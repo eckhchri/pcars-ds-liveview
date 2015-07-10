@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+ <html>
+     <head>
+         <title>Christoph Google maps Hockenheim for live position update</title>
+         
+         <script src="https://maps.google.com/maps/api/js??v=3.exp&sensor=true"></script>
+
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+         
+         <script src="./sample_data.js" charset="utf-8"></script>
+	 <script src="./pcars_driver.js" charset="utf-8"></script>
+	 <script src="./receive_ds_data.js" charset="utf-8"></script>
+	 <script src="./calc_coordinates.js" charset="utf-8"></script>
+	 <script src="./class_referenz_points.js" charset="utf-8"></script>
+	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+         
+         <style type="text/css">
+
+             html, body, #map {
+                 width: 90%;
+                 height: 90%;
+                 margin: 0;
+                 padding: 0;
+             }
+
+             .stations, .stations svg {
+                 position: absolute;
+             }
+
+             .stations svg {
+                 width: 60px;
+                 height: 20px;
+                 padding-right: 100px;
+                 font: 10px sans-serif;
+             }
+
+             .stations circle {
+                 fill: brown;
+                 stroke: black;
+                 stroke-width: 1.5px;
+             }
+
+         </style>
+     </head>
+   <body>
+	   <p>
+			Christophs Test Seite fuer GPS Live Tracking inklusive Live Update von Positionen.
+	   </p>
+       <div id="map"></div>
+
+       <script>          
+
+	////////////////// test object PCARSdriver
+	//   var driver1 =  new PCARSdriver(1234567,"eckhchri",3,277,278,279);
+	//   test = driver1.GetRefID();
+	//   document.write(  "<br>--test object PCARSdriver<br>" );
+	//   document.write(  driver1.GetRefID() );
+	//   document.write(  driver1.GetName() );
+	// test receiving DS Data via Javascript
+	//	document.write( "<br>TestFunc" + TestFunc (2,3) + "<br>" );
+	/////////////////
+	
+
+	// initialize array for PCARSdriver objects
+	var  aDrivers 	= new Array();
+
+
+	// Test 
+	// ACHTUNG	3. Parameter muss die Z Koordinate sein !!!!!!		
+	//         calc_coordinates( cuircitname,  aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );	
+//	calc_coordinates ("HOCKENHEIM",-621990, -133340);
+//	calc_coordinates ("HOCKENHEIM",-527260, -403770);
+//	calc_coordinates ("HOCKENHEIM",-438290, -451690);
+//	calc_coordinates ("HOCKENHEIM",-575190, -309520);
+
+	//var RefPoint =	new Refpoint("HOCKENHEIM");
+
+
+		
+
+	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
+	//	   Receive_DS_data(url,port,timeout)
+	aDrivers = Receive_DS_data("www.eckhchri.de",9000,2000);
+
+	console.log ("Rueckgabewert Funktion Receive_DS_data:" +  aDrivers);
+
+
+	// display resulst in table below google map
+	document.write ( "<table style='width:70%' border=1 ><tr><th>Ref-ID</th><th>Driver Name</th><th>X</th><th>Y</th><th>Z</th><th>State</th><th>CurrentSector</th><th>Race Position</th><th>LAT</th><th>LONG</th></tr>");
+	for (var i = 0; i < aDrivers.length; i++ ){
+		document.write ( "<tr>" );
+		document.write ( "<td>" + aDrivers[i].GetRefID() + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetName()  + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetPosX()  + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetPosY()  + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetPosZ()  + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetState()  + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetCurrentSector()  + "</td>");
+		document.write ( "<td>" + aDrivers[i].GetRacePosition()  + "</td>");
+
+		
+		var  gpsCo =  calc_coordinates ("HOCKENHEIM", aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
+
+		console.log ("--gpsLat" + gpsCo["Lat"]);
+		//anzeigen von LAT und LONG 
+		document.write ( "<td>" + gpsCo["Lat"]   + "</td>");
+		document.write ( "<td>" + gpsCo["Long"]  + "</td>");
+		
+
+
+		document.write ( "</tr>" );
+	}
+	document.write ( "</table>" );
+	
+	
+
+           function GPSSensor(initData) {
+               //state information
+               var _div = null;
+               var _data = initData;
+               var _projection = null;
+
+               function transform(d) {
+                   var padding = 10;                   
+                   d = new google.maps.LatLng(d.Lat, d.Long);
+                   d = _projection.fromLatLngToDivPixel(d);
+                   return d3.select(this) 
+                       .style("left", (d.x - padding) + "px")
+                       .style("top", (d.y - padding) + "px");
+               }
+               
+               function transformWithEase(d) {
+                   var padding = 10;
+                   d = new google.maps.LatLng(d.Lat, d.Long);
+                   d = _projection.fromLatLngToDivPixel(d);
+                   return d3.select(this)
+                       .transition().duration(300)
+                       .style("left", (d.x - padding) + "px")
+                       .style("top", (d.y - padding) + "px");
+               }
+
+               //superclass methods for google maps
+               this.onAdd = function() {
+                   _div = d3.select(this.getPanes().overlayLayer)
+                            .append("div")
+                            .attr("class", "stations");
+               };               
+                              
+               this.draw = function () {                   
+                   var padding = 10;
+                   _projection = this.getProjection();
+
+                   
+                   var marker = _div.selectAll("svg")
+                       .data(_data, function (d) { return d.Key; })
+                       .each(transform) // update existing markers
+                        .enter().append("svg:svg")
+                       .each(transform)
+                       .attr("class", "marker");
+
+                   // Add a circle.
+                   marker.append("svg:circle") 
+                       .attr("r", 4.5)
+                       .attr("cx", padding)
+                       .attr("cy", padding);
+
+                   // Add a label.
+                   marker.append("svg:text")
+                       .attr("x", padding + 7)
+                       .attr("y", padding)
+                       .attr("dy", ".31em")
+                       .text(function (d) { return d.Key; });                                      
+               };
+
+               this.onRemove = function () {
+                   _div.remove();
+               };
+
+               this.update = function (data) {                    
+                   //update internal data which drive redrawing on zoom_changed                  
+
+		   console.log ("---" + data[0]);
+                   for (var i = 0; i < data.length; i++) {
+		       console.log ("---", data);
+                       var found = false;
+                       for (var j = 0; j < _data.length; j++) {
+                           if (_data[j].Key === data[i].Key) {
+                               found = true;
+                               _data[j].Lat = data[i].Lat;
+                               _data[j].Long = data[i].Long;
+                           }
+                       }
+                       if (!found)
+                           _data.push(data[i]);
+                   }
+                   //this.draw();
+                   _div.selectAll("svg")
+                       .data(_data, function (d) { return d.Key; }) 
+                       .each(transformWithEase);                  
+               };
+           }
+           //subclassing
+           GPSSensor.prototype = new google.maps.OverlayView();
+           
+
+
+           // Create the Google Map
+           var map = new google.maps.Map(d3.select("#map").node(), {
+               zoom: 14,
+			   
+			   // todo: Christoph changs  + Referenzpunk Object erstellen
+			   // Hockenheim 49.32771 , 8.56588
+               center: new google.maps.LatLng(49.32771, 8.56588),
+               mapTypeId: google.maps.MapTypeId.ROADMAP
+           });
+           
+           var sensorData = [
+               sensor1Data[0]               
+               ,sensor2Data[0]
+           ];
+           var sensorLayer = new GPSSensor(sensorData);
+           sensorLayer.setMap(map);
+           
+
+				
+///////////////////////////////////////////////////
+           //simulate position update by receiving positions at random interval
+		   
+           var d1Cnt = 1, d2Cnt = 1;
+           (function loop() {
+
+
+            //   var randTimeout = Math.round(Math.random() * (3000 - 500)) + 500;
+	
+		randTimeout = 1200;
+		console.log("--Timeout_Loop()" + randTimeout);
+
+               setTimeout(function () {
+		
+		  /// toDo Christoph ///////////////////////
+                 aDrivers = Receive_DS_data("www.eckhchri.de",9000,2000);
+	
+		for (var i = 0; i < aDrivers.length; i++ ){
+
+			// todo: only static value Driver 2
+	                gpsCoTmp =  calc_coordinates ("HOCKENHEIM", aDrivers[1].GetPosX() , aDrivers[1].GetPosZ() );
+
+			sensor1Data[i].Long 	= gpsCoTmp["Long"];
+			sensor1Data[i].Lat 	= gpsCoTmp["Lat"];
+			sensor1Data[i].Key	= aDrivers[1].GetName();
+		
+		}	
+		
+		sensorLayer.update([sensor1Data[0]]);
+		
+
+/*
+                   var whichSensor = Math.floor(Math.random() * 2);
+                   if (whichSensor==0 && d1Cnt < sensor1Data.length)
+                       sensorLayer.update([sensor1Data[d1Cnt++]]);
+                   else if (whichSensor==1 && d2Cnt < sensor2Data.length)
+                       sensorLayer.update([sensor2Data[d2Cnt++]]);
+*/
+
+                   loop();
+               }, randTimeout);
+			   
+           }());           
+
+       </script>
+   </body>
