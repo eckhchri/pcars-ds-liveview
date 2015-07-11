@@ -292,6 +292,7 @@
 		aSensorData[i] = {      
 					//"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
 					"Key": aDrivers[i].GetName()
+					,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
                                         ,"DateTime":"2013-09-04T09:41:09+10:00"
                                         ,"Lat": gpsCo["Lat"]
                                         ,"Long": gpsCo["Long"]
@@ -363,7 +364,7 @@
                    d = new google.maps.LatLng(d.Lat, d.Long);
                    d = _projection.fromLatLngToDivPixel(d);
                    return d3.select(this)
-                       .transition().duration(300)
+                       .transition().duration(700)
                        .style("left", (d.x - padding) + "px")
                        .style("top", (d.y - padding) + "px");
                }
@@ -394,11 +395,21 @@
                        .attr("cy", padding);
 
                    // Add a label.
+		   console.log ("-+-+ aSensorData: " , aSensorData);
                    marker.append("svg:text")
                        .attr("x", padding + 7)
                        .attr("y", padding)
                        .attr("dy", ".31em")
-                       .text(function (d) { return d.Key; });                                      
+//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
+		       .text(function (d) { 
+						for (var i = 0; i < aSensorData.length; i++){
+						
+							if (aSensorData[i].Key == d.Key){
+								return  aSensorData[i].MarkerLabel;
+							}
+						}
+					});
+                //       .text(function (d) { return d.Key; });                                      
                };
 
                this.onRemove = function () {
@@ -448,7 +459,7 @@
 	//  	console.log ("-++-+-+---++++--+-+-+-+-"  +  aRefPointTMP[cuircitID]["refLat"] ); 
 	//	console.log("-+-+- aSensorData-Array: ", aSensorData);
 	//	console.log("-+-+- sensorData-Array: ", sensorData);
-	    var sensorLayer = new GPSSensor(aSensorData);
+	   var sensorLayer = new GPSSensor(aSensorData);
            sensorLayer.setMap(map);
            
 
@@ -473,12 +484,13 @@
 
 			// calculate GPS coordinates
 	                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
-			console.log("GPS coordinates: ", gpsCoTmp);
+			//console.log("GPS coordinates: ", gpsCoTmp);
 			
 			// fill data array
 			aSensorData[i] = {
 				//	"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
 					"Key": aDrivers[i].GetName()
+					,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
                                         ,"DateTime":"2013-09-04T09:41:09+10:00"
                                         ,"Lat": gpsCoTmp["Lat"]
                                         ,"Long": gpsCoTmp["Long"]
