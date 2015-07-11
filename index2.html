@@ -251,22 +251,25 @@
 
 	//todo: display Driver Data with jqGrid
 	document.write('<div id="DriverDataArea"><table id="DriverDataTable"></table></div>');
+
+	//todo: define correct data types within jqGrid table definition
 	jQuery("#DriverDataTable").jqGrid({
                 datatype: "local",
-                height: 250,
+                height: 200,
 		width: 800,
 		caption: "List of available drivers",
-                colNames:['RefID','Position', 'Driver Name', 'State', 'Sector', 'PosX', 'PosY', 'PosZ', 'fastest lap' ],
+                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'PosX', 'PosY', 'PosZ', 'fastest lap', 'last lap' ],
                 colModel:[
                         {name:'refid',index:'invdate', width:40},
-			{name:'driverposition',index:'name', width:10, search:true},
-                        {name:'drivername',index:'name', width:200, search:true},
+			{name:'driverposition',index:'name', width:15, search:true},
+                        {name:'drivername',index:'name', width:75, search:true},
 			{name:'driverstate',width:30, align:"center",sorttype:"float"},
 			{name:'driversector',width:10, align:"center",sorttype:"float"},
                         {name:'posx',width:20, align:"center",sorttype:"float"},
 			{name:'posy',width:20, align:"center",sorttype:"float"},
 			{name:'posz',width:20, align:"center",sorttype:"float"},
-			{name:'fastestlab',width:20, align:"center",sorttype:"float"}
+			{name:'fastestlap',width:20, align:"center",sorttype:"float"},
+			{name:'lastlap',width:20, align:"center",sorttype:"float"}
                 ]
 	});
 
@@ -281,6 +284,8 @@
 									,posx: aDrivers[i].GetPosX()
 									,posy: aDrivers[i].GetPosY()
 									,posz: aDrivers[i].GetPosZ()
+									,fastestlap: aDrivers[i].GetFastestLapTime()
+									,lastlap: aDrivers[i].GetLastLapTime()
 								 });
 
 		var  gpsCo =  calc_coordinates ( cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );

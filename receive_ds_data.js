@@ -141,7 +141,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 		 
 			for (var i = 0;i<myArr.response.participants.length;i++)
 			{
-				//console.log ( "DS Participants:" + myArr.response.participants[i].attributes.name);
+				console.log ( "DS Participants:" , myArr.response.participants);
 				// read data of all participants and put it in an array of PCARSdriver objects
 				aDrivers.push (
 					new PCARSdriver(myArr.response.participants[i].attributes.RefId,
@@ -152,7 +152,11 @@ function Receive_DS_data (url,port,timeout,receivemode){
 						myArr.response.participants[i].attributes.PositionZ,
 						myArr.response.participants[i].attributes.State,
 						myArr.response.participants[i].attributes.CurrentSector,
-						myArr.response.participants[i].attributes.RacePosition
+						myArr.response.participants[i].attributes.RacePosition,
+						myArr.response.participants[i].attributes.FastestLapTime,
+					        myArr.response.participants[i].attributes.LastLapTime,
+						myArr.response.participants[i].attributes.Orientation,
+						myArr.response.participants[i].attributes.Speed
 						)
 					);
 			

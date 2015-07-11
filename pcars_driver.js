@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition)
+function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd)
 {
         // vars
         this.RefID     =       RefID;
@@ -11,6 +11,11 @@ function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, Race
 	this.State     =       State;
 	this.CurrentSector =   CurrentSector;
 	this.RacePosition  =   RacePosition;
+	this.FastestLapTime=   FLapTime;
+        this.LastLapTime   =   LLapTime;
+        this.Orientation   =   Orient;
+        this.Speed	   =   Spd;
+
 
         //private vars
         var privateLat;
@@ -55,6 +60,24 @@ function GetRacePosition(){
         return this.RacePosition;
 }
 
+function GetFastestLapTime(){
+	//todo convert in readable time mm:ss
+	return this.FastestLapTime;
+}
+
+function GetLastLapTime(){
+	//todo: convert in readable time mm:ss
+        return this.LastLapTime;
+}
+
+function GetOrientation(){
+        return this.Orientation;
+}
+
+function GetSpeed(){
+	//todo: convert in km/h
+	return this.Speed;
+}
 
 
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
@@ -66,5 +89,9 @@ PCARSdriver.prototype.GetPosZ=GetPosZ;
 PCARSdriver.prototype.GetState=GetState;
 PCARSdriver.prototype.GetCurrentSector=GetCurrentSector;
 PCARSdriver.prototype.GetRacePosition=GetRacePosition;
+PCARSdriver.prototype.GetFastestLapTime=GetFastestLapTime;
+PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
+PCARSdriver.prototype.GetOrientation=GetOrientation;
+PCARSdriver.prototype.GetSpeed=GetSpeed;
 
 
