@@ -11,37 +11,37 @@
 // http://www.latlong.net/Show-Latitude-Longitude.html
 
 
-function calc_coordinates (cuircit_id,PosX,PosY){
+function calc_coordinates (circuit_id,PosX,PosY){
 
-        var aRefPointTmp         =       new Refpoint(cuircit_id);
+        var aRefPointTmp         =       new Refpoint(circuit_id);
 
         // variablen definieren
-        var q = degreeToRadians ( aRefPointTmp["rotation"] );           //Rotationswinkel in Rad, da Math.cos() den Winkel in Rad will
+        var q = degreeToRadians ( aRefPointTmp[circuit_id]["rotation"] );           //Rotationswinkel in Rad, da Math.cos() den Winkel in Rad will
         var x_neu;
         var y_neu;
 
 	//console.log("CALC:", aRefPointTmp );
+	//console.log("Calc q: " + q);
 
         //Rotation herausrechnen (muss vor der Umrechnung in den Winkel passieren . bei Hockenheim nicht notwendig)
-        if ( aRefPointTmp[cuircit_id]["rotation"] != 0) {
+        if ( aRefPointTmp[circuit_id]["rotation"] != 0) {
 
                 //ACHTUNG: Math.cos benoetigt einen Winkel in rad
                 x_neu = (Math.cos(q) * PosX) - (Math.sin(q) * PosY);
                 y_neu = (Math.sin(q) * PosX) + (Math.cos(q) * PosY);
 
-                //console.log ("X_alt:" + PosX + " X_Neu:" + x_neu + "Y_alt:" + PosY + " Y_Neu:" + y_neu);
         }else{
                 // werte unveraendert uebernehmen
                 x_neu = PosX;
                 y_neu = PosY;
-
-                //console.log ("PosX und PosY unveraendert uebernommen. PosX: " + x_neu + " PosY:" + y_neu );
         }
 
+	//console.log ("X_alt: " + PosX + " X_Neu: " + x_neu + "Y_alt: " + PosY + " Y_Neu: " + y_neu);
+
         //Umrechnung Positionsdaten in Winkel (Radius Erde 6371.000.000 mm, da Daten im Spiel als Millimeter raus kommen):
-        //var radius_zur_erdachse = 6371000000 * Math.cos( aRefPointTmp[cuircit_id]["refLat"] ) + aRefPointTmp["cor_r"]; // Ungenauigkeit -> erhoete Korrekturwerte notwendig
+        //var radius_zur_erdachse = 6371000000 * Math.cos( aRefPointTmp[circuit_id]["refLat"] ) + aRefPointTmp["cor_r"]; // Ungenauigkeit -> erhoete Korrekturwerte notwendig
         //ACHTUNG: Math.cos benoetigt einen Winkel in rad
-        var radius_zur_erdachse = 6371000000 * Math.cos( degreeToRadians(aRefPointTmp[cuircit_id]["refLat"]) ) +  aRefPointTmp[cuircit_id]["cor_r_Long"];
+        var radius_zur_erdachse = 6371000000 * Math.cos( degreeToRadians(aRefPointTmp[circuit_id]["refLat"]) ) +  aRefPointTmp[circuit_id]["cor_r_Long"];
 
 		
 	/************************************************************
@@ -57,23 +57,25 @@ function calc_coordinates (cuircit_id,PosX,PosY){
 
 	//Methode über Winkel ins Verhaeltnis setzen zu 360° entspricht 40030km
         //var umfang_erde = 40030000000; //in millimeteri
-	var umfang_erde = 2 * Math.PI * (6371000000 + aRefPointTmp[cuircit_id]["cor_r_Lat"]);
+	var umfang_erde = 2 * Math.PI * (6371000000 + aRefPointTmp[circuit_id]["cor_r_Lat"]);
         var umfang_erde_Lat = 2 * Math.PI * radius_zur_erdachse; //in millimeter
 
 
+	//console.log("Calc Coordinates. umfang_erde/umfang_erde_Lat: " + umfang_erde_Lat + " / " + umfang_erde_Lat );
+ 
         var winkelX = x_neu / umfang_erde_Lat * 360;
         var winkelY = y_neu / umfang_erde * 360;
 		
 		
-        //console.log("CuircitName: "     + aRefPointTmp[cuircit_id]["Name"]);
+        //console.log("CuircitName: "     + aRefPointTmp[circuit_id]["Name"]);
         //console.log("RadiusErdachse: "  + radius_zur_erdachse);
         //console.log("WinkelX: "         + winkelX + " WinkelY: " + winkelY );
 
         // finalen Wert berechnen
-        var car_coordinateLong  =  aRefPointTmp[cuircit_id]["refLong"] + winkelX;
-        var car_coordinateLat   =  aRefPointTmp[cuircit_id]["refLat"] + winkelY;
+        var car_coordinateLong  =  aRefPointTmp[circuit_id]["refLong"] + winkelX;
+        var car_coordinateLat   =  aRefPointTmp[circuit_id]["refLat"] + winkelY;
 		
-	//console.log ("GPS RefLong: " + aRefPointTmp[cuircit_id]["refLong"] + " RefLat: " + aRefPointTmp[cuircit_id]["refLat"] );
+	//console.log ("GPS RefLong: " + aRefPointTmp[circuit_id]["refLong"] + " RefLat: " + aRefPointTmp[circuit_id]["refLat"] );
         //console.log ("GPS Long:    " + car_coordinateLong + " Lat: " + car_coordinateLat + "++++++++++++End++++++");
 
         // retrn a hash of gps coordinates

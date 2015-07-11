@@ -284,7 +284,9 @@
 								 });
 
 		var  gpsCo =  calc_coordinates ( cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
-		aSensorData[i] = {      "Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+		aSensorData[i] = {      
+					//"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+					"Key": aDrivers[i].GetName()
                                         ,"DateTime":"2013-09-04T09:41:09+10:00"
                                         ,"Lat": gpsCo["Lat"]
                                         ,"Long": gpsCo["Long"]
@@ -428,7 +430,6 @@
            GPSSensor.prototype = new google.maps.OverlayView();
            
 
-	   console.log("Test curcuitID: "  + cuircitID )
            // Create the Google Map
            var map = new google.maps.Map(d3.select("#map").node(), {
                zoom: aRefPointTMP[cuircitID]["Zoom"],
@@ -467,6 +468,7 @@
 
 			// calculate GPS coordinates
 	                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
+			console.log("GPS coordinates: ", gpsCoTmp);
 			
 			// fill data array
 			aSensorData[i] = {
@@ -479,7 +481,7 @@
                                         ,"Speed":22
                                 	}
 		}	
-	//	console.log("-+-+- aSensorData-Array: ", aSensorData);
+		//console.log("-+-+- aSensorData-Array: ", aSensorData);
 
 		// update draw data
 		sensorLayer.update(aSensorData);

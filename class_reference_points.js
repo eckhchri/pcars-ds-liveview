@@ -271,12 +271,8 @@ function Refpoint(cuircit_id)
 	//Autodromo Nazionale Monza Short
 	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short"});
 
-
-
 ///////////////////////////////////////////////////////////////////////////	
-	console.log("Refpoints: "  , aRefPoints);	
-
-
+	//console.log("Refpoints: "  , aRefPoints);	
 	
 	if (cuircit_id == undefined)
 	{
