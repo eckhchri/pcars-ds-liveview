@@ -108,6 +108,8 @@
 	var aSensorData = new Array();		// array of Hashes, each hash includes parameters of a driver
 	var DsServerURL = "www.eckhchri.de";
 	var DsPort	= 9000;
+	var DisplayDuration = 700;		// duration for displaying marker updates
+	var global_i		= 0;
 
 
 	// Test Area
@@ -301,46 +303,7 @@
                                 }
 	
 	}
-	
-
-/*
-	// display resulst in table below google map
-	document.write('<div id="DriverData">');
-	document.write("<table id='DriverDataTable' style='width:70%' border=1>" );
-	document.write("<thead><tr><th>Ref-ID</th><th>Driver Name</th><th>X</th><th>Y</th><th>Z</th><th>State</th><th>CurrentSector</th><th>Race Position</th><th>LAT</th><th>LONG</th></tr></thead>");
-	for (var i = 0; i < aDrivers.length; i++ ){
-		document.write ( "<tbody><tr>" );
-		document.write ( "<td>" + aDrivers[i].GetRefID() + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetName()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetPosX()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetPosY()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetPosZ()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetState()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetCurrentSector()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetRacePosition()  + "</td>");
-
-		var  gpsCo =  calc_coordinates ( cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
-
-		console.log ("--gpsLat" + gpsCo["Lat"]);
-		//anzeigen von LAT und LONG 
-		document.write ( "<td>" + gpsCo["Lat"]   + "</td>");
-		document.write ( "<td>" + gpsCo["Long"]  + "</td>");
-		document.write ( "</tr></tbody>" );
-
-		aSensorData[i] = {	"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
-					,"DateTime":"2013-09-04T09:41:09+10:00"
-					,"Lat": gpsCo["Lat"]
-					,"Long": gpsCo["Long"]
-					,"Heading":286.0
-					,"Speed":22
-				}
-
-	}
-	document.write ( "</table>" );
-	document.write('</div>');
-*/	
-	
-//	console.log("-+-+- aSensorData-Array: ", aSensorData);
+	//console.log("-+-+- aSensorData-Array: ", aSensorData);
 
 	
 	// setting up google maps overlays
@@ -364,7 +327,7 @@
                    d = new google.maps.LatLng(d.Lat, d.Long);
                    d = _projection.fromLatLngToDivPixel(d);
                    return d3.select(this)
-                       .transition().duration(700)
+                       .transition().duration(DisplayDuration)
                        .style("left", (d.x - padding) + "px")
                        .style("top", (d.y - padding) + "px");
                }
@@ -379,8 +342,7 @@
                this.draw = function () {                   
                    var padding = 10;
                    _projection = this.getProjection();
-
-                   
+		  
                    var marker = _div.selectAll("svg")
                        .data(_data, function (d) { return d.Key; })
                        .each(transform) // update existing markers
@@ -392,23 +354,33 @@
                    marker.append("svg:circle") 
                        .attr("r", 4.5)
                        .attr("cx", padding)
-                       .attr("cy", padding);
+                       .attr("cy", padding)
+		       .style("fill", "purple");
+			;
 
                    // Add a label.
-		   console.log ("-+-+ aSensorData: " , aSensorData);
+		   console.log ("++++ in function draw() ->  aSensorData: " , aSensorData);
                    marker.append("svg:text")
                        .attr("x", padding + 7)
                        .attr("y", padding)
                        .attr("dy", ".31em")
 //todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
-		       .text(function (d) { 
+		       .text(function (d) {
+						
+						console.log("+++++ d:" , d);
 						for (var i = 0; i < aSensorData.length; i++){
 						
+							console.log(" for Update MarkerLabel:" , aSensorData);
 							if (aSensorData[i].Key == d.Key){
+								console.log("Update MarkerLabel:" , aSensorData[i].MarkerLabel);
 								return  aSensorData[i].MarkerLabel;
 							}
 						}
-					});
+						
+						//todo: during update d is not an array its an individual hash
+						console.log("++++not array:");
+						return d.MarkerLabel;
+					})
                 //       .text(function (d) { return d.Key; });                                      
                };
 
@@ -417,29 +389,32 @@
                };
 
 
-		// todo:
-		// known issue: Beim Wechsel der Position, bleibt eine "Leiche" auf der Karte uebrig, weil Key "Pos - Name" zusammensetzt
+		// todo: known issue: Beim Wechsel der Position, bleibt eine "Leiche" auf der Karte uebrig, weil Key "Pos - Name" zusammensetzt
 		// easyt solution:  deleting leading position number 
                this.update = function (data) {                    
                    //update internal data which drive redrawing on zoom_changed                  
 
-                 for (var i = 0; i < data.length; i++) {
-		      // console.log ("-------------------------------------------", data);
-                       var found = false;
-                       for (var j = 0; j < _data.length; j++) {
-                           if (_data[j].Key === data[i].Key) {
-                               found = true;
-                               _data[j].Lat = data[i].Lat;
-                               _data[j].Long = data[i].Long;
-                           }
-                       }
-                       if (!found)
-                           _data.push(data[i]);
-                   }
-                   //this.draw();
-                   _div.selectAll("svg")
-                       .data(_data, function (d) { return d.Key; }) 
-                       .each(transformWithEase);                  
+                 	for (var i = 0; i < data.length; i++) {
+			       //console.log ("------------------------------------------- data", data);
+	                       var found = false;
+	                       for (var j = 0; j < _data.length; j++) {
+	                           if (_data[j].Key === data[i].Key) {
+	        	                       found = true;
+	                               _data[j].Lat = data[i].Lat;
+	                               _data[j].Long = data[i].Long;
+				       _data[j].MarkerLabel = data[i].MarkerLabel;
+	                           }
+	                       }
+	                       if (!found)
+	                           _data.push(data[i]);
+	                   }
+
+			   //todo: what does this draw() call ?
+			   console.log ("-------------------------------------------_data", _data);
+	                   this.draw();
+	                   _div.selectAll("svg")
+	                       .data(_data, function (d) { return d.Key; }) 
+	                       .each(transformWithEase);                 
                };
            }
            //subclassing
@@ -467,7 +442,7 @@
 ///////////////////////////////////////////////////
            //simulate position update by receiving positions at random interval
 		   
-           var d1Cnt = 1, d2Cnt = 1;
+           //var d1Cnt = 1, d2Cnt = 1;
            (function loop() {
 
 
