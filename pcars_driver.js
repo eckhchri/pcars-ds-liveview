@@ -61,13 +61,13 @@ function GetRacePosition(){
 }
 
 function GetFastestLapTime(){
-	//todo convert in readable time mm:ss
-	return this.FastestLapTime;
+	// return format 00:00:00
+	return _ConvertLaptimeInReadbaleFormat(this.FastestLapTime);
 }
 
 function GetLastLapTime(){
-	//todo: convert in readable time mm:ss
-        return this.LastLapTime;
+	//convert in readable time mm:ss::ms
+        return _ConvertLaptimeInReadbaleFormat( this.LastLapTime);
 }
 
 function GetOrientation(){
@@ -77,6 +77,31 @@ function GetOrientation(){
 function GetSpeed(){
 	//todo: convert in km/h
 	return this.Speed;
+}
+
+function GetPosColor(){
+	
+	if (this.RacePos == 1){
+		return green;
+	}else{
+		return red;
+	}
+}
+
+/// help function
+function _ConvertLaptimeInReadbaleFormat(milliseconds)
+{
+	//todo: implemet date format with leading zeros for seconds and milliseconds
+	var date = new Date(milliseconds);
+	var str = '';
+  //    str += date.getUTCDate()-1 + " ";		//days
+  //    str += date.getUTCHours() + ":";		//hours
+        str += date.getUTCMinutes() + ":";		//minutes
+        str += date.getUTCSeconds() + ":";		//seconds
+        str += date.getUTCMilliseconds();		//miliseconds
+ //     console.log("Time Formated string:" + str);
+
+	return str;
 }
 
 
@@ -93,5 +118,5 @@ PCARSdriver.prototype.GetFastestLapTime=GetFastestLapTime;
 PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
 PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
-
+PCARSdriver.prototype.GetPosColor=GetPosColor;
 
