@@ -1,1 +1,1 @@
-pcars-ds-liveview
+Project CARS Dedicated live view (pcars-ds-liveview)
