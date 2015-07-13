@@ -18,13 +18,14 @@ function Refpoint(cuircit_id)
         aRefPoints[1695182971] ={
                                 "refLat":        49.329738	// Komma in Javascript ist ein Punkt
                                 ,"refLong":      8.574270	// Komma in Javascript ist ein Punkt
-                                ,"rotation":     0.573		// Winkel in GRAD Ma�
+                                ,"rotation":     0.573		// Winkel in GRAD Maß
                                 ,"cor_r_Long":   45000000	// Korrektur Radius zur Erdachse fuer Ost/West
 				,"cor_r_Lat":	 0		// Korrektur Erdradius fuer  Nord/Sued
                                 ,"Name":         "Hockenheim"	// real name of the cuircit
                                 ,"Zoom":         15		// wanted zoom level for initial map
                                 ,"MapInitLat":   49.329718	// Map initialisierungs Koordinaten
                                 ,"MapInitLong":  8.574300
+                                ,"Comment": "letztes finetuning" 
                                 };
 	//Hockenheim Short
 	aRefPoints[1768660198] = {};
@@ -50,6 +51,7 @@ function Refpoint(cuircit_id)
 	        		,"Zoom":         15
 	        		,"MapInitLat":   25.050175
 	        		,"MapInitLong":  55.237547
+	        		,"Comment": "live prüfen"
 				};
 
 	///Dubai Autodrome International
@@ -74,6 +76,7 @@ function Refpoint(cuircit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   50.359101
                 ,"MapInitLong":  6.962529
+                ,"Comment": "live prüfen"
                 };
 
 	//Nuerburgring Sprint Short
@@ -96,6 +99,7 @@ function Refpoint(cuircit_id)
                 ,"Zoom":         13
                 ,"MapInitLat":   50.359101
                 ,"MapInitLong":  6.962529
+                ,"Comment": "live prüfen"
                 };
 	//Nordschleife Stage 3
 	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3"});
@@ -118,6 +122,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   52.830643
 		,"MapInitLong":  -1.374920
+		,"Comment": "by colets, prüfen"
 		};
 	//Donington Park National
 	aRefPoints[-1194019375] = CopyObjectWithModifications(aRefPoints[354022214], {"Name": "Donington Park National"});
@@ -136,6 +141,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   52.02699
 		,"MapInitLong":  11.27995
+		,"Comment": "by colets, prüfen"
 		};
 	//Oschersleben National
 	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National"});
@@ -155,6 +161,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   43.73777
 		,"MapInitLong":  7.42209
+		,"Comment": "by colets, prüfen"
 		};
 	//Bathurst
 	aRefPoints[921120824] = new Array();
@@ -169,6 +176,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   -33.439873
 		,"MapInitLong":  149.559744
+		,"Comment": "by colets, prüfen"
 		};
 	
 	//Circuit de Spa-Francorchamps
@@ -184,6 +192,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   50.43061
 		,"MapInitLong":  5.9767
+		,"Comment": "by colets, prüfen"
 		};
 	//Circuit de Barcelona-Catalunya GP
 	aRefPoints[521933422] = new Array();
@@ -198,6 +207,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   41.57304
 		,"MapInitLong":  2.25925
+		,"Comment": "by colets, prüfen"
 		};
 	//Circuit de Barcelona-Catalunya Club
 	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club"});
@@ -217,6 +227,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   44.34069
 		,"MapInitLong":  11.71717
+		,"Comment": "by colets, prüfen"
 		};
 	
 	//Willow Springs International Raceway
@@ -232,6 +243,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   34.86891
 		,"MapInitLong":  -118.26126
+		,"Comment": "by colets, prüfen"
 		};
 	//Willow Springs Horse Thief Mile
 	aRefPoints[-1849531562] = CopyObjectWithModifications(aRefPoints[-103312908], {"Name": "Willow Springs Horse Thief Mile"});
@@ -249,6 +261,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   42.3288
 		,"MapInitLong":  -76.9206
+		,"Comment": "by colets, prüfen"
 		};
 	//Watkins Glen Short
 	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen Short"});
@@ -266,6 +279,7 @@ function Refpoint(cuircit_id)
 		,"Zoom":         15
 		,"MapInitLat":   45.61902
 		,"MapInitLong":  9.28125
+		,"Comment": "by colets, prüfen"
 		};
 	
 	//Autodromo Nazionale Monza Short
