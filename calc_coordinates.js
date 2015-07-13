@@ -5,7 +5,7 @@
 //als ergebnis wollen wir die live positionsdaten in Lat und Long degree.
 
 //der weg:
-//1. die positionsdaten in ein delta von Lang und Lat umrechnen (darin enthalten ist auch den möglicherweise enthaltenen rotationsfehler heraus zu rechnen)
+//1. die positionsdaten in ein delta von Lang und Lat umrechnen (darin enthalten ist auch den mÃ¶glicherweise enthaltenen rotationsfehler heraus zu rechnen)
 //2. das aus 1. ermittelte delta auf das Lang und Lat des referenzpunktes aufaddieren
 //3. die in 2. ermittelten koordinaten in google maps anzeigen
 // http://www.latlong.net/Show-Latitude-Longitude.html
@@ -20,6 +20,10 @@ function calc_coordinates (circuit_id,PosX,PosY){
         var x_neu;
         var y_neu;
 
+	//correction multiplier
+	x_neu = x_neu * aRefPointTmp[circuit_id]["cor_PosX_mul"];
+	y_neu = y_neu * aRefPointTmp[circuit_id]["cor_PosY_mul"];
+	
 	//console.log("CALC:", aRefPointTmp );
 	//console.log("Calc q: " + q);
 
@@ -45,7 +49,7 @@ function calc_coordinates (circuit_id,PosX,PosY){
 
 		
 	/************************************************************
-	////Methode über rechtwinkliges Dreieck
+	////Methode Ã¼ber rechtwinkliges Dreieck
         var winkelX = Math.asin(x_neu/radius_zur_erdachse);
         var winkelY = Math.asin(y_neu/6371000000);
 
@@ -55,7 +59,7 @@ function calc_coordinates (circuit_id,PosX,PosY){
         winkelY = radiansToDegrees(winkelY);
 	**************************************************************/
 
-	//Methode über Winkel ins Verhaeltnis setzen zu 360° entspricht 40030km
+	//Methode Ã¼ber Winkel ins Verhaeltnis setzen zu 360Â° entspricht 40030km
         //var umfang_erde = 40030000000; //in millimeteri
 	var umfang_erde = 2 * Math.PI * (6371000000 + aRefPointTmp[circuit_id]["cor_r_Lat"]);
         var umfang_erde_Lat = 2 * Math.PI * radius_zur_erdachse; //in millimeter
