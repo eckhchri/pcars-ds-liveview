@@ -21,6 +21,8 @@ function Refpoint(cuircit_id)
                                 ,"rotation":     0.573		// Winkel in GRAD Maß
                                 ,"cor_r_Long":   45000000	// Korrektur Radius zur Erdachse fuer Ost/West
 				,"cor_r_Lat":	 0		// Korrektur Erdradius fuer  Nord/Sued
+				,"cor_PosX_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
+				,"cor_PosY_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
                                 ,"Name":         "Hockenheim"	// real name of the cuircit
                                 ,"Zoom":         15		// wanted zoom level for initial map
                                 ,"MapInitLat":   49.329718	// Map initialisierungs Koordinaten
@@ -47,6 +49,8 @@ function Refpoint(cuircit_id)
 	        		,"rotation":     -0.401
 			   	,"cor_r_Long":   45000000
 				,"cor_r_Lat":    0
+				,"cor_PosX_mul": 1
+				,"cor_PosY_mul": 1
 	        		,"Name":         "Dubai Autodrome GP"
 	        		,"Zoom":         15
 	        		,"MapInitLat":   25.050175
@@ -72,6 +76,8 @@ function Refpoint(cuircit_id)
                 ,"rotation":     -0.9 
                 ,"cor_r_Long":   30000000
 		,"cor_r_Lat":    -30000000 
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
                 ,"Name":         "Nuerburgring GP"
                 ,"Zoom":         15
                 ,"MapInitLat":   50.359101
@@ -95,6 +101,8 @@ function Refpoint(cuircit_id)
                 ,"rotation":     -0.9
                 ,"cor_r_Long":   10000000
                 ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
                 ,"Name":         "Nordschleife"
                 ,"Zoom":         13
                 ,"MapInitLat":   50.359101
@@ -113,10 +121,12 @@ function Refpoint(cuircit_id)
         aRefPoints[-1454279631] =
                 {
                 "refLat":        38.162514
-                ,"refLong":      -122.457196
+                ,"refLong":      -122.457216
                 ,"rotation":     142
-                ,"cor_r_Long":   50000000
-                ,"cor_r_Lat":    -50000000
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    -30000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 0.65
                 ,"Name":         "Sonoma Raceway GP"
                 ,"Zoom":         13
                 ,"MapInitLat":   38.162770 
@@ -137,6 +147,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Donington Park GP"
 		,"Zoom":         15
 		,"MapInitLat":   52.830643
@@ -156,6 +168,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Oschersleben GP"
 		,"Zoom":         15
 		,"MapInitLat":   52.02699
@@ -176,6 +190,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Azure Circuit"
 		,"Zoom":         15
 		,"MapInitLat":   43.73777
@@ -191,6 +207,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Bathurst"
 		,"Zoom":         15
 		,"MapInitLat":   -33.439873
@@ -207,6 +225,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Spa-Francorchamps"
 		,"Zoom":         15
 		,"MapInitLat":   50.43061
@@ -222,6 +242,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Barcelona-Catalunya GP"
 		,"Zoom":         15
 		,"MapInitLat":   41.57304
@@ -242,6 +264,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Imola"
 		,"Zoom":         15
 		,"MapInitLat":   44.34069
@@ -258,6 +282,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Willow Springs International Raceway"
 		,"Zoom":         15
 		,"MapInitLat":   34.86891
@@ -276,6 +302,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Watkins Glen GP"
 		,"Zoom":         15
 		,"MapInitLat":   42.3288
@@ -294,6 +322,8 @@ function Refpoint(cuircit_id)
 		,"rotation":     0
 		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
 		,"Name":         "Autodromo Nazionale Monza GP"
 		,"Zoom":         15
 		,"MapInitLat":   45.61902
