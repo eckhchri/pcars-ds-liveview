@@ -107,7 +107,26 @@ function Refpoint(cuircit_id)
 	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 1"});
 	//Nordschleife Stage 2
 	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 2"});
-
+	
+	//Sonoma Raceway
+	aRefPoints[-1454279631] = new Array();
+        aRefPoints[-1454279631] =
+                {
+                "refLat":        38.162514
+                ,"refLong":      -122.457196
+                ,"rotation":     142
+                ,"cor_r_Long":   50000000
+                ,"cor_r_Lat":    -50000000
+                ,"Name":         "Sonoma Raceway GP"
+                ,"Zoom":         13
+                ,"MapInitLat":   38.162770 
+                ,"MapInitLong":  -122.457449
+                ,"Comment": "live prüfen"
+                };
+        //Sonoma Raceway National
+	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National"});
+	//Sonoma Sonoma Raceway Short
+	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short"});
 
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
