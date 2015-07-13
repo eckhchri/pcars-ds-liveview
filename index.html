@@ -4,18 +4,39 @@
          <title>Christoph Google maps Hockenheim for live position update</title>
          
          <script src="https://maps.google.com/maps/api/js??v=3.exp&sensor=true"></script>
-
-         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
-         
+	 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+        
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+ 
          <script src="./sample_data.js" charset="utf-8"></script>
 	 <script src="./pcars_driver.js" charset="utf-8"></script>
 	 <script src="./receive_ds_data.js" charset="utf-8"></script>
 	 <script src="./calc_coordinates.js" charset="utf-8"></script>
-	 <script src="./class_referenz_points.js" charset="utf-8"></script>
-	 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	 <script src="./class_reference_points.js" charset="utf-8"></script>
+
+	<!--Ermoeglicht das verschieben von DIV Bloecken -->
+	<!-- Jquery UI needed for jTable-->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <script>
+                  $(function() {
+                    $( "#DSdata" ).draggable();
+                    $( "#DriverData" ).draggable();
+		    $( "#TrackList" ) .draggable();
+		    $( "#DriverDataArea" ) .draggable();
+                  });
+        </script>
+
+	<!-- The jqGrid language file code-->
+        <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-de.js"></script>
+        <!-- The atual jqGrid code -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
+
+
+
          
-         <style type="text/css">
+        <style type="text/css">
 
              html, body, #map {
                  width: 90%;
@@ -23,6 +44,36 @@
                  margin: 0;
                  padding: 0;
              }
+	     #DSdata{
+		position: 	absolute; 
+		left: 		55%; 
+		top: 		5%; 
+		width: 		300px; 
+		height: 	71px;
+		border:		1;
+		background:	lightgreen;
+	     }
+
+	     #TrackList{
+		position:       absolute;
+                left:           25%;
+                top:            65%;
+                border:         1;
+		text-align: 	center;
+	     }
+
+	     #DriverData{
+		position:       absolute;
+                left:           55%;
+		top:		250px;
+		background:	lightblue;
+	     }
+		
+	     #DriverDataArea{
+		position:       absolute;
+		left:           55%;
+		top:            330px;
+	     }
 
              .stations, .stations svg {
                  position: absolute;
@@ -48,74 +99,215 @@
 			Christophs Test Seite fuer GPS Live Tracking inklusive Live Update von Positionen.
 	   </p>
        <div id="map"></div>
-
+      
        <script>          
 
-	////////////////// test object PCARSdriver
-	//   var driver1 =  new PCARSdriver(1234567,"eckhchri",3,277,278,279);
-	//   test = driver1.GetRefID();
-	//   document.write(  "<br>--test object PCARSdriver<br>" );
-	//   document.write(  driver1.GetRefID() );
-	//   document.write(  driver1.GetName() );
-	// test receiving DS Data via Javascript
-	//	document.write( "<br>TestFunc" + TestFunc (2,3) + "<br>" );
-	/////////////////
-	
 
-	// initialize array for PCARSdriver objects
-	var  aDrivers 	= new Array();
+	// initialize vars
+	var aDrivers 	= new Array();		// array for PCARSdriver objects
+	var aSensorData = new Array();		// array of Hashes, each hash includes parameters of a driver
+	var DsServerURL = "www.eckhchri.de";
+	var DsPort	= 9000;
+	var DisplayDuration = 700;		// duration for displaying marker updates
+	var global_i		= 0;
 
 
-	// Test 
+	// Test Area
 	// ACHTUNG	3. Parameter muss die Z Koordinate sein !!!!!!		
-	//         calc_coordinates( cuircitname,  aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );	
-//	calc_coordinates ("HOCKENHEIM",-621990, -133340);
-//	calc_coordinates ("HOCKENHEIM",-527260, -403770);
-//	calc_coordinates ("HOCKENHEIM",-438290, -451690);
-//	calc_coordinates ("HOCKENHEIM",-575190, -309520);
-
-	//var RefPoint =	new Refpoint("HOCKENHEIM");
+	//         calc_coordinates( cuircitid,  aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );	
+	//	calc_coordinates (1695182971 ,-621990, -133340);
 
 
-		
+	//StreckenID Liste holen 
+        var aTrackList = Receive_DS_data(DsServerURL, DsPort, 2000, "GETTRACKLIST");
+        //console.log("TRACKLIST: " , aTrackList);
+
+	// Allgemeine DS Daten abfragen (Race, Qualifying, ...)
+	var aDsData 	= Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSDATA");
+	//console.log("DSdata complete array: " , aDsData);
+
+	// set to global var, to modify in future stage for periodical updates via ajax
+	var DsName 		=	aDsData.name;
+	var DsTrackName		=	aTrackList[aDsData.TrackId];
+	var DsMaxMemberCnt	=	aDsData.max_member_count;
+	var cuircitID		=	aDsData.TrackId;	
+
+
+	document.write('<div id="DSdata">');
+	document.write('DS URL:' + DsServerURL + ":" + DsPort + "<br>");
+	if (DsTrackName != undefined){
+		document.write('DS Name: ' + DsName +   "<br>");
+		document.write('DS Track Name: ' + DsTrackName + "(" + cuircitID + ")"  + 	"<br>");
+		document.write('Max Member Count: ' + DsMaxMemberCnt + "<br>");
+	}else{
+		document.write('<br> <b>DS not available!</b> <br>');
+	}
+	document.write('</div>');
+
 
 	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
-	//	   Receive_DS_data(url,port,timeout)
-	aDrivers = Receive_DS_data("www.eckhchri.de",9000,2000);
+	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
+	aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
 
-	console.log ("Rueckgabewert Funktion Receive_DS_data:" +  aDrivers);
+	//console.log ("Rueckgabewert Funktion Receive_DS_data:" +  aDrivers);
 
-
-	// display resulst in table below google map
-	document.write ( "<table style='width:70%' border=1 ><tr><th>Ref-ID</th><th>Driver Name</th><th>X</th><th>Y</th><th>Z</th><th>State</th><th>CurrentSector</th><th>Race Position</th><th>LAT</th><th>LONG</th></tr>");
-	for (var i = 0; i < aDrivers.length; i++ ){
-		document.write ( "<tr>" );
-		document.write ( "<td>" + aDrivers[i].GetRefID() + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetName()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetPosX()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetPosY()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetPosZ()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetState()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetCurrentSector()  + "</td>");
-		document.write ( "<td>" + aDrivers[i].GetRacePosition()  + "</td>");
-
-		
-		var  gpsCo =  calc_coordinates ("HOCKENHEIM", aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
-
-		console.log ("--gpsLat" + gpsCo["Lat"]);
-		//anzeigen von LAT und LONG 
-		document.write ( "<td>" + gpsCo["Lat"]   + "</td>");
-		document.write ( "<td>" + gpsCo["Long"]  + "</td>");
-		
-
-
-		document.write ( "</tr>" );
+	// todo: check if logic is OK
+	if (cuircitID == "" || cuircitID == undefined){
+		cuircitID            =       1695182971;		//  set default value Hockenheim
 	}
-	document.write ( "</table>" );
+
+
+
+	// get List of alle RefPoints
+	var aRefPointTMP         =      new Refpoint( cuircitID );
+	console.log ("++++++++++++++aRefPointTMP: " , aRefPointTMP);
+
+
+	// create Table with list of all tracks
+	// todo: make table searchable   and  add new Theme
+	document.write('<div id="TrackList"><table id="tracklisttable"></table></div>');
+
+	jQuery("#tracklisttable").jqGrid({	
+	        datatype: "local",
+	        height: 250,
+	        colNames:['TrackID','TrackName', 'RefPoints exists?'],
+	        colModel:[
+	                {name:'trackid',index:'invdate', width:100},
+	                {name:'trackname',index:'name', width:200, search:true},
+	                {name:'refpoint',index:'amount', width:90, align:"right",sorttype:"float"},
+	        ],
+		search : {
+     		caption: "Search...",
+		Find: "Find",
+		Reset: "Reset",
+		odata : ['equal', 'not equal', 'less', 'less or equal','greater','greater or equal', 'begins with','does not begin with','is in','is not in','ends with','does not end with','contains','does not contain'],
+		groupOps: [ { op: "AND", text: "all" }, { op: "OR", text: "any" } ],
+	   	matchText: " match",
+     		rulesText: " rules"
+		},
+	        multiselect: false,
+	        caption: "List of available Tracks",
+
+
+		// todo sugrid einbauen
+		//http://www.trirand.com/blog/jqgrid/jqgrid.html
+		//http://jsfiddle.net/amorris/mz9ue/
+		subGrid : true,
 	
+	//	subGridUrl: 'subgrid.php?q=2',
+	//	subGridModel: [{ name  : ['Desc','Value'], 
+        //            width : [55,200] } 
+	//	],
+	//	caption: "Track Information"
+	
+	    	subGridRowExpanded: function (subgridId, rowid) {
+        	var subgridTableId = subgridId + "_t";
+		console.log("SubGridTableID: " , subgridTableId);
+        	$("#" + subgridId).html("<table id='" + subgridTableId + "'></table>");
+	        $("#" + subgridTableId).jqGrid({
+		            datatype: "local",
+		            data: $(this).jqGrid("getLocalRow", rowid).files,
+		            colNames: ["Name", "Value"],
+		            colModel: [
+		              {name: "name", width: 130, key: true},
+		              {name: "value", width: 130}
+	            ],
+	    	height: "100%",
+            	rowNum: 10,
+            	sortname: "name",
+            	idPrefix: "s_" + rowid + "_"
+        });
+
+	// Subgrid add
+        jQuery("#subgridTableId").jqGrid('addRowData',rowid,{     name:"RefLang"
+                                                                ,value:"49.0000"
+                                                               });
+    }
+
+
+ 	});
+
+
+	var k = 0;
+	var rpexists = "no";
+	if (aTrackList.length != 0){
+		for (var key in aTrackList ){
 	
 
-           function GPSSensor(initData) {
+			if (aRefPointTMP[key]){rpexists="yes"}else{rpexists="no"};
+	 
+		       	jQuery("#tracklisttable").jqGrid('addRowData',k+1,{	trackid:key 
+										,trackname:aTrackList[key] 
+										,refpoint:rpexists });
+			k++;
+		}
+	}else{
+		for (var key in aRefPointTMP ){
+	
+			jQuery("#tracklisttable").jqGrid('addRowData',k+1,{	trackid:key 
+										,trackname:aRefPointTMP[key]["Name"] 
+										,refpoint:"yes" });
+			k++;
+		}
+	}
+
+	//todo: display Driver Data with jqGrid
+	document.write('<div id="DriverDataArea"><table id="DriverDataTable"></table></div>');
+
+	//todo: define correct data types within jqGrid table definition
+	jQuery("#DriverDataTable").jqGrid({
+                datatype: "local",
+                height: 200,
+		width: 800,
+		caption: "List of available drivers",
+                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'PosX', 'PosY', 'PosZ', 'fastest lap', 'last lap' ],
+                colModel:[
+                        {name:'refid',index:'invdate', width:40},
+			{name:'driverposition',index:'name', width:15, search:true},
+                        {name:'drivername',index:'name', width:75, search:true},
+			{name:'driverstate',width:30, align:"center",sorttype:"float"},
+			{name:'driversector',width:10, align:"center",sorttype:"float"},
+                        {name:'posx',width:20, align:"center",sorttype:"float"},
+			{name:'posy',width:20, align:"center",sorttype:"float"},
+			{name:'posz',width:20, align:"center",sorttype:"float"},
+			{name:'fastestlap',width:20, align:"center",sorttype:"float"},
+			{name:'lastlap',width:20, align:"center",sorttype:"float"}
+                ]
+	});
+
+	// Fill data into Driver Table
+	for (var i = 0; i < aDrivers.length; i++ ){
+
+		jQuery("#DriverDataTable").jqGrid('addRowData',i,{     	refid: aDrivers[i].GetRefID()
+                                                                       	,driverposition: aDrivers[i].GetRacePosition()
+                                                                       	,drivername: aDrivers[i].GetName()
+									,driverstate: aDrivers[i].GetState()
+									,driversector: aDrivers[i].GetCurrentSector()
+									,posx: aDrivers[i].GetPosX()
+									,posy: aDrivers[i].GetPosY()
+									,posz: aDrivers[i].GetPosZ()
+									,fastestlap: aDrivers[i].GetFastestLapTime()
+									,lastlap: aDrivers[i].GetLastLapTime()
+								 });
+
+		var  gpsCo =  calc_coordinates ( cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
+		aSensorData[i] = {      
+					//"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+					"Key": aDrivers[i].GetName()
+					,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
+                                        ,"Lat": gpsCo["Lat"]
+                                        ,"Long": gpsCo["Long"]
+                                        ,"Heading":286.0
+                                        ,"Speed":22
+                                }
+	
+	}
+	//console.log("-+-+- aSensorData-Array: ", aSensorData);
+
+	
+	// setting up google maps overlays
+	function GPSSensor(initData) {
                //state information
                var _div = null;
                var _data = initData;
@@ -135,7 +327,7 @@
                    d = new google.maps.LatLng(d.Lat, d.Long);
                    d = _projection.fromLatLngToDivPixel(d);
                    return d3.select(this)
-                       .transition().duration(300)
+                       .transition().duration(DisplayDuration)
                        .style("left", (d.x - padding) + "px")
                        .style("top", (d.y - padding) + "px");
                }
@@ -150,8 +342,7 @@
                this.draw = function () {                   
                    var padding = 10;
                    _projection = this.getProjection();
-
-                   
+		  
                    var marker = _div.selectAll("svg")
                        .data(_data, function (d) { return d.Key; })
                        .each(transform) // update existing markers
@@ -163,63 +354,87 @@
                    marker.append("svg:circle") 
                        .attr("r", 4.5)
                        .attr("cx", padding)
-                       .attr("cy", padding);
+                       .attr("cy", padding)
+		       .style("fill", "purple");
+			;
 
                    // Add a label.
+		   console.log ("++++ in function draw() ->  aSensorData: " , aSensorData);
                    marker.append("svg:text")
                        .attr("x", padding + 7)
                        .attr("y", padding)
                        .attr("dy", ".31em")
-                       .text(function (d) { return d.Key; });                                      
+//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
+		       .text(function (d) {
+						
+						console.log("+++++ d:" , d);
+						for (var i = 0; i < aSensorData.length; i++){
+						
+							console.log(" for Update MarkerLabel:" , aSensorData);
+							if (aSensorData[i].Key == d.Key){
+								console.log("Update MarkerLabel:" , aSensorData[i].MarkerLabel);
+								return  aSensorData[i].MarkerLabel;
+							}
+						}
+						
+						//todo: during update d is not an array its an individual hash
+						console.log("++++not array:");
+						return d.MarkerLabel;
+					})
+                //       .text(function (d) { return d.Key; });                                      
                };
 
                this.onRemove = function () {
                    _div.remove();
                };
 
+
+		// todo: known issue: Beim Wechsel der Position, bleibt eine "Leiche" auf der Karte uebrig, weil Key "Pos - Name" zusammensetzt
+		// easyt solution:  deleting leading position number 
                this.update = function (data) {                    
                    //update internal data which drive redrawing on zoom_changed                  
 
-		   console.log ("---" + data[0]);
-                   for (var i = 0; i < data.length; i++) {
-		       console.log ("---", data);
-                       var found = false;
-                       for (var j = 0; j < _data.length; j++) {
-                           if (_data[j].Key === data[i].Key) {
-                               found = true;
-                               _data[j].Lat = data[i].Lat;
-                               _data[j].Long = data[i].Long;
-                           }
-                       }
-                       if (!found)
-                           _data.push(data[i]);
-                   }
-                   //this.draw();
-                   _div.selectAll("svg")
-                       .data(_data, function (d) { return d.Key; }) 
-                       .each(transformWithEase);                  
+                 	for (var i = 0; i < data.length; i++) {
+			       //console.log ("------------------------------------------- data", data);
+	                       var found = false;
+	                       for (var j = 0; j < _data.length; j++) {
+	                           if (_data[j].Key === data[i].Key) {
+	        	                       found = true;
+	                               _data[j].Lat = data[i].Lat;
+	                               _data[j].Long = data[i].Long;
+				       _data[j].MarkerLabel = data[i].MarkerLabel;
+	                           }
+	                       }
+	                       if (!found)
+	                           _data.push(data[i]);
+	                   }
+
+			   //todo: what does this draw() call ?
+			   console.log ("-------------------------------------------_data", _data);
+	                   this.draw();
+	                   _div.selectAll("svg")
+	                       .data(_data, function (d) { return d.Key; }) 
+	                       .each(transformWithEase);                 
                };
            }
            //subclassing
            GPSSensor.prototype = new google.maps.OverlayView();
            
 
-
            // Create the Google Map
            var map = new google.maps.Map(d3.select("#map").node(), {
-               zoom: 14,
-			   
-			   // todo: Christoph changs  + Referenzpunk Object erstellen
-			   // Hockenheim 49.32771 , 8.56588
-               center: new google.maps.LatLng(49.32771, 8.56588),
-               mapTypeId: google.maps.MapTypeId.ROADMAP
+               zoom: aRefPointTMP[cuircitID]["Zoom"],
+		
+		// use ´cuircit RefPoint for center google map
+	       	// Hockenheim 49.32771 , 8.56588
+               	center: new google.maps.LatLng( aRefPointTMP[cuircitID]["MapInitLat"] , aRefPointTMP[cuircitID]["MapInitLong"] ),
+               	mapTypeId: google.maps.MapTypeId.SATELLITE
            });
            
-           var sensorData = [
-               sensor1Data[0]               
-               ,sensor2Data[0]
-           ];
-           var sensorLayer = new GPSSensor(sensorData);
+	//  	console.log ("-++-+-+---++++--+-+-+-+-"  +  aRefPointTMP[cuircitID]["refLat"] ); 
+	//	console.log("-+-+- aSensorData-Array: ", aSensorData);
+	//	console.log("-+-+- sensorData-Array: ", sensorData);
+	   var sensorLayer = new GPSSensor(aSensorData);
            sensorLayer.setMap(map);
            
 
@@ -227,41 +442,42 @@
 ///////////////////////////////////////////////////
            //simulate position update by receiving positions at random interval
 		   
-           var d1Cnt = 1, d2Cnt = 1;
+           //var d1Cnt = 1, d2Cnt = 1;
            (function loop() {
 
 
-            //   var randTimeout = Math.round(Math.random() * (3000 - 500)) + 500;
-	
-		randTimeout = 1200;
+		// todo: reduce timeout for better performance ?	
+		randTimeout = 500;
 		console.log("--Timeout_Loop()" + randTimeout);
 
                setTimeout(function () {
 		
-		  /// toDo Christoph ///////////////////////
-                 aDrivers = Receive_DS_data("www.eckhchri.de",9000,2000);
+		// collect live data 
+                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE" );
 	
 		for (var i = 0; i < aDrivers.length; i++ ){
 
-			// todo: only static value Driver 2
-	                gpsCoTmp =  calc_coordinates ("HOCKENHEIM", aDrivers[1].GetPosX() , aDrivers[1].GetPosZ() );
-
-			sensor1Data[i].Long 	= gpsCoTmp["Long"];
-			sensor1Data[i].Lat 	= gpsCoTmp["Lat"];
-			sensor1Data[i].Key	= aDrivers[1].GetName();
-		
+			// calculate GPS coordinates
+	                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
+			//console.log("GPS coordinates: ", gpsCoTmp);
+			
+			// fill data array
+			aSensorData[i] = {
+				//	"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+					"Key": aDrivers[i].GetName()
+					,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
+                                        ,"Lat": gpsCoTmp["Lat"]
+                                        ,"Long": gpsCoTmp["Long"]
+                                        ,"Heading":286.0
+                                        ,"Speed":22
+                                	}
 		}	
-		
-		sensorLayer.update([sensor1Data[0]]);
-		
+		//console.log("-+-+- aSensorData-Array: ", aSensorData);
 
-/*
-                   var whichSensor = Math.floor(Math.random() * 2);
-                   if (whichSensor==0 && d1Cnt < sensor1Data.length)
-                       sensorLayer.update([sensor1Data[d1Cnt++]]);
-                   else if (whichSensor==1 && d2Cnt < sensor2Data.length)
-                       sensorLayer.update([sensor2Data[d2Cnt++]]);
-*/
+		// update draw data
+		sensorLayer.update(aSensorData);
+
 
                    loop();
                }, randTimeout);
