@@ -1,11 +1,10 @@
 <!DOCTYPE html>
  <html>
      <head>
-         <title>Christoph Google maps Hockenheim for live position update</title>
+         <title>Project Cars DS - live view with position update.</title>
          
          <script src="https://maps.google.com/maps/api/js??v=3.exp&sensor=true"></script>
 	 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
-        
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
  
 	 <script src="./pcars_driver.js" charset="utf-8"></script>
@@ -109,6 +108,9 @@
 	var DsPort	= 9000;
 	var DisplayDuration = 700;		// duration for displaying marker updates
 	var global_i		= 0;
+	var map;				// google map object
+	var sensorLayer;
+	var aRefPointTMP;			// hash of all RefPoints for available tracks
 
 
 	// Test Area
@@ -130,6 +132,7 @@
 	var DsTrackName		=	aTrackList[aDsData.TrackId];
 	var DsMaxMemberCnt	=	aDsData.max_member_count;
 	var cuircitID		=	aDsData.TrackId;	
+
 
 
 	document.write('<div id="DSdata">');
@@ -158,7 +161,7 @@
 
 
 	// get List of alle RefPoints
-	var aRefPointTMP         =      new Refpoint( cuircitID );
+	aRefPointTMP         =      new Refpoint( cuircitID );
 	console.log ("++++++++++++++aRefPointTMP: " , aRefPointTMP);
 
 
@@ -374,6 +377,8 @@
                        .each(transform)
                        .attr("class", "marker");
 
+		   console.log("++ Marker" , marker);
+
                    // Add a circle.
                    marker.append("svg:circle") 
                        .attr("r", 4.5)
@@ -390,13 +395,14 @@
                        .attr("dy", ".31em")
 //todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
 		       .text(function (d) {
-						
+						return d.key;
 						console.log("+++++ d:" , d);
+
 						for (var i = 0; i < aSensorData.length; i++){
 						
 							console.log(" for Update MarkerLabel:" , aSensorData);
 							if (aSensorData[i].Key == d.Key){
-								console.log("Update MarkerLabel:" , aSensorData[i].MarkerLabel);
+								console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);
 								return  aSensorData[i].MarkerLabel;
 							}
 						}
@@ -404,6 +410,7 @@
 						//todo: during update d is not an array its an individual hash
 						console.log("++++not array:");
 						return d.MarkerLabel;
+						
 					})
                 //       .text(function (d) { return d.Key; });                                      
                };
@@ -427,6 +434,7 @@
 	                               _data[j].Lat = data[i].Lat;
 	                               _data[j].Long = data[i].Long;
 				       _data[j].MarkerLabel = data[i].MarkerLabel;
+				//	console.log("---12 _data changes for key:" + _data[j].Key + " // " + data[i].Key);
 	                           }
 	                       }
 	                       if (!found)
@@ -434,45 +442,49 @@
 	                   }
 
 			   //todo: what does this draw() call ?
-			   console.log ("-------------------------------------------_data", _data);
+			   console.log ("THIS:" , this);
 	                   this.draw();
 	                   _div.selectAll("svg")
 	                       .data(_data, function (d) { return d.Key; }) 
 	                       .each(transformWithEase);                 
                };
            }
+	
+	function init_map(_TrackID)
+	{
            //subclassing
            GPSSensor.prototype = new google.maps.OverlayView();
            
 
            // Create the Google Map
-           var map = new google.maps.Map(d3.select("#map").node(), {
+           map = new google.maps.Map(d3.select("#map").node(), {
                zoom: aRefPointTMP[cuircitID]["Zoom"],
 		
 		// use ´cuircit RefPoint for center google map
-	       	// Hockenheim 49.32771 , 8.56588
-               	center: new google.maps.LatLng( aRefPointTMP[cuircitID]["MapInitLat"] , aRefPointTMP[cuircitID]["MapInitLong"] ),
+               	center: new google.maps.LatLng( aRefPointTMP[_TrackID]["MapInitLat"] , aRefPointTMP[_TrackID]["MapInitLong"] ),
                	mapTypeId: google.maps.MapTypeId.SATELLITE
            });
            
-	//  	console.log ("-++-+-+---++++--+-+-+-+-"  +  aRefPointTMP[cuircitID]["refLat"] ); 
-	//	console.log("-+-+- aSensorData-Array: ", aSensorData);
-	//	console.log("-+-+- sensorData-Array: ", sensorData);
-	   var sensorLayer = new GPSSensor(aSensorData);
+	   //console.log("-+-+- aSensorData-Array: ", aSensorData);
+	   sensorLayer = new GPSSensor(aSensorData);
            sensorLayer.setMap(map);
-           
+       }
+
+	init_map(cuircitID);
 
 				
 ///////////////////////////////////////////////////
            //simulate position update by receiving positions at random interval
 		   
            //var d1Cnt = 1, d2Cnt = 1;
+	   var tmpcuircitID;	// to valida if global cuircitid differs from current
            (function loop() {
 
 
 		// todo: reduce timeout for better performance ?	
 		randTimeout = 500;
 		console.log("--Timeout_Loop()" + randTimeout);
+		tmpcuircitID = cuircitID;	// initialize var with currect TrackID
 
                setTimeout(function () {
 		
@@ -496,12 +508,25 @@
                                         ,"Heading":286.0
                                         ,"Speed":22
                                 	}
+			//console.log ("aDrivers[i]" , aDrivers[i]);
+			tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
 		}	
 		//console.log("-+-+- aSensorData-Array: ", aSensorData);
 
 		// update draw data
 		sensorLayer.update(aSensorData);
 
+		
+		//todo: Move map dynamically if cuircit changes to a new GPS coordinate
+		if (cuircitID != tmpcuircitID ){
+			//map.setCenter({lat: 50.332733, lng: 6.943355});	
+			map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
+			cuircitID = tmpcuircitID;  // give the global var the new TrackId
+			console.log("TrackID changed. Call SetCenter() for the map. cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
+		}
+		//todo: Kann man die marker direkt mit setPosition updaten?
+		//marker.setPosition(latlng:LatLng|LatLngLiteral)
+		//init_map(cuircitID);
 
                    loop();
                }, randTimeout);

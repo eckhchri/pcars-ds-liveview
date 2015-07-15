@@ -86,7 +86,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
                  var myArr = JSON.parse( xmlhttp.responseText );
                  var arrayoutput = myArr.toString();
 
-                 //console.log("ReceiveDsData complete array" , myArr);
+                 console.log("ReceiveDsData complete array" , myArr);
 
 	   switch ( this.receivemode ) {
 
@@ -135,7 +135,22 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			if ( myArr.response.participants.length == 0 ){
 			
 				console.log("no Participants found in DS, leave function!");
-				aDrivers.push (  new PCARSdriver(9234567,"NO_PARTICIPANT_TestData",3,277,278,279) );		
+				aDrivers.push (  new PCARSdriver(
+									9234567
+									,"NO_PARTICIPANT_TestData"
+									,3
+									,277
+									,278
+									,279
+									,"StateTest"
+									,"Sector1"
+									,"123"
+									,"123456"
+									,"123456"
+									,"0"
+									,"321"
+									,{TrackId: 920145926}
+						) );		
 				return aDrivers;
 			}
 		 
@@ -156,7 +171,10 @@ function Receive_DS_data (url,port,timeout,receivemode){
 						myArr.response.participants[i].attributes.FastestLapTime,
 					        myArr.response.participants[i].attributes.LastLapTime,
 						myArr.response.participants[i].attributes.Orientation,
-						myArr.response.participants[i].attributes.Speed
+						myArr.response.participants[i].attributes.Speed,
+						{ 	TrackId: myArr.response.attributes.TrackId
+							,GridSize : myArr.response.attributes.GridSize
+						}
 						)
 					);
 			

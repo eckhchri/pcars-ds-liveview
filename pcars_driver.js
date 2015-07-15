@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd)
+function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd, variousParameters)
 {
         // vars
         this.RefID     =       RefID;
@@ -15,6 +15,7 @@ function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, Race
         this.LastLapTime   =   LLapTime;
         this.Orientation   =   Orient;
         this.Speed	   =   Spd;
+	this.variousParameters = variousParameters;
 
 
         //private vars
@@ -87,6 +88,12 @@ function GetPosColor(){
 		return red;
 	}
 }
+function GetVariousParameter(parameter)
+{
+	//console.log("variousParameters: ", this.variousParameters + " --- parameter: " + parameter);
+	return this.variousParameters[parameter];
+}
+
 
 /// help function
 function _ConvertLaptimeInReadbaleFormat(milliseconds)
@@ -119,4 +126,5 @@ PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
 PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
+PCARSdriver.prototype.GetVariousParameter=GetVariousParameter;
 

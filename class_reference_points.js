@@ -345,8 +345,8 @@ function Refpoint(cuircit_id)
 
 	}
 	
-//	console.log ("+++ RefPoints: " , aRefPoints);
-//	console.log ("++ used  CuircitID: " + this.cuircit_id );
+	//console.log ("+++ RefPoints: " , aRefPoints);
+	//console.log ("++ used  CuircitID: " + this.cuircit_id );
 
 	// set values for the object	
 	this.Lat 	= aRefPoints[this.cuircit_id]["refLat"];
