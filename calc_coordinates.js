@@ -21,8 +21,8 @@ function calc_coordinates (circuit_id,PosX,PosY){
         var y_neu;
 
 	//correction multiplier
-	x_neu = x_neu * aRefPointTmp[circuit_id]["cor_PosX_mul"];
-	y_neu = y_neu * aRefPointTmp[circuit_id]["cor_PosY_mul"];
+	PosX = PosX * aRefPointTmp[circuit_id]["cor_PosX_mul"];
+	PosY = PosY * aRefPointTmp[circuit_id]["cor_PosY_mul"];
 	
 	//console.log("CALC:", aRefPointTmp );
 	//console.log("Calc q: " + q);
