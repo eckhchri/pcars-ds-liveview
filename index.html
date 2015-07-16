@@ -139,10 +139,11 @@
 
 	// Allgemeine DS Daten abfragen (Race, Qualifying, ...)
 	var aDsData 	= Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSDATA");
-	//console.log("DSdata complete array: " , aDsData);
+	console.log("DSdata complete array: " , aDsData);
 
 	// set to global var, to modify in future stage for periodical updates via ajax
 	var DsName 		=	aDsData.name;
+	var DsState		=	aDsData.state;		//idle/running
 	var DsTrackName		=	aTrackList[aDsData.TrackId];
 	var DsMaxMemberCnt	=	aDsData.max_member_count;
 	var cuircitID		=	aDsData.TrackId;	
@@ -150,13 +151,13 @@
 
 
 	document.write('<div id="DSdata">');
-	document.write('DS URL:' + DsServerURL + ":" + DsPort + "<br>");
+	document.write('DS URL: <b>' + DsServerURL + " : " + DsPort + "</b><br>");
 	if (DsTrackName != undefined){
 		document.write('DS Name: ' + DsName +   "<br>");
 		document.write('DS Track Name: ' + DsTrackName + "(" + cuircitID + ")"  + 	"<br>");
 		document.write('Max Member Count: ' + DsMaxMemberCnt + "<br>");
 	}else{
-		document.write('<br> <b>DS not available!</b> <br>');
+		document.write('<br> DS state: <b> '+ DsState + '</b> <br>');
 	}
 	document.write('</div>');
 
@@ -171,7 +172,6 @@
 	if (cuircitID == "" || cuircitID == undefined){
 		cuircitID            =       1695182971;		//  set default value Hockenheim
 	}
-
 
 
 	// get List of alle RefPoints
@@ -242,7 +242,7 @@
     }
 
 
- 	});
+ 	}); //end jqGrid
 
 
 	var k = 0;
