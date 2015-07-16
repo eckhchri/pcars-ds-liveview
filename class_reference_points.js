@@ -128,7 +128,7 @@ function Refpoint(cuircit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 0.65
                 ,"Name":         "Sonoma Raceway GP"
-                ,"Zoom":         13
+                ,"Zoom":         15
                 ,"MapInitLat":   38.162770 
                 ,"MapInitLong":  -122.457449
                 ,"Comment": "live prüfen"
@@ -138,6 +138,26 @@ function Refpoint(cuircit_id)
 	//Sonoma Sonoma Raceway Short
 	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short"});
 
+	//Circuit des 24 Heures du Mans
+	aRefPoints[1740968730] = new Array();
+        aRefPoints[1740968730] =
+                {
+                "refLat":        47.939065
+                ,"refLong":      0.218178
+                ,"rotation":     1.6
+                ,"cor_r_Long":   25000000
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Circuit des 24 Heures du Mans"
+                ,"Zoom":         13
+                ,"MapInitLat":   47.936818 
+                ,"MapInitLong":  0.223960
+                ,"Comment": "live prüfen"
+                };
+        //Le Circuit Bugatti
+	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti"});
+                
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
