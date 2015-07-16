@@ -223,17 +223,17 @@ function Refpoint(cuircit_id)
 	aRefPoints[921120824] =
 		{
 		"refLat":        -33.439873
-		,"refLong":      149.559744
-		,"rotation":     0
-		,"cor_r_Long":   45000000
-		,"cor_r_Lat":    0
+		,"refLong":      149.559704
+		,"rotation":     -9
+		,"cor_r_Long":   15000000
+		,"cor_r_Lat":    15000000
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Bathurst"
-		,"Zoom":         15
-		,"MapInitLat":   -33.439873
-		,"MapInitLong":  149.559744
-		,"Comment": "by colets, prüfen"
+		,"Zoom":         14
+		,"MapInitLat":   -33.448809
+		,"MapInitLong":  149.555024
+		,"Comment": "live prüfen"
 		};
 	
 	//Circuit de Spa-Francorchamps
