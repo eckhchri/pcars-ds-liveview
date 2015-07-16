@@ -156,7 +156,7 @@ function Refpoint(cuircit_id)
                 ,"Comment": "live prüfen"
                 };
         //Le Circuit Bugatti
-	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti"});
+	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});
                 
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
