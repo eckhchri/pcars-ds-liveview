@@ -1,4 +1,4 @@
-/// Referenz Object
+/// Reference Object
 // CLASS of RefPoints
 function Refpoint(cuircit_id)
 {
