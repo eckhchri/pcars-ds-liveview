@@ -80,8 +80,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Nuerburgring GP"
                 ,"Zoom":         15
-                ,"MapInitLat":   50.359101
-                ,"MapInitLong":  6.962529
+                ,"MapInitLat":   50.332154
+                ,"MapInitLong":  6.940467
                 ,"Comment": "live prüfen"
                 };
 
