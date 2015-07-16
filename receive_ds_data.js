@@ -78,10 +78,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	{	
 
-		   //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		   //document.write ( "HTTP Response received" );
-		   //document.write ( xmlhttp.responseText );
-
+		 //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 		 //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
                  var myArr = JSON.parse( xmlhttp.responseText );
                  var arrayoutput = myArr.toString();
