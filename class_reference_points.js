@@ -126,7 +126,7 @@ function Refpoint(cuircit_id)
                 ,"cor_r_Long":   10000000
                 ,"cor_r_Lat":    -30000000
                 ,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 0.65
+		,"cor_PosY_mul": 0.97
                 ,"Name":         "Sonoma Raceway GP"
                 ,"Zoom":         15
                 ,"MapInitLat":   38.162770 
