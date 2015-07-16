@@ -156,6 +156,7 @@
 		document.write('DS Name: ' + DsName +   "<br>");
 		document.write('DS Track Name: ' + DsTrackName + "(" + cuircitID + ")"  + 	"<br>");
 		document.write('Max Member Count: ' + DsMaxMemberCnt + "<br>");
+		document.write('<br> DS state: <b> '+ DsState + '</b> <br>');
 	}else{
 		document.write('<br> DS state: <b> '+ DsState + '</b> <br>');
 	}
@@ -407,9 +408,10 @@
                        .attr("x", padding + 7)
                        .attr("y", padding)
                        .attr("dy", ".31em")
-//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
+			//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
+			//      it seem that the function within .text(...) will called only once at the beginning 
+			//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
 		       .text(function (d) {
-						return d.key;
 						console.log("+++++ d:" , d);
 
 						for (var i = 0; i < aSensorData.length; i++){
@@ -426,7 +428,7 @@
 						return d.MarkerLabel;
 						
 					})
-                //       .text(function (d) { return d.Key; });                                      
+               //       .text(function (d) { return d.Key; });                                      
                };
 
                this.onRemove = function () {
@@ -460,7 +462,8 @@
 	                   this.draw();
 	                   _div.selectAll("svg")
 	                       .data(_data, function (d) { return d.Key; }) 
-	                       .each(transformWithEase);                 
+	                       .each(transformWithEase);                
+			 
                };
            }
 	
@@ -503,7 +506,7 @@
                setTimeout(function () {
 		
 		// collect live data 
-                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE" );
+                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE"); 
 	
 		for (var i = 0; i < aDrivers.length; i++ ){
 
@@ -526,7 +529,15 @@
 			tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
 		}	
 		//console.log("-+-+- aSensorData-Array: ", aSensorData);
+/*
+		console.log("d3 object: " , d3);
+		var _divtmp = d3.select(this.getPanes().overlayLayer)
+                            .append("div")
+                            .attr("class", "stations");
 
+		var marker = _divtmp.selectAll("svg");
+		console.log("Marker:" , marker);
+*/
 		// update draw data
 		sensorLayer.update(aSensorData);
 
