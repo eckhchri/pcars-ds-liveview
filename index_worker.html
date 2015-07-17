@@ -1,0 +1,76 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <style>
+	#DSDATA{
+                position:       absolute;
+                left:           10%;
+                top:            5%;
+                width:          150px;
+                height:         90px;
+                border:         1;
+                background:     lightgreen;
+             }
+
+  </style>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+   <script>
+	$(function() {
+                    $( "#DSDATA" ).draggable();
+                  });
+   </script>
+
+  <title>HTML5 WebWorker Testseite</title>
+</head>
+<body>
+
+	<div id=DSDATA><p id=DSDATAP>TestText</p><div>
+
+<script>
+
+	var globalcnt = 0;
+
+	//http://www.html5rocks.com/de/tutorials/workers/basics/
+	// create new worker
+	var worker = new Worker('worker_dsdata.js');
+
+	//event handler of the worker
+	worker.addEventListener('message', function(e) {
+		
+		console.log('Worker said: ', e.data);
+		// write in HTML page
+		document.getElementsByTagName('p')[0].innerHTML = e.data.state + " / " + globalcnt;
+
+		globalcnt++;
+		 //call worker again if first run finished -> currently endless loop
+		 worker.postMessage("www.eckhchri.de");		
+
+	}, false);
+
+
+	//start worker and send params
+        worker.postMessage("www.eckhchri.de");
+
+	//change elements in HTML
+	//http://www.html-seminar.de/javascript-html-elemente-aendern.htm
+	var inhalt = document.getElementById('DSDATAP');
+	var inhalt2= document.getElementsByTagName('p');
+
+	console.log("HTML Inhalt", inhalt.innerHTML);
+	console.log("HTML inhalt2:", inhalt2);
+	
+	for (i=0;i < 50; i++){
+
+		//document.getElementsByTagName('p')[0].innerHTML = 'Absatz durch JavaScript geaendert' + i ;	
+//		worker.postMessage("www.eckhchri.de");
+		
+
+	}
+
+</script>
+
+	
+
+</body>
