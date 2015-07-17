@@ -95,9 +95,6 @@
          </style>
      </head>
    <body>
-	   <p>
-			Christophs Test Seite fuer GPS Live Tracking inklusive Live Update von Positionen.
-	   </p>
        <div id="map"></div>
       
        <script>
@@ -108,6 +105,7 @@
 	var aSensorData = new Array();		// array of Hashes, each hash includes parameters of a driver
 	var DsServerURL = "www.eckhchri.de";
 	var DsPort	= 9000;
+	var XMLHTTPTimeout = 2000;
 	var DisplayDuration = 700;		// duration for displaying marker updates
 	var global_i		= 0;
 	var map;				// google map object
@@ -148,12 +146,34 @@
 	var DsMaxMemberCnt	=	aDsData.max_member_count;
 	var cuircitID		=	aDsData.TrackId;	
 
+	document.write('<div id="DSdata"><p1>DS Status: - </p1><br><p2></p2><br><p3></p3><br><p4></p4></div>');
 
+	var workerDSDATA      =       new Worker('./worker_dsdata.js');
 
-	document.write('<div id="DSdata">');
+        //event handler of the worker
+        workerDSDATA.addEventListener('message', function(e) {
+
+                console.log('Worker said: ', e.data);
+                // write in HTML page
+                document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   ' + e.data.state;
+		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: ' + e.data.joinable;
+		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: ' + e.data.lobbyid;
+		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      ' + e.data.now; 
+
+		//console.log("HTML Elements" , document.getElementsByTagName('p1'));
+
+		//call worker again for next itteration -> currently endless loop
+		workerDSDATA.postMessage({dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSDATA"});
+
+        }, false);
+
+	//initail call of the worker
+	workerDSDATA.postMessage({dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSDATA"});
+/*
+	document.write('<div id="DSdata">
 	document.write('DS URL: <b>' + DsServerURL + " : " + DsPort + "</b><br>");
 	if (DsTrackName != undefined){
-		document.write('DS Name: ' + DsName +   "<br>");
+		document.write('DS    Name: ' + DsName +   "<br>");
 		document.write('DS Track Name: ' + DsTrackName + "(" + cuircitID + ")"  + 	"<br>");
 		document.write('Max Member Count: ' + DsMaxMemberCnt + "<br>");
 		document.write('<br> DS state: <b> '+ DsState + '</b> <br>');
@@ -161,7 +181,7 @@
 		document.write('<br> DS state: <b> '+ DsState + '</b> <br>');
 	}
 	document.write('</div>');
-
+*/
 
 	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
@@ -399,8 +419,12 @@
                        .attr("r", 4.5)
                        .attr("cx", padding)
                        .attr("cy", padding)
-		       .style("fill", "purple");
-			;
+		       .style("fill", "red");
+
+		//todo experimental method call	
+		//marker.text("test123456");	
+		   console.log("Marker: " , marker);
+		
 
                    // Add a label.
 		   console.log ("++++ in function draw() ->  aSensorData: " , aSensorData);
@@ -458,6 +482,7 @@
 	                   }
 
 			   //todo: what does this draw() call ?
+			   console.log ("THIS Updated data:" , _data);
 			   console.log ("THIS:" , this);
 	                   this.draw();
 	                   _div.selectAll("svg")

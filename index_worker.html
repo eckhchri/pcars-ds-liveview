@@ -34,24 +34,26 @@
 
 	//http://www.html5rocks.com/de/tutorials/workers/basics/
 	// create new worker
-	var worker = new Worker('worker_dsdata.js');
+	var callParams	=	{dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDSDATA"};
+	var worker 	= 	new Worker('./worker_dsdata.js');
 
 	//event handler of the worker
 	worker.addEventListener('message', function(e) {
 		
 		console.log('Worker said: ', e.data);
 		// write in HTML page
-		document.getElementsByTagName('p')[0].innerHTML = e.data.state + " / " + globalcnt;
+		drawDsData(e);
+		//document.getElementsByTagName('p')[0].innerHTML = e.data.state + " / " + globalcnt;
 
 		globalcnt++;
 		 //call worker again if first run finished -> currently endless loop
-		 worker.postMessage("www.eckhchri.de");		
+		 worker.postMessage(callParams);		
 
 	}, false);
 
 
-	//start worker and send params
-        worker.postMessage("www.eckhchri.de");
+	//initial start worker and send params
+        worker.postMessage(callParams);
 
 	//change elements in HTML
 	//http://www.html-seminar.de/javascript-html-elemente-aendern.htm
@@ -61,13 +63,18 @@
 	console.log("HTML Inhalt", inhalt.innerHTML);
 	console.log("HTML inhalt2:", inhalt2);
 	
-	for (i=0;i < 50; i++){
 
-		//document.getElementsByTagName('p')[0].innerHTML = 'Absatz durch JavaScript geaendert' + i ;	
-//		worker.postMessage("www.eckhchri.de");
-		
 
-	}
+function drawDsData(a){
+
+	var html;
+	html = 	'DS Url: ' + 
+	a.data.state + " / " + globalcnt;
+
+	document.getElementsByTagName('p')[0].innerHTML = html;
+
+}
+
 
 </script>
 
