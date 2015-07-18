@@ -75,11 +75,11 @@
 
                 console.log('Worker2 Tracklist said: ', e.data);
 		refreshTrackList(e);
+		worker2.postMessage({workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
         }, false);
 	//todo: call this function not each time, implement an delay for each worker
 	worker2.postMessage({workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
-//	worker2.postMessage({workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 
 	jQuery("#tracklisttable").jqGrid({	
@@ -134,31 +134,37 @@ function refreshTrackList(a)
 	//jQuery("#tracklisttable").jqGrid('GridUnload');		// destroy complete table working
 	//jQuery("#tracklisttable").trigger("clearGridData");		// unload did not work :-(
 
-	var grididcnt = 1;
+	var grididcnt = 0;
+	var _data;
 	// get current sizre of the table
 	var GridSize = jQuery("#tracklisttable").getGridParam("reccount");
-	//console.log("Current Table size: " , GridSize);
 
-	for (i=0; i <= a.data.length; i++)
+
+	//todo: delte all rows before puute new data in it
+	//for (j=0;j<GridSize; j++){
+	//	jQuery("#tracklisttable").jqGrid('delRowData', j );
+	//}
+
+	console.log("Current Table size: " , GridSize);
+
+	for (i=0; i < a.data.length; i++)
 	{
-		console.log("update data on row: " + i + " / " , a.data[i].trackid);
+		console.log("update data on row: " + i + " / " + a.data[i]);
+
+
+		_data = {      id:             grididcnt
+                               ,trackid:       a.data[i].trackid
+                               ,trackname:     a.data[i].trackname
+                               ,refpoint:      a.data[i].refpoint
+                               ,comment:       a.data[i].comment
+                        };
 		//decision if replace or add a row to jqGrid
 		if (i <= GridSize)
 		{
-			jQuery("#tracklisttable").jqGrid('setRowData',i, {      id:		grididcnt
-										,trackid:	a.data[i].trackid
-	                                                                	,trackname: 	a.data[i].trackname
-	                                                                	,refpoint:	a.data[i].refpoint
-	                                                                	,comment:	a.data[i].comment
-	                                                        	});
+			jQuery("#tracklisttable").jqGrid('setRowData',i, _data);
 			console.log("+++++ set " + i );
 		}else{
-			jQuery("#tracklisttable").jqGrid('addRowData',i,{       id:		grididcnt
-										,trackid:       a.data[i].trackid
-                        	                                                ,trackname:     a.data[i].trackname
-                                	                                        ,refpoint:      a.data[i].refpoint
-                                        	                                ,comment:       a.data[i].comment
-                                                	                });
+			jQuery("#tracklisttable").jqGrid('addRowData',i, _data);
 			console.log("+++++ add " + i );
 		}
 
@@ -169,8 +175,6 @@ function refreshTrackList(a)
 	jQuery("#tracklisttable").trigger("reloadGrid");
 	
 	console.log("jqGrid after setDatat(): " , jQuery("#tracklisttable"));
-
-	worker2.postMessage({ dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 }
 
