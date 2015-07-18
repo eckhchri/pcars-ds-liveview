@@ -12,6 +12,17 @@
                 background:     lightgreen;
              }
 
+	#DSTRACKLIST{
+                position:       absolute;
+                left:           15%;
+                top:            15%;
+                width:          150px;
+                height:         90px;
+                border:         1;
+                background:     lightblue;
+             }
+
+
   </style>
    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -19,59 +30,140 @@
    <script>
 	$(function() {
                     $( "#DSDATA" ).draggable();
+		    $( "#DSTRACKLIST" ).draggable();
                   });
    </script>
+   <!-- The jqGrid language file code-->
+   <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css"></script>
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-de.js"></script>
+   <!-- The actual jqGrid code -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
 
   <title>HTML5 WebWorker Testseite</title>
 </head>
 <body>
 
-	<div id=DSDATA><p id=DSDATAP>TestText</p><div>
+	<div id=DSDATA><p1 id=DSDATAP>TestText</p1></div>
+	<div id=DSTRACKLIST><table id="tracklisttable"></table></div>
 
 <script>
 
 	var globalcnt = 0;
 
 	//http://www.html5rocks.com/de/tutorials/workers/basics/
-	// create new worker
-	var callParams	=	{dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDSDATA"};
+	// create new worker ///////////////////////////////////////////////////////////////////////////////////////
+	var callParams	=	{workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDSDATA"};
 	var worker 	= 	new Worker('./worker_dsdata.js');
 
 	//event handler of the worker
 	worker.addEventListener('message', function(e) {
-		
 		console.log('Worker said: ', e.data);
-		// write in HTML page
 		drawDsData(e);
-		//document.getElementsByTagName('p')[0].innerHTML = e.data.state + " / " + globalcnt;
-
 		globalcnt++;
 		 //call worker again if first run finished -> currently endless loop
-		 worker.postMessage(callParams);		
-
+//		 worker.postMessage(callParams);		
 	}, false);
-
 
 	//initial start worker and send params
         worker.postMessage(callParams);
+
+
+	
+	// create worker for Tracklist updates //////////////////////////////////////////////////////////////////////
+	var worker2      =       new Worker('./worker_tracklist.js');
+	worker2.addEventListener('message', function(e) {
+
+                console.log('Worker2 Tracklist said: ', e.data);
+		refreshTrackList(e);
+
+        }, false);
+	//todo: call this function not each time, implement an delay for each worker
+	worker2.postMessage({ dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
+
+
+	jQuery("#tracklisttable").jqGrid({	
+	        datatype: "local",
+	        height: 250,
+	        colNames:['TrackID','TrackName', 'RefPoints exists?','Comment'],
+	        colModel:[
+	                {name:'trackid',index:'invdate', width:100},
+	                {name:'trackname', width:200},
+	                {name:'refpoint', width:90, align:"right",sorttype:"float"},
+			{name:'comment', width:160, align:"left"},
+	        ],
+	        caption: "List of available Tracks",
+	});
+
+	jQuery("#tracklisttable").jqGrid('addRowData',0,{	trackid:"123451" 
+								,trackname: "HoCkEnHeIm2014"
+								,refpoint:"no"
+								,comment:" Testdata" 
+							});
+	jQuery("#tracklisttable").jqGrid('addRowData',1,{       trackid:"3555451"
+                                                                ,trackname: "Dubai"
+                                                                ,refpoint:"yes"
+                                                                ,comment:"1Testdata"
+                                                        });
+
 
 	//change elements in HTML
 	//http://www.html-seminar.de/javascript-html-elemente-aendern.htm
 	var inhalt = document.getElementById('DSDATAP');
 	var inhalt2= document.getElementsByTagName('p');
-
 	console.log("HTML Inhalt", inhalt.innerHTML);
 	console.log("HTML inhalt2:", inhalt2);
-	
+	//////////////////////////////////////////	
 
 
+
+//////////////// functions
 function drawDsData(a){
 
 	var html;
 	html = 	'DS Url: ' + 
 	a.data.state + " / " + globalcnt;
 
-	document.getElementsByTagName('p')[0].innerHTML = html;
+	document.getElementsByTagName('p1')[0].innerHTML = html;
+
+}
+
+function refreshTrackList(a)
+{
+
+	console.log("refreshTrackList(): " , a);
+	//jQuery("#tracklisttable").jqGrid('GridUnload');		// destroy complete table working
+	//jQuery("#tracklisttable").trigger("clearGridData");		// unload did not work :-(
+
+	// get current sizre of the table
+	var GridSize = jQuery("#tracklisttable").getGridParam("reccount");
+	//console.log("Current Table size: " , GridSize);
+
+	for (i=0; i < a.data.length;i++)
+	{
+		console.log("update data on row: " + i + " / " , a.data[i].trackid);
+		//decision if replace or add a row to jqGrid
+		if (i <= GridSize)
+		{
+			jQuery("#tracklisttable").jqGrid('setRowData',i, {      trackid:	a.data[i].trackid
+	                                                                	,trackname: 	a.data[i].trackname
+	                                                                	,refpoint:	a.data[i].refpoint
+	                                                                	,comment:	a.data[i].comment
+	                                                        	});
+			console.log("+++++ " + i );
+		}else{
+			jQuery("#tracklisttable").jqGrid('addRowData',i,{       trackid:        a.data[i].trackid
+                        	                                                ,trackname:     a.data[i].trackname
+                                	                                        ,refpoint:      a.data[i].refpoint
+                                        	                                ,comment:       a.data[i].comment
+                                                	                });
+			console.log("+++++ " + i );
+		}
+	
+	}
+	
+	jQuery("#tracklisttable").trigger("reloadGrid");
+	
+	console.log("jqGrid after setDatat(): " , jQuery("#tracklisttable"));
 
 }
 
