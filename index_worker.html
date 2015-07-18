@@ -52,7 +52,7 @@
 
 	//http://www.html5rocks.com/de/tutorials/workers/basics/
 	// create new worker ///////////////////////////////////////////////////////////////////////////////////////
-	var callParams	=	{workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDSDATA"};
+	var callParams	=	{workerdelay: 1000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDSDATA"};
 	var worker 	= 	new Worker('./worker_dsdata.js');
 
 	//event handler of the worker
@@ -61,7 +61,7 @@
 		drawDsData(e);
 		globalcnt++;
 		 //call worker again if first run finished -> currently endless loop
-//		 worker.postMessage(callParams);		
+		 worker.postMessage(callParams);		
 	}, false);
 
 	//initial start worker and send params
@@ -78,32 +78,32 @@
 
         }, false);
 	//todo: call this function not each time, implement an delay for each worker
-	worker2.postMessage({ dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
+	worker2.postMessage({workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
+//	worker2.postMessage({workerdelay: 5000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
 	        height: 250,
-	        colNames:['TrackID','TrackName', 'RefPoints exists?','Comment'],
+	        colNames:['ID','TrackID','TrackName', 'RefPoints exists?','Comment'],
 	        colModel:[
-	                {name:'trackid',index:'invdate', width:100},
-	                {name:'trackname', width:200},
+			{name:'id', index:'id', formatter: 'integer', width:100},
+	                {name:'trackid', index:'trackid', width:100},
+	                {name:'trackname', index: 'trackname', width:200},
 	                {name:'refpoint', width:90, align:"right",sorttype:"float"},
 			{name:'comment', width:160, align:"left"},
 	        ],
 	        caption: "List of available Tracks",
+		rowNum: 200,
 	});
 
-	jQuery("#tracklisttable").jqGrid('addRowData',0,{	trackid:"123451" 
-								,trackname: "HoCkEnHeIm2014"
-								,refpoint:"no"
-								,comment:" Testdata" 
+	// initial data for grid !!! 
+	jQuery("#tracklisttable").jqGrid('addRowData',0,{	id: 0
+								,trackid:	"1" 
+								,trackname: 	"initialdata"
+								,refpoint:	"no"
+								,comment:	"" 
 							});
-	jQuery("#tracklisttable").jqGrid('addRowData',1,{       trackid:"3555451"
-                                                                ,trackname: "Dubai"
-                                                                ,refpoint:"yes"
-                                                                ,comment:"1Testdata"
-                                                        });
 
 
 	//change elements in HTML
@@ -134,36 +134,43 @@ function refreshTrackList(a)
 	//jQuery("#tracklisttable").jqGrid('GridUnload');		// destroy complete table working
 	//jQuery("#tracklisttable").trigger("clearGridData");		// unload did not work :-(
 
+	var grididcnt = 1;
 	// get current sizre of the table
 	var GridSize = jQuery("#tracklisttable").getGridParam("reccount");
 	//console.log("Current Table size: " , GridSize);
 
-	for (i=0; i < a.data.length;i++)
+	for (i=0; i <= a.data.length; i++)
 	{
 		console.log("update data on row: " + i + " / " , a.data[i].trackid);
 		//decision if replace or add a row to jqGrid
 		if (i <= GridSize)
 		{
-			jQuery("#tracklisttable").jqGrid('setRowData',i, {      trackid:	a.data[i].trackid
+			jQuery("#tracklisttable").jqGrid('setRowData',i, {      id:		grididcnt
+										,trackid:	a.data[i].trackid
 	                                                                	,trackname: 	a.data[i].trackname
 	                                                                	,refpoint:	a.data[i].refpoint
 	                                                                	,comment:	a.data[i].comment
 	                                                        	});
-			console.log("+++++ " + i );
+			console.log("+++++ set " + i );
 		}else{
-			jQuery("#tracklisttable").jqGrid('addRowData',i,{       trackid:        a.data[i].trackid
+			jQuery("#tracklisttable").jqGrid('addRowData',i,{       id:		grididcnt
+										,trackid:       a.data[i].trackid
                         	                                                ,trackname:     a.data[i].trackname
                                 	                                        ,refpoint:      a.data[i].refpoint
                                         	                                ,comment:       a.data[i].comment
                                                 	                });
-			console.log("+++++ " + i );
+			console.log("+++++ add " + i );
 		}
-	
+
+		grididcnt++;		
 	}
 	
+
 	jQuery("#tracklisttable").trigger("reloadGrid");
 	
 	console.log("jqGrid after setDatat(): " , jQuery("#tracklisttable"));
+
+	worker2.postMessage({ dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 }
 

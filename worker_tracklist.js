@@ -6,6 +6,11 @@ self.addEventListener('message', function(e) {
 
 	importScripts('./receive_ds_data.js');
 	importScripts('./class_reference_points.js');
+	importScripts('./sleep.js');
+
+
+	//delays this worker to reduce http requests and make application resposive
+	sleep(e.data.workerdelay);
 
 	var aTrackList 	= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode);
 	console.log("DS Tracklist complete array: " , aTrackList);
