@@ -132,7 +132,7 @@ function refreshTrackList(a)
 
 	console.log("refreshTrackList(): " , a);
 	//jQuery("#tracklisttable").jqGrid('GridUnload');		// destroy complete table working
-	//jQuery("#tracklisttable").trigger("clearGridData");		// unload did not work :-(
+	jQuery("#tracklisttable").trigger("clearGridData");		// unload did not work :-(
 
 	var grididcnt = 0;
 	var _data;
@@ -140,17 +140,11 @@ function refreshTrackList(a)
 	var GridSize = jQuery("#tracklisttable").getGridParam("reccount");
 
 
-	//todo: delte all rows before puute new data in it
-	//for (j=0;j<GridSize; j++){
-	//	jQuery("#tracklisttable").jqGrid('delRowData', j );
-	//}
-
-	console.log("Current Table size: " , GridSize);
+	//console.log("Current Table size: " , GridSize);
 
 	for (i=0; i < a.data.length; i++)
 	{
-		console.log("update data on row: " + i + " / " + a.data[i]);
-
+		//console.log("update data on row: " + i + " / " + a.data[i]);
 
 		_data = {      id:             grididcnt
                                ,trackid:       a.data[i].trackid
@@ -158,8 +152,9 @@ function refreshTrackList(a)
                                ,refpoint:      a.data[i].refpoint
                                ,comment:       a.data[i].comment
                         };
+
 		//decision if replace or add a row to jqGrid
-		if (i <= GridSize)
+		if (i < GridSize)
 		{
 			jQuery("#tracklisttable").jqGrid('setRowData',i, _data);
 			console.log("+++++ set " + i );
@@ -167,11 +162,13 @@ function refreshTrackList(a)
 			jQuery("#tracklisttable").jqGrid('addRowData',i, _data);
 			console.log("+++++ add " + i );
 		}
-
-		grididcnt++;		
+	
+		grididcnt++;
+				
+		if (i == 5){exit}
+		
 	}
 	
-
 	jQuery("#tracklisttable").trigger("reloadGrid");
 	
 	console.log("jqGrid after setDatat(): " , jQuery("#tracklisttable"));
