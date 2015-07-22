@@ -162,7 +162,7 @@ function Refpoint(cuircit_id)
 	aRefPoints[1277693448] = new Array();
         aRefPoints[1277693448] =
                 {
-                "refLat":        -43.533285
+                "refLat":        -43.533275
                 ,"refLong":      172.478130
                 ,"rotation":     0
                 ,"cor_r_Long":   0
@@ -173,7 +173,7 @@ function Refpoint(cuircit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   -43.531123 
                 ,"MapInitLong":  172.479408
-                ,"Comment": "Abgleich mit Testpunkten"
+                ,"Comment": "live prüfen"
                 };
         //Ruapuna Park A Circuit
 	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit"});
