@@ -157,7 +157,99 @@ function Refpoint(cuircit_id)
                 };
         //Le Circuit Bugatti
 	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});
-                
+        
+        //Ruapuna Park GP
+	aRefPoints[1277693448] = new Array();
+        aRefPoints[1277693448] =
+                {
+                "refLat":        -43.533285
+                ,"refLong":      172.478130
+                ,"rotation":     0
+                ,"cor_r_Long":   0
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Ruapuna Park GP"
+                ,"Zoom":         15
+                ,"MapInitLat":   -43.533285 
+                ,"MapInitLong":  172.478130
+                ,"Comment": "Abgleich mit Testpunkten"
+                };
+        //Ruapuna Park A Circuit
+	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit"});
+        //Ruapuna Park Club
+	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club"});
+	//Ruapuna Park Outer Loop
+	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop"});
+	//Ruapuna Park B Circuit
+	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit"});
+        
+        //Cadwell GP
+	aRefPoints[1876749797] = new Array();
+        aRefPoints[1876749797] =
+                {
+                "refLat":        53.310571
+                ,"refLong":      -0.059456
+                ,"rotation":     0
+                ,"cor_r_Long":   0
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Cadwell GP"
+                ,"Zoom":         15
+                ,"MapInitLat":   53.310571 
+                ,"MapInitLong":  -0.059456
+                ,"Comment": "Abgleich mit Testpunkten"
+                };
+        //Cadwell Club Circuit
+	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit"});
+	//Cadwell Woodland
+	aRefPoints[-1408189041] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Woodland"});
+        
+        //Oulton Park International
+	aRefPoints[545979690] = new Array();
+        aRefPoints[545979690] =
+                {
+                "refLat":        53.179844
+                ,"refLong":      -2.613997
+                ,"rotation":     0
+                ,"cor_r_Long":   0
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Oulton Park International"
+                ,"Zoom":         15
+                ,"MapInitLat":   53.179844 
+                ,"MapInitLong":  -2.613997
+                ,"Comment": "Abgleich mit Testpunkten"
+                };
+        //Oulton Park Fosters
+	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters"});
+	//Oulton Park Island
+	aRefPoints[-1877699523] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Island"});
+        
+        //Snetterton 300
+	aRefPoints[1508903068] = new Array();
+        aRefPoints[1508903068] =
+                {
+                "refLat":        52.463968
+                ,"refLong":      0.945310
+                ,"rotation":     0
+                ,"cor_r_Long":   0
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Snetterton 300"
+                ,"Zoom":         15
+                ,"MapInitLat":   52.463968 
+                ,"MapInitLong":  0.945310
+                ,"Comment": "Abgleich mit Testpunkten"
+                };
+        //Snetterton 200
+	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200"});
+	//Snetterton 100
+	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100"});
+        
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
