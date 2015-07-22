@@ -171,8 +171,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Ruapuna Park GP"
                 ,"Zoom":         15
-                ,"MapInitLat":   -43.533285 
-                ,"MapInitLong":  172.478130
+                ,"MapInitLat":   -43.531123 
+                ,"MapInitLong":  172.479408
                 ,"Comment": "Abgleich mit Testpunkten"
                 };
         //Ruapuna Park A Circuit
@@ -197,8 +197,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Cadwell GP"
                 ,"Zoom":         15
-                ,"MapInitLat":   53.310571 
-                ,"MapInitLong":  -0.059456
+                ,"MapInitLat":   53.308465 
+                ,"MapInitLong":  -0.063734
                 ,"Comment": "Abgleich mit Testpunkten"
                 };
         //Cadwell Club Circuit
@@ -219,8 +219,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Oulton Park International"
                 ,"Zoom":         15
-                ,"MapInitLat":   53.179844 
-                ,"MapInitLong":  -2.613997
+                ,"MapInitLat":   53.176808 
+                ,"MapInitLong":  -2.616589
                 ,"Comment": "Abgleich mit Testpunkten"
                 };
         //Oulton Park Fosters
@@ -241,8 +241,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Snetterton 300"
                 ,"Zoom":         15
-                ,"MapInitLat":   52.463968 
-                ,"MapInitLong":  0.945310
+                ,"MapInitLat":   52.465021 
+                ,"MapInitLong":  0.947079
                 ,"Comment": "Abgleich mit Testpunkten"
                 };
         //Snetterton 200
