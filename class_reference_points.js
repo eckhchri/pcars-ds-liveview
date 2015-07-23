@@ -232,18 +232,18 @@ function Refpoint(cuircit_id)
 	aRefPoints[1508903068] = new Array();
         aRefPoints[1508903068] =
                 {
-                "refLat":        52.463968
-                ,"refLong":      0.945310
-                ,"rotation":     0
+                "refLat":        52.463952
+                ,"refLong":      0.945230
+                ,"rotation":     0.2
                 ,"cor_r_Long":   0
-                ,"cor_r_Lat":    0
+                ,"cor_r_Lat":    20000000
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Snetterton 300"
                 ,"Zoom":         15
                 ,"MapInitLat":   52.465021 
                 ,"MapInitLong":  0.947079
-                ,"Comment": "Abgleich mit Testpunkten"
+                ,"Comment": "live prüfen"
                 };
         //Snetterton 200
 	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200"});
