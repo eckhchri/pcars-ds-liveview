@@ -210,9 +210,9 @@ function Refpoint(cuircit_id)
 	aRefPoints[545979690] = new Array();
         aRefPoints[545979690] =
                 {
-                "refLat":        53.179844
-                ,"refLong":      -2.613997
-                ,"rotation":     0
+                "refLat":        53.179864
+                ,"refLong":      -2.613992
+                ,"rotation":     -0.3
                 ,"cor_r_Long":   0
                 ,"cor_r_Lat":    0
                 ,"cor_PosX_mul": 1
@@ -221,7 +221,7 @@ function Refpoint(cuircit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   53.176808 
                 ,"MapInitLong":  -2.616589
-                ,"Comment": "Abgleich mit Testpunkten"
+                ,"Comment": "live prüfen"
                 };
         //Oulton Park Fosters
 	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters"});
