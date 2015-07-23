@@ -164,7 +164,7 @@ function Refpoint(cuircit_id)
                 {
                 "refLat":        -43.533275
                 ,"refLong":      172.478130
-                ,"rotation":     0
+                ,"rotation":     -0.3
                 ,"cor_r_Long":   0
                 ,"cor_r_Lat":    0
                 ,"cor_PosX_mul": 1
