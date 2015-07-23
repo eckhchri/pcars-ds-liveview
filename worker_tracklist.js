@@ -2,7 +2,7 @@
 
 self.addEventListener('message', function(e) {
 
-	console.log("e: " , e);
+	//console.log("e: " , e);
 
 	importScripts('./receive_ds_data.js');
 	importScripts('./class_reference_points.js');
@@ -13,7 +13,7 @@ self.addEventListener('message', function(e) {
 	sleep(e.data.workerdelay);
 
 	var aTrackList 	= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode);
-	console.log("DS Tracklist complete array: " , aTrackList);
+	//console.log("DS Tracklist complete array: " , aTrackList);
 
 
 	var aRefPointTMP         =      new Refpoint();

@@ -19,6 +19,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	this.timeout		=	timeout;
 	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
 
+	console.log("Receive_DS_data() --- receivemode: " , receivemode);
+
 	if (this.receivevariant == undefined)
 	{
 		this.receivevariant = "GETDRIVERDATE";
@@ -31,10 +33,6 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				,"GETDSDATA"	 : "/api/session/status?attributes&members&participants"
 				,"GETTRACKLIST"  : "/api/list/tracks"
 			};	
-
-	
-
-
 
 //todo: Decison Using XMLHTTP class oder   THREE
 //      http://api.jquery.com/jquery.getjson/
@@ -131,23 +129,28 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			// if no users joined return example Data
 			if ( myArr.response.participants.length == 0 ){
 			
-				console.log("no Participants found in DS, leave function!");
-				aDrivers.push (  new PCARSdriver(
-									9234567
-									,"NO_PARTICIPANT_TestData"
-									,3
-									,277
-									,278
-									,279
-									,"StateTest"
-									,"Sector1"
-									,"123"
-									,"123456"
-									,"123456"
-									,"0"
-									,"321"
-									,{TrackId: 920145926}
-						) );		
+				console.log("no Participants found in DS, leave function and use Test data array!");
+
+				aDrivers.push( new PCARSdriver(
+                                                                        9234567
+                                                                        ,"NO_PARTICIPANT_TestData"
+                                                                        ,3
+                                                                        ,277
+                                                                        ,278
+                                                                        ,279
+                                                                        ,"StateTest"
+                                                                        ,"Sector1"
+                                                                        ,"123"
+                                                                        ,"123456"
+                                                                        ,"123456"
+                                                                        ,"0"
+                                                                        ,"321"
+                                                                        ,{TrackId: 920145926}
+                                                )
+					);
+
+				console.log("+-+-+-: " ,  aDrivers);				
+
 				return aDrivers;
 			}
 		 
