@@ -188,18 +188,18 @@ function Refpoint(cuircit_id)
 	aRefPoints[1876749797] = new Array();
         aRefPoints[1876749797] =
                 {
-                "refLat":        53.310571
-                ,"refLong":      -0.059456
+                "refLat":        53.310651
+                ,"refLong":      -0.059440
                 ,"rotation":     0
                 ,"cor_r_Long":   0
-                ,"cor_r_Lat":    0
+                ,"cor_r_Lat":    -30000000
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Cadwell GP"
                 ,"Zoom":         15
                 ,"MapInitLat":   53.308465 
                 ,"MapInitLong":  -0.063734
-                ,"Comment": "Abgleich mit Testpunkten"
+                ,"Comment": "live prüfen"
                 };
         //Cadwell Club Circuit
 	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit"});
