@@ -263,8 +263,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Donington Park GP"
 		,"Zoom":         15
-		,"MapInitLat":   52.830643
-		,"MapInitLong":  -1.374920
+		,"MapInitLat":   52.830820
+		,"MapInitLong":  -1.375028
 		,"Comment": "by colets, prüfen"
 		};
 	//Donington Park National
@@ -284,8 +284,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Oschersleben GP"
 		,"Zoom":         15
-		,"MapInitLat":   52.02699
-		,"MapInitLong":  11.27995
+		,"MapInitLat":   52.028131
+		,"MapInitLong":  11.277030
 		,"Comment": "by colets, prüfen"
 		};
 	//Oschersleben National
@@ -306,8 +306,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Azure Circuit"
 		,"Zoom":         15
-		,"MapInitLat":   43.73777
-		,"MapInitLong":  7.42209
+		,"MapInitLat":   43.736946
+		,"MapInitLong":  7.424597
 		,"Comment": "by colets, prüfen"
 		};
 	//Bathurst
@@ -341,8 +341,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Spa-Francorchamps"
 		,"Zoom":         15
-		,"MapInitLat":   50.43061
-		,"MapInitLong":  5.9767
+		,"MapInitLat":   50.436616
+		,"MapInitLong":  5.969509
 		,"Comment": "by colets, prüfen"
 		};
 	//Circuit de Barcelona-Catalunya GP
@@ -358,8 +358,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Barcelona-Catalunya GP"
 		,"Zoom":         15
-		,"MapInitLat":   41.57304
-		,"MapInitLong":  2.25925
+		,"MapInitLat":   41.569771
+		,"MapInitLong":  2.257696
 		,"Comment": "by colets, prüfen"
 		};
 	//Circuit de Barcelona-Catalunya Club
@@ -380,8 +380,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Imola"
 		,"Zoom":         15
-		,"MapInitLat":   44.34069
-		,"MapInitLong":  11.71717
+		,"MapInitLat":   44.341913
+		,"MapInitLong":  11.712662
 		,"Comment": "by colets, prüfen"
 		};
 	
@@ -398,8 +398,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Willow Springs International Raceway"
 		,"Zoom":         15
-		,"MapInitLat":   34.86891
-		,"MapInitLong":  -118.26126
+		,"MapInitLat":   34.873204
+		,"MapInitLong":  -118.264599
 		,"Comment": "by colets, prüfen"
 		};
 	//Willow Springs Horse Thief Mile
@@ -418,8 +418,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Watkins Glen GP"
 		,"Zoom":         15
-		,"MapInitLat":   42.3288
-		,"MapInitLong":  -76.9206
+		,"MapInitLat":   42.336648
+		,"MapInitLong":  -76.924696
 		,"Comment": "by colets, prüfen"
 		};
 	//Watkins Glen Short
@@ -438,8 +438,8 @@ function Refpoint(cuircit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Autodromo Nazionale Monza GP"
 		,"Zoom":         15
-		,"MapInitLat":   45.61902
-		,"MapInitLong":  9.28125
+		,"MapInitLat":   45.621382
+		,"MapInitLong":  9.287683
 		,"Comment": "by colets, prüfen"
 		};
 	
