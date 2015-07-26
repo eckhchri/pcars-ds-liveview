@@ -5,7 +5,6 @@ self.addEventListener('message', function(e) {
 	console.log("Driver Data 1 : " , e);
 
 	importScripts('./receive_ds_data.js');
-//	importScripts('./class_reference_points.js');
 	importScripts('./pcars_driver.js');
 	importScripts('./sleep.js');
 

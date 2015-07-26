@@ -19,7 +19,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	this.timeout		=	timeout;
 	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
 
-	console.log("Receive_DS_data() --- receivemode: " , receivemode);
+	//console.log("Receive_DS_data() --- receivemode: " , receivemode);
 
 	if (this.receivevariant == undefined)
 	{
