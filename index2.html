@@ -21,7 +21,6 @@
         <script>
                   $(function() {
                     $( "#DSdata" ).draggable();
-                //    $( "#DriverData" ).draggable();
 		    $( "#TrackList" ) .draggable();
 		    $( "#DriverDataArea" ) .draggable();
                   });
@@ -34,8 +33,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
 
 
-
-         
+        <!-- CSS definitions--> 
         <style type="text/css">
 
              html, body, #map {
@@ -95,10 +93,12 @@
          </style>
      </head>
    <body>
-       <div id="map"></div>
-      
+	
        <script>
 
+
+	// write area for map
+	document.write('<div id="map"></div>');
 
 	// initialize vars
 	var aDrivers 	= new Array();		// array for PCARSdriver objects
@@ -125,20 +125,12 @@
 				+ get_url_param('dsport'));
 	}
 
-
-	// Test Area
-	// ACHTUNG	3. Parameter muss die Z Koordinate sein !!!!!!		
-	//         calc_coordinates( cuircitid,  aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );	
-	//	calc_coordinates (1695182971 ,-621990, -133340);
-
-
 	//StreckenID Liste holen 
         var aTrackList = Receive_DS_data(DsServerURL, DsPort, 2000, "GETTRACKLIST");
-        //console.log("TRACKLIST: " , aTrackList);
+        console.log("TRACKLIST: " , aTrackList);
 
 	// Allgemeine DS Daten abfragen (Race, Qualifying, ...)
 	var aDsData 	= Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSDATA");
-	console.log("DSdata complete array: " , aDsData);
 
 	// set to global var, to modify in future stage for periodical updates via ajax
 	var DsName 		=	aDsData.name;
@@ -146,6 +138,16 @@
 	var DsTrackName		=	aTrackList[aDsData.TrackId];
 	var DsMaxMemberCnt	=	aDsData.max_member_count;
 	var cuircitID		=	aDsData.TrackId;	
+
+
+	 // todo: check if logic is OK
+        if (cuircitID == "" || cuircitID == undefined){
+                cuircitID            =       1695182971;                //  set default value Hockenheim
+        }
+
+        // initialize RefPoint
+        aRefPointTMP         =      new Refpoint( cuircitID );
+
 
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,10 +170,13 @@
 		//console.log("HTML Elements" , document.getElementsByTagName('p1'));
 
 		//call worker again for next itteration -> currently endless loop
-		workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSDATA"});
-
+		workerDSDATA.postMessage({
+						workerdelay: 	100
+						,dsurl:		DsServerURL
+						,dsport:	DsPort
+						,timeout:	XMLHTTPTimeout
+						,receivemode:	"GETDSDATA"});
         }, false);
-
 	//initail call of the worker
 	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSDATA"});
 
@@ -179,38 +184,55 @@
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
+	// initial call for map initialization
 	aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
 
-	//console.log ("Rueckgabewert Funktion Receive_DS_data:" +  aDrivers);
+        for (var i = 0; i < aDrivers.length; i++ ){
 
-	// todo: check if logic is OK
-	if (cuircitID == "" || cuircitID == undefined){
-		cuircitID            =       1695182971;		//  set default value Hockenheim
-	}
+                        // calculate GPS coordinates
+			console.log("-------- aDrivers" , aDrivers);
+                        gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
 
+                        // fill data array
+                        aSensorData[i] = {
+                                        "Key": aDrivers[i].GetName()
+                                        ,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
+                                        ,"Lat": gpsCoTmp["Lat"]
+                                        ,"Long": gpsCoTmp["Long"]
+                                        ,"Heading":286.0
+                                        ,"Speed":22
+                                        }
+			// bookmark current TrackID to detect track changes and adjust Map
+                        tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
+        }
 
-	// get List of alle RefPoints
-	aRefPointTMP         =      new Refpoint( cuircitID );
-	//console.log ("++++++++++++++aRefPointTMP: " , aRefPointTMP);
+	// init google map
+        init_map(cuircitID);
 
 
 	// create Table with list of all tracks
-	// todo: make table searchable   and  add new Theme
 	document.write('<div id="TrackList"><table id="tracklisttable"></table></div>');
 
 	// create worker for Tracklist updates //////////////////////////////////////////////////////////////////////
 	var w_tracklist      =       new Worker('./worker_tracklist.js');
 	
 	w_tracklist.addEventListener('message', function(e) {
-                //console.log('Worker2 Tracklist said: ', e.data);
-		refreshTrackList(e);
-		w_tracklist.postMessage({workerdelay: WORKERDELEAY_TRACKLIST, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
+		
+					refreshTrackList(e);
+					w_tracklist.postMessage({
+									workerdelay: WORKERDELEAY_TRACKLIST
+									,dsurl: "www.eckhchri.de"
+									,dsport: 9000
+									,timeout: 2000
+									,receivemode: "GETTRACKLIST" });
         }, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
 	w_tracklist.postMessage({workerdelay: 2000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 	// initiate jqGrid
+	// todo: make table searchable   and  add new Theme
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
@@ -228,6 +250,7 @@
 	});
 
 	// initial data for grid !!! Needed because of Refresh problem !!
+	// todo: really needed ?
 	jQuery("#tracklisttable").jqGrid('addRowData',0,{	id: 0
 								,trackid:	"1" 
 								,trackname: 	"initialdata"
@@ -237,18 +260,62 @@
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // create DriverList object
+        // create DriverList object and map update
 
 	//display Driver Data with jqGrid
 	document.write('<div id="DriverDataArea"><table id="DriverDataTable"></table></div>');
 
+	// first data run before init map()
+	aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
 
 	// create worker for Driver data updates //////////////////////////////////////////////////////////////////////
 	var workerDRIVERDATA      =       new Worker('./worker_driverdata.js');
 	workerDRIVERDATA.addEventListener('message', function(e) {
-                console.log('Worker3 DriverList said: ', e.data);
+		
+                console.log('Worker3 DriverList and  said: ', e.data);
+		// refresh table of Driver data
                 refreshDriverList(e);
-                workerDRIVERDATA.postMessage({workerdelay: 2000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+
+		//todo var declaration needed within loop ???
+		var tmpcuircitID;
+
+		//update map
+		for (var i = 0; i < e.data.length; i++ ){
+
+                        // calculate GPS coordinates
+                        gpsCoTmp =  calc_coordinates (cuircitID , e.data[i].PosX , e.data[i].PosZ );
+
+                        // fill data array
+                        aSensorData[i] = {
+                                        "Key": e.data[i].Name
+                                        ,"MarkerLabel" : e.data[i].RacePosition + "-" + e.data[i].Name
+                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
+                                        ,"Lat": gpsCoTmp["Lat"]
+                                        ,"Long": gpsCoTmp["Long"]
+                                        ,"Heading":286.0
+                                        ,"Speed":22
+                                        }
+                        tmpcuircitID = e.data[i].variousParameters.TrackId;
+                }
+
+		//console.log("++++++++ aSensorData_NEW" , aSensorData);
+		sensorLayer.update(aSensorData);
+
+                //todo: Move map dynamically if cuircit changes to a new GPS coordinate
+                if (cuircitID != tmpcuircitID ){
+                        //map.setCenter({lat: 50.332733, lng: 6.943355});
+                        map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
+                        cuircitID = tmpcuircitID;  // give the global var the new TrackId
+                        console.log("TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
+                }
+
+		// start next run of this loop
+		workerDRIVERDATA.postMessage({  workerdelay: 500
+                                                ,dsurl: "www.eckhchri.de"
+                                                ,dsport: 9000
+                                                ,timeout: 2000
+                                                ,receivemode: "GETDRIVERDATE" });
+
         }, false);
         //initial call of worker and start the loop
         workerDRIVERDATA.postMessage({workerdelay: 2000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
@@ -400,78 +467,9 @@
                };
            }
 
-	// init google map 
-	init_map(cuircitID);
 
-				
-///////////////////////////////////////////////////
-           //simulate position update by receiving positions at random interval
-		   
-           //var d1Cnt = 1, d2Cnt = 1;
-	   var tmpcuircitID;	// to valida if global cuircitid differs from current
-           (function loop() {
-
-
-		// todo: reduce timeout for better performance ?	
-		randTimeout = 500;
-		console.log("--Timeout_Loop()" + randTimeout);
-		tmpcuircitID = cuircitID;	// initialize var with currect TrackID
-
-               setTimeout(function () {
-		
-		// collect live data 
-                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE"); 
-	
-		for (var i = 0; i < aDrivers.length; i++ ){
-
-			// calculate GPS coordinates
-	                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
-			//console.log("GPS coordinates: ", gpsCoTmp);
-			
-			// fill data array
-			aSensorData[i] = {
-				//	"Key": aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
-					"Key": aDrivers[i].GetName()
-					,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
-                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
-                                        ,"Lat": gpsCoTmp["Lat"]
-                                        ,"Long": gpsCoTmp["Long"]
-                                        ,"Heading":286.0
-                                        ,"Speed":22
-                                	}
-			//console.log ("aDrivers[i]" , aDrivers[i]);
-			tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
-		}	
-		//console.log("-+-+- aSensorData-Array: ", aSensorData);
-/*
-		console.log("d3 object: " , d3);
-		var _divtmp = d3.select(this.getPanes().overlayLayer)
-                            .append("div")
-                            .attr("class", "stations");
-
-		var marker = _divtmp.selectAll("svg");
-		console.log("Marker:" , marker);
-*/
-		// update draw data
-		sensorLayer.update(aSensorData);
-
-		
-		//todo: Move map dynamically if cuircit changes to a new GPS coordinate
-		if (cuircitID != tmpcuircitID ){
-			//map.setCenter({lat: 50.332733, lng: 6.943355});	
-			map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
-			cuircitID = tmpcuircitID;  // give the global var the new TrackId
-			console.log("TrackID changed. Call SetCenter() for the map. cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
-		}
-		//todo: Kann man die marker direkt mit setPosition updaten?
-		//marker.setPosition(latlng:LatLng|LatLngLiteral)
-		//init_map(cuircitID);
-
-                   loop();
-               }, randTimeout);
-			   
-           }());           
-
+//////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
 function init_map(_TrackID)
 {
@@ -535,7 +533,9 @@ function refreshDriverList(a)
         var _data;
         // get current sizre of the table
         var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	
-	
+
+
+	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	for (i=0; i < a.data.length; i++)
         {
                 //console.log("update data on row: " + i + " / " + a.data[i]);
