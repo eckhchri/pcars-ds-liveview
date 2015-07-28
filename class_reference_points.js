@@ -250,6 +250,24 @@ function Refpoint(cuircit_id)
 	//Snetterton 100
 	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100"});
         
+        //Zhuhai International Circuit
+	aRefPoints[1836888499] = new Array();
+        aRefPoints[1836888499] =
+                {
+                "refLat":        22.367585
+                ,"refLong":      113.559640
+                ,"rotation":     -29.9
+                ,"cor_r_Long":   -15000000
+                ,"cor_r_Lat":    -25000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Zhuhai International Circuit"
+                ,"Zoom":         15
+                ,"MapInitLat":   22.367988 
+                ,"MapInitLong":  113.556162
+                ,"Comment": "live prüfen"
+                };
+        
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
