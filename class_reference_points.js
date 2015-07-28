@@ -292,6 +292,26 @@ function Refpoint(cuircit_id)
 	//Silverstone National
 	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone National"});
         
+        //Brands Hatch GP
+	aRefPoints[1988984740] = new Array();
+        aRefPoints[1988984740] =
+                {
+                "refLat":        51.357240
+                ,"refLong":      0.261592
+                ,"rotation":     0
+                ,"cor_r_Long":   -10000000
+                ,"cor_r_Lat":    20000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Brands Hatch GP"
+                ,"Zoom":         15
+                ,"MapInitLat":   51.357186 
+                ,"MapInitLong":  0.262930
+                ,"Comment": "live prüfen, Strecke wahrscheinlich auch leicht fehlerhaft"
+                };
+        //Brands Hatch Indy
+	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {"Name": "Brands Hatch Indy"});
+        
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
