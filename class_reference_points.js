@@ -312,6 +312,24 @@ function Refpoint(cuircit_id)
         //Brands Hatch Indy
 	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {"Name": "Brands Hatch Indy"});
         
+        //Mazda Raceway Laguna Seca
+	aRefPoints[-1612023328] = new Array();
+        aRefPoints[-1612023328] =
+                {
+                "refLat":        36.584300
+                ,"refLong":      -121.753357
+                ,"rotation":     2
+                ,"cor_r_Long":   0
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Mazda Raceway Laguna Seca"
+                ,"Zoom":         15
+                ,"MapInitLat":   36.584275 
+                ,"MapInitLong":  -121.753345
+                ,"Comment": "live prüfen"
+                };
+        
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
