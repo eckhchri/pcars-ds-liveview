@@ -267,6 +267,30 @@ function Refpoint(cuircit_id)
                 ,"MapInitLong":  113.556162
                 ,"Comment": "live prüfen"
                 };
+                
+        //Silverstone GP
+	aRefPoints[1641471184] = new Array();
+        aRefPoints[1641471184] =
+                {
+                "refLat":        52.078807
+                ,"refLong":      -1.015293
+                ,"rotation":     -0.2
+                ,"cor_r_Long":   20000000
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Silverstone GP"
+                ,"Zoom":         15
+                ,"MapInitLat":   52.071727 
+                ,"MapInitLong":  -1.015736
+                ,"Comment": "Strecke sehr wahrscheinlich fehlerhaft, erneut prüfen"
+                };
+        //Silverstone International
+	aRefPoints[1101719627] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone International"});
+	//Silverstone Stowe
+	aRefPoints[1600840139] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Stowe"});
+	//Silverstone National
+	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone National"});
         
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
