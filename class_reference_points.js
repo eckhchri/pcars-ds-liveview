@@ -347,6 +347,24 @@ function Refpoint(cuircit_id)
                 ,"MapInitLong":  16.452067
                 ,"Comment": "live prüfen"
                 };
+                
+        //Road America
+	aRefPoints[-660300766] = new Array();
+        aRefPoints[-660300766] =
+                {
+                "refLat":        43.798290
+                ,"refLong":      -87.995239
+                ,"rotation":     0
+                ,"cor_r_Long":   30000000
+                ,"cor_r_Lat":    10000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Road America"
+                ,"Zoom":         15
+                ,"MapInitLat":   43.798710 
+                ,"MapInitLong":  -87.995182
+                ,"Comment": "nochmal checken, starke Abweichungen"
+                };
         
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
