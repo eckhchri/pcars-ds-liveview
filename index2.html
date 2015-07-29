@@ -106,12 +106,29 @@
 	var DsServerURL = "www.eckhchri.de";
 	var DsPort	= 9000;
 	var XMLHTTPTimeout = 2000;
-	var DisplayDuration = 700;		// duration for displaying marker updates
+	var DisplayDuration = 600;		// duration for displaying marker updates
 	var global_i		= 0;
 	var map;				// google map object
 	var sensorLayer;
 	var aRefPointTMP;			// hash of all RefPoints for available tracks
 	var WORKERDELEAY_TRACKLIST	=	5000; 	// in ms
+	var PCARSd	= new PCARSdriver(
+                                                                        9234567
+                                                                        ,"NO_PARTICIPANT_TestData"
+                                                                        ,3
+                                                                        ,277
+                                                                        ,278
+                                                                        ,279
+                                                                        ,"StateTest"
+                                                                        ,"Sector1"
+                                                                        ,"123"
+                                                                        ,"123456"
+                                                                        ,"123456"
+                                                                        ,"0"
+                                                                        ,"321"
+                                                                        ,{TrackId: 920145926}
+                                                ); // only use the object to get functions of it
+
 
 	// check if url params overwrite the default ds info
 	if (get_url_param('dsurl') && get_url_param('dsport'))
@@ -310,15 +327,18 @@
                 }
 
 		// start next run of this loop
-		workerDRIVERDATA.postMessage({  workerdelay: 500
+		workerDRIVERDATA.postMessage({  workerdelay: 200
                                                 ,dsurl: "www.eckhchri.de"
                                                 ,dsport: 9000
                                                 ,timeout: 2000
                                                 ,receivemode: "GETDRIVERDATE" });
 
         }, false);
+	
         //initial call of worker and start the loop
         workerDRIVERDATA.postMessage({workerdelay: 2000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+	//Todo: start a second worker loop with delay, to have continous updates on map
+//	workerDRIVERDATA.postMessage({workerdelay: 3000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
 
 
 	//todo: add subgrid for more drivers information
@@ -531,22 +551,27 @@ function refreshDriverList(a)
         console.log("refreshDriverList(e): " , a);
 	var grididcnt = 0;
         var _data;
-        // get current sizre of the table
+
+	// clean complete table befor reloading new data to prevent ghost entries
+	jQuery("#DriverDataTable").jqGrid("clearGridData");	
+
+        // get current size of the table
         var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	
 
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
+	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
 	for (i=0; i < a.data.length; i++)
         {
                 //console.log("update data on row: " + i + " / " + a.data[i]);
                 _data = {   
 				refid:			a.data[i].RefID
-				,driverposition:	a.data[i].RacePos	
+				,driverposition:	a.data[i].RacePosition	
 				,drivername:		a.data[i].Name
 	                        ,driverstate:		a.data[i].State
 	                        ,driversector:		a.data[i].CurrentSector
-	                        ,fastestlap:		a.data[i].FastestLapTime
-	                        ,lastlap:		a.data[i].LastLapTime
+	                        ,fastestlap:		PCARSd.GetFastestLapTime(  a.data[i].FastestLapTime )
+	                        ,lastlap:		PCARSd.GetLastLapTime(  a.data[i].LastLapTime )
 	                        ,posx:			a.data[i].PosX
 	                        ,posy:			a.data[i].PosY
 	                        ,posz:			a.data[i].PosZ

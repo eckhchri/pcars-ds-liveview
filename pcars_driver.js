@@ -61,14 +61,24 @@ function GetRacePosition(){
         return this.RacePosition;
 }
 
-function GetFastestLapTime(){
-	// return format 00:00:00
-	return _ConvertLaptimeInReadbaleFormat(this.FastestLapTime);
+function GetFastestLapTime(a){
+	
+	if (a == undefined){
+		// return format 00:00:00
+		return _ConvertLaptimeInReadbaleFormat(this.FastestLapTime);
+	}else{
+		return _ConvertLaptimeInReadbaleFormat(a);
+	}
 }
 
-function GetLastLapTime(){
-	//convert in readable time mm:ss::ms
-        return _ConvertLaptimeInReadbaleFormat( this.LastLapTime);
+function GetLastLapTime(a){
+	if (a == undefined){
+		//convert in readable time mm:ss::ms
+	        return _ConvertLaptimeInReadbaleFormat( this.LastLapTime);
+	}else{
+                return _ConvertLaptimeInReadbaleFormat(a);
+        }
+
 }
 
 function GetOrientation(){
