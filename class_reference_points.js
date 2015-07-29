@@ -330,6 +330,24 @@ function Refpoint(cuircit_id)
                 ,"Comment": "live prüfen"
                 };
         
+        //Brno
+	aRefPoints[-907901266] = new Array();
+        aRefPoints[-907901266] =
+                {
+                "refLat":        49.203370
+                ,"refLong":      16.444172
+                ,"rotation":     156.6
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    -30000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Brno"
+                ,"Zoom":         15
+                ,"MapInitLat":   49.205370 
+                ,"MapInitLong":  16.452067
+                ,"Comment": "live prüfen"
+                };
+        
 	//Donington Park GP
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
