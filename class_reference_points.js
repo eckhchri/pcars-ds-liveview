@@ -18,16 +18,16 @@ function Refpoint(circuit_id)
 	aRefPoints[9999999999] = new Array();
         aRefPoints[9999999999] =
                 {
-                "refLat":        51.500681 
-                ,"refLong":      -0.071795
-                ,"rotation":     0 
-                ,"cor_r_Long":   0
-		,"cor_r_Lat":    0 
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
-                ,"Name":         "Slightly Mad Studios Ltd"
-                ,"Zoom":         15
-                ,"MapInitLat":   51.500681
+                "refLat":        51.500681			// Komma in Javascript ist ein Punkt
+                ,"refLong":      -0.071795			// Komma in Javascript ist ein Punkt
+                ,"rotation":     0				// Winkel in GRAD Maß
+                ,"cor_r_Long":   0				// Korrektur Radius zur Erdachse fuer Ost/West
+		,"cor_r_Lat":    0				// Korrektur Erdradius fuer  Nord/Sued
+		,"cor_PosX_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
+		,"cor_PosY_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
+                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the cuircit
+                ,"Zoom":         15				// wanted zoom level for initial map
+                ,"MapInitLat":   51.500681			// Map initialisierungs Koordinaten
                 ,"MapInitLong":  -0.071795
                 ,"Comment": "Default"
                 };
@@ -36,16 +36,16 @@ function Refpoint(circuit_id)
 	aRefPoints[1695182971] = new Array();
         aRefPoints[1695182971] = CopyObjectWithModifications(aRefPoints[9999999999],
         	{
-                "refLat":        49.329738	// Komma in Javascript ist ein Punkt
-                ,"refLong":      8.574270	// Komma in Javascript ist ein Punkt
-                ,"rotation":     0.573		// Winkel in GRAD Maß
-                ,"cor_r_Long":   45000000	// Korrektur Radius zur Erdachse fuer Ost/West
-		,"cor_r_Lat":	 0		// Korrektur Erdradius fuer  Nord/Sued
-		,"cor_PosX_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
-		,"cor_PosY_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
-                ,"Name":         "Hockenheim"	// real name of the cuircit
-                ,"Zoom":         15		// wanted zoom level for initial map
-                ,"MapInitLat":   49.329718	// Map initialisierungs Koordinaten
+                "refLat":        49.329738
+                ,"refLong":      8.574270
+                ,"rotation":     0.573
+                ,"cor_r_Long":   45000000
+		,"cor_r_Lat":	 0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Hockenheim"
+                ,"Zoom":         15
+                ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
                 ,"Comment": "letztes finetuning" 
         	});
@@ -627,7 +627,7 @@ function GetRefPoint(circuit_id){
 //	return aRefPoints; 
 //}
 
-function GetCuircitnameByTrackID (circuit_id)
+function GetCircuitnameByTrackID (circuit_id)
 {
 //	return aRefPoints[circuit_id]["Name"];
 }
@@ -650,6 +650,6 @@ function CopyObjectWithModifications(source, changes )
 }
 
 Refpoint.prototype.GetRefPoint=GetRefPoint;
-Refpoint.prototype.GetCuircitnameByTrackID=GetCuircitnameByTrackID;
+Refpoint.prototype.GetCircuitnameByTrackID=GetCircuitnameByTrackID;
 Refpoint.prototype.CopyObjectWithModifications=CopyObjectWithModifications;
 ///Refpoint.prototype.GetAllRefPoints=GetAllRefPoints;
