@@ -1,10 +1,10 @@
 /// Reference Object
 // CLASS of RefPoints
-function Refpoint(cuircit_id)
+function Refpoint(circuit_id)
 {
 
-//	console.log ("RefPoint - Parameter: " , cuircit_id);
-	this.cuircit_id 	= 	cuircit_id;
+//	console.log ("RefPoint - Parameter: " , circuit_id);
+	this.circuit_id 	= 	circuit_id;
 	this.Lat		=	undefined;
 	this.Long		=	undefined;
 	this.Rot		=	undefined;
@@ -32,49 +32,45 @@ function Refpoint(cuircit_id)
                 ,"Comment": "Default"
                 };
 	
-	/////////////////// Hockenheim
-	aRefPoints[1695182971] = {};
-        aRefPoints[1695182971] ={
-                                "refLat":        49.329738	// Komma in Javascript ist ein Punkt
-                                ,"refLong":      8.574270	// Komma in Javascript ist ein Punkt
-                                ,"rotation":     0.573		// Winkel in GRAD Maß
-                                ,"cor_r_Long":   45000000	// Korrektur Radius zur Erdachse fuer Ost/West
-				,"cor_r_Lat":	 0		// Korrektur Erdradius fuer  Nord/Sued
-				,"cor_PosX_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
-				,"cor_PosY_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
-                                ,"Name":         "Hockenheim"	// real name of the cuircit
-                                ,"Zoom":         15		// wanted zoom level for initial map
-                                ,"MapInitLat":   49.329718	// Map initialisierungs Koordinaten
-                                ,"MapInitLong":  8.574300
-                                ,"Comment": "letztes finetuning" 
-                                };
+	//Hockenheim GP
+	aRefPoints[1695182971] = new Array();
+        aRefPoints[1695182971] = CopyObjectWithModifications(aRefPoints[9999999999],
+        	{
+                "refLat":        49.329738	// Komma in Javascript ist ein Punkt
+                ,"refLong":      8.574270	// Komma in Javascript ist ein Punkt
+                ,"rotation":     0.573		// Winkel in GRAD Maß
+                ,"cor_r_Long":   45000000	// Korrektur Radius zur Erdachse fuer Ost/West
+		,"cor_r_Lat":	 0		// Korrektur Erdradius fuer  Nord/Sued
+		,"cor_PosX_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
+		,"cor_PosY_mul": 1		// Korrektur Multiplikator fuer PosX vor der Berechnung
+                ,"Name":         "Hockenheim"	// real name of the cuircit
+                ,"Zoom":         15		// wanted zoom level for initial map
+                ,"MapInitLat":   49.329718	// Map initialisierungs Koordinaten
+                ,"MapInitLong":  8.574300
+                ,"Comment": "letztes finetuning" 
+        	});
 	//Hockenheim Short
-	aRefPoints[1768660198] = {};
-	aRefPoints[1768660198] =  JSON.parse(JSON.stringify( aRefPoints[1695182971] ));
-	aRefPoints[1768660198]["Name"] = "Hockenheim Short";
-
+	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short"});
 	//Hockenheim National
-	aRefPoints[-1977142985] = {};
-        aRefPoints[-1977142985] =  JSON.parse(JSON.stringify( aRefPoints[1695182971] ));
-        aRefPoints[-1977142985]["Name"] = "Hockenheim National";
+	aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim National"});
 	
 
-	////////////////// Dubai todo: name durch track ID ersetzen
+	//Dubai Autodrome GP
 	aRefPoints[-661887517] = CopyObjectWithModifications(aRefPoints[9999999999],
-				{ 
-				"refLat":      	 25.046650      
-				,"refLong":   	 55.231300
-	        		,"rotation":     -0.401
-			   	,"cor_r_Long":   45000000
-				,"cor_r_Lat":    0
-				,"cor_PosX_mul": 1
-				,"cor_PosY_mul": 1
-	        		,"Name":         "Dubai Autodrome GP"
-	        		,"Zoom":         15
-	        		,"MapInitLat":   25.050175
-	        		,"MapInitLong":  55.237547
-	        		,"Comment": "live prüfen"
-				});
+		{ 
+		"refLat":      	 25.046650      
+		,"refLong":   	 55.231300
+	  	,"rotation":     -0.401
+	   	,"cor_r_Long":   45000000
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+	        ,"Name":         "Dubai Autodrome GP"
+	        ,"Zoom":         15
+	        ,"MapInitLat":   25.050175
+	        ,"MapInitLong":  55.237547
+	        ,"Comment": "live prüfen"
+		});
 
 	///Dubai Autodrome International
 	aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International"});
@@ -583,33 +579,33 @@ function Refpoint(cuircit_id)
 ///////////////////////////////////////////////////////////////////////////	
 	//console.log("Refpoints: "  , aRefPoints);	
 	
-	if (cuircit_id == undefined)
+	if (circuit_id == undefined)
 	{
 		// no paramter given -> set to an default value to prevent empty return value
 		console.log ("Cuircit_id NOT set, change to default!");
-		this.cuircit_id = 1695182971;
+		this.circuit_id = 1695182971;
 
 	}
 	
 	//console.log ("+++ RefPoints: " , aRefPoints);
-	//console.log ("++ used  CuircitID: " + this.cuircit_id );
+	//console.log ("++ used  CuircitID: " + this.circuit_id );
 
 	// set values for the object	
-	this.Lat 	= aRefPoints[this.cuircit_id]["refLat"];
-	this.Long 	= aRefPoints[this.cuircit_id]["refLong"];
-	this.Rot     	= aRefPoints[this.cuircit_id]["rotation"];
+	this.Lat 	= aRefPoints[this.circuit_id]["refLat"];
+	this.Long 	= aRefPoints[this.circuit_id]["refLong"];
+	this.Rot     	= aRefPoints[this.circuit_id]["rotation"];
 
 	// todo: kann man hier nicht auch die Funktion GetCuircitnameByTrackID aufrufen?
 /*
 	return {
-			 "refLat": 	aRefPoints[this.cuircit_id]["refLat"]
-			,"refLong":	aRefPoints[this.cuircit_id]["refLong"]
-			,"rotation":    aRefPoints[this.cuircit_id]["rotation"]
-			,"cor_r":	aRefPoints[this.cuircit_id]["cor_r"] 
-			,"Name":        aRefPoints[this.cuircit_id]["Name"]
-			,"Zoom":	aRefPoints[this.cuircit_id]["Zoom"]
-			,"MapInitLat":	aRefPoints[this.cuircit_id]["MapInitLat"]
-        		,"MapInitLong":	aRefPoints[this.cuircit_id]["MapInitLong"]	
+			 "refLat": 	aRefPoints[this.circuit_id]["refLat"]
+			,"refLong":	aRefPoints[this.circuit_id]["refLong"]
+			,"rotation":    aRefPoints[this.circuit_id]["rotation"]
+			,"cor_r":	aRefPoints[this.circuit_id]["cor_r"] 
+			,"Name":        aRefPoints[this.circuit_id]["Name"]
+			,"Zoom":	aRefPoints[this.circuit_id]["Zoom"]
+			,"MapInitLat":	aRefPoints[this.circuit_id]["MapInitLat"]
+        		,"MapInitLong":	aRefPoints[this.circuit_id]["MapInitLong"]	
 		};
 */
 
@@ -619,7 +615,7 @@ function Refpoint(cuircit_id)
 
 }
 
-function GetRefPoint(cuircit_id){
+function GetRefPoint(circuit_id){
 
 	return ( this.Lat, this.Long, this.Rot );
 }
@@ -631,9 +627,9 @@ function GetRefPoint(cuircit_id){
 //	return aRefPoints; 
 //}
 
-function GetCuircitnameByTrackID (cuircit_id)
+function GetCuircitnameByTrackID (circuit_id)
 {
-//	return aRefPoints[cuircit_id]["Name"];
+//	return aRefPoints[circuit_id]["Name"];
 }
 
 // todo: use a function to copy cuircit variantions from on object to another
