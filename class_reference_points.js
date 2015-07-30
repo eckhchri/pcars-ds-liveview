@@ -18,17 +18,17 @@ function Refpoint(cuircit_id)
 	aRefPoints[9999999999] = new Array();
         aRefPoints[9999999999] =
                 {
-                "refLat":        0 
-                ,"refLong":      0
+                "refLat":        51.500681 
+                ,"refLong":      -0.071795
                 ,"rotation":     0 
                 ,"cor_r_Long":   0
 		,"cor_r_Lat":    0 
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-                ,"Name":         "Default"
+                ,"Name":         "Slightly Mad Studios Ltd"
                 ,"Zoom":         15
-                ,"MapInitLat":   0
-                ,"MapInitLong":  0
+                ,"MapInitLat":   51.500681
+                ,"MapInitLong":  -0.071795
                 ,"Comment": "Default"
                 };
 	
