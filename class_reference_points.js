@@ -387,7 +387,7 @@ function Refpoint(circuit_id)
                 "refLat":        50.992257
                 ,"refLong":      5.258882
                 ,"rotation":     -148.2
-                ,"cor_r_Long":   0
+                ,"cor_r_Long":   15000000
                 ,"cor_r_Lat":    0
                 ,"cor_PosX_mul": 0.955
 		,"cor_PosY_mul": 0.96
@@ -395,7 +395,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   50.990644 
                 ,"MapInitLong":  5.257656
-                ,"Comment": "nochmal checken"
+                ,"Comment": "live prüfen"
                 };
         
 	//Donington Park GP
