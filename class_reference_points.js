@@ -13,6 +13,25 @@ function Refpoint(cuircit_id)
 	var aRefPoints = new Array();
 
 	//static information
+	
+	//Default
+	aRefPoints[9999999999] = new Array();
+        aRefPoints[9999999999] =
+                {
+                "refLat":        0 
+                ,"refLong":      0
+                ,"rotation":     0 
+                ,"cor_r_Long":   0
+		,"cor_r_Lat":    0 
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Default"
+                ,"Zoom":         15
+                ,"MapInitLat":   0
+                ,"MapInitLong":  0
+                ,"Comment": "Default"
+                };
+	
 	/////////////////// Hockenheim
 	aRefPoints[1695182971] = {};
         aRefPoints[1695182971] ={
@@ -41,8 +60,7 @@ function Refpoint(cuircit_id)
 	
 
 	////////////////// Dubai todo: name durch track ID ersetzen
-	aRefPoints[-661887517] = new Array();
-	aRefPoints[-661887517] = 
+	aRefPoints[-661887517] = CopyObjectWithModifications(aRefPoints[9999999999],
 				{ 
 				"refLat":      	 25.046650      
 				,"refLong":   	 55.231300
@@ -56,7 +74,7 @@ function Refpoint(cuircit_id)
 	        		,"MapInitLat":   25.050175
 	        		,"MapInitLong":  55.237547
 	        		,"Comment": "live prüfen"
-				};
+				});
 
 	///Dubai Autodrome International
 	aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International"});
