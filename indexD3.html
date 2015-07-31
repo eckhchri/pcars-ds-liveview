@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+</head>
+<!--
+	http://christopheviau.com/d3_tutorial/
+-->
+<body>
+    <div id="viz"></div>
+
+    <input type="checkbox" id="checkbox1" />
+
+    <script type="text/javascript">
+
+
+//draw circle
+    var sampleSVG = d3.select("#viz")
+        .append("svg")
+        .attr("width", 200)
+        .attr("height", 200);    
+
+    sampleSVG.append("circle")
+        .style("stroke", "gray")
+        .style("fill", "white")
+        .attr("r", 40)
+        .attr("cx", 50)
+        .attr("cy", 50)
+        .on("mouseover", function(){d3.select(this).style("fill", "blue");})
+ //       .on("mouseout", function(){d3.select(this).style("fill", "white");})
+	.on("click", function(){d3.select(this).style("fill", "red");});
+    console.log("sampleSVG: " , sampleSVG);
+
+
+// Event handling Checkboxes
+
+$('#checkbox1').click(function () {
+
+	console.log("Checkbox click:" , this);
+
+	if ($(this).attr('checked')) {
+	        alert('is checked');
+	} else {
+	        alert('is not checked');
+	}
+})
+
+
+
+    </script>
+</body>
+</html>
