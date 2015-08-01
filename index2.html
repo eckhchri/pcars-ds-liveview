@@ -58,19 +58,20 @@
                 top:            65%;
                 border:         1;
 		text-align: 	center;
+		background:	lightgrey;
 	     }
 
 	     #DriverData{
 		position:       absolute;
                 left:           55%;
 		top:		250px;
-		background:	lightblue;
 	     }
 		
 	     #DriverDataArea{
 		position:       absolute;
 		left:           55%;
 		top:            330px;
+		background:	lightgrey
 	     }
 
              .stations, .stations svg {
@@ -93,13 +94,18 @@
          </style>
      </head>
    <body>
-	
+
+	<!-- definition of data areas-->
+	<div id="map"></div>
+	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4></div>
+	<div id="DriverDataArea">
+		<div align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
+		<table id="DriverDataTable"></table></div>	
+	<div id="TrackList">
+		<div align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
+		<table id="tracklisttable"></table></div>	
+
        <script>
-
-
-	// write area for map
-	document.write('<div id="map"></div>');
-
 	// initialize vars
 	var aDrivers 	= new Array();		// array for PCARSdriver objects
 	var aSensorData = new Array();		// array of Hashes, each hash includes parameters of a driver
@@ -112,6 +118,9 @@
 	var sensorLayer;
 	var aRefPointTMP;			// hash of all RefPoints for available tracks
 	var WORKERDELEAY_TRACKLIST	=	5000; 	// in ms
+	var WORKERDELEAY_DRIVERLIST	=	200;	// in ms
+	var StopRefreshTracklist	=	"false";
+	var StopRefreshDriverlist	=	"false";
 	var PCARSd	= new PCARSdriver(
                                                                         9234567
                                                                         ,"NO_PARTICIPANT_TestData"
@@ -169,13 +178,10 @@
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
-	document.write('<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4></div>');
-
 	var workerDSDATA      =       new Worker('./worker_dsdata.js');
 
         //event handler of the worker
         workerDSDATA.addEventListener('message', function(e) {
-
                 console.log('Worker said: ', e.data);
                 // write in HTML page
 		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   ' + DsServerURL + " : " +  DsPort;
@@ -183,8 +189,6 @@
 		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: ' + e.data.joinable;
 		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: ' + e.data.lobbyid;
 		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      ' + e.data.now; 
-
-		//console.log("HTML Elements" , document.getElementsByTagName('p1'));
 
 		//call worker again for next itteration -> currently endless loop
 		workerDSDATA.postMessage({
@@ -227,9 +231,19 @@
 	// init google map
         init_map(cuircitID);
 
-
 	// create Table with list of all tracks
-	document.write('<div id="TrackList"><table id="tracklisttable"></table></div>');
+	// checkbox Event handling
+	$('#cbTracklistRefresh').click(function () {
+
+		if ($('#cbTracklistRefresh').is(':checked') == true) {
+			StopRefreshTracklist 	= "true";
+			WORKERDELEAY_TRACKLIST 	= 10000;
+		}else{
+			StopRefreshTracklist 	= "false";
+			WORKERDELEAY_TRACKLIST	= 5000;
+		}
+	})
+
 
 	// create worker for Tracklist updates //////////////////////////////////////////////////////////////////////
 	var w_tracklist      =       new Worker('./worker_tracklist.js');
@@ -238,15 +252,15 @@
 		
 					refreshTrackList(e);
 					w_tracklist.postMessage({
-									workerdelay: WORKERDELEAY_TRACKLIST
-									,dsurl: "www.eckhchri.de"
-									,dsport: 9000
-									,timeout: 2000
-									,receivemode: "GETTRACKLIST" });
+								workerdelay: 	WORKERDELEAY_TRACKLIST
+								,dsurl: 	"www.eckhchri.de"
+								,dsport: 	9000
+								,timeout: 	2000
+								,receivemode: 	"GETTRACKLIST" });
         }, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
-	w_tracklist.postMessage({workerdelay: 2000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
+	w_tracklist.postMessage({workerdelay: 1000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 	// initiate jqGrid
 	// todo: make table searchable   and  add new Theme
@@ -278,9 +292,6 @@
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // create DriverList object and map update
-
-	//display Driver Data with jqGrid
-	document.write('<div id="DriverDataArea"><table id="DriverDataTable"></table></div>');
 
 	// first data run before init map()
 	aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
@@ -327,7 +338,7 @@
                 }
 
 		// start next run of this loop
-		workerDRIVERDATA.postMessage({  workerdelay: 200
+		workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
                                                 ,dsurl: "www.eckhchri.de"
                                                 ,dsport: 9000
                                                 ,timeout: 2000
@@ -336,7 +347,7 @@
         }, false);
 	
         //initial call of worker and start the loop
-        workerDRIVERDATA.postMessage({workerdelay: 2000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+        workerDRIVERDATA.postMessage({workerdelay: 500, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
 	//Todo: start a second worker loop with delay, to have continous updates on map
 //	workerDRIVERDATA.postMessage({workerdelay: 3000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
 
@@ -361,6 +372,19 @@
                         {name:'posz',width:20, align:"center",sorttype:"float"}
                 ]
 	});
+
+	
+	// checkbox Event handling
+        $('#cbDriverlistRefresh').click(function () {
+
+                if ($('#cbDriverlistRefresh').is(':checked') == true) {
+                        StopRefreshDriverlist   = "true";
+                        WORKERDELEAY_DRIVERLIST	= 3000;
+                }else{
+                        StopRefreshDriverlist  	= "false";
+                        WORKERDELEAY_DRIVERLIST	= 200;
+                }
+        })
 
 	
 	// setting up google maps overlays
@@ -514,6 +538,13 @@ function init_map(_TrackID)
 ///////////////////
 function refreshTrackList(a)
 {
+	// if set to true, no refresh of table wanted
+	if (StopRefreshTracklist == "true")
+	{
+		console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );
+		return 1;
+	}
+
 	console.log("refreshTrackList(): " , a);
 	//jQuery("#tracklisttable").trigger("clearGridData");		// unload did not work :-(
 	var grididcnt = 0;
@@ -544,10 +575,16 @@ function refreshTrackList(a)
 	jQuery("#tracklisttable").trigger("reloadGrid");
 	
 }
-
 //////////////////
 function refreshDriverList(a)
 {
+	// if set to true, no refresh of table wanted
+        if (StopRefreshDriverlist == "true")
+        {
+                console.log("--- INFO stop refresh tracklist because StopRefreshDriverlist set to:", StopRefreshDriverlist );
+                return 1;
+        }
+
         console.log("refreshDriverList(e): " , a);
 	var grididcnt = 0;
         var _data;

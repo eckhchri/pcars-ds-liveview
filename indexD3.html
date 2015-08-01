@@ -39,11 +39,18 @@ $('#checkbox1').click(function () {
 
 	console.log("Checkbox click:" , this);
 
+	if ($('#checkbox1').is(':checked') == true) {
+
+             alert(" is checked");
+      }
+
+/*	
 	if ($(this).attr('checked')) {
 	        alert('is checked');
 	} else {
 	        alert('is not checked');
 	}
+*/
 })
 
 
