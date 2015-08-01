@@ -19,11 +19,22 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
-                  $(function() {
+                $(function() {
                     $( "#DSdata" ).draggable();
 		    $( "#TrackList" ) .draggable();
 		    $( "#DriverDataArea" ) .draggable();
-                  });
+                });
+		
+		$(function() {
+            		$( "#DSdata" ).resizable({
+//             		animate: true
+			ghost: true
+            		});
+//		        $( "#TrackList" ).resizable({
+//               		ghost: true
+//            		});
+         	});
+	
         </script>
 
 	<!-- The jqGrid language file code-->
