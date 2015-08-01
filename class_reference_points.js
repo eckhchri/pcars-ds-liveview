@@ -26,7 +26,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
 		,"cor_PosY_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the cuircit
-                ,"Zoom":         15				// wanted zoom level for initial map
+                ,"Zoom":         19				// wanted zoom level for initial map
                 ,"MapInitLat":   51.500681			// Map initialisierungs Koordinaten
                 ,"MapInitLong":  -0.071795
                 ,"Comment": "Default"
