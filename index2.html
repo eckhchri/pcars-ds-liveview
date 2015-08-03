@@ -56,7 +56,7 @@
 	     #DSdata{
 		position: 	absolute; 
 		left: 		55%; 
-		top: 		5%; 
+		top: 		0px; 
 		width: 		300px; 
 		height: 	100px;
 		border:		1;
@@ -65,8 +65,8 @@
 
 	     #TrackList{
 		position:       absolute;
-                left:           25%;
-                top:            65%;
+                left:           5%;
+                top:            0px;
                 border:         1;
 		text-align: 	center;
 		background:	lightgrey;
@@ -80,8 +80,8 @@
 		
 	     #DriverDataArea{
 		position:       absolute;
-		left:           55%;
-		top:            330px;
+		left:           5%;
+		top:            45px;
 		background:	lightgrey
 	     }
 
@@ -279,6 +279,7 @@
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
 	        height: 250,
+	        hiddengrid: true,
 	        colNames:['ID','TrackID','TrackName', 'RefPoints exists?','Comment'],
 	        colModel:[
 			{name:'id', index:'id', formatter: 'integer', width:100},
@@ -368,6 +369,7 @@
                 datatype: "local",
                 height: 200,
 		width: 800,
+		hiddengrid: true,
 		caption: "List of available drivers",
                 colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
                 colModel:[
@@ -536,7 +538,7 @@ function init_map(_TrackID)
            map = new google.maps.Map(d3.select("#map").node(), {
                zoom: aRefPointTMP[cuircitID]["Zoom"],
 
-                // use ´cuircit RefPoint for center google map
+                // use Â´cuircit RefPoint for center google map
                 center: new google.maps.LatLng( aRefPointTMP[_TrackID]["MapInitLat"] , aRefPointTMP[_TrackID]["MapInitLong"] ),
                 mapTypeId: google.maps.MapTypeId.SATELLITE
            });
