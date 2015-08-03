@@ -76,12 +76,14 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	{	
 
-		 //document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-		 //https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                 var myArr = JSON.parse( xmlhttp.responseText );
-                 var arrayoutput = myArr.toString();
+		//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+		//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+                var myArr 		= JSON.parse( xmlhttp.responseText );
+                var arrayoutput 	= myArr.toString();
+		var DriverDummy		= new PCARSdriver();
+		DriverDummyi.SetExampleData();
 
-                 console.log("ReceiveDsData complete array" , myArr);
+                console.log("ReceiveDsData complete array" , myArr);
 
 	   switch ( this.receivemode ) {
 
@@ -131,23 +133,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			
 				console.log("no Participants found in DS, leave function and use Test data array!");
 
-				aDrivers.push( new PCARSdriver(
-                                                                        9234567
-                                                                        ,"NO_PARTICIPANT_TestData"
-                                                                        ,3
-                                                                        ,277
-                                                                        ,278
-                                                                        ,279
-                                                                        ,"StateTest"
-                                                                        ,"Sector1"
-                                                                        ,"123"
-                                                                        ,"123456"
-                                                                        ,"123456"
-                                                                        ,"0"
-                                                                        ,"321"
-                                                                        ,{TrackId: 920145926}
-                                                )
-					);
+				aDrivers.push( DriverDummy );
 
 				console.log("+-+-+-: " ,  aDrivers);				
 
@@ -194,7 +180,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
                         if ( myArr.response.list.length == 0 ){
 
                                 console.log("no Participants found in DS, leave function!");
-                                aDrivers.push (  new PCARSdriver(9234567,"NO_PARTICIPANT_TestData",3,277,278,279) );        
+                                aDrivers.push ( DriverDummy );        
                                 return aDrivers;
                         }
 			
@@ -218,7 +204,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
     	}
 	
 	// return empty array: no DS, no Memebers, ...
-	aDrivers.push (  new PCARSdriver(9234567,"NO_DS_FOUND_TestData",3,277,278,279) );
+
+	aDrivers.push ( DriverDummy );
 	return aDrivers;
 
 }

@@ -104,6 +104,28 @@ function GetVariousParameter(parameter)
 	return this.variousParameters[parameter];
 }
 
+function SetExampleData()
+{
+
+	// set default parameter for a dummy object
+	this.RefID     =       9234567;
+        this.Name      =       "NO_PARTICIPANT_TestData";
+        this.RacePos   =       3;
+        this.PosX      =       271;
+        this.PosY      =       277;
+        this.PosZ      =       288;
+        this.State     =       "StateTest";
+        this.CurrentSector =   0;
+        this.RacePosition  =   0;
+        this.FastestLapTime=   9000;
+        this.LastLapTime   =   9999;
+        this.Orientation   =   orientation;
+        this.Speed         =   100;
+        this.variousParameters = {TrackId: 920145926};
+
+	return 1;
+}
+
 
 /// help function
 function _ConvertLaptimeInReadbaleFormat(milliseconds)
@@ -137,4 +159,5 @@ PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
 PCARSdriver.prototype.GetVariousParameter=GetVariousParameter;
+PCARSdriver.prototype.SetExampleData=SetExampleData;
 
