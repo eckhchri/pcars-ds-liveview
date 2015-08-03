@@ -56,8 +56,8 @@
 
 	     #TrackList{
 		position:       absolute;
-                left:           25%;
-                top:            65%;
+                left:           5%;
+                top:            25px;
                 border:         1;
 		text-align: 	center;
 	     }
@@ -71,8 +71,8 @@
 		
 	     #DriverDataArea{
 		position:       absolute;
-		left:           55%;
-		top:            330px;
+		left:           5%;
+		top:            0px;
 	     }
 
              .stations, .stations svg {
@@ -204,8 +204,7 @@
 		},
 	        multiselect: false,
 	        caption: "List of available Tracks",
-                // grid initial collapsed
-                hiddengrid: true,
+                hiddengrid: true,	// grid initial collapsed
 
 		// todo sugrid einbauen
 		//http://www.trirand.com/blog/jqgrid/jqgrid.html
@@ -301,6 +300,7 @@
                 datatype: "local",
                 height: 200,
 		width: 800,
+		hiddengrid: true,	// grid initial collapsed
 		caption: "List of available drivers",
                 colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'PosX', 'PosY', 'PosZ', 'fastest lap', 'last lap' ],
                 colModel:[
