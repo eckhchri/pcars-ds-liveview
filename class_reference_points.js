@@ -497,18 +497,18 @@ function Refpoint(circuit_id)
 	aRefPoints[521933422] = new Array();
 	aRefPoints[521933422] =
 		{
-		"refLat":        41.57304
-		,"refLong":      2.25925
-		,"rotation":     0
-		,"cor_r_Long":   45000000
+		"refLat":        41.569355
+		,"refLong":      2.258060
+		,"rotation":     58.1
+		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Barcelona-Catalunya GP"
 		,"Zoom":         15
-		,"MapInitLat":   41.569771
-		,"MapInitLong":  2.257696
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   41.569612
+		,"MapInitLong":  2.257745
+		,"Comment": "live prüfen"
 		};
 	//Circuit de Barcelona-Catalunya Club
 	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club"});
