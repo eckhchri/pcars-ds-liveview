@@ -519,18 +519,18 @@ function Refpoint(circuit_id)
 	aRefPoints[920145926] = new Array();
 	aRefPoints[920145926] =
 		{
-		"refLat":        44.34069
-		,"refLong":      11.71717
-		,"rotation":     0
-		,"cor_r_Long":   45000000
+		"refLat":        44.340705
+		,"refLong":      11.717190
+		,"rotation":     -1.9
+		,"cor_r_Long":   -20000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Imola"
 		,"Zoom":         15
-		,"MapInitLat":   44.341913
-		,"MapInitLong":  11.712662
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   44.341112
+		,"MapInitLong":  11.712506
+		,"Comment": "live prüfen"
 		};
 	
 	//Willow Springs International Raceway
