@@ -402,18 +402,18 @@ function Refpoint(circuit_id)
 	aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] =
 		{
-		"refLat":        52.830643280
-		,"refLong":      -1.37492025
-		,"rotation":     0
-		,"cor_r_Long":   45000000
+		"refLat":        52.830575
+		,"refLong":      -1.374732
+		,"rotation":     174
+		,"cor_r_Long":   10000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Donington Park GP"
 		,"Zoom":         15
-		,"MapInitLat":   52.830820
-		,"MapInitLong":  -1.375028
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   52.830756
+		,"MapInitLong":  -1.375103
+		,"Comment": "live prüfen"
 		};
 	//Donington Park National
 	aRefPoints[-1194019375] = CopyObjectWithModifications(aRefPoints[354022214], {"Name": "Donington Park National"});
