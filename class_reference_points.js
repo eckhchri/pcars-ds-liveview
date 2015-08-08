@@ -446,17 +446,17 @@ function Refpoint(circuit_id)
 	aRefPoints[832629329] =
 		{
 		"refLat":        43.737030
-		,"refLong":      7.427388
+		,"refLong":      7.427395
 		,"rotation":     126
-		,"cor_r_Long":   90000000
-		,"cor_r_Lat":    80000000
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 0.983
+		,"cor_PosY_mul": 0.985
 		,"Name":         "Azure Circuit"
 		,"Zoom":         15
 		,"MapInitLat":   43.737186
 		,"MapInitLong":  7.425732
-		,"Comment": "live prüfen, leichter Fehler"
+		,"Comment": "live prüfen"
 		};
 	//Bathurst
 	aRefPoints[921120824] = new Array();
