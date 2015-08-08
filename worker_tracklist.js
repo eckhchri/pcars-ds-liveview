@@ -2,9 +2,10 @@
 
 self.addEventListener('message', function(e) {
 
-	//console.log("e: " , e);
+	console.log("e: " , e);
 
 	importScripts('./receive_ds_data.js');
+	importScripts('./pcars_driver.js');
 	importScripts('./class_reference_points.js');
 	importScripts('./sleep.js');
 
@@ -13,7 +14,7 @@ self.addEventListener('message', function(e) {
 	sleep(e.data.workerdelay);
 
 	var aTrackList 	= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode);
-	//console.log("DS Tracklist complete array: " , aTrackList);
+	console.log("DS Tracklist complete array: " , aTrackList);
 
 
 	var aRefPointTMP         =      new Refpoint();
@@ -22,8 +23,22 @@ self.addEventListener('message', function(e) {
 	var commenttmp = '';
 	var tmpObj;
 	var aNewTrackList = new Array();
-	
-	if (aTrackList.length != 0){
+
+/*
+	// workaround for Firefox Javscript engine to get length of the array
+	aTrackList.forEach(function(entry) {
+		if( entry === undefined){
+		
+		}else{
+	  		LengthTracklist++;
+		}
+		console.log("DS Tracklist complete array ENTRY:", entry);
+	});
+*/
+
+	if (aTrackList.keys(aTrackList).length != 0){
+
+		console.log("+++ use data from DS return value");
 		for (var key in aTrackList ){
 	
 			tmpObject = aRefPointTMP[key];
@@ -46,6 +61,8 @@ self.addEventListener('message', function(e) {
 			k++;
 		}
 	}else{
+		console.log("+++ use data from RefPoint Array");
+		// this case if no DS available, generate from RefPoint list
 		for (var key in aRefPointTMP ){
 		
 			tmpObject = aRefPointTMP[key];	

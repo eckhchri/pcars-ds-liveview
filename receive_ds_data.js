@@ -66,7 +66,17 @@ function Receive_DS_data (url,port,timeout,receivemode){
 		xmlhttp.send();
 	}catch(err){
 		console.log("Error while sending Request to DS!:" + err );
-		return aDrivers;
+	
+		switch ( this.receivemode ){
+			case 	"GETDSDATA":  		return aDrivers;
+			
+			// todo: check if retrun value ist correct
+			case  	"GETDRIVERDATE":	return aDrivers;	
+
+			case	"GETTRACKLIST":		return new Array();
+		} // end switch
+
+		//return aDrivers;
 	}
 
   	// xmlhttp.timeout = this.timeout;  // could onyl be set in Synchronous mode
@@ -81,7 +91,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
                 var myArr 		= JSON.parse( xmlhttp.responseText );
                 var arrayoutput 	= myArr.toString();
 		var DriverDummy		= new PCARSdriver();
-		DriverDummyi.SetExampleData();
+		DriverDummy.SetExampleData();
 
                 console.log("ReceiveDsData complete array" , myArr);
 
@@ -124,10 +134,6 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 		case  "GETDRIVERDATE":
 		
-			//	for (var i = 0;i<myArr.response.members.length;i++)
-			//	{
-			//	}
-
 			// if no users joined return example Data
 			if ( myArr.response.participants.length == 0 ){
 			
@@ -175,8 +181,9 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 			// todo: Auslesen der trackIDs und den dazugehoerigen Namen
 
-
 			// if no users joined return example Data
+			console.log("++++++++++++++++ GETTRACKLIST / received data" , myArr );
+			// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                         if ( myArr.response.list.length == 0 ){
 
                                 console.log("no Participants found in DS, leave function!");

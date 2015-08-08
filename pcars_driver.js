@@ -119,7 +119,7 @@ function SetExampleData()
         this.RacePosition  =   0;
         this.FastestLapTime=   9000;
         this.LastLapTime   =   9999;
-        this.Orientation   =   orientation;
+        this.Orientation   =   0;
         this.Speed         =   100;
         this.variousParameters = {TrackId: 920145926};
 

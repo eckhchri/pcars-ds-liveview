@@ -4,6 +4,7 @@ self.addEventListener('message', function(e) {
 
 	//console.log("e: " , e);
 	importScripts('./receive_ds_data.js');
+	importScripts('./pcars_driver.js');
 	importScripts('./sleep.js');
 
         //delays this worker to reduce http requests and make application resposive
