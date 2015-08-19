@@ -73,7 +73,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			// todo: check if retrun value ist correct
 			case  	"GETDRIVERDATE":	return aDrivers;	
 
-			case	"GETTRACKLIST":		return new Array();
+			case	"GETTRACKLIST":		return new Array;
 		} // end switch
 
 		//return aDrivers;
