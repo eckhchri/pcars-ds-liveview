@@ -638,5 +638,18 @@ function refreshDriverList(a)
 	return 1;
 }
 
+function GetTrackIDbyName(TrackName)
+{
+
+        var TMP_TrackID = 9999999999;   //Default TrackID
+
+        for (var key in aRefPointTMP){
+                if (aRefPointTMP[key]["Name"] == TrackName){
+                        TMP_TrackID = key;
+                }
+        }
+        return TMP_TrackID;
+}
+
        </script>
    </body>
