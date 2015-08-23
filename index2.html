@@ -642,6 +642,7 @@ function GetTrackIDbyName(TrackName)
 {
 
         var TMP_TrackID = 9999999999;   //Default TrackID
+	//aRefPointTMP must be known or alternatively defined new with var aRefPointTMP = new Refpoint();
 
         for (var key in aRefPointTMP){
                 if (aRefPointTMP[key]["Name"] == TrackName){
