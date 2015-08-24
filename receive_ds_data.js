@@ -45,7 +45,10 @@ function Receive_DS_data (url,port,timeout,receivemode){
 //	document.write ( data );
 	
 
-	var aDrivers          =   new Array();
+	var aDrivers    	=	new Array();
+	//var aEmptyArray 	=       new Array();
+	//var aEmptyArray 	=	new Object();
+	var aEmptyArray       	=       new Array();
 
 	// http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/
 	var xmlhttp = new XMLHttpRequest();
@@ -65,15 +68,15 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	try{
 		xmlhttp.send();
 	}catch(err){
-		console.log("Error while sending Request to DS!:" + err );
-	
+	//	console.log("Error while sending Request to DS!:" + err );
+
 		switch ( this.receivemode ){
 			case 	"GETDSDATA":  		return aDrivers;
 			
 			// todo: check if retrun value ist correct
 			case  	"GETDRIVERDATE":	return aDrivers;	
 
-			case	"GETTRACKLIST":		return new Array;
+			case	"GETTRACKLIST":		return aEmptyArray;
 		} // end switch
 
 		//return aDrivers;
