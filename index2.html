@@ -254,13 +254,14 @@
 	w_tracklist.addEventListener('message', function(e) {
 
 					console.log("Worker Trackliste Event: ", e );
-					console.log("Worker Trackliste Event: JSON PARSE ", JSON.parse(e.data) );
+//					console.log("Worker Trackliste Event: JSON PARSE ", JSON.parse(e.data) );
 					
 					var str = e.data;	// data string from return object
 
-					var strtmp = str.replace("null", " ");	// workaround for FireFox
+//					var strtmp = str.replace("null", " ");	// workaround for FireFox; convert [null] -> []
 
-					refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
+//					refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
+					refreshTrackList(buildTracklist(e.data));
 					w_tracklist.postMessage({
 								workerdelay: 	WORKERDELEAY_TRACKLIST
 								,dsurl: 	"www.eckhchri.de"

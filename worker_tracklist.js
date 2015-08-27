@@ -14,10 +14,11 @@ self.addEventListener('message', function(e) {
 
 	var aTrackList 	= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode);
 	console.log("Worker: DS Tracklist from Receive_DS_data(): " , aTrackList);
-	console.log("Worker: DS Tracklist from Receive_DS_data() JSON " , JSON.stringify(aTrackList));
+//	console.log("Worker: DS Tracklist from Receive_DS_data() JSON " , JSON.stringify(aTrackList));
 
 
 	// use JSON.stringify() to prevent problem with empty arrays in Firefox
-	self.postMessage(JSON.stringify(aTrackList));
+//	self.postMessage(JSON.stringify(aTrackList));
+	self.postMessage(aTrackList);
 
 }, false);
