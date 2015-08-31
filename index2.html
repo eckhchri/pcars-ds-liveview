@@ -713,6 +713,19 @@ function buildTracklist( a ){
 	return aNewTrackList;
 }
 
+function BuildTrackNameFromGameAPI(TrackName,TrackVariation)
+{
+        //combines the TrackName and TrackVariation from the Game API to one Name
+        var TMP_Name;
+
+        if (TrackVariation == ""){
+                return TrackName;
+        }else{
+                TMP_Name = TrackName + " " + TrackVariation;
+                return TMP_Name;
+        }
+}
+
 function GetTrackIDbyName(TrackName)
 {
        //returns the TrackID for the Game API Name
@@ -733,19 +746,6 @@ function GetTrackIDbyName(TrackName)
                 }
         }
         return TMP_TrackID;
-}
-
-function BuildTrackNameFromGameAPI(TrackName,TrackVariation)
-{
-        //combines the TrackName and Trackvariation from the Game API to one Name
-        var TMP_Name;
-
-        if (TrackVariation == ""){
-                return TrackName;
-        }else{
-                TMP_Name = TrackName + " " + TrackVariation;
-                return TMP_Name;
-        }
 }
 
        </script>
