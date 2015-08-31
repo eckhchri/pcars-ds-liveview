@@ -522,7 +522,7 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-		,"Name":         "Circuit de Barcelona-Catalunya GP
+		,"Name":         "Circuit de Barcelona-Catalunya GP"
 		,"Name2":	 "Circuit de Barcelona-Catalunya Grand Prix"	//"mTrackLocation":"Circuit de Barcelona-Catalunya","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   41.569612
