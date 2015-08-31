@@ -25,7 +25,8 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0				// Korrektur Erdradius fuer  Nord/Sued
 		,"cor_PosX_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
 		,"cor_PosY_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
-                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the cuircit
+                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the cuircit in DS API
+                ,"Name2":	 ""				// real name of the cuircit in Game API, if it differs from DS API Name
                 ,"Zoom":         19				// wanted zoom level for initial map
                 ,"MapInitLat":   51.500681			// Map initialisierungs Koordinaten
                 ,"MapInitLong":  -0.071795
@@ -43,7 +44,8 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":	 0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-                ,"Name":         "Hockenheim"
+                ,"Name":         "Hockenheim GP"
+                ,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
@@ -66,6 +68,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 	        ,"Name":         "Dubai Autodrome GP"
+	        ,"Name2":	 "Dubai Autodrome Grand Prix"	//"mTrackLocation":"Dubai Autodrome","mTrackVariation":"Grand Prix"
 	        ,"Zoom":         15
 	        ,"MapInitLat":   25.050175
 	        ,"MapInitLong":  55.237547
@@ -92,7 +95,8 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    -30000000 
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-                ,"Name":         "Nuerburgring GP"
+                ,"Name":         "Nürburgring GP"
+                ,"Name2":	 "Nürburgring Grand Prix"	//"mTrackLocation":"Nürburgring","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   50.332154
                 ,"MapInitLong":  6.940467
@@ -100,11 +104,11 @@ function Refpoint(circuit_id)
                 };
 
 	//Nuerburgring Sprint Short
-	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nuerburgring Sprint Short"});
+	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint Short"});
 	//Nuerburgring Sprint
-	aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nuerburgring Sprint"});
+	aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint"});
 	//Nuerburgring Muellenbach
-	aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nuerburgring Muellenbach"});
+	aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Müllenbach","Name2": "Nürburgring MuellenBach"});	//"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
 
 	//Nordschleife
 	aRefPoints[697498609] = new Array();
@@ -118,6 +122,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Nordschleife"
+                ,"Name2":	 "Nordschleife Full"	//"mTrackLocation":"Nordschleife","mTrackVariation":"Full"
                 ,"Zoom":         13
                 ,"MapInitLat":   50.359101
                 ,"MapInitLong":  6.962529
@@ -142,6 +147,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 0.97
                 ,"Name":         "Sonoma Raceway GP"
+                ,"Name2":	 "Sonoma Raceway Grand Prix"	//"mTrackLocation":"Sonoma Raceway","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   38.162770 
                 ,"MapInitLong":  -122.457449
@@ -164,13 +170,14 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Circuit des 24 Heures du Mans"
+                ,"Name2":	 "Le Mans Circuit des 24 Heures du Mans"	//"mTrackLocation":"Le Mans","mTrackVariation":"Circuit des 24 Heures du Mans"
                 ,"Zoom":         13
                 ,"MapInitLat":   47.936818 
                 ,"MapInitLong":  0.223960
                 ,"Comment": "live prüfen"
                 };
         //Le Circuit Bugatti
-	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});
+	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Name2": "Le Mans Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});	//"mTrackLocation":"Le Mans","mTrackVariation":"Le Circuit Bugatti"
         
         //Ruapuna Park GP
 	aRefPoints[1277693448] = new Array();
@@ -184,19 +191,20 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Ruapuna Park GP"
+                ,"Name2":	 "Ruapuna Park Grand Prix"	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   -43.531123 
                 ,"MapInitLong":  172.479408
                 ,"Comment": "live prüfen"
                 };
         //Ruapuna Park A Circuit
-	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit"});
+	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "Ruapuna Park A_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
         //Ruapuna Park Club
 	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club"});
 	//Ruapuna Park Outer Loop
-	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop"});
+	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "Ruapuna Park Outer_Loop"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Outer_Loop"
 	//Ruapuna Park B Circuit
-	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit"});
+	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "Ruapuna Park B_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"B_Circuit"
         
         //Cadwell GP
 	aRefPoints[1876749797] = new Array();
@@ -210,6 +218,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Cadwell GP"
+                ,"Name2":	 "Cadwell Grand Prix"	//"mTrackLocation":"Cadwell","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   53.308465 
                 ,"MapInitLong":  -0.063734
@@ -254,15 +263,16 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Snetterton 300"
+                ,"Name2":	 "Snetterton 300 Circuit"	//"mTrackLocation":"Snetterton","mTrackVariation":"300 Circuit"
                 ,"Zoom":         15
                 ,"MapInitLat":   52.465021 
                 ,"MapInitLong":  0.947079
                 ,"Comment": "live prüfen"
                 };
         //Snetterton 200
-	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200"});
+	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200","Name2": "Snetterton 200 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"200 Circuit"
 	//Snetterton 100
-	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100"});
+	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100","Name2": "Snetterton 100 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"100 Circuit"
         
         //Zhuhai International Circuit
 	aRefPoints[1836888499] = new Array();
@@ -294,6 +304,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Silverstone GP"
+                ,"Name2":	 "Silverstone Grand Prix"	//"mTrackLocation":"Silverstone","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   52.071727 
                 ,"MapInitLong":  -1.015736
@@ -318,6 +329,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Brands Hatch GP"
+                ,"Name2":	 "Brands Hatch Grand Prix"	//"mTrackLocation":"Brands Hatch","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   51.357186 
                 ,"MapInitLong":  0.262930
@@ -392,6 +404,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 0.955
 		,"cor_PosY_mul": 0.96
                 ,"Name":         "Zolder"
+                ,"Name2":	 "Zolder Grand Prix"	//"mTrackLocation":"Zolder","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   50.990644 
                 ,"MapInitLong":  5.257656
@@ -410,6 +423,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Donington Park GP"
+		,"Name2":	 "Donington Park Grand Prix"	//"mTrackLocation":"Donington Park","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   52.830756
 		,"MapInitLong":  -1.375103
@@ -431,6 +445,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Oschersleben GP"
+		,"Name2":	 "Oschersleben Grand Prix"	//"mTrackLocation":"Oschersleben","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   52.028131
 		,"MapInitLong":  11.277030
@@ -453,11 +468,13 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 0.983
 		,"cor_PosY_mul": 0.985
 		,"Name":         "Azure Circuit"
+		,"Name2":	 "Azure Circuit Grand Prix"	//"mTrackLocation":"Azure Circuit","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   43.737186
 		,"MapInitLong":  7.425732
 		,"Comment": "live prüfen"
 		};
+		
 	//Bathurst
 	aRefPoints[921120824] = new Array();
 	aRefPoints[921120824] =
@@ -493,6 +510,7 @@ function Refpoint(circuit_id)
 		,"MapInitLong":  5.969509
 		,"Comment": "by colets, prüfen"
 		};
+		
 	//Circuit de Barcelona-Catalunya GP
 	aRefPoints[521933422] = new Array();
 	aRefPoints[521933422] =
@@ -504,7 +522,8 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-		,"Name":         "Circuit de Barcelona-Catalunya GP"
+		,"Name":         "Circuit de Barcelona-Catalunya GP
+		,"Name2":	 "Circuit de Barcelona-Catalunya Grand Prix"	//"mTrackLocation":"Circuit de Barcelona-Catalunya","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   41.569612
 		,"MapInitLong":  2.257745
@@ -527,6 +546,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Imola"
+		,"Name2":	 "Imola Grand Prix"	//"mTrackLocation":"Imola","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   44.341112
 		,"MapInitLong":  11.712506
@@ -565,13 +585,14 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Watkins Glen GP"
+		,"Name2":	 "Watkins Glen International Grand Prix"	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   42.336648
 		,"MapInitLong":  -76.924696
 		,"Comment": "by colets, prüfen"
 		};
 	//Watkins Glen Short
-	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen Short"});
+	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen Short","Name2": "Watkins Glen International Short Circuit"});	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Short Circuit"
 
 	//Autodromo Nazionale Monza GP
 	aRefPoints[-52972612] = new Array();
@@ -585,6 +606,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Autodromo Nazionale Monza GP"
+		,"Name2":	 "Autodromo Nazionale Monza Grand Prix"	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   45.621382
 		,"MapInitLong":  9.287683
