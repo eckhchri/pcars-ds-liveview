@@ -316,14 +316,14 @@
 					refreshTrackList(buildTracklist(e.data));
 					w_tracklist.postMessage({
 								workerdelay: 	WORKERDELEAY_TRACKLIST
-								,dsurl: 	"www.eckhchri.de"
-								,dsport: 	9000
+								,dsurl: 	DsServerURL
+								,dsport: 	DsPort
 								,timeout: 	2000
 								,receivemode: 	"GETTRACKLIST" });
         }, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
-	w_tracklist.postMessage({workerdelay: 100, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETTRACKLIST" });
+	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST" });
 
 	// initiate jqGrid
 	// todo: make table searchable   and  add new Theme
