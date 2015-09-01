@@ -12,7 +12,7 @@ function TestFunc(p1 , p2)
 function Receive_DS_data (url,port,timeout,receivemode){
 
 
-	// todo:   Globale variablen füllen ???? oder als Rueckgabewert aus der Function?
+	// todo:   Globale variablen fÃ¼llen ???? oder als Rueckgabewert aus der Function?
 	this.url		=	url;
 	this.port		=	port;
 	this.fullurl		=	'http://' +  url + ':' + port;
@@ -29,9 +29,10 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 	// todo: Mapping HASH fuer receivevariant festlegen
 	var aReceiveModes = {
-				 "GETDRIVERDATE" : "/api/session/status?attributes&members&participants"
-				,"GETDSDATA"	 : "/api/session/status?attributes&members&participants"
-				,"GETTRACKLIST"  : "/api/list/tracks"
+				 "GETDRIVERDATE" 	: "/api/session/status?attributes&members&participants"
+				,"GETDSDATA"	 	: "/api/session/status?attributes&members&participants"
+				,"GETTRACKLIST"  	: "/api/list/tracks"
+				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?participants=true&eventInformation=true"
 			};	
 
 //todo: Decison Using XMLHTTP class oder   THREE
@@ -77,6 +78,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			case  	"GETDRIVERDATE":	return aDrivers;	
 
 			case	"GETTRACKLIST":		return aEmptyArray;
+			
+			case	"GETCRESTDRIVERDATA":	return aDrivers;
 		} // end switch
 
 		//return aDrivers;
@@ -208,6 +211,51 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			//console.log("+++ aTrackList: " , aTrackList);			
 
 			return aTrackList;
+			
+		case  "GETCRESTDRIVERDATA":
+		
+			// if no users joined return example Data
+			if ( myArr.participants.mNumParticipants == 0 ){
+			
+				console.log("no Participants found in DS, leave function and use Test data array!");
+
+				aDrivers.push( DriverDummy );
+
+				console.log("+-+-+-: " ,  aDrivers);				
+
+				return aDrivers;
+			}
+		 
+			for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
+			{
+				//console.log ( "DS Participants:" , myArr.response.participants);
+				// read data of all participants and put it in an array of PCARSdriver objects
+				aDrivers.push (
+					new PCARSdriver(0,							//RefId - NA
+						myArr.participants.mParticipantInfo[i].mName,			//Name
+						0,								//GridPosition - NA
+						myArr.participants.mParticipantInfo[i].mWorldPosition[0],	//PositionX in meters
+						myArr.participants.mParticipantInfo[i].mWorldPosition[1],	//PositionY in meters
+						myArr.participants.mParticipantInfo[i].mWorldPosition[2],	//PositionZ in meters
+						"NA",								//State - NA
+						myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+						myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
+						0,								//FastestLapTime - NA
+					        0,								//LastLapTime - NA
+						0,								//Orientation - NA
+						0,								//Speed - NA
+						{ 	TrackLocation: myArr.eventInformation.mTrackLocation		//TrackId - NA - replaced by TrackLocation
+							,TrackVariation : myArr.eventInformation.mTrackVariation	//GridSize - NA - replaced by TrackVariation
+						}
+						)
+					);
+			
+			}
+
+			//console.log (  "Array of aDriver Objects: " + aDrivers);
+  
+			// return information
+	                return aDrivers;
 
 	  } // End SWITCH
 
