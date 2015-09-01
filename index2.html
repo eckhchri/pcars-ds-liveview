@@ -411,14 +411,14 @@
 		// start next run of this loop
 		if (APIMODE == "DS"){
 			workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
-                                                ,dsurl: "www.eckhchri.de"
-                                                ,dsport: 9000
+                                                ,dsurl: DsServerURL
+                                                ,dsport: DsPort
                                                 ,timeout: 2000
                                                 ,receivemode: "GETDRIVERDATE" });
 		}else{
 			workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
-                                                ,dsurl: "localhost"
-                                                ,dsport: 8080
+                                                ,dsurl: CRESTServerURL
+                                                ,dsport: CRESTPort
                                                 ,timeout: 2000
                                                 ,receivemode: "GETCRESTDRIVERDATA" });
 		}
@@ -427,9 +427,9 @@
 	
         //initial call of worker and start the loop
         if (APIMODE == "DS"){
-        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETDRIVERDATE" });
         }else{
-        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: "localhost", dsport: 8080, timeout: 2000, receivemode: "GETCRESTDRIVERDATA" });	
+        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: 2000, receivemode: "GETCRESTDRIVERDATA" });	
         }
 	//Todo: start a second worker loop with delay, to have continous updates on map
 //	workerDRIVERDATA.postMessage({workerdelay: 3000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
