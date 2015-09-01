@@ -151,6 +151,8 @@
 	var aSensorData = new Array();		// array of Hashes, each hash includes parameters of a driver
 	var DsServerURL = "www.eckhchri.de";
 	var DsPort	= 9000;
+	var CRESTServerURL = "localhost";
+	var CRESTPort = 8080;
 	var XMLHTTPTimeout = 2000;
 	var DisplayDuration = 600;		// duration for displaying marker updates
 	var global_i		= 0;
@@ -255,7 +257,11 @@
 	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
 	// initial call for map initialization
-	aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
+	if (APIMODE == "DS"){
+		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
+	}else{
+		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA");
+	}
 
         for (var i = 0; i < aDrivers.length; i++ ){
 
@@ -352,7 +358,11 @@
         // create DriverList object and map update
 
 	// first data run before init map()
-	aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
+	if (APIMODE == "DS"){
+		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
+	}else{
+		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA");
+	}
 
 	// create worker for Driver data updates //////////////////////////////////////////////////////////////////////
 	var workerDRIVERDATA      =       new Worker('./worker_driverdata.js');
@@ -399,16 +409,28 @@
                 }
 
 		// start next run of this loop
-		workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
+		if (APIMODE == "DS"){
+			workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
                                                 ,dsurl: "www.eckhchri.de"
                                                 ,dsport: 9000
                                                 ,timeout: 2000
                                                 ,receivemode: "GETDRIVERDATE" });
+		}else{
+			workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
+                                                ,dsurl: "localhost"
+                                                ,dsport: 8080
+                                                ,timeout: 2000
+                                                ,receivemode: "GETCRESTDRIVERDATA" });
+		}
 
         }, false);
 	
         //initial call of worker and start the loop
-        workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+        if (APIMODE == "DS"){
+        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+        }else{
+        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: "localhost", dsport: 8080, timeout: 2000, receivemode: "GETCRESTDRIVERDATA" });	
+        }
 	//Todo: start a second worker loop with delay, to have continous updates on map
 //	workerDRIVERDATA.postMessage({workerdelay: 3000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
 
