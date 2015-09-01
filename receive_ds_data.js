@@ -50,6 +50,11 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	//var aEmptyArray 	=       new Array();
 	//var aEmptyArray 	=	new Object();
 	var aEmptyArray       	=       new Array();
+	var TrackName;
+	var TrackID;
+	var PosX;
+	var PosY;
+	var PosZ;
 
 	// http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/
 	var xmlhttp = new XMLHttpRequest();
@@ -230,13 +235,18 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			{
 				//console.log ( "DS Participants:" , myArr.response.participants);
 				// read data of all participants and put it in an array of PCARSdriver objects
+				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+				TrackID = GetTrackIDbyName(TrackName);
+				PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
+				PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
+				PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
 				aDrivers.push (
 					new PCARSdriver(0,							//RefId - NA
 						myArr.participants.mParticipantInfo[i].mName,			//Name
 						0,								//GridPosition - NA
-						myArr.participants.mParticipantInfo[i].mWorldPosition[0],	//PositionX in meters
-						myArr.participants.mParticipantInfo[i].mWorldPosition[1],	//PositionY in meters
-						myArr.participants.mParticipantInfo[i].mWorldPosition[2],	//PositionZ in meters
+						PosX,								//PositionX in meters
+						PosY,								//PositionY in meters
+						PosZ,								//PositionZ in meters
 						"NA",								//State - NA
 						myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
 						myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
@@ -244,8 +254,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 					        0,								//LastLapTime - NA
 						0,								//Orientation - NA
 						0,								//Speed - NA
-						{ 	TrackLocation: myArr.eventInformation.mTrackLocation		//TrackId - NA - replaced by TrackLocation
-							,TrackVariation : myArr.eventInformation.mTrackVariation	//GridSize - NA - replaced by TrackVariation
+						{ 	TrackId: TrackID					//TrackID
+							,GridSize : 0						//GridSize - NA
 						}
 						)
 					);
@@ -266,4 +276,36 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	aDrivers.push ( DriverDummy );
 	return aDrivers;
 
+}
+
+function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation)
+{
+        //combines the TrackName and TrackVariation from the Game API to one Name
+        var TrackName;
+        if (TrackVariation == ""){
+                TrackName = TrackLocation; 
+        }else{
+                TrackName = TrackLocation + " " + TrackVariation;
+        }
+        
+        return TrackName;
+}
+function GetTrackIDbyName(TrackName)
+{
+       //returns the TrackID for the Game API Name
+        var TMP_TrackID = 9999999999;   //Default TrackID
+        var TMP_RefPoint = new Refpoint();
+        var TMP_Name;
+        
+        for (var key in TMP_RefPoint){
+                if(TMP_RefPoint[key]["Name2"] == ""){
+                        TMP_Name = TMP_RefPoint[key]["Name"];
+                }else{
+                        TMP_Name = TMP_RefPoint[key]["Name2"];
+                }
+                if (TMP_Name == TrackName){
+                        TMP_TrackID = key;
+                }
+        }
+        return TMP_TrackID;
 }
