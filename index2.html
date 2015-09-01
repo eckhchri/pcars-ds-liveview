@@ -25,6 +25,7 @@
                     $( "#DSdata" ).draggable();
 		    $( "#TrackList" ) .draggable();
 		    $( "#DriverDataArea" ) .draggable();
+		    $( "#Settings" ) .draggable();
                 });
 		
 		$(function() {
@@ -86,6 +87,13 @@
 		background:	lightgrey
 	     }
 
+	     #Settings{
+		position:       absolute;
+                left:           75%;
+                top:            25px;
+                background:     lightgrey
+	     }
+
              .stations, .stations svg {
                  position: absolute;
              }
@@ -119,7 +127,22 @@
 		<table id="DriverDataTable"></table></div>	
 	<div id="TrackList">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
-		<table id="tracklisttable"></table></div>	
+		<table id="tracklisttable"></table></div>
+
+	
+	<div id="Settings">
+		Settings: <br>
+		<form action="#">
+ 
+		  <fieldset>
+			<label for="APITYPE">Select API Type</label>
+	    		<select name="APITYPE" id="APITYPE">
+	      			<option selected="selected">DS</option>
+	      			<option>CREST</option>
+			</select>
+		</fieldset>
+		</form>
+	</div>	
 
        <script>
 	// initialize vars
