@@ -61,7 +61,7 @@
 		left: 		55%; 
 		top: 		0px; 
 		width: 		300px; 
-		height: 	100px;
+		height: 	125px;
 		border:		1;
 		background:	lightgreen;
 	     }
@@ -121,7 +121,7 @@
 
 	<!-- definition of data areas-->
 	<div id="map"></div>
-	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4></div>
+	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br>----- Settings ----<br><p5></p5></div>
 	<div id="DriverDataArea">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
 		<table id="DriverDataTable"></table></div>	
@@ -129,20 +129,21 @@
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
 		<table id="tracklisttable"></table></div>
 
-	
+	<!-- definition of option panel-->	
 	<div id="Settings">
 		Settings: <br>
+
+		<!-- API dropdown -->
 		<form action="#">
- 
 		  <fieldset>
-			<label for="APITYPE">Select API Type</label>
-	    		<select name="APITYPE" id="APITYPE">
+			<label for="APIMODE">Select API Type</label>
+	    		<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      			<option selected="selected">DS</option>
 	      			<option>CREST</option>
 			</select>
 		</fieldset>
 		</form>
-	</div>	
+	</div>
 
        <script>
 	// initialize vars
@@ -160,6 +161,7 @@
 	var WORKERDELEAY_DRIVERLIST	=	200;	// in ms
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
+	var APIMODE			=	"DS";   // possible values DS,CREST
 	var PCARSd	= new PCARSdriver(
                                                                         9234567
                                                                         ,"NO_PARTICIPANT_TestData"
@@ -206,6 +208,22 @@
         var testID = GetTrackIDbyName(testname);
         console.log("TRACKID: " , testID);
 
+
+	/////////////////////////////////////
+	// Event Handler
+	// Dropdown API
+	$( ".APIMODE" ).change(function() {
+
+                var str = "";
+                $( "select option:selected" ).each(function() {
+                      str += $( this ).text() + " ";
+                });
+
+                APIMODE = str;
+        });
+
+
+
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
@@ -220,7 +238,7 @@
 		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: ' + e.data.joinable;
 		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: ' + e.data.lobbyid;
 		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      ' + e.data.now; 
-
+		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
 		//call worker again for next itteration -> currently endless loop
 		workerDSDATA.postMessage({
 						workerdelay: 	100
