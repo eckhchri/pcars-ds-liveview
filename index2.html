@@ -233,7 +233,7 @@
 
         //event handler of the worker
         workerDSDATA.addEventListener('message', function(e) {
-                console.log('Worker said: ', e.data);
+                //console.log('Worker said: ', e.data);
                 // write in HTML page
 		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   ' + DsServerURL + " : " +  DsPort;
                 document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   ' + e.data.state;
@@ -613,7 +613,7 @@ function init_map(_TrackID)
 function refreshTrackList(a)
 {
 
-	console.log("refreshTrackList(): " , a);
+	//console.log("refreshTrackList(): " , a);
 	// if set to true, no refresh of table wanted
 	if (StopRefreshTracklist == "true")
 	{
@@ -660,6 +660,7 @@ function refreshDriverList(a)
         console.log("refreshDriverList(e): " , a);
 	var grididcnt = 0;
         var _data;
+	var _allDrivers = new Array();
 
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
@@ -673,7 +674,7 @@ function refreshDriverList(a)
 	console.log ("++++++++ length of data:" + a.data.length);
 	for (i=0; i < a.data.length; i++)
         {
-		console.log("update data on row: " + i + " / " + a.data);
+		//console.log("update data on row: " + i + " / " + a.data);
                 //console.log("update data on row: " + i + " / " + a.data[i]);
                 _data = {   
 				refid:			a.data[i].RefID
@@ -697,11 +698,58 @@ function refreshDriverList(a)
                         //console.log("+++++ add " + i );
                 }
                 grididcnt++;
+	
+		//build hash for clean up map	
+		_allDrivers[a.data[i].Name] =  {driverposition : a.data[i].RacePosition};
+
         }
-	//console.log("Driver table: ", _data);
+
         jQuery("#DriverDataTable").trigger("reloadGrid");
+
+	EraseGhostCarsFromMap(_allDrivers);
+
 	return 1;
 }
+
+function EraseGhostCarsFromMap(allDrivers)
+{
+        console.log("---------- Call function EraseGhostCarsFromMap() with driver list ----" , allDrivers );
+
+	var svgs = 	d3.selectAll("svg")
+			.each(function( obj ) {
+				console.log("---------- svg object:" , obj);
+			
+				if ( allDrivers[obj['Key']] === undefined )
+				{
+					console.log("------- Ghost car found and delete it from map: " , obj);
+					
+					//todo: delete ghost cars from map via D3 functions
+					//https://github.com/mbostock/d3/wiki/Selections#exit
+					//this.remove();
+					//this.exit().remove();
+
+				}
+			
+			})
+
+	console.log("---------- all svgs:" , svgs);
+
+	/*
+        var cars = _div.selectAll("svg")
+                       .data(_data, function (d) { return d.Key; })
+                       .each(transform) // update existing markers
+                        .enter().append("svg:svg")
+                       .each(transform)
+                       .attr("class", "marker");
+	*/
+        //console.log("---------- all Cars:" , cars);
+
+        return 1;
+}
+
+
+
+
 ///////////////////
 function buildTracklist( a ){
 

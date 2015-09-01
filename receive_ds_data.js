@@ -104,7 +104,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 		var DriverDummy		= new PCARSdriver();
 		DriverDummy.SetExampleData();
 
-                console.log("ReceiveDsData complete array" , myArr);
+                //console.log("ReceiveDsData complete array" , myArr);
 
 	   switch ( this.receivemode ) {
 
