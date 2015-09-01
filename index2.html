@@ -718,7 +718,8 @@ function EraseGhostCarsFromMap(allDrivers)
 	var svgs = 	d3.selectAll("svg")
 			.each(function( obj ) {
 				console.log("---------- svg object:" , obj);
-			
+		
+		/*	
 				if ( allDrivers[obj['Key']] === undefined )
 				{
 					console.log("------- Ghost car found and delete it from map: " , obj);
@@ -729,7 +730,7 @@ function EraseGhostCarsFromMap(allDrivers)
 					//this.exit().remove();
 
 				}
-			
+		*/	
 			})
 
 	console.log("---------- all svgs:" , svgs);
