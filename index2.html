@@ -354,16 +354,6 @@
 							});
 
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // create DriverList object and map update
-
-	// first data run before init map()
-	if (APIMODE == "DS"){
-		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
-	}else{
-		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA");
-	}
-
 	// create worker for Driver data updates //////////////////////////////////////////////////////////////////////
 	var workerDRIVERDATA      =       new Worker('./worker_driverdata.js');
 	workerDRIVERDATA.addEventListener('message', function(e) {
