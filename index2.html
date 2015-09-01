@@ -713,17 +713,18 @@ function buildTracklist( a ){
 	return aNewTrackList;
 }
 
-function BuildTrackNameFromGameAPI(TrackName,TrackVariation)
+function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation)
 {
         //combines the TrackName and TrackVariation from the Game API to one Name
-        var TMP_Name;
+        var TrackName;
 
         if (TrackVariation == ""){
-                return TrackName;
+                TrackName = TrackLocation; 
         }else{
-                TMP_Name = TrackName + " " + TrackVariation;
-                return TMP_Name;
+                TrackName = TrackLocation + " " + TrackVariation;
         }
+        
+        return TrackName;
 }
 
 function GetTrackIDbyName(TrackName)
