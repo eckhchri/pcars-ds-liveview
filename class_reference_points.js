@@ -52,9 +52,9 @@ function Refpoint(circuit_id)
                 ,"Comment": "letztes finetuning" 
         	});
 	//Hockenheim Short
-	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short"});
+	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short","Name2": ""});
 	//Hockenheim National
-	aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim National"});
+	aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim National","Name2": ""});
 	
 
 	//Dubai Autodrome GP
@@ -76,13 +76,13 @@ function Refpoint(circuit_id)
 		});
 
 	///Dubai Autodrome International
-	aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International"});
+	aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International","Name2": ""});
 	//Dubai Kartdrome
-	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome"});
+	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": ""});
 	//Dubai Autodrome National
-	aRefPoints[31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National"});
+	aRefPoints[31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": ""});
 	//Dubai Autodrome Club
-	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club"});
+	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": ""});
 
 	//Nuerburgring GP
 	//aRefPoints[-945967394] = new Array();
@@ -104,9 +104,9 @@ function Refpoint(circuit_id)
                 });
 
 	//Nuerburgring Sprint Short
-	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint Short"});
+	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint Short","Name2": ""});
 	//Nuerburgring Sprint
-	aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint"});
+	aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint","Name2": ""});
 	//Nuerburgring Muellenbach
 	aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Müllenbach","Name2": "Nürburgring MuellenBach"});	//"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
 
@@ -129,11 +129,11 @@ function Refpoint(circuit_id)
                 ,"Comment": "live prüfen"
                 });
 	//Nordschleife Stage 3
-	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3"});
+	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3","Name2": ""});
 	//Nordschleife Stage 1
-	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 1"});
+	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 1","Name2": ""});
 	//Nordschleife Stage 2
-	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 2"});
+	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 2","Name2": ""});
 	
 	//Sonoma Raceway
 	//aRefPoints[-1454279631] = new Array();
@@ -154,9 +154,9 @@ function Refpoint(circuit_id)
                 ,"Comment": "live prüfen"
                 });
         //Sonoma Raceway National
-	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National"});
+	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National","Name2": ""});
 	//Sonoma Sonoma Raceway Short
-	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short"});
+	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short","Name2": ""});
 
 	//Circuit des 24 Heures du Mans
 	//aRefPoints[1740968730] = new Array();
@@ -200,7 +200,7 @@ function Refpoint(circuit_id)
         //Ruapuna Park A Circuit
 	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "Ruapuna Park A_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
         //Ruapuna Park Club
-	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club"});
+	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club","Name2": ""});
 	//Ruapuna Park Outer Loop
 	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "Ruapuna Park Outer_Loop"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Outer_Loop"
 	//Ruapuna Park B Circuit
@@ -225,9 +225,9 @@ function Refpoint(circuit_id)
                 ,"Comment": "live prüfen"
                 });
         //Cadwell Club Circuit
-	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit"});
+	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit","Name2": ""});
 	//Cadwell Woodland
-	aRefPoints[-1408189041] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Woodland"});
+	aRefPoints[-1408189041] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Woodland","Name2": ""});
         
         //Oulton Park International
 	//aRefPoints[545979690] = new Array();
@@ -311,11 +311,11 @@ function Refpoint(circuit_id)
                 ,"Comment": "Strecke sehr wahrscheinlich fehlerhaft, erneut prüfen"
                 });
         //Silverstone International
-	aRefPoints[1101719627] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone International"});
+	aRefPoints[1101719627] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone International","Name2": ""});
 	//Silverstone Stowe
-	aRefPoints[1600840139] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Stowe"});
+	aRefPoints[1600840139] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Stowe","Name2": ""});
 	//Silverstone National
-	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone National"});
+	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone National","Name2": ""});
         
         //Brands Hatch GP
 	//aRefPoints[1988984740] = new Array();
@@ -336,7 +336,7 @@ function Refpoint(circuit_id)
                 ,"Comment": "live prüfen, Strecke wahrscheinlich auch leicht fehlerhaft"
                 });
         //Brands Hatch Indy
-	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {"Name": "Brands Hatch Indy"});
+	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {"Name": "Brands Hatch Indy","Name2": ""});
         
         //Mazda Raceway Laguna Seca
 	//aRefPoints[-1612023328] = new Array();
@@ -430,7 +430,7 @@ function Refpoint(circuit_id)
 		,"Comment": "live prüfen"
 		});
 	//Donington Park National
-	aRefPoints[-1194019375] = CopyObjectWithModifications(aRefPoints[354022214], {"Name": "Donington Park National"});
+	aRefPoints[-1194019375] = CopyObjectWithModifications(aRefPoints[354022214], {"Name": "Donington Park National","Name2": ""});
 
 
 	//Oschersleben GP
@@ -452,9 +452,9 @@ function Refpoint(circuit_id)
 		,"Comment": "by colets, prüfen"
 		});
 	//Oschersleben National
-	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National"});
+	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National","Name2": ""});
 	//Oschersleben C Circuit
-	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Circuit"});
+	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Circuit","Name2": ""});
 
 	//Azure Circuit
 	//aRefPoints[832629329] = new Array();
@@ -530,9 +530,9 @@ function Refpoint(circuit_id)
 		,"Comment": "live prüfen"
 		});
 	//Circuit de Barcelona-Catalunya Club
-	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club"});
+	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club","Name2": ""});
 	//Circuit de Barcelona-Catalunya National
-	aRefPoints[-998191994] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya National"});
+	aRefPoints[-998191994] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya National","Name2": ""});
 
 	//Imola
 	//aRefPoints[920145926] = new Array();
@@ -614,7 +614,7 @@ function Refpoint(circuit_id)
 		});
 	
 	//Autodromo Nazionale Monza Short
-	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short"});
+	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": ""});
 
 ///////////////////////////////////////////////////////////////////////////	
 	//console.log("Refpoints: "  , aRefPoints);	
