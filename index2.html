@@ -61,7 +61,7 @@
 		left: 		55%; 
 		top: 		0px; 
 		width: 		300px; 
-		height: 	125px;
+		height: 	145px;
 		border:		1;
 		background:	lightgreen;
 	     }
@@ -121,7 +121,7 @@
 
 	<!-- definition of data areas-->
 	<div id="map"></div>
-	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br>----- Settings ----<br><p5></p5></div>
+	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br>----- Settings ----<br><p5></p5><br><p6></p6></div>
 	<div id="DriverDataArea">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
 		<table id="DriverDataTable"></table></div>	
@@ -143,6 +143,14 @@
 			</select>
 		</fieldset>
 		</form>
+
+		<br>----<br>
+		<p>
+  			<label for="amount">DisplayDuration:</label>
+			<input type="text" id="amount" readonly style="border:0;">
+		</p> 			
+		<!-- Slider Duration -->
+		<div id="slider-range-max"></div>
 	</div>
 
        <script>
@@ -224,6 +232,24 @@
                 APIMODE = str;
         });
 
+	// Event handler for Slider
+	$(function() {
+		$( "#slider-range-max" ).slider({
+			range: "max",
+			min: 100,
+			max: 900,
+      			value: DisplayDuration, 
+			step: 50,
+      			slide: function( event, ui ) {
+        			$( "#amount" ).val( ui.value );
+				//set new value
+				DisplayDuration	= ui.value;
+      			}
+    		});
+    		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+  	});
+
+
 
 
 	
@@ -241,6 +267,7 @@
 		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: ' + e.data.lobbyid;
 		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      ' + e.data.now; 
 		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
+		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
 		//call worker again for next itteration -> currently endless loop
 		workerDSDATA.postMessage({
 						workerdelay: 	100
