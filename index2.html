@@ -416,13 +416,13 @@
 
                 //todo: Move map dynamically if cuircit changes to a new GPS coordinate
 		console.log("+++++++++++++++++++++++++++" , aRefPointTMP);
-		//console.log("+++++++++++++++++++++++++++ (tmpcuircitID)" , tmpcuircitID);
+		console.log("----------- cuircitID / tmpcuircitID" + cuircitID + " / " + tmpcuircitID + "--> TrackID change necessary?");
                 //console.log("+++++++++++++++++++++++++++ (aRefPointTMP[tmpcuircitID]" , aRefPointTMP[tmpcuircitID]);
                 if ( (cuircitID != tmpcuircitID) && (tmpcuircitID == 'defined') ){
                         //map.setCenter({lat: 50.332733, lng: 6.943355});
                         map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
                         cuircitID = tmpcuircitID;  // give the global var the new TrackId
-                        console.log("TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
+                        console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
                 }
 
 		// start next run of this loop
