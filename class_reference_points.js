@@ -497,18 +497,18 @@ function Refpoint(circuit_id)
 	//aRefPoints[904625875] = new Array();
 	aRefPoints[904625875] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        50.43061
-		,"refLong":      5.9767
-		,"rotation":     0
-		,"cor_r_Long":   45000000
-		,"cor_r_Lat":    0
+		"refLat":        50.430342
+		,"refLong":      5.976448
+		,"rotation":     -2.45
+		,"cor_r_Long":   30000000
+		,"cor_r_Lat":    40000000
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Spa-Francorchamps"
 		,"Zoom":         15
-		,"MapInitLat":   50.436616
-		,"MapInitLong":  5.969509
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   50.437254
+		,"MapInitLong":  5.970570
+		,"Comment": "live prüfen"
 		});
 		
 	//Circuit de Barcelona-Catalunya GP
