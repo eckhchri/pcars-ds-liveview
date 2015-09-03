@@ -25,8 +25,8 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0				// Korrektur Erdradius fuer  Nord/Sued
 		,"cor_PosX_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
 		,"cor_PosY_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
-                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the cuircit in DS API
-                ,"Name2":	 ""				// real name of the cuircit in Game API, if it differs from DS API Name
+                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
+                ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
                 ,"Zoom":         19				// wanted zoom level for initial map
                 ,"MapInitLat":   51.500681			// Map initialisierungs Koordinaten
                 ,"MapInitLong":  -0.071795
@@ -437,19 +437,19 @@ function Refpoint(circuit_id)
 	//aRefPoints[-1194185720] = new Array();
 	aRefPoints[-1194185720] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        52.02699
-		,"refLong":      11.27995
-		,"rotation":     0
-		,"cor_r_Long":   45000000
+		"refLat":        52.027834
+		,"refLong":      11.280251
+		,"rotation":     161.8
+		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
+		,"cor_PosX_mul": 1.003
 		,"cor_PosY_mul": 1
 		,"Name":         "Oschersleben GP"
 		,"Name2":	 "Oschersleben Grand Prix"	//"mTrackLocation":"Oschersleben","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
-		,"MapInitLat":   52.028131
-		,"MapInitLong":  11.277030
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   52.028843
+		,"MapInitLong":  11.276850
+		,"Comment": "live prüfen"
 		});
 	//Oschersleben National
 	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National","Name2": ""});
