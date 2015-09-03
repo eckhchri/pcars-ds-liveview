@@ -44,7 +44,7 @@ function Refpoint(circuit_id)
                 ,"MapInitLat":   62.552546
                 ,"MapInitLong":  -45.678026
                 ,"Comment": "Default fictional tracks"
-                };
+                });
 	
 	//Hockenheim GP
 	//aRefPoints[1695182971] = new Array();
@@ -636,7 +636,7 @@ function Refpoint(circuit_id)
 		"Name":         "Azure Coast"
 		,"Name2":	"Azure Coast Eastbound"
 		,"Comment": 	"fictional track"
-        };
+        });
 	//Azure Coast Westbound
 	aRefPoints[-1936790504] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Westbound","Name2": ""});
 	//Azure Coast Stage 1
@@ -652,7 +652,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "California Highway Full"
 		,"Comment": 	"fictional track"
-        };
+        });
 	//California Highway Reverse
 	aRefPoints[928006536] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Reverse"});
 	//California Highway Stage 1
@@ -668,7 +668,7 @@ function Refpoint(circuit_id)
 		"Name":         "Sakitto GP"
 		,"Name2":	"Sakitto Grand Prix"
 		,"Comment": 	"fictional track"
-        };
+        });
 	//Sakitto International
 	aRefPoints[-1474170192] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto International","Name2": ""});
 	//Sakitto Sakitto National
@@ -682,7 +682,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "Summerton"
 		,"Comment":	"Kart Track?"
-        };
+        });
 	//Summerton National
 	aRefPoints[1408845203] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton National"});
 	//Summerton Sprint
@@ -693,14 +693,14 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "Chesterfield"
 		,"Comment": 	"Kart Track"
-        };
+        });
 		
 	//Glencairn
 	aRefPoints[-1066742780] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
 		"Name":         "Glencairn"
 		,"Comment": 	"Kart Track"
-        };
+        });
 	//Glencairn Reverse
 	aRefPoints[-1520844580] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn Reverse"});
 	//Glencairn East
@@ -717,7 +717,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "Greenwood Karting Circuit"
 		,"Comment": 	"Kart Track"
-        };
+        });
 
 ///////////////////////////////////////////////////////////////////////////	
 	//console.log("Refpoints: "  , aRefPoints);	
