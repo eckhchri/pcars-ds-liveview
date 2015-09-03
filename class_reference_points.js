@@ -37,11 +37,11 @@ function Refpoint(circuit_id)
 	//aRefPoints[9999999999] = new Array();
         aRefPoints[8888888888] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
-                "refLat":        62.552546			// Komma in Javascript ist ein Punkt
-                ,"refLong":      -45.678026			// Komma in Javascript ist ein Punkt
-                ,"Name":         "Greenland"		// real name of the circuit in DS API
-                ,"Zoom":         15				// wanted zoom level for initial map
-                ,"MapInitLat":   62.552546			// Map initialisierungs Koordinaten
+                "refLat":        62.552546
+                ,"refLong":      -45.678026
+                ,"Name":         "Greenland"
+                ,"Zoom":         15
+                ,"MapInitLat":   62.552546
                 ,"MapInitLong":  -45.678026
                 ,"Comment": "Default fictional tracks"
                 };
@@ -628,6 +628,96 @@ function Refpoint(circuit_id)
 	
 	//Autodromo Nazionale Monza Short
 	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": ""});
+	
+	//// fictional tracks
+	//Azure Coast
+	aRefPoints[560711985] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Azure Coast"
+		,"Name2":	"Azure Coast Eastbound"
+		,"Comment": 	"fictional track"
+        };
+	//Azure Coast Westbound
+	aRefPoints[-1936790504] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Westbound","Name2": ""});
+	//Azure Coast Stage 1
+	aRefPoints[550129415] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 1","Name2": ""});
+	//Azure Coast Stage 2
+	aRefPoints[-780879576] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 2","Name2": ""});
+	//Azure Coast Stage 3
+	aRefPoints[-1737261125] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 3","Name2": ""});
+	
+							
+	//California Highway Full
+	aRefPoints[-1593944167] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "California Highway Full"
+		,"Comment": 	"fictional track"
+        };
+	//California Highway Reverse
+	aRefPoints[928006536] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Reverse"});
+	//California Highway Stage 1
+	aRefPoints[1676943041] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 1"});
+	//California Highway Stage 2
+	aRefPoints[940391868] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 2"});
+	//California Highway Stage 3
+	aRefPoints[-331502851] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 3"});
+		
+	//Sakitto GP
+	aRefPoints[-1759743046] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Sakitto GP"
+		,"Name2":	"Sakitto Grand Prix"
+		,"Comment": 	"fictional track"
+        };
+	//Sakitto International
+	aRefPoints[-1474170192] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto International","Name2": ""});
+	//Sakitto Sakitto National
+	aRefPoints[-1260826266] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto National","Name2": ""});
+	//Sakitto Sprint
+	aRefPoints[-879282119] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto Sprint","Name2": ""});
+	
+	//// Kart tracks	
+	//Summerton
+	aRefPoints[-44748320] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Summerton"
+		,"Comment":	"Kart Track?"
+        };
+	//Summerton National
+	aRefPoints[1408845203] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton National"});
+	//Summerton Sprint
+	aRefPoints[-1605913568] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton Sprint"});
+		
+	//Chesterfield
+	aRefPoints[-1735912413] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Chesterfield"
+		,"Comment": 	"Kart Track"
+        };
+		
+	//Glencairn
+	aRefPoints[-1066742780] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Glencairn"
+		,"Comment": 	"Kart Track"
+        };
+	//Glencairn Reverse
+	aRefPoints[-1520844580] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn Reverse"});
+	//Glencairn East
+	aRefPoints[766599953] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn East"});
+	//Glencairn East Reverse
+	aRefPoints[-446794969] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn East Reverse"});
+	//Glencairn West
+	aRefPoints[-1408779593] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West"});
+	//Glencairn West Reverse
+	aRefPoints[-913625358] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West Reverse"});
+
+	//Greenwood Karting Circuit
+	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Greenwood Karting Circuit"
+		,"Comment": 	"Kart Track"
+        };
 
 ///////////////////////////////////////////////////////////////////////////	
 	//console.log("Refpoints: "  , aRefPoints);	
