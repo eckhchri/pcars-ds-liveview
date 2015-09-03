@@ -299,7 +299,7 @@
                         // fill data array
                         aSensorData[i] = {
                                         "Key": aDrivers[i].GetName()
-                                        ,"MarkerLabel" : aDrivers[i].GetRacePosition() + "-" + aDrivers[i].GetName()
+                                        ,"MarkerLabel" : buildDriverName ( aDrivers[i].GetRacePosition(), aDrivers[i].GetName() )
                                         ,"DateTime":"2013-09-04T09:41:09+10:00"
                                         ,"Lat": gpsCoTmp["Lat"]
                                         ,"Long": gpsCoTmp["Long"]
@@ -729,50 +729,39 @@ function refreshDriverList(a)
                 grididcnt++;
 	
 		//build hash for clean up map	
-		_allDrivers[a.data[i].Name] =  {driverposition : a.data[i].RacePosition};
+		_allDrivers[buildDriverName(a.data[i].Name, a.data[i].RacePosition)] =  {driverposition : a.data[i].RacePosition};
 
         }
 
         jQuery("#DriverDataTable").trigger("reloadGrid");
 
-	EraseGhostCarsFromMap(_allDrivers);
+	CleanupDriverObjects(_allDrivers);
 
 	return 1;
 }
 
-function EraseGhostCarsFromMap(allDrivers)
+function buildDriverName(drivername , raceposition)
 {
-        console.log("---------- Call function EraseGhostCarsFromMap() with driver list ----" , allDrivers );
+	// Diego Xavier on race position 5 => "5-Diego Xavier"
+	return raceposition + "-" + drivername;
+}
 
+function CleanupDriverObjects(allDrivers)
+{
+        //console.log("---------- Call function CleanupDriverObjects() with driver list ----" , allDrivers );
+	
 	var svgs = 	d3.selectAll("svg")
 			.each(function( obj ) {
-				console.log("---------- svg object this:" , this);
+				console.log("---------- svg object this:" , this );
 		
-		/*	
-				if ( allDrivers[this['Key']] === undefined )
+				if ( allDrivers[this.textContent] === undefined )
 				{
-					console.log("------- Ghost car found and delete it from map: " , obj);
-					
+					console.log("------- Ghost car found and delete it from map (this.textContent: " , this.textContent);
 					//todo: delete ghost cars from map via D3 functions
-					//https://github.com/mbostock/d3/wiki/Selections#exit
-					//this.remove();
-					//this.exit().remove();
-
+					this.remove();
 				}
-		*/	
-			})
-
-	console.log("---------- all svgs:" , svgs);
-
-	/*
-        var cars = _div.selectAll("svg")
-                       .data(_data, function (d) { return d.Key; })
-                       .each(transform) // update existing markers
-                        .enter().append("svg:svg")
-                       .each(transform)
-                       .attr("class", "marker");
-	*/
-        //console.log("---------- all Cars:" , cars);
+			});
+	//todo: maybe add an additional routine for cleaning up Driver names
 
         return 1;
 }

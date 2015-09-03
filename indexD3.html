@@ -42,8 +42,13 @@
                         .duration(750)
                         .attr("r", function(d) { 	var tmp = d3.select(this);
 							console.log("--- this1: ", tmp.attr("r")   ); 
-							console.log("--- this2: ", tmp[0][0].attributes.r   ); 
-							return  tmp.attr("r") + 1;
+							console.log("--- this2: ", tmp[0][0].attributes.r   );
+
+							if (tmp.attr("r") <= 100) {
+								return  tmp.attr("r") + 1;
+							}else{
+								return  10;
+							}
 						});
 		})
        .on("mouseout", function(){d3.select(this).style("fill", "white");})
