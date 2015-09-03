@@ -598,19 +598,19 @@ function Refpoint(circuit_id)
 	//aRefPoints[-52972612] = new Array();
 	aRefPoints[-52972612] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        45.61902
-		,"refLong":      9.28125
+		"refLat":        45.619146
+		,"refLong":      9.280608
 		,"rotation":     0
-		,"cor_r_Long":   45000000
+		,"cor_r_Long":   25000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Autodromo Nazionale Monza GP"
 		,"Name2":	 "Autodromo Nazionale Monza Grand Prix"	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
-		,"MapInitLat":   45.621382
-		,"MapInitLong":  9.287683
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   45.621690
+		,"MapInitLong":  9.286990
+		,"Comment": "live prüfen"
 		});
 	
 	//Autodromo Nazionale Monza Short
