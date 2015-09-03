@@ -557,7 +557,8 @@
 			//      it seem that the function within .text(...) will called only once at the beginning 
 			//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
 		       .text(function (d) {
-						console.log("+++++ d:" , d);
+						console.log("+++++ d: " , d );
+						console.log("+++++ this: " , this );
 
 						for (var i = 0; i < aSensorData.length; i++){
 						
@@ -745,10 +746,10 @@ function EraseGhostCarsFromMap(allDrivers)
 
 	var svgs = 	d3.selectAll("svg")
 			.each(function( obj ) {
-				console.log("---------- svg object:" , obj);
+				console.log("---------- svg object this:" , this);
 		
 		/*	
-				if ( allDrivers[obj['Key']] === undefined )
+				if ( allDrivers[this['Key']] === undefined )
 				{
 					console.log("------- Ghost car found and delete it from map: " , obj);
 					
