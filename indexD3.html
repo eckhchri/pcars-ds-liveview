@@ -9,7 +9,8 @@
 	http://christopheviau.com/d3_tutorial/
 -->
 <body>
-    <div id="viz"></div>
+    <div id="viz1"></div>
+    <div id="viz2"></div>
 
     <input type="checkbox" id="checkbox1" />
 
@@ -23,10 +24,10 @@
 
 
 //draw circle
-    var sampleSVG = d3.select("#viz")
-        .append("svg")
-        .attr("width", 200)
-        .attr("height", 200);    
+    var sampleSVG = d3.select("#viz1")
+        .append("svg");
+ //       .attr("width", 200)
+ ///       .attr("height", 200);    
 
     sampleSVG.append("circle")
         .style("stroke", "gray")
@@ -34,10 +35,58 @@
         .attr("r", 40)
         .attr("cx", 50)
         .attr("cy", 50)
-        .on("mouseover", function(){d3.select(this).style("fill", "blue");})
- //       .on("mouseout", function(){d3.select(this).style("fill", "white");})
+        .on("mouseover", function(){
+		d3.select(this)
+	//		.style("fill", "blue")
+			.transition()
+                        .duration(750)
+                        .attr("r", function(d) { 	var tmp = d3.select(this);
+							console.log("--- this1: ", tmp.attr("r")   ); 
+							console.log("--- this2: ", tmp[0][0].attributes.r   ); 
+							return  tmp.attr("r") + 1;
+						});
+		})
+       .on("mouseout", function(){d3.select(this).style("fill", "white");})
 	.on("click", function(){d3.select(this).style("fill", "red");});
-    console.log("sampleSVG: " , sampleSVG);
+
+var sampleSVG2 = d3.select("#viz2")
+        .append("svg");
+//        .attr("width", 150)
+//        .attr("height", 150);
+
+    sampleSVG2.append("circle")
+        .style("stroke", "gray")
+        .style("fill", "grey")
+        .attr("r", 20)
+        .attr("cx", 30)
+        .attr("cy", 30)
+
+
+// D3 handling to select all svgs
+
+	var svgs =      d3.select("body").selectAll("svg").each( function(obj) { 
+
+				var tmp_obj = d3.select(this);
+
+                                console.log("---------- svg object:" , tmp_obj);
+
+				tmp_obj.selectAll("circle")
+				.transition()
+	    			.duration(750)
+				.attr("r", function(d) { return 26; });
+
+
+				if (0)
+				{
+					tmp_obj.remove();
+				}
+				
+
+                        });
+	console.log(" --- svgs: " , svgs);
+
+
+
 
 
 // Event handling Checkboxes
