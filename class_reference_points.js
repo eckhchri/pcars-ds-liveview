@@ -32,6 +32,19 @@ function Refpoint(circuit_id)
                 ,"MapInitLong":  -0.071795
                 ,"Comment": "Default"
                 };
+                
+        //Default fictional tracks
+	//aRefPoints[9999999999] = new Array();
+        aRefPoints[8888888888] = CopyObjectWithModifications(aRefPoints[9999999999],
+                {
+                "refLat":        62.552546			// Komma in Javascript ist ein Punkt
+                ,"refLong":      -45.678026			// Komma in Javascript ist ein Punkt
+                ,"Name":         "Greenland"		// real name of the circuit in DS API
+                ,"Zoom":         15				// wanted zoom level for initial map
+                ,"MapInitLat":   62.552546			// Map initialisierungs Koordinaten
+                ,"MapInitLong":  -45.678026
+                ,"Comment": "Default fictional tracks"
+                };
 	
 	//Hockenheim GP
 	//aRefPoints[1695182971] = new Array();
