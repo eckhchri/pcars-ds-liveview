@@ -414,9 +414,13 @@
                 //console.log("+++++++++++++++++++++++++++ (aRefPointTMP[tmpcuircitID]" , aRefPointTMP[tmpcuircitID]);
 
                 if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
+
                         //map.setCenter({lat: 50.332733, lng: 6.943355});
-                        map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
-                        map.setZoom(aRefPointTMP[tmpcuircitID]["Zoom"]);
+     //                 map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
+     //                 map.setZoom(aRefPointTMP[tmpcuircitID]["Zoom"]);
+
+			changeMapSettings(aRefPointTMP[tmpcuircitID] , map);
+
                         cuircitID = tmpcuircitID;  // give the global var the new TrackId
                         console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
                 }
@@ -633,12 +637,19 @@ function init_map(_TrackID)
            sensorLayer.setMap(map);
 }
 
-function changeMapSettings(newTrackObj)
+function changeMapSettings(newTrackObj, mapobj)
 {
-	//map.setCenter({lat: 50.332733, lng: 6.943355});
-        map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
-        
-        map.setZoom(aRefPointTMP[tmpcuircitID]["Zoom"]);
+	console.log("----- call function changeMapSettings() with track data: " , newTrackObj );
+	console.log("----- call function changeMapSettings() with map data: " , mapobj );
+
+	//todo: replace map (global variable) with mapobj(if this is not a copy)
+	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
+        map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
+
+        map.setZoom(newTrackObj["Zoom"]);
+
+
+	//todo: change also picture Overlay prevered mapsourc(google,openstreetmap) in needed
         return 1;
 }
 
