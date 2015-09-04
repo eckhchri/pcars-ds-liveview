@@ -633,6 +633,15 @@ function init_map(_TrackID)
            sensorLayer.setMap(map);
 }
 
+function changeMapSettings(newTrackObj)
+{
+	//map.setCenter({lat: 50.332733, lng: 6.943355});
+        map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
+        
+        map.setZoom(aRefPointTMP[tmpcuircitID]["Zoom"]);
+        return 1;
+}
+
 ///////////////////
 function refreshTrackList(a)
 {
