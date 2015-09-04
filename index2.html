@@ -213,12 +213,6 @@
         // initialize RefPoint
         aRefPointTMP         =      new Refpoint( cuircitID );
 
-	// Test - determine TrackID by Game API Name
-	var testname = BuildTrackNameFromGameAPI("Road America","");
-        var testID = GetTrackIDbyName(testname);
-        console.log("TRACKID: " , testID);
-
-
 	/////////////////////////////////////
 	// Event Handler
 	// Dropdown API
@@ -832,42 +826,5 @@ function buildTracklist( a ){
 
 	return aNewTrackList;
 }
-
-function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation)
-{
-        //combines the TrackName and TrackVariation from the Game API to one Name
-        var TrackName;
-
-        if (TrackVariation == ""){
-                TrackName = TrackLocation; 
-        }else{
-                TrackName = TrackLocation + " " + TrackVariation;
-        }
-        
-        return TrackName;
-}
-
-function GetTrackIDbyName(TrackName)
-{
-       //returns the TrackID for the Game API Name
-
-        var TMP_TrackID = 9999999999;   //Default TrackID
-        //aRefPointTMP must be known or alternatively defined new with var aRefPointTMP = new Refpoint();
-        var TMP_Name;
-
-        for (var key in aRefPointTMP){
-                if(aRefPointTMP[key]["Name2"] == ""){
-                        TMP_Name = aRefPointTMP[key]["Name"];
-                }else{
-                        TMP_Name = aRefPointTMP[key]["Name2"];
-                }
-
-                if (TMP_Name == TrackName){
-                        TMP_TrackID = key;
-                }
-        }
-        return TMP_TrackID;
-}
-
        </script>
    </body>
