@@ -121,7 +121,7 @@ function SetExampleData()
         this.LastLapTime   =   9999;
         this.Orientation   =   0;
         this.Speed         =   100;
-        this.variousParameters = {TrackId: 920145926};
+        this.variousParameters = {TrackId: 9999999999};
 
 	return 1;
 }
