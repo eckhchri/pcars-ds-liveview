@@ -4,6 +4,10 @@ Project CARS Dedicated live view (pcars-ds-liveview)
 - Using default parameter: http://[your Webserver url]/index.html
 - Overwriting default DS parameters:   http://[your Webserver url]/index.html?dsurl=www.xyz.com&dsport=9009
 
+**Features**
+- Dedicated Server API
+- CREST API - http://cars-rest-api.com/
+
 **Default parameter**:
 - dedicated server url:   www.eckhchri.de
 - dedicated server port:  9000
