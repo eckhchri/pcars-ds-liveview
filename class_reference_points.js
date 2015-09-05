@@ -681,17 +681,19 @@ function Refpoint(circuit_id)
 	aRefPoints[-44748320] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
 		"Name":         "Summerton"
+		,"Name2":	"Summerton International"	//"mTrackLocation":"Summerton","mTrackVariation":"International"
 		,"Comment":	"Kart Track?"
         });
 	//Summerton National
-	aRefPoints[1408845203] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton National"});
+	aRefPoints[1408845203] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton National","Name2": ""});
 	//Summerton Sprint
-	aRefPoints[-1605913568] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton Sprint"});
+	aRefPoints[-1605913568] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton Sprint","Name2": ""});
 		
 	//Chesterfield
 	aRefPoints[-1735912413] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
 		"Name":         "Chesterfield"
+		,"Name2":	"Chesterfield Grand Prix"	//"mTrackLocation":"Chesterfield","mTrackVariation":"Grand Prix"
 		,"Comment": 	"Kart Track"
         });
 		
@@ -699,18 +701,19 @@ function Refpoint(circuit_id)
 	aRefPoints[-1066742780] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
 		"Name":         "Glencairn"
+		,"Name2":	"Glencairn Grand Prix"	//"mTrackLocation":"Glencairn","mTrackVariation":"Grand Prix"
 		,"Comment": 	"Kart Track"
         });
 	//Glencairn Reverse
-	aRefPoints[-1520844580] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn Reverse"});
+	aRefPoints[-1520844580] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn Reverse","Name2": "Glencairn GP Reverese"});	//"mTrackLocation":"Glencairn","mTrackVariation":"GP Reverese"
 	//Glencairn East
-	aRefPoints[766599953] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn East"});
+	aRefPoints[766599953] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn East","Name2": ""});
 	//Glencairn East Reverse
-	aRefPoints[-446794969] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn East Reverse"});
+	aRefPoints[-446794969] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn East Reverse","Name2": ""});
 	//Glencairn West
-	aRefPoints[-1408779593] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West"});
+	aRefPoints[-1408779593] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West","Name2": ""});
 	//Glencairn West Reverse
-	aRefPoints[-913625358] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West Reverse"});
+	aRefPoints[-913625358] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West Reverse","Name2": ""});
 
 	//Greenwood Karting Circuit
 	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[8888888888],
