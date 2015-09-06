@@ -5,7 +5,7 @@ Project CARS Dedicated live view (pcars-ds-liveview)
 - Overwriting default DS parameters:   http://[your Webserver url]/index.html?dsurl=www.xyz.com&dsport=9009
 
 **Features**
-- Dedicated Server API
+- Dedicated Server API - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
 - CREST API - http://cars-rest-api.com/
 
 **Default parameter**:
