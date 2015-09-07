@@ -590,19 +590,19 @@ function Refpoint(circuit_id)
 	//aRefPoints[-1785781495] = new Array();
 	aRefPoints[-1785781495] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        42.3288
-		,"refLong":      -76.9206
-		,"rotation":     0
-		,"cor_r_Long":   45000000
+		"refLat":        42.329767
+		,"refLong":      -76.920975
+		,"rotation":     -178.4
+		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 1.062
+		,"cor_PosY_mul": 1.065
 		,"Name":         "Watkins Glen GP"
 		,"Name2":	 "Watkins Glen International Grand Prix"	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
-		,"MapInitLat":   42.336648
-		,"MapInitLong":  -76.924696
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   42.336564
+		,"MapInitLong":  -76.924519
+		,"Comment": "live prüfen"
 		});
 	//Watkins Glen Short
 	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen Short","Name2": "Watkins Glen International Short Circuit"});	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Short Circuit"
