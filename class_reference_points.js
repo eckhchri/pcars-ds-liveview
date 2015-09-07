@@ -570,18 +570,18 @@ function Refpoint(circuit_id)
 	//aRefPoints[-103312908] = new Array();
 	aRefPoints[-103312908] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        34.86891
-		,"refLong":      -118.26126
-		,"rotation":     0
-		,"cor_r_Long":   45000000
+		"refLat":        34.871624
+		,"refLong":      -118.263848
+		,"rotation":     -32.8
+		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 0.97
+		,"cor_PosY_mul": 0.97
 		,"Name":         "Willow Springs International Raceway"
 		,"Zoom":         15
-		,"MapInitLat":   34.873204
-		,"MapInitLong":  -118.264599
-		,"Comment": "by colets, prüfen"
+		,"MapInitLat":   34.872929
+		,"MapInitLong":  -118.264394
+		,"Comment": "live prüfen"
 		});
 	//Willow Springs Horse Thief Mile
 	aRefPoints[-1849531562] = CopyObjectWithModifications(aRefPoints[-103312908], {"Name": "Willow Springs Horse Thief Mile"});
