@@ -581,10 +581,19 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   34.872929
 		,"MapInitLong":  -118.264394
-		,"Comment": "live prüfen"
+		,"Comment": "nochmal prüfen"
 		});
 	//Willow Springs Horse Thief Mile
-	aRefPoints[-1849531562] = CopyObjectWithModifications(aRefPoints[-103312908], {"Name": "Willow Springs Horse Thief Mile"});
+	aRefPoints[-1849531562] = CopyObjectWithModifications(aRefPoints[-103312908], 
+		{
+		"rotation":     -33.3
+		,"cor_PosX_mul": 0.97
+		,"cor_PosY_mul": 0.985
+		,"Name": "Willow Springs Horse Thief Mile"
+		,"MapInitLat":   34.878537
+		,"MapInitLong":  -118.264290
+		,"Comment": "live prüfen"
+		});
 
 	//Watkins Glen GP
 	//aRefPoints[-1785781495] = new Array();
