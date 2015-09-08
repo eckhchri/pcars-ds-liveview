@@ -581,7 +581,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   34.872929
 		,"MapInitLong":  -118.264394
-		,"Comment": "nochmal prüfen"
+		,"Comment": "live prüfen, leichte Abweichungen, mit aktuellen Testpunkten keine bessere Einstellung möglich"
 		});
 	//Willow Springs Horse Thief Mile
 	aRefPoints[-1849531562] = CopyObjectWithModifications(aRefPoints[-103312908], 
