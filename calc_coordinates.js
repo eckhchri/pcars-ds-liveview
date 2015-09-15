@@ -13,12 +13,12 @@
 
 function calc_coordinates (circuit_id,PosX,PosY){
 
-        var aRefPointTmp         =       new Refpoint(circuit_id);
+	var aRefPointTmp         =       new Refpoint(circuit_id);
 
-        // variablen definieren
-        var q = degreeToRadians ( aRefPointTmp[circuit_id]["rotation"] );           //Rotationswinkel in Rad, da Math.cos() den Winkel in Rad will
-        var x_neu;
-        var y_neu;
+	// define variables
+	var q = degreeToRadians ( aRefPointTmp[circuit_id]["rotation"] );           //rotation angle in radian, because Math.cos() needs angle in radian
+	var x_new;
+	var y_new;
 
 	//correction multiplier
 	PosX = PosX * aRefPointTmp[circuit_id]["cor_PosX_mul"];
@@ -27,63 +27,59 @@ function calc_coordinates (circuit_id,PosX,PosY){
 	//console.log("CALC:", aRefPointTmp );
 	//console.log("Calc q: " + q);
 
-        //Rotation herausrechnen (muss vor der Umrechnung in den Winkel passieren . bei Hockenheim nicht notwendig)
-        if ( aRefPointTmp[circuit_id]["rotation"] != 0) {
+	//eliminate rotation error
+	if ( aRefPointTmp[circuit_id]["rotation"] != 0) {
+		//ATTENTION: Math.cos needs angle in radian
+		x_new = (Math.cos(q) * PosX) - (Math.sin(q) * PosY);
+		y_new = (Math.sin(q) * PosX) + (Math.cos(q) * PosY);
+	}else{
+		// no rotation
+		x_new = PosX;
+		y_new = PosY;
+	}
 
-                //ACHTUNG: Math.cos benoetigt einen Winkel in rad
-                x_neu = (Math.cos(q) * PosX) - (Math.sin(q) * PosY);
-                y_neu = (Math.sin(q) * PosX) + (Math.cos(q) * PosY);
+	//console.log ("X_old: " + PosX + " X_New: " + x_new + "Y_old: " + PosY + " Y_New: " + y_new);
 
-        }else{
-                // werte unveraendert uebernehmen
-                x_neu = PosX;
-                y_neu = PosY;
-        }
-
-	//console.log ("X_alt: " + PosX + " X_Neu: " + x_neu + "Y_alt: " + PosY + " Y_Neu: " + y_neu);
-
-        //Umrechnung Positionsdaten in Winkel (Radius Erde 6371.000.000 mm, da Daten im Spiel als Millimeter raus kommen):
-        //var radius_zur_erdachse = 6371000000 * Math.cos( aRefPointTmp[circuit_id]["refLat"] ) + aRefPointTmp["cor_r"]; // Ungenauigkeit -> erhoete Korrekturwerte notwendig
-        //ACHTUNG: Math.cos benoetigt einen Winkel in rad
-        var radius_zur_erdachse = 6371000000 * Math.cos( degreeToRadians(aRefPointTmp[circuit_id]["refLat"]) ) +  aRefPointTmp[circuit_id]["cor_r_Long"];
+	//calculation from game position data to an GPS angle (radius earth 6371.000.000 mm, because the data from the Game DS API is in millimeter):
+	//ATTENTION: Math.cos needs angle in radian
+	var radius2EarthAxis = 6371000000 * Math.cos( degreeToRadians(aRefPointTmp[circuit_id]["refLat"]) ) +  aRefPointTmp[circuit_id]["cor_r_Long"];
 
 		
 	/************************************************************
-	////Methode über rechtwinkliges Dreieck
-        var winkelX = Math.asin(x_neu/radius_zur_erdachse);
-        var winkelY = Math.asin(y_neu/6371000000);
-
-        //konvertiere Bogenmas in Grad
-       // console.log("WinkelX VOR Umrechnung: " + winkelX + " WinkelY: " + winkelY );
-        winkelX = radiansToDegrees(winkelX);
-        winkelY = radiansToDegrees(winkelY);
+	////Method 1: right-angled triangle
+        var angleX = Math.asin(x_new/radius2EarthAxis);
+        var angleY = Math.asin(y_new/6371000000);
+        //convert radian to degree
+       // console.log("angleX before calculation: " + angleX + " angleY: " + angleY );
+        angleX = radiansToDegrees(angleX);
+        angleY = radiansToDegrees(angleY);
 	**************************************************************/
 
-	//Methode über Winkel ins Verhaeltnis setzen zu 360° entspricht 40030km
-        //var umfang_erde = 40030000000; //in millimeteri
-	var umfang_erde = 2 * Math.PI * (6371000000 + aRefPointTmp[circuit_id]["cor_r_Lat"]);
-        var umfang_erde_Lat = 2 * Math.PI * radius_zur_erdachse; //in millimeter
+	//Method 2: set angle in relation, 360 degrees are 40030km circumference  - better method
+	//var circumference_earth = 40030000000; //in millimeter
+	var circumference_earth = 2 * Math.PI * (6371000000 + aRefPointTmp[circuit_id]["cor_r_Lat"]);
+	var circumference_earth_Lat = 2 * Math.PI * radius2EarthAxis; //in millimeter
 
 
-	//console.log("Calc Coordinates. umfang_erde/umfang_erde_Lat: " + umfang_erde_Lat + " / " + umfang_erde_Lat );
+	//console.log("Calc Coordinates. circumference_earth/circumference_earth_Lat: " + circumference_earth + " / " + circumference_earth_Lat );
  
-        var winkelX = x_neu / umfang_erde_Lat * 360;
-        var winkelY = y_neu / umfang_erde * 360;
+	var angleX = x_new / circumference_earth_Lat * 360;
+	var angleY = y_new / circumference_earth * 360;
 		
 		
-        //console.log("CuircitName: "     + aRefPointTmp[circuit_id]["Name"]);
-        //console.log("RadiusErdachse: "  + radius_zur_erdachse);
-        //console.log("WinkelX: "         + winkelX + " WinkelY: " + winkelY );
+	//console.log("CuircitName: "     + aRefPointTmp[circuit_id]["Name"]);
+	//console.log("radius2EarthAxis: "  + radius2EarthAxis);
+	//console.log("angleX: "         + angleX + " angleY: " + angleY );
 
-        // finalen Wert berechnen
-        var car_coordinateLong  =  aRefPointTmp[circuit_id]["refLong"] + winkelX;
-        var car_coordinateLat   =  aRefPointTmp[circuit_id]["refLat"] + winkelY;
+	// calculate final value
+	var car_coordinateLong  =  aRefPointTmp[circuit_id]["refLong"] + angleX;
+	var car_coordinateLat   =  aRefPointTmp[circuit_id]["refLat"] + angleY;
 		
 	//console.log ("GPS RefLong: " + aRefPointTmp[circuit_id]["refLong"] + " RefLat: " + aRefPointTmp[circuit_id]["refLat"] );
-        //console.log ("GPS Long:    " + car_coordinateLong + " Lat: " + car_coordinateLat + "++++++++++++End++++++");
+	//console.log ("GPS Long:    " + car_coordinateLong + " Lat: " + car_coordinateLat + "++++++++++++End++++++");
 
-        // retrn a hash of gps coordinates
-        return {"Lat" : car_coordinateLat , "Long" : car_coordinateLong};
+	// return a hash of gps coordinates
+	return {"Lat" : car_coordinateLat , "Long" : car_coordinateLong};
 }
 
 function degreeToRadians($degree)
