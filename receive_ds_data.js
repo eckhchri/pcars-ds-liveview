@@ -231,12 +231,13 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				return aDrivers;
 			}
 		 
+		 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+			TrackID = GetTrackIDbyName(TrackName);
+
 			for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
 			{
 				//console.log ( "DS Participants:" , myArr.response.participants);
 				// read data of all participants and put it in an array of PCARSdriver objects
-				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
-				TrackID = GetTrackIDbyName(TrackName);
 				PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 				PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
 				PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
