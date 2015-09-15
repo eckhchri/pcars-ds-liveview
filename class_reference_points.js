@@ -523,6 +523,8 @@ function Refpoint(circuit_id)
 		,"MapInitLong":  5.970570
 		,"Comment": "live prüfen"
 		});
+	//Greenwood Karting Circuit - Kart track of Spa-Franchorchamps
+	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit"});
 		
 	//Circuit de Barcelona-Catalunya GP
 	//aRefPoints[521933422] = new Array();
@@ -685,7 +687,7 @@ function Refpoint(circuit_id)
 	//Sakitto Sprint
 	aRefPoints[-879282119] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto Sprint","Name2": ""});
 	
-	//// Kart tracks	
+	//// fictional Kart tracks	
 	//Summerton
 	aRefPoints[-44748320] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
@@ -723,13 +725,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-1408779593] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West","Name2": ""});
 	//Glencairn West Reverse
 	aRefPoints[-913625358] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West Reverse","Name2": ""});
-
-	//Greenwood Karting Circuit
-	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[8888888888],
-		{
-		"Name":         "Greenwood Karting Circuit"
-		,"Comment": 	"Kart Track"
-        });
 
 ///////////////////////////////////////////////////////////////////////////	
 	//console.log("Refpoints: "  , aRefPoints);	
