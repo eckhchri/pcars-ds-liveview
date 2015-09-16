@@ -23,7 +23,7 @@ function Refpoint(circuit_id)
                 ,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
                 ,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
 		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
-		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation
+		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
                 ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
