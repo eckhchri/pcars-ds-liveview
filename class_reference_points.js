@@ -135,7 +135,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         13
                 ,"MapInitLat":   50.359101
                 ,"MapInitLong":  6.962529
-                ,"Comment": "live check"
+                ,"Comment": "live check, big discrepancies on some parts of track"
                 });
 	//Nordschleife Stage 3
 	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3","Name2": ""});
@@ -386,7 +386,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   43.798710 
                 ,"MapInitLong":  -87.995182
-                ,"Comment": "check again, large discrepancies"
+                ,"Comment": "check again, big discrepancies"
                 });
                 
         //Zolder
