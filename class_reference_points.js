@@ -18,23 +18,22 @@ function Refpoint(circuit_id)
 	aRefPoints[9999999999] = new Array();
         aRefPoints[9999999999] =
                 {
-                "refLat":        51.500681			// Komma in Javascript ist ein Punkt
-                ,"refLong":      -0.071795			// Komma in Javascript ist ein Punkt
-                ,"rotation":     0				// Winkel in GRAD Maß
-                ,"cor_r_Long":   0				// Korrektur Radius zur Erdachse fuer Ost/West
-		,"cor_r_Lat":    0				// Korrektur Erdradius fuer  Nord/Sued
-		,"cor_PosX_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
-		,"cor_PosY_mul": 1				// Korrektur Multiplikator fuer PosX vor der Berechnung
+                "refLat":        51.500681			// GPS coords of the zero point, where X=0 and Z=0
+                ,"refLong":      -0.071795			
+                ,"rotation":     0				// angle in degree
+                ,"cor_r_Long":   0				// earth radius correction value for east/west calculation
+		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation
+		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation
+		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
                 ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
-                ,"Zoom":         19				// wanted zoom level for initial map
-                ,"MapInitLat":   51.500681			// Map initialisierungs Koordinaten
+                ,"Zoom":         19				// wanted zoom level for initial google map
+                ,"MapInitLat":   51.500681			// google map initialization coords
                 ,"MapInitLong":  -0.071795
                 ,"Comment": "Default"
                 };
                 
-        //Default fictional tracks
-	//aRefPoints[9999999999] = new Array();
+        //Default for fictional tracks
         aRefPoints[8888888888] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        62.552546
@@ -43,11 +42,10 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   62.552546
                 ,"MapInitLong":  -45.678026
-                ,"Comment": "Default fictional tracks"
+                ,"Comment": "Default for fictional tracks"
                 });
 	
 	//Hockenheim GP
-	//aRefPoints[1695182971] = new Array();
         aRefPoints[1695182971] = CopyObjectWithModifications(aRefPoints[9999999999],
         	{
                 "refLat":        49.329738
@@ -62,7 +60,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
-                ,"Comment": "letztes finetuning" 
+                ,"Comment": "finetuning" 
         	});
 	//Hockenheim Short
 	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short","Name2": ""});
@@ -85,7 +83,7 @@ function Refpoint(circuit_id)
 	        ,"Zoom":         15
 	        ,"MapInitLat":   25.050175
 	        ,"MapInitLong":  55.237547
-	        ,"Comment": "live prüfen"
+	        ,"Comment": "live check"
 		});
 
 	///Dubai Autodrome International
@@ -98,7 +96,6 @@ function Refpoint(circuit_id)
 	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": ""});
 
 	//Nuerburgring GP
-	//aRefPoints[-945967394] = new Array();
         aRefPoints[-945967394] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        50.332733 
@@ -113,7 +110,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   50.332154
                 ,"MapInitLong":  6.940467
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
 
 	//Nuerburgring Sprint Short
@@ -124,7 +121,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Müllenbach","Name2": "Nürburgring MuellenBach"});	//"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
 
 	//Nordschleife
-	//aRefPoints[697498609] = new Array();
         aRefPoints[697498609] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        50.332733
@@ -139,7 +135,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         13
                 ,"MapInitLat":   50.359101
                 ,"MapInitLong":  6.962529
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
 	//Nordschleife Stage 3
 	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3","Name2": ""});
@@ -149,7 +145,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 2","Name2": ""});
 	
 	//Sonoma Raceway
-	//aRefPoints[-1454279631] = new Array();
         aRefPoints[-1454279631] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        38.162514
@@ -164,7 +159,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   38.162770 
                 ,"MapInitLong":  -122.457449
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         //Sonoma Raceway National
 	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National","Name2": ""});
@@ -172,7 +167,6 @@ function Refpoint(circuit_id)
 	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short","Name2": ""});
 
 	//Circuit des 24 Heures du Mans
-	//aRefPoints[1740968730] = new Array();
         aRefPoints[1740968730] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        47.939065
@@ -187,13 +181,12 @@ function Refpoint(circuit_id)
                 ,"Zoom":         13
                 ,"MapInitLat":   47.936818 
                 ,"MapInitLong":  0.223960
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         //Le Circuit Bugatti
 	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Name2": "Le Mans Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});	//"mTrackLocation":"Le Mans","mTrackVariation":"Le Circuit Bugatti"
         
         //Ruapuna Park GP
-	//aRefPoints[1277693448] = new Array();
         aRefPoints[1277693448] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        -43.533275
@@ -208,7 +201,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   -43.531123 
                 ,"MapInitLong":  172.479408
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         //Ruapuna Park A Circuit
 	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "Ruapuna Park A_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
@@ -220,7 +213,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "Ruapuna Park B_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"B_Circuit"
         
         //Cadwell GP
-	//aRefPoints[1876749797] = new Array();
         aRefPoints[1876749797] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        53.310651
@@ -235,7 +227,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   53.308465 
                 ,"MapInitLong":  -0.063734
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         //Cadwell Club Circuit
 	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit","Name2": ""});
@@ -243,7 +235,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-1408189041] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Woodland","Name2": ""});
         
         //Oulton Park International
-	//aRefPoints[545979690] = new Array();
         aRefPoints[545979690] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        53.179864
@@ -257,7 +248,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   53.176808 
                 ,"MapInitLong":  -2.616589
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         //Oulton Park Fosters
 	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters"});
@@ -265,7 +256,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-1877699523] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Island"});
         
         //Snetterton 300
-	//aRefPoints[1508903068] = new Array();
         aRefPoints[1508903068] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        52.463952
@@ -280,7 +270,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   52.465021 
                 ,"MapInitLong":  0.947079
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         //Snetterton 200
 	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200","Name2": "Snetterton 200 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"200 Circuit"
@@ -288,7 +278,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100","Name2": "Snetterton 100 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"100 Circuit"
         
         //Zhuhai International Circuit
-	//aRefPoints[1836888499] = new Array();
         aRefPoints[1836888499] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        22.367585
@@ -302,11 +291,10 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   22.367988 
                 ,"MapInitLong":  113.556162
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
                 
         //Silverstone GP
-	//aRefPoints[1641471184] = new Array();
         aRefPoints[1641471184] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        52.078807
@@ -321,7 +309,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   52.071727 
                 ,"MapInitLong":  -1.015736
-                ,"Comment": "Strecke sehr wahrscheinlich fehlerhaft, erneut prüfen"
+                ,"Comment": "track maybe not correct, check again"
                 });
         //Silverstone International
 	aRefPoints[1101719627] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone International","Name2": ""});
@@ -331,7 +319,6 @@ function Refpoint(circuit_id)
 	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone National","Name2": ""});
         
         //Brands Hatch GP
-	//aRefPoints[1988984740] = new Array();
         aRefPoints[1988984740] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        51.357240
@@ -346,13 +333,12 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   51.357186 
                 ,"MapInitLong":  0.262930
-                ,"Comment": "live prüfen, Strecke wahrscheinlich auch leicht fehlerhaft"
+                ,"Comment": "live check, track maybe not correct, small discrepancies"
                 });
         //Brands Hatch Indy
 	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {"Name": "Brands Hatch Indy","Name2": ""});
         
         //Mazda Raceway Laguna Seca
-	//aRefPoints[-1612023328] = new Array();
         aRefPoints[-1612023328] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        36.584300
@@ -366,11 +352,10 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   36.584275 
                 ,"MapInitLong":  -121.753345
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         
         //Brno
-	//aRefPoints[-907901266] = new Array();
         aRefPoints[-907901266] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        49.203370
@@ -384,11 +369,10 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   49.205370 
                 ,"MapInitLong":  16.452067
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
                 
         //Road America
-	//aRefPoints[-660300766] = new Array();
         aRefPoints[-660300766] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        43.798290
@@ -402,11 +386,10 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   43.798710 
                 ,"MapInitLong":  -87.995182
-                ,"Comment": "nochmal checken, starke Abweichungen"
+                ,"Comment": "check again, large discrepancies"
                 });
                 
         //Zolder
-	//aRefPoints[-360711057] = new Array();
         aRefPoints[-360711057] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
                 "refLat":        50.992257
@@ -421,11 +404,10 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   50.990644 
                 ,"MapInitLong":  5.257656
-                ,"Comment": "live prüfen"
+                ,"Comment": "live check"
                 });
         
 	//Donington Park GP
-	//aRefPoints[354022214] = new Array();
 	aRefPoints[354022214] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        52.830575
@@ -440,14 +422,13 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   52.830756
 		,"MapInitLong":  -1.375103
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	//Donington Park National
 	aRefPoints[-1194019375] = CopyObjectWithModifications(aRefPoints[354022214], {"Name": "Donington Park National","Name2": ""});
 
 
 	//Oschersleben GP
-	//aRefPoints[-1194185720] = new Array();
 	aRefPoints[-1194185720] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        52.027834
@@ -462,7 +443,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   52.028843
 		,"MapInitLong":  11.276850
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	//Oschersleben National
 	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National","Name2": ""});
@@ -470,7 +451,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Circuit","Name2": ""});
 
 	//Azure Circuit
-	//aRefPoints[832629329] = new Array();
 	aRefPoints[832629329] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        43.737030
@@ -485,11 +465,10 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   43.737186
 		,"MapInitLong":  7.425732
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 		
 	//Bathurst
-	//aRefPoints[921120824] = new Array();
 	aRefPoints[921120824] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        -33.439873
@@ -503,11 +482,10 @@ function Refpoint(circuit_id)
 		,"Zoom":         14
 		,"MapInitLat":   -33.448809
 		,"MapInitLong":  149.555024
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	
 	//Circuit de Spa-Francorchamps
-	//aRefPoints[904625875] = new Array();
 	aRefPoints[904625875] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        50.430342
@@ -521,13 +499,12 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   50.437254
 		,"MapInitLong":  5.970570
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	//Greenwood Karting Circuit - Kart track of Spa-Franchorchamps
 	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit"});
 		
 	//Circuit de Barcelona-Catalunya GP
-	//aRefPoints[521933422] = new Array();
 	aRefPoints[521933422] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        41.569355
@@ -542,7 +519,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   41.569612
 		,"MapInitLong":  2.257745
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	//Circuit de Barcelona-Catalunya Club
 	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club","Name2": ""});
@@ -550,7 +527,6 @@ function Refpoint(circuit_id)
 	aRefPoints[-998191994] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya National","Name2": ""});
 
 	//Imola
-	//aRefPoints[920145926] = new Array();
 	aRefPoints[920145926] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        44.340705
@@ -565,11 +541,10 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   44.341112
 		,"MapInitLong":  11.712506
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	
 	//Willow Springs International Raceway
-	//aRefPoints[-103312908] = new Array();
 	aRefPoints[-103312908] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        34.871624
@@ -583,7 +558,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   34.872929
 		,"MapInitLong":  -118.264394
-		,"Comment": "live prüfen, leichte Abweichungen, mit aktuellen Testpunkten keine bessere Einstellung möglich"
+		,"Comment": "live check, small discrepancies"
 		});
 	//Willow Springs Horse Thief Mile
 	aRefPoints[-1849531562] = CopyObjectWithModifications(aRefPoints[-103312908], 
@@ -594,11 +569,10 @@ function Refpoint(circuit_id)
 		,"Name": "Willow Springs Horse Thief Mile"
 		,"MapInitLat":   34.878537
 		,"MapInitLong":  -118.264290
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 
 	//Watkins Glen GP
-	//aRefPoints[-1785781495] = new Array();
 	aRefPoints[-1785781495] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        42.329767
@@ -613,13 +587,12 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   42.336564
 		,"MapInitLong":  -76.924519
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	//Watkins Glen Short
 	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen Short","Name2": "Watkins Glen International Short Circuit"});	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Short Circuit"
 
 	//Autodromo Nazionale Monza GP
-	//aRefPoints[-52972612] = new Array();
 	aRefPoints[-52972612] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        45.619146
@@ -634,7 +607,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   45.621690
 		,"MapInitLong":  9.286990
-		,"Comment": "live prüfen"
+		,"Comment": "live check"
 		});
 	
 	//Autodromo Nazionale Monza Short
@@ -745,7 +718,7 @@ function Refpoint(circuit_id)
 	this.Long 	= aRefPoints[this.circuit_id]["refLong"];
 	this.Rot     	= aRefPoints[this.circuit_id]["rotation"];
 
-	// todo: kann man hier nicht auch die Funktion GetCuircitnameByTrackID aufrufen?
+	// todo: can you not also call the function GetCuircitnameByTrackID here?
 /*
 	return {
 			 "refLat": 	aRefPoints[this.circuit_id]["refLat"]
