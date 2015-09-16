@@ -16,5 +16,5 @@ Project CARS Dedicated live view (pcars-ds-liveview)
 - browser support: CHROME 44 or newer
 
 **Shared some info in Project CARS Forum**
-http://forum.projectcarsgame.com/showthread.php?39269-Provide-GPS-coordinates-of-all-track-reference-points-GPS-calculation-in-javascript
+- http://forum.projectcarsgame.com/showthread.php?39269-Provide-GPS-coordinates-of-all-track-reference-points-GPS-calculation-in-javascript
 
