@@ -16,7 +16,7 @@ function calc_coordinates (circuit_id,PosX,PosY){
 	var aRefPointTmp         =       new Refpoint(circuit_id);
 
 	// define variables
-	var q = degreeToRadians ( aRefPointTmp[circuit_id]["rotation"] );           //rotation angle in radian, because Math.cos() needs angle in radian
+	var rotation = degreeToRadians ( aRefPointTmp[circuit_id]["rotation"] );           //rotation angle in radian, because Math.cos() needs angle in radian
 	var x_new;
 	var y_new;
 
@@ -25,13 +25,13 @@ function calc_coordinates (circuit_id,PosX,PosY){
 	PosY = PosY * aRefPointTmp[circuit_id]["cor_PosY_mul"];
 	
 	//console.log("CALC:", aRefPointTmp );
-	//console.log("Calc q: " + q);
+	//console.log("Calc rotation: " + rotation);
 
 	//eliminate rotation error
 	if ( aRefPointTmp[circuit_id]["rotation"] != 0) {
 		//ATTENTION: Math.cos needs angle in radian
-		x_new = (Math.cos(q) * PosX) - (Math.sin(q) * PosY);
-		y_new = (Math.sin(q) * PosX) + (Math.cos(q) * PosY);
+		x_new = (Math.cos(rotation) * PosX) - (Math.sin(rotation) * PosY);
+		y_new = (Math.sin(rotation) * PosX) + (Math.cos(rotation) * PosY);
 	}else{
 		// no rotation
 		x_new = PosX;
@@ -104,9 +104,9 @@ winkelX = arcsin(PosX/radius_zur_erdachse)
 winkelY = arcsin(PosX/ 6371.000.000)
 
 Rotation herausrechnen (muss vor der Umrechnung in den Winkel passieren . bei Hockenheim nicht notwendig):
-q = Rotationswinkel
-x' = cosq * x - sinq * y
-y' = sinq * x + cosq * y
+rotation = Rotationswinkel
+x' = cos (rotation) * x - sin (rotation) * y
+y' = sin (rotation) * x + cos (rotation) * y
 
 
 ///
