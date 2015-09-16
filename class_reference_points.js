@@ -755,7 +755,7 @@ function GetCircuitnameByTrackID (circuit_id)
 //	return aRefPoints[circuit_id]["Name"];
 }
 
-// todo: use a function to copy cuircit variantions from on object to another
+// todo: use a function to copy cuircit variantions from one object to another
 function CopyObjectWithModifications(source, changes )
 {
 	var dest = {};
