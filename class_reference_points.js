@@ -20,9 +20,9 @@ function Refpoint(circuit_id)
                 {
                 "refLat":        51.500681			// GPS coords of the zero point, where X=0 and Z=0
                 ,"refLong":      -0.071795			
-                ,"rotation":     0				// angle in degree
-                ,"cor_r_Long":   0				// earth radius correction value for east/west calculation
-		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation
+                ,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
+                ,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
+		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
 		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
