@@ -57,7 +57,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Hockenheim GP"
                 ,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
+                ,"Zoom":         16
                 ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
                 ,"Comment": "finetuning" 
@@ -80,9 +80,9 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 	        ,"Name":         "Dubai Autodrome GP"
 	        ,"Name2":	 "Dubai Autodrome Grand Prix"	//"mTrackLocation":"Dubai Autodrome","mTrackVariation":"Grand Prix"
-	        ,"Zoom":         15
-	        ,"MapInitLat":   25.050175
-	        ,"MapInitLong":  55.237547
+	        ,"Zoom":         17
+	        ,"MapInitLat":   25.050102
+	        ,"MapInitLong":  55.238634
 	        ,"Comment": "live check"
 		});
 
@@ -156,7 +156,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 0.97
                 ,"Name":         "Sonoma Raceway GP"
                 ,"Name2":	 "Sonoma Raceway Grand Prix"	//"mTrackLocation":"Sonoma Raceway","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
+                ,"Zoom":         16
                 ,"MapInitLat":   38.162770 
                 ,"MapInitLong":  -122.457449
                 ,"Comment": "live check"
@@ -440,7 +440,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Oschersleben GP"
 		,"Name2":	 "Oschersleben Grand Prix"	//"mTrackLocation":"Oschersleben","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
+		,"Zoom":         16
 		,"MapInitLat":   52.028843
 		,"MapInitLong":  11.276850
 		,"Comment": "live check"
