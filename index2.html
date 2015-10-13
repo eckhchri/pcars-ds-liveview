@@ -163,6 +163,7 @@
 	var CRESTPort = 8080;
 	var XMLHTTPTimeout = 2000;
 	var DisplayDuration = 600;		// duration for displaying marker updates
+	var StopTransitionDelay = "false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
 	var global_i		= 0;
 	var map;				// google map object
 	var sensorLayer;
@@ -230,7 +231,7 @@
 	$(function() {
 		$( "#slider-range-max" ).slider({
 			range: "max",
-			min: 100,
+			min: 0,
 			max: 900,
       			value: DisplayDuration, 
 			step: 50,
@@ -306,6 +307,13 @@
 
 	// init google map
         init_map(cuircitID);
+
+	// add map Listener
+	map.addListener('zoom_changed', function() {
+		console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);
+        	StopTransitionDelay = "true";
+		console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " , StopTransitionDelay);
+  	});
 
 	// create Table with list of all tracks
 	// checkbox Event handling
@@ -416,9 +424,6 @@
                 if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
 
                         //map.setCenter({lat: 50.332733, lng: 6.943355});
-     //                 map.setCenter({lat: aRefPointTMP[tmpcuircitID]["MapInitLat"], lng: aRefPointTMP[tmpcuircitID]["MapInitLong"]});
-     //                 map.setZoom(aRefPointTMP[tmpcuircitID]["Zoom"]);
-
 			changeMapSettings(aRefPointTMP[tmpcuircitID] , map);
 
                         cuircitID = tmpcuircitID;  // give the global var the new TrackId
@@ -605,11 +610,29 @@
 			   //todo: what does this draw() call ?
 			   console.log ("THIS Updated data:" , _data);
 			   console.log ("THIS:" , this);
-	                   this.draw();
-	                   _div.selectAll("svg")
-	                       .data(_data, function (d) { return d.Key; }) 
-	                       .each(transformWithEase);                
-			 
+
+			   if( StopTransitionDelay == "true" )
+			   {
+				console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " , StopTransitionDelay );
+				this.draw();
+                                   _div.selectAll("svg")
+                                       .data(_data, function (d) { return d.Key; })
+                                       .each(transform);
+
+				// reset to default after zoom event finished
+                                StopTransitionDelay = "false";
+			
+			   }else{
+
+				console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );
+		                   this.draw();
+		                   _div.selectAll("svg")
+		                       .data(_data, function (d) { return d.Key; }) 
+		                       .each(transformWithEase);                
+
+				// reset to default after zoom event finished
+				StopTransitionDelay = "false";
+			   }		 
                };
            }
 
