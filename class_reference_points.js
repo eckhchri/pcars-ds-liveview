@@ -91,7 +91,7 @@ function Refpoint(circuit_id)
 	//Dubai Kartdrome
 	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": ""});
 	//Dubai Autodrome National
-	aRefPoints[31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": ""});
+	aRefPoints[-31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": ""});
 	//Dubai Autodrome Club
 	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": ""});
 
