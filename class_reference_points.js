@@ -660,6 +660,21 @@ function Refpoint(circuit_id)
 	//Sakitto Sprint
 	aRefPoints[-879282119] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto Sprint","Name2": ""});
 	
+	//Mojave Cougar Ridge 
+	aRefPoints[-688586697] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Mojave Cougar Ridge"
+		,"Comment": 	"fictional track"
+        });
+        //Mojave Boa Ascent
+	aRefPoints[850003838] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Boa Ascent"});
+	//Mojave Gila Crest
+	aRefPoints[2089801285] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Gila Crest"});
+	//Mojave Coyote Noose
+	aRefPoints[-2125682335] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Coyote Noose"});
+	//Mojave Sidewinder
+	aRefPoints[-1463443929] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Sidewinder"});
+	
 	//// fictional Kart tracks	
 	//Summerton
 	aRefPoints[-44748320] = CopyObjectWithModifications(aRefPoints[8888888888],
@@ -698,6 +713,7 @@ function Refpoint(circuit_id)
 	aRefPoints[-1408779593] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West","Name2": ""});
 	//Glencairn West Reverse
 	aRefPoints[-913625358] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West Reverse","Name2": ""});
+	
 
 ///////////////////////////////////////////////////////////////////////////	
 	//console.log("Refpoints: "  , aRefPoints);	
