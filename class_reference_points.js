@@ -674,6 +674,8 @@ function Refpoint(circuit_id)
 	aRefPoints[-2125682335] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Coyote Noose"});
 	//Mojave Sidewinder
 	aRefPoints[-1463443929] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Sidewinder"});
+	//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
+	aRefPoints[0] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track"});
 	
 	//// fictional Kart tracks	
 	//Summerton
