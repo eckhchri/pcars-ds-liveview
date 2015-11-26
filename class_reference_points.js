@@ -66,7 +66,6 @@ function Refpoint(circuit_id)
 	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short","Name2": ""});
 	//Hockenheim National
 	aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim National","Name2": ""});
-	
 
 	//Dubai Autodrome GP
 	aRefPoints[-661887517] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -715,6 +714,24 @@ function Refpoint(circuit_id)
 	aRefPoints[-1408779593] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West","Name2": ""});
 	//Glencairn West Reverse
 	aRefPoints[-913625358] = CopyObjectWithModifications(aRefPoints[-1066742780], {"Name": "Glencairn West Reverse","Name2": ""});
+	
+	
+	//// Historic Tracks
+	//Rouen Les Essarts
+	aRefPoints[-1031249929] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Rouen Les Essarts"
+		,"Comment": 	"find out refPoint"
+	});
+	//Rouen Les Essarts Short
+	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short"});
+	
+	//Hockenheim Classic - copy of Hockenheim GP
+	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": ""});
+	
+	//Silverstone Classic - copy of Silverstone GP
+	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Classic","Name2": ""});
+	
 	
 
 ///////////////////////////////////////////////////////////////////////////	
