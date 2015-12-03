@@ -40,8 +40,8 @@ function Refpoint(circuit_id)
                 ,"refLong":      -45.678026
                 ,"Name":         "Greenland"
                 ,"Zoom":         15
-                ,"MapInitLat":   62.552546
-                ,"MapInitLong":  -45.678026
+                ,"MapInitLat":   41.036357
+                ,"MapInitLong":  -113.535295
                 ,"Comment": "Default for fictional tracks"
                 });
 	
