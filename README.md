@@ -2,14 +2,14 @@ Project CARS Dedicated live view (pcars-ds-liveview)
 
 **Usage**:
 - Using default parameter: http://[your Webserver url]/index.html
-- Overwriting default DS parameters:   
-http://[your Webserver url]/index.html?dsurl=[DS HTTP API url]&dsport=[DS HTTP API Port]
-
-example: http://www.xyz.com/index.html?dsurl=www.xyzDS.com&dsport=9000
+- Overwriting default DS parameters:  
+						http://[your Webserver url]/index.html?dsurl=[DS HTTP API url]&dsport=[DS HTTP API Port]
+						
+						example: http://www.xyz.com/index.html?dsurl=www.xyzDS.com&dsport=9000
 - Overwriting default CREST parameters:   
-http://[your Webserver url]/index.html?cresturl=[IP address of gaming PC]&crestport=[CREST Port]
-
-example: http://www.xyz.com/index.html?cresturl=192.168.0.1&crestport=8080
+						http://[your Webserver url]/index.html?cresturl=[IP address of gaming PC]&crestport=[CREST Port]
+						
+						example: http://www.xyz.com/index.html?cresturl=192.168.0.1&crestport=8080
 
 **Features**
 - Dedicated Server API - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
