@@ -202,6 +202,18 @@
 				+ " / " 
 				+ get_url_param('dsport'));
 	}
+	
+	// check if url params overwrite the default CREST info
+	if (get_url_param('cresturl') && get_url_param('crestport'))
+        {
+                CRESTServerURL     =       get_url_param('cresturl');
+                CRESTPort          =       get_url_param('crestport');
+
+		console.log("overwrite ds default settings with: " 
+				+ get_url_param('cresturl') 
+				+ " / " 
+				+ get_url_param('crestport'));
+	}
 
 
 	// set to global var, to modify in future stage for periodical updates via ajax
