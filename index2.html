@@ -135,7 +135,7 @@
 
 		<!-- API dropdown -->
 		<form action="#">
-		  <fieldset>
+		  <fieldset id="fieldset">
 			<label for="APIMODE">Select API Type</label>
 	    		<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      			<option selected="selected">DS</option>
@@ -210,7 +210,8 @@
                 CRESTPort          =       get_url_param('crestport');
                 APIMODE		   =	   "CREST";
                 DisplayDuration    =	   400;
-
+		document.getElementById("fieldset").elements.namedItem("APIMODE").value = "CREST";
+		
 		console.log("overwrite crest default settings with: " 
 				+ get_url_param('cresturl') 
 				+ " / " 
