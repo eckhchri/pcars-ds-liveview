@@ -830,8 +830,9 @@ function buildTracklist( aTrackList ){
         var commenttmp 		= '';
         var tmpObj;
         var aNewTrackList 	= new Array();
+	var aTmpTracklist	= new array();
 
-	//console.log("-------------------------- buildTracklist() for DSTrackList with:" , aTrackList);
+	console.log("--------------------------------- buildTracklist() for DSTrackList with:" , aTrackList);
 	//console.log("-------------------------- buildTracklist() with:" , aRefPointTMP);
 
 	// go through all available RefPoints
@@ -857,6 +858,18 @@ function buildTracklist( aTrackList ){
 
 		k++;	
         }
+	
+	//convert object array into associative array
+	aTrackList.forEach(function(entry) {
+		aTmpTracklist[ entry.id ] = 	{
+							'name': 	entry.id,
+							'gridsize':	entry.gridsize
+						};
+	});	
+	
+	WEITERmachen!!!!!!!!!!!!!!!!!!!!
+	console.log("---------------------------------------------------------------- buildTracklist() aTmpTracklist :" , aTmpTracklist);
+	aTrackList = aTmpTracklist;
 
 	// fill up Tracklist with tracks where no RefPoint exists		
 	for (var key in aTrackList){

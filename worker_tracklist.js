@@ -6,6 +6,7 @@ self.addEventListener('message', function(e) {
 
 	importScripts('./receive_ds_data.js');
 	importScripts('./pcars_driver.js');
+	importScripts('./pcars_track.js');
 	importScripts('./class_reference_points.js');
 	importScripts('./sleep.js');
 
