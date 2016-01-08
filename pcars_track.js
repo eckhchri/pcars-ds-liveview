@@ -1,5 +1,5 @@
 // CLASS of an pCars track
-function PCARSTRACK(name, trackid, gridsize)
+function PCARSTRACK(trackid, name, gridsize)
 {
         // vars
         this.name  	=       name;

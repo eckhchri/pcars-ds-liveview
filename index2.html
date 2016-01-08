@@ -11,6 +11,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
  
 	 <script src="./pcars_driver.js" charset="utf-8"></script>
+	 <script src="./pcars_track.js" charset="utf-8"></script>
 	 <script src="./receive_ds_data.js" charset="utf-8"></script>
 	 <script src="./calc_coordinates.js" charset="utf-8"></script>
 	 <script src="./class_reference_points.js" charset="utf-8"></script>
@@ -695,7 +696,7 @@ function changeMapSettings(newTrackObj, mapobj)
 function refreshTrackList(a)
 {
 
-	//console.log("refreshTrackList(): " , a);
+	console.log("------------------------ refreshTrackList() parameter: " , a);
 	// if set to true, no refresh of table wanted
 	if (StopRefreshTracklist == "true")
 	{
@@ -826,61 +827,65 @@ function CleanupDriverObjects(allDrivers)
 function buildTracklist( aTrackList ){
 
 	var aRefPointTMP	= new Refpoint();
-        var k 			= 0;
         var commenttmp 		= '';
         var tmpObj;
         var aNewTrackList 	= new Array();
-	var aTmpTracklist	= new array();
+	var aTmpTracklist	= new Array();
 
-	console.log("--------------------------------- buildTracklist() for DSTrackList with:" , aTrackList);
+	console.log("--------------------------------- buildTracklist() for DSTrackList:" , aTrackList);
 	//console.log("-------------------------- buildTracklist() with:" , aRefPointTMP);
 
-	// go through all available RefPoints
+
+	// go through all responded tracks from pcars dedicated server
+        for (var i=0; i < aTrackList.length; i++)
+        {
+
+		tmpObject = aTrackList[i];
+		console.log("--------------------------------- buildTracklist() tmpObject: " , tmpObject); 
+
+		//if refpoint for a track exists
+		if (aRefPointTMP[tmpObject.trackid]){
+			aNewTrackList[tmpObject.trackid] = { 	
+								trackid:         tmpObject.trackid
+	                	                              	,trackname:      tmpObject.name
+								,maxgrindsize:   tmpObject.gridsize
+	                        	                      	,refpoint:       "yes"
+	                                	              	,comment:        aRefPointTMP[tmpObject.trackid]["Comment"]
+        	                                    	   };
+		}else{
+			//no Refpoint entry exists , fill with dummy values
+			aNewTrackList[tmpObject.trackid] = {
+                                                                trackid:         tmpObject.trackid
+                                                                ,trackname:      tmpObject.name
+								,maxgrindsize:   tmpObject.gridsize
+                                                                ,refpoint:       "no"
+                                                                ,comment:        "no comment, because no refpoint"
+                                                           };
+		}
+			
+		// delete objects that allready covered by DS output from RefpointArray
+		delete aRefPointTMP[tmpObject.trackid];
+        }
+
+	//fill up with refpoint entries taht are not listed in DS array
 	for (var key in aRefPointTMP ){
 
 		tmpObject = aRefPointTMP[key];
-		// check if comment field exists in the RefPoint array
+
+                // check if comment field exists in the RefPoint array
 		commenttmp = '';
                 if ( 'Comment' in tmpObject ) {  commenttmp = tmpObject["Comment"];  };
 
-		//in the case Refpoint did not inlcude all avaiable track fill up with DS retunr values
-		if (aRefPointTMP[key]){
-				
-			aNewTrackList[k] = {   trackid:		key
-                       	                       ,trackname:	aRefPointTMP[key].Name
-                               	               ,refpoint:	"yes"
-                                       	       ,comment:	commenttmp
-                                            };			
-
-			// delete from DS Tracklist to reduce load for second for-loop below
-			delete aTrackList[key];
-		}
-
-		k++;	
-        }
-	
-	//convert object array into associative array
-	aTrackList.forEach(function(entry) {
-		aTmpTracklist[ entry.id ] = 	{
-							'name': 	entry.id,
-							'gridsize':	entry.gridsize
-						};
-	});	
-	
-	WEITERmachen!!!!!!!!!!!!!!!!!!!!
-	console.log("---------------------------------------------------------------- buildTracklist() aTmpTracklist :" , aTmpTracklist);
-	aTrackList = aTmpTracklist;
-
-	// fill up Tracklist with tracks where no RefPoint exists		
-	for (var key in aTrackList){
-
-		aNewTrackList[k] = {   trackid:         key
-                                                       ,trackname:      aTrackList[key]
-                                                       ,refpoint:       "no"
-                                                       ,comment:        "Dedicated Server - Dataset"
-                                                   };
-		k++;
+		aNewTrackList[tmpObject.trackid] = {
+                                                                trackid:         key
+                                                                ,trackname:      aRefPointTMP[key].Name 
+                                                                ,maxgrindsize:   "no info"
+                                                                ,refpoint:       "yes"
+                                                                ,comment:        commenttmp 
+                                                           };
 	}
+
+	console.log("--------------------------------- buildTracklist() with refpoint information:" , aNewTrackList);
 
 	return aNewTrackList;
 
