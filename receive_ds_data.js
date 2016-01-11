@@ -31,6 +31,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	var aReceiveModes = {
 				 "GETDRIVERDATE" 	: "/api/session/status?attributes&members&participants"
 				,"GETDSDATA"	 	: "/api/session/status?attributes&members&participants"
+				,"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants"
 				,"GETTRACKLIST"  	: "/api/list/tracks"
 				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?participants=true&eventInformation=true"
 			};	
@@ -47,6 +48,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	
 
 	var aDrivers    	=	new Array();
+	var data		=	new Array();
 	//var aEmptyArray 	=       new Array();
 	//var aEmptyArray 	=	new Object();
 	var aEmptyArray       	=       new Array();
@@ -108,6 +110,88 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 	   switch ( this.receivemode ) {
 
+
+		case  "GETDSANDDRIVERDATA":
+
+			//https://github.com/eckhchri/pcars-ds-liveview/issues/29
+			//return an object like:
+			//  data.aDrivers[]
+			//  data.globals{}
+
+			// collect DS common data
+			if ( myArr.response.state == "Idle" ){
+
+//	Todo: put all values into Array?
+                                data.globals = {
+                                         	"joinable":            myArr.response.joinable
+	                                        ,"lobbyid":             myArr.response.lobbyid
+	                                        ,"max_member_count":    myArr.response.max_member_count
+	                                        ,"now":                 myArr.response.now
+	                                        ,"state":               myArr.response.state
+	                                     }
+                        }else if ( myArr.response.state == "Running" ){
+
+                                data.globals = {
+	                                         "joinable":            myArr.response.joinable
+	                                        ,"lobbyid":             myArr.response.lobbyid
+	                                        ,"max_member_count":    myArr.response.max_member_count
+	                                        ,"now":                 myArr.response.now
+	                                        ,"state":               myArr.response.state
+	                                        ,"name":                myArr.response.name
+	                                        ,"TrackId":             myArr.response.attributes.TrackId
+	                                        ,"SessionStage":        myArr.response.attributes.SessionStage
+        	                                }
+                        }else{
+				// in case of othe stati return a defined value
+				data.globals = {};
+			}
+
+
+			// collect Driverdata
+			if ( myArr.response.participants.length == 0 ){
+
+                                console.log("no Participants found in DS, leave function and use Test data array!");
+
+				// put empty object into array
+                                data.push( DriverDummy );
+
+                        }else{
+
+				for (var i = 0;i<myArr.response.participants.length;i++)
+	                        {	
+        	                        //console.log ( "DS Participants:" , myArr.response.participants);
+	                                // read data of all participants and put it in an array of PCARSdriver objects
+	                                data.push (
+	                                        new PCARSdriver(myArr.response.participants[i].attributes.RefId,
+	                                                myArr.response.participants[i].attributes.Name,
+	                                                myArr.response.participants[i].attributes.GridPosition,
+	                                                myArr.response.participants[i].attributes.PositionX,
+	                                                myArr.response.participants[i].attributes.PositionY,
+	                                                myArr.response.participants[i].attributes.PositionZ,
+	                                                myArr.response.participants[i].attributes.State,
+	                                                myArr.response.participants[i].attributes.CurrentSector,
+	                                                myArr.response.participants[i].attributes.RacePosition,
+	                                                myArr.response.participants[i].attributes.FastestLapTime,
+	                                                myArr.response.participants[i].attributes.LastLapTime,
+	                                                myArr.response.participants[i].attributes.Orientation,
+	                                                myArr.response.participants[i].attributes.Speed,
+	                                                {       TrackId: myArr.response.attributes.TrackId
+	                                                        ,GridSize : myArr.response.attributes.GridSize
+	                                                }
+	                                                )
+                                        );
+                        }
+
+                        //console.log (  "Array of aDriver Objects: " + aDrivers);
+
+                        // return information
+                        return data;
+
+			}
+			
+
+
+			return data;
 
 		//todo: DSData mit beim Abrufen der Fahrendaten integrien, damit man den DS Statisch aktualisieren kann
 		case  "GETDSDATA":
