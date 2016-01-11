@@ -208,14 +208,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 			for (var i = 0;i<myArr.response.list.length;i++)
                         {
-				//build array TrackID to TrackName 
-/*				aTrackList [ myArr.response.list[i].id ] =    
-					 		{
-							'id':		myArr.response.list[i].id,	
-							'name': 	myArr.response.list[i].name,
-							'gridsize':	myArr.response.list[i].gridsize,
-							};
-*/
+				//build array of PCARSTRACK objects 
 				aTrackList.push (  
 							new PCARSTRACK (
 								myArr.response.list[i].id,
@@ -223,8 +216,6 @@ function Receive_DS_data (url,port,timeout,receivemode){
 								myArr.response.list[i].gridsize
 							)
 						);
-
-
 			}							
 
 			//console.log("+++++++++++++++ aTrackList: " , aTrackList);			
