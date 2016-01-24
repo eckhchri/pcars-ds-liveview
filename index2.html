@@ -1,6 +1,5 @@
 <!DOCTYPE html>
- <html>
-     <html lang="de">
+<html lang="de">
      <head>
          <meta charset="utf-8"/>
          <title>Project Cars DS - live view with position update.</title>
@@ -23,10 +22,10 @@
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <script>
                 $(function() {
-                    $( "#DSdata" ).draggable();
-		    $( "#TrackList" ) .draggable();
-		    $( "#DriverDataArea" ) .draggable();
-		    $( "#Settings" ) .draggable();
+					$( "#DSdata" ).draggable();
+					$( "#TrackList" ) .draggable();
+					$( "#DriverDataArea" ) .draggable();
+					$( "#Settings" ) .draggable();
                 });
 		
 		$(function() {
@@ -42,7 +41,7 @@
         </script>
 
 	<!-- The jqGrid language file code-->
-        <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css"></script>
+        <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css">
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-de.js"></script>
         <!-- The atual jqGrid code -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
@@ -221,14 +220,14 @@
 
 
 	// set to global var, to modify in future stage for periodical updates via ajax
-	var DsName 		=	"-+-"; // aDsData.name;
-	var DsState		=	"-+-"; //aDsData.state;		//idle/running
+	var DsName			=	"-+-"; // aDsData.name;
+	var DsState			=	"-+-"; //aDsData.state;		//idle/running
 	var DsTrackName		=	"Slightly Mad Studios Ltd";		//aTrackList[aDsData.TrackId];
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;	
 
-        // initialize RefPoint
-        aRefPointTMP         =      new Refpoint( cuircitID );
+	// initialize RefPoint
+	aRefPointTMP         =      new Refpoint( cuircitID );
 
 	/////////////////////////////////////
 	// Event Handler
@@ -260,35 +259,108 @@
     		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
   	});
 
+	// initiate jqGrid for DriverData
+	// todo: make table searchable   and  add new Theme
+	// todo: add subgrid information like: Long,Lat,RefPoint,...
+	jQuery("#tracklisttable").jqGrid({	
+	        datatype: "local",
+	        height: 250,
+	        hiddengrid: true,
+	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
+	        colModel:[
+					{name:'id', index:'id', formatter: 'integer', width:100},
+	                		{name:'trackid', index:'trackid', width:100},
+	       			        {name:'trackname', index: 'trackname', width:200},
+					{name:'gridsize', width:40, align:"right"},
+			                {name:'refpoint', width:90, align:"center",sorttype:"float"},
+					{name:'comment', width:160, align:"left"},
+	        ],
+	        caption: "List of available Tracks",
+		rowNum: 200,
+	});
+
+	// initial data for grid !!! Needed because of Refresh problem !!
+	// todo: really needed ?
+	jQuery("#tracklisttable").jqGrid('addRowData',0,{	
+								id: 		0
+								,trackid:	"2" 
+								,trackname:	"initialdata2"
+								,gridsize:	"-"
+								,refpoint:	"no"
+								,comment:	"test comment" 
+							});
 
 
 
-	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
 	var workerDSDATA      =       new Worker('./worker_dsdata.js');
 
-        //event handler of the worker
-        workerDSDATA.addEventListener('message', function(e) {
-                //console.log('Worker said: ', e.data);
-                // write in HTML page
-		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   ' + DsServerURL + " : " +  DsPort;
-                document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   ' + e.data.state;
-		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: ' + e.data.joinable;
-		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: ' + e.data.lobbyid;
-		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      ' + e.data.now; 
+	//event handler of the worker
+	workerDSDATA.addEventListener('message', function(e) {
+		
+		console.log('+++++++++++++++++++++++++++++++++++++++ Worker returned: ', e.data);
+		
+		// write in HTML page for DS status
+		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort;
+		document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   	' + e.data.globals.state;
+		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: 	' + e.data.globals.joinable;
+		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: 	' + e.data.globals.lobbyid;
+		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      	' + e.data.globals.now; 
 		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
 		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
+		
+		
+		/////////////////////////////////////////// update driver data /////////////////////
+		// refresh table of Driver data
+        refreshDriverList(e.data.driverlist);
+		
+		//todo var declaration needed within loop ???
+		var tmpcuircitID;
+
+		//update map
+		for (var i = 0; i < e.data.driverlist.length; i++ ){
+
+				// calculate GPS coordinates
+				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ );
+
+				// fill data array
+				aSensorData[i] = {
+						"Key": 				e.data.driverlist[i].Name
+						,"MarkerLabel" :	e.data.driverlist[i].RacePosition + "-" + e.data.driverlist[i].Name
+						,"DateTime":		"2013-09-04T09:41:09+10:00"
+						,"Lat": 			gpsCoTmp["Lat"]
+						,"Long": 			gpsCoTmp["Long"]
+						,"Heading":			286.0
+						,"Speed":			22
+				}
+				
+        		tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;
+		}
+		
+		//console.log("++++++++ aSensorData_NEW" , aSensorData);
+		sensorLayer.update(aSensorData);
+
+		// in case track changes on DS adjust the map settings for new possition
+        if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
+
+            //map.setCenter({lat: 50.332733, lng: 6.943355});
+			changeMapSettings(aRefPointTMP[tmpcuircitID] , map);
+
+            cuircitID = tmpcuircitID;  // give the global var the new TrackId
+            console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
+		}
+		
 		//call worker again for next itteration -> currently endless loop
 		workerDSDATA.postMessage({
 						workerdelay: 	100
-						,dsurl:		DsServerURL
-						,dsport:	DsPort
-						,timeout:	XMLHTTPTimeout
-						,receivemode:	"GETDSDATA"});
-        }, false);
+						,dsurl:			DsServerURL
+						,dsport:		DsPort
+						,timeout:		XMLHTTPTimeout
+						,receivemode:	"GETDSANDDRIVERDATA"});
+	}, false);
 	//initail call of the worker
-	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSDATA"});
+	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA"});
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -296,33 +368,33 @@
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
 	// initial call for map initialization
 	if (APIMODE == "DS"){
-		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDRIVERDATE");
+		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA");
 	}else{
 		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA");
 	}
+	
+	for (var i = 0; i < aDrivers.length; i++ ){
 
-        for (var i = 0; i < aDrivers.length; i++ ){
+		// calculate GPS coordinates
+		console.log("-------- aDrivers: " , aDrivers[i] );
+		gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
 
-                        // calculate GPS coordinates
-			console.log("-------- aDrivers" , aDrivers);
-                        gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
-
-                        // fill data array
-                        aSensorData[i] = {
-                                        "Key": aDrivers[i].GetName()
-                                        ,"MarkerLabel" : buildDriverName ( aDrivers[i].GetRacePosition(), aDrivers[i].GetName() )
-                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
-                                        ,"Lat": gpsCoTmp["Lat"]
-                                        ,"Long": gpsCoTmp["Long"]
-                                        ,"Heading":286.0
-                                        ,"Speed":22
-                                        }
-			// bookmark current TrackID to detect track changes and adjust Map
-                        tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
-        }
+		// fill data array
+		aSensorData[i] = {
+				"Key": aDrivers[i].GetName()
+				,"MarkerLabel" : buildDriverName ( aDrivers[i].GetRacePosition(), aDrivers[i].GetName() )
+				,"DateTime":"2013-09-04T09:41:09+10:00"
+				,"Lat": gpsCoTmp["Lat"]
+				,"Long": gpsCoTmp["Long"]
+				,"Heading":286.0
+				,"Speed":22
+		}
+		// bookmark current TrackID to detect track changes and adjust Map
+		tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
+	}
 
 	// init google map
-        init_map(cuircitID);
+	init_map(cuircitID);
 
 	// add map Listener
 	map.addListener('zoom_changed', function() {
@@ -350,64 +422,37 @@
 	
 	w_tracklist.addEventListener('message', function(e) {
 
-					console.log("Worker Trackliste Event: ", e );
-//					console.log("Worker Trackliste Event: JSON PARSE ", JSON.parse(e.data) );
+			console.log("Worker Trackliste Event: ", e );
+//			console.log("Worker Trackliste Event: JSON PARSE ", JSON.parse(e.data) );
 					
-					var str = e.data;	// data string from return object
+			var str = e.data;	// data string from return object
 
-//					var strtmp = str.replace("null", " ");	// workaround for FireFox; convert [null] -> []
+//			var strtmp = str.replace("null", " ");	// workaround for FireFox; convert [null] -> []
 
-//					refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
-					refreshTrackList(buildTracklist(e.data));
-					w_tracklist.postMessage({
+//			refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
+			refreshTrackList(buildTracklist(e.data));
+			w_tracklist.postMessage({
 								workerdelay: 	WORKERDELEAY_TRACKLIST
 								,dsurl: 	DsServerURL
 								,dsport: 	DsPort
 								,timeout: 	2000
 								,receivemode: 	"GETTRACKLIST" });
-        }, false);
+	}, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
 	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST" });
 
-	// initiate jqGrid
-	// todo: make table searchable   and  add new Theme
-	// todo: add subgrid information like: Long,Lat,RefPoint,...
-	jQuery("#tracklisttable").jqGrid({	
-	        datatype: "local",
-	        height: 250,
-	        hiddengrid: true,
-	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
-	        colModel:[
-					{name:'id', index:'id', formatter: 'integer', width:100},
-	                		{name:'trackid', index:'trackid', width:100},
-	       			        {name:'trackname', index: 'trackname', width:200},
-					{name:'gridsize', width:40, align:"right"},
-			                {name:'refpoint', width:90, align:"center",sorttype:"float"},
-					{name:'comment', width:160, align:"left"},
-	        ],
-	        caption: "List of available Tracks",
-		rowNum: 200,
-	});
 
-	// initial data for grid !!! Needed because of Refresh problem !!
-	// todo: really needed ?
-	jQuery("#tracklisttable").jqGrid('addRowData',0,{	id: 0
-								,trackid:	"2" 
-								,trackname: 	"initialdata2"
-								,gridsize:      "-"
-								,refpoint:	"no"
-								,comment:	"test comment" 
-							});
-
-
+/* obsolete because of receive mode "GETDSANDDRIVERDATA"
+   //TODO: BUT  CREST Mode differentiation must be implemented again maby a  GETDSANDDRIVERDATACREST - Mode
+ 
 	// create worker for Driver data updates //////////////////////////////////////////////////////////////////////
 	var workerDRIVERDATA      =       new Worker('./worker_driverdata.js');
 	workerDRIVERDATA.addEventListener('message', function(e) {
 		
-                console.log('Worker3 DriverList and  said: ', e.data);
+		console.log('Worker3 DriverList and  said: ', e.data);
 		// refresh table of Driver data
-                refreshDriverList(e);
+        refreshDriverList(e);
 
 		//todo var declaration needed within loop ???
 		var tmpcuircitID;
@@ -473,6 +518,9 @@
         }
 	//Todo: start a second worker loop with delay, to have continous updates on map
 //	workerDRIVERDATA.postMessage({workerdelay: 3000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
+
+*/
+
 
 
 	//todo: add subgrid for more drivers information
@@ -715,8 +763,7 @@ function refreshTrackList(a)
 	
 	for (var key in a ){
 
-		console.log("--- Info for loop value a[key]: ", a[key]);
-
+		//console.log("--- Info for loop value a[key]: ", a[key]);
 		_data = {
                                         id:             gridcnt
                                         ,trackid:       a[key]["trackid"]
@@ -744,9 +791,9 @@ function refreshDriverList(a)
                 return 1;
         }
 
-        console.log("refreshDriverList(e): " , a);
+	console.log("refreshDriverList(e): " , a);
 	var grididcnt = 0;
-        var _data;
+	var _data;
 	var _allDrivers = new Array();
 
 	// clean complete table befor reloading new data to prevent ghost entries
@@ -758,40 +805,39 @@ function refreshDriverList(a)
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
-	console.log ("++++++++ length of data:" + a.data.length);
-	for (i=0; i < a.data.length; i++)
-        {
+	console.log ("++++++++ length of data:" + a.length);
+	for (i=0; i < a.length; i++)
+	{
 		//console.log("update data on row: " + i + " / " + a.data);
-                //console.log("update data on row: " + i + " / " + a.data[i]);
-                _data = {   
-				refid:			a.data[i].RefID
-				,driverposition:	a.data[i].RacePosition	
-				,drivername:		a.data[i].Name
-	                        ,driverstate:		a.data[i].State
-	                        ,driversector:		a.data[i].CurrentSector
-	                        ,fastestlap:		PCARSd.GetFastestLapTime(  a.data[i].FastestLapTime )
-	                        ,lastlap:		PCARSd.GetLastLapTime(  a.data[i].LastLapTime )
-	                        ,posx:			a.data[i].PosX
-	                        ,posy:			a.data[i].PosY
-	                        ,posz:			a.data[i].PosZ
-                        };
-                //decision if replace or add a row to jqGrid
-                if (i < GridSize)
-                {
-                        jQuery("#DriverDataTable").jqGrid('setRowData',i, _data);
-                        //console.log("+++++ set " + i );
-                }else{
-                        jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
-                        //console.log("+++++ add " + i );
-                }
-                grididcnt++;
+		//console.log("update data on row: " + i + " / " + a.data[i]);
+		_data = {   
+					refid:				a[i].RefID
+					,driverposition:	a[i].RacePosition	
+					,drivername:		a[i].Name
+					,driverstate:		a[i].State
+					,driversector:		a[i].CurrentSector
+					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
+					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
+					,posx:				a[i].PosX
+					,posy:				a[i].PosY
+					,posz:			a[i].PosZ
+		};
+		//decision if replace or add a row to jqGrid
+		if (i < GridSize){
+				jQuery("#DriverDataTable").jqGrid('setRowData',i, _data);
+				//console.log("+++++ set " + i );
+		}else{
+				jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
+				//console.log("+++++ add " + i );
+		}
+		grididcnt++;
 	
 		//build hash for clean up map	
-		_allDrivers[buildDriverName(a.data[i].Name, a.data[i].RacePosition)] =  {driverposition : a.data[i].RacePosition};
+		_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};
 
-        }
+	}
 
-        jQuery("#DriverDataTable").trigger("reloadGrid");
+	jQuery("#DriverDataTable").trigger("reloadGrid");
 
 	CleanupDriverObjects(_allDrivers);
 
@@ -900,3 +946,4 @@ function buildTracklist( aTrackList ){
 
        </script>
    </body>
+</html>

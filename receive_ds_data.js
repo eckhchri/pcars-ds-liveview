@@ -87,6 +87,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			case	"GETTRACKLIST":		return aEmptyArray;
 			
 			case	"GETCRESTDRIVERDATA":	return aDrivers;
+			
+			case	"GETDSANDDRIVERDATA":	return aEmptyArray;
 		} // end switch
 
 		//return aDrivers;
@@ -118,20 +120,21 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			//  data.aDrivers[]
 			//  data.globals{}
 
+			
 			// collect DS common data
 			if ( myArr.response.state == "Idle" ){
 
-//	Todo: put all values into Array?
-                                data.globals = {
+					//	Todo: put all values into Array?
+					data.globals = {
                                          	"joinable":            myArr.response.joinable
 	                                        ,"lobbyid":             myArr.response.lobbyid
 	                                        ,"max_member_count":    myArr.response.max_member_count
 	                                        ,"now":                 myArr.response.now
 	                                        ,"state":               myArr.response.state
 	                                     }
-                        }else if ( myArr.response.state == "Running" ){
+			}else if ( myArr.response.state == "Running" ){
 
-                                data.globals = {
+					data.globals = {
 	                                         "joinable":            myArr.response.joinable
 	                                        ,"lobbyid":             myArr.response.lobbyid
 	                                        ,"max_member_count":    myArr.response.max_member_count
@@ -141,27 +144,30 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	                                        ,"TrackId":             myArr.response.attributes.TrackId
 	                                        ,"SessionStage":        myArr.response.attributes.SessionStage
         	                                }
-                        }else{
+			}else{
 				// in case of othe stati return a defined value
 				data.globals = {};
 			}
 
-
+			data.driverlist = [];
+			
 			// collect Driverdata
 			if ( myArr.response.participants.length == 0 ){
 
-                                console.log("no Participants found in DS, leave function and use Test data array!");
+				console.log("no Participants found in DS, leave function and use Test data array!");
 
-				// put empty object into array
-                                data.push( DriverDummy );
+				// put empty dummy object into array
+				
+				data.driverlist.push( DriverDummy );
+				data.driverlist.push( DriverDummy );
 
-                        }else{
+			}else{
 
-				for (var i = 0;i<myArr.response.participants.length;i++)
-	                        {	
+				for (var i = 0;i<myArr.response.participants.length;i++){
+					
         	                        //console.log ( "DS Participants:" , myArr.response.participants);
 	                                // read data of all participants and put it in an array of PCARSdriver objects
-	                                data.push (
+	                                data.driverlist.push (
 	                                        new PCARSdriver(myArr.response.participants[i].attributes.RefId,
 	                                                myArr.response.participants[i].attributes.Name,
 	                                                myArr.response.participants[i].attributes.GridPosition,
@@ -180,20 +186,19 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	                                                }
 	                                                )
                                         );
-                        }
+				}
 
-                        //console.log (  "Array of aDriver Objects: " + aDrivers);
+				//console.log (  "Array of aDriver Objects: " + aDrivers);
 
-                        // return information
-                        return data;
-
+                // return information
+				return data;
 			}
 			
 
 
 			return data;
 
-		//todo: DSData mit beim Abrufen der Fahrendaten integrien, damit man den DS Statisch aktualisieren kann
+/* obsolete because of recaive mode	 "GETDSANDDRIVERDATA"
 		case  "GETDSDATA":
 
 			// return common data of the DS Server
@@ -226,6 +231,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			// default
 			var empty  = new Array;
 			return empty;
+*/
+
 
 		case  "GETDRIVERDATE":
 		
