@@ -103,15 +103,14 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 		//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 		//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-                var myArr 		= JSON.parse( xmlhttp.responseText );
-                var arrayoutput 	= myArr.toString();
+		var myArr 		= JSON.parse( xmlhttp.responseText );
+		var arrayoutput 	= myArr.toString();
 		var DriverDummy		= new PCARSdriver();
 		DriverDummy.SetExampleData();
 
-                //console.log("ReceiveDsData complete array" , myArr);
+		//console.log("ReceiveDsData complete array" , myArr);
 
 	   switch ( this.receivemode ) {
-
 
 		case  "GETDSANDDRIVERDATA":
 
@@ -326,7 +325,16 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 				return aDrivers;
 			}
-		 
+
+			aDrivers.globals = {
+                 	"joinable":				"CREST Mode"
+                    ,"lobbyid":				"CREST Mode"
+                    ,"max_member_count":    "CREST Mode"
+                    ,"now":					"CREST Mode"
+                    ,"state":				"CREST Mode"
+                 }
+			onsole.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);
+			
 		 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 			TrackID = GetTrackIDbyName(TrackName);
 
@@ -337,7 +345,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 				PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
 				PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
-				aDrivers.push (
+				aDrivers.driverlist.push (
 					new PCARSdriver(0,							//RefId - NA
 						myArr.participants.mParticipantInfo[i].mName,			//Name
 						0,								//GridPosition - NA

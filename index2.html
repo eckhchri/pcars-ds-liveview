@@ -352,12 +352,24 @@
 		}
 		
 		//call worker again for next itteration -> currently endless loop
-		workerDSDATA.postMessage({
-						workerdelay: 	100
-						,dsurl:			DsServerURL
-						,dsport:		DsPort
-						,timeout:		XMLHTTPTimeout
-						,receivemode:	"GETDSANDDRIVERDATA"});
+		if (APIMODE == "DS"){
+			//DS receive mode
+			workerDSDATA.postMessage({
+				workerdelay: 	100
+				,dsurl:			DsServerURL
+				,dsport:		DsPort
+				,timeout:		XMLHTTPTimeout
+				,receivemode:	"GETDSANDDRIVERDATA"});
+		}else{
+			//CREST receive mode
+			workerDSDATA.postMessage({
+				workerdelay: 	100
+				,dsurl:			DsServerURL
+				,dsport:		DsPort
+				,timeout:		XMLHTTPTimeout
+				,receivemode:	"GETCRESTDRIVERDATA"});
+		}
+		
 	}, false);
 	//initail call of the worker
 	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA"});
