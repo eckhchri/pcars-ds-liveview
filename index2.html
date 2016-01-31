@@ -24,6 +24,7 @@
                 $(function() {
 					$( "#DSdata" ).draggable();
 					$( "#TrackList" ) .draggable();
+					$( "#CarList" ) .draggable();
 					$( "#DriverDataArea" ) .draggable();
 					$( "#Settings" ) .draggable();
                 });
@@ -67,24 +68,32 @@
 	     }
 
 	     #TrackList{
-		position:       absolute;
+				position:       absolute;
                 left:           5%;
                 top:            0px;
                 border:         1;
-		text-align: 	center;
+				text-align: 	center;
+	     }
+	     
+	     #CarList{
+				position:       absolute;
+                left:           10%;
+                top:            90px;
+                border:         1;
+				text-align: 	center;
 	     }
 
 	     #DriverData{
-		position:       absolute;
+				position:       absolute;
                 left:           55%;
-		top:		250px;
+				top:		250px;
 	     }
 		
 	     #DriverDataArea{
-		position:       absolute;
-		left:           5%;
-		top:            45px;
-		background:	lightgrey
+				position:       absolute;
+				left:           5%;
+				top:            45px;
+				background:	lightgrey
 	     }
 
 	     #Settings{
@@ -127,7 +136,11 @@
 		<table id="DriverDataTable"></table></div>	
 	<div id="TrackList">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
-		<table id="tracklisttable"></table></div>
+		<table id="tracklisttable"></table>
+	</div>
+	<div id="CarList">
+		<table id="carlisttable"></table>
+	</div>
 
 	<!-- definition of option panel-->	
 	<div id="Settings">
@@ -289,7 +302,25 @@
 								,comment:	"test comment" 
 							});
 
-
+	// car lis overview
+	jQuery("#carlisttable").jqGrid({	
+	        datatype: "local",
+	        height: 250,
+	        hiddengrid: true,
+	        colNames:['ID','CarName','Set1','Set2', 'Set3','Comment'],
+	        colModel:[
+					{name:'id', index:'id', formatter: 'integer', width:100},
+					{name:'trackid', index:'trackid', width:100},
+					{name:'trackname', index: 'trackname', width:200},
+					{name:'gridsize', width:40, align:"right"},
+					{name:'refpoint', width:90, align:"center",sorttype:"float"},
+					{name:'comment', width:160, align:"left"},
+	        ],
+	        caption: "List of available Cars with properties.",
+		rowNum: 200,
+	});
+	
+	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
