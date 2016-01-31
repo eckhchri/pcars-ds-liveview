@@ -46,12 +46,18 @@ function Receive_DS_data (url,port,timeout,receivemode){
 //	wait(3);
 //	document.write ( data );
 	
-
-	var aDrivers    	=	new Array();
-	var data		=	new Array();
-	//var aEmptyArray 	=       new Array();
-	//var aEmptyArray 	=	new Object();
-	var aEmptyArray       	=       new Array();
+	var aDrivers		=	new Array();
+	aDrivers.globals = {
+         	"joinable":				"default parameters"
+            ,"lobbyid":				"default parameters"
+            ,"max_member_count":    "default parameters"
+            ,"now":					"default parameters"
+            ,"state":				"default parameters"
+         }
+	aDrivers.driverlist	=	new Array();
+	
+	var data			=	new Array();
+	var aEmptyArray		=	new Array();
 	var TrackName;
 	var TrackID;
 	var PosX;
@@ -76,8 +82,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	try{
 		xmlhttp.send();
 	}catch(err){
-	//	console.log("Error while sending Request to DS!:" + err );
-
+		
+		//	console.log("Error while sending Request to DS!:" + err );
 		switch ( this.receivemode ){
 			case 	"GETDSDATA":  		return aDrivers;
 			
@@ -88,22 +94,20 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			
 			case	"GETCRESTDRIVERDATA":	return aDrivers;
 			
-			case	"GETDSANDDRIVERDATA":	return aEmptyArray;
+			case	"GETDSANDDRIVERDATA":	return aDrivers;
 		} // end switch
 
-		//return aDrivers;
 	}
 
-  	// xmlhttp.timeout = this.timeout;  // could onyl be set in Synchronous mode
-
-
+	// could onyl be set in Synchronous mode
+  	// xmlhttp.timeout = this.timeout;  
 		
 	if (xmlhttp.readyState==4 && xmlhttp.status==200)
 	{	
 
 		//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 		//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
-		var myArr 		= JSON.parse( xmlhttp.responseText );
+		var myArr 			= JSON.parse( xmlhttp.responseText );
 		var arrayoutput 	= myArr.toString();
 		var DriverDummy		= new PCARSdriver();
 		DriverDummy.SetExampleData();
@@ -125,7 +129,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 
 					//	Todo: put all values into Array?
 					data.globals = {
-                                         	"joinable":            myArr.response.joinable
+                                         	"joinable":				myArr.response.joinable
 	                                        ,"lobbyid":             myArr.response.lobbyid
 	                                        ,"max_member_count":    myArr.response.max_member_count
 	                                        ,"now":                 myArr.response.now
@@ -145,9 +149,19 @@ function Receive_DS_data (url,port,timeout,receivemode){
         	                                }
 			}else{
 				// in case of othe stati return a defined value
-				data.globals = {};
+				data.globals = {
+                        "joinable":            "unknown mode"
+                       ,"lobbyid":             "unknown mode"
+                       ,"max_member_count":    "unknown mode"
+                       ,"now":                 "unknown mode"
+                       ,"state":               "unknown mode"
+                       ,"name":                "unknown mode"
+                       ,"TrackId":             "unknown mode"
+                       ,"SessionStage":        "unknown mode"
+                       }
 			}
 
+			//prepare empty array
 			data.driverlist = [];
 			
 			// collect Driverdata
@@ -156,7 +170,6 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				console.log("no Participants found in DS, leave function and use Test data array!");
 
 				// put empty dummy object into array
-				
 				data.driverlist.push( DriverDummy );
 				data.driverlist.push( DriverDummy );
 
@@ -314,6 +327,15 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			
 		case  "GETCRESTDRIVERDATA":
 		
+			//overwrite default values with CRESt specific ones
+			aDrivers.globals = {
+             	"joinable":				"CREST Mode"
+                ,"lobbyid":				"CREST Mode"
+                ,"max_member_count":    "CREST Mode"
+                ,"now":					"CREST Mode"
+                ,"state":				"CREST Mode"
+             }
+			
 			// if no users joined return example Data
 			if ( myArr.participants.mNumParticipants == 0 ){
 			
@@ -326,13 +348,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				return aDrivers;
 			}
 
-			aDrivers.globals = {
-                 	"joinable":				"CREST Mode"
-                    ,"lobbyid":				"CREST Mode"
-                    ,"max_member_count":    "CREST Mode"
-                    ,"now":					"CREST Mode"
-                    ,"state":				"CREST Mode"
-                 }
+			
 			onsole.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);
 			
 		 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);

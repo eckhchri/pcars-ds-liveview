@@ -155,13 +155,13 @@
 
        <script>
 	// initialize vars
-	var aDrivers 	= new Array();		// array for PCARSdriver objects
-	var aSensorData = new Array();		// array of Hashes, each hash includes parameters of a driver
-	var DsServerURL = "www.eckhchri.de";
-	var DsPort	= 9000;
-	var CRESTServerURL = "localhost";
-	var CRESTPort = 8080;
-	var XMLHTTPTimeout = 2000;
+	var aDrivers 		= new Array();		// array for PCARSdriver objects
+	var aSensorData 	= new Array();		// array of Hashes, each hash includes parameters of a driver
+	var DsServerURL 	= "www.eckhchri.de";
+	var DsPort			= 9000;
+	var CRESTServerURL 	= "localhost";
+	var CRESTPort		= 8080;
+	var XMLHTTPTimeout	= 2000;
 	var DisplayDuration = 600;		// duration for displaying marker updates
 	var StopTransitionDelay = "false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
 	var global_i		= 0;
@@ -172,32 +172,31 @@
 	var WORKERDELEAY_DRIVERLIST	=	200;	// in ms
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
-	var APIMODE			=	"DS";   // possible values DS,CREST
+	var APIMODE					=	"DS";   // possible values DS,CREST
 	var PCARSd	= new PCARSdriver(
-                                                                        9234567
-                                                                        ,"NO_PARTICIPANT_TestData"
-                                                                        ,3
-                                                                        ,277
-                                                                        ,278
-                                                                        ,279
-                                                                        ,"StateTest"
-                                                                        ,"Sector1"
-                                                                        ,"123"
-                                                                        ,"123456"
-                                                                        ,"123456"
-                                                                        ,"0"
-                                                                        ,"321"
-                                                                        ,{TrackId: 920145926}
-                                                ); // only use the object to get functions of it
-
+									9234567
+									,"NO_PARTICIPANT_TestData"
+									,3
+									,277
+									,278
+									,279
+									,"StateTest"
+									,"Sector1"
+									,"123"
+									,"123456"
+									,"123456"
+									,"0"
+									,"321"
+									,{TrackId: 920145926}
+								); // only use the object to get functions of it
 
 	// check if url params overwrite the default ds info
 	if (get_url_param('dsurl') && get_url_param('dsport'))
         {
-                DsServerURL     =       get_url_param('dsurl');
-                DsPort          =       get_url_param('dsport');
+			DsServerURL     =       get_url_param('dsurl');
+			DsPort          =       get_url_param('dsport');
 
-		console.log("overwrite ds default settings with: " 
+			console.log("overwrite ds default settings with: " 
 				+ get_url_param('dsurl') 
 				+ " / " 
 				+ get_url_param('dsport'));
@@ -205,11 +204,11 @@
 	
 	// check if url params overwrite the default CREST info
 	if (get_url_param('cresturl') && get_url_param('crestport'))
-        {
-                CRESTServerURL     =       get_url_param('cresturl');
-                CRESTPort          =       get_url_param('crestport');
-                APIMODE		   =	   "CREST";
-                DisplayDuration    =	   400;
+	{
+		CRESTServerURL		=	get_url_param('cresturl');
+		CRESTPort			=	get_url_param('crestport');
+		APIMODE				=	"CREST";
+		DisplayDuration		=	400;
 		document.getElementById("fieldset").elements.namedItem("APIMODE").value = "CREST";
 		
 		console.log("overwrite crest default settings with: " 
@@ -445,93 +444,14 @@
 			refreshTrackList(buildTracklist(e.data));
 			w_tracklist.postMessage({
 								workerdelay: 	WORKERDELEAY_TRACKLIST
-								,dsurl: 	DsServerURL
-								,dsport: 	DsPort
-								,timeout: 	2000
+								,dsurl: 		DsServerURL
+								,dsport: 		DsPort
+								,timeout: 		2000
 								,receivemode: 	"GETTRACKLIST" });
 	}, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
 	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST" });
-
-
-/* obsolete because of receive mode "GETDSANDDRIVERDATA"
-   //TODO: BUT  CREST Mode differentiation must be implemented again maby a  GETDSANDDRIVERDATACREST - Mode
- 
-	// create worker for Driver data updates //////////////////////////////////////////////////////////////////////
-	var workerDRIVERDATA      =       new Worker('./worker_driverdata.js');
-	workerDRIVERDATA.addEventListener('message', function(e) {
-		
-		console.log('Worker3 DriverList and  said: ', e.data);
-		// refresh table of Driver data
-        refreshDriverList(e);
-
-		//todo var declaration needed within loop ???
-		var tmpcuircitID;
-
-		//update map
-		for (var i = 0; i < e.data.length; i++ ){
-
-                        // calculate GPS coordinates
-                        gpsCoTmp =  calc_coordinates (cuircitID , e.data[i].PosX , e.data[i].PosZ );
-
-                        // fill data array
-                        aSensorData[i] = {
-                                        "Key": e.data[i].Name
-                                        ,"MarkerLabel" : e.data[i].RacePosition + "-" + e.data[i].Name
-                                        ,"DateTime":"2013-09-04T09:41:09+10:00"
-                                        ,"Lat": gpsCoTmp["Lat"]
-                                        ,"Long": gpsCoTmp["Long"]
-                                        ,"Heading":286.0
-                                        ,"Speed":22
-                                        }
-                        tmpcuircitID = e.data[i].variousParameters.TrackId;
-                }
-
-		//console.log("++++++++ aSensorData_NEW" , aSensorData);
-		sensorLayer.update(aSensorData);
-
-                //todo: Move map dynamically if cuircit changes to a new GPS coordinate
-		console.log("+++++++++++++++++++++++++++" , aRefPointTMP);
-		console.log("----------- cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID + "--> TrackID change necessary?");
-                //console.log("+++++++++++++++++++++++++++ (aRefPointTMP[tmpcuircitID]" , aRefPointTMP[tmpcuircitID]);
-
-                if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
-
-                        //map.setCenter({lat: 50.332733, lng: 6.943355});
-			changeMapSettings(aRefPointTMP[tmpcuircitID] , map);
-
-                        cuircitID = tmpcuircitID;  // give the global var the new TrackId
-                        console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
-                }
-
-		// start next run of this loop
-		if (APIMODE == "DS"){
-			workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
-                                                ,dsurl: DsServerURL
-                                                ,dsport: DsPort
-                                                ,timeout: 2000
-                                                ,receivemode: "GETDRIVERDATE" });
-		}else{
-			workerDRIVERDATA.postMessage({  workerdelay: WORKERDELEAY_DRIVERLIST
-                                                ,dsurl: CRESTServerURL
-                                                ,dsport: CRESTPort
-                                                ,timeout: 2000
-                                                ,receivemode: "GETCRESTDRIVERDATA" });
-		}
-
-        }, false);
-	
-        //initial call of worker and start the loop
-        if (APIMODE == "DS"){
-        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETDRIVERDATE" });
-        }else{
-        	workerDRIVERDATA.postMessage({workerdelay: 200, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: 2000, receivemode: "GETCRESTDRIVERDATA" });	
-        }
-	//Todo: start a second worker loop with delay, to have continous updates on map
-//	workerDRIVERDATA.postMessage({workerdelay: 3000, dsurl: "www.eckhchri.de", dsport: 9000, timeout: 2000, receivemode: "GETDRIVERDATE" });
-
-*/
 
 
 
@@ -545,18 +465,17 @@
                 colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
                 colModel:[
                         {name:'refid',index:'invdate', width:40},
-			{name:'driverposition',index:'name', width:15, search:true},
+						{name:'driverposition',index:'name', width:15, search:true},
                         {name:'drivername',index:'name', width:75, search:true},
-			{name:'driverstate',width:40, align:"center",sorttype:"float"},
-			{name:'driversector',width:10, align:"center",sorttype:"float"},
-			{name:'fastestlap',width:20, align:"center",sorttype:"float"},
-			{name:'lastlap',width:20, align:"center",sorttype:"float"},
-			{name:'posx',width:20, align:"center",sorttype:"float"},
+						{name:'driverstate',width:40, align:"center",sorttype:"float"},
+						{name:'driversector',width:10, align:"center",sorttype:"float"},
+						{name:'fastestlap',width:20, align:"center",sorttype:"float"},
+						{name:'lastlap',width:20, align:"center",sorttype:"float"},
+						{name:'posx',width:20, align:"center",sorttype:"float"},
                         {name:'posy',width:20, align:"center",sorttype:"float"},
                         {name:'posz',width:20, align:"center",sorttype:"float"}
                 ]
 	});
-
 	
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
@@ -817,7 +736,7 @@ function refreshDriverList(a)
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
-	console.log ("++++++++ length of data:" + a.length);
+	console.log ("++++++++ length of driverlist array:" + a.length);
 	for (i=0; i < a.length; i++)
 	{
 		//console.log("update data on row: " + i + " / " + a.data);
