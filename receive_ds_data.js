@@ -1,8 +1,8 @@
 // Module for recaive data from ProjectCARS dedicated server
 // requirements:    JQUERY  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
-//Receive_DS_data("www.eckhchri.de",9000);
-// http://www.eckhchri.de:9000/api/session/status?attributes&members&participants
+//Receive_DS_data("[DS URL]]",9000);
+// http://[DS URL]:9000/api/session/status?attributes&members&participants
 
 function TestFunc(p1 , p2)
 {
