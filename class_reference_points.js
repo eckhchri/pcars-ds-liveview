@@ -676,6 +676,13 @@ function Refpoint(circuit_id)
 	//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
 	aRefPoints[0] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track"});
 	
+	//Bannochbrae Road Circuit 
+	aRefPoints[-602684269] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Bannochbrae Road Circuit"
+		,"Comment": 	"fictional track"
+        });
+	
 	//// fictional Kart tracks	
 	//Summerton
 	aRefPoints[-44748320] = CopyObjectWithModifications(aRefPoints[8888888888],
