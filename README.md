@@ -16,7 +16,7 @@ Project CARS Dedicated live view (pcars-ds-liveview)
 - CREST API - http://cars-rest-api.com/
 
 **Default parameter**:
-- dedicated server url:   www.eckhchri.de
+- dedicated server url:   MY-URL.com
 - dedicated server port:  9000
 - CREST server url:       localhost
 - CREST server port:      8080
