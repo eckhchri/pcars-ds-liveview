@@ -9,6 +9,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
  
+ 	 <script src="./config.js" charset="utf-8"></script>
 	 <script src="./pcars_driver.js" charset="utf-8"></script>
 	 <script src="./pcars_track.js" charset="utf-8"></script>
 	 <script src="./receive_ds_data.js" charset="utf-8"></script>
@@ -95,6 +96,10 @@
 				top:            45px;
 				background:	lightgrey
 	     }
+	     #hide or unhide objects
+	     starthidden {
+   				 display: none;
+  		}
 
 	     #Settings{
 		position:       absolute;
@@ -133,7 +138,7 @@
 	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br>----- Settings ----<br><p5></p5><br><p6></p6></div>
 	<div id="DriverDataArea">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
-		<table id="DriverDataTable"></table></div>	
+		<table id="DriverDataTable"></table></div>
 	<div id="TrackList">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
 		<table id="tracklisttable"></table>
@@ -168,16 +173,12 @@
 
        <script>
 	// initialize vars
-	var aDrivers 		= new Array();		// array for PCARSdriver objects
-	var aSensorData 	= new Array();		// array of Hashes, each hash includes parameters of a driver
-	var DsServerURL 	= "MY-URL.com";
-	var DsPort			= 9000;
-	var CRESTServerURL 	= "localhost";
-	var CRESTPort		= 8080;
-	var XMLHTTPTimeout	= 2000;
-	var DisplayDuration = 600;		// duration for displaying marker updates
+	var aDrivers 			= new Array();		// array for PCARSdriver objects
+	var aSensorData 		= new Array();		// array of Hashes, each hash includes parameters of a driver
+	var XMLHTTPTimeout		= 2000;
+	var DisplayDuration 	= 600;		// duration for displaying marker updates
 	var StopTransitionDelay = "false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
-	var global_i		= 0;
+	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
 	var aRefPointTMP;			// hash of all RefPoints for available tracks
@@ -202,7 +203,16 @@
 									,"321"
 									,{TrackId: 920145926}
 								); // only use the object to get functions of it
-
+						
+								
+	// hide or unhide objects defined within config.js
+	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();			}
+	if ( SHOWDSDATA 	== false ) { 	$( "#DSdata" ).hide();				}						
+	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();		}
+	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();			}
+	
+	
+								
 	// check if url params overwrite the default ds info
 	if (get_url_param('dsurl') && get_url_param('dsport'))
         {
@@ -332,7 +342,7 @@
 		console.log('+++++++++++++++++++++++++++++++++++++++ Worker returned: ', e.data);
 		
 		// write in HTML page for DS status
-		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort;
+		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
 		document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   	' + e.data.globals.state;
 		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: 	' + e.data.globals.joinable;
 		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: 	' + e.data.globals.lobbyid;
@@ -394,8 +404,8 @@
 			//CREST receive mode
 			workerDSDATA.postMessage({
 				workerdelay: 	100
-				,dsurl:			CRESTServerURL
-				,dsport:		CRESTPort
+				,dsurl:			DsServerURL
+				,dsport:		DsPort
 				,timeout:		XMLHTTPTimeout
 				,receivemode:	"GETCRESTDRIVERDATA"});
 		}
