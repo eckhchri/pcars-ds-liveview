@@ -349,7 +349,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			}
 
 			
-			onsole.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);
+			console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);
 			
 		 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 			TrackID = GetTrackIDbyName(TrackName);
