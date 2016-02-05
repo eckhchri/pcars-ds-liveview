@@ -226,9 +226,9 @@
 	if (get_url_param('cresturl') && get_url_param('crestport'))
 	{
 		CRESTServerURL		=	get_url_param('cresturl');
-		CRESTPort			=	get_url_param('crestport');
-		APIMODE				=	"CREST";
-		DisplayDuration		=	400;
+		CRESTPort		=	get_url_param('crestport');
+		APIMODE			=	"CREST";
+		DisplayDuration		=	DisplayDurationCREST;
 		document.getElementById("fieldset").elements.namedItem("APIMODE").value = "CREST";
 		
 		console.log("overwrite crest default settings with: " 
