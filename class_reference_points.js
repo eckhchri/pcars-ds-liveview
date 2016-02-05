@@ -725,11 +725,21 @@ function Refpoint(circuit_id)
 	
 	//// Historic Tracks
 	//Rouen Les Essarts
-	aRefPoints[-1031249929] = CopyObjectWithModifications(aRefPoints[8888888888],
+	aRefPoints[-1031249929] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"Name":         "Rouen Les Essarts"
-		,"Comment": 	"find out refPoint"
-	});
+		"refLat":        49.333052
+		,"refLong":      1.010787
+		,"rotation":     55.5
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1.04
+		,"Name":         "Rouen Les Essarts"
+		,"Zoom":         14
+		,"MapInitLat":   49.333581
+		,"MapInitLong":  1.004589
+		,"Comment": "live check"
+		});
 	//Rouen Les Essarts Short
 	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short"});
 	
