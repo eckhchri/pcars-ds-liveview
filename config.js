@@ -12,7 +12,7 @@ var SHOWSETTINGS	=	true;	// [true|false]
 
 //defines a delay for each worker to reduce CPU load
 var WORKERDELAY_TRACKLIST	=	5000; 	// in ms
-var WORKERDELEAY_DRIVERLIST	=	200;    // in ms
+var WORKERDELAY_DRIVERLIST	=	200;    // in ms
 
 var DisplayDuration 		  = 600;		// duration for displaying marker updates
 var DisplayDurationCREST 	= 400;		// duration for displaying marker updates
