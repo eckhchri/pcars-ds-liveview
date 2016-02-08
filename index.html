@@ -458,10 +458,10 @@
 
 		if ($('#cbTracklistRefresh').is(':checked') == true) {
 			StopRefreshTracklist 	= "true";
-			WORKERDELEAY_TRACKLIST 	= 10000;
+			WORKERDELAY_TRACKLIST 	= 10000;
 		}else{
 			StopRefreshTracklist 	= "false";
-			WORKERDELEAY_TRACKLIST	= 5000;
+			WORKERDELAY_TRACKLIST	= 5000;
 		}
 	})
 
@@ -481,7 +481,7 @@
 //			refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
 			refreshTrackList(buildTracklist(e.data));
 			w_tracklist.postMessage({
-								workerdelay: 	WORKERDELEAY_TRACKLIST
+								workerdelay: 	WORKERDELAY_TRACKLIST
 								,dsurl: 		DsServerURL
 								,dsport: 		DsPort
 								,timeout: 		2000
