@@ -392,7 +392,7 @@
 		if (APIMODE == "DS"){
 			//DS receive mode
 			workerDSDATA.postMessage({
-				workerdelay: 		WORKERDELAY_DRIVERLIST
+				workerdelay: 		WORKERDELAY_DSDATA
 				,dsurl:			DsServerURL
 				,dsport:		DsPort
 				,timeout:		XMLHTTPTimeout
@@ -400,7 +400,7 @@
 		}else{
 			//CREST receive mode
 			workerDSDATA.postMessage({
-				workerdelay: 		WORKERDELAY_DRIVERLIST
+				workerdelay: 		WORKERDELAY_DSDATA
 				,dsurl:			CRESTServerURL
 				,dsport:		CRESTPort
 				,timeout:		XMLHTTPTimeout
