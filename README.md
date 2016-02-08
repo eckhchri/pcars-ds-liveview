@@ -1,4 +1,4 @@
-Project CARS Dedicated live view (pcars-ds-liveview)
+Project CARS Dedicated Server live view (pcars-ds-liveview)
 
 **Usage**:
 - Using default parameter: http://[your Webserver url]/index.html
