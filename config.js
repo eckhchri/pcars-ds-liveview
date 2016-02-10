@@ -6,6 +6,7 @@ var CRESTPort		= 8080;
 
 //hide or unhide elements
 var	SHOWTRACKLIST 	=	true;	// [true|false]
+var SHOWCARLIST = true; 	// [true|false]
 var	SHOWDSDATA 		=	true;	// [true|false]
 var	SHOWDRIVERDATA 	=	true;	// [true|false]
 var SHOWSETTINGS	=	true;	// [true|false]
