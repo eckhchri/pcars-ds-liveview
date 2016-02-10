@@ -33,6 +33,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				,"GETDSDATA"	 	: "/api/session/status?attributes&members&participants"
 				,"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants"
 				,"GETTRACKLIST"  	: "/api/list/tracks"
+				,"GETVEHICLELIST"  	: "/api/list/vehicles"
 				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?participants=true&eventInformation=true"
 			};	
 
@@ -91,6 +92,8 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			case  	"GETDRIVERDATE":	return aDrivers;	
 
 			case	"GETTRACKLIST":		return aEmptyArray;
+			
+			case	"GETVEHICLELIST":	return aEmptyArray;
 			
 			case	"GETCRESTDRIVERDATA":	return aDrivers;
 			
@@ -324,6 +327,40 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			//console.log("+++++++++++++++ aTrackList: " , aTrackList);			
 
 			return aTrackList;
+			
+		case "GETVEHICLELIST":
+
+			// todo: Auslesen der trackIDs und den dazugehoerigen Namen
+
+			// if no users joined return example Data
+			console.log("++++++++++++++++ GETVEHICLELIST / received data" , myArr );
+			// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+                        if ( myArr.response.list.length == 0 ){
+
+                                console.log("no Participants found in DS, leave function!");
+                                aDrivers.push ( DriverDummy );        
+                                return aDrivers;
+                        }
+			
+			//console.log("++++TRACKLIST: " ,  myArr);
+
+			var aVehicleList = new Array;
+
+			for (var i = 0;i<myArr.response.list.length;i++)
+                        {
+				//build array of PCARSTRACK objects 
+				aVehicleList.push (  
+							new PCARSVEHICLE (
+								myArr.response.list[i].id,
+								myArr.response.list[i].name,
+								myArr.response.list[i].class
+							)
+						);
+			}							
+
+			//console.log("+++++++++++++++ aTrackList: " , aTrackList);			
+
+			return aVehicleList;
 			
 		case  "GETCRESTDRIVERDATA":
 		
