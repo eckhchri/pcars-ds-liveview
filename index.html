@@ -72,14 +72,14 @@
 	     #TrackList{
 				position:       absolute;
                 left:           5%;
-                top:            0px;
+                top:            45px;
                 border:         1;
 				text-align: 	center;
 	     }
 	     
 	     #CarList{
 				position:       absolute;
-                left:           10%;
+                left:           5%;
                 top:            90px;
                 border:         1;
 				text-align: 	center;
@@ -94,7 +94,7 @@
 	     #DriverDataArea{
 				position:       absolute;
 				left:           5%;
-				top:            45px;
+				top:            0px;
 				background:	lightgrey
 	     }
 	     #hide or unhide objects
@@ -134,18 +134,19 @@
      </head>
    <body>
 
-	<!-- definition of data areas-->
+	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
 	<div id="map"></div>
 	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br>----- Settings ----<br><p5></p5><br><p6></p6></div>
-	<div id="DriverDataArea">
-		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
-		<table id="DriverDataTable"></table></div>
+	<div id="CarList">
+		<table id="carlisttable"></table>
+	</div>
 	<div id="TrackList">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
 		<table id="tracklisttable"></table>
 	</div>
-	<div id="CarList">
-		<table id="carlisttable"></table>
+	<div id="DriverDataArea">
+		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
+		<table id="DriverDataTable"></table>
 	</div>
 
 	<!-- definition of option panel-->	
