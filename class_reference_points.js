@@ -804,7 +804,12 @@ function GetRefPoint(circuit_id){
 
 function GetCircuitnameByTrackID (circuit_id)
 {
-//	return aRefPoints[circuit_id]["Name"];
+	if ( aRefPoints[circuit_id] ){
+		return aRefPoints[circuit_id]["Name"];
+	}
+	else{
+		return "not defined";
+	}
 }
 
 // todo: use a function to copy cuircit variantions from one object to another

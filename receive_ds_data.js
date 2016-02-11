@@ -115,7 +115,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 		var DriverDummy		= new PCARSdriver();
 		DriverDummy.SetExampleData();
 
-		//console.log("ReceiveDsData complete array" , myArr);
+		console.log("ReceiveDsData complete array" , myArr);
 
 	   switch ( this.receivemode ) {
 
@@ -147,8 +147,6 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	                                        ,"now":                 myArr.response.now
 	                                        ,"state":               myArr.response.state
 	                                        ,"name":                myArr.response.name
-	                                        ,"TrackId":             myArr.response.attributes.TrackId
-	                                        ,"SessionStage":        myArr.response.attributes.SessionStage
         	                                }
 			}else{
 				// in case of othe stati return a defined value
@@ -159,10 +157,15 @@ function Receive_DS_data (url,port,timeout,receivemode){
                        ,"now":                 "unknown mode"
                        ,"state":               "unknown mode"
                        ,"name":                "unknown mode"
-                       ,"TrackId":             "unknown mode"
-                       ,"SessionStage":        "unknown mode"
                        }
 			}
+			data.globals.attributes = new Array();
+			//cath all attributes
+			for (var key in myArr.response.attributes) {
+			
+				data.globals.attributes[key] =  myArr.response.attributes[key];
+			}
+			
 
 			//prepare empty array
 			data.driverlist = [];
@@ -209,46 +212,10 @@ function Receive_DS_data (url,port,timeout,receivemode){
 				return data;
 			}
 			
-
-
 			return data;
 
-/* obsolete because of recaive mode	 "GETDSANDDRIVERDATA"
-		case  "GETDSDATA":
-
-			// return common data of the DS Server
-
-			if ( myArr.response.state == "Idle" ){
-		
-				return { 
-					 "joinable":		myArr.response.joinable
-					,"lobbyid":		myArr.response.lobbyid
-					,"max_member_count":	myArr.response.max_member_count
-					,"now":			myArr.response.now
-					,"state":		myArr.response.state
-					}
-			}
-
-			if ( myArr.response.state == "Running" ){
-
-                                return {
-                                         "joinable":            myArr.response.joinable
-                                        ,"lobbyid":             myArr.response.lobbyid
-                                        ,"max_member_count":    myArr.response.max_member_count
-                                        ,"now":                 myArr.response.now
-                                        ,"state":               myArr.response.state
-                                        ,"name":		myArr.response.name
-					,"TrackId":		myArr.response.attributes.TrackId
-					,"SessionStage":	myArr.response.attributes.SessionStage
-					}
-                        }
 			
-			// default
-			var empty  = new Array;
-			return empty;
-*/
-
-
+			
 		case  "GETDRIVERDATE":
 		
 			// if no users joined return example Data

@@ -60,13 +60,13 @@
                  padding: 0;
              }
 	     #DSdata{
-		position: 	absolute; 
-		left: 		55%; 
-		top: 		0px; 
-		width: 		300px; 
-		height: 	145px;
-		border:		1;
-		background:	lightgreen;
+				position: 	absolute; 
+				left: 		55%; 
+				top: 		0px; 
+				width: 		300px; 
+				height: 	190px;
+				border:		1;
+				background:	lightgreen;
 	     }
 
 	     #TrackList{
@@ -136,7 +136,11 @@
 
 	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
 	<div id="map"></div>
-	<div id="DSdata"><p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br>----- Settings ----<br><p5></p5><br><p6></p6></div>
+	<div id="DSdata">
+		<p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br><p7></p7><br><p8></p8><br><p9></p9><br>----- Settings ----<br><p5></p5><br><p6></p6>
+		<div id="DSdataInformation"></div>
+		<div id="DSdataSettings"></div>
+	</div>
 	<div id="CarList">
 		<table id="carlisttable"></table>
 	</div>
@@ -182,7 +186,7 @@
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
-	var aRefPointTMP;			// hash of all RefPoints for available tracks
+	var aRefPointTMP		= new Refpoint();			// hash of all RefPoints for available tracks
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
@@ -350,6 +354,16 @@
 		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      	' + e.data.globals.now; 
 		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
 		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
+		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + aRefPointTMP[e.data.globals.attributes.TrackId]["Name"];
+		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + e.data.globals.attributes.SessionStage;
+		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + e.data.globals.attributes.SessionState;
+		
+		//todo:  replace document.get... by Jquery functionality
+		//$('#DSdataInformation').append( 
+		//				$("<p0>").text("DS URL2: " + DsServerURL + " : " +  DsPort)
+		//);
+		
+		
 		
 		
 		/////////////////////////////////////////// update driver data /////////////////////
