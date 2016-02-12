@@ -55,6 +55,11 @@ function Receive_DS_data (url,port,timeout,receivemode){
             ,"now":					"default parameters"
             ,"state":				"default parameters"
          }
+        aDrivers.globals.attributes = new Array();
+        aDrivers.globals.attributes.TrackId = 0;
+        aDrivers.globals.attributes.SessionStage = "NA";
+        aDrivers.globals.attributes.SessionState = "NA";
+
 	aDrivers.driverlist	=	new Array();
 	
 	var data			=	new Array();
