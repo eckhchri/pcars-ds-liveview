@@ -343,7 +343,11 @@ function Receive_DS_data (url,port,timeout,receivemode){
                 ,"max_member_count":    "CREST Mode"
                 ,"now":					"CREST Mode"
                 ,"state":				"CREST Mode"
-             }
+             	}
+             	aDrivers.globals.attributes = new Array();
+        	aDrivers.globals.attributes.TrackId = 0;
+        	aDrivers.globals.attributes.SessionStage = "NA";
+	 	aDrivers.globals.attributes.SessionState = "NA";
 			
 			// if no users joined return example Data
 			if ( myArr.participants.mNumParticipants == 0 ){
