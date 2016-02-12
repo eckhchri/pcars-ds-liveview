@@ -32,7 +32,10 @@ function Refpoint(circuit_id)
                 ,"MapInitLong":  -0.071795
                 ,"Comment": "Default"
                 };
-                
+        
+        //Default for idle DS server
+        aRefPoints[0] = CopyObjectWithModifications(aRefPoints[9999999999],{});
+        
         //Default for fictional tracks
         aRefPoints[8888888888] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
