@@ -674,7 +674,7 @@ function Refpoint(circuit_id)
 	//Mojave Sidewinder
 	aRefPoints[-1463443929] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Sidewinder"});
 	//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
-	aRefPoints[0] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track"});
+	aRefPoints[-1] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track"});
 	
 	//Bannochbrae Road Circuit 
 	aRefPoints[-602684269] = CopyObjectWithModifications(aRefPoints[8888888888],
