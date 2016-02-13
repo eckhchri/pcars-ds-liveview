@@ -131,14 +131,25 @@ function SetExampleData()
 function _ConvertLaptimeInReadbaleFormat(milliseconds)
 {
 	//todo: implemet date format with leading zeros for seconds and milliseconds
-	var date = new Date(milliseconds);
+	//var date = new Date(milliseconds);
 	var str = '';
   //    str += date.getUTCDate()-1 + " ";		//days
   //    str += date.getUTCHours() + ":";		//hours
-        str += date.getUTCMinutes() + ":";		//minutes
-        str += date.getUTCSeconds() + ":";		//seconds
-        str += date.getUTCMilliseconds();		//miliseconds
+        //str += date.getUTCMinutes() + ":";		//minutes
+        //str += date.getUTCSeconds() + ":";		//seconds
+        //str += date.getUTCMilliseconds();		//miliseconds
  //     console.log("Time Formated string:" + str);
+
+	var ms = parseInt((milliseconds%1000))
+        , s = parseInt((milliseconds/1000)%60)
+        , m = parseInt((milliseconds/(1000*60))%60);
+
+        m = (m < 10) ? "0" + m : m;
+        s = (s < 10) ? "0" + s : s;
+        ms = (ms < 10) ? "00" + ms : ms;
+        ms = (ms > 9 && ms < 100) ? "0" + ms : ms;
+
+        str = m + ":" + s + "." + ms;
 
 	return str;
 }
