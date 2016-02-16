@@ -485,7 +485,7 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check"
                 };
 	//Ruapuna Park Outer Loop
-	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "Ruapuna Park Outer_Loop"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Outer_Loop"
+	aRefPoints[1940584155] =
 		{
                 "refLat":        -43.533275
                 ,"refLong":      172.478130
@@ -1776,7 +1776,7 @@ function Refpoint(circuit_id)
 		};
 	
 	//Hockenheim Classic - copy of Hockenheim GP
-	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": ""});
+	aRefPoints[1552853772] =
 		{
 		"refLat":        49.329738
 		,"refLong":      8.574270
@@ -1794,7 +1794,7 @@ function Refpoint(circuit_id)
 		};
 	
 	//Silverstone Classic - copy of Silverstone GP
-	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Classic","Name2": ""});
+	aRefPoints[-1194290828] =
 		{
                 "refLat":        52.078807
                 ,"refLong":      -1.015293
