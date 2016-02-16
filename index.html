@@ -375,7 +375,7 @@
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 
 				// calculate GPS coordinates
-				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ );
+				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
 
 				// fill data array
 				aSensorData[i] = {
@@ -442,7 +442,7 @@
 
 		// calculate GPS coordinates
 		console.log("-------- aDrivers: " , aDrivers[i] );
-		gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() );
+		gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() , aRefPointTMP );
 
 		// fill data array
 		aSensorData[i] = {

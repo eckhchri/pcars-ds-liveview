@@ -787,6 +787,7 @@ function Refpoint(circuit_id)
 		};
 */
 
+	// todo: normal we have to return "this" as the object, not the array
 	return aRefPoints;
 	/////////////////////// function of this object
 

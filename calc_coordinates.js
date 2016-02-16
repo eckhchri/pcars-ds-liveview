@@ -11,9 +11,7 @@
 // http://www.latlong.net/Show-Latitude-Longitude.html
 
 
-function calc_coordinates (circuit_id,PosX,PosY){
-
-	var aRefPointTmp         =       new Refpoint(circuit_id);
+function calc_coordinates (circuit_id,PosX,PosY, aRefPointTmp){
 
 	// define variables
 	var rotation = degreeToRadians ( aRefPointTmp[circuit_id]["rotation"] );           //rotation angle in radian, because Math.cos() needs angle in radian
