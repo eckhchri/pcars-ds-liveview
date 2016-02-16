@@ -412,7 +412,8 @@
 				,dsurl:			DsServerURL
 				,dsport:		DsPort
 				,timeout:		XMLHTTPTimeout
-				,receivemode:	"GETDSANDDRIVERDATA"});
+				,receivemode:	"GETDSANDDRIVERDATA"
+				,arefpoint:		aRefPointTMP});
 		}else{
 			//CREST receive mode
 			workerDSDATA.postMessage({
@@ -420,12 +421,13 @@
 				,dsurl:			CRESTServerURL
 				,dsport:		CRESTPort
 				,timeout:		XMLHTTPTimeout
-				,receivemode:	"GETCRESTDRIVERDATA"});
+				,receivemode:	"GETCRESTDRIVERDATA"
+				,arefpoint:		aRefPointTMP});
 		}
 		
 	}, false);
 	//initail call of the worker
-	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA"});
+	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
 
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -433,9 +435,9 @@
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
 	// initial call for map initialization
 	if (APIMODE == "DS"){
-		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA");
+		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
 	}else{
-		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA");
+		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
 	}
 	
 	for (var i = 0; i < aDrivers.length; i++ ){
@@ -501,11 +503,12 @@
 								,dsurl: 		DsServerURL
 								,dsport: 		DsPort
 								,timeout: 		2000
-								,receivemode: 	"GETTRACKLIST" });
+								,receivemode: 	"GETTRACKLIST" 
+								,arefpoint:		aRefPointTMP});
 	}, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
-	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST" });
+	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST", arefpoint: aRefPointTMP });
 
 
 

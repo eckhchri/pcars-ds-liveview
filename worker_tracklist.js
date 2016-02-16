@@ -11,7 +11,7 @@ self.addEventListener('message', function(e) {
 	//Syntax:  setTimeout(function,milliseconds,param1,param2,...)
 	var aTrackList = setTimeout(function(){
 		
-		var a = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode);
+		var a = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode, e.data.arefpoint);
 		//console.log("Worker: DS Tracklist from Receive_DS_data(): " , a);
 
 		// return result to main thread after timeout

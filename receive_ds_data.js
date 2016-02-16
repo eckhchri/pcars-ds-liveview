@@ -9,7 +9,7 @@ function TestFunc(p1 , p2)
 	return p1 * p2;
 }
 
-function Receive_DS_data (url,port,timeout,receivemode){
+function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 
 
 	// todo:   Globale variablen füllen ???? oder als Rueckgabewert aus der Function?
@@ -18,6 +18,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 	this.fullurl		=	'http://' +  url + ':' + port;
 	this.timeout		=	timeout;
 	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
+	this.aRefPointTMP	=	aRefPointTMP;		// hash off all available RefPoints
 
 	//console.log("Receive_DS_data() --- receivemode: " , receivemode);
 
@@ -365,7 +366,7 @@ function Receive_DS_data (url,port,timeout,receivemode){
 			console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);
 			
 		 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
-			TrackID = GetTrackIDbyName(TrackName);
+			TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
 
 			for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
 			{
@@ -424,11 +425,11 @@ function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation)
         
         return TrackName;
 }
-function GetTrackIDbyName(TrackName)
+function GetTrackIDbyName(TrackName , TMP_RefPoint)
 {
        //returns the TrackID for the Game API Name
         var TMP_TrackID = 9999999999;   //Default TrackID
-        var TMP_RefPoint = new Refpoint();
+        //var TMP_RefPoint = new Refpoint();
         var TMP_Name;
         
         for (var key in TMP_RefPoint){
