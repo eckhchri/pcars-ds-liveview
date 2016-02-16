@@ -22,9 +22,9 @@ function Refpoint(circuit_id)
                 ,"refLong":      -0.071795			
                 ,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
                 ,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
-				,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
-				,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
-				,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
+		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
+		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
+		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
                 ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
                 ,"Zoom":         19				// wanted zoom level for initial google map
@@ -40,9 +40,9 @@ function Refpoint(circuit_id)
                 ,"refLong":      -0.071795			
                 ,"rotation":     0			
                 ,"cor_r_Long":   0			
-				,"cor_r_Lat":    0				
-				,"cor_PosX_mul": 1				
-				,"cor_PosY_mul": 1				
+		,"cor_r_Lat":    0				
+		,"cor_PosX_mul": 1				
+		,"cor_PosY_mul": 1				
                 ,"Name":         "Slightly Mad Studios Ltd"	
                 ,"Name2":	 ""				
                 ,"Zoom":         19				
@@ -56,13 +56,13 @@ function Refpoint(circuit_id)
                 {
                 "refLat":        62.552546
                 ,"refLong":      -45.678026
-				,"rotation":     0			
+		,"rotation":     0			
                 ,"cor_r_Long":   0			
-				,"cor_r_Lat":    0				
-				,"cor_PosX_mul": 1				
-				,"cor_PosY_mul": 1				
+		,"cor_r_Lat":    0				
+		,"cor_PosX_mul": 1				
+		,"cor_PosY_mul": 1				
                 ,"Name":         "Greenland"
-				,"Name2":	 ""	
+		,"Name2":	 ""	
                 ,"Zoom":         15
                 ,"MapInitLat":   41.036357
                 ,"MapInitLong":  -113.535295
@@ -87,9 +87,39 @@ function Refpoint(circuit_id)
                 ,"Comment": "finetuning" 
         	};
 	//Hockenheim Short
-	//aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short","Name2": ""});
+	aRefPoints[1768660198] =
+		{
+                "refLat":        49.329738
+                ,"refLong":      8.574270
+                ,"rotation":     0.573
+                ,"cor_r_Long":   45000000
+		,"cor_r_Lat":	 0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Hockenheim Short"
+                ,"Name2":	 ""
+                ,"Zoom":         16
+                ,"MapInitLat":   49.329718
+                ,"MapInitLong":  8.574300
+                ,"Comment": "finetuning" 
+        	};
 	//Hockenheim National
-	//aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim National","Name2": ""});
+	aRefPoints[-1977142985] =
+		{
+                "refLat":        49.329738
+                ,"refLong":      8.574270
+                ,"rotation":     0.573
+                ,"cor_r_Long":   45000000
+		,"cor_r_Lat":	 0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Hockenheim National"
+                ,"Name2":	 ""
+                ,"Zoom":         16
+                ,"MapInitLat":   49.329718
+                ,"MapInitLong":  8.574300
+                ,"Comment": "finetuning" 
+        	};
 
 	//Dubai Autodrome GP
 	aRefPoints[-661887517] = 
@@ -110,13 +140,73 @@ function Refpoint(circuit_id)
 		};
 
 	///Dubai Autodrome International
-	//aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International","Name2": ""});
+	aRefPoints[-710712693] =
+		{ 
+		"refLat":      	 25.046650      
+		,"refLong":   	 55.231300
+	  	,"rotation":     -0.401
+	   	,"cor_r_Long":   45000000
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+	        ,"Name":         "Dubai Autodrome International"
+	        ,"Name2":	 ""
+	        ,"Zoom":         17
+	        ,"MapInitLat":   25.050102
+	        ,"MapInitLong":  55.238634
+	        ,"Comment": "live check"
+		};
 	//Dubai Kartdrome
-	//aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": ""});
+	aRefPoints[-232513374] =
+		{ 
+		"refLat":      	 25.046650      
+		,"refLong":   	 55.231300
+	  	,"rotation":     -0.401
+	   	,"cor_r_Long":   45000000
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+	        ,"Name":         "Dubai Kartdrome"
+	        ,"Name2":	 ""
+	        ,"Zoom":         17
+	        ,"MapInitLat":   25.050102
+	        ,"MapInitLong":  55.238634
+	        ,"Comment": "live check"
+		};
 	//Dubai Autodrome National
-	//aRefPoints[-31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": ""});
+	aRefPoints[-31727447] =
+		{ 
+		"refLat":      	 25.046650      
+		,"refLong":   	 55.231300
+	  	,"rotation":     -0.401
+	   	,"cor_r_Long":   45000000
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+	        ,"Name":         "Dubai Autodrome National"
+	        ,"Name2":	 ""
+	        ,"Zoom":         17
+	        ,"MapInitLat":   25.050102
+	        ,"MapInitLong":  55.238634
+	        ,"Comment": "live check"
+		};
 	//Dubai Autodrome Club
-	//aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": ""});
+	aRefPoints[1735854797] =
+		{ 
+		"refLat":      	 25.046650      
+		,"refLong":   	 55.231300
+	  	,"rotation":     -0.401
+	   	,"cor_r_Long":   45000000
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+	        ,"Name":         "Dubai Autodrome Club"
+	        ,"Name2":	 ""
+	        ,"Zoom":         17
+	        ,"MapInitLat":   25.050102
+	        ,"MapInitLong":  55.238634
+	        ,"Comment": "live check"
+		};
 
 	//Nuerburgring GP
         aRefPoints[-945967394] = 
@@ -135,13 +225,57 @@ function Refpoint(circuit_id)
                 ,"MapInitLong":  6.940467
                 ,"Comment": "live check"
                 };
-
 	//Nuerburgring Sprint Short
-	//aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint Short","Name2": ""});
+	aRefPoints[-810715843] =
+		{
+                "refLat":        50.332733 
+                ,"refLong":      6.943355
+                ,"rotation":     -0.9 
+                ,"cor_r_Long":   30000000
+		,"cor_r_Lat":    -30000000 
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Nürburgring Sprint Short"
+                ,"Name2":	 ""
+                ,"Zoom":         15
+                ,"MapInitLat":   50.332154
+                ,"MapInitLong":  6.940467
+                ,"Comment": "live check"
+                };
 	//Nuerburgring Sprint
-	//aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint","Name2": ""});
+	aRefPoints[-709737101] =
+		{
+                "refLat":        50.332733 
+                ,"refLong":      6.943355
+                ,"rotation":     -0.9 
+                ,"cor_r_Long":   30000000
+		,"cor_r_Lat":    -30000000 
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Nürburgring Sprint"
+                ,"Name2":	 ""
+                ,"Zoom":         15
+                ,"MapInitLat":   50.332154
+                ,"MapInitLong":  6.940467
+                ,"Comment": "live check"
+                };
 	//Nuerburgring Muellenbach
-	//aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Müllenbach","Name2": "Nürburgring MuellenBach"});	//"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
+	aRefPoints[-246966400] =
+		{
+                "refLat":        50.332733 
+                ,"refLong":      6.943355
+                ,"rotation":     -0.9 
+                ,"cor_r_Long":   30000000
+		,"cor_r_Lat":    -30000000 
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Nürburgring Müllenbach"
+                ,"Name2":	 "Nürburgring MuellenBach"	//"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
+                ,"Zoom":         15
+                ,"MapInitLat":   50.332154
+                ,"MapInitLong":  6.940467
+                ,"Comment": "live check"
+                };
 
 	//Nordschleife
         aRefPoints[697498609] = 
@@ -161,11 +295,56 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check, big discrepancies on some parts of track"
                 };
 	//Nordschleife Stage 3
-	//aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3","Name2": ""});
+	aRefPoints[1128950148] =
+		{
+                "refLat":        50.332733
+                ,"refLong":      6.943385
+                ,"rotation":     -0.9
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Nordschleife Stage 3"
+                ,"Name2":	 ""
+                ,"Zoom":         13
+                ,"MapInitLat":   50.359101
+                ,"MapInitLong":  6.962529
+                ,"Comment": "live check, big discrepancies on some parts of track"
+                };
 	//Nordschleife Stage 1
-	//aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 1","Name2": ""});
+	aRefPoints[1459212514] =
+		{
+                "refLat":        50.332733
+                ,"refLong":      6.943385
+                ,"rotation":     -0.9
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Nordschleife Stage 1"
+                ,"Name2":	 ""
+                ,"Zoom":         13
+                ,"MapInitLat":   50.359101
+                ,"MapInitLong":  6.962529
+                ,"Comment": "live check, big discrepancies on some parts of track"
+                };
 	//Nordschleife Stage 2
-	//aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 2","Name2": ""});
+	aRefPoints[-300387291] =
+		{
+                "refLat":        50.332733
+                ,"refLong":      6.943385
+                ,"rotation":     -0.9
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    0
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+                ,"Name":         "Nordschleife Stage 2"
+                ,"Name2":	 ""
+                ,"Zoom":         13
+                ,"MapInitLat":   50.359101
+                ,"MapInitLong":  6.962529
+                ,"Comment": "live check, big discrepancies on some parts of track"
+                };
 	
 	//Sonoma Raceway
         aRefPoints[-1454279631] = 
