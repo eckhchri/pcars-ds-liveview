@@ -16,40 +16,40 @@ function Refpoint(circuit_id)
 	
 	//Default
 	//aRefPoints[9999999999] = new Array();
-        aRefPoints[9999999999] =
-                {
-                "refLat":        51.500681			// GPS coords of the zero point, where X=0 and Z=0
-                ,"refLong":      -0.071795			
-                ,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
-                ,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
+	aRefPoints[9999999999] =
+        	{
+		"refLat":        51.500681			// GPS coords of the zero point, where X=0 and Z=0
+		,"refLong":      -0.071795			
+		,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
+		,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
 		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
 		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
-                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
-                ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
-                ,"Zoom":         19				// wanted zoom level for initial google map
-                ,"MapInitLat":   51.500681			// google map initialization coords
-                ,"MapInitLong":  -0.071795
-                ,"Comment": "Default"
-                };
+		,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
+		,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
+		,"Zoom":         19				// wanted zoom level for initial google map
+		,"MapInitLat":   51.500681			// google map initialization coords
+		,"MapInitLong":  -0.071795
+		,"Comment": "Default"
+		};
         
-        //Default for idle DS server
-        aRefPoints[0] = 
-				{
-                "refLat":        51.500681	
-                ,"refLong":      -0.071795			
-                ,"rotation":     0			
-                ,"cor_r_Long":   0			
+	//Default for idle DS server
+	aRefPoints[0] = 
+		{
+		"refLat":        51.500681	
+		,"refLong":      -0.071795			
+		,"rotation":     0			
+		,"cor_r_Long":   0			
 		,"cor_r_Lat":    0				
 		,"cor_PosX_mul": 1				
 		,"cor_PosY_mul": 1				
-                ,"Name":         "Slightly Mad Studios Ltd"	
-                ,"Name2":	 ""				
-                ,"Zoom":         19				
-                ,"MapInitLat":   51.500681			
-                ,"MapInitLong":  -0.071795
-                ,"Comment": "Default"
-                };
+		,"Name":         "Slightly Mad Studios Ltd"	
+		,"Name2":	 ""				
+		,"Zoom":         19				
+		,"MapInitLat":   51.500681			
+		,"MapInitLong":  -0.071795
+		,"Comment": "Default"
+		};
         
         //Default for fictional tracks
         aRefPoints[8888888888] =
@@ -364,9 +364,39 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check"
                 };
         //Sonoma Raceway National
-	//aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National","Name2": ""});
+	aRefPoints[-995202729] =
+		{
+                "refLat":        38.162514
+                ,"refLong":      -122.457216
+                ,"rotation":     142
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    -30000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 0.97
+                ,"Name":         "Sonoma Raceway National"
+                ,"Name2":	 ""
+                ,"Zoom":         16
+                ,"MapInitLat":   38.162770 
+                ,"MapInitLong":  -122.457449
+                ,"Comment": "live check"
+                };
 	//Sonoma Sonoma Raceway Short
-	//aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short","Name2": ""});
+	aRefPoints[1035110721] =
+		{
+                "refLat":        38.162514
+                ,"refLong":      -122.457216
+                ,"rotation":     142
+                ,"cor_r_Long":   10000000
+                ,"cor_r_Lat":    -30000000
+                ,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 0.97
+                ,"Name":         "Sonoma Raceway Short"
+                ,"Name2":	 ""
+                ,"Zoom":         16
+                ,"MapInitLat":   38.162770 
+                ,"MapInitLong":  -122.457449
+                ,"Comment": "live check"
+                };
 
 	//Circuit des 24 Heures du Mans
         aRefPoints[1740968730] = 
