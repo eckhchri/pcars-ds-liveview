@@ -13,13 +13,11 @@ self.addEventListener('message', function(e) {
 		
 		var a = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode);
 		//console.log("Worker: DS Tracklist from Receive_DS_data(): " , a);
-		return a;
+
+		// return result to main thread after timeout
+		self.postMessage(a);
 		
 	}, e.data.workerdelay, e);
 
-
-	// use JSON.stringify() to prevent problem with empty arrays in Firefox
-	//	self.postMessage(JSON.stringify(aTrackList));
-	self.postMessage(aTrackList);
 
 }, false);

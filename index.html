@@ -253,8 +253,6 @@
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;	
 
-	// initialize RefPoint
-	aRefPointTMP         =      new Refpoint( cuircitID );
 
 	/////////////////////////////////////
 	// Event Handler
@@ -344,7 +342,7 @@
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
-		console.log('+++++++++++++++++++++++++++++++++++++++ Worker returned: ', e.data);
+		console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);
 		
 		// write in HTML page for DS status
 		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
@@ -489,7 +487,7 @@
 	
 	w_tracklist.addEventListener('message', function(e) {
 
-			console.log("Worker Trackliste Event: ", e );
+			console.log("+++++++++++ GETTRACKLIST Worker Trackliste Event: ", e );
 //			console.log("Worker Trackliste Event: JSON PARSE ", JSON.parse(e.data) );
 					
 			var str = e.data;	// data string from return object
@@ -497,7 +495,7 @@
 //			var strtmp = str.replace("null", " ");	// workaround for FireFox; convert [null] -> []
 
 //			refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
-			refreshTrackList(buildTracklist(e.data));
+			refreshTrackList(buildTracklist(e.data , aRefPointTMP ));
 			w_tracklist.postMessage({
 								workerdelay: 	WORKERDELAY_TRACKLIST
 								,dsurl: 		DsServerURL
@@ -859,16 +857,16 @@ function CleanupDriverObjects(allDrivers)
 
 
 ///////////////////
-function buildTracklist( aTrackList ){
+function buildTracklist( aTrackList , aRefPointTMP ){
 
-	var aRefPointTMP	= new Refpoint();
+	var aRefPointInt	= aRefPointTMP; // copy object to a new one, because the object will be changed
 	var commenttmp 		= '';
 	var tmpObj;
 	var aNewTrackList 	= new Array();
 	var aTmpTracklist	= new Array();
 
-	console.log("--------------------------------- buildTracklist() for DSTrackList:" , aTrackList);
-	//console.log("-------------------------- buildTracklist() with:" , aRefPointTMP);
+	//console.log("--------------------------------- buildTracklist() for DSTrackList:" , aTrackList);
+	//console.log("-------------------------- buildTracklist() with:" , aRefPointInt);
 
 	// go through all responded tracks from pcars dedicated server
 	for (var i=0; i < aTrackList.length; i++)
@@ -878,14 +876,14 @@ function buildTracklist( aTrackList ){
 		//console.log("--------------------------------- buildTracklist() tmpObject: " , tmpObject); 
 
 		//if refpoint for a track exists
-		if (aRefPointTMP[tmpObject.trackid]){
+		if (aRefPointInt[tmpObject.trackid]){
 
 			aNewTrackList[tmpObject.trackid] = { 	
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"yes"
-				,comment:	aRefPointTMP[tmpObject.trackid]["Comment"]
+				,comment:	aRefPointInt[tmpObject.trackid]["Comment"]
             };
 
 		//no Refpoint entry exists , fill with dummy values
@@ -901,15 +899,15 @@ function buildTracklist( aTrackList ){
 		}
 			
 		// delete objects that allready covered by DS output from RefpointArray
-		delete aRefPointTMP[tmpObject.trackid];
+		delete aRefPointInt[tmpObject.trackid];
 	}
 
 	//fill up with refpoint entries taht are not listed in DS array
-	for (var key in aRefPointTMP ){
+	for (var key in aRefPointInt ){
 		
-		//console.log("--------------------------------- buildTracklist() aRefPointTMP[key]" , aRefPointTMP[key] );
+		//console.log("--------------------------------- buildTracklist() aRefPointInt[key]" , aRefPointInt[key] );
 
-		tmpObject = aRefPointTMP[key];
+		tmpObject = aRefPointInt[key];
 
 		// check if comment field exists in the RefPoint array
 		commenttmp = '';
@@ -917,7 +915,7 @@ function buildTracklist( aTrackList ){
 
 		aNewTrackList[key] = {
 				trackid:	key
-				,trackname:	aRefPointTMP[key]["Name"]
+				,trackname:	aRefPointInt[key]["Name"]
 				,gridsize:	"no info"
 				,refpoint:	"yes"
 				,comment:	commenttmp 
@@ -932,3 +930,4 @@ function buildTracklist( aTrackList ){
        </script>
    </body>
 </html>
+
