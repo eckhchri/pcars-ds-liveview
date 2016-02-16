@@ -51,92 +51,92 @@ function Refpoint(circuit_id)
 		,"Comment": "Default"
 		};
         
-        //Default for fictional tracks
-        aRefPoints[8888888888] =
-                {
-                "refLat":        62.552546
-                ,"refLong":      -45.678026
+	//Default for fictional tracks
+	aRefPoints[8888888888] =
+		{
+		"refLat":        62.552546
+		,"refLong":      -45.678026
 		,"rotation":     0			
-                ,"cor_r_Long":   0			
+		,"cor_r_Long":   0			
 		,"cor_r_Lat":    0				
 		,"cor_PosX_mul": 1				
 		,"cor_PosY_mul": 1				
-                ,"Name":         "Greenland"
+		,"Name":         "Greenland"
 		,"Name2":	 ""	
-                ,"Zoom":         15
-                ,"MapInitLat":   41.036357
-                ,"MapInitLong":  -113.535295
-                ,"Comment": "Default for fictional tracks"
-                };
+		,"Zoom":         15
+		,"MapInitLat":   41.036357
+		,"MapInitLong":  -113.535295
+		,"Comment": "Default for fictional tracks"
+		};
 	
 	//Hockenheim GP
-        aRefPoints[1695182971] = 
-        	{
-                "refLat":        49.329738
-                ,"refLong":      8.574270
-                ,"rotation":     0.573
-                ,"cor_r_Long":   45000000
+	aRefPoints[1695182971] = 
+		{
+		"refLat":        49.329738
+		,"refLong":      8.574270
+		,"rotation":     0.573
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":	 0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-                ,"Name":         "Hockenheim GP"
-                ,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
-                ,"Zoom":         16
-                ,"MapInitLat":   49.329718
-                ,"MapInitLong":  8.574300
-                ,"Comment": "finetuning" 
-        	};
+		,"Name":         "Hockenheim GP"
+		,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
+		,"Zoom":         16
+		,"MapInitLat":   49.329718
+		,"MapInitLong":  8.574300
+		,"Comment": "finetuning" 
+		};
 	//Hockenheim Short
 	aRefPoints[1768660198] =
 		{
-                "refLat":        49.329738
-                ,"refLong":      8.574270
-                ,"rotation":     0.573
-                ,"cor_r_Long":   45000000
+		"refLat":        49.329738
+		,"refLong":      8.574270
+		,"rotation":     0.573
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":	 0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-                ,"Name":         "Hockenheim Short"
-                ,"Name2":	 ""
-                ,"Zoom":         16
-                ,"MapInitLat":   49.329718
-                ,"MapInitLong":  8.574300
-                ,"Comment": "finetuning" 
-        	};
+		,"Name":         "Hockenheim Short"
+		,"Name2":	 ""
+		,"Zoom":         16
+		,"MapInitLat":   49.329718
+		,"MapInitLong":  8.574300
+		,"Comment": "finetuning" 
+		};
 	//Hockenheim National
 	aRefPoints[-1977142985] =
 		{
-                "refLat":        49.329738
-                ,"refLong":      8.574270
-                ,"rotation":     0.573
-                ,"cor_r_Long":   45000000
+		"refLat":        49.329738
+		,"refLong":      8.574270
+		,"rotation":     0.573
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":	 0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-                ,"Name":         "Hockenheim National"
-                ,"Name2":	 ""
-                ,"Zoom":         16
-                ,"MapInitLat":   49.329718
-                ,"MapInitLong":  8.574300
-                ,"Comment": "finetuning" 
-        	};
+		,"Name":         "Hockenheim National"
+		,"Name2":	 ""
+		,"Zoom":         16
+		,"MapInitLat":   49.329718
+		,"MapInitLong":  8.574300
+		,"Comment": "finetuning" 
+		};
 
 	//Dubai Autodrome GP
 	aRefPoints[-661887517] = 
 		{ 
 		"refLat":      	 25.046650      
 		,"refLong":   	 55.231300
-	  	,"rotation":     -0.401
-	   	,"cor_r_Long":   45000000
+		,"rotation":     -0.401
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-	        ,"Name":         "Dubai Autodrome GP"
-	        ,"Name2":	 "Dubai Autodrome Grand Prix"	//"mTrackLocation":"Dubai Autodrome","mTrackVariation":"Grand Prix"
-	        ,"Zoom":         17
-	        ,"MapInitLat":   25.050102
-	        ,"MapInitLong":  55.238634
-	        ,"Comment": "live check"
+		,"Name":         "Dubai Autodrome GP"
+		,"Name2":	 "Dubai Autodrome Grand Prix"	//"mTrackLocation":"Dubai Autodrome","mTrackVariation":"Grand Prix"
+		,"Zoom":         17
+		,"MapInitLat":   25.050102
+		,"MapInitLong":  55.238634
+		,"Comment": "live check"
 		};
 
 	///Dubai Autodrome International
@@ -144,68 +144,68 @@ function Refpoint(circuit_id)
 		{ 
 		"refLat":      	 25.046650      
 		,"refLong":   	 55.231300
-	  	,"rotation":     -0.401
-	   	,"cor_r_Long":   45000000
+		,"rotation":     -0.401
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-	        ,"Name":         "Dubai Autodrome International"
-	        ,"Name2":	 ""
-	        ,"Zoom":         17
-	        ,"MapInitLat":   25.050102
-	        ,"MapInitLong":  55.238634
-	        ,"Comment": "live check"
+		,"Name":         "Dubai Autodrome International"
+		,"Name2":	 ""
+		,"Zoom":         17
+		,"MapInitLat":   25.050102
+		,"MapInitLong":  55.238634
+		,"Comment": "live check"
 		};
 	//Dubai Kartdrome
 	aRefPoints[-232513374] =
 		{ 
 		"refLat":      	 25.046650      
 		,"refLong":   	 55.231300
-	  	,"rotation":     -0.401
-	   	,"cor_r_Long":   45000000
+		,"rotation":     -0.401
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-	        ,"Name":         "Dubai Kartdrome"
-	        ,"Name2":	 ""
-	        ,"Zoom":         17
-	        ,"MapInitLat":   25.050102
-	        ,"MapInitLong":  55.238634
-	        ,"Comment": "live check"
+		,"Name":         "Dubai Kartdrome"
+		,"Name2":	 ""
+		,"Zoom":         17
+		,"MapInitLat":   25.050102
+		,"MapInitLong":  55.238634
+		,"Comment": "live check"
 		};
 	//Dubai Autodrome National
 	aRefPoints[-31727447] =
 		{ 
 		"refLat":      	 25.046650      
 		,"refLong":   	 55.231300
-	  	,"rotation":     -0.401
-	   	,"cor_r_Long":   45000000
+		,"rotation":     -0.401
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-	        ,"Name":         "Dubai Autodrome National"
-	        ,"Name2":	 ""
-	        ,"Zoom":         17
-	        ,"MapInitLat":   25.050102
-	        ,"MapInitLong":  55.238634
-	        ,"Comment": "live check"
+		,"Name":         "Dubai Autodrome National"
+		,"Name2":	 ""
+		,"Zoom":         17
+		,"MapInitLat":   25.050102
+		,"MapInitLong":  55.238634
+		,"Comment": "live check"
 		};
 	//Dubai Autodrome Club
 	aRefPoints[1735854797] =
 		{ 
 		"refLat":      	 25.046650      
 		,"refLong":   	 55.231300
-	  	,"rotation":     -0.401
-	   	,"cor_r_Long":   45000000
+		,"rotation":     -0.401
+		,"cor_r_Long":   45000000
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-	        ,"Name":         "Dubai Autodrome Club"
-	        ,"Name2":	 ""
-	        ,"Zoom":         17
-	        ,"MapInitLat":   25.050102
-	        ,"MapInitLong":  55.238634
-	        ,"Comment": "live check"
+		,"Name":         "Dubai Autodrome Club"
+		,"Name2":	 ""
+		,"Zoom":         17
+		,"MapInitLat":   25.050102
+		,"MapInitLong":  55.238634
+		,"Comment": "live check"
 		};
 
 	//Nuerburgring GP
