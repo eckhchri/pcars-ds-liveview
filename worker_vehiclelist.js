@@ -16,6 +16,10 @@ self.addEventListener('message', function(e) {
 	var aVehicleList = setTimeout(function(){
 		
 		var a = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode , e.data.arefpoint);
+		
+		//Workaround: needed to have a valid and full RefPoint hash in addEventListener function
+		a["arefpoint"] = e.data.arefpoint;
+		
 		//console.log("Worker: DS Vehiclelist from Receive_DS_data(): " , a);
 		
 		// return result to main thread after timeout

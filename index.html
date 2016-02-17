@@ -186,7 +186,7 @@
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
-	var aRefPointTMP		= new Refpoint();			// hash of all RefPoints for available tracks
+	var aRefPointTMP		= new Refpoint("-1");			// hash of all RefPoints for available tracks
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
@@ -352,7 +352,7 @@
 		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      	' + e.data.globals.now; 
 		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
 		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
-		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + aRefPointTMP[e.data.globals.attributes.TrackId]["Name"];
+		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"];		
 		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + e.data.globals.attributes.SessionStage;
 		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + e.data.globals.attributes.SessionState;
 		
@@ -375,7 +375,7 @@
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 
 				// calculate GPS coordinates
-				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
+				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
 
 				// fill data array
 				aSensorData[i] = {
@@ -397,8 +397,9 @@
 		// in case track changes on DS adjust the map settings for new possition
         if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
 
+        	//console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP); 		
             //map.setCenter({lat: 50.332733, lng: 6.943355});
-			changeMapSettings(aRefPointTMP[tmpcuircitID] , map);
+			changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
 
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
             console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);
@@ -413,7 +414,7 @@
 				,dsport:		DsPort
 				,timeout:		XMLHTTPTimeout
 				,receivemode:	"GETDSANDDRIVERDATA"
-				,arefpoint:		aRefPointTMP});
+				,arefpoint:		e.data.arefpoint});
 		}else{
 			//CREST receive mode
 			workerDSDATA.postMessage({
@@ -422,10 +423,11 @@
 				,dsport:		CRESTPort
 				,timeout:		XMLHTTPTimeout
 				,receivemode:	"GETCRESTDRIVERDATA"
-				,arefpoint:		aRefPointTMP});
+				,arefpoint:		e.data.arefpoint});
 		}
 		
 	}, false);
+	
 	//initail call of the worker
 	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
 
@@ -461,7 +463,7 @@
 	}
 
 	// init google map
-	init_map(cuircitID);
+	init_map(cuircitID , aRefPointTMP);
 
 	// add map Listener
 	map.addListener('zoom_changed', function() {
@@ -504,7 +506,7 @@
 								,dsport: 		DsPort
 								,timeout: 		2000
 								,receivemode: 	"GETTRACKLIST" 
-								,arefpoint:		aRefPointTMP});
+								,arefpoint:		e.data.arefpoint});
 	}, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
@@ -692,18 +694,19 @@
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
-function init_map(_TrackID)
+function init_map(_TrackID , aRefPoint)
 {
+	
            //subclassing
            GPSSensor.prototype = new google.maps.OverlayView();
 
 
            // Create the Google Map
            map = new google.maps.Map(d3.select("#map").node(), {
-               zoom: aRefPointTMP[cuircitID]["Zoom"],
+               zoom: aRefPoint[cuircitID]["Zoom"],
 
-                // use ´cuircit RefPoint for center google map
-                center: new google.maps.LatLng( aRefPointTMP[_TrackID]["MapInitLat"] , aRefPointTMP[_TrackID]["MapInitLong"] ),
+                // use cuircit RefPoint for center google map
+                center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
                 mapTypeId: google.maps.MapTypeId.SATELLITE
            });
 
