@@ -2,6 +2,7 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 
 **Usage**:
 - Using default parameter: http://[your Webserver url]/index.html
+- change settings in config.js with an editor
 - Overwriting default DS parameters:  
 						http://[your Webserver url]/index.html?dsurl=[DS HTTP API url]&dsport=[DS HTTP API Port]
 						
