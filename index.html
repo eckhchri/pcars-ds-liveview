@@ -186,13 +186,14 @@
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
+	var sensorLayer_UpdateTime;		//time, when marker are updated
+        var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
+        var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
+	var DisplayDurationCorrector = 0;
 	var aRefPointTMP		= new Refpoint("-1");			// hash of all RefPoints for available tracks
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
-	var sensorLayer_UpdateTime;		//time, when marker are updated
-        var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
-        var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
 	var PCARSd	= new PCARSdriver(
 									9234567
 									,"NO_PARTICIPANT_TestData"
@@ -274,14 +275,14 @@
 	$(function() {
 		$( "#slider-range-max" ).slider({
 			range: "max",
-			min: 0,
-			max: 900,
-      			value: DisplayDuration, 
-			step: 50,
+			min: -200,
+			max: 200,
+      			value: DisplayDurationCorrector, 
+			step: 25,
       			slide: function( event, ui ) {
         			$( "#amount" ).val( ui.value );
 				//set new value
-				DisplayDuration	= ui.value;
+				DisplayDurationCorrector = ui.value;
       			}
     		});
     		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
@@ -394,12 +395,13 @@
         		tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;
 		}
 		
-		//console.log("++++++++ aSensorData_NEW" , aSensorData);
-		sensorLayer.update(aSensorData);
 		sensorLayer_UpdateTime = Date.now();
                 sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
                 sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
                 console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);
+                DisplayDuration = sensorLayer_UpdateDelta + DisplayDurationCorrector;
+                //console.log("++++++++ aSensorData_NEW" , aSensorData);
+		sensorLayer.update(aSensorData);
 
 		// in case track changes on DS adjust the map settings for new possition
         if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
