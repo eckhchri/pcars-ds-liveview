@@ -400,6 +400,7 @@
                 sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
                 console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);
                 DisplayDuration = sensorLayer_UpdateDelta + DisplayDurationCorrector;
+                if (DisplayDuration < 0) { DisplayDuration = 0 }
                 //console.log("++++++++ aSensorData_NEW" , aSensorData);
 		sensorLayer.update(aSensorData);
 
