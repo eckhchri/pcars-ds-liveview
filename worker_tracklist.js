@@ -11,10 +11,11 @@ self.addEventListener('message', function(e) {
 	//Syntax:  setTimeout(function,milliseconds,param1,param2,...)
 	var aTrackList = setTimeout(function(){
 		
-		var a = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode, e.data.arefpoint);
+		var a = new Array(); 
+		a["aTrack"] = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode, e.data.aRefpoint);
 		
 		//Workaround: needed to have a valid and full RefPoint hash in w_tracklist.addEventListener
-		a["arefpoint"] = e.data.arefpoint;
+		a["aRefpoint"] = e.data.aRefpoint;
 		
 		//console.log("Worker: DS Tracklist from Receive_DS_data(): " , a);
 

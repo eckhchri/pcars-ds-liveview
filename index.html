@@ -502,25 +502,21 @@
 	w_tracklist.addEventListener('message', function(e) {
 
 			console.log("+++++++++++ GETTRACKLIST Worker Trackliste Event: ", e );
-//			console.log("Worker Trackliste Event: JSON PARSE ", JSON.parse(e.data) );
 					
-			var str = e.data;	// data string from return object
+		//	var str = e.data;	// data string from return object
 
-//			var strtmp = str.replace("null", " ");	// workaround for FireFox; convert [null] -> []
-
-//			refreshTrackList( buildTracklist(JSON.parse(strtmp)) );
-			refreshTrackList(buildTracklist(e.data , aRefPointTMP ));
+			refreshTrackList(buildTracklist(e.data.aTrack , aRefPointTMP ));
 			w_tracklist.postMessage({
 								workerdelay: 	WORKERDELAY_TRACKLIST
 								,dsurl: 		DsServerURL
 								,dsport: 		DsPort
 								,timeout: 		2000
 								,receivemode: 	"GETTRACKLIST" 
-								,arefpoint:		e.data.arefpoint});
+								,aRefpoint:		e.data.aRefpoint});
 	}, false);
 	
 	//initial call of the tracklist worker. initiate endless loop
-	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST", arefpoint: aRefPointTMP });
+	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTMP });
 
 
 

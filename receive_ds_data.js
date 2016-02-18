@@ -183,7 +183,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 
 				// put empty dummy object into array
 				data.driverlist.push( DriverDummy );
-				data.driverlist.push( DriverDummy );
+				//data.driverlist.push( DriverDummy );
 
 			}else{
 
@@ -274,12 +274,12 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			// if no users joined return example Data
 			console.log("++++++++++++++++ GETTRACKLIST / received data" , myArr );
 			// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-                        if ( myArr.response.list.length == 0 ){
-
-                                console.log("no Participants found in DS, leave function!");
-                                aDrivers.push ( DriverDummy );        
-                                return aDrivers;
-                        }
+			if ( myArr.response.list.length == 0 ){
+				
+					console.log("no Participants found in DS, leave function!");
+					aDrivers.push ( DriverDummy );        
+					return aDrivers;
+			}
 			
 			//console.log("++++TRACKLIST: " ,  myArr);
 
