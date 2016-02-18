@@ -170,7 +170,7 @@
 
 		<br>----<br>
 		<p>
-  			<label for="amount">DisplayDuration:</label>
+  			<label for="amount">DisplayDurationCorrector:</label>
 			<input type="text" id="amount" readonly style="border:0;">
 		</p> 			
 		<!-- Slider Duration -->
@@ -186,6 +186,10 @@
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
+	var sensorLayer_UpdateTime;		//time, when marker are updated
+        var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
+        var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
+	var DisplayDurationCorrector = 0;
 	var aRefPointTMP		= new Refpoint("-1");			// hash of all RefPoints for available tracks
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
@@ -271,14 +275,14 @@
 	$(function() {
 		$( "#slider-range-max" ).slider({
 			range: "max",
-			min: 0,
-			max: 900,
-      			value: DisplayDuration, 
-			step: 50,
+			min: -200,
+			max: 200,
+      			value: DisplayDurationCorrector, 
+			step: 25,
       			slide: function( event, ui ) {
         			$( "#amount" ).val( ui.value );
 				//set new value
-				DisplayDuration	= ui.value;
+				DisplayDurationCorrector = ui.value;
       			}
     		});
     		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
@@ -338,7 +342,7 @@
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
 	var workerDSDATA      =       new Worker('./worker_dsdata.js');
-
+	sensorLayer_UpdateTime_old = Date.now();	//initialize a value for first time
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
@@ -391,7 +395,13 @@
         		tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;
 		}
 		
-		//console.log("++++++++ aSensorData_NEW" , aSensorData);
+		sensorLayer_UpdateTime = Date.now();
+                sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
+                sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
+                console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);
+                DisplayDuration = sensorLayer_UpdateDelta + DisplayDurationCorrector;
+                if (DisplayDuration < 0) { DisplayDuration = 0 }
+                //console.log("++++++++ aSensorData_NEW" , aSensorData);
 		sensorLayer.update(aSensorData);
 
 		// in case track changes on DS adjust the map settings for new possition
