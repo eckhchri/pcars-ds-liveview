@@ -190,6 +190,9 @@
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
+	var sensorLayer_UpdateTime;		//time, when marker are updated
+        var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
+        var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
 	var PCARSd	= new PCARSdriver(
 									9234567
 									,"NO_PARTICIPANT_TestData"
@@ -338,7 +341,7 @@
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
 	var workerDSDATA      =       new Worker('./worker_dsdata.js');
-
+	sensorLayer_UpdateTime_old = Date.now();	//initialize a value for first time
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
@@ -393,6 +396,10 @@
 		
 		//console.log("++++++++ aSensorData_NEW" , aSensorData);
 		sensorLayer.update(aSensorData);
+		sensorLayer_UpdateTime = Date.now();
+                sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
+                sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
+                console.log("+++++++++Sensor Update Delta:",workerDSDATA_UpdateDuration);
 
 		// in case track changes on DS adjust the map settings for new possition
         if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
