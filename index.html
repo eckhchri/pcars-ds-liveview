@@ -399,7 +399,7 @@
 		sensorLayer_UpdateTime = Date.now();
                 sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
                 sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
-                console.log("+++++++++Sensor Update Delta:",workerDSDATA_UpdateDuration);
+                console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);
 
 		// in case track changes on DS adjust the map settings for new possition
         if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
