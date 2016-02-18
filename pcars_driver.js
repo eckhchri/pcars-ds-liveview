@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd, variousParameters)
+function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, variousParameters)
 {
         // vars
         this.RefID     =       RefID;
@@ -8,14 +8,16 @@ function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, Race
         this.PosX      =       PosX;
         this.PosY      =       PosY;
         this.PosZ      =       PosZ;
-	this.State     =       State;
-	this.CurrentSector =   CurrentSector;
-	this.RacePosition  =   RacePosition;
-	this.FastestLapTime=   FLapTime;
+        this.State     =       State;
+        this.CurrentSector =   CurrentSector;
+        this.RacePosition  =   RacePosition;
+        this.FastestLapTime=   FLapTime;
         this.LastLapTime   =   LLapTime;
         this.Orientation   =   Orient;
-        this.Speed	   =   Spd;
-	this.variousParameters = variousParameters;
+        this.Speed	   		=   Spd;
+        this.CurrentLap		=	CurrentLap;
+        this.VehicleId		=	VehicleId;		
+        this.variousParameters = variousParameters;
 
 
         //private vars

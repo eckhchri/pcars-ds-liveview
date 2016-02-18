@@ -191,7 +191,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					
         	                        //console.log ( "DS Participants:" , myArr.response.participants);
 	                                // read data of all participants and put it in an array of PCARSdriver objects
-	                                data.driverlist.push (
+					
+								
+					                 data.driverlist.push (
 	                                        new PCARSdriver(myArr.response.participants[i].attributes.RefId,
 	                                                myArr.response.participants[i].attributes.Name,
 	                                                myArr.response.participants[i].attributes.GridPosition,
@@ -205,16 +207,17 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	                                                myArr.response.participants[i].attributes.LastLapTime,
 	                                                myArr.response.participants[i].attributes.Orientation,
 	                                                myArr.response.participants[i].attributes.Speed,
-	                                                {       TrackId: myArr.response.attributes.TrackId
-	                                                        ,GridSize : myArr.response.attributes.GridSize
+	                                                myArr.response.participants[i].attributes.CurrentLap,
+	                                                myArr.response.participants[i].attributes.VehicleId,
+	                                                {       
+	                                        				TrackId: myArr.response.attributes.TrackId
+	                                                        ,GridSize: myArr.response.attributes.GridSize
 	                                                }
-	                                                )
+	                                         	)
                                         );
 				}
 
-				//console.log (  "Array of aDriver Objects: " + aDrivers);
-
-                // return information
+				// return information
 				return data;
 			}
 			
@@ -254,6 +257,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					        myArr.response.participants[i].attributes.LastLapTime,
 						myArr.response.participants[i].attributes.Orientation,
 						myArr.response.participants[i].attributes.Speed,
+						myArr.response.participants[i].attributes.CurrentLap,
+                        myArr.response.participants[i].attributes.VehicleId,
 						{ 	TrackId: myArr.response.attributes.TrackId
 							,GridSize : myArr.response.attributes.GridSize
 						}
@@ -389,6 +394,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					        0,								//LastLapTime - NA
 						0,								//Orientation - NA
 						0,								//Speed - NA
+						999999,							//CurrentLap
+						2091910841,								//VehicleID
 						{ 	TrackId: TrackID					//TrackID
 							,GridSize : 0						//GridSize - NA
 						}
