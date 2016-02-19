@@ -298,15 +298,18 @@
 	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
 					{name:'id', index:'id', formatter: 'integer', width:100},
-	                		{name:'trackid', index:'trackid', width:100},
-	       			        {name:'trackname', index: 'trackname', width:200},
+					{name:'trackid', index:'trackid', width:100},
+					{name:'trackname', index: 'trackname', width:200},
 					{name:'gridsize', width:40, align:"right"},
-			                {name:'refpoint', width:90, align:"center",sorttype:"float"},
+					{name:'refpoint', width:90, align:"center",sorttype:"float"},
 					{name:'comment', width:160, align:"left"},
 	        ],
 	        caption: "List of available Tracks",
 		rowNum: 200,
 	});
+	
+	// add filter option bar
+	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 
 	// initial data for grid !!! Needed because of Refresh problem !!
 	// todo: really needed ?
@@ -527,20 +530,25 @@
 		width: 800,
 		hiddengrid: true,
 		caption: "List of available drivers",
-                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
+                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
                 colModel:[
-                        {name:'refid',index:'invdate', width:40},
-						{name:'driverposition',index:'name', width:15, search:true},
-                        {name:'drivername',index:'name', width:75, search:true},
-						{name:'driverstate',width:40, align:"center",sorttype:"float"},
-						{name:'driversector',width:10, align:"center",sorttype:"float"},
-						{name:'fastestlap',width:25, align:"center",sorttype:"float"},
-						{name:'lastlap',width:25, align:"center",sorttype:"float"},
+                        {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
+						{name:'driverposition',index:'name', width:18, sorttype:"int", search:true},
+                        {name:'drivername', width:80,sorttype:"text", search:true},
+						{name:'driverstate',width:40, align:"center",sorttype:"text"},
+						{name:'driversector',width:20, align:"center",sorttype:"int"},
+						{name:'lapnumber',width:18, align:"center",sorttype:"int"},
+						{name:'vehiclename',width:40, align:"center",sorttype:"text"},
+						{name:'fastestlap',width:35, align:"center",sorttype:"text"},
+						{name:'lastlap',width:35, align:"center",sorttype:"text"},
 						{name:'posx',width:20, align:"center",sorttype:"float"},
                         {name:'posy',width:20, align:"center",sorttype:"float"},
                         {name:'posz',width:20, align:"center",sorttype:"float"}
                 ]
 	});
+	
+	// add filter option bar
+	jQuery("#DriverDataTable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 	
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
