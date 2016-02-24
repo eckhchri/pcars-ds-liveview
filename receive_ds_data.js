@@ -20,7 +20,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
 	this.aRefPointTMP	=	aRefPointTMP;		// hash off all available RefPoints
 
-	//console.log("Receive_DS_data() --- receivemode: " , receivemode);
+	//if(log >= 3){console.log("Receive_DS_data() --- receivemode: " , receivemode);}
 
 	if (this.receivevariant == undefined)
 	{
@@ -42,7 +42,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 //      http://api.jquery.com/jquery.getjson/
 //	jQuery.getJSON( this.fullurl, 
 //    			function(data){
-//				console.log( data );
+//				if(log >= 3){console.log( data );}
 //				document.write ( data );
 //		});
 //	wait(3);
@@ -90,7 +90,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		xmlhttp.send();
 	}catch(err){
 		
-		//	console.log("Error while sending Request to DS!:" + err );
+		//	if(log >= 3){console.log("Error while sending Request to DS!:" + err );}
 		switch ( this.receivemode ){
 			case 	"GETDSDATA":  		return aDrivers;
 			
@@ -121,7 +121,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		var DriverDummy		= new PCARSdriver();
 		DriverDummy.SetExampleData();
 
-		console.log("ReceiveDsData complete array" , myArr);
+		if(log >= 3){console.log("ReceiveDsData complete array" , myArr);}
 
 	   switch ( this.receivemode ) {
 
@@ -179,7 +179,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			// collect Driverdata
 			if ( myArr.response.participants.length == 0 ){
 
-				console.log("no Participants found in DS, leave function and use Test data array!");
+				if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
 
 				// put empty dummy object into array
 				data.driverlist.push( DriverDummy );
@@ -189,7 +189,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 
 				for (var i = 0;i<myArr.response.participants.length;i++){
 					
-        	                        //console.log ( "DS Participants:" , myArr.response.participants);
+        	                        //if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
 	                                // read data of all participants and put it in an array of PCARSdriver objects
 					
 								
@@ -230,18 +230,18 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			// if no users joined return example Data
 			if ( myArr.response.participants.length == 0 ){
 			
-				console.log("no Participants found in DS, leave function and use Test data array!");
+				if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
 
 				aDrivers.push( DriverDummy );
 
-				console.log("+-+-+-: " ,  aDrivers);				
+				if(log >= 3){console.log("+-+-+-: " ,  aDrivers);}
 
 				return aDrivers;
 			}
 		 
 			for (var i = 0;i<myArr.response.participants.length;i++)
 			{
-				//console.log ( "DS Participants:" , myArr.response.participants);
+				//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
 				// read data of all participants and put it in an array of PCARSdriver objects
 				aDrivers.push (
 					new PCARSdriver(myArr.response.participants[i].attributes.RefId,
@@ -267,7 +267,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			
 			}
 
-			//console.log (  "Array of aDriver Objects: " + aDrivers);
+			//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
   
 			// return information
 	                return aDrivers;		
@@ -277,16 +277,16 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			// todo: Auslesen der trackIDs und den dazugehoerigen Namen
 
 			// if no users joined return example Data
-			console.log("++++++++++++++++ GETTRACKLIST / received data" , myArr );
+			if(log >= 3){console.log("++++++++++++++++ GETTRACKLIST / received data" , myArr );}
 			// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
 			if ( myArr.response.list.length == 0 ){
 				
-					console.log("no Participants found in DS, leave function!");
+					if(log >= 3){console.log("no Participants found in DS, leave function!");}
 					aDrivers.push ( DriverDummy );        
 					return aDrivers;
 			}
 			
-			//console.log("++++TRACKLIST: " ,  myArr);
+			//if(log >= 3){console.log("++++TRACKLIST: " ,  myArr);}
 
 			var aTrackList = new Array;
 
@@ -311,16 +311,16 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			// todo: Auslesen der trackIDs und den dazugehoerigen Namen
 
 			// if no users joined return example Data
-			console.log("++++++++++++++++ GETVEHICLELIST / received data" , myArr );
+			if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST / received data" , myArr );}
 			// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
                         if ( myArr.response.list.length == 0 ){
 
-                                console.log("no Participants found in DS, leave function!");
+                                if(log >= 3){console.log("no Participants found in DS, leave function!");}
                                 aDrivers.push ( DriverDummy );        
                                 return aDrivers;
                         }
 			
-			//console.log("++++TRACKLIST: " ,  myArr);
+			//if(log >= 3){console.log("++++TRACKLIST: " ,  myArr);}
 
 			var aVehicleList = new Array;
 
@@ -336,7 +336,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 						);
 			}							
 
-			//console.log("+++++++++++++++ aTrackList: " , aTrackList);			
+			//if(log >= 3){console.log("+++++++++++++++ aTrackList: " , aTrackList);}			
 
 			return aVehicleList;
 			
@@ -358,24 +358,24 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			// if no users joined return example Data
 			if ( myArr.participants.mNumParticipants == 0 ){
 			
-				console.log("no Participants found in DS, leave function and use Test data array!");
+				if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
 
 				aDrivers.push( DriverDummy );
 
-				console.log("+-+-+-: " ,  aDrivers);				
+				if(log >= 3){console.log("+-+-+-: " ,  aDrivers);}				
 
 				return aDrivers;
 			}
 
 			
-			console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);
+			if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
 			
 		 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 			TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
 
 			for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
 			{
-				//console.log ( "DS Participants:" , myArr.response.participants);
+				//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
 				// read data of all participants and put it in an array of PCARSdriver objects
 				PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 				PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
@@ -404,7 +404,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			
 			}
 
-			//console.log (  "Array of aDriver Objects: " + aDrivers);
+			//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
   
 			// return information
 	                return aDrivers;
