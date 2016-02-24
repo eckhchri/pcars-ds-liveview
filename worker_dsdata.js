@@ -5,6 +5,7 @@ self.addEventListener('message', function(e) {
 	importScripts('./receive_ds_data.js');
 	importScripts('./pcars_driver.js');
 	importScripts('./class_reference_points.js');
+	importScripts('./config.js');	//for console.log levels needed
 
 	//delays this worker to reduce http requests and make application resposive
 	//Syntax:  setTimeout(function,milliseconds,param1,param2,...)
@@ -15,7 +16,7 @@ self.addEventListener('message', function(e) {
 			
 			//Workaround: needed to have a valid and full RefPoint hash in addEventListener function
 			a["arefpoint"] = e.data.arefpoint;
-			console.log("DSdata complete array: " , a);
+			if(log >= 3){console.log("DSdata complete array: " , a);}
 			
 			// return result to main thread after timeout
 			self.postMessage(a);
