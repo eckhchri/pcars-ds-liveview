@@ -8,6 +8,7 @@ self.addEventListener('message', function(e) {
 	importScripts('./pcars_driver.js');
 	importScripts('./pcars_vehicle.js');
 	importScripts('./sleep.js');
+	importScripts('./config.js');	//for console.log levels needed
 
 	//delays this worker to reduce http requests and make application resposive
 	//sleep(e.data.workerdelay);
@@ -20,7 +21,7 @@ self.addEventListener('message', function(e) {
 		//Workaround: needed to have a valid and full RefPoint hash in addEventListener function
 		a["arefpoint"] = e.data.arefpoint;
 		
-		//console.log("Worker: DS Vehiclelist from Receive_DS_data(): " , a);
+		//if(log >= 3){console.log("Worker: DS Vehiclelist from Receive_DS_data(): " , a);}
 		
 		// return result to main thread after timeout
 		self.postMessage(aVehicleList);
