@@ -561,6 +561,8 @@
 	
 	// add filter option bar
 	jQuery("#DriverDataTable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	// sort driver table on startup
+	jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 	
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
