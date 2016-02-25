@@ -542,17 +542,17 @@
                 colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
                 colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
-						{name:'driverposition',index:'name', width:18, sorttype:"int", search:true},
+			{name:'driverposition', width:18, sorttype:"int", search:true},
                         {name:'drivername', width:80,sorttype:"text", search:true},
-						{name:'driverstate',width:40, align:"center",sorttype:"text"},
-						{name:'driversector',width:20, align:"center",sorttype:"int"},
-						{name:'lapnumber',width:18, align:"center",sorttype:"int"},
-						{name:'vehiclename',width:40, align:"center",sorttype:"text"},
-						{name:'fastestlap',width:35, align:"center",sorttype:"text"},
-						{name:'lastlap',width:35, align:"center",sorttype:"text"},
-						{name:'posx',width:20, align:"center",sorttype:"float"},
-                        {name:'posy',width:20, align:"center",sorttype:"float"},
-                        {name:'posz',width:20, align:"center",sorttype:"float"}
+			{name:'driverstate',width:40, align:"center",sorttype:"text"},
+			{name:'driversector',width:20, align:"center",sorttype:"int"},
+			{name:'lapnumber',width:18, align:"center",sorttype:"int"},
+			{name:'vehiclename',width:40, align:"center",sorttype:"text"},
+			{name:'fastestlap',width:35, align:"center",sorttype:"text"},
+			{name:'lastlap',width:35, align:"center",sorttype:"text"},
+			{name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
+                        {name:'posy',hidden: true,width:20, align:"center",sorttype:"float"},
+                        {name:'posz',hidden: true,width:20, align:"center",sorttype:"float"}
                 ]
 	});
 	
