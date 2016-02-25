@@ -190,26 +190,13 @@
         var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
         var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
 	var DisplayDurationCorrector = 0;
-	var aRefPointTMP		= new Refpoint("-1");			// hash of all RefPoints for available tracks
+	var aRefPointTMP			= 	new Refpoint("-1");			// hash of all RefPoints for available tracks
+	var aVehicleList			=	new Array();
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
-	var PCARSd	= new PCARSdriver(
-									9234567
-									,"NO_PARTICIPANT_TestData"
-									,3
-									,277
-									,278
-									,279
-									,"StateTest"
-									,"Sector1"
-									,"123"
-									,"123456"
-									,"123456"
-									,"0"
-									,"321"
-									,{TrackId: 920145926}
-								); // only use the object to get functions of it
+	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
+	PCARSd.SetExampleData();
 						
 								
 	// hide or unhide objects defined within config.js
@@ -345,6 +332,30 @@
 	});
 	
 	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// create worker to get vehicle list
+	var workerVEHICLELIST      =       new Worker('./worker_vehiclelist.js');
+	
+	workerVEHICLELIST.addEventListener('message', function(e) {
+		
+		if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker returned: e ', e );}
+		if ( e.data.avehiclelist.length > 0 ){
+			
+			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var
+			
+			// no additional worker call needed, because needed data available			
+			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
+			
+		}else{
+			
+			// no return value from DS, start another run
+			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST start new Worker run.' );}
+			workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
+		}
+		
+	}, false);
+	workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
+	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
@@ -354,9 +365,6 @@
 	workerDSDATA.addEventListener('message', function(e) {
 		
 		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
-		if (e.data.driverlist[0].Name != "NO_PARTICIPANT_TestData"){
-                        if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}
-                }
                 
 		// write in HTML page for DS status
 		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
@@ -545,15 +553,15 @@
                 colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
                 colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
-			{name:'driverposition', width:18, sorttype:"int", search:true},
+                        {name:'driverposition', width:18, sorttype:"int", search:true},
                         {name:'drivername', width:80,sorttype:"text", search:true},
-			{name:'driverstate',width:40, align:"center",sorttype:"text"},
-			{name:'driversector',width:20, align:"center",sorttype:"int"},
-			{name:'lapnumber',width:18, align:"center",sorttype:"int"},
-			{name:'vehiclename',width:40, align:"center",sorttype:"text"},
-			{name:'fastestlap',width:35, align:"center",sorttype:"text"},
-			{name:'lastlap',width:35, align:"center",sorttype:"text"},
-			{name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
+                        {name:'driverstate',width:40, align:"center",sorttype:"text"},
+                        {name:'driversector',width:20, align:"center",sorttype:"int"},
+                        {name:'lapnumber',width:18, align:"center",sorttype:"int"},
+                        {name:'vehiclename',width:40, align:"center",sorttype:"text"},
+                        {name:'fastestlap',width:35, align:"center",sorttype:"text"},
+                        {name:'lastlap',width:35, align:"center",sorttype:"text"},
+                        {name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posy',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posz',hidden: true,width:20, align:"center",sorttype:"float"}
                 ]
@@ -833,11 +841,14 @@ function refreshDriverList(a)
 					,drivername:		a[i].Name
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
+					,lapnumber:			a[i].CurrentLap
+					//,vehiclename:		a[i].GetNameById( a[i].VehicleId )
+					,vehiclename:		a[i].VehicleId
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
 					,posx:				a[i].PosX
 					,posy:				a[i].PosY
-					,posz:			a[i].PosZ
+					,posz:				a[i].PosZ
 		};
 		//decision if replace or add a row to jqGrid
 		if (i < GridSize){

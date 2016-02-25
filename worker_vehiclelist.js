@@ -2,7 +2,7 @@
 
 self.addEventListener('message', function(e) {
 
-	console.log("e: " , e);
+	console.log("GETVEHICLELIST e: " , e);
 
 	importScripts('./receive_ds_data.js');
 	importScripts('./pcars_driver.js');
@@ -16,15 +16,16 @@ self.addEventListener('message', function(e) {
 
 	var aVehicleList = setTimeout(function(){
 		
-		var a = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode , e.data.arefpoint);
+		var a = new Array();
+		a["avehiclelist"]= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode , e.data.arefpoint);
 		
 		//Workaround: needed to have a valid and full RefPoint hash in addEventListener function
 		a["arefpoint"] = e.data.arefpoint;
 		
-		//if(log >= 3){console.log("Worker: DS Vehiclelist from Receive_DS_data(): " , a);}
+		//if(log >= 3){console.log("Worker: GETVEHICLELIST DS Vehiclelist from Receive_DS_data(): " , a);}
 		
 		// return result to main thread after timeout
-		self.postMessage(aVehicleList);
+		self.postMessage(a);
 		
 	}, e.data.workerdelay , e);
 

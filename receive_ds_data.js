@@ -308,24 +308,24 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			
 		case "GETVEHICLELIST":
 
-			// todo: Auslesen der trackIDs und den dazugehoerigen Namen
-
-			// if no users joined return example Data
-			if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST / received data" , myArr );}
-			// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
-                        if ( myArr.response.list.length == 0 ){
-
-                                if(log >= 3){console.log("no Participants found in DS, leave function!");}
-                                aDrivers.push ( DriverDummy );        
-                                return aDrivers;
-                        }
+			//if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST / received data" , myArr.response );}
 			
-			//if(log >= 3){console.log("++++TRACKLIST: " ,  myArr);}
+			// if no vehicle data returned return empty data			
+			if ( myArr.response.list.length == 0 ){
+
+				if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST  array length=0 .");}
+				        
+				return aEmptyArray;
+			}
+			
+			//if(log >= 3){console.log("++++ GETVEHICLELIST: " ,  myArr);}
 
 			var aVehicleList = new Array;
 
 			for (var i = 0;i<myArr.response.list.length;i++)
-                        {
+			{
+				
+				//if(log >= 4){console.log("++++ GETVEHICLELIST Aray element id: " + i + " " ,  myArr.response.list[i]);}
 				//build array of PCARSTRACK objects 
 				aVehicleList.push (  
 							new PCARSVEHICLE (
@@ -351,9 +351,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
                 ,"state":				"CREST Mode"
              	}
              	aDrivers.globals.attributes = new Array();
-        	aDrivers.globals.attributes.TrackId = 0;
-        	aDrivers.globals.attributes.SessionStage = "NA";
-	 	aDrivers.globals.attributes.SessionState = "NA";
+         	aDrivers.globals.attributes.TrackId = 0;
+         	aDrivers.globals.attributes.SessionStage = "NA";
+         	aDrivers.globals.attributes.SessionState = "NA";
 			
 			// if no users joined return example Data
 			if ( myArr.participants.mNumParticipants == 0 ){
