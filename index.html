@@ -354,6 +354,7 @@
 	workerDSDATA.addEventListener('message', function(e) {
 		
 		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+		if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}
 		
 		// write in HTML page for DS status
 		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
@@ -405,13 +406,13 @@
 		sensorLayer_UpdateTime = Date.now();
                 sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
                 sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
-                if(log >= 3){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
+                if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
                 
                 DisplayDuration = sensorLayer_UpdateDelta + DisplayDurationCorrector;
                 if (DisplayDuration < 0) { DisplayDuration = 0 }	//catch a negative value
                 if (APIMODE == "DS" && DisplayDuration < UpdateRateDS) { DisplayDuration = UpdateRateDS }	//If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
                 if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration
-                if(log >= 3){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
+                if(log >= 2){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
                 
                 //if(log >= 3){console.log("++++++++ aSensorData_NEW" , aSensorData);}
 		sensorLayer.update(aSensorData);
