@@ -411,6 +411,7 @@
                 if (DisplayDuration < 0) { DisplayDuration = 0 }	//catch a negative value
                 if (APIMODE == "DS" && DisplayDuration < UpdateRateDS) { DisplayDuration = UpdateRateDS }	//If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
                 if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration
+                if(log >= 3){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
                 
                 //if(log >= 3){console.log("++++++++ aSensorData_NEW" , aSensorData);}
 		sensorLayer.update(aSensorData);
