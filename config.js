@@ -18,7 +18,7 @@ var WORKERDELAY_DSDATA  	=	100;    // in ms
 var DisplayDuration 		  = 500;		// initial duration for displaying marker updates
 var DisplayDurationCREST 	= 100;		// initial duration for displaying marker updates
 
-var UpdateRateDS = 500;   //Update rate of DS. Currently sed for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
+var UpdateRateDS = 500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
 
 // Logging
 //Log Levels for console.log commands: 0 = off or special use, 1 = error, 2 = warning, 3 = info, 4 = extended info (output of variables for example)
