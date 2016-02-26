@@ -76,6 +76,10 @@
                 border:         1;
 				text-align: 	center;
 	     }
+	     #TrackList .ui-jqgrid-bdiv{
+				max-height: 400px;
+				overflow-x: hidden;
+		 }
 	     
 	     #CarList{
 				position:       absolute;
@@ -97,6 +101,7 @@
 				top:            0px;
 				background:	lightgrey
 	     }
+	    	         
 	     #hide or unhide objects
 	     starthidden {
    				 display: none;
@@ -290,12 +295,12 @@
 	        hiddengrid: true,
 	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
-					{name:'id', index:'id', formatter: 'integer', width:100, sorttype:"int"},
-					{name:'trackid', index:'trackid', width:100, sorttype:"int"},
-					{name:'trackname', index: 'trackname', width:200, sorttype:"text"},
-					{name:'gridsize', width:40, align:"right", sorttype:"text"},
-					{name:'refpoint', width:90, align:"center", sorttype:"text"},
-					{name:'comment', width:160, align:"left", sorttype:"text"},
+					{name:'id', index:'id', formatter: 'integer', width:30, sorttype:"int"},
+					{name:'trackid', index:'trackid', width:80, sorttype:"int"},
+					{name:'trackname', index: 'trackname', width:250, sorttype:"text"},
+					{name:'gridsize', width:50, align:"center", sorttype:"text"},
+					{name:'refpoint', width:70, align:"center", sorttype:"text"},
+					{name:'comment', width:250, align:"left", sorttype:"text"},
 	        ],
 		caption: "List of available Tracks",
 		rowNum: 20,
