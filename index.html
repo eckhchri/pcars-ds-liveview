@@ -190,8 +190,9 @@
         var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
         var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
 	var DisplayDurationCorrector = 0;
-	var aRefPointTMP			= 	new Refpoint("-1");			// hash of all RefPoints for available tracks
-	var aVehicleList			=	new Array();
+	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks
+	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
+	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
@@ -342,6 +343,9 @@
 		if ( e.data.avehiclelist.length > 0 ){
 			
 			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var
+			
+			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);
+		
 			
 			// no additional worker call needed, because needed data available			
 			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
@@ -842,8 +846,8 @@ function refreshDriverList(a)
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
 					,lapnumber:			a[i].CurrentLap
-					//,vehiclename:		a[i].GetNameById( a[i].VehicleId )
-					,vehiclename:		a[i].VehicleId
+					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)
+					//,vehiclename:		a[i].VehicleId
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
 					,posx:				a[i].PosX
@@ -899,6 +903,34 @@ function CleanupDriverObjects(allDrivers)
 }
 
 
+function transformVehicleObjectToHash(a){
+	
+	var hash = new Array();
+	
+	if(log >= 3){console.log("------- transformVehicleObjectToHash() for a : " , a)};
+	
+	for (var i=0; i < a.length; i++){
+		
+		hash[a[i].vehicleid] = a[i].name;
+		if(log >= 3){console.log("------- transformVehicleObjectToHash(), VehicleID/Name: " + a[i].vehicleid + " / "+ a[i].name  );}
+		
+	}
+	
+				
+	return hash;
+}
+
+
+function VehicleIdToName(id, array){
+	
+	if (array[id]){
+		
+		return array[id];
+		
+	}
+	//if ID not found return id
+	return id;
+}
 
 
 ///////////////////
