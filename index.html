@@ -147,6 +147,7 @@
 	<div id="TrackList">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/></div>
 		<table id="tracklisttable"></table>
+		<div id="pager_tracklisttable"></div>
 	</div>
 	<div id="DriverDataArea">
 		<div class="tableoption" align="right">Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/></div>
@@ -285,7 +286,7 @@
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
-	        height: 250,
+	        height: 'auto',
 	        hiddengrid: true,
 	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
@@ -296,8 +297,10 @@
 					{name:'refpoint', width:90, align:"center", sorttype:"text"},
 					{name:'comment', width:160, align:"left", sorttype:"text"},
 	        ],
-	        caption: "List of available Tracks",
-		rowNum: 200,
+		caption: "List of available Tracks",
+		rowNum: 20,
+		rowList:[10,20,30],
+		pager: 'pager_tracklisttable',
 	});
 	
 	// add filter option bar
