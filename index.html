@@ -411,6 +411,7 @@
 				}
 				
         		tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;
+        		//if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}	//analyzing problem with asynchronous marker updates
 		}
 		
 		sensorLayer_UpdateTime = Date.now();
