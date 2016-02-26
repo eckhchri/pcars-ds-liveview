@@ -838,7 +838,6 @@ function refreshDriverList(a)
 	if(log >= 3){console.log ("++++++++ length of driverlist array:" + a.length);}
 	for (i=0; i < a.length; i++)
 	{
-		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data);}
 		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
 		_data = {   
 					refid:				a[i].RefID
@@ -848,7 +847,6 @@ function refreshDriverList(a)
 					,driversector:		a[i].CurrentSector
 					,lapnumber:			a[i].CurrentLap
 					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)
-					//,vehiclename:		a[i].VehicleId
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
 					,posx:				a[i].PosX
@@ -908,12 +906,12 @@ function transformVehicleObjectToHash(a){
 	
 	var hash = new Array();
 	
-	if(log >= 3){console.log("------- transformVehicleObjectToHash() for a : " , a)};
+	if(log >= 5){console.log("------- transformVehicleObjectToHash() for a : " , a)};
 	
 	for (var i=0; i < a.length; i++){
 		
 		hash[a[i].vehicleid] = a[i].name;
-		if(log >= 3){console.log("------- transformVehicleObjectToHash(), VehicleID/Name: " + a[i].vehicleid + " / "+ a[i].name  );}
+		//if(log >= 5){console.log("------- transformVehicleObjectToHash(), VehicleID/Name: " + a[i].vehicleid + " / "+ a[i].name  );}
 		
 	}
 	
