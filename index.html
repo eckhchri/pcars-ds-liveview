@@ -79,6 +79,11 @@
 	     #TrackList .ui-jqgrid-bdiv{
 				max-height: 400px;
 				overflow-x: hidden;
+				word-wrap: break-word; /* IE 5.5+ and CSS3 */
+    			white-space: pre-wrap; /* CSS3 */
+    			white-space: -pre-wrap; /* Opera 4-6 */
+    			white-space: -o-pre-wrap; /* Opera 7 */
+    			white-space: normal !important;
 		 }
 	     
 	     #CarList{
@@ -292,6 +297,7 @@
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
 	        height: 'auto',
+	        width:	790,
 	        hiddengrid: true,
 	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
