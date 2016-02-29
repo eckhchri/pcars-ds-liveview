@@ -331,7 +331,7 @@
 	// car lis overview
 	jQuery("#carlisttable").jqGrid({	
 	        datatype: "local",
-	        height: 250,
+	        height: 'auto',
 	        hiddengrid: true,
 	        colNames:['ID','CarName','Set1','Set2', 'Set3','Comment'],
 	        colModel:[
@@ -565,7 +565,7 @@
 	//todo: add subgrid for more drivers information
 	jQuery("#DriverDataTable").jqGrid({
                 datatype: "local",
-                height: 200,
+                height: 'auto',
 		width: 800,
 		hiddengrid: true,
 		caption: "List of available drivers",
