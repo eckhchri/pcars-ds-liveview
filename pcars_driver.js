@@ -117,7 +117,7 @@ function SetExampleData()
 	// set default parameter for a dummy object
 	this.RefID     =       9234567;
         this.Name      =       "NO_PARTICIPANT_TestData";
-        this.IsPlayer  =       1;
+        this.IsPlayer  =       0;
         this.RacePos   =       3;
         this.PosX      =       271;
         this.PosY      =       277;
