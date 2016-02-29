@@ -569,7 +569,7 @@
 		width: 800,
 		hiddengrid: true,
 		caption: "List of available drivers",
-                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'fastest lap', 'last lap','PosX', 'PosY', 'PosZ' ],
+                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'fastest lap', 'last lap','Hu/AI','PosX', 'PosY', 'PosZ' ],
                 colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
                         {name:'driverposition', width:18, sorttype:"int", search:true},
@@ -580,6 +580,7 @@
                         {name:'vehiclename',width:40, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
+                        {name:'isplayer',width:15, align:"center",sorttype:"text"},
                         {name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posy',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posz',hidden: true,width:20, align:"center",sorttype:"float"}
@@ -863,6 +864,7 @@ function refreshDriverList(a)
 					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
+					,isplayer:		ConvertIsPlayer(a[i].IsPlayer)
 					,posx:				a[i].PosX
 					,posy:				a[i].PosY
 					,posz:				a[i].PosZ
@@ -944,6 +946,17 @@ function VehicleIdToName(id, array){
 	//if ID not found return id
 	return id;
 }
+
+function ConvertIsPlayer(bool){
+	
+	if (bool){
+		return "Hu";
+	} else {
+		return "AI";	
+	}
+}
+
+
 
 
 ///////////////////
