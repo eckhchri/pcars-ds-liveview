@@ -1,9 +1,10 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, variousParameters)
+function PCARSdriver(RefID,Name,IsPlayer,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, variousParameters)
 {
         // vars
         this.RefID     =       RefID;
         this.Name      =       Name;
+        this.IsPlayer  =       IsPlayer;
         this.RacePos   =       RacePos;
         this.PosX      =       PosX;
         this.PosY      =       PosY;
@@ -33,6 +34,10 @@ function CalcGPSCoordinates(){
 
 function GetName(){
 	return this.Name;
+}
+
+function GetIsPlayer(){
+	return this.IsPlayer;
 }
 
 function GetRefID(){
@@ -112,6 +117,7 @@ function SetExampleData()
 	// set default parameter for a dummy object
 	this.RefID     =       9234567;
         this.Name      =       "NO_PARTICIPANT_TestData";
+        this.IsPlayer  =       1;
         this.RacePos   =       3;
         this.PosX      =       271;
         this.PosY      =       277;
@@ -163,6 +169,7 @@ function _ConvertLaptimeInReadbaleFormat(milliseconds)
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
 PCARSdriver.prototype.GetRefID=GetRefID;
 PCARSdriver.prototype.GetName=GetName;
+PCARSdriver.prototype.GetIsPlayer=GetIsPlayer;
 PCARSdriver.prototype.GetPosX=GetPosX;
 PCARSdriver.prototype.GetPosY=GetPosY;
 PCARSdriver.prototype.GetPosZ=GetPosZ;
