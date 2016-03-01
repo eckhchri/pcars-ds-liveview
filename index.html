@@ -350,7 +350,7 @@
 	//$('#TrackList span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/>');
 	
 	//Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks   ' + '<input type="button" title="Stop refresh of table" id="cbTracklistRefresh" value="Stop"></input>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks   ' + '<input type="button" title="Stop refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd"></input>');
 
 
 	// car lis overview
@@ -572,11 +572,13 @@
                         WORKERDELAY_TRACKLIST   = 10000;
                         data.value = "Start";
                         data.title = "Start refresh of table";
+                        data.style="background-color:#ffffff";
                 }else{
                         StopRefreshTracklist    = "false";
                         WORKERDELAY_TRACKLIST   = 5000;
                         data.value = "Stop";
                         data.title = "Stop refresh of table";
+                        data.style="background-color:#dddddd";
                 }
         }
 
