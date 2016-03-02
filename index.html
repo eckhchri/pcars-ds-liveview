@@ -348,9 +348,8 @@
 	// add StopRefresh Table button in jqgrid header
 	//Method with checkbox
 	//$('#TrackList span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/>');
-	
 	//Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks   ' + '<input type="button" title="Stop refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd"></input>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd"></input>');
 
 
 	// car lis overview
@@ -553,7 +552,7 @@
 	// checkbox Event handling
 	$('#cbTracklistRefresh').click(function () {
 
-		/* Method for checkbox
+		/* Method with checkbox
 		if ($('#cbTracklistRefresh').is(':checked') == true) {
 			StopRefreshTracklist 	= "true";
 			WORKERDELAY_TRACKLIST 	= 10000;
@@ -564,20 +563,20 @@
 		//Method with button
 		var self = this;
                 changeRefreshTracklist(self);
-	})
+	});
 	
 	function changeRefreshTracklist(data){
                 if(data.value === "Stop"){
                         StopRefreshTracklist    = "true";
                         WORKERDELAY_TRACKLIST   = 10000;
                         data.value = "Start";
-                        data.title = "Start refresh of table";
+                        data.title = "Start automatic refresh of table";
                         data.style="background-color:#ffffff";
                 }else{
                         StopRefreshTracklist    = "false";
                         WORKERDELAY_TRACKLIST   = 5000;
                         data.value = "Stop";
-                        data.title = "Stop refresh of table";
+                        data.title = "Stop automatic refresh of table";
                         data.style="background-color:#dddddd";
                 }
         }
@@ -637,17 +636,38 @@
 	// sort driver table on startup
 	jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 	// add StopRefresh Table button in jqgrid header
-	$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
+	//Method with checkbox
+	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
+	//Method with Button
+	jQuery('#tracklisttable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>');
 			
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
 
+                /* Method with checkbox
                 if ($('#cbDriverlistRefresh').is(':checked') == true) {
                         StopRefreshDriverlist   = "true";
                 }else{
                         StopRefreshDriverlist  	= "false";
+                }*/
+                //Method with Button
+                var self = this;
+                changeRefreshDriverlist(self);
+        });
+        
+        function changeRefreshDriverlist(data){
+                if(data.value === "Stop"){
+                        StopRefreshDriverlist   = "true";
+                        data.value = "Start";
+                        data.title = "Start automatic refresh of table";
+                        data.style="background-color:#ffffff";
+                }else{
+                        StopRefreshDriverlist  	= "false";
+                        data.value = "Stop";
+                        data.title = "Stop automatic refresh of table";
+                        data.style="background-color:#dddddd";
                 }
-        })
+        }
 
 	
 	// setting up google maps overlays
