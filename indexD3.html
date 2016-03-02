@@ -73,7 +73,7 @@ var sampleSVG2 = d3.select("#viz2")
 
 				var tmp_obj = d3.select(this);
 
-                                console.log("---------- svg object:" , tmp_obj);
+				console.log("---------- svg object:" , tmp_obj);
 
 				tmp_obj.selectAll("circle")
 				.transition()
@@ -90,7 +90,16 @@ var sampleSVG2 = d3.select("#viz2")
                         });
 	console.log(" --- svgs: " , svgs);
 
-
+/*
+	 var marker = _div.selectAll("svg")
+     .data(_data, function (d) { return d.Key; })
+     .each(transform) // update existing markers
+      .enter().append("svg:svg")
+     .each(transform)
+     //.attr("class", "marker");
+ 		.attr("class", function (d){ return d.CSSTextClases });
+*/
+	
 
 
 
@@ -113,6 +122,10 @@ $('#checkbox1').click(function () {
 	}
 */
 })
+
+
+
+
 
 
 
