@@ -165,6 +165,33 @@ function _ConvertLaptimeInReadbaleFormat(milliseconds)
 	return str;
 }
 
+function GetCSSTextClass()
+{
+	var css = "marker markertext";
+	
+	return css;
+}
+
+function GetCSSCircleClass()
+{
+	
+	//Example: CSS_RacePos_1
+	var css = "CSS_RacePos_" + this.RacePos;
+	
+	// todo:  add dynamic vehicle Class mapping
+	css +=	" CSS_Vehicle_GT3";
+	
+	//decision if real player or ai
+	if (this.IsPlayer == "yes")
+	{
+		css += " CSS_IsRealPlayer";
+	}else{
+		css += " CSS_IsAiPlayer";
+	}
+	
+	//return a string of CSS classes
+	return css;
+}
 
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
 PCARSdriver.prototype.GetRefID=GetRefID;
@@ -183,4 +210,5 @@ PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
 PCARSdriver.prototype.GetVariousParameter=GetVariousParameter;
 PCARSdriver.prototype.SetExampleData=SetExampleData;
-
+PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
+PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
