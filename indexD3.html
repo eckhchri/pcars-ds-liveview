@@ -17,6 +17,10 @@
 <body>
     <div id="viz1"></div>
     <div id="viz2"></div>
+    <div>
+    	Stylesheet's contents:
+    	<textarea id="output"></textarea>
+	</div>
 
     <input type="checkbox" id="checkbox1" />
 
@@ -118,8 +122,19 @@ var sampleSVG3 = d3.select("#viz2")
  		.attr("class", function (d){ return d.CSSTextClases });
 */
 	
-
-
+function setStyle(cssText) {
+	var sheet = document.createElement('style');
+	sheet.type = 'text/css';
+	/* Optional */ window.customSheet = sheet;
+	(document.head || document.getElementsByTagName('head')[0]).appendChild(sheet);
+    return (setStyle = function(cssText, node) {
+		if(!node || node.parentNode !== sheet)
+            return sheet.appendChild(document.createTextNode(cssText));
+		node.nodeValue = cssText;
+		return node;
+	})(cssText);
+};
+var vTestCSSClass;
 
 // Event handling Checkboxes
 
@@ -130,7 +145,31 @@ $('#checkbox1').click(function () {
 	if ($('#checkbox1').is(':checked') == false) {
 		
 		//remove a class
-		ELEMENT.classList.remove("TestCSSClass");
+		//ELEMENT.classList.remove("TestCSSClass");
+		//overwirte settings within object -> not we want to do
+		//$('circle.TestCSSClass').css('fill' , 'white');
+		
+		//$('circle.TestCSSClass').removeClass('circle.TestCSSClass').addClass('someClassReplacement');
+		
+		/*
+		document.styleSheets[0].cssRules[0].cssText = "\
+		     #TestCSSClass {
+
+		     }";
+		
+		*/
+		
+		// http://stackoverflow.com/questions/7125453/modifying-css-class-property-values-on-the-fly-with-javascript-jquery
+		// http://jsfiddle.net/hdU8s/10/
+/*
+		var rule1, rule2,
+        output = document.getElementById('output');
+		console.log("rule1 / rule2 / output" , rule1 + " / " +  rule2 + " / " + output);
+		*/
+		console.log("+++++++ TestCSSClass " , vTestCSSClass);
+		setStyle( '', vTestCSSClass );
+
+		
 	}
 
 	if ($('#checkbox1').is(':checked') == true) {
@@ -140,12 +179,22 @@ $('#checkbox1').click(function () {
          ////// 1st solution
 	     //$('#TestCSSClass').css('fill', 'green') ;
         
-         ////// 2nd solution
+         ////// 2nd solution -> working fine
+/*
              $.injectCSS({
             	    "circle.TestCSSClass": {
             	        "fill": "yellow"
             	    }
-            	});         
+            	});
+*/         
+
+             vTestCSSClass = setStyle(
+                     '.TestCSSClass{ fill: grey; } \n',
+                     vTestCSSClass
+                 );
+         
+         
+         
          //////3rd solution
 /*             
              $("<style>")
