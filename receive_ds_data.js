@@ -35,7 +35,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				,"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants"
 				,"GETTRACKLIST"  	: "/api/list/tracks"
 				,"GETVEHICLELIST"  	: "/api/list/vehicles"
-				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?participants=true&eventInformation=true"
+				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true"
 			};	
 
 //todo: Decison Using XMLHTTP class oder   THREE
@@ -355,7 +355,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
              	aDrivers.globals.attributes = new Array();
          	aDrivers.globals.attributes.TrackId = 0;
          	aDrivers.globals.attributes.SessionStage = "NA";
-         	aDrivers.globals.attributes.SessionState = "NA";
+         	aDrivers.globals.attributes.SessionState = myArr.gameStates.mSessionState;
 			
 			// if no users joined return example Data
 			if ( myArr.participants.mNumParticipants == 0 ){
