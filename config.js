@@ -20,6 +20,8 @@ var DisplayDurationCREST 	= 100;		// initial duration for displaying marker upda
 
 var UpdateRateDS = 500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
 
+var StopTransitionDelay_minTimeRun = 500; //milliseconds - A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase function have to be interrupted and the normal transform function is used
+
 // Logging
 //Log Levels for console.log commands: 0 = off or special use, 1 = error, 2 = warning, 3 = info, 4 = extended info (output of variables for example)
 var log = 3;
