@@ -218,8 +218,8 @@
 	var aDrivers 			= new Array();		// array for PCARSdriver objects
 	var aSensorData 		= new Array();		// array of Hashes, each hash includes parameters of a driver
 	var XMLHTTPTimeout		= 2000;
-	var StopTransitionDelay = "false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
-	var StopTransitionDelay_StartTime = 0;	//timestamp for StopTransitionDelay is set to "true"
+	var StopTransitionDelay = "true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
+	var StopTransitionDelay_StartTime = Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
