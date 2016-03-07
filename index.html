@@ -218,6 +218,7 @@
 	var aSensorData 		= new Array();		// array of Hashes, each hash includes parameters of a driver
 	var XMLHTTPTimeout		= 2000;
 	var StopTransitionDelay = "false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
+	var StopTransitionDelay_StartTime = 0;	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
@@ -565,6 +566,7 @@
 	map.addListener('zoom_changed', function() {
 		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
         	StopTransitionDelay = "true";
+        	StopTransitionDelay_StartTime = Date.now();
 		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " , StopTransitionDelay);}
   	});
 
@@ -810,6 +812,10 @@
 			   //todo: what does this draw() call ?
 			   if(log >= 3){console.log ("THIS Updated data:" , _data);}
 			   if(log >= 3){console.log ("THIS:" , this);}
+			   
+			   //Detect time between StopTransitionDelay set to "true" and now
+			   var CurrentTime = Date.now();
+                           var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
 
 			   if( StopTransitionDelay == "true" )
 			   {
@@ -819,8 +825,9 @@
                                        .data(_data, function (d) { return d.Key; })
                                        .each(transform);
 
-				// reset to default after zoom event finished
-                                StopTransitionDelay = "false";
+				// reset to default after zoom event finished. 
+				//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
+                                if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
 			
 			   }else{
 
@@ -831,7 +838,7 @@
 		                       .each(transformWithEase);                
 
 				// reset to default after zoom event finished
-				StopTransitionDelay = "false";
+				//StopTransitionDelay = "false";
 			   }		 
                };
            }
@@ -872,6 +879,8 @@ function changeMapSettings(newTrackObj, mapobj)
 
         map.setZoom(newTrackObj["Zoom"]);
 
+	StopTransitionDelay = "true";
+	StopTransitionDelay_StartTime = Date.now();
 
 	//todo: change also picture Overlay prevered mapsourc(google,openstreetmap) in needed
         return 1;
