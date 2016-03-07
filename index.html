@@ -567,7 +567,7 @@
 		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
         	StopTransitionDelay = "true";
         	StopTransitionDelay_StartTime = Date.now();
-		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " , StopTransitionDelay);}
+		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
   	});
 
 	// create Table with list of all tracks
@@ -819,7 +819,7 @@
 
 			   if( StopTransitionDelay == "true" )
 			   {
-				if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " , StopTransitionDelay );}
+				if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
 				this.draw();
                                    _div.selectAll("svg")
                                        .data(_data, function (d) { return d.Key; })
