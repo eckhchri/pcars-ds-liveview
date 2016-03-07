@@ -17,6 +17,7 @@
 	 <script src="./calc_coordinates.js" charset="utf-8"></script>
 	 <script src="./class_reference_points.js" charset="utf-8"></script>
 	 <script src="./get_url_param.js" charset="utf-8"></script>
+	 <script src="./css_classchanger.js" charset="utf-8"></script>
 
 	<!--Ermoeglicht das verschieben von DIV Bloecken -->
 	<!-- Jquery UI needed for jTable-->
@@ -232,6 +233,7 @@
 	var StopRefreshDriverlist	=	"false";
 	var APIMODE					=	"DS";   // possible values DS,CREST
 	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
+	var CSSClassChanger			=	new CSSClassChanger ();
 	PCARSd.SetExampleData();
 						
 								
@@ -673,6 +675,7 @@
                 //Method with Button
                 var self = this;
                 changeRefreshDriverlist(self);
+                                                
         });
         
         function changeRefreshDriverlist(data){
@@ -689,7 +692,8 @@
                 }
         }
 
-	
+	 
+        
 	// setting up google maps overlays
 	function GPSSensor(initData) {
                //state information

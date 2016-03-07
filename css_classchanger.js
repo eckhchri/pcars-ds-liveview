@@ -2,7 +2,11 @@
 function CSSClassChanger ()
 {
 
+	this.aCSSClasses = new Array(); 	//Array of all handled CSS Clases
+	
+	return this;
 
+}
 
 
 
@@ -27,4 +31,31 @@ function CSSClassChanger ()
 		})(cssText);
 	};
 
-}
+	// hide svg objects during change of race session
+	function HideAllSvg()
+	{
+		
+		var CSSStyleHandle = setStyle(
+				    '.marker{ display: none; } \n',
+				    CSSStyleHandle );
+		
+		//remember object handle
+		this.aCSSClasses['hideallsvgs']	=	(CSSStyleHandle);
+		
+		return 1;
+	}
+	
+	//unhide svg ojects
+	function UnHideAllSvg(){
+		
+		if(this.aCSSClasses['hideallsvgs']) setStyle( '', this.aCSSClasses['hideallsvgs'] );
+		
+		delete this.aCSSClasses['hideallsvgs'];
+		
+		return 1;
+	}
+	
+
+CSSClassChanger.prototype.setStyle=setStyle;
+CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
+CSSClassChanger.prototype.UnHideAllSvg=UnHideAllSvg;
