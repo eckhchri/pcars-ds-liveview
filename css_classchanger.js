@@ -19,6 +19,7 @@ function CSSClassChanger ()
 	// 					if(object_TestCSSClass) setStyle( '', object_TestCSSClass );
 	//
 	function setStyle(cssText) {
+				
 		var sheet = document.createElement('style');
 		sheet.type = 'text/css';
 		/* Optional */ window.customSheet = sheet;
@@ -30,6 +31,22 @@ function CSSClassChanger ()
 			return node;
 		})(cssText);
 	};
+	
+	// a function to clear all css clases that were managed by this object
+	function ClearAllCssClases()
+	{
+		for (var key in this.aCSSClasses){
+			
+			//delete css class from html DOM structure
+			if(this.aCSSClasses[key]) setStyle( '', this.aCSSClasses[key] );
+			
+			//delte from internale list
+			delete this.aCSSClasses[key];
+		}
+		
+		return 1;
+	}
+	
 
 	// hide svg objects during change of race session
 	function HideAllSvg()
@@ -44,7 +61,6 @@ function CSSClassChanger ()
 		
 		return 1;
 	}
-	
 	//unhide svg ojects
 	function UnHideAllSvg(){
 		
@@ -59,3 +75,4 @@ function CSSClassChanger ()
 CSSClassChanger.prototype.setStyle=setStyle;
 CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
 CSSClassChanger.prototype.UnHideAllSvg=UnHideAllSvg;
+CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
