@@ -240,6 +240,27 @@
 	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
 	var CSSClassChanger			=	new CSSClassChanger ();
 	PCARSd.SetExampleData();
+	
+	// set to global var, to modify in future stage for periodical updates via ajax
+	var DsName			=	"-+-"; // aDsData.name;
+	var DsState			=	"-+-"; //aDsData.state;		//idle/running
+	var DsTrackName		=	"Slightly Mad Studios Ltd";		//aTrackList[aDsData.TrackId];
+	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
+	var cuircitID		=	9999999999;		//aDsData.TrackId;	
+	
+	var GPSinit                         = calc_coordinates (9999999999 , PCARSd.GetPosX() , PCARSd.GetPosZ() , aRefPointTMP);
+        aSensorData[0] = {
+		"Key"			PCARSd.GetName()
+		,"MarkerLabel" :	PCARSd.GetRacePosition() + "-" + PCARSd.GetName()
+		,"DateTime"		"2013-09-04T09:41:09+10:00"
+		,"Lat"			GPSinit["Lat"]
+		,"Long":		GPSinit["Long"]
+		,"Heading"		286.0
+		,"Speed"		PCARSd.GetSpeed()
+		,"CSSTextClases"	PCARSd.GetCSSTextClass()
+		,"CSSCircleClases"	PCARSd.GetCSSCircleClass()
+        }
+
 						
 								
 	// hide or unhide objects defined within config.js
@@ -282,14 +303,6 @@
 				+ get_url_param('crestport'));
 		}
 	}
-
-
-	// set to global var, to modify in future stage for periodical updates via ajax
-	var DsName			=	"-+-"; // aDsData.name;
-	var DsState			=	"-+-"; //aDsData.state;		//idle/running
-	var DsTrackName		=	"Slightly Mad Studios Ltd";		//aTrackList[aDsData.TrackId];
-	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
-	var cuircitID		=	9999999999;		//aDsData.TrackId;	
 
 
 	/////////////////////////////////////
@@ -852,7 +865,7 @@
 			   if( StopTransitionDelay == "true" )
 			   {
 				if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
-				this.draw();
+				//this.draw();
                                    _div.selectAll("svg")
                                        .data(_data, function (d) { return d.Key; })
                                        .each(transform);
@@ -864,7 +877,7 @@
 			   }else{
 
 				if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
-		                   this.draw();
+		                   //this.draw();
 		                   _div.selectAll("svg")
 		                       .data(_data, function (d) { return d.Key; }) 
 		                       .each(transformWithEase);                
