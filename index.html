@@ -1093,6 +1093,11 @@ function VehicleIdToName(id, array){
 		return array[id];
 		
 	}
+	else
+	{
+		// in the case vehilce IDs not in hash
+		if(log >= 3){console.log("------- VehicleIdToName(), vehicle ID unknown: " , id)};
+	}
 	//if ID not found return id
 	return id;
 }
