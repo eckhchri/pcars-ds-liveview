@@ -1071,15 +1071,16 @@ function transformVehicleObjectToHash(a){
 	
 	var hash = new Array();
 	
-	if(log >= 5){console.log("------- transformVehicleObjectToHash() for a : " , a)};
+	if(log >= 3){console.log("------- transformVehicleObjectToHash() for a : " , a)};
 	
 	for (var i=0; i < a.length; i++){
 		
-		hash[a[i].vehicleid] = a[i].name;
+		// '' + a[i].vehicleid -> needed to convert negative numbers to string
+		hash[ '' + a[i].vehicleid ] = a[i].name;
 		//if(log >= 5){console.log("------- transformVehicleObjectToHash(), VehicleID/Name: " + a[i].vehicleid + " / "+ a[i].name  );}
 		
 	}
-	
+	if(log >= 3){console.log("------- transformVehicleObjectToHash() for hash : " , hash)};
 				
 	return hash;
 }
