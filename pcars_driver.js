@@ -1,20 +1,20 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,RacePos,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, variousParameters)
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, variousParameters)
 {
         // vars
-        this.RefID     =       RefID;
-        this.Name      =       Name;
-        this.IsPlayer  =       IsPlayer;
-        this.RacePos   =       RacePos;
-        this.PosX      =       PosX;
-        this.PosY      =       PosY;
-        this.PosZ      =       PosZ;
-        this.State     =       State;
-        this.CurrentSector =   CurrentSector;
-        this.RacePosition  =   RacePosition;
-        this.FastestLapTime=   FLapTime;
-        this.LastLapTime   =   LLapTime;
-        this.Orientation   =   Orient;
+        this.RefID			=	RefID;
+        this.Name      		=	Name;
+        this.IsPlayer  		= 	IsPlayer;
+        this.GridPosition   =	GridPosition;
+        this.PosX      		=	PosX;
+        this.PosY      		=	PosY;
+        this.PosZ      		=	PosZ;
+        this.State     		=	State;
+        this.CurrentSector 	=   CurrentSector;
+        this.RacePosition  	=   RacePosition;
+        this.FastestLapTime	=   FLapTime;
+        this.LastLapTime   	=   LLapTime;
+        this.Orientation   	=   Orient;
         this.Speed	   		=   Spd;
         this.CurrentLap		=	CurrentLap;
         this.VehicleId		=	VehicleId;		
@@ -99,7 +99,7 @@ function GetSpeed(){
 
 function GetPosColor(){
 	
-	if (this.RacePos == 1){
+	if (this.RacePosition == 1){
 		return green;
 	}else{
 		return red;
@@ -113,22 +113,21 @@ function GetVariousParameter(parameter)
 
 function SetExampleData()
 {
-
-	// set default parameter for a dummy object
-	this.RefID     =       9234567;
-        this.Name      =       "NO_PARTICIPANT_TestData";
-        this.IsPlayer  =       0;
-        this.RacePos   =       3;
-        this.PosX      =       271;
-        this.PosY      =       277;
-        this.PosZ      =       288;
-        this.State     =       "StateTest";
-        this.CurrentSector =   0;
-        this.RacePosition  =   0;
-        this.FastestLapTime=   9000;
-        this.LastLapTime   =   9999;
-        this.Orientation   =   0;
-        this.Speed         =   100;
+		// set default parameter for a dummy object
+		this.RefID			=	9234567;
+        this.Name			=	"NO_PARTICIPANT_TestData";
+        this.IsPlayer		=	0;
+        this.GridPosition	=	3;
+        this.PosX			=	271;
+        this.PosY			=	277;
+        this.PosZ			=	288;
+        this.State			=	"StateTest";
+        this.CurrentSector	=   0;
+        this.RacePosition	=   0;
+        this.FastestLapTime	=   9000;
+        this.LastLapTime	=   9999;
+        this.Orientation	=   0;
+        this.Speed			=   100;
         this.VehicleId		=	-886212684;
         this.CurrentLap		=	99;
         this.variousParameters = {TrackId: 9999999999};
@@ -176,13 +175,13 @@ function GetCSSCircleClass()
 {
 	
 	//Example: CSS_RacePos_1
-	var css = "CSS_RacePos_" + this.RacePos;
+	var css = "CSS_RacePos_" + this.RacePosition;
 	
 	// todo:  add dynamic vehicle Class mapping
 	css +=	" CSS_Vehicle_GT3";
 	
 	//decision if real player or ai
-	if (this.IsPlayer == "yes")
+	if (this.IsPlayer == 1)
 	{
 		css += " CSS_IsRealPlayer";
 	}else{

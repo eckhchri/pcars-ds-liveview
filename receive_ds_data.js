@@ -194,7 +194,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					
 								
 					                 data.driverlist.push (
-	                                        new PCARSdriver(myArr.response.participants[i].attributes.RefId,
+	                                        new PCARSdriver(
+	                                                myArr.response.participants[i].attributes.RefId,
 	                                                myArr.response.participants[i].attributes.Name,
 	                                                myArr.response.participants[i].attributes.IsPlayer,
 	                                                myArr.response.participants[i].attributes.GridPosition,
@@ -256,7 +257,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 						myArr.response.participants[i].attributes.CurrentSector,
 						myArr.response.participants[i].attributes.RacePosition,
 						myArr.response.participants[i].attributes.FastestLapTime,
-					        myArr.response.participants[i].attributes.LastLapTime,
+						myArr.response.participants[i].attributes.LastLapTime,
 						myArr.response.participants[i].attributes.Orientation,
 						myArr.response.participants[i].attributes.Speed,
 						myArr.response.participants[i].attributes.CurrentLap,

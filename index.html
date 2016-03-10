@@ -496,22 +496,22 @@
         		//if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}	//analyzing problem with asynchronous marker updates
 		}
 		
-		sensorLayer_UpdateTime = Date.now();
-                sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
-                sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
-                if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
+        sensorLayer_UpdateTime = Date.now();
+		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
+		sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
+		if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
                 
-                //Calculation of dynamic DisplayDuration
-                if (APIMODE == "DS" && sensorLayer_UpdateDelta < UpdateRateDS) {
-                        DisplayDuration = UpdateRateDS + DisplayDurationCorrector       //If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
-                } else{
-                        DisplayDuration = sensorLayer_UpdateDelta  + DisplayDurationCorrector;
-                }
-                if (DisplayDuration < 0) { DisplayDuration = 0 }        //catch a negative value
-                if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration
-                if(log >= 2){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
+		//Calculation of dynamic DisplayDuration
+		if (APIMODE == "DS" && sensorLayer_UpdateDelta < UpdateRateDS) {
+				DisplayDuration = UpdateRateDS + DisplayDurationCorrector       //If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
+		}else{
+				DisplayDuration = sensorLayer_UpdateDelta  + DisplayDurationCorrector;
+		}
+		if (DisplayDuration < 0) { DisplayDuration = 0 }        //catch a negative value
+		if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration
+		if(log >= 2){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
                 
-                //if(log >= 3){console.log("++++++++ aSensorData_NEW" , aSensorData);}
+		if(log >= 3){console.log("++++++++ aSensorData_NEW" , aSensorData);}
 		sensorLayer.update(aSensorData);
 
 		// in case track changes on DS adjust the map settings for new possition
@@ -837,23 +837,24 @@
                };
 
 
-		// todo: known issue: Beim Wechsel der Position, bleibt eine "Leiche" auf der Karte uebrig, weil Key "Pos - Name" zusammensetzt
-		// easyt solution:  deleting leading position number 
-               this.update = function (data) {                    
-                   //update internal data which drive redrawing on zoom_changed                  
-			var marker;
-			var padding = 10;
+               // todo: known issue: Beim Wechsel der Position, bleibt eine "Leiche" auf der Karte uebrig, weil Key "Pos - Name" zusammensetzt
+               // easyt solution:  deleting leading position number 
+               this.update = function (data) {     
 			
-                 	for (var i = 0; i < data.length; i++) {
-			       //if(log >= 3){console.log ("------------------------------------------- data", data);}
+					//update internal data which drive redrawing on zoom_changed                  
+					var marker;
+					var padding = 10;
+					                    				
+					for (var i = 0; i < data.length; i++) {
+
 	                       var found = false;
 	                       for (var j = 0; j < _data.length; j++) {
 	                           if (_data[j].Key === data[i].Key) {
-	        	                       found = true;
-	                               _data[j].Lat = data[i].Lat;
-	                               _data[j].Long = data[i].Long;
-				       _data[j].MarkerLabel = data[i].MarkerLabel;
-				//	if(log >= 3){console.log("---12 _data changes for key:" + _data[j].Key + " // " + data[i].Key);}
+									found = true;
+									_data[j].Lat = data[i].Lat;
+									_data[j].Long = data[i].Long;
+									_data[j].MarkerLabel = data[i].MarkerLabel;
+									//	if(log >= 3){console.log("---12 _data changes for key:" + _data[j].Key + " // " + data[i].Key);}
 	                           }
 	                       }
 	                       if (!found)
@@ -861,12 +862,12 @@
 	                   }
 
 			   //todo: what does this draw() call ?
-			   if(log >= 3){console.log ("THIS Updated data:" , _data);}
-			   if(log >= 3){console.log ("THIS:" , this);}
+			   //if(log >= 3){console.log ("THIS Updated data:" , _data);}
+			   //if(log >= 3){console.log ("THIS:" , this);}
 			   
 			   //Detect time between StopTransitionDelay set to "true" and now
 			   var CurrentTime = Date.now();
-                           var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
+			   var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
 
 			   if( StopTransitionDelay == "true" )
 			   {
@@ -1046,7 +1047,7 @@ function refreshDriverList(a)
         }
 
 	if(log >= 3){console.log("refreshDriverList(e): " , a);}
-	var grididcnt = 0;
+
 	var _data;
 	var _allDrivers = new Array();
 
@@ -1059,7 +1060,6 @@ function refreshDriverList(a)
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
-	if(log >= 3){console.log ("++++++++ length of driverlist array:" + a.length);}
 	for (i=0; i < a.length; i++)
 	{
 		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
@@ -1073,7 +1073,7 @@ function refreshDriverList(a)
 					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
-					,isplayer:		ConvertIsPlayer(a[i].IsPlayer)
+					,isplayer:			ConvertIsPlayer(a[i].IsPlayer)
 					,posx:				a[i].PosX
 					,posy:				a[i].PosY
 					,posz:				a[i].PosZ
@@ -1086,7 +1086,6 @@ function refreshDriverList(a)
 				jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
 				//if(log >= 3){console.log("+++++ add " + i );}
 		}
-		grididcnt++;
 	
 		//build hash for clean up map	
 		_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};
