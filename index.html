@@ -532,6 +532,7 @@
                         UnHide_Timer = UnHide_Timer + sensorLayer_UpdateDelta;
                         if (UnHide_Timer > 1000){
                                 sensorLayer.interruptTransition();
+                                sensorLayer.update(aSensorData);
                                 CSSClassChanger.UnHideAllSvg();
                                 UnHide_Timer = 0;
                                 UnHide = "false";
