@@ -384,19 +384,20 @@
 	        datatype: "local",
 	        height: 'auto',
 	        hiddengrid: true,
-	        colNames:['ID','CarName','Set1','Set2', 'Set3','Comment'],
+	        colNames:['ID','CarName','class','Set1', 'Set2','Comment'],
 	        colModel:[
-					{name:'id', index:'id', formatter: 'integer', width:100},
-					{name:'trackid', index:'trackid', width:100},
-					{name:'trackname', index: 'trackname', width:200},
-					{name:'gridsize', width:40, align:"right"},
-					{name:'refpoint', width:90, align:"center",sorttype:"float"},
-					{name:'comment', width:160, align:"left"},
+					{name:'vehicleid', 	width:100, 	sorttype:"float",align:"left", index:'id', formatter: 'float'},
+					{name:'name', 		width:100, 	sorttype:"text"},
+					{name:'cls',  		width:200, 	sorttype:"text"},
+					{name:'set1', 		width:40, 	sorttype:"text", align:"right"},
+					{name:'set2', 		width:90, 	sorttype:"text", align:"center"},
+					{name:'comment', 	width:160, 	sorttype:"text", align:"left"},
 	        ],
 	        caption: "List of available Cars with properties.",
 		rowNum: 200,
 	});
-	
+	// add filter option bar
+	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create worker to get vehicle list
@@ -411,9 +412,13 @@
 			
 			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);
 		
+			//display vehicle data in table 
+			refreshVehicleList(aVehicleList);
 			
 			// no additional worker call needed, because needed data available			
 			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
+			
+			
 			
 		}else{
 			
@@ -1037,6 +1042,36 @@ function refreshTrackList(a)
 	jQuery("#tracklisttable").trigger("reloadGrid");
 	
 }
+
+//fill
+function refreshVehicleList(a)
+{
+	var _data;
+	
+	// clean complete table befor reloading new data to prevent ghost entries
+	jQuery("#carlisttable").jqGrid("clearGridData");	
+	
+	
+	for (i=0; i < a.length; i++)
+	{
+	
+		_data = {
+   					vehicleid:	a[i].vehicleid,
+					name:		a[i].name,
+					cls:		a[i].cls,
+					set1:		"-",
+					set2:		"-",
+					comment:	"-"
+				};
+		
+		jQuery("#carlisttable").jqGrid('addRowData',i, _data);
+	}
+	
+	
+	return 1;
+		
+}
+
 //////////////////
 function refreshDriverList(a)
 {
@@ -1108,7 +1143,7 @@ function buildDriverName(drivername , raceposition)
 
 function CleanupDriverObjects(allDrivers)
 {
-        //if(log >= 3){console.log("---------- Call function CleanupDriverObjects() with driver list ----" , allDrivers );}
+	//if(log >= 3){console.log("---------- Call function CleanupDriverObjects() with driver list ----" , allDrivers );}
 	
 	var svgs = 	d3.selectAll("svg")
 			.each(function( obj ) {
@@ -1116,7 +1151,7 @@ function CleanupDriverObjects(allDrivers)
 		
 				if ( allDrivers[this.textContent] === undefined )
 				{
-					if(log >= 3){console.log("------- Ghost car found and delete it from map (this.textContent: " , this.textContent);}
+					if(log >= 3){console.log("------- Ghost car found and delete it from map (this.textContent): " , this.textContent);}
 					//todo: delete ghost cars from map via D3 functions
 					this.remove();
 				}
