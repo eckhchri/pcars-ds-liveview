@@ -6,6 +6,7 @@ self.addEventListener('message', function(e) {
 	importScripts('./pcars_driver.js');
 	importScripts('./class_reference_points.js');
 	importScripts('./config.js');	//for console.log levels needed
+	importScripts('./demo_data.js');
 
 	//delays this worker to reduce http requests and make application resposive
 	//Syntax:  setTimeout(function,milliseconds,param1,param2,...)
