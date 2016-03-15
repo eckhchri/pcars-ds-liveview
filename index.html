@@ -201,6 +201,7 @@
 	    		<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      			<option selected="selected">DS</option>
 	      			<option>CREST</option>
+	      			<option>DEMO</option>
 			</select>
 		</fieldset>
 		</form>
@@ -242,7 +243,8 @@
 	var CSSClassChanger			=	new CSSClassChanger ();
 	PCARSd.SetExampleData();
 	
-	var recording_count = 0;	//used as array index comment during recording demo data
+	var recording_count = 0;        //used as array index comment during recording demo data
+        var record_pos = demo_start_pos;//used for playback of data during DEMO mode
 	
 	// set to global var, to modify in future stage for periodical updates via ajax
 	var DsName			=	"-+-"; // aDsData.name;
@@ -575,7 +577,8 @@
 				,timeout:		XMLHTTPTimeout
 				,receivemode:	"GETDSANDDRIVERDATA"
 				,arefpoint:		e.data.arefpoint});
-		}else{
+		}
+		if (APIMODE == "CREST"){
 			//CREST receive mode
 			workerDSDATA.postMessage({
 				workerdelay: 		WORKERDELAY_DSDATA
@@ -585,7 +588,18 @@
 				,receivemode:	"GETCRESTDRIVERDATA"
 				,arefpoint:		e.data.arefpoint});
 		}
-		
+		if (APIMODE == "DEMO"){
+                        //CREST receive mode
+                        workerDSDATA.postMessage({
+                                workerdelay:            WORKERDELAY_DSDATA
+                                ,dsurl:                 ""
+                                ,dsport:                0
+                                ,timeout:               record_pos
+                                ,receivemode:   "GETDEMODATA"
+                                ,arefpoint:             e.data.arefpoint});
+                        record_pos = record_pos + 1;
+                        if(record_pos > demo.length-1 || record_pos > demo_end_pos-1){record_pos = demo_start_pos;}     //jump to beginning id end of array or demo_end_pos is reached/ -1, because the array begins with 0
+                }
 	}, false);
 	
 	//initail call of the worker
