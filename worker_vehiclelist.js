@@ -7,6 +7,7 @@ self.addEventListener('message', function(e) {
 	importScripts('./pcars_vehicle.js');
 	importScripts('./sleep.js');
 	importScripts('./config.js');	//for console.log levels needed
+	importScripts('./demo_data.js');
 	
 	if(log >= 3){console.log("GETVEHICLELIST e: " , e);}
 

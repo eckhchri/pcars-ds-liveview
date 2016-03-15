@@ -18,6 +18,7 @@
 	 <script src="./class_reference_points.js" charset="utf-8"></script>
 	 <script src="./get_url_param.js" charset="utf-8"></script>
 	 <script src="./css_classchanger.js" charset="utf-8"></script>
+	 <script src="./demo_data.js" charset="utf-8"></script>
 
 	<!--Ermoeglicht das verschieben von DIV Bloecken -->
 	<!-- Jquery UI needed for jTable-->
@@ -200,6 +201,7 @@
 	    		<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      			<option selected="selected">DS</option>
 	      			<option>CREST</option>
+	      			<option>DEMO</option>
 			</select>
 		</fieldset>
 		</form>
@@ -240,6 +242,9 @@
 	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
 	var CSSClassChanger			=	new CSSClassChanger ();
 	PCARSd.SetExampleData();
+	
+	var recording_count = 0;        //used as array index comment during recording demo data
+        var record_pos = demo_start_pos;//used for playback of data during DEMO mode
 	
 	// set to global var, to modify in future stage for periodical updates via ajax
 	var DsName			=	"-+-"; // aDsData.name;
@@ -473,7 +478,7 @@
 
                 if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
                 if (SessionState_old == "" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}         //Hide if you open the website during "Loading"
-
+		if (SessionState_old == "NA" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
@@ -548,6 +553,21 @@
                 }
                 SessionState_old = SessionState;
 
+		if (recording_demo_data == "true"){
+                        console.log("           {//" + recording_count);
+                        console.log("                globals:{sensorLayer_UpdateDelta:"+sensorLayer_UpdateDelta+", state:\""+e.data.globals.state+"\", name:\""+e.data.globals.name+"\", lobbyid:"+e.data.globals.lobbyid+", joinable:\""+e.data.globals.joinable+"\", max_member_count:"+e.data.globals.max_member_count+", now:"+e.data.globals.now+", attributes:{TrackId:"+e.data.globals.attributes.TrackId+", SessionState:\""+e.data.globals.attributes.SessionState+"\", SessionStage:\""+e.data.globals.attributes.SessionStage+"\", GridSize:"+e.data.globals.attributes.GridSize+", MaxPlayers:"+e.data.globals.attributes.MaxPlayers+"}},");
+                        console.log("                participants:[");
+                        for (var i = 0; i < e.data.driverlist.length; i++ ){
+                                if ((i+1) == e.data.driverlist.length){
+                                        console.log("                        {RefId:\""+e.data.driverlist[i].RefID+"\", Name:\""+e.data.driverlist[i].Name+"\", IsPlayer:"+e.data.driverlist[i].IsPlayer+", GridPosition:\""+e.data.driverlist[i].GridPosition+"\", VehicleId:"+e.data.driverlist[i].VehicleId+", RacePosition:"+e.data.driverlist[i].RacePosition+", CurrentLap:"+e.data.driverlist[i].CurrentLap+", CurrentSector:"+e.data.driverlist[i].CurrentSector+", LastLapTime:"+e.data.driverlist[i].LastLapTime+", FastestLapTime:"+e.data.driverlist[i].FastestLapTime+", State:\""+e.data.driverlist[i].State+"\", Speed:"+e.data.driverlist[i].Speed+", PositionX:"+e.data.driverlist[i].PosX+", PositionY:"+e.data.driverlist[i].PosY+", PositionZ:"+e.data.driverlist[i].PosZ+", Orientation:"+e.data.driverlist[i].Orientation+"}");
+                                }else{
+                                        console.log("                        {RefId:\""+e.data.driverlist[i].RefID+"\", Name:\""+e.data.driverlist[i].Name+"\", IsPlayer:"+e.data.driverlist[i].IsPlayer+", GridPosition:\""+e.data.driverlist[i].GridPosition+"\", VehicleId:"+e.data.driverlist[i].VehicleId+", RacePosition:"+e.data.driverlist[i].RacePosition+", CurrentLap:"+e.data.driverlist[i].CurrentLap+", CurrentSector:"+e.data.driverlist[i].CurrentSector+", LastLapTime:"+e.data.driverlist[i].LastLapTime+", FastestLapTime:"+e.data.driverlist[i].FastestLapTime+", State:\""+e.data.driverlist[i].State+"\", Speed:"+e.data.driverlist[i].Speed+", PositionX:"+e.data.driverlist[i].PosX+", PositionY:"+e.data.driverlist[i].PosY+", PositionZ:"+e.data.driverlist[i].PosZ+", Orientation:"+e.data.driverlist[i].Orientation+"},");
+                                }
+                        }
+                        console.log("                ]");
+                        console.log("        },");
+                        recording_count = recording_count + 1;
+                }
 		
 		//call worker again for next itteration -> currently endless loop
 		if (APIMODE == "DS"){
@@ -559,7 +579,8 @@
 				,timeout:		XMLHTTPTimeout
 				,receivemode:	"GETDSANDDRIVERDATA"
 				,arefpoint:		e.data.arefpoint});
-		}else{
+		}
+		if (APIMODE == "CREST"){
 			//CREST receive mode
 			workerDSDATA.postMessage({
 				workerdelay: 		WORKERDELAY_DSDATA
@@ -569,7 +590,18 @@
 				,receivemode:	"GETCRESTDRIVERDATA"
 				,arefpoint:		e.data.arefpoint});
 		}
-		
+		if (APIMODE == "DEMO"){
+                        //CREST receive mode
+                        workerDSDATA.postMessage({
+                                workerdelay:            WORKERDELAY_DSDATA
+                                ,dsurl:                 ""
+                                ,dsport:                0
+                                ,timeout:               record_pos
+                                ,receivemode:   "GETDEMODATA"
+                                ,arefpoint:             e.data.arefpoint});
+                        record_pos = record_pos + 1;
+                        if(record_pos > demo.length-1 || record_pos > demo_end_pos-1){record_pos = demo_start_pos;}     //jump to beginning id end of array or demo_end_pos is reached/ -1, because the array begins with 0
+                }
 	}, false);
 	
 	//initail call of the worker

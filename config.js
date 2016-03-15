@@ -25,3 +25,10 @@ var StopTransitionDelay_minTimeRun = 500; //milliseconds - A zoom change in Goog
 // Logging
 //Log Levels for console.log commands: 0 = off or special use, 1 = error, 2 = warning, 3 = info, 4 = extended info (output of variables for example)
 var log = 3;
+
+// set log to 0 and recording_demo_data to true to record demo data via console.log and paste it to demo_data.js
+recording_demo_data = "false";
+
+//playback demo from start position to end position
+demo_start_pos = 110;
+demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
