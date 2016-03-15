@@ -252,7 +252,6 @@
 	var DsTrackName		=	"Slightly Mad Studios Ltd";		//aTrackList[aDsData.TrackId];
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
-	var	cntDSWORKER		=	0;		//only for testing MarkerlabelText with Testdate
 	
 	var GPSinit                         = calc_coordinates (9999999999 , PCARSd.GetPosX() , PCARSd.GetPosZ() , aRefPointTMP);
         aSensorData[0] = {
@@ -263,8 +262,8 @@
 		,"Long":		GPSinit["Long"]
 		,"Heading":		286.0
 		,"Speed":		PCARSd.GetSpeed()
-		,"CSSTextClases":	PCARSd.GetCSSTextClass()
-		,"CSSCircleClases":	PCARSd.GetCSSCircleClass()
+		,"CSSTextClasses":	PCARSd.GetCSSTextClass()
+		,"CSSCircleClasses":	PCARSd.GetCSSCircleClass()
         }
 
 						
@@ -464,9 +463,6 @@
 		//);
 		
 		
-		e.data.driverlist[0].Name = cntDSWORKER;
-		cntDSWORKER++;
-		
 		/////////////////////////////////////////// update driver data /////////////////////
 		// refresh table of Driver data
         refreshDriverList(e.data.driverlist);
@@ -500,8 +496,8 @@
 						,"Long": 			gpsCoTmp["Long"]
 						,"Heading":			286.0
 						,"Speed":			e.data.driverlist[i].Speed
-						,"CSSTextClases":	e.data.driverlist[i].GetCSSTextClass()
-						,"CSSCircleClases":	e.data.driverlist[i].GetCSSCircleClass()
+						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
+						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass()
 				}
 				
         		tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;
@@ -633,8 +629,8 @@
 				,"Long": 			gpsCoTmp["Long"]
 				,"Heading":			286.0
 				,"Speed":			aDrivers[i].Speed
-				,"CSSTextClases":	aDrivers[i].GetCSSTextClass()
-				,"CSSCircleClases":	aDrivers[i].GetCSSCircleClass()
+				,"CSSTextClasses":	aDrivers[i].GetCSSTextClass()
+				,"CSSCircleClasses":	aDrivers[i].GetCSSCircleClass()
 		}
 		// bookmark current TrackID to detect track changes and adjust Map
 		tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
@@ -823,7 +819,7 @@
                         .enter().append("svg:svg")
                        .each(transform)
                        //.attr("class", "marker");
-                   		.attr("class", function (d){ return d.CSSTextClases });
+                   		.attr("class", function (d){ return d.CSSTextClasses });
            
                    
 		   		   //if(log >= 3){console.log("++ Marker" , marker);}
@@ -833,7 +829,7 @@
                        .attr("r", 4.5)
                        .attr("cx", padding)
                        .attr("cy", padding)
-                       .attr("class", function (d){ return d.CSSCircleClases } );
+                       .attr("class", function (d){ return d.CSSCircleClasses } );
 		       		   //.style("fill", "red");
 
 					//todo experimental method call	
@@ -922,7 +918,7 @@
 					.enter().append("svg:svg")
 					.each(transform)
 					//.attr("class", "marker");
-					.attr("class", function (d){ return d.CSSTextClases });
+					.attr("class", function (d){ return d.CSSTextClasses });
 
 				// reset to default after zoom event finished. 
 				//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
@@ -941,7 +937,7 @@
 					.enter().append("svg:svg")
 					.each(transform)
 					//.attr("class", "marker");
-					.attr("class", function (d){ return d.CSSTextClases });
+					.attr("class", function (d){ return d.CSSTextClasses });
 
 				// reset to default after zoom event finished
 				//StopTransitionDelay = "false";
@@ -951,7 +947,7 @@
 				.attr("r", 4.5)
 				.attr("cx", padding)
 				.attr("cy", padding)
-				.attr("class", function (d){ return d.CSSCircleClases } );
+				.attr("class", function (d){ return d.CSSCircleClasses } );
 				//.style("fill", "red");
 
 			//todo experimental method call
@@ -973,7 +969,6 @@
 					//if(log >= 4){console.log("+++++ this: " , this );}
 
 					for (var i = 0; i < aSensorData.length; i++){
-						if(log >= 3){console.log(" for Update MarkerLabel: cntDSWorker / aSensorData / key: ", cntDSWORKER + " / " , aSensorData , " / " + d.Key );}
 						if (aSensorData[i].Key == d.Key){
 						if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
 						return  aSensorData[i].MarkerLabel;

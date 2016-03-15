@@ -7,7 +7,19 @@
 	<script src="./lib/jquery-injectCSS/jquery.injectCSS.js" charset="utf-8"></script>
 	
 	<style type="text/css">
-
+		.svg {
+			width: 50px;
+			height: 20px;
+			padding-right: 100px;
+			font: 10px sans-serif;
+			color: red;
+		}
+		
+	.stations circle {
+			fill: blue;
+			stroke: black;
+			stroke-width: 1.5px;
+		}
 		
 	</style>
 </head>
@@ -15,17 +27,28 @@
 	http://christopheviau.com/d3_tutorial/
 -->
 <body>
+	<div class="stations">
+		<svg class="marker markertext" style="left: 150px; top:250px;">
+			<circle r="4.5" cx="5" cy="5" class="CSS_RacePos_25 CSS_Vehicle_GT3"></circle>
+			<text x="0" y="15" fill="red">I love SVG!</text>
+		</svg>
+		<svg class="marker markertext" style="left: 150px; top:250px;">
+			<circle r="4.5" cx="5" cy="5" class="CSS_RacePos_25 CSS_Vehicle_GT3"></circle>
+			<text x="0" y="15" fill="red">I love SVG!</text>
+		</svg>
+	</div>
     <div id="viz1"></div>
     <div id="viz2"></div>
     <div>
     	Stylesheet's contents:
     	<textarea id="output"></textarea>
 	</div>
+	
 
     <input type="checkbox" id="checkbox1" />
 
     <script type="text/javascript">
-
+	
 
 //Test Object;
 
@@ -224,8 +247,46 @@ $('#checkbox1').click(function () {
 
 
 
+///////////////////////////////SVG Text changes////////////////////////////////////////////////////
+/// http://www.jeromecukier.net/blog/2013/03/05/d3-tutorial-at-strata-redux/  ///
+var _div;
+var marker;
+var _data;
 
 
+var _data = ['10','60'];
+marker = d3.select(".stations")
+			.selectAll("svg")
+			.selectAll("text")
+			.data(_data)
+			.each(function(d, i) 
+				{ 
+					console.log("++++ each() d/i: " , d , " / " + i)
+					return d; 
+				
+				})
+			.text(function(d,i)
+				{
+					console.log("++++ text() d/i: " , d , " / " + i)
+					return "Test" + i + d ;
+				}
+			);
+console.log("----- _marker: ", marker);
+
+/*
+marker.data(_data)
+	  .style("font-size", function(d,i){ 
+			console.log("+++++ d/i:  " , d , " / "+ i);
+			return d+"px";
+	})	
+
+
+marker.append("text")
+	.text(function (d) {
+			return "Label2";
+
+	})
+*/
 
 
     </script>
