@@ -474,7 +474,7 @@
 
                 if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
                 if (SessionState_old == "" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}         //Hide if you open the website during "Loading"
-
+		if (SessionState_old == "NA" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
