@@ -956,7 +956,6 @@
 
 
 			// Add a label.
-			if(log >= 3){console.log ("++++ in function draw() ->  aSensorData: " , aSensorData);}
 			marker.append("svg:text")
 				.attr("x", padding + 7)
 				.attr("y", padding)
@@ -965,7 +964,7 @@
 				//      it seem that the function within .text(...) will called only once at the beginning
 				//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
 				.text(function (d) {
-					//if(log >= 4){console.log("+++++ d: " , d );}
+					if(log >= 4){console.log("+++++ d: " , d );}
 					//if(log >= 4){console.log("+++++ this: " , this );}
 
 					for (var i = 0; i < aSensorData.length; i++){
