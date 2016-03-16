@@ -996,14 +996,17 @@
 					return d.MarkerLabel;
 
 				})
+	
+								
+			}; //end update()
+              
 
-               };
-               
-               this.interruptTransition = function (){
+			this.interruptTransition = function (){
                         _div.selectAll("svg")
                                 .interrupt();
-               }
-           }
+            }; // end interruptTransition()
+            
+          }
 
 
 //////////////////////////////////////////////////////////////////////////
