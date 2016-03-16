@@ -248,7 +248,8 @@ $('#checkbox1').click(function () {
 
 
 ///////////////////////////////SVG Text changes////////////////////////////////////////////////////
-/// http://www.jeromecukier.net/blog/2013/03/05/d3-tutorial-at-strata-redux/  ///
+/// http://www.jeromecukier.net/blog/2013/03/05/d3-tutorial-at-strata-redux/ 
+/// https://bost.ocks.org/mike/selection/ 
 var _div;
 var marker;
 var _data;
@@ -272,6 +273,63 @@ marker = d3.select(".stations")
 				}
 			);
 console.log("----- _marker: ", marker);
+
+// second try with each
+
+var _data2  = [
+               {key: "A", label: "SVG1"},
+               {key: "E", label: "SVG2"}
+             ];
+
+var marker2 = d3.select(".stations")
+.selectAll("svg")
+.selectAll("text")
+.data(_data, function (d) { return d.key })
+.enter()
+.append("p")
+.text(function(d,i)
+	{
+		console.log("++++ text() 2 d/i: " , d , " / " + i)
+		return "Test" + i + d ;
+	});
+
+console.log("----- _marker2: ", marker2);
+
+
+///////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
+////////////// Example 3
+
+var _data3  = [
+				{key: 4 ,  label: "SVG4"},
+				{key: 8 ,  label: "SVG8"},
+				{key: 15,  label: "SVG15"}
+			];
+		
+var selection = d3.select("body").selectAll("p")
+	.data(_data3, function (d){ return d.key; })
+	.enter().append("p")
+	.text(function(d) { return "I’m number " + d.label + "!"; });
+console.log("----- current Output: selection ", selection);
+
+//Example 3 Update mit vertauschte Reihenfolge aber OHNE enter().append() aufruf
+ var _data4  = [
+			{key: 4 ,  label: "SVG44"},
+			{key: 15,  label: "SVG1515"},
+			{key: 8 ,  label: "SVG88"}
+		];
+		
+ var tmp1 = d3.select("body").selectAll("p")
+	.data(_data4, function (d){	return d.key;})
+	.text(function(d) 
+			{ 
+				console.log("----- _marker3-2: (d)  " , d)
+				return "I’m number " + d.label + "!"; 
+			});
+ 
+ console.log("----- _marker3-3: tmp1  " , tmp1);
+ 
+  
 
 /*
 marker.data(_data)
