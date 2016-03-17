@@ -1278,16 +1278,17 @@ function ConvertIsPlayer(bool){
 ///////////////////
 function buildTracklist( aTrackList , aRefPoint ){
 
-	if(log >= 3){console.log("--------------------------------- buildTracklist()  aTrackList: " , aTrackList)};
-	if(log >= 3){console.log("--------------------------------- buildTracklist()  aRefPoint: " , aRefPoint)};
+	// INFO: sometime problems with negative index number in associative array !!
 	
+	var aRefPointInt	= aRefPoint;
+	//var aRefPointInt  = new Refpoint("-1"); // works fine, but slower because creating new RefPointArry
+	//var aRefPointInt	= aRefPoint.slice(); // real copy an arrayworks but did not copy negative indexes
 	
-	var aRefPointInt = new Refpoint("-1"); // Workaround :-)
-	//var aRefPointInt	= aRefPoint.slice(); // copy object to a new one, because the object will be changed
 	var commenttmp 		= '';
 	var tmpObj;
 	var aNewTrackList 	= [];
 	var aTmpTracklist	= [];
+	var aSkipList		= []; //List of all existing RefIDs
 
 	// go through all responded tracks from pcars dedicated server
 	for (var i=0; i < aTrackList.length; i++)
@@ -1295,9 +1296,9 @@ function buildTracklist( aTrackList , aRefPoint ){
 		tmpObject = aTrackList[i];
 
 		//if refpoint for a track exists
-		if (aRefPointInt[tmpObject.trackid]){
+		if (aRefPointInt['' + tmpObject.trackid]){
 
-			aNewTrackList[tmpObject.trackid] = { 	
+			aNewTrackList[tmpObject.trackid.toString()] = { 	
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
 				,gridsize:	tmpObject.gridsize
@@ -1308,7 +1309,7 @@ function buildTracklist( aTrackList , aRefPoint ){
 		//no Refpoint entry exists , fill with dummy values
 		}else{
 			
-			aNewTrackList[tmpObject.trackid] = {
+			aNewTrackList[tmpObject.trackid.toString()] = {
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
 				,gridsize:	tmpObject.gridsize
@@ -1317,24 +1318,26 @@ function buildTracklist( aTrackList , aRefPoint ){
            };
 		}
 			
-		// delete objects that allready covered by DS output from RefpointArray
-		delete aRefPointInt[tmpObject.trackid];
+		// remember trackids that allready covered by DS output from RefpointArray
+		aSkipList.push('' + tmpObject.trackid);
 	}
-	
-	if(log >= 3){console.log("--------------------------------- buildTracklist() aNewTrackList: " , aNewTrackList)};
-	
+			
 	//fill up with refpoint entries that are not listed in DS array
 	for (var key in aRefPointInt ){
 		
-		//if(log >= 3){console.log("--------------------------------- buildTracklist() aRefPointInt[key]" , aRefPointInt[key] );}
-
-		tmpObject = aRefPointInt[key];
+		if ( aSkipList['' + key] ){
+			continue;		// allready found in DS TrackList, skip run
+		};
+		
+		if(log >= 3){console.log("------- for break did not work, to many runs for key: " , key)};
+		
+		tmpObject = aRefPointInt['' + key];
 
 		// check if comment field exists in the RefPoint array
 		commenttmp = '';
 		if ( 'Comment' in tmpObject ) {  commenttmp = tmpObject["Comment"];  };
 
-		aNewTrackList[key] = {
+		aNewTrackList['' + key] = {
 				trackid:	key
 				,trackname:	aRefPointInt[key]["Name"]
 				,gridsize:	"no info"
@@ -1342,8 +1345,6 @@ function buildTracklist( aTrackList , aRefPoint ){
 				,comment:	commenttmp 
 		};
 	}
-
-	if(log >= 3){console.log("--------------------------------- buildTracklist() with refpoint information:" , aNewTrackList);}
 
 	return aNewTrackList;
 }
