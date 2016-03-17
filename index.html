@@ -710,7 +710,7 @@
 					
 		//	var str = e.data;	// data string from return object
 
-			refreshTrackList(buildTracklist(e.data.aTrack , aRefPointTMP ));
+			refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
 			w_tracklist.postMessage({
 								workerdelay: 	WORKERDELAY_TRACKLIST
 								,dsurl: 		DsServerURL
@@ -1258,23 +1258,23 @@ function ConvertIsPlayer(bool){
 
 
 ///////////////////
-function buildTracklist( aTrackList , aRefPointTMP ){
+function buildTracklist( aTrackList , aRefPoint ){
 
-	var aRefPointInt	= aRefPointTMP; // copy object to a new one, because the object will be changed
+	if(log >= 3){console.log("--------------------------------- buildTracklist()  aTrackList: " , aTrackList)};
+	if(log >= 3){console.log("--------------------------------- buildTracklist()  aRefPoint: " , aRefPoint)};
+	
+	
+	var aRefPointInt = new Refpoint("-1"); // Workaround :-)
+	//var aRefPointInt	= aRefPoint.slice(); // copy object to a new one, because the object will be changed
 	var commenttmp 		= '';
 	var tmpObj;
-	var aNewTrackList 	= new Array();
-	var aTmpTracklist	= new Array();
-
-	//if(log >= 3){console.log("--------------------------------- buildTracklist() for DSTrackList:" , aTrackList);}
-	//if(log >= 3){console.log("-------------------------- buildTracklist() with:" , aRefPointInt);}
+	var aNewTrackList 	= [];
+	var aTmpTracklist	= [];
 
 	// go through all responded tracks from pcars dedicated server
 	for (var i=0; i < aTrackList.length; i++)
 	{
-
 		tmpObject = aTrackList[i];
-		//if(log >= 3){console.log("--------------------------------- buildTracklist() tmpObject: " , tmpObject);}
 
 		//if refpoint for a track exists
 		if (aRefPointInt[tmpObject.trackid]){
@@ -1302,8 +1302,10 @@ function buildTracklist( aTrackList , aRefPointTMP ){
 		// delete objects that allready covered by DS output from RefpointArray
 		delete aRefPointInt[tmpObject.trackid];
 	}
-
-	//fill up with refpoint entries taht are not listed in DS array
+	
+	if(log >= 3){console.log("--------------------------------- buildTracklist() aNewTrackList: " , aNewTrackList)};
+	
+	//fill up with refpoint entries that are not listed in DS array
 	for (var key in aRefPointInt ){
 		
 		//if(log >= 3){console.log("--------------------------------- buildTracklist() aRefPointInt[key]" , aRefPointInt[key] );}
