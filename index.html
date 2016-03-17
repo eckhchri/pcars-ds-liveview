@@ -640,32 +640,38 @@
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
 	// initial call for map initialization
 	if (APIMODE == "DS"){
-		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
-	}else{
-		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
-	}
-	
-	for (var i = 0; i < aDrivers.length; i++ ){
+                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+        }
+        if (APIMODE == "CREST"){
+                aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
+        }
+        if (APIMODE == "DEMO"){
+                aDrivers = Receive_DS_data("", 0, record_pos, "GETDEMODATA", aRefPointTMP);
+                cuircitID = aDrivers.globals.attributes.TrackId;
+        }
+        if(log >= 2){console.log("-------- aDrivers: " , aDrivers.driverlist[0].GetPosX() );}
 
-		// calculate GPS coordinates
-		if(log >= 3){console.log("-------- aDrivers: " , aDrivers[i] );}
-		gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() , aRefPointTMP );
+        for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
-		// fill data array
-		aSensorData[i] = {
-				"Key": 				aDrivers[i].GetName()
-				,"MarkerLabel" : 	buildDriverName ( aDrivers[i].GetRacePosition(), aDrivers[i].GetName() )
-				,"DateTime":		"2013-09-04T09:41:09+10:00"
-				,"Lat": 			gpsCoTmp["Lat"]
-				,"Long": 			gpsCoTmp["Long"]
-				,"Heading":			286.0
-				,"Speed":			aDrivers[i].Speed
-				,"CSSTextClasses":	aDrivers[i].GetCSSTextClass()
-				,"CSSCircleClasses":	aDrivers[i].GetCSSCircleClass()
-		}
-		// bookmark current TrackID to detect track changes and adjust Map
-		tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
-	}
+                // calculate GPS coordinates
+                if(log >= 2){console.log("-------- aDrivers: " , aDrivers.driverlist[i] );}
+                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
+
+                // fill data array
+                aSensorData[i] = {
+                                "Key":                          aDrivers.driverlist[i].GetName()
+                                ,"MarkerLabel" :        buildDriverName ( aDrivers.driverlist[i].GetRacePosition(), aDrivers.driverlist[i].GetName() )
+                                ,"DateTime":            "2013-09-04T09:41:09+10:00"
+                                ,"Lat":                         gpsCoTmp["Lat"]
+                                ,"Long":                        gpsCoTmp["Long"]
+                                ,"Heading":                     286.0
+                                ,"Speed":                       aDrivers.driverlist[i].Speed
+                                ,"CSSTextClasses":      aDrivers.driverlist[i].GetCSSTextClass()
+                                ,"CSSCircleClasses":    aDrivers.driverlist[i].GetCSSCircleClass()
+                }
+                // bookmark current TrackID to detect track changes and adjust Map
+                tmpcuircitID = aDrivers.driverlist[i].GetVariousParameter("TrackId");
+        }
 
 	// init google map
 	init_map(cuircitID , aRefPointTMP);
