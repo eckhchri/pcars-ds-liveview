@@ -4,7 +4,7 @@ var DsPort			= 9000;
 var CRESTServerURL 	= "localhost";
 var CRESTPort		= 8080;
 
-//default API mode
+//default API mode, possible values: DS, CREST or DEMO
 var APIMODE   =   "DS";
 
 //hide or unhide elements
