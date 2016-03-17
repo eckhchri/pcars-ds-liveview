@@ -199,7 +199,7 @@
 		  <fieldset id="fieldset">
 			<label for="APIMODE">Select API Type</label>
 	    		<select class="APIMODE" name="APIMODE" id="APIMODE">
-	      			<option selected="selected">DS</option>
+	      			<option>DS</option>
 	      			<option>CREST</option>
 	      			<option>DEMO</option>
 			</select>
@@ -238,7 +238,7 @@
 	var StopRefreshDriverlist	=	"false";
 	var SessionState                =       "";
         var SessionState_old            =       "";
-	var APIMODE					=	"DS";   // possible values DS,CREST
+	//var APIMODE					=	"DS";   // possible values DS,CREST
 	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
 	var CSSClassChanger			=	new CSSClassChanger ();
 	PCARSd.SetExampleData();
@@ -279,14 +279,28 @@
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();			}
 	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}
 	
-	
-	
+	//set dropdown menu APIMODE
+	switch(APIMODE) {
+		case "DS":
+			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
+			break;
+		case "CREST":
+			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "CREST";
+			break;
+		case "DEMO":
+			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DEMO";
+			break;
+		default:
+			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
+	}
 								
 	// check if url params overwrite the default ds info
 	if (get_url_param('dsurl') && get_url_param('dsport'))
         {
 			DsServerURL     =       get_url_param('dsurl');
 			DsPort          =       get_url_param('dsport');
+			APIMODE         =       "DS";
+			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
 
 			if(log >= 3){
 				console.log("overwrite ds default settings with: " 
@@ -626,32 +640,36 @@
 	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
 	// initial call for map initialization
 	if (APIMODE == "DS"){
-		aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
-	}else{
-		aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
-	}
-	
-	for (var i = 0; i < aDrivers.length; i++ ){
+                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+        }
+        if (APIMODE == "CREST"){
+                aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
+        }
+        if (APIMODE == "DEMO"){
+                aDrivers = Receive_DS_data("", 0, record_pos, "GETDEMODATA", aRefPointTMP);
+                cuircitID = aDrivers.globals.attributes.TrackId;
+        }
+        
+        for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
-		// calculate GPS coordinates
-		if(log >= 3){console.log("-------- aDrivers: " , aDrivers[i] );}
-		gpsCoTmp =  calc_coordinates (cuircitID , aDrivers[i].GetPosX() , aDrivers[i].GetPosZ() , aRefPointTMP );
+                // calculate GPS coordinates
+                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
 
-		// fill data array
-		aSensorData[i] = {
-				"Key": 				aDrivers[i].GetName()
-				,"MarkerLabel" : 	buildDriverName ( aDrivers[i].GetRacePosition(), aDrivers[i].GetName() )
-				,"DateTime":		"2013-09-04T09:41:09+10:00"
-				,"Lat": 			gpsCoTmp["Lat"]
-				,"Long": 			gpsCoTmp["Long"]
-				,"Heading":			286.0
-				,"Speed":			aDrivers[i].Speed
-				,"CSSTextClasses":	aDrivers[i].GetCSSTextClass()
-				,"CSSCircleClasses":	aDrivers[i].GetCSSCircleClass()
-		}
-		// bookmark current TrackID to detect track changes and adjust Map
-		tmpcuircitID = aDrivers[i].GetVariousParameter("TrackId");
-	}
+                // fill data array
+                aSensorData[i] = {
+                                "Key":                          aDrivers.driverlist[i].GetName()
+                                ,"MarkerLabel" :        buildDriverName ( aDrivers.driverlist[i].GetRacePosition(), aDrivers.driverlist[i].GetName() )
+                                ,"DateTime":            "2013-09-04T09:41:09+10:00"
+                                ,"Lat":                         gpsCoTmp["Lat"]
+                                ,"Long":                        gpsCoTmp["Long"]
+                                ,"Heading":                     286.0
+                                ,"Speed":                       aDrivers.driverlist[i].Speed
+                                ,"CSSTextClasses":      aDrivers.driverlist[i].GetCSSTextClass()
+                                ,"CSSCircleClasses":    aDrivers.driverlist[i].GetCSSCircleClass()
+                }
+                // bookmark current TrackID to detect track changes and adjust Map
+                tmpcuircitID = aDrivers.driverlist[i].GetVariousParameter("TrackId");
+        }
 
 	// init google map
 	init_map(cuircitID , aRefPointTMP);
