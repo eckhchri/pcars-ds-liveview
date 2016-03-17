@@ -4,6 +4,9 @@ var DsPort			= 9000;
 var CRESTServerURL 	= "localhost";
 var CRESTPort		= 8080;
 
+//default API mode
+var APIMODE   =   "DS";
+
 //hide or unhide elements
 var	SHOWTRACKLIST 	=	true;	// [true|false]
 var SHOWCARLIST = true; 	// [true|false]
