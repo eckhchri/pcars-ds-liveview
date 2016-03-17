@@ -30,5 +30,9 @@ var log = 3;
 recording_demo_data = "false";
 
 //playback demo from start position to end position
-demo_start_pos = 25;
-demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
+//demo_start_pos = 25;
+//demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
+
+//troubleshoot position change problem
+demo_start_pos = 176;
+demo_end_pos = 220;
