@@ -649,12 +649,10 @@
                 aDrivers = Receive_DS_data("", 0, record_pos, "GETDEMODATA", aRefPointTMP);
                 cuircitID = aDrivers.globals.attributes.TrackId;
         }
-        if(log >= 2){console.log("-------- aDrivers: " , aDrivers.driverlist[0].GetPosX() );}
-
+        
         for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
                 // calculate GPS coordinates
-                if(log >= 2){console.log("-------- aDrivers: " , aDrivers.driverlist[i] );}
                 gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
 
                 // fill data array
