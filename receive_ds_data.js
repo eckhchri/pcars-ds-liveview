@@ -51,16 +51,17 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	
 	var aDrivers		=	new Array();
 	aDrivers.globals = {
-         	"joinable":				"default parameters"
-            ,"lobbyid":				"default parameters"
-            ,"max_member_count":    "default parameters"
-            ,"now":					"default parameters"
-            ,"state":				"default parameters"
-         }
-        aDrivers.globals.attributes = new Array();
-        aDrivers.globals.attributes.TrackId = 0;
-        aDrivers.globals.attributes.SessionStage = "NA";
-        aDrivers.globals.attributes.SessionState = "NA";
+		"joinable"		"default parameters"
+		,"lobbyid"		"default parameters"
+		,"max_member_count"	"default parameters"
+		,"now"			"default parameters"
+		,"state"		"default parameters"
+		,"attributes":{
+			"TrackId":      9999999999
+			,"SessionStage":""
+			,"SessionState":""
+		}
+	}
 
 	aDrivers.driverlist	=	new Array();
 	
