@@ -406,11 +406,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				aDrivers.globals = {
 					"joinable":		"CREST Mode"
 					,"lobbyid":		"CREST Mode"
-					,"max_member_count"	"CREST Mode"
+					,"max_member_count":	"CREST Mode"
 					,"now":			"CREST Mode"
 					,"state":		"CREST Mode"
 					,"attributes":{
-						"TrackId"	TrackID
+						"TrackId":	TrackID
 						,"SessionStage":""
 						,"SessionState":myArr.gameStates.mSessionState
 					}
