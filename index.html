@@ -635,24 +635,30 @@
                 }
 	}, false);
 	
-	//initail call of the worker
-	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
-
-
 	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
-	//	   Receive_DS_data(url,port,timeout,RetrivelMode)
+	//         Receive_DS_data(url,port,timeout,RetrivelMode)
+	// initial call of the worker
 	// initial call for map initialization
-	if (APIMODE == "DS"){
-                aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
-        }
-        if (APIMODE == "CREST"){
-                aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
-        }
-        if (APIMODE == "DEMO"){
-                aDrivers = Receive_DS_data("", 0, record_pos, "GETDEMODATA", aRefPointTMP);
-                cuircitID = aDrivers.globals.attributes.TrackId;
-        }
+
+	switch(APIMODE) {
+		case "DS":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+			break;
+		case "CREST":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
+			break;
+		case "DEMO":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: record_pos, receivemode: "GETDEMODATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data("", 0, record_pos, "GETDEMODATA", aRefPointTMP);
+			cuircitID = aDrivers.globals.attributes.TrackId;
+			break;
+		default:
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+	}
         
         for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
