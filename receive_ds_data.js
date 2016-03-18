@@ -399,18 +399,22 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				
 			case  "GETCRESTDRIVERDATA":
 			
+				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
+				
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
-	             	"joinable":				"CREST Mode"
-	                ,"lobbyid":				"CREST Mode"
-	                ,"max_member_count":    "CREST Mode"
-	                ,"now":					"CREST Mode"
-	                ,"state":				"CREST Mode"
-	             	}
-	             	aDrivers.globals.attributes = new Array();
-	         	aDrivers.globals.attributes.TrackId = 0;
-	         	aDrivers.globals.attributes.SessionStage = "NA";
-	         	aDrivers.globals.attributes.SessionState = myArr.gameStates.mSessionState;
+					"joinable":		"CREST Mode"
+					,"lobbyid":		"CREST Mode"
+					,"max_member_count"	"CREST Mode"
+					,"now":			"CREST Mode"
+					,"state":		"CREST Mode"
+					,"attributes":{
+						"TrackId"	TrackID
+						,"SessionStage":""
+						,"SessionState":myArr.gameStates.mSessionState
+					}
+				}
 				
 				// if no users joined return example Data
 				if ( myArr.participants.mNumParticipants == 0 ){
@@ -426,9 +430,6 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	
 				
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
-				
-			 	TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
-				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
 	
 				for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
 				{
