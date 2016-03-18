@@ -1331,18 +1331,18 @@ function buildTracklist( aTrackList , aRefPoint ){
 		}
 			
 		// remember trackids that allready covered by DS output from RefpointArray
-		aSkipList.push('' + tmpObject.trackid);
+		aSkipList['' + tmpObject.trackid] = "allready found";
 	}
 			
 	//fill up with refpoint entries that are not listed in DS array
 	for (var key in aRefPointInt ){
 		
+		
+		//skip run if allready found 
 		if ( aSkipList['' + key] ){
-			continue;		// allready found in DS TrackList, skip run
+			continue;		
 		};
-		
-		if(log >= 3){console.log("------- for break did not work, to many runs for key: " , key)};
-		
+				
 		tmpObject = aRefPointInt['' + key];
 
 		// check if comment field exists in the RefPoint array
