@@ -542,11 +542,11 @@
 		sensorLayer.update(aSensorData);
 
 		// in case track changes on DS adjust the map settings for new possition
-        if ( (cuircitID != tmpcuircitID) && ( typeof tmpcuircitID != 'undefined') ){
-
-        	//if(log >= 3){console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP);}
-            //map.setCenter({lat: 50.332733, lng: 6.943355});
-			changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
+        if ( cuircitID != tmpcuircitID ){
+		//if(log >= 3){console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP);}
+		if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
+		//map.setCenter({lat: 50.332733, lng: 6.943355});
+		changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
 
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
             if(log >= 3){console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);}
