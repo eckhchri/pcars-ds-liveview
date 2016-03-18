@@ -488,8 +488,9 @@
 		
 		//todo var declaration needed within loop ???
 		var tmpcuircitID;
-		
+		tmpcuircitID = e.data.globals.attributes.TrackId;
 		SessionState = e.data.globals.attributes.SessionState;
+		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
 
 		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
                 //if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
@@ -520,7 +521,7 @@
 						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass()
 				}
 				
-        		tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;
+        		//tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;	//TrackId is available in globals, not necessary reading it from variousParameters
         		//if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}	//analyzing problem with asynchronous marker updates
 		}
 		
