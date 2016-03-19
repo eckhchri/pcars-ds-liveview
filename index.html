@@ -205,6 +205,17 @@
 			</select>
 		</fieldset>
 		</form>
+		<form action="##">
+		  <fieldset id="fieldset_drivercolor">
+			<label for="DRIVERCOLOR">color driver objects</label>
+	    		<select class="DRIVERCOLOR" name="DRIVERCOLOR" id="DRIVERCOLOR">
+	    			<option></option>
+	      			<option>leading-drivers</option>
+	      			<option>delete-colors</option>
+	      			<option>test</option>
+			</select>
+		</fieldset>
+		</form>
 		<br>----<br>
   			<label for="amount">WORKERDELAY_DSDATA:</label>
 			<input type="text" id="workerdelay_dsdata" readonly style="border:0;">
@@ -345,7 +356,31 @@
 
                 APIMODE = str;
         });
+	
+	// color driver objects
+	$( ".DRIVERCOLOR" ).change(function() {
 
+        var str1 = $( this ).text();
+        
+        switch ( str1 ) {
+        
+        	case "leading-drivers":
+	        	CSSClassChangerset.HideAllSvg();
+        		break;
+        	
+        	case "delete-colors":
+    
+	    		break;
+        	
+    	    default:
+        		CSSClassChangerset.ClearAllCssClases();
+    			break;
+        }
+             
+	});
+
+	
+	
 	// Event handler for Slider
 	$(function() {
 		$( "#slider-range-max" ).slider({
