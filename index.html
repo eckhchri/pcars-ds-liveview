@@ -859,7 +859,8 @@
                    var padding = 10;
                    _projection = this.getProjection();
 		  
-		  /* complete block moved to update function
+					// complete block moved to update function
+					/*
                    var marker = _div.selectAll("svg")
                        .data(_data, function (d) { return d.Key; })
                        .each(transform) // update existing markers
@@ -912,7 +913,7 @@
 						
 					})
                //       .text(function (d) { return d.Key; });                                      
-               */
+				*/
                };
 
                this.onRemove = function () {
@@ -924,29 +925,11 @@
                // easyt solution:  deleting leading position number 
                this.update = function (data) {     
 			
-					//update internal data which drive redrawing on zoom_changed                  
-					var marker;
-					var padding = 10;
-					                    				
-					for (var i = 0; i < data.length; i++) {
-
-	                       var found = false;
-	                       for (var j = 0; j < _data.length; j++) {
-	                           if (_data[j].Key === data[i].Key) {
-									found = true;
-									_data[j].Lat = data[i].Lat;
-									_data[j].Long = data[i].Long;
-									_data[j].MarkerLabel = data[i].MarkerLabel;
-									//	if(log >= 3){console.log("---12 _data changes for key:" + _data[j].Key + " // " + data[i].Key);}
-	                           }
-	                       }
-	                       if (!found)
-	                           _data.push(data[i]);
-	                   }
-
-			   //todo: what does this draw() call ?
-			   //if(log >= 3){console.log ("THIS Updated data:" , _data);}
-			   //if(log >= 3){console.log ("THIS:" , this);}
+				var marker;
+				var padding = 10;
+					
+				//update internal data which drive redrawing on zoom_changed
+				_data = data.slice();
 			   
 			   //Detect time between StopTransitionDelay set to "true" and now
 			   var CurrentTime = Date.now();
@@ -954,41 +937,35 @@
 
 			   if( StopTransitionDelay == "true" )
 			   {
-				if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
-				//this.draw();
-                                   /*_div.selectAll("svg")
-                                       .data(_data, function (d) { return d.Key; })
-                                       .each(transform);*/
-				 marker = _div.selectAll("svg")
-					.data(_data, function (d) { return d.Key; })
-					.each(transform) // update existing markers
-					.enter().append("svg:svg")
-					.each(transform)
-					//.attr("class", "marker");
-					.attr("class", function (d){ return d.CSSTextClasses });
-
-				// reset to default after zoom event finished. 
-				//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
-                                if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
+					if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
+					//this.draw();
+					marker = _div.selectAll("svg")
+						.data(_data, function (d) { return d.Key; })
+						.each(transform) // update existing markers
+						.enter().append("svg:svg")
+						.each(transform)
+						.attr("class", function (d){ return d.CSSTextClasses });
+	
+					// reset to default after zoom event finished. 
+					//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
+					if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
 			
 			   }else{
 
-				if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
-		                   //this.draw();
-		                   /*_div.selectAll("svg")
-		                       .data(_data, function (d) { return d.Key; }) 
-		                       .each(transformWithEase);*/
-				 marker = _div.selectAll("svg")
-					.data(_data, function (d) { return d.Key; })
-					.each(transformWithEase) // update existing markers
-					.enter().append("svg:svg")
-					.each(transform)
-					//.attr("class", "marker");
-					.attr("class", function (d){ return d.CSSTextClasses });
-
-				// reset to default after zoom event finished
-				//StopTransitionDelay = "false";
-			   }		 
+					if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
+					//this.draw();
+	
+					marker = _div.selectAll("svg")
+						.data(_data, function (d) { return d.Key; })
+						.each(transformWithEase) // update existing markers
+						.enter().append("svg:svg")
+						.each(transform)
+						.attr("class", function (d){ return d.CSSTextClasses });
+	
+					// reset to default after zoom event finished
+					//StopTransitionDelay = "false";
+			  }
+			
 			// Add a circle.
 			marker.append("svg:circle")
 				.attr("r", 4.5)
@@ -1012,7 +989,6 @@
 				//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
 				.text(function (d) {
 					if(log >= 4){console.log("+++++ d: " , d );}
-					//if(log >= 4){console.log("+++++ this: " , this );}
 
 					for (var i = 0; i < aSensorData.length; i++){
 						if (aSensorData[i].Key == d.Key){
@@ -1020,20 +996,23 @@
 						return  aSensorData[i].MarkerLabel;
 						}
 					}
-
-					//todo: during update d is not an array its an individual hash
-					//if(log >= 3){console.log("++++not array:");}
 					return d.MarkerLabel;
 
 				})
-	
-								
-			}; //end update()
+			
+			// update labels new
+			var svgs = _div.selectAll("text")
+						.data(_data, function (d){ return d.Key; })
+						.text(function(d){ return d.MarkerLabel; });
+			if(log >= 3){console.log("---------- Update MarkerLabel _svgs: " , svgs );}				
+			
+		  	}; //end update()
               
 
 			this.interruptTransition = function (){
-                        _div.selectAll("svg")
-                                .interrupt();
+		  		// interrupt transition while zoom event
+				_div.selectAll("svg")
+					.interrupt();
             }; // end interruptTransition()
             
           }
@@ -1208,7 +1187,7 @@ function refreshDriverList(a)
 
 	jQuery("#DriverDataTable").trigger("reloadGrid");
 
-	CleanupDriverObjects(_allDrivers);
+	//CleanupDriverObjects(_allDrivers);
 
 	return 1;
 }
