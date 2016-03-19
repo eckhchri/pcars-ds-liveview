@@ -205,14 +205,18 @@
 			</select>
 		</fieldset>
 		</form>
-
+		<br>----<br>
+  			<label for="amount">WORKERDELAY_DSDATA:</label>
+			<input type="text" id="workerdelay_dsdata" readonly style="border:0;">
+			<div id="slider-workerdelay_dsdata"></div>			
 		<br>----<br>
 		<p>
   			<label for="amount">DisplayDurationCorrector:</label>
 			<input type="text" id="amount" readonly style="border:0;">
-		</p> 			
+		</p>
 		<!-- Slider Duration -->
 		<div id="slider-range-max"></div>
+		
 	</div>
 
        <script>
@@ -357,6 +361,23 @@
       			}
     		});
     		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+  	});
+	
+	
+	$(function() {
+		$( "#slider-workerdelay_dsdata" ).slider({
+			range: "max",
+			min:	0,
+			max:	1500,
+      		value:	WORKERDELAY_DSDATA, 
+			step:	50,
+			slide:	function( event, ui ) {
+						$( "#workerdelay_dsdata" ).val( ui.value );
+						//set new value
+						WORKERDELAY_DSDATA = ui.value;
+      			}
+    		});
+    		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
 
 	// initiate jqGrid for DriverData
@@ -860,7 +881,7 @@
                    _projection = this.getProjection();
 		  
 					// complete block moved to update function
-					/*
+		/*
                    var marker = _div.selectAll("svg")
                        .data(_data, function (d) { return d.Key; })
                        .each(transform) // update existing markers
@@ -913,7 +934,7 @@
 						
 					})
                //       .text(function (d) { return d.Key; });                                      
-				*/
+			*/
                };
 
                this.onRemove = function () {
@@ -972,12 +993,6 @@
 				.attr("cx", padding)
 				.attr("cy", padding)
 				.attr("class", function (d){ return d.CSSCircleClasses } );
-				//.style("fill", "red");
-
-			//todo experimental method call
-			//marker.text("test123456");
-			if(log >= 3){console.log("Marker: " , marker);}
-
 
 			// Add a label.
 			marker.append("svg:text")
@@ -999,7 +1014,7 @@
 					return d.MarkerLabel;
 
 				})
-			
+
 			// update labels new
 			var svgs = _div.selectAll("text")
 						.data(_data, function (d){ return d.Key; })
@@ -1200,7 +1215,8 @@ function buildDriverName(drivername , raceposition)
 
 function CleanupDriverObjects(allDrivers)
 {
-	//if(log >= 3){console.log("---------- Call function CleanupDriverObjects() with driver list ----" , allDrivers );}
+	//TODO: seems that the function deletes also used svgs objects -> logical failure?
+	if(log >= 3){console.log("---------- CleanupDriverObjects() with driver list ----" , allDrivers );}
 	
 	var svgs = 	d3.selectAll("svg")
 			.each(function( obj ) {
@@ -1208,7 +1224,7 @@ function CleanupDriverObjects(allDrivers)
 		
 				if ( allDrivers[this.textContent] === undefined )
 				{
-					if(log >= 3){console.log("------- Ghost car found and delete it from map (this.textContent): " , this.textContent);}
+					if(log >= 3){console.log("---------- CleanupDriverObjects() - Ghost car deleted from map: " , this.textContent);}
 					//todo: delete ghost cars from map via D3 functions
 					this.remove();
 				}
