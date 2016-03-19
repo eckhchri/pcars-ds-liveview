@@ -1049,8 +1049,13 @@
 					return d.MarkerLabel;
 
 				})
-
-			// update labels new
+				
+			// Update CSS classes new
+			var svgs = _div.selectAll("circle")
+						.data(_data, function (d){ return d.Key; })
+						.attr("class" ,(function(d){ return d.CSSCircleClasses; }));
+			
+			// Update labels new
 			var svgs = _div.selectAll("text")
 						.data(_data, function (d){ return d.Key; })
 						.text(function(d){ return d.MarkerLabel; });
