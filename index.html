@@ -161,14 +161,8 @@
 		.tableoption {
 			background:     lightgrey;
 		}
-
-		circle.CSS_RacePos_1 {
-			fill: white;
-			border-radius: 400%
-		}		
 		
-
-         </style>
+        </style>
      </head>
    <body>
 
@@ -211,11 +205,11 @@
 			<label for="DRIVERCOLOR">color driver objects</label>
 			<select class="DRIVERCOLOR" name="DRIVERCOLOR" id="DRIVERCOLOR">
 	    		<option></option>
-	      		<option>leading-drivers</option>
-	      		<option>delete-colors</option>
-	      		<option>test</option>
+	    		<option value="hidedrivers">hide-drivers</option>
+	    		<option value="unhidedrivers">unhide-drivers</option>
+	    		<option value="colortop3">Top 3 vehicles</option>
+	      		<option value="deletecssclasses">reset CSS Classes</option>
 			</select>
-	
 	
 		<br>----<br>
   			<label for="amount">WORKERDELAY_DSDATA:</label>
@@ -242,10 +236,10 @@
 	var map;				// google map object
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
-        var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
-        var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
-        var UnHide                      = "false";	//UnHide markers
-        var UnHide_Timer                = 0;		//Timer for UnHide markers
+	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
+	var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
+	var UnHide                      = "false";	//UnHide markers
+	var UnHide_Timer                = 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector = 0;
 	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks
 	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
@@ -253,7 +247,7 @@
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var SessionState                =       "";
-        var SessionState_old            =       "";
+	var SessionState_old            =       "";
 	//var APIMODE					=	"DS";   // possible values DS,CREST
 	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
 	var CSSClassChanger			=	new CSSClassChanger ();
@@ -356,19 +350,27 @@
 	
 	$( "#DRIVERCOLOR" ).change(function() {
         $("#DRIVERCOLOR option:selected").each(function() {
-        	var str1 = $( this ).text();
+        	var str1 = $( this ).val();
 	        switch ( str1 ) {
 	        
-	        	case "leading-drivers":
-	        		if(log >= 3){console.log('+++++++++++ Event DRIVERCOLOR.change()' );}
-		        	CSSClassChangerset.HideAllSvg();
+	        	case "hidedrivers":
+	        		CSSClassChanger.HideAllSvg();
+	        		break;
+	        		
+	        	case "unhidedrivers":
+		        	CSSClassChanger.UnHideAllSvg();
 	        		break;
 	        	
-	        	case "delete-colors":
+	        	case "colortop3":
+	        		CSSClassChanger.ColorTop3vehicles();
 		    		break;
-	        	
+		    		
+	        	case "deletecssclasses":
+	        		CSSClassChanger.ClearAllCssClases();
+	        		break;
+	        		
 	    	    default:
-	        		CSSClassChangerset.ClearAllCssClases();
+	        		CSSClassChanger.ClearAllCssClases();
 	    			break;
 	        }
         });            
