@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, variousParameters)
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId/*, variousParameters*/)
 {
         // vars
         this.RefID			=	RefID;
@@ -18,7 +18,7 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.Speed	   		=   Spd;
         this.CurrentLap		=	CurrentLap;
         this.VehicleId		=	VehicleId;		
-        this.variousParameters = variousParameters;
+        //this.variousParameters = variousParameters;
 
 
         //private vars
@@ -105,11 +105,11 @@ function GetPosColor(){
 		return red;
 	}
 }
-function GetVariousParameter(parameter)
+/*function GetVariousParameter(parameter)
 {
 	//console.log("variousParameters: ", this.variousParameters + " --- parameter: " + parameter);
 	return this.variousParameters[parameter];
-}
+}*/
 
 function SetExampleData()
 {
@@ -130,7 +130,7 @@ function SetExampleData()
         this.Speed			=   100;
         this.VehicleId		=	-886212684;
         this.CurrentLap		=	99;
-        this.variousParameters = {TrackId: 9999999999};
+        //this.variousParameters = {TrackId: 9999999999};
         
 
 	return 1;
@@ -207,7 +207,7 @@ PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
 PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
-PCARSdriver.prototype.GetVariousParameter=GetVariousParameter;
+//PCARSdriver.prototype.GetVariousParameter=GetVariousParameter;
 PCARSdriver.prototype.SetExampleData=SetExampleData;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
