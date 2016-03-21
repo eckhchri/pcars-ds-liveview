@@ -1,12 +1,15 @@
 // CLASS of an pCars Driver
-function CSSClassChanger ()
+function CSSClassChanger (aCSSDefinition)
 {
 	this.CurrentState	= "";
 	this.aCSSClasses 	= new Array(); 	//Array of all handled CSS Clases
 	// structure:
 	//		aCSSClasses['hideallsvgs']
-	//		aCSSClasses['colortop3']
+	//		aCSSClasses['CSSTOP3VEHICLES']
 	//		...
+		
+	this.aCSSDef = {}; 
+	this.aCSSDef = aCSSDefinition;	// copy CSS definitions into local varaibale
 	
 	return this;
 
@@ -73,15 +76,12 @@ function CSSClassChanger ()
 	function ColorTop3vehicles(){
 		
 		var CSScls;
-		var CSSstr = '';
-		CSSstr += 'circle.CSS_RacePos_1 {fill: gold; stroke-width: 3px }\n';
-		CSSstr += 'circle.CSS_RacePos_2 {fill: silver; stroke-width: 3px }\n';
-		CSSstr += 'circle.CSS_RacePos_3 {fill: #CD7F32; stroke-width: 3px }\n';
+		if (this.aCSSDef['CSSTOP3VEHICLES']) {
+					this.aCSSClasses['CSSTOP3VEHICLES'] = setStyle(this.aCSSDef['CSSTOP3VEHICLES'],CSScls);
+		}else{
+			if(log >= 2){console.log('++ WARNING ++ CSSClassChanger() missing CSS definition CSSTOP3VEHICLES: ', this.aCSSDef['CSSTOP3VEHICLES'] );}
+		}
 		
-		this.aCSSClasses['colortop3'] = this.aCSSClasses['colortop3'] = setStyle( 
-										CSSstr
-										, CSScls );
-				
 		return 1;
 	}
 

@@ -39,3 +39,17 @@ recording_demo_data = "false";
 //troubleshoot position change problem
 demo_start_pos = 176;
 demo_end_pos = 220;
+
+//CSS definitions
+var CSSTOP3VEHICLESstr ='';
+CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_1 {fill: gold; stroke-width: 3px }\n';
+CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_2 {fill: silver; stroke-width: 3px }\n';
+CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_3 {fill: #CD7F32; stroke-width: 3px }\n';
+var CSSSAMEVEHICLECLASSESstr ='';
+CSSSAMEVEHICLECLASSESstr = 'CSS_GT3 {fill: darkblue;}\n';
+
+var CSSDEFINITIONS = {
+		CSSTOP3VEHICLES:		CSSTOP3VEHICLESstr,
+		CSSSAMEVEHICLECLASSES:  CSSSAMEVEHICLECLASSESstr
+	};
+

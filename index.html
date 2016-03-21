@@ -200,16 +200,14 @@
 		</fieldset>
 		</form>
 		
-	
-		
-			<label for="DRIVERCOLOR">color driver objects</label>
-			<select class="DRIVERCOLOR" name="DRIVERCOLOR" id="DRIVERCOLOR">
-	    		<option></option>
-	    		<option value="hidedrivers">hide-drivers</option>
-	    		<option value="unhidedrivers">unhide-drivers</option>
-	    		<option value="colortop3">Top 3 vehicles</option>
-	      		<option value="deletecssclasses">reset CSS Classes</option>
-			</select>
+		<label for="DRIVERCOLOR">color driver objects</label>
+		<select class="DRIVERCOLOR" name="DRIVERCOLOR" id="DRIVERCOLOR">
+	    	<option></option>
+	    	<option value="hidedrivers">hide-drivers</option>
+	    	<option value="unhidedrivers">unhide-drivers</option>
+	    	<option value="colortop3">Top 3 vehicles</option>
+	    	<option value="deletecssclasses">reset CSS Classes</option>
+		</select>
 	
 		<br>----<br>
   			<label for="amount">WORKERDELAY_DSDATA:</label>
@@ -246,19 +244,21 @@
 	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
-	var SessionState                =       "";
-	var SessionState_old            =       "";
-	//var APIMODE					=	"DS";   // possible values DS,CREST
-	var PCARSd	= new PCARSdriver(); // only use the object to get functions of it
-	var CSSClassChanger			=	new CSSClassChanger ();
+	var SessionState			=       "";
+	var SessionState_old		=       "";
+	//var APIMODE				=	"DS";   // possible values DS,CREST,DEMO
+	
+	var PCARSd					=	new PCARSdriver(); // only use the object to get functions of it
+	var CSSClassChanger			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
+
 	PCARSd.SetExampleData();
 	
 	var recording_count = 0;        //used as array index comment during recording demo data
-        var record_pos = demo_start_pos;//used for playback of data during DEMO mode
+	var record_pos = demo_start_pos;//used for playback of data during DEMO mode
 	var record_pos_helper;          //for WORKERDELAY_DEMODATA calculation needed
 	
 	var sensorLayer_UpdateDelta_DEMOdiff;	//Difference between sensorLayer_UpdateDelta of the recorded data and the playback
-        var WORKERDELAY_DEMODATA = WORKERDELAY_DSDATA;	//Worker delay for DEMO mode to adapt the playback speed to the recording
+	var WORKERDELAY_DEMODATA = WORKERDELAY_DSDATA;	//Worker delay for DEMO mode to adapt the playback speed to the recording
 
 	// set to global var, to modify in future stage for periodical updates via ajax
 	var DsName			=	"-+-"; // aDsData.name;
