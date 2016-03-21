@@ -1210,7 +1210,7 @@ function refreshDriverList(a)
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
 
         // get current size of the table
-        var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	
+        //var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	//disabled, because after clearGridData it is 0 every time
 
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
@@ -1234,13 +1234,13 @@ function refreshDriverList(a)
 					,posz:				a[i].PosZ
 		};
 		//decision if replace or add a row to jqGrid
-		if (i < GridSize){
+		/*if (i < GridSize){	//disabled, because after clearGridData GridSize is 0 every time
 				jQuery("#DriverDataTable").jqGrid('setRowData',i, _data);
 				//if(log >= 3){console.log("+++++ set " + i );}
-		}else{
+		}else{*/
 				jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
 				//if(log >= 3){console.log("+++++ add " + i );}
-		}
+		//}
 	
 		//build hash for clean up map	
 		_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};
