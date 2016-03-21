@@ -641,52 +641,62 @@
                 }
 		
 		//call worker again for next itteration -> currently endless loop
-		if (APIMODE == "DS"){
-			//DS receive mode
-			workerDSDATA.postMessage({
-				workerdelay: 		WORKERDELAY_DSDATA
-				,dsurl:			DsServerURL
-				,dsport:		DsPort
-				,timeout:		XMLHTTPTimeout
-				,receivemode:	"GETDSANDDRIVERDATA"
-				,arefpoint:		e.data.arefpoint});
-		}
-		if (APIMODE == "CREST"){
-			//CREST receive mode
-			workerDSDATA.postMessage({
-				workerdelay: 		WORKERDELAY_DSDATA
-				,dsurl:			CRESTServerURL
-				,dsport:		CRESTPort
-				,timeout:		XMLHTTPTimeout
-				,receivemode:	"GETCRESTDRIVERDATA"
-				,arefpoint:		e.data.arefpoint});
-		}
-		if (APIMODE == "DEMO"){
-                        //DEMO receive mode
+		switch(APIMODE) {
+                        case "DS":
+                                //DS receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 DsServerURL
+                                        ,dsport:                DsPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETDSANDDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
+                        case "CREST":                   //CREST receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 CRESTServerURL
+                                        ,dsport:                CRESTPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETCRESTDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
+                        case "DEMO":
+                                //DEMO receive mode
 
-                        //Calculation of WORKERDELAY_DEMODATA to adapt the playback speed to the recording speed
-                        //The record_pos is the array element of the recorded data and correlates to one worker run. Each element includes the sensorLayer_UpdateDelta. This is the time between the last and the current worker run. Now we calculate the WORKERDELAY_DEMODATA, which is the delay to the next worker run. Because of that we need the sensorLayer_UpdateDelta of the next array element and not of the current.
-                        record_pos_helper = record_pos + 1;
-                        if(record_pos_helper > demo.length-1){record_pos_helper = 0;}	//if last array element with record_pos is reached, record_pos_helper exceeds the upper array boundary. In this case the helper jumps to the first array element
-                        
-                        sensorLayer_UpdateDelta_DEMOdiff = demo[record_pos_helper].globals.sensorLayer_UpdateDelta - sensorLayer_UpdateDelta;	//diff time between recorded data and playback sensorLayer_UpdateDelta
-                        WORKERDELAY_DEMODATA = WORKERDELAY_DEMODATA + sensorLayer_UpdateDelta_DEMOdiff;		//adapt playback speed to recorded data with the worker delay
-                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
-                        if(log >= 2){console.log("Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
-
-                        workerDSDATA.postMessage({
-                                workerdelay:            WORKERDELAY_DEMODATA
-                                ,dsurl:                 ""
-                                ,dsport:                0
-                                ,timeout:               record_pos
-                                ,receivemode:   "GETDEMODATA"
-                                ,arefpoint:             e.data.arefpoint});
-                        record_pos = record_pos + 1;
-                        if(record_pos > demo.length-1 || record_pos > demo_end_pos-1){          //jump to beginning if end of array or demo_end_pos is reached/ -1, because the array begins with 0
-                                record_pos = demo_start_pos;
-                                StopTransitionDelay = "true";
-                                StopTransitionDelay_StartTime = Date.now();
-                        }
+	                        //Calculation of WORKERDELAY_DEMODATA to adapt the playback speed to the recording speed
+	                        //The record_pos is the array element of the recorded data and correlates to one worker run. Each element includes the sensorLayer_UpdateDelta. This is the time between the last and the current worker run. Now we calculate the WORKERDELAY_DEMODATA, which is the delay to the next worker run. Because of that we need the sensorLayer_UpdateDelta of the next array element and not of the current.
+	                        record_pos_helper = record_pos + 1;
+	                        if(record_pos_helper > demo.length-1){record_pos_helper = 0;}	//if last array element with record_pos is reached, record_pos_helper exceeds the upper array boundary. In this case the helper jumps to the first array element
+	                        
+	                        sensorLayer_UpdateDelta_DEMOdiff = demo[record_pos_helper].globals.sensorLayer_UpdateDelta - sensorLayer_UpdateDelta;	//diff time between recorded data and playback sensorLayer_UpdateDelta
+	                        WORKERDELAY_DEMODATA = WORKERDELAY_DEMODATA + sensorLayer_UpdateDelta_DEMOdiff;		//adapt playback speed to recorded data with the worker delay
+	                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
+	                        if(log >= 2){console.log("Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
+	
+	                        workerDSDATA.postMessage({
+	                                workerdelay:            WORKERDELAY_DEMODATA
+	                                ,dsurl:                 ""
+	                                ,dsport:                0
+	                                ,timeout:               record_pos
+	                                ,receivemode:   "GETDEMODATA"
+	                                ,arefpoint:             e.data.arefpoint});
+	                        record_pos = record_pos + 1;
+	                        if(record_pos > demo.length-1 || record_pos > demo_end_pos-1){          //jump to beginning if end of array or demo_end_pos is reached/ -1, because the array begins with 0
+	                                record_pos = demo_start_pos;
+	                                StopTransitionDelay = "true";
+	                                StopTransitionDelay_StartTime = Date.now();
+	                        }
+	                        break;
+                        default:
+                                //DS receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 DsServerURL
+                                        ,dsport:                DsPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETDSANDDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
                 }
 	}, false);
 	
