@@ -841,7 +841,12 @@
                         {name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posy',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posz',hidden: true,width:20, align:"center",sorttype:"float"}
-                ]
+                ],
+                afterInsertRow: function (rowid, rowdata) {
+			if (rowdata.driverposition == 1){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });}
+			if (rowdata.driverposition == 2){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'silver' });}
+			if (rowdata.driverposition == 3){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: '#CD7F32' });}
+		}
 	});
 	
 	// add filter option bar
