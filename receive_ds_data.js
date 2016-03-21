@@ -114,11 +114,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
                                                         demo_el.participants[i].Orientation,
                                                         demo_el.participants[i].Speed,
                                                         demo_el.participants[i].CurrentLap,
-                                                        demo_el.participants[i].VehicleId,
+                                                        demo_el.participants[i].VehicleId/*,
                                                         {
                                                                                 TrackId: demo_el.globals.attributes.TrackId
                                                                 ,GridSize: demo_el.globals.attributes.GridSize
-                                                        }
+                                                        }*/
 						)
                                         );
                 }
@@ -264,11 +264,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                                myArr.response.participants[i].attributes.Orientation,
 		                                                myArr.response.participants[i].attributes.Speed,
 		                                                myArr.response.participants[i].attributes.CurrentLap,
-		                                                myArr.response.participants[i].attributes.VehicleId,
+		                                                myArr.response.participants[i].attributes.VehicleId/*,
 		                                                {       
 		                                        				TrackId: myArr.response.attributes.TrackId
 		                                                        ,GridSize: myArr.response.attributes.GridSize
-		                                                }
+		                                                }*/
 		                                         	)
 	                                        );
 					}
@@ -315,10 +315,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 							myArr.response.participants[i].attributes.Orientation,
 							myArr.response.participants[i].attributes.Speed,
 							myArr.response.participants[i].attributes.CurrentLap,
-	                        myArr.response.participants[i].attributes.VehicleId,
+	                        			myArr.response.participants[i].attributes.VehicleId/*,
 							{ 	TrackId: myArr.response.attributes.TrackId
 								,GridSize : myArr.response.attributes.GridSize
-							}
+							}*/
 							)
 						);
 				
@@ -454,10 +454,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 							0,								//Orientation - NA
 							0,								//Speed - NA
 							999999,							//CurrentLap
-							2091910841,								//VehicleID
+							2091910841/*,								//VehicleID
 							{ 	TrackId: TrackID					//TrackID
 								,GridSize : 0						//GridSize - NA
-							}
+							}*/
 							)
 						);
 				
