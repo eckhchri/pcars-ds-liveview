@@ -1243,7 +1243,7 @@ function refreshDriverList(a)
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
 					,lapnumber:			a[i].CurrentLap
-					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName);	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
+					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
 					,isplayer:			ConvertIsPlayer(a[i].IsPlayer)
