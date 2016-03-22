@@ -1222,6 +1222,7 @@ function refreshDriverList(a)
 
 	var _data;
 	var _allDrivers = new Array();
+	var VehicleName;
 
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
@@ -1234,6 +1235,14 @@ function refreshDriverList(a)
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
 	for (i=0; i < a.length; i++)
 	{
+		//The data for resolving the VehicleID to VehicleName is not available in DEMO mode, further the recording contains the VehicleName directly in the VehicleId
+		if(APIMODE =="DEMO"){
+                        //VehicleName = demo[record_pos].participants[i].VehicleName;
+                        VehicleName = a[i].VehicleId;
+                }else{
+                        VehicleName = VehicleIdToName(a[i].VehicleId , aVehicleIdToName);
+                }
+
 		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
 		_data = {   
 					refid:				a[i].RefID
@@ -1242,7 +1251,7 @@ function refreshDriverList(a)
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
 					,lapnumber:			a[i].CurrentLap
-					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)
+					,vehiclename:		VehicleName
 					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
 					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
 					,isplayer:			ConvertIsPlayer(a[i].IsPlayer)
