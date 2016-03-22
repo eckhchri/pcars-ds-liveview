@@ -254,7 +254,7 @@
 	PCARSd.SetExampleData();
 	
 	var recording_count = 0;        //used as array index comment during recording demo data
-	var record_pos = demo_start_pos;//used for playback of data during DEMO mode
+	var record_pos;			//used for playback of data during DEMO mode
 	var record_pos_helper;          //for WORKERDELAY_DEMODATA calculation needed
 	
 	var sensorLayer_UpdateDelta_DEMOdiff;	//Difference between sensorLayer_UpdateDelta of the recorded data and the playback
@@ -281,7 +281,12 @@
 		,"CSSCircleClasses":	PCARSd.GetCSSCircleClass()
         }*/
 
-						
+	// catch demo array boundary breaks
+        if(demo_start_pos > demo.length-1 || demo_start_pos < 0){
+                record_pos = 0;
+        }else{
+                record_pos = demo_start_pos;
+        }
 								
 	// hide or unhide objects defined within config.js
 	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();			}
