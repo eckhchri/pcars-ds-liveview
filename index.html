@@ -1093,12 +1093,27 @@
 			var svgs = _div.selectAll("text")
 						.data(_data, function (d){ return d.Key; })
 						.text(function(d){ return d.MarkerLabel; });
-			if(log >= 3){console.log("---------- Update MarkerLabel _svgs: " , svgs );}
-			
-			CleanupDriverObjects(_data);
+
+			// delete unneeded svg objects from dom tree
+			this.CleanupDriverObjects(_data);			
 			
 		  	}; //end update()
-              
+            
+		  	this.CleanupDriverObjects = function(data) {
+		  		// remapping of array of drivers to array of key
+		  		var aTmp = {};
+		  		for ( i = 0; i < data.length; i++) {
+		  			aTmp[data[i].Key] = "";
+		  		}
+		  			
+		  		var svgs = 	d3.selectAll("svg")
+		  					.each(function( d ) {
+		  							if ( aTmp[d.Key] == undefined ) {		  								
+		  								//if(log >= 4){console.log("---- CleanupDriverObjects() - Ghost car deleted from map d.Key: " , d.Key);}
+		  								this.remove(); 	// delete svg object
+		  							}	
+		  					});
+		  	}; // end CleanupDriverObjects()
 
 			this.interruptTransition = function (){
 		  		// interrupt transition while zoom event
@@ -1116,7 +1131,6 @@
 //////////////////////////////////////////////////////////////////////////
 function init_map(_TrackID , aRefPoint)
 {
-	
            //subclassing
            GPSSensor.prototype = new google.maps.OverlayView();
 
@@ -1137,26 +1151,26 @@ function init_map(_TrackID , aRefPoint)
 
 function changeMapSettings(newTrackObj, mapobj)
 {
-	if(log >= 3){console.log("----- call function changeMapSettings() with track data: " , newTrackObj );}
-	if(log >= 3){console.log("----- call function changeMapSettings() with map data: " , mapobj );}
+	//if(log >= 3){console.log("----- call function changeMapSettings() with track data: " , newTrackObj );}
+	//if(log >= 3){console.log("----- call function changeMapSettings() with map data: " , mapobj );}
 
 	//todo: replace map (global variable) with mapobj(if this is not a copy)
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
-        map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
+	map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
 
-        map.setZoom(newTrackObj["Zoom"]);
+	map.setZoom(newTrackObj["Zoom"]);
 
 	StopTransitionDelay = "true";
 	StopTransitionDelay_StartTime = Date.now();
 
 	//todo: change also picture Overlay prevered mapsourc(google,openstreetmap) in needed
-        return 1;
+	return 1;
 }
 
 ///////////////////
 function refreshTrackList(a)
 {
-	if(log >= 3){console.log("------------------------ refreshTrackList() parameter a : " , a);}
+	//if(log >= 3){console.log("------------------------ refreshTrackList() parameter a : " , a);}
 
 	// if set to true, no refresh of table wanted
 	if (StopRefreshTracklist == "true")
@@ -1170,7 +1184,6 @@ function refreshTrackList(a)
 
 	var gridcnt = 0;
 	var _data;
-
 	
 	for (var key in a ){
 
@@ -1202,9 +1215,7 @@ function refreshVehicleList(a)
 	jQuery("#carlisttable").jqGrid("clearGridData");	
 	
 	
-	for (i=0; i < a.length; i++)
-	{
-	
+	for (i=0; i < a.length; i++) {
 		_data = {
    					vehicleid:	a[i].vehicleid,
 					name:		a[i].name,
@@ -1217,22 +1228,19 @@ function refreshVehicleList(a)
 		jQuery("#carlisttable").jqGrid('addRowData',i, _data);
 	}
 	
-	
-	return 1;
-		
+	return 1;	
 }
 
 //////////////////
 function refreshDriverList(a)
 {
 	// if set to true, no refresh of table wanted
-        if (StopRefreshDriverlist == "true")
-        {
+        if (StopRefreshDriverlist == "true") {
                 if(log >= 3){console.log("--- INFO stop refresh tracklist because StopRefreshDriverlist set to:", StopRefreshDriverlist );}
                 return 1;
         }
 
-	if(log >= 3){console.log("refreshDriverList(e): " , a);}
+	//if(log >= 3){console.log("refreshDriverList(e): " , a);}
 
 	var _data;
 	var _allDrivers = new Array();
@@ -1246,9 +1254,7 @@ function refreshDriverList(a)
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
-	for (i=0; i < a.length; i++)
-	{
-
+	for (i=0; i < a.length; i++) {
 		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
 		_data = {   
 					refid:				a[i].RefID
@@ -1291,57 +1297,23 @@ function buildDriverName(drivername , raceposition)
 	return raceposition + "-" + drivername;
 }
 
-function CleanupDriverObjects(allDrivers)
-{
-	// remapping of array of drivers to array of key
-	var aTmp = {};
-	for ( i = 0; i < allDrivers.length; i++) {
-		aTmp[allDrivers[i].Key] = "";
-	}
-		
-	var svgs = 	d3.selectAll("svg")
-				.each(function( d ) {
-					
-						if ( aTmp[d.Key] == undefined ) {
-							
-							if(log >= 3){console.log("---- CleanupDriverObjects() - Ghost car deleted from map d.Key: " , d.Key);}
-							//delete the svg object
-							this.remove();
-						}	
-				});
-	
-	return 1;
-}
-
-
 function transformVehicleObjectToHash(a){
 	
-	var hash = new Array();
-	
-	if(log >= 3){console.log("------- transformVehicleObjectToHash() for a : " , a)};
+	var hash = {};
 	
 	for (var i=0; i < a.length; i++){
-		
 		// '' + a[i].vehicleid -> needed to convert negative numbers to string
 		hash[ '' + a[i].vehicleid ] = a[i].name;
-		//if(log >= 5){console.log("------- transformVehicleObjectToHash(), VehicleID/Name: " + a[i].vehicleid + " / "+ a[i].name  );}
-		
 	}
-	if(log >= 3){console.log("------- transformVehicleObjectToHash() for hash : " , hash)};
 				
 	return hash;
 }
 
-
 function VehicleIdToName(id, array){
 	
 	if (array[id]){
-		
-		return array[id];
-		
-	}
-	else
-	{
+		return array[id];	
+	} else {
 		// in the case vehilce IDs not in hash
 		if(log >= 3){console.log("------- VehicleIdToName(), vehicle ID unknown: " , id)};
 	}
@@ -1357,9 +1329,6 @@ function ConvertIsPlayer(bool){
 		return "AI";	
 	}
 }
-
-
-
 
 ///////////////////
 function buildTracklist( aTrackList , aRefPoint ){
