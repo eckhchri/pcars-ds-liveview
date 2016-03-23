@@ -770,7 +770,7 @@
 	map.addListener('zoom_changed', function() {
 		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
         	StopTransitionDelay = "true";
-        	StopTransitionDelay_StartTime = Date.now();
+        	//StopTransitionDelay_StartTime = Date.now();
         	sensorLayer.interruptTransition();
         	sensorLayer.update(aSensorData);
 		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
