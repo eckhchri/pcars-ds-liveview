@@ -1093,7 +1093,9 @@
 			var svgs = _div.selectAll("text")
 						.data(_data, function (d){ return d.Key; })
 						.text(function(d){ return d.MarkerLabel; });
-			if(log >= 3){console.log("---------- Update MarkerLabel _svgs: " , svgs );}				
+			if(log >= 3){console.log("---------- Update MarkerLabel _svgs: " , svgs );}
+			
+			CleanupDriverObjects(_data);
 			
 		  	}; //end update()
               
@@ -1279,7 +1281,6 @@ function refreshDriverList(a)
 
 	jQuery("#DriverDataTable").trigger("reloadGrid");
 
-	//CleanupDriverObjects(_allDrivers);
 
 	return 1;
 }
@@ -1292,23 +1293,24 @@ function buildDriverName(drivername , raceposition)
 
 function CleanupDriverObjects(allDrivers)
 {
-	//TODO: seems that the function deletes also used svgs objects -> logical failure?
-	if(log >= 3){console.log("---------- CleanupDriverObjects() with driver list ----" , allDrivers );}
-	
-	var svgs = 	d3.selectAll("svg")
-			.each(function( obj ) {
-				if(log >= 3){console.log("---------- svg object this:" , this );}
+	// remapping of array of drivers to array of key
+	var aTmp = {};
+	for ( i = 0; i < allDrivers.length; i++) {
+		aTmp[allDrivers[i].Key] = "";
+	}
 		
-				if ( allDrivers[this.textContent] === undefined )
-				{
-					if(log >= 3){console.log("---------- CleanupDriverObjects() - Ghost car deleted from map: " , this.textContent);}
-					//todo: delete ghost cars from map via D3 functions
-					this.remove();
-				}
-			});
-	//todo: maybe add an additional routine for cleaning up Driver names
-
-        return 1;
+	var svgs = 	d3.selectAll("svg")
+				.each(function( d ) {
+					
+						if ( aTmp[d.Key] == undefined ) {
+							
+							if(log >= 3){console.log("---- CleanupDriverObjects() - Ghost car deleted from map d.Key: " , d.Key);}
+							//delete the svg object
+							this.remove();
+						}	
+				});
+	
+	return 1;
 }
 
 
