@@ -244,8 +244,10 @@
 	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
-	var SessionState			=       "";
+	var SessionState		=       "";
 	var SessionState_old		=       "";
+	var SessionStage		=	"";
+	var SessionStage_old		=	"";
 	//var APIMODE				=	"DS";   // possible values DS,CREST,DEMO
 	
 	var PCARSd					=	new PCARSdriver(); // only use the object to get functions of it
@@ -550,12 +552,19 @@
 		var tmpcuircitID;
 		tmpcuircitID = e.data.globals.attributes.TrackId;
 		SessionState = e.data.globals.attributes.SessionState;
+		SessionStage = e.data.globals.attributes.SessionStage;
 		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
 
 		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
                 //if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
                 //if (SessionState_old == "" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}         //Hide if you open the website during "Loading"
 		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
+		
+		if (SessionStage_old != SessionStage){
+			StopTransitionDelay = "true";
+			StopTransitionDelay_StartTime = Date.now();
+			sensorLayer.interruptTransition();
+		}
 		
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
@@ -630,6 +639,7 @@
                         }
                 }
                 SessionState_old = SessionState;
+                SessionStage_old = SessionStage;
 
 		if (recording_demo_data == "true"){
                         console.log("           {//" + recording_count);
