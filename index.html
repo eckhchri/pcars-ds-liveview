@@ -1100,8 +1100,10 @@
 
 			this.interruptTransition = function (){
 		  		// interrupt transition while zoom event
-				_div.selectAll("svg")
-					.interrupt();
+				if(_div != null){
+					_div.selectAll("svg")
+						.interrupt();
+				}
             }; // end interruptTransition()
             
           }
