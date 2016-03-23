@@ -23,7 +23,9 @@ var DisplayDurationCREST 	= 100;		// initial duration for displaying marker upda
 
 var UpdateRateDS = 500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
 
-var StopTransitionDelay_minTimeRun = 500; //milliseconds - A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase function have to be interrupted and the normal transform function is used
+//StopTransitionDelay_minTimeRun - Time of disabled tranformWithEase function and using the transform function instead on SessionState and SessionStage changes. 
+//In this case the markers jump to a new init position on map, but this takes sometimes circa 1 second after the switch. For this jump the normal transform function is needed.
+var StopTransitionDelay_minTimeRun = 1100; //milliseconds - 
 
 // Logging
 //Log Levels for console.log commands: 0 = off or special use, 1 = error, 2 = warning, 3 = info, 4 = extended info (output of variables for example)
@@ -33,12 +35,8 @@ var log = 3;
 recording_demo_data = "false";
 
 //playback demo from start position to end position
-//demo_start_pos = 25;
-//demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
-
-//troubleshoot position change problem
-demo_start_pos = 176;
-demo_end_pos = 220;
+demo_start_pos = 0;
+demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
 
 //CSS definitions
 var CSSTOP3VEHICLESstr ='';
