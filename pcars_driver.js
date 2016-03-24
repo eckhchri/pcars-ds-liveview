@@ -68,6 +68,7 @@ function GetRacePosition(){
         return this.RacePosition;
 }
 
+/* disabled, because ConvertLaptimeInReadbaleFormat function moved to index.html
 function GetFastestLapTime(a){
 	
 	if (a == undefined){
@@ -86,7 +87,7 @@ function GetLastLapTime(a){
                 return _ConvertLaptimeInReadbaleFormat(a);
         }
 
-}
+}*/
 
 function GetOrientation(){
         return this.Orientation;
@@ -136,7 +137,7 @@ function SetExampleData()
 	return 1;
 }
 
-
+/* disabled, because ConvertLaptimeInReadbaleFormat moved to index.html
 /// help function
 function _ConvertLaptimeInReadbaleFormat(milliseconds)
 {
@@ -162,7 +163,7 @@ function _ConvertLaptimeInReadbaleFormat(milliseconds)
         str = m + ":" + s + "." + ms;
 
 	return str;
-}
+}*/
 
 function GetCSSTextClass()
 {
@@ -202,8 +203,8 @@ PCARSdriver.prototype.GetPosZ=GetPosZ;
 PCARSdriver.prototype.GetState=GetState;
 PCARSdriver.prototype.GetCurrentSector=GetCurrentSector;
 PCARSdriver.prototype.GetRacePosition=GetRacePosition;
-PCARSdriver.prototype.GetFastestLapTime=GetFastestLapTime;
-PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
+//PCARSdriver.prototype.GetFastestLapTime=GetFastestLapTime;
+//PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
 PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
