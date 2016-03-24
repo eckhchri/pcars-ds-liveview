@@ -1257,19 +1257,19 @@ function refreshDriverList(a)
 	for (i=0; i < a.length; i++) {
 		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
 		_data = {   
-					refid:				a[i].RefID
+					refid:			a[i].RefID
 					,driverposition:	a[i].RacePosition	
 					,drivername:		a[i].Name
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
-					,lapnumber:			a[i].CurrentLap
+					,lapnumber:		a[i].CurrentLap
 					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
-					,fastestlap:		PCARSd.GetFastestLapTime(  a[i].FastestLapTime )
-					,lastlap:			PCARSd.GetLastLapTime(  a[i].LastLapTime )
-					,isplayer:			ConvertIsPlayer(a[i].IsPlayer)
-					,posx:				a[i].PosX
-					,posy:				a[i].PosY
-					,posz:				a[i].PosZ
+					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
+					,lastlap:		ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
+					,isplayer:		ConvertIsPlayer(a[i].IsPlayer)
+					,posx:			a[i].PosX
+					,posy:			a[i].PosY
+					,posz:			a[i].PosZ
 		};
 		//decision if replace or add a row to jqGrid
 		/*if (i < GridSize){	//disabled, because after clearGridData GridSize is 0 every time
@@ -1402,6 +1402,43 @@ function buildTracklist( aTrackList , aRefPoint ){
 	}
 
 	return aNewTrackList;
+}
+
+function CalcGaps(bestLaptime,bestLaptimeFirst,bestLaptimeAhead){
+	var gap2ahead = 0;
+	var gap2first = 0;
+
+	if (bestLaptime != 0){
+		if (bestLaptimeAhead != 0){gap2ahead = bestLaptime - bestLaptimeAhead;}
+		if (bestLaptimeFirst != 0){gap2first = bestLaptime - bestLaptimeFirst;}
+	}
+
+	var Gaps = {
+		gap2first: ConvertLaptimeInReadbaleFormat(gap2first),
+		gap2ahead: ConvertLaptimeInReadbaleFormat(gap2ahead)
+	}
+
+	return Gaps;
+}
+
+function ConvertLaptimeInReadbaleFormat(milliseconds)
+{
+	//todo: implemet date format with leading zeros for seconds and milliseconds
+	//var date = new Date(milliseconds);
+	var str = '';
+
+	var ms = parseInt((milliseconds%1000))
+	 , s = parseInt((milliseconds/1000)%60)
+	 , m = parseInt((milliseconds/(1000*60))%60);
+
+	m = (m < 10) ? "0" + m : m;
+	s = (s < 10) ? "0" + s : s;
+	ms = (ms < 10) ? "00" + ms : ms;
+	ms = (ms > 9 && ms < 100) ? "0" + ms : ms;
+
+	str = m + ":" + s + "." + ms;
+
+	return str;
 }
 
 function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel,header_names,excludeColumns/*,fileName*/) {
