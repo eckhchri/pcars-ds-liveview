@@ -3,14 +3,7 @@
 
 //Receive_DS_data("[DS URL]]",9000);
 // http://[DS URL]:9000/api/session/status?attributes&members&participants
-
-function TestFunc(p1 , p2)
-{
-	return p1 * p2;
-}
-
 function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
-
 
 	// todo:   Globale variablen füllen ???? oder als Rueckgabewert aus der Function?
 	this.url		=	url;
@@ -72,6 +65,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	var PosX;
 	var PosY;
 	var PosZ;
+	var index;			// index of driver objects
+    var loopcnt = 0;	// use as index if RacePosition is 0 during several session states
 	
 	if(this.receivemode == "GETDEMODATA"){
                 data.driverlist = [];
@@ -85,44 +80,51 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
                         ,"state":               demo_el.globals.state
                         ,"name":                demo_el.globals.name
                         ,"attributes":{
-                                "TrackId":      demo_el.globals.attributes.TrackId
+                        		"TrackId":      demo_el.globals.attributes.TrackId
                                 ,"GridSize":    demo_el.globals.attributes.GridSize
                                 ,"MaxPlayers":  demo_el.globals.attributes.MaxPlayers
                                 ,"SessionStage":demo_el.globals.attributes.SessionStage
                                 ,"SessionState":demo_el.globals.attributes.SessionState
                         }
                 }
-                 for (var i = 0;i<demo_el.participants.length;i++){
+                
+                
+                
+                for (var i = 0;i<demo_el.participants.length;i++){
+                	
+                	//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+                	//read data of all participants and put it in an array of PCARSdriver objects
+                	
+                	index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
+                	loopcnt++;
 
-                                        //if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
-                                        // read data of all participants and put it in an array of PCARSdriver objects
-
-					data.driverlist.push (
-                                                new PCARSdriver(
-                                                        demo_el.participants[i].RefId,
-                                                        demo_el.participants[i].Name,
-                                                        demo_el.participants[i].IsPlayer,
-                                                        demo_el.participants[i].GridPosition,
-                                                        demo_el.participants[i].PositionX,
-                                                        demo_el.participants[i].PositionY,
-                                                        demo_el.participants[i].PositionZ,
-                                                        demo_el.participants[i].State,
-                                                        demo_el.participants[i].CurrentSector,
-                                                        demo_el.participants[i].RacePosition,
-                                                        demo_el.participants[i].FastestLapTime,
-                                                        demo_el.participants[i].LastLapTime,
-                                                        demo_el.participants[i].Orientation,
-                                                        demo_el.participants[i].Speed,
-                                                        demo_el.participants[i].CurrentLap,
-                                                        demo_el.participants[i].VehicleId/*,
-                                                        {
-                                                                                TrackId: demo_el.globals.attributes.TrackId
-                                                                ,GridSize: demo_el.globals.attributes.GridSize
-                                                        }*/
-						)
-                                        );
+                	data.driverlist[index] =
+							new PCARSdriver(
+								demo_el.participants[i].RefId,
+								demo_el.participants[i].Name,
+								demo_el.participants[i].IsPlayer,
+								demo_el.participants[i].GridPosition,
+								demo_el.participants[i].PositionX,
+								demo_el.participants[i].PositionY,
+								demo_el.participants[i].PositionZ,
+								demo_el.participants[i].State,
+								demo_el.participants[i].CurrentSector,
+								demo_el.participants[i].RacePosition,
+								demo_el.participants[i].FastestLapTime,
+								demo_el.participants[i].LastLapTime,
+								demo_el.participants[i].Orientation,
+								demo_el.participants[i].Speed,
+								demo_el.participants[i].CurrentLap,
+								demo_el.participants[i].VehicleId/*,
+								{
+									TrackId: demo_el.globals.attributes.TrackId
+									,GridSize: demo_el.globals.attributes.GridSize
+                                }*/
+							);
                 }
+                
                 return data;
+                
         }else{
 
 		// http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/
@@ -237,7 +239,6 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	
 					// put empty dummy object into array
 					data.driverlist.push( DriverDummy );
-					//data.driverlist.push( DriverDummy );
 	
 				}else{
 	
@@ -246,8 +247,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	        	                        //if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
 		                                // read data of all participants and put it in an array of PCARSdriver objects
 						
-									
-						                 data.driverlist.push (
+	                					index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
+	                					loopcnt++;
+
+	                					data.driverlist[index] =
 		                                        new PCARSdriver(
 		                                                myArr.response.participants[i].attributes.RefId,
 		                                                myArr.response.participants[i].attributes.Name,
@@ -269,8 +272,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        				TrackId: myArr.response.attributes.TrackId
 		                                                        ,GridSize: myArr.response.attributes.GridSize
 		                                                }*/
-		                                         	)
-	                                        );
+		                                         	);
 					}
 	
 					// return information
@@ -299,7 +301,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				{
 					//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
 					// read data of all participants and put it in an array of PCARSdriver objects
-					aDrivers.push (
+					
+					index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
+					loopcnt++;
+
+					data.driverlist[index] =
 						new PCARSdriver(myArr.response.participants[i].attributes.RefId,
 							myArr.response.participants[i].attributes.Name,
 							myArr.response.participants[i].attributes.IsPlayer,
@@ -319,16 +325,13 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 							{ 	TrackId: myArr.response.attributes.TrackId
 								,GridSize : myArr.response.attributes.GridSize
 							}*/
-							)
-						);
+							);
 				
 				}
 	
-				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
-	  
-				// return information
-		                return aDrivers;		
+				return aDrivers;		
 	
+				
 			case "GETTRACKLIST":
 	
 				// todo: Auslesen der trackIDs und den dazugehoerigen Namen
@@ -438,35 +441,36 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
 					PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
-					aDrivers.driverlist.push (
-						new PCARSdriver(0,							//RefId - NA
-							myArr.participants.mParticipantInfo[i].mName,			//Name
-							1,								//NA
-							0,								//GridPosition - NA
-							PosX,								//PositionX in meters
-							PosY,								//PositionY in meters
-							PosZ,								//PositionZ in meters
-							"NA",								//State - NA
-							myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
-							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
-							0,								//FastestLapTime - NA
-						        0,								//LastLapTime - NA
-							0,								//Orientation - NA
-							0,								//Speed - NA
-							999999,							//CurrentLap
-							2091910841/*,								//VehicleID
-							{ 	TrackId: TrackID					//TrackID
-								,GridSize : 0						//GridSize - NA
-							}*/
-							)
-						);
-				
+					
+					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
+					loopcnt++;
+
+					data.driverlist[index] =
+						new PCARSdriver(
+								0,												//RefId - NA
+								myArr.participants.mParticipantInfo[i].mName,	//Name
+								1,												//NA
+								0,												//GridPosition - NA
+								PosX,											//PositionX in meters
+								PosY,											//PositionY in meters
+								PosZ,											//PositionZ in meters
+								"NA",											//State - NA
+								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
+								0,												//FastestLapTime - NA
+								0,												//LastLapTime - NA
+								0,												//Orientation - NA
+								0,												//Speed - NA
+								999999,											//CurrentLap
+								2091910841/*,									//VehicleID
+								{ 	TrackId: TrackID					//TrackID
+									,GridSize : 0						//GridSize - NA
+								}*/
+							);
 				}
 	
 				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
-	  
-				// return information
-		                return aDrivers;
+				return aDrivers;
 	
 		  } // End SWITCH
 	
@@ -511,3 +515,16 @@ function GetTrackIDbyName(TrackName , TMP_RefPoint)
         }
         return TMP_TrackID;
 }
+function CalculateIndexDriverArray (RacePostion, LoopCnt){
+	
+	//decide if Racepsotion or Gridpostion is used as index for drivers array
+	if (RacePostion != 0){
+		 index = RacePostion -1; // -1 because RacePost starts with 1
+	}else{                		 
+		 index = LoopCnt; // because already starts with 0
+	}
+		
+	return index;	
+}
+
+
