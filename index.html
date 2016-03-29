@@ -1244,6 +1244,7 @@ function refreshDriverList(a)
 
 	var _data;
 	var _allDrivers = new Array();
+	var Gaps = [];
 
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
@@ -1256,6 +1257,14 @@ function refreshDriverList(a)
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
 	for (i=0; i < a.length; i++) {
 		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
+		
+		if (i == 0){
+			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i].FastestLapTime);
+		}else{
+			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
+		}
+		if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
+                
 		_data = {   
 					refid:			a[i].RefID
 					,driverposition:	a[i].RacePosition	
