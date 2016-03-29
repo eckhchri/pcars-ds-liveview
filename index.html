@@ -526,6 +526,9 @@
 		
 		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
+                SessionState = e.data.globals.attributes.SessionState;
+		SessionStage = e.data.globals.attributes.SessionStage;
+                
 		// write in HTML page for DS status
 		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
 		document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   	' + e.data.globals.state;
@@ -535,8 +538,8 @@
 		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
 		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
 		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"];		
-		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + e.data.globals.attributes.SessionStage;
-		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + e.data.globals.attributes.SessionState;
+		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + SessionStage;
+		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + SessionState;
 		
 		//todo:  replace document.get... by Jquery functionality
 		//$('#DSdataInformation').append( 
@@ -551,8 +554,6 @@
 		//todo var declaration needed within loop ???
 		var tmpcuircitID;
 		tmpcuircitID = e.data.globals.attributes.TrackId;
-		SessionState = e.data.globals.attributes.SessionState;
-		SessionStage = e.data.globals.attributes.SessionStage;
 		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
 
 		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
