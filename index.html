@@ -839,22 +839,24 @@
 	jQuery("#DriverDataTable").jqGrid({
                 datatype: "local",
                 height: 'auto',
-		width: 800,
+		width: 900,
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
-                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'fastest lap', 'last lap','Hu/AI','PosX', 'PosY', 'PosZ' ],
+                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ' ],
                 colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
                         {name:'driverposition', width:18, sorttype:"int", search:true},
-                        {name:'drivername', width:80,sorttype:"text", search:true},
+                        {name:'drivername', width:100,sorttype:"text", search:true},
                         {name:'driverstate',width:40, align:"center",sorttype:"text"},
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
                         {name:'lapnumber',width:18, align:"center",sorttype:"int"},
-                        {name:'vehiclename',width:40, align:"center",sorttype:"text"},
-                        {name:'fastestlap',width:35, align:"center",sorttype:"text"},
+                        {name:'vehiclename',width:90,sorttype:"text"},
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
-                        {name:'isplayer',width:15, align:"center",sorttype:"text"},
+                        {name:'fastestlap',width:35, align:"center",sorttype:"text"},
+                        {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
+			{name:'gap2first',width:30, align:"center",sorttype:"text"},
+                        {name:'isplayer',width:20, align:"center",sorttype:"text"},
                         {name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posy',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posz',hidden: true,width:20, align:"center",sorttype:"float"}
@@ -1273,8 +1275,10 @@ function refreshDriverList(a)
 					,driversector:		a[i].CurrentSector
 					,lapnumber:		a[i].CurrentLap
 					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
-					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
 					,lastlap:		ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
+					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
+					,gap2ahead:		Gaps.gap2ahead
+					,gap2first:		Gaps.gap2first
 					,isplayer:		ConvertIsPlayer(a[i].IsPlayer)
 					,posx:			a[i].PosX
 					,posy:			a[i].PosY
@@ -1436,7 +1440,7 @@ function ConvertLaptimeInReadbaleFormat(milliseconds)
 	//var date = new Date(milliseconds);
 	
 	if (milliseconds == 0){
-		return "no time";
+		return "-";
 	}
 	
 	var str = '';
