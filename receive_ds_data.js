@@ -66,39 +66,41 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	var PosY;
 	var PosZ;
 	var index;			// index of driver objects
-    var loopcnt = 0;	// use as index if RacePosition is 0 during several session states
+	var loopcnt = 0;	// use as index if RacePosition is 0 during several session states
 	
 	if(this.receivemode == "GETDEMODATA"){
-                data.driverlist = [];
-                var recording_position = timeout;
-                var demo_el = demo[recording_position];
-                data.globals = {
-                        "joinable":             demo_el.globals.joinable
-                        ,"lobbyid":             demo_el.globals.lobbyid
-                        ,"max_member_count":    demo_el.globals.max_member_count
-                        ,"now":                 demo_el.globals.now
-                        ,"state":               demo_el.globals.state
-                        ,"name":                demo_el.globals.name
-                        ,"attributes":{
-                        		"TrackId":      demo_el.globals.attributes.TrackId
-                                ,"GridSize":    demo_el.globals.attributes.GridSize
-                                ,"MaxPlayers":  demo_el.globals.attributes.MaxPlayers
-                                ,"SessionStage":demo_el.globals.attributes.SessionStage
-                                ,"SessionState":demo_el.globals.attributes.SessionState
-                        }
-                }
+		data.driverlist = [];
+		var recording_position = timeout;
+		var demo_el = demo[recording_position];
+		data.globals = {
+			"joinable":		demo_el.globals.joinable
+			,"lobbyid":		demo_el.globals.lobbyid
+			,"max_member_count":	demo_el.globals.max_member_count
+			,"now":			demo_el.globals.now
+			,"state":		demo_el.globals.state
+			,"name":		demo_el.globals.name
+			,"attributes":{
+				"TrackId":		demo_el.globals.attributes.TrackId
+				,"GridSize":		demo_el.globals.attributes.GridSize
+				,"MaxPlayers":		demo_el.globals.attributes.MaxPlayers
+				,"SessionStage":	demo_el.globals.attributes.SessionStage
+				,"SessionState":	demo_el.globals.attributes.SessionState
+				,"SessionTimeDuration":	demo_el.globals.attributes.SessionTimeDuration
+				,"SessionTimeElapsed":	demo_el.globals.attributes.SessionTimeElapsed
+			}
+		}
                 
                 
                 
-                for (var i = 0;i<demo_el.participants.length;i++){
+		for (var i = 0;i<demo_el.participants.length;i++){
                 	
-                	//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
-                	//read data of all participants and put it in an array of PCARSdriver objects
+			//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+			//read data of all participants and put it in an array of PCARSdriver objects
                 	
-                	index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
-                	loopcnt++;
+			index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
+			loopcnt++;
 
-                	data.driverlist[index] =
+			data.driverlist[index] =
 							new PCARSdriver(
 								demo_el.participants[i].RefId,
 								demo_el.participants[i].Name,
@@ -119,13 +121,13 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								{
 									TrackId: demo_el.globals.attributes.TrackId
 									,GridSize: demo_el.globals.attributes.GridSize
-                                }*/
+								}*/
 							);
-                }
+		}
                 
-                return data;
+		return data;
                 
-        }else{
+	}else{
 
 		// http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/
 		var xmlhttp = new XMLHttpRequest();
