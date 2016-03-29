@@ -1299,6 +1299,16 @@ function refreshDriverList(a)
 
 	}
 
+	//Hide columns diff and gap during SessionStage Race1 and Race2
+	if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
+		if(log >= 3){console.log("Hide Gaps");}
+		jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
+	}
+	if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
+		if(log >= 3){console.log("Show Gaps");}
+		jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
+	}
+
 	jQuery("#DriverDataTable").trigger("reloadGrid");
 
 
