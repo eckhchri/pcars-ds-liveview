@@ -249,7 +249,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	        	                        //if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
 		                                // read data of all participants and put it in an array of PCARSdriver objects
 						
-	                					index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
+	                					index = CalculateIndexDriverArray (myArr.response.participants[i].attributes.RacePosition, loopcnt);
 	                					loopcnt++;
 
 	                					data.driverlist[index] =
