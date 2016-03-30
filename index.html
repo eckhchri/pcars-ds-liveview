@@ -541,6 +541,13 @@
 		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + SessionStage;
 		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + SessionState;
 		
+		var resttime = ConvertLaptimeInReadbaleFormat((e.data.globals.attributes.SessionTimeDuration-e.data.globals.attributes.SessionTimeElapsed)*1000);	//Times in seconds, but function need it in milliseconds, multiplied by 1000
+		if (SessionState == "Race"){
+			document.getElementById("txtSessionStage").value = ' ' + e.data.globals.attributes.SessionStage + ': ' + resttime.slice(0,-4);;	//slice for deleting the milliseconds part of the time
+		}else{
+			document.getElementById("txtSessionStage").value = '  ----  ';
+		}
+		
 		//todo:  replace document.get... by Jquery functionality
 		//$('#DSdataInformation').append( 
 		//				$("<p0>").text("DS URL2: " + DsServerURL + " : " +  DsPort)
@@ -877,7 +884,8 @@
 	//Method with checkbox
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
-	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>');
+	//TODO: tune Layout
+	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly style="border:0; background: #eeeeee;">');
 			
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
