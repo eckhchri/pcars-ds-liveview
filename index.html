@@ -935,7 +935,7 @@
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
 	//TODO: tune Layout
-	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly style="border:0; background: #eeeeee;">');
+	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly style="border:0; background: #eeeeee;">');
 			
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
@@ -971,7 +971,16 @@
 		//JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getGridParam", "data"), "",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",],"Report_DriverTable");
 		ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Session Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]/*,"Report_DriverTable"*/),"Report_DriverTable");
 	});
-	 
+	
+	$('#cbDriverlistExportAll').click(function () {
+		var CSVall = "";
+		for (var key in CSVExport) {
+			if(CSVExport[key] != ""){
+				CSVall += CSVExport[key] + '\r\n\n';
+			}
+		}
+		ExportCSV(CSVall,"Session Results");
+	}); 
         
 	// setting up google maps overlays
 	function GPSSensor(initData) {
