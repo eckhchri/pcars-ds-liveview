@@ -950,7 +950,7 @@
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
 	//TODO: tune Layout
-	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly style="border:0; background: #eeeeee;">');
+	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;">');
 			
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
