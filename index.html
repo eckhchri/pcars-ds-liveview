@@ -591,15 +591,30 @@
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
 		}
-		//after Race1
-		if (SessionStage_old == "Race1" && SessionStage != "Race1"){
+		//after Race1 if there is a Race2
+		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
 		}
-		//after Race2
-		if (SessionStage_old == "Race2" && SessionStage != "Race2"){
+		//after Race Weekend finished
+		if (SessionState_old != "PostRace" && SessionState == "PostRace"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
+				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			}
+			if (SessionStage_old == "Race2"){
+				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			}
+			//Auto Export
+			if (autoExport == "true"){
+				var CSVall = "";
+				for (var key in CSVExport) {
+					if(CSVExport[key] != ""){
+						CSVall += CSVExport[key] + '\r\n\n';
+					}
+				}
+				ExportCSV(CSVall,"Session Results");
+			}
 		}
 
 		if(log >= 3){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
