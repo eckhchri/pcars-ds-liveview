@@ -51,3 +51,5 @@ var CSSDEFINITIONS = {
 		CSSSAMEVEHICLECLASSES:  CSSSAMEVEHICLECLASSESstr
 	};
 
+// automatic CSV Export of all session results after a race weekend, a download dialog will pop up
+var autoExport = "false";
