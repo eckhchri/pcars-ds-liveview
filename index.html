@@ -955,7 +955,7 @@
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
 	//TODO: tune Layout
-	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;">');
+	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;">');
 			
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
@@ -973,15 +973,15 @@
         });
         
         function changeRefreshDriverlist(data){
-                if(data.value === "Stop"){
+                if(data.value === "Pause"){
                         StopRefreshDriverlist   = "true";
-                        data.value = "Start";
-                        data.title = "Start automatic refresh of table";
+                        data.value = "Play";
+                        data.title = "Resume automatic refresh of table";
                         data.style="background-color:#ffffff";
                 }else{
                         StopRefreshDriverlist  	= "false";
-                        data.value = "Stop";
-                        data.title = "Stop automatic refresh of table";
+                        data.value = "Pause";
+                        data.title = "Pause automatic refresh of table";
                         data.style="background-color:#dddddd";
                 }
         }
