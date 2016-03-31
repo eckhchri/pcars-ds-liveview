@@ -574,36 +574,36 @@
 		//after Practice1
 		if (SessionState_old != "Lobby" && SessionStage_old == "Practice1" && SessionStage != "Practice1"){     //During SessionState Lobby the SessionStage is Practice1
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");	//sort grid for the case that the user changed the sorting
-			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
 		}
 		//after Practice2
 		if (SessionStage_old == "Practice2" && SessionStage != "Practice2"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
 		}
 		//after Qualifying
 		if (SessionStage_old == "Qualifying" && SessionStage != "Qualifying"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
 		}
 		//after Warmup
 		if (SessionStage_old == "Warmup" && SessionStage != "Warmup"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
 		}
 		//after Race1 if there is a Race2
 		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
 		}
 		//after Race Weekend finished
 		if (SessionState_old != "PostRace" && SessionState == "PostRace"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
-				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
 			}
 			if (SessionStage_old == "Race2"){
-				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]);
+				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
 			}
 			//Auto Export
 			if (autoExport == "true"){
@@ -950,7 +950,7 @@
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
 	//TODO: tune Layout
-	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly style="border:0; background: #eeeeee;">');
+	jQuery('#DriverDataTable').setCaption('List of available drivers&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbDriverlistRefresh" value="Stop" style="background-color:#dddddd"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly style="border:0; background: #eeeeee;">');
 			
 	// checkbox Event handling
         $('#cbDriverlistRefresh').click(function () {
@@ -984,7 +984,7 @@
 	$('#cbDriverlistExport').click(function () {
 		//jqGrid("getRowData") used, because with jqGrid("getGridParam", "data") is nor sort possible. getRowData is automatically sorted like you see it on the website, but only works for the current page if you have a pager enabled.
 		//JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getGridParam", "data"), "",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",],"Report_DriverTable");
-		ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Session Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",]/*,"Report_DriverTable"*/),"Report_DriverTable");
+		ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","posx","posy","posz",]/*,"Report_DriverTable"*/),"Report_DriverTable");
 	});
 	
 	$('#cbDriverlistExportAll').click(function () {
