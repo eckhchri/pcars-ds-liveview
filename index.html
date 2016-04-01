@@ -602,7 +602,7 @@
 			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
 		}
 		//after Race Weekend finished
-		if (SessionState_old != "PostRace" && SessionState == "PostRace"){
+		if (SessionState_old == "Race" && SessionState == "PostRace"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
 				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
@@ -638,7 +638,7 @@
                 //if (SessionState_old == "" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}         //Hide if you open the website during "Loading"
 		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
-		if (SessionStage_old != SessionStage){
+		if (SessionStage_old != SessionStage && SessionStage_old != ""){	//SessionStage_old != "" for startup, because the init value is ""
 			StopTransitionDelay = "true";
 			StopTransitionDelay_StartTime = Date.now();
 			sensorLayer.interruptTransition();
