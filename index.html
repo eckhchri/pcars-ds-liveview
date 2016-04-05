@@ -222,42 +222,40 @@
 		<div id="slider-range-max"></div>
 		
 	</div>
+<script>
 
-       <script>
 	// initialize vars
-	var aDrivers 			= new Array();		// array for PCARSdriver objects
-	var aSensorData 		= new Array();		// array of Hashes, each hash includes parameters of a driver
-	var XMLHTTPTimeout		= 2000;
-	var StopTransitionDelay = "true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
-	var StopTransitionDelay_StartTime = Date.now();	//timestamp for StopTransitionDelay is set to "true"
+	var aDrivers 			=	new Array();		// array for PCARSdriver objects
+	var aSensorData 		=	new Array();		// array of Hashes, each hash includes parameters of a driver
+	var XMLHTTPTimeout		=	2000;
+	var StopTransitionDelay =	"true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
+	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
 	var map;				// google map object
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
 	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
 	var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
-	var UnHide                      = "false";	//UnHide markers
-	var UnHide_Timer                = 0;		//Timer for UnHide markers
-	var DisplayDurationCorrector = 0;
+	var UnHide					= "false";	//UnHide markers
+	var UnHide_Timer			= 0;		//Timer for UnHide markers
+	var DisplayDurationCorrector =	0;
 	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks
 	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
 	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
-	var SessionState		=       "";
-	var SessionState_old		=       "";
-	var SessionStage		=	"";
+	var SessionState			=	"";
+	var SessionState_old		=	"";
+	var SessionStage			=	"";
 	var SessionStage_old		=	"";
-	//var APIMODE				=	"DS";   // possible values DS,CREST,DEMO
-	
 	var PCARSd					=	new PCARSdriver(); // only use the object to get functions of it
 	var CSSClassChanger			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
 
 	PCARSd.SetExampleData();
 	
-	var recording_count = 0;        //used as array index comment during recording demo data
-	var record_pos;			//used for playback of data during DEMO mode
-	var record_pos_helper;          //for WORKERDELAY_DEMODATA calculation needed
+	var recording_count			=	0;	//used as array index comment during recording demo data
+	var record_pos;						//used for playback of data during DEMO mode
+	var record_pos_helper;          	//for WORKERDELAY_DEMODATA calculation needed
 	
 	var sensorLayer_UpdateDelta_DEMOdiff;	//Difference between sensorLayer_UpdateDelta of the recorded data and the playback
 	var WORKERDELAY_DEMODATA = WORKERDELAY_DSDATA;	//Worker delay for DEMO mode to adapt the playback speed to the recording
@@ -302,11 +300,11 @@
 	}
 								
 	// hide or unhide objects defined within config.js
-	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();			}
-	if ( SHOWDSDATA 	== false ) { 	$( "#DSdata" ).hide();				}						
-	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();		}
-	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();			}
-	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}
+	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();		}
+	if ( SHOWDSDATA 	== false ) { 	$( "#DSdata" ).hide();			}						
+	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
+	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
+	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}	
 	
 	//set dropdown menu APIMODE
 	switch(APIMODE) {
@@ -322,6 +320,7 @@
 		default:
 			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
 	}
+	
 								
 	// check if url params overwrite the default ds info
 	if (get_url_param('dsurl') && get_url_param('dsport'))
@@ -1000,8 +999,19 @@
 			}
 		}
 		ExportCSV(CSVall,"Results");
-	}); 
-        
+	});
+	
+	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////
+	// BLOCK to set Default settings
+	$( document ).ready(function() {
+		
+		//set default value for CSS coloration
+		$("#DRIVERCOLOR").val( CSSDEFAULSET ).change();
+		
+	});
+	
+	
 	// setting up google maps overlays
 	function GPSSensor(initData) {
                //state information
