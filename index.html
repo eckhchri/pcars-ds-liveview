@@ -770,7 +770,7 @@
 	                        sensorLayer_UpdateDelta_DEMOdiff = demo[record_pos_helper].globals.sensorLayer_UpdateDelta - sensorLayer_UpdateDelta;	//diff time between recorded data and playback sensorLayer_UpdateDelta
 	                        WORKERDELAY_DEMODATA = WORKERDELAY_DEMODATA + sensorLayer_UpdateDelta_DEMOdiff;		//adapt playback speed to recorded data with the worker delay
 	                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
-	                        if(log >= 2){console.log("Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
+	                        if(log >= 2){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
 	
 	                        workerDSDATA.postMessage({
 	                                workerdelay:            WORKERDELAY_DEMODATA
