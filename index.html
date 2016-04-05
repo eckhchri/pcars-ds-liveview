@@ -356,6 +356,10 @@
 		}
 	}
 
+	// check if url params overwrite the default autoExport option
+	if (get_url_param('autoexport')){
+		autoExport = get_url_param('autoexport');
+	}
 
 	/////////////////////////////////////
 	// Event Handler
