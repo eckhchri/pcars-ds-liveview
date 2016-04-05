@@ -39,7 +39,7 @@ demo_start_pos = 0;
 demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
 
 //CSS default
-var CSSDEFAULSET = 'colortop3';  //use the value of the selection Box #DRIVERCOLOR
+var CSSDEFAULTSET = 'colortop3';  //use the value of the selection Box #DRIVERCOLOR
 
 //CSS definitions
 var CSSTOP3VEHICLESstr ='';
