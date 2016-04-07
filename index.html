@@ -321,6 +321,15 @@
 			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
 	}
 	
+	///////////////////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////////////////
+	// BLOCK to set Default settings
+	$( document ).ready(function() {
+		
+		//set default value for CSS coloration
+		$("#DRIVERCOLOR").val( CSSDEFAULTSET ).change();
+		
+	});
 								
 	// check if url params overwrite the default ds info
 	if (get_url_param('dsurl') && get_url_param('dsport'))
@@ -1003,16 +1012,6 @@
 			}
 		}
 		ExportCSV(CSVall,"Results");
-	});
-	
-	///////////////////////////////////////////////////////////////////////
-	///////////////////////////////////////////////////////////////////////
-	// BLOCK to set Default settings
-	$( document ).ready(function() {
-		
-		//set default value for CSS coloration
-		$("#DRIVERCOLOR").val( CSSDEFAULTSET ).change();
-		
 	});
 	
 	
