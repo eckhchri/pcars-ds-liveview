@@ -623,7 +623,7 @@
                 //if (SessionState_old == "" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}         //Hide if you open the website during "Loading"
 		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
-		if (SessionStage_old != SessionStage && SessionStage_old != ""){	//SessionStage_old != "" for startup, because the init value is ""
+		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
 			StopTransitionDelay = "true";
 			StopTransitionDelay_StartTime = Date.now();
 			sensorLayer.interruptTransition();
