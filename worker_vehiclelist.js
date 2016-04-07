@@ -5,7 +5,6 @@ self.addEventListener('message', function(e) {
 	importScripts('./receive_ds_data.js');
 	importScripts('./pcars_driver.js');
 	importScripts('./pcars_vehicle.js');
-	importScripts('./sleep.js');
 	importScripts('./config.js');	//for console.log levels needed
 	//Because of the high performance impact of big demo data, the demo_data.js file is only imported in DEMO mode
         if(e.data.receivemode == "GETDEMODATA"){
