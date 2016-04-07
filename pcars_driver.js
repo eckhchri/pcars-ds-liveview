@@ -1,6 +1,22 @@
 // CLASS of an pCars Driver
 function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId/*, variousParameters*/)
 {
+
+		//CurrentSector has to be mapped
+		// API Sector 	- Real Sector
+		// 	3 			- 	1
+		// 	1 			- 	2
+		// 	2 			- 	3
+		//	0			-	0
+		//this.aSectormapping = {};
+		this.aSectormapping = {
+					"3": '1',
+					"1": '2',
+					"2": '3',
+					"0": '0'
+		};
+
+	
         // vars
         this.RefID			=	RefID;
         this.Name      		=	Name;
@@ -10,7 +26,7 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.PosY      		=	PosY;
         this.PosZ      		=	PosZ;
         this.State     		=	State;
-        this.CurrentSector 	=   CurrentSector;
+        this.CurrentSector 	=   this.aSectormapping[ CurrentSector ];
         this.RacePosition  	=   RacePosition;
         this.FastestLapTime	=   FLapTime;
         this.LastLapTime   	=   LLapTime;
@@ -20,10 +36,10 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.VehicleId		=	VehicleId;		
         //this.variousParameters = variousParameters;
 
-
         //private vars
         var privateLat;
         var privateLong;
+      
 }
 
 function CalcGPSCoordinates(){
@@ -212,3 +228,4 @@ PCARSdriver.prototype.GetPosColor=GetPosColor;
 PCARSdriver.prototype.SetExampleData=SetExampleData;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
+
