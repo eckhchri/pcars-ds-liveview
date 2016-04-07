@@ -248,11 +248,10 @@
 	var SessionState_old		=	"";
 	var SessionStage			=	"";
 	var SessionStage_old		=	"";
-	var PCARSd					=	new PCARSdriver(); // only use the object to get functions of it
-	var CSSClassChanger			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
-
-	PCARSd.SetExampleData();
+	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
+	PCARSd.SetExampleData();							// setDefaultValues
 	
+	var CSSClassChanger			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
 	var recording_count			=	0;	//used as array index comment during recording demo data
 	var record_pos;						//used for playback of data during DEMO mode
 	var record_pos_helper;          	//for WORKERDELAY_DEMODATA calculation needed
@@ -275,20 +274,6 @@
 		Race1:		"",
 		Race2:		""
 	}
-	
-	/* aSensorData init was only necessary as the draw function call was disabled, but the commands of the draw function were not moved to the update function
-	var GPSinit                         = calc_coordinates (9999999999 , PCARSd.GetPosX() , PCARSd.GetPosZ() , aRefPointTMP);
-        aSensorData[0] = {
-		"Key":			PCARSd.GetName()
-		,"MarkerLabel" :	PCARSd.GetRacePosition() + "-" + PCARSd.GetName()
-		,"DateTime":		"2013-09-04T09:41:09+10:00"
-		,"Lat":			GPSinit["Lat"]
-		,"Long":		GPSinit["Long"]
-		,"Heading":		286.0
-		,"Speed":		PCARSd.GetSpeed()
-		,"CSSTextClasses":	PCARSd.GetCSSTextClass()
-		,"CSSCircleClasses":	PCARSd.GetCSSCircleClass()
-        }*/
 
 	// catch demo array boundary breaks
 	if(demo_start_pos > demo.length-1 || demo_start_pos < 0){
@@ -468,22 +453,11 @@
 	// add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 
-	// initial data for grid !!! Needed because of Refresh problem !!
-	// todo: really needed ?
-	jQuery("#tracklisttable").jqGrid('addRowData',0,{	
-								id: 		0
-								,trackid:	"2" 
-								,trackname:	"initialdata2"
-								,gridsize:	"-"
-								,refpoint:	"no"
-								,comment:	"test comment" 
-							});
-	
 	// add StopRefresh Table button in jqgrid header
 	//Method with checkbox
 	//$('#TrackList span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/>');
 	//Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd; width:50px"></input>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd; width:50px" disabled></input>');
 
 
 	// car lis overview
@@ -524,8 +498,7 @@
 			
 			// no additional worker call needed, because needed data available			
 			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
-			
-			
+						
 			
 		}else{
 			
@@ -880,7 +853,7 @@
 		}*/
 		//Method with button
 		var self = this;
-                changeRefreshTracklist(self);
+		changeRefreshTracklist(self);
                 
 	});
 	
@@ -907,19 +880,24 @@
 	w_tracklist.addEventListener('message', function(e) {
 
 			if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste Event: ", e );}
-					
-		//	var str = e.data;	// data string from return object
+			
+			if ( e.data.aTrack.length > 0 ){
+				// in case DS return a result refresh track table
+				refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
 
-			refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
-			w_tracklist.postMessage({
-								workerdelay: 	WORKERDELAY_TRACKLIST
-								,dsurl: 		DsServerURL
-								,dsport: 		DsPort
-								,timeout: 		2000
-								,receivemode: 	"GETTRACKLIST" 
-								,aRefpoint:		e.data.aRefpoint});
+			}else{
+				
+				w_tracklist.postMessage({
+					workerdelay: 	WORKERDELAY_TRACKLIST
+					,dsurl: 		DsServerURL
+					,dsport: 		DsPort
+					,timeout: 		2000
+					,receivemode: 	"GETTRACKLIST" 
+					,aRefpoint:		e.data.aRefpoint});
+				
+			}
+			
 	}, false);
-	
 	//initial call of the tracklist worker. initiate endless loop
 	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTMP });
 
