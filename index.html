@@ -1118,7 +1118,9 @@ function init_map(_TrackID , aRefPoint)
 
                 // use cuircit RefPoint for center google map
                 center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
-                mapTypeId: google.maps.MapTypeId.SATELLITE
+                mapTypeId: google.maps.MapTypeId.SATELLITE,
+                //deactivate google streetview
+                streetViewControl: false
            });
 
            //if(log >= 3){console.log("-+-+- aSensorData-Array: ", aSensorData);}
