@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<!-- http://jsfiddle.net/2dN4M/500/   -->
+
+<html lang="de">
+  <head>
+  		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+  		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		
+		<script>
+			var header = $('[data-role=header]').outerHeight();
+			var panel = $('.ui-panel').height();
+			var panelheight = panel - header;
+			$('.ui-panel').css({
+			  'top': header,
+			  'min-height': panelheight
+			});
+		</script>
+		<style type="text/css">
+			 .ui-panel-inner {
+			   padding: 0px;
+			 }
+			 
+			 .ui-controlgroup {
+			   margin: 0;
+			 }
+			 
+			 #header {
+			   height: 41px;
+			 }
+			 
+			 #bars-button {
+			   margin: 7px;
+			 }
+        </style>
+  </head>
+  <body>
+    
+  
+  <div data-role="page" id="home" data-theme="a">
+	<div id="header" data-role="header" >
+	<h1>DS status: connected | DS joinable: yes | Session Sate: race</h1>
+		<a href="#" data-icon="grid" class="ui-btn-left ">Statistiks</a>
+    	<a href="#rightpanel_1" data-icon="gear" class="ui-btn-right ui-mini">Options</a>
+<!-- 
+	    <div data-role="navbar">
+	        <ul>
+	            <li><a href="#">One</a></li>
+	        </ul>
+	    </div>
+-->	
+	</div><!-- /header -->
+
+	
+	  	<!-- rightpanel2  -->
+		<div data-role="panel" id="rightpanel_1" data-position="right" data-display="overlay" data-theme="a">
+        	<h3>Right Panel: Push</h3>
+        	<p>To close, click off the panel, swipe left or right, hit the Esc key, or use the button below:</p>
+        </div>
+	</div>
+        
+  </body>
+</html>
