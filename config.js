@@ -5,7 +5,7 @@ var CRESTServerURL 	= "localhost";
 var CRESTPort		= 8080;
 
 //default API mode, possible values: DS, CREST or DEMO
-var APIMODE   =   "DS";
+var APIMODE   =   "DS";		// Default API Mode
 
 //hide or unhide elements
 var	SHOWTRACKLIST 	=	true;	// [true|false]

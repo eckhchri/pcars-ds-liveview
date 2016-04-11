@@ -186,21 +186,7 @@
 	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
 	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}	
-	
-	//set dropdown menu APIMODE
-	switch(APIMODE) {
-		case "DS":
-			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
-			break;
-		case "CREST":
-			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "CREST";
-			break;
-		case "DEMO":
-			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DEMO";
-			break;
-		default:
-			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
-	}
+
 	
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
@@ -209,40 +195,30 @@
 		
 		//set default value for CSS coloration
 		$("#DRIVERCOLOR").val( CSSDEFAULTSET ).change();
+
+		//set dropdown menu APIMODE	
+		$("#APIMODE").val( APIMODE ).change();
 		
 	});
-								
+
+
 	// check if url params overwrite the default ds info
-	if (get_url_param('dsurl') && get_url_param('dsport'))
-        {
+	if (get_url_param('dsurl') && get_url_param('dsport'))	{
 			DsServerURL     =       get_url_param('dsurl');
 			DsPort          =       get_url_param('dsport');
 			APIMODE         =       "DS";
-			document.getElementById("fieldset").elements.namedItem("APIMODE").value = "DS";
-
-			if(log >= 3){
-				console.log("overwrite ds default settings with: " 
-					+ get_url_param('dsurl') 
-					+ " / " 
-					+ get_url_param('dsport'));
-			}
+			//overwrite dropdown menu selection
+			$("#APIMODE").val( APIMODE ).change();
 	}
-	
+
 	// check if url params overwrite the default CREST info
-	if (get_url_param('cresturl') && get_url_param('crestport'))
-	{
+	if (get_url_param('cresturl') && get_url_param('crestport'))	{
 		CRESTServerURL		=	get_url_param('cresturl');
-		CRESTPort		=	get_url_param('crestport');
-		APIMODE			=	"CREST";
+		CRESTPort			=	get_url_param('crestport');
+		APIMODE				=	"CREST";
 		DisplayDuration		=	DisplayDurationCREST;
-		document.getElementById("fieldset").elements.namedItem("APIMODE").value = "CREST";
-		
-		if(log >= 3){
-			console.log("overwrite crest default settings with: " 
-				+ get_url_param('cresturl') 
-				+ " / " 
-				+ get_url_param('crestport'));
-		}
+		//overwrite dropdown menu selection
+		$("#APIMODE").val( APIMODE ).change();
 	}
 
 	// check if url params overwrite the default autoExport option
@@ -251,8 +227,7 @@
 	}
 
 	/////////////////////////////////////
-	// Event Handler
-	// Dropdown API
+	// Event Handler - Dropdown API
 	$("#APIMODE").change(function() {
 			$("#APIMODE option:selected").each(function() {
 					APIMODE = $( this ).text();
