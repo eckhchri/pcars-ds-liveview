@@ -149,19 +149,19 @@ function Refpoint(circuit_id)
 	//Sonoma Raceway
         aRefPoints[-1454279631] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
-                "refLat":        38.162514
-                ,"refLong":      -122.457216
-                ,"rotation":     142
-                ,"cor_r_Long":   10000000
-                ,"cor_r_Lat":    -30000000
-                ,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 0.97
+		"refLat":        38.162520	//38.162514
+		,"refLong":      -122.457175	//-122.457216
+		,"rotation":     141.5	//142
+		,"cor_r_Long":   0	//10000000
+		,"cor_r_Lat":    0	//-30000000
+		,"cor_PosX_mul": 1.004	//1
+		,"cor_PosY_mul": 0.99	//0.97
                 ,"Name":         "Sonoma Raceway GP"
                 ,"Name2":	 "Sonoma Raceway Grand Prix"	//"mTrackLocation":"Sonoma Raceway","mTrackVariation":"Grand Prix"
                 ,"Zoom":         16
                 ,"MapInitLat":   38.162770 
                 ,"MapInitLong":  -122.457449
-                ,"Comment": "live check"
+                ,"Comment": "finished, not perfect in Turn 1, but not better possible"
                 });
         //Sonoma Raceway National
 	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National","Name2": ""});
