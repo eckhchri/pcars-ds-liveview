@@ -70,8 +70,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	
 	if(this.receivemode == "GETDEMODATA"){
 		data.driverlist = [];
-		var recording_position = timeout;
-		var demo_el = demo[recording_position];
+		/*var recording_position = timeout;
+		var demo_el = demo[recording_position];*/
+		var demo_el = timeout;
 		data.globals = {
 			"joinable":		demo_el.globals.joinable
 			,"lobbyid":		demo_el.globals.lobbyid
