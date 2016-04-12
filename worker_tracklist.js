@@ -7,10 +7,10 @@ self.addEventListener('message', function(e) {
 	importScripts('./pcars_track.js');
 	importScripts('./class_reference_points.js');
 	importScripts('./config.js');	//for console.log levels needed
-	//Because of the high performance impact of big demo data, the demo_data.js file is only imported in DEMO mode
+	/*//Because of the high performance impact of big demo data, the demo_data.js file is only imported in DEMO mode
         if(e.data.receivemode == "GETDEMODATA"){
                 importScripts('./demo_data.js');
-        }
+        }*/
 
 	//delays this worker to reduce http requests and make application resposive
 	//Syntax:  setTimeout(function,milliseconds,param1,param2,...)
