@@ -6,10 +6,10 @@ self.addEventListener('message', function(e) {
 	importScripts('./pcars_driver.js');
 	importScripts('./pcars_vehicle.js');
 	importScripts('./config.js');	//for console.log levels needed
-	//Because of the high performance impact of big demo data, the demo_data.js file is only imported in DEMO mode
+	/*//Because of the high performance impact of big demo data, the demo_data.js file is only imported in DEMO mode
         if(e.data.receivemode == "GETDEMODATA"){
                 importScripts('./demo_data.js');
-        }
+        }*/
 	
 	if(log >= 3){console.log("GETVEHICLELIST e: " , e);}
 
