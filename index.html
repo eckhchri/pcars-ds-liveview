@@ -629,7 +629,7 @@
 	                                workerdelay:            WORKERDELAY_DEMODATA
 	                                ,dsurl:                 ""
 	                                ,dsport:                0
-	                                ,timeout:               record_pos
+	                                ,timeout:               demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
 	                                ,receivemode:   "GETDEMODATA"
 	                                ,arefpoint:             e.data.arefpoint});
 	                        record_pos = record_pos + 1;
@@ -667,8 +667,9 @@
 			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
 			break;
 		case "DEMO":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: record_pos, receivemode: "GETDEMODATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data("", 0, record_pos, "GETDEMODATA", aRefPointTMP);
+			//timeout parameter used for transerring demo_data array element to the worker
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP);
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			break;
 		default:
