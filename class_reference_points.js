@@ -159,12 +159,19 @@ function Refpoint(circuit_id)
                 ,"Name":         "Sonoma Raceway GP"
                 ,"Name2":	 "Sonoma Raceway Grand Prix"	//"mTrackLocation":"Sonoma Raceway","mTrackVariation":"Grand Prix"
                 ,"Zoom":         16
-                ,"MapInitLat":   38.162770 
-                ,"MapInitLong":  -122.457449
+		,"MapInitLat":   38.162600
+		,"MapInitLong":  -122.457415
                 ,"Comment": "finished, not perfect in Turn 1, but not better possible"
                 });
         //Sonoma Raceway National
-	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway National","Name2": ""});
+	aRefPoints[-995202729] = CopyObjectWithModifications(aRefPoints[-1454279631],
+		{
+		"Name": "Sonoma Raceway National"
+		,"Name2": ""
+		,"Zoom":         17
+		,"MapInitLat":   38.163366
+		,"MapInitLong":  -122.457876
+		});
 	//Sonoma Sonoma Raceway Short
 	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short","Name2": ""});
 
@@ -338,7 +345,8 @@ function Refpoint(circuit_id)
                 ,"Comment": "finished"
                 });
         //Brands Hatch Indy
-	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {
+	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], 
+		{
 		"Name":         "Brands Hatch Indy"
 		,"Name2":       ""
 		,"Zoom":        17
