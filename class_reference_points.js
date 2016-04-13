@@ -323,22 +323,28 @@ function Refpoint(circuit_id)
         //Brands Hatch GP
         aRefPoints[1988984740] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
-                "refLat":        51.357240
-                ,"refLong":      0.261592
-                ,"rotation":     0
-                ,"cor_r_Long":   -10000000
-                ,"cor_r_Lat":    20000000
+		"refLat":        51.357200	//51.357240
+		,"refLong":      0.261632	//0.261592
+		,"rotation":     -0.5	//0
+		,"cor_r_Long":   -10000000
+		,"cor_r_Lat":    10000000	//20000000
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Brands Hatch GP"
                 ,"Name2":	 "Brands Hatch Grand Prix"	//"mTrackLocation":"Brands Hatch","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
+                ,"Zoom":         16
                 ,"MapInitLat":   51.357186 
                 ,"MapInitLong":  0.262930
-                ,"Comment": "live check, track maybe not correct, small discrepancies"
+                ,"Comment": "finished"
                 });
         //Brands Hatch Indy
-	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {"Name": "Brands Hatch Indy","Name2": ""});
+	aRefPoints[1300627020] = CopyObjectWithModifications(aRefPoints[1988984740], {
+		"Name":         "Brands Hatch Indy"
+		,"Name2":       ""
+		,"Zoom":        17
+		,"MapInitLat":   51.359090
+		,"MapInitLong":  0.260612
+		});
         
         //Mazda Raceway Laguna Seca
         aRefPoints[-1612023328] = CopyObjectWithModifications(aRefPoints[9999999999],
