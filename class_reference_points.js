@@ -303,29 +303,50 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check"
                 });
                 
-        //Silverstone GP
-        aRefPoints[1641471184] = CopyObjectWithModifications(aRefPoints[9999999999],
-                {
-                "refLat":        52.078807
-                ,"refLong":      -1.015293
-                ,"rotation":     -0.2
-                ,"cor_r_Long":   20000000
-                ,"cor_r_Lat":    0
-                ,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
-                ,"Name":         "Silverstone GP"
-                ,"Name2":	 "Silverstone Grand Prix"	//"mTrackLocation":"Silverstone","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
-                ,"MapInitLat":   52.071727 
-                ,"MapInitLong":  -1.015736
-                ,"Comment": "track maybe not correct, check again"
-                });
-        //Silverstone International
-	aRefPoints[1101719627] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone International","Name2": ""});
+	//Silverstone GP
+	aRefPoints[1641471184] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":	52.078790      //52.078807
+		,"refLong":	-1.015293
+		,"rotation":	-0.2
+		,"cor_r_Long":	20000000
+		,"cor_r_Lat":	0
+		,"cor_PosX_mul":1
+		,"cor_PosY_mul":1
+		,"Name"::	"Silverstone GP"
+		,"Name2":	"Silverstone Grand Prix"       //"mTrackLocation":"Silverstone","mTrackVariation":"Grand Prix"
+		,"Zoom":	15
+		,"MapInitLat":	52.071727
+		,"MapInitLong":	-1.015736
+		,"Comment":	"finished, small discrepencies"
+		});
+	//Silverstone International
+	aRefPoints[1101719627] = CopyObjectWithModifications(aRefPoints[1641471184],
+		{
+		"Name": "Silverstone International"
+		,"Name2": ""
+		,"Zoom":         16
+		,"MapInitLat":   52.068110
+		,"MapInitLong":  -1.016541
+		});
 	//Silverstone Stowe
-	aRefPoints[1600840139] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Stowe","Name2": ""});
+	aRefPoints[1600840139] = CopyObjectWithModifications(aRefPoints[1641471184],
+		{
+		"Name": "Silverstone Stowe"
+		,"Name2": ""
+		,"Zoom":         17
+		,"MapInitLat":   52.068230
+		,"MapInitLong":  -1.018023
+		});
 	//Silverstone National
-	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone National","Name2": ""});
+	aRefPoints[1952936927] = CopyObjectWithModifications(aRefPoints[1641471184],
+		{
+		"Name": "Silverstone National"
+		,"Name2": ""
+		,"Zoom":         17
+		,"MapInitLat":   52.075955
+		,"MapInitLong":  -1.014935
+		});
         
         //Brands Hatch GP
         aRefPoints[1988984740] = CopyObjectWithModifications(aRefPoints[9999999999],
