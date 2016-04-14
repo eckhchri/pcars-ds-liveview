@@ -313,7 +313,7 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":	0
 		,"cor_PosX_mul":1
 		,"cor_PosY_mul":1
-		,"Name"::	"Silverstone GP"
+		,"Name":	"Silverstone GP"
 		,"Name2":	"Silverstone Grand Prix"       //"mTrackLocation":"Silverstone","mTrackVariation":"Grand Prix"
 		,"Zoom":	15
 		,"MapInitLat":	52.071727
