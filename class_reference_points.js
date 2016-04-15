@@ -785,7 +785,7 @@ function Refpoint(circuit_id)
 	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": ""});
 	
 	//Silverstone Classic - copy of Silverstone GP
-	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Classic","Name2": ""});
+	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Classic","Name2": "","Comment": "live check"});
 	
 	
 
