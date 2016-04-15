@@ -113,27 +113,47 @@ function Refpoint(circuit_id)
 	//Nuerburgring GP
         aRefPoints[-945967394] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
-                "refLat":        50.332733 
-                ,"refLong":      6.943355
-                ,"rotation":     -0.9 
-                ,"cor_r_Long":   30000000
-		,"cor_r_Lat":    -30000000 
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+                "refLat":        50.332743	//50.332733 
+                ,"refLong":      6.943395	//6.943355
+                ,"rotation":     -0.35	//-0.9 
+                ,"cor_r_Long":   0	//30000000
+		,"cor_r_Lat":    0	//-30000000 
+		,"cor_PosX_mul": 1.005	//1
+		,"cor_PosY_mul": 0.9985	//1
                 ,"Name":         "Nürburgring GP"
                 ,"Name2":	 "Nürburgring Grand Prix"	//"mTrackLocation":"Nürburgring","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   50.332154
                 ,"MapInitLong":  6.940467
-                ,"Comment": "live check"
+                ,"Comment": "finished, small discrepancies"
                 });
-
 	//Nuerburgring Sprint Short
-	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint Short","Name2": ""});
+	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394],
+		{
+		"Name":		"Nürburgring Sprint Short"
+		,"Name2":	""
+		,"Zoom":	16
+		,"MapInitLat":	50.333628
+		,"MapInitLong":	6.943330
+		});
 	//Nuerburgring Sprint
-	aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Sprint","Name2": ""});
+	aRefPoints[-709737101] = CopyObjectWithModifications(aRefPoints[-945967394],
+		{
+		"Name":		"Nürburgring Sprint"
+		,"Name2":	""
+		,"Zoom":	16
+		,"MapInitLat":	50.333628
+		,"MapInitLong":	6.943330
+		});
 	//Nuerburgring Muellenbach
-	aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nürburgring Müllenbach","Name2": "Nürburgring MuellenBach"});	//"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
+	aRefPoints[-246966400] = CopyObjectWithModifications(aRefPoints[-945967394],
+		{
+		"Name":		"Nürburgring Müllenbach"
+		,"Name2":	"Nürburgring MuellenBach"     //"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
+		,"Zoom":	17
+		,"MapInitLat":	50.326304
+		,"MapInitLong":	6.937391
+		});
 
 	//Nordschleife
         aRefPoints[697498609] = CopyObjectWithModifications(aRefPoints[9999999999],
