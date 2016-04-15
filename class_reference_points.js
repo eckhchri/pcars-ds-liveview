@@ -51,10 +51,10 @@ function Refpoint(circuit_id)
 	//Hockenheim GP
         aRefPoints[1695182971] = CopyObjectWithModifications(aRefPoints[9999999999],
         	{
-                "refLat":        49.329738
+                "refLat":	 49.329747	//49.329738
                 ,"refLong":      8.574270
-                ,"rotation":     0.573
-                ,"cor_r_Long":   45000000
+                ,"rotation":     0.35	//0.573
+                ,"cor_r_Long":   30000000	//45000000
 		,"cor_r_Lat":	 0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
@@ -63,12 +63,25 @@ function Refpoint(circuit_id)
                 ,"Zoom":         16
                 ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
-                ,"Comment": "finetuning" 
+                ,"Comment": "finished" 
         	});
 	//Hockenheim Short
-	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Short","Name2": ""});
+	aRefPoints[1768660198] = CopyObjectWithModifications(aRefPoints[1695182971],
+		{
+		"Name":		"Hockenheim Short"
+		,"Name2":	""
+		,"Zoom":	17
+		,"MapInitLat":	49.328991
+		,"MapInitLong":	8.568469
+		});
 	//Hockenheim National
-	aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim National","Name2": ""});
+	aRefPoints[-1977142985] = CopyObjectWithModifications(aRefPoints[1695182971],
+		{
+		"Name":		"Hockenheim National"
+		,"Name2":	""
+		,"MapInitLat":	49.329796
+		,"MapInitLong":	8.571180
+		});
 
 	//Dubai Autodrome GP
 	aRefPoints[-661887517] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -782,7 +795,7 @@ function Refpoint(circuit_id)
 	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short"});
 	
 	//Hockenheim Classic - copy of Hockenheim GP
-	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": ""});
+	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": "","Comment": "live check"});
 	
 	//Silverstone Classic - copy of Silverstone GP
 	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Classic","Name2": "","Comment": "live check"});
