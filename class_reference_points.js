@@ -815,10 +815,10 @@ function Refpoint(circuit_id)
 	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short"});
 	
 	//Hockenheim Classic - copy of Hockenheim GP
-	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": "","Comment": "live check"});
+	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": ""});
 	
 	//Silverstone Classic - copy of Silverstone GP
-	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"Name": "Silverstone Classic","Name2": "","Comment": "live check"});
+	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"rotation": 0.2,"Name": "Silverstone Classic","Name2": "","Comment": "finished"});
 	
 	
 
