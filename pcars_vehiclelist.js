@@ -3,7 +3,9 @@ function PCARSVEHICLELIST()
 {
         // vars
         //this.name				=	"";
-        this.idToNameMapping	=	{};			//mapaping between
+        this.idToNameMapping	=	{};			//mapaping between vehicleid and name
+        this.idToClassMapping	=	{};			//mapaping between vehicleid and class
+        this.idToClassMappingNormalized	=	{};			//mapaping between vehicleid and class
         this.aVehicleList		=	[]; 		//array of pcars_vehicle objects
         this.DataAvaiavle		=	0;			// to check if data was set
         
@@ -22,15 +24,27 @@ function setVehicleData(aVL)
 										aVL[i].vehicleid, 
 										aVL[i].name, 
 										aVL[i].cls); 
-		l2++;		
+		l2++;
+		
+		//create mappings for faster access in futher scenarios
+		this.idToNameMapping[aVL[i].vehicleid] 				=	aVL[i].name;
+		this.idToClassMapping[aVL[i].vehicleid] 			=	aVL[i].cls;
+		this.idToClassMappingNormalized[aVL[i].vehicleid]	=	_ClassNormalization( aVL[i].cls );
+				
+				
 	}
 
 	
-	if(log >= 3){console.log("--- INFO object setVehicleData: ", this.aVehicleList );}
+	if(log >= 3){console.log("--- INFO object setVehicleData: ", this );}
 	
 	this.DataAvaiavle = 1;
 	
 	return 1;
+}
+
+function _ClassNormalization(str)
+{
+	return str.replace(/ /g, '_');;
 }
 
 function getVehicleList()
@@ -68,3 +82,4 @@ function getVehicleClassByName(){
 PCARSVEHICLELIST.prototype.setVehicleData=setVehicleData;
 PCARSVEHICLELIST.prototype.getVehicleClasses=getVehicleClasses;
 PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
+PCARSVEHICLELIST.prototype.getVehicleClassByName=getVehicleClassByName;

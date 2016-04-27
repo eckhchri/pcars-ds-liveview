@@ -188,14 +188,16 @@ function GetCSSTextClass()
 	return css;
 }
 
-function GetCSSCircleClass()
+function GetCSSCircleClass(aVehicleidToClass)
 {
 	
 	//Example: CSS_RacePos_1
 	var css = "CSS_RacePos_" + this.RacePosition;
 	
 	// todo:  add dynamic vehicle Class mapping
-	css +=	" CSS_Vehicle_GT3";
+	if (aVehicleidToClass){
+		css +=	" CSS_Vehicle_" + aVehicleidToClass['' + this.VehicleId];
+	}
 	
 	//decision if real player or ai
 	if (this.IsPlayer == 1)

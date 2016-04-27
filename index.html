@@ -524,7 +524,7 @@
 						,"Heading":			286.0
 						,"Speed":			e.data.driverlist[i].Speed
 						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
-						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass()
+						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass(PCARSVehicleList.idToClassMappingNormalized)
 				}
 				
         		//tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;	//TrackId is available in globals, not necessary reading it from variousParameters
