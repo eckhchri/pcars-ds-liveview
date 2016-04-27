@@ -16,6 +16,7 @@
 	<script src="./pcars_driver.js" charset="utf-8"></script>
 	<script src="./pcars_track.js" charset="utf-8"></script>
 	<script src="./pcars_vehicle.js" charset="utf-8"></script>
+	<script src="pcars_vehiclelist.js" charset="utf-8"></script>
 	<script src="./receive_ds_data.js" charset="utf-8"></script>
 	<script src="./calc_coordinates.js" charset="utf-8"></script>
 	<script src="./class_reference_points.js" charset="utf-8"></script>
@@ -144,6 +145,7 @@
 	var SessionState_old		=	"";
 	var SessionStage			=	"";
 	var SessionStage_old		=	"";
+	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
 	
@@ -365,7 +367,8 @@
 			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);
 		
 			//display vehicle data in table 
-			refreshVehicleList(aVehicleList);
+			PCARSVehicleList.setVehicleData(aVehicleList);
+			refreshVehicleList(PCARSVehicleList);
 			
 			// no additional worker call needed, because needed data available			
 			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
@@ -1162,9 +1165,12 @@ function refreshTrackList(a)
 }
 
 //fill
-function refreshVehicleList(a)
+function refreshVehicleList(aVL)
 {
+	a	=	aVL.getVehicleList();
 	var _data;
+	
+	if(log >= 3){console.log("--- INFO refreshVehicleList aVL: ", a );}
 	
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#carlisttable").jqGrid("clearGridData");	
