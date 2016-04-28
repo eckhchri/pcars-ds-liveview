@@ -30,6 +30,7 @@ function setVehicleData(aVL)
 		this.idToNameMapping[aVL[i].vehicleid] 				=	aVL[i].name;
 		this.idToClassMapping[aVL[i].vehicleid] 			=	aVL[i].cls;
 		this.idToClassMappingNormalized[aVL[i].vehicleid]	=	_ClassNormalization( aVL[i].cls );
+		
 				
 				
 	}

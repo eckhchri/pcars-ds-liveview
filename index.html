@@ -16,7 +16,8 @@
 	<script src="./pcars_driver.js" charset="utf-8"></script>
 	<script src="./pcars_track.js" charset="utf-8"></script>
 	<script src="./pcars_vehicle.js" charset="utf-8"></script>
-	<script src="pcars_vehiclelist.js" charset="utf-8"></script>
+	<script src="./pcars_vehiclelist.js" charset="utf-8"></script>
+	<script src="./pcars_html_controls.js" charset="utf-8"></script>	
 	<script src="./receive_ds_data.js" charset="utf-8"></script>
 	<script src="./calc_coordinates.js" charset="utf-8"></script>
 	<script src="./class_reference_points.js" charset="utf-8"></script>
@@ -145,7 +146,9 @@
 	var SessionState_old		=	"";
 	var SessionStage			=	"";
 	var SessionStage_old		=	"";
+	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
+	var	aCurrentVehicleClasses	=	new Array();		//array of all vehicle classes within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
 	
@@ -196,10 +199,11 @@
 	$( document ).ready(function() {
 		
 		//set default value for CSS coloration
-		$("#DRIVERCOLOR").val( CSSDEFAULTSET ).change();
-
+		//$("#DRIVERCOLOR").val(  ).change();
+		HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );
+		
 		//set dropdown menu APIMODE	
-		$("#APIMODE").val( APIMODE ).change();
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );		
 		
 	});
 
@@ -210,7 +214,7 @@
 			DsPort          =       get_url_param('dsport');
 			APIMODE         =       "DS";
 			//overwrite dropdown menu selection
-			$("#APIMODE").val( APIMODE ).change();
+			HTMLCTRL.APIMODE_SetSelection( APIMODE );
 	}
 
 	// check if url params overwrite the default CREST info
@@ -220,7 +224,7 @@
 		APIMODE				=	"CREST";
 		DisplayDuration		=	DisplayDurationCREST;
 		//overwrite dropdown menu selection
-		$("#APIMODE").val( APIMODE ).change();
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );
 	}
 
 	// check if url params overwrite the default autoExport option
@@ -527,9 +531,25 @@
 						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass(PCARSVehicleList.idToClassMappingNormalized)
 				}
 				
+				//gatthering all vehicle classes of the current race
+				aCurrentVehicleClasses[i] = e.data.driverlist[i].Name;
+				
         		//tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;	//TrackId is available in globals, not necessary reading it from variousParameters
         		//if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}	//analyzing problem with asynchronous marker updates
 		}
+		
+		
+		//todo: dynamically fill up selection box with vehicle classes
+		if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
+		var lcvc 	= aCurrentVehicleClasses.length;
+		var tmpcvc	= "";		
+		for(var i = 0; i < lcvc; i++){
+			
+			tmpcvc	=	aCurrentVehicleClasses[i];
+			HTMLCTRL.DRIVERCOLOR_AddSelElement(tmpcvc , tmpcvc);
+		}
+	
+		
 		
         sensorLayer_UpdateTime = Date.now();
 		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
