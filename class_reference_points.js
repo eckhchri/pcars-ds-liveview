@@ -173,11 +173,14 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check, big discrepancies on some parts of track"
                 });
 	//Nordschleife Stage 3
-	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 3","Name2": ""});
+	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 3","Name2": ""});
 	//Nordschleife Stage 1
-	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 1","Name2": ""});
+	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 1","Name2": ""});
 	//Nordschleife Stage 2
-	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[-945967394], {"Name": "Nordschleife Stage 2","Name2": ""});
+	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 2","Name2": ""});
+	
+	//Nürburgring Combined
+	aRefPoints[-891514248] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Combined","Name2": ""});
 	
 	//Sonoma Raceway
         aRefPoints[-1454279631] = CopyObjectWithModifications(aRefPoints[9999999999],
