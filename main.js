@@ -1,9 +1,62 @@
 
 function onload_main(){
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////
+	///////////////////////////////// initialize vars
+	var map;						// google map object
+	var aDrivers 					=	new Array();		// array for PCARSdriver objects
+	var aSensorData 				=	new Array();		// array of Hashes, each hash includes parameters of a driver
+	var XMLHTTPTimeout				=	2000;
+	var StopTransitionDelay 		=	"true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
+	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
+	var global_i					= 0;
+	var sensorLayer;
+	var sensorLayer_UpdateTime;		//time, when marker are updated
+	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
+	var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
+	var UnHide					= "false";	//UnHide markers
+	var UnHide_Timer			= 0;		//Timer for UnHide markers
+	var DisplayDurationCorrector =	0;
+	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks
+	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
+	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
+	var StopRefreshTracklist	=	"false";
+	var StopRefreshDriverlist	=	"false";
+	var SessionState			=	"";
+	var SessionState_old		=	"";
+	var SessionStage			=	"";
+	var SessionStage_old		=	"";
+	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
+	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
+	var	aCurrentVehicleClasses	=	new Array();		//array of all vehicle classes within the current race
+	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
+	PCARSd.SetExampleData();							// setDefaultValues
+	
+	var CSSClsChg				=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
+	var recording_count			=	0;	//used as array index comment during recording demo data
+	var record_pos;						//used for playback of data during DEMO mode
+	var record_pos_helper;          	//for WORKERDELAY_DEMODATA calculation needed
+	
+	var sensorLayer_UpdateDelta_DEMOdiff;	//Difference between sensorLayer_UpdateDelta of the recorded data and the playback
+	var WORKERDELAY_DEMODATA = WORKERDELAY_DSDATA;	//Worker delay for DEMO mode to adapt the playback speed to the recording
 
+	// set to global var, to modify in future stage for periodical updates via ajax
+	var DsName			=	"-+-"; // aDsData.name;
+	var DsState			=	"-+-"; //aDsData.state;		//idle/running
+	var DsTrackName		=	"Slightly Mad Studios Ltd";		//aTrackList[aDsData.TrackId];
+	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
+	var cuircitID		=	9999999999;		//aDsData.TrackId;
+	
+	var CSVExport = {	//CSV Export Data
+		Practice1:	"",
+		Practice2:	"",
+		Qualifying:	"",
+		Warmup:		"",
+		Race1:		"",
+		Race2:		""
+	}
 
-
-	// init W2UI elements
+	///// init W2UI elements
 	initW2UI();
 	initMap();
 

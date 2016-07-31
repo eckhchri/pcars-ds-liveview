@@ -152,7 +152,7 @@
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
 	
-	var CSSClassChanger			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
+	var CSSClsChg			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js	
 	var recording_count			=	0;	//used as array index comment during recording demo data
 	var record_pos;						//used for playback of data during DEMO mode
 	var record_pos_helper;          	//for WORKERDELAY_DEMODATA calculation needed
@@ -246,23 +246,23 @@
 	        switch ( str1 ) {
 	        
 	        	case "hidedrivers":
-	        		CSSClassChanger.HideAllSvg();
+	        		CSSClsChg.HideAllSvg();
 	        		break;
 	        		
 	        	case "unhidedrivers":
-		        	CSSClassChanger.UnHideAllSvg();
+		        	CSSClsChg.UnHideAllSvg();
 	        		break;
 	        	
 	        	case "colortop3":
-	        		CSSClassChanger.ColorTop3vehicles();
+	        		CSSClsChg.ColorTop3vehicles();
 		    		break;
 		    		
 	        	case "deletecssclasses":
-	        		CSSClassChanger.ClearAllCssClases();
+	        		CSSClsChg.ClearAllCssClases();
 	        		break;
 	        		
 	    	    default:
-	        		CSSClassChanger.ClearAllCssClases();
+	        		CSSClsChg.ClearAllCssClases();
 	    			break;
 	        }
         });            
@@ -496,10 +496,10 @@
 		tmpcuircitID = e.data.globals.attributes.TrackId;
 		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
 
-		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
-                //if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
-                //if (SessionState_old == "" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}         //Hide if you open the website during "Loading"
-		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClassChanger.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
+		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
+                //if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
+                //if (SessionState_old == "" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}         //Hide if you open the website during "Loading"
+		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
 		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
 			StopTransitionDelay = "true";
@@ -589,7 +589,7 @@
                         	StopTransitionDelay = "true";
                                 sensorLayer.interruptTransition();
                                 sensorLayer.update(aSensorData);
-                                CSSClassChanger.UnHideAllSvg();
+                                CSSClsChg.UnHideAllSvg();
                                 UnHide_Timer = 0;
                                 UnHide = "false";
                                 if(log >= 2){console.log("+++++++++UnHide StopTransitionDelay:    ",StopTransitionDelay);}

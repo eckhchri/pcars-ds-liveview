@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function CSSClassChanger (aCSSDefinition)
+function CSSClassChanger(aCSSDefinition)
 {
 	this.CurrentState	= "";
 	this.aCSSClasses 	= new Array(); 	//Array of all handled CSS Clases
@@ -11,7 +11,7 @@ function CSSClassChanger (aCSSDefinition)
 	this.aCSSDef = {}; 
 	this.aCSSDef = aCSSDefinition;	// copy CSS definitions into local varaibale
 	
-	return this;
+	//return this;
 
 }
 
