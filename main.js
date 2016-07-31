@@ -56,6 +56,25 @@ function onload_main(){
 		Race2:		""
 	}
 
+	// catch demo array boundary breaks
+	if(demo_start_pos > demo.length-1 || demo_start_pos < 0){
+		demo_start_pos = 0;
+	}
+	record_pos = demo_start_pos;
+	if(demo_end_pos < 0){
+		demo_end_pos = 0;
+	}
+								
+	
+	
+	
+	// set Default Values
+	SetDefaultHTMLValues(HTMLCTRL);
+	
+	// get requested url parameters
+	GetReqParameters();
+	
+	
 	///// init W2UI elements
 	initW2UI();
 	initMap();
@@ -367,4 +386,54 @@ function GPSSensor(initData) {
 		}
  }; // end interruptTransition()
  
+}
+
+///////////////////////////////////////////////////////////////////////
+function SetDefaultHTMLValues(HTMLCTRL){ 
+	
+	// hide or unhide objects defined within config.js
+	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();		}
+	if ( SHOWDSDATA 	== false ) { 	$( "#DSdata" ).hide();			}						
+	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
+	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
+	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}
+	
+	// BLOCK to set Default settings
+	$( document ).ready(function() {
+		
+		//set default value for CSS coloration
+		HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );
+		
+		//set dropdown menu APIMODE	
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );		
+		
+	});
+}
+
+///////////////////////////////////////////////////////////////////////
+function GetReqParameters(){
+	
+	// check if url params overwrite the default ds info
+	if (get_url_param('dsurl') && get_url_param('dsport'))	{
+			DsServerURL     =       get_url_param('dsurl');
+			DsPort          =       get_url_param('dsport');
+			APIMODE         =       "DS";
+			//overwrite dropdown menu selection
+			HTMLCTRL.APIMODE_SetSelection( APIMODE );
+	}
+
+	// check if url params overwrite the default CREST info
+	if (get_url_param('cresturl') && get_url_param('crestport'))	{
+		CRESTServerURL		=	get_url_param('cresturl');
+		CRESTPort			=	get_url_param('crestport');
+		APIMODE				=	"CREST";
+		DisplayDuration		=	DisplayDurationCREST;
+		//overwrite dropdown menu selection
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );
+	}
+
+	// check if url params overwrite the default autoExport option
+	if (get_url_param('autoexport')){
+		autoExport = get_url_param('autoexport');
+	}
 }
