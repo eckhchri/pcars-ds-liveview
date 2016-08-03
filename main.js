@@ -65,7 +65,10 @@ function onload_main(){
 		demo_end_pos = 0;
 	}
 								
-	
+//////////// scope of varibale to clarify ( differences between config.js and main.js scope -> put all to config.js?) 	
+	if(log >= 3){console.log ("++++++++++++++++++++++++++++++ SHOWSETTINGS: " , SHOWSETTINGS );}
+	if(log >= 3){console.log ("++++++++++++++++++++++++++++++ window.DisplayDurationCorrector: " , window.DisplayDurationCorrector );}
+	if(log >= 3){console.log ("++++++++++++++++++++++++++++++ SHOWSETTINGS: " , DisplayDurationCorrector );}
 	
 	
 	// set Default Values
@@ -73,6 +76,14 @@ function onload_main(){
 	
 	// get requested url parameters
 	GetReqParameters();
+	
+	
+	// create Event Handler
+	initEventHandler();
+	
+	
+	// JQ Grid 
+	createJqGrid();
 	
 	
 	///// init W2UI elements
@@ -103,6 +114,11 @@ function initMap(){
          //deactivate google streetview
          streetViewControl: false
 		});
+    	
+    	
+    	// bind tables to google Map
+    	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
+    	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
 	
 };
 
@@ -436,4 +452,145 @@ function GetReqParameters(){
 	if (get_url_param('autoexport')){
 		autoExport = get_url_param('autoexport');
 	}
+}
+
+//////////////////////////////////////////////////////////////////////////
+function initEventHandler(){
+	
+	
+	$("#APIMODE").change(function() {
+		$("#APIMODE option:selected").each(function() {
+				APIMODE = $( this ).text();
+		});			
+	}); // end #APIMODE change event
+	
+	////////////
+	$( "#DRIVERCOLOR" ).change(function() {
+	    $("#DRIVERCOLOR option:selected").each(function() {
+	    	var str1 = $( this ).val();
+	        switch ( str1 ) {
+	        
+	        	case "hidedrivers":
+	        		CSSClsChg.HideAllSvg();
+	        		break;
+	        		
+	        	case "unhidedrivers":
+		        	CSSClsChg.UnHideAllSvg();
+	        		break;
+	        	
+	        	case "colortop3":
+	        		CSSClsChg.ColorTop3vehicles();
+		    		break;
+		    		
+	        	case "deletecssclasses":
+	        		CSSClsChg.ClearAllCssClases();
+	        		break;
+	        		
+	    	    default:
+	        		CSSClsChg.ClearAllCssClases();
+	    			break;
+	        }
+	    });            
+	}); // end #DRIVERCOLOR change Venet
+	
+	
+	//////////// Event handler for Slider
+	$(function() {
+		$( "#slider-range-max" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+      			value: window.DisplayDurationCorrector, 
+			step: 25,
+      			slide: function( event, ui ) {
+        			$( "#amount" ).val( ui.value );
+				//set new value
+				DisplayDurationCorrector = ui.value;
+      			}
+    		});
+    		$( "#amount" ).val( $( "#slider-range-max" ).slider( "value" ) );
+  	});
+	
+	////////////
+	$(function() {
+		$( "#slider-workerdelay_dsdata" ).slider({
+			range: "max",
+			min:	0,
+			max:	1500,
+      		value:	WORKERDELAY_DSDATA, 
+			step:	50,
+			slide:	function( event, ui ) {
+						$( "#workerdelay_dsdata" ).val( ui.value );
+						//set new value
+						WORKERDELAY_DSDATA = ui.value;
+      			}
+    		});
+    		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
+  	});
+	
+}
+
+function createJqGrid(){
+	
+	// initiate jqGrid for DriverData
+	// todo: make table searchable   and  add new Theme
+	// todo: add subgrid information like: Long,Lat,RefPoint,...
+	jQuery("#tracklisttable").jqGrid({	
+	        datatype: "local",
+	        height: 'auto',
+	        width:	790,
+	        hiddengrid: true,
+	        colNames:['ID','TrackID','TrackName','Max Gridsize', 'RefPoints exists?','Comment'],
+	        colModel:[
+					{name:'id', index:'id', formatter: 'integer', width:45, sorttype:"int"},
+					{name:'trackid', index:'trackid', width:80, sorttype:"int"},
+					{name:'trackname', index: 'trackname', width:240, sorttype:"text"},
+					{name:'gridsize', width:50, align:"center", sorttype:"text"},
+					{name:'refpoint', width:70, align:"center", sorttype:"text"},
+					{name:'comment', width:250, align:"left", sorttype:"text"},
+	        ],
+		caption: "List of available Tracks",
+		rowNum: 200,
+		//rowList:[10,20,30],
+		//pager: 'pager_tracklisttable',
+	});
+			
+	// add filter option bar
+	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	
+	// add StopRefresh Table button in jqgrid header
+	//Method with checkbox
+	//$('#TrackList span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/>');
+	//Method with Button
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd; width:50px" disabled></input>');
+	
+	
+	
+	// car lis overview
+	jQuery("#carlisttable").jqGrid({	
+	        datatype: "local",
+	        height: 'auto',
+	        hiddengrid: true,
+	        colNames:['ID','CarName','class','Set1', 'Set2','Comment'],
+	        colModel:[
+					{name:'vehicleid', 	width:100, 	sorttype:"float",align:"left", index:'id', formatter: 'float'},
+					{name:'name', 		width:100, 	sorttype:"text"},
+					{name:'cls',  		width:200, 	sorttype:"text"},
+					{name:'set1', 		width:40, 	sorttype:"text", align:"right"},
+					{name:'set2', 		width:90, 	sorttype:"text", align:"center"},
+					{name:'comment', 	width:160, 	sorttype:"text", align:"left"},
+	        ],
+	        caption: "List of available Cars with properties.",
+		rowNum: 200,
+	});
+	// add filter option bar
+	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	
+	
+	
+	
+	//TODO: really needed?
+	$('#tracklisttable').css('z-index', 9999);
+	$('#map').css('z-index', 9998);
+		
 }
