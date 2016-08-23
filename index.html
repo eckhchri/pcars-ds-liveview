@@ -1113,7 +1113,7 @@ function init_map(_TrackID , aRefPoint)
 
            // Create the Google Map
            map = new google.maps.Map(d3.select("#map").node(), {
-               zoom: aRefPoint[cuircitID]["Zoom"],
+               zoom: aRefPoint[_TrackID]["Zoom"],
 
                 // use cuircit RefPoint for center google map
                 center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
