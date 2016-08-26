@@ -1,4 +1,4 @@
-function HTMLCONTROL (){
+function HTMLCONTROL(){
 	
 	
 	return this;

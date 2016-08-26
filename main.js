@@ -84,19 +84,432 @@ function onload_main(){
 	
 	// JQ Grid 
 	createJqGrid();
+	if(log >= 3){console.log("-+-+- after calling createJqGrid().");}
 	
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// create worker to get vehicle list
+	var workerVEHICLELIST      =       new Worker('./worker_vehiclelist.js');
+	
+	workerVEHICLELIST.addEventListener('message', function(e) {
+		
+		if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker returned: e ', e );}
+		if ( e.data.avehiclelist.length > 0 ){
+			
+			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var
+			
+			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);
+		
+			//display vehicle data in table 
+			PCARSVehicleList.setVehicleData(aVehicleList);
+			refreshVehicleList(PCARSVehicleList);
+			
+			// no additional worker call needed, because needed data available			
+			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
+						
+			
+		}else{
+			
+			// no return value from DS, start another run
+			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST start new Worker run.' );}
+			workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
+		}
+		
+	}, false);
+	workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
+	
+	/*	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// create DS data object
+	var workerDSDATA      =       new Worker('./worker_dsdata.js');
+	sensorLayer_UpdateTime_old = Date.now();	//initialize a value for first time
+	//event handler of the worker
+	workerDSDATA.addEventListener('message', function(e) {
+		
+		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+                
+        SessionState = e.data.globals.attributes.SessionState;
+		SessionStage = e.data.globals.attributes.SessionStage;
+                
+		// write in HTML page for DS status
+		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
+		document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   	' + e.data.globals.state;
+		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: 	' + e.data.globals.joinable;
+		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: 	' + e.data.globals.lobbyid;
+		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      	' + e.data.globals.now; 
+		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
+		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
+		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"];		
+		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + SessionStage;
+		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + SessionState;
+		
+		if(StopRefreshDriverlist == "false"){
+			var resttime = ConvertLaptimeInReadbaleFormat((e.data.globals.attributes.SessionTimeDuration-e.data.globals.attributes.SessionTimeElapsed)*1000);       //Times in seconds, but function need it in milliseconds, multiplied by 1000
+			if(resttime != "-"){
+				resttime = '  Time: ' + resttime;
+			}
+			if (SessionState == "Race"){
+				document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + resttime.slice(0,-4);     //slice for deleting the milliseconds part of the time
+			}else{
+				document.getElementById("txtSessionStage").value = '';
+			}
+		}
+		
+		//todo:  replace document.get... by Jquery functionality
+		//$('#DSdataInformation').append( 
+		//				$("<p0>").text("DS URL2: " + DsServerURL + " : " +  DsPort)
+		//);
+		
+		//Reset CSVs on a new Race Weekend
+		if (SessionState_old != "Loading" && SessionState == "Loading"){
+			for (var key in CSVExport) {
+				CSVExport[key] = "";
+			}
+		}
+
+		// Build CSVs - must be done before refreshDriverList updates the table, because we need the data of the last worker run of a SessionStage and the if statements match on the first worker run of the following SessionStage
+		//TODO: search for better implementation
+		//after Practice1
+		if (SessionState_old != "Lobby" && SessionState_old != "Loading" && SessionStage_old == "Practice1" && SessionStage != "Practice1"){     //During SessionState Lobby the SessionStage is Practice1
+			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");	//sort grid for the case that the user changed the sorting
+			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
+		}
+		//after Practice2
+		if (SessionStage_old == "Practice2" && SessionStage != "Practice2"){
+			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
+			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
+		}
+		//after Qualifying
+		if (SessionStage_old == "Qualifying" && SessionStage != "Qualifying"){
+			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
+			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
+		}
+		//after Warmup
+		if (SessionStage_old == "Warmup" && SessionStage != "Warmup"){
+			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
+			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
+		}
+		//after Race1 if there is a Race2
+		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
+			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
+			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
+		}
+		//after Race Weekend finished
+		if (SessionState_old == "Race" && SessionState == "PostRace"){
+			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
+			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
+				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
+			}
+			if (SessionStage_old == "Race2"){
+				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
+			}
+			//Auto Export
+			if (autoExport == "true"){
+				var CSVall = "";
+				for (var key in CSVExport) {
+					if(CSVExport[key] != ""){
+						CSVall += CSVExport[key] + '\r\n\n';
+					}
+				}
+				ExportCSV(CSVall,"Results");
+			}
+		}
+
+		if(log >= 3){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
+		
+		/////////////////////////////////////////// update driver data /////////////////////
+		// refresh table of Driver data
+        refreshDriverList(e.data.driverlist);
+		
+		//todo var declaration needed within loop ???
+		var tmpcuircitID;
+		tmpcuircitID = e.data.globals.attributes.TrackId;
+		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
+
+		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
+                //if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
+                //if (SessionState_old == "" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}         //Hide if you open the website during "Loading"
+		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
+		
+		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
+			StopTransitionDelay = "true";
+			StopTransitionDelay_StartTime = Date.now();
+			sensorLayer.interruptTransition();
+		}
+		
+		//update map
+		for (var i = 0; i < e.data.driverlist.length; i++ ){
+
+				//calculate GPS coordinates
+				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
+
+				if(log >= 3){console.log('+++++++++++ DriverData Array  ', e.data.driverlist);}
+				
+				//cast object type because losing while webworker transfer
+				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
+				
+				//fill data array
+				aSensorData[i] = {
+						"Key": 				e.data.driverlist[i].Name
+						,"MarkerLabel" :	e.data.driverlist[i].RacePosition + "-" + e.data.driverlist[i].Name
+						,"DateTime":		"2013-09-04T09:41:09+10:00"
+						,"Lat": 			gpsCoTmp["Lat"]
+						,"Long": 			gpsCoTmp["Long"]
+						,"Heading":			286.0
+						,"Speed":			e.data.driverlist[i].Speed
+						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
+						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass(PCARSVehicleList.idToClassMappingNormalized)
+				}
+				
+				//gatthering all vehicle classes of the current race
+				aCurrentVehicleClasses[i] = e.data.driverlist[i].Name;
+				
+        		//tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;	//TrackId is available in globals, not necessary reading it from variousParameters
+        		//if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}	//analyzing problem with asynchronous marker updates
+		}
+		
+		
+		//todo: dynamically fill up selection box with vehicle classes
+		if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
+		var lcvc 	= aCurrentVehicleClasses.length;
+		var tmpcvc	= "";		
+		for(var i = 0; i < lcvc; i++){
+			
+			tmpcvc	=	aCurrentVehicleClasses[i];
+			HTMLCTRL.DRIVERCOLOR_AddSelElement(tmpcvc , tmpcvc);
+		}
+	
+		
+			
+        sensorLayer_UpdateTime = Date.now();
+		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
+		sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
+		if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
+                
+		//Calculation of dynamic DisplayDuration
+		if ((APIMODE == "DS" || APIMODE == "DEMO") && sensorLayer_UpdateDelta < UpdateRateDS) {
+				DisplayDuration = UpdateRateDS + DisplayDurationCorrector       //If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
+		}else{
+				DisplayDuration = sensorLayer_UpdateDelta  + DisplayDurationCorrector;
+		}
+		if (DisplayDuration < 0) { DisplayDuration = 0 }        //catch a negative value
+		if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration
+		if(log >= 2){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
+                
+		if(log >= 3){console.log("++++++++ aSensorData_NEW" , aSensorData);}
+		sensorLayer.update(aSensorData);
+
+		// in case track changes on DS adjust the map settings for new possition
+        if ( cuircitID != tmpcuircitID ){
+		//if(log >= 3){console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP);}
+		if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
+		//map.setCenter({lat: 50.332733, lng: 6.943355});
+		changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
+
+            cuircitID = tmpcuircitID;  // give the global var the new TrackId
+            if(log >= 3){console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);}
+		}
+		
+		if (SessionState_old != "Race" && SessionState == "Race"){   //Unhide markers after calculation, with a delay of 1000 ms
+                        UnHide = "true";
+                }
+                if (UnHide == "true"){
+                        UnHide_Timer = UnHide_Timer + sensorLayer_UpdateDelta;
+                        if (UnHide_Timer > 1000){
+                        	StopTransitionDelay = "true";
+                                sensorLayer.interruptTransition();
+                                sensorLayer.update(aSensorData);
+                                CSSClsChg.UnHideAllSvg();
+                                UnHide_Timer = 0;
+                                UnHide = "false";
+                                if(log >= 2){console.log("+++++++++UnHide StopTransitionDelay:    ",StopTransitionDelay);}
+                        }
+                }
+                SessionState_old = SessionState;
+                SessionStage_old = SessionStage;
+
+		if (recording_demo_data == "true"){
+                        console.log("           {//" + recording_count);
+                        console.log("                globals:{sensorLayer_UpdateDelta:"+sensorLayer_UpdateDelta+", state:\""+e.data.globals.state+"\", name:\""+e.data.globals.name+"\", lobbyid:"+e.data.globals.lobbyid+", joinable:\""+e.data.globals.joinable+"\", max_member_count:"+e.data.globals.max_member_count+", now:"+e.data.globals.now+", attributes:{TrackId:"+e.data.globals.attributes.TrackId+", SessionState:\""+e.data.globals.attributes.SessionState+"\", SessionStage:\""+e.data.globals.attributes.SessionStage+"\", GridSize:"+e.data.globals.attributes.GridSize+", MaxPlayers:"+e.data.globals.attributes.MaxPlayers+", SessionTimeDuration:"+e.data.globals.attributes.SessionTimeDuration+", SessionTimeElapsed:"+e.data.globals.attributes.SessionTimeElapsed+"}},");
+                        console.log("                participants:[");
+                        for (var i = 0; i < e.data.driverlist.length; i++ ){
+                                if ((i+1) == e.data.driverlist.length){
+                                        console.log("                        {RefId:"+e.data.driverlist[i].RefID+", Name:\""+e.data.driverlist[i].Name+"\", IsPlayer:"+e.data.driverlist[i].IsPlayer+", GridPosition:"+e.data.driverlist[i].GridPosition+", VehicleId:\""+VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName)+"\", RacePosition:"+e.data.driverlist[i].RacePosition+", CurrentLap:"+e.data.driverlist[i].CurrentLap+", CurrentSector:"+e.data.driverlist[i].CurrentSector+", LastLapTime:"+e.data.driverlist[i].LastLapTime+", FastestLapTime:"+e.data.driverlist[i].FastestLapTime+", State:\""+e.data.driverlist[i].State+"\", Speed:"+e.data.driverlist[i].Speed+", PositionX:"+e.data.driverlist[i].PosX+", PositionY:"+e.data.driverlist[i].PosY+", PositionZ:"+e.data.driverlist[i].PosZ+", Orientation:"+e.data.driverlist[i].Orientation+"}");
+                                }else{
+                                        console.log("                        {RefId:"+e.data.driverlist[i].RefID+", Name:\""+e.data.driverlist[i].Name+"\", IsPlayer:"+e.data.driverlist[i].IsPlayer+", GridPosition:"+e.data.driverlist[i].GridPosition+", VehicleId:\""+VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName)+"\", RacePosition:"+e.data.driverlist[i].RacePosition+", CurrentLap:"+e.data.driverlist[i].CurrentLap+", CurrentSector:"+e.data.driverlist[i].CurrentSector+", LastLapTime:"+e.data.driverlist[i].LastLapTime+", FastestLapTime:"+e.data.driverlist[i].FastestLapTime+", State:\""+e.data.driverlist[i].State+"\", Speed:"+e.data.driverlist[i].Speed+", PositionX:"+e.data.driverlist[i].PosX+", PositionY:"+e.data.driverlist[i].PosY+", PositionZ:"+e.data.driverlist[i].PosZ+", Orientation:"+e.data.driverlist[i].Orientation+"},");
+                                }
+                        }
+                        console.log("                ]");
+                        console.log("        },");
+                        recording_count = recording_count + 1;
+                }
+		
+		//call worker again for next itteration -> currently endless loop
+		switch(APIMODE) {
+                        case "DS":
+                                //DS receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 DsServerURL
+                                        ,dsport:                DsPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETDSANDDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
+                        case "CREST":                   //CREST receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 CRESTServerURL
+                                        ,dsport:                CRESTPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETCRESTDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
+                        case "DEMO":
+                                //DEMO receive mode
+
+	                        //Calculation of WORKERDELAY_DEMODATA to adapt the playback speed to the recording speed
+	                        //The record_pos is the array element of the recorded data and correlates to one worker run. Each element includes the sensorLayer_UpdateDelta. This is the time between the last and the current worker run. Now we calculate the WORKERDELAY_DEMODATA, which is the delay to the next worker run. Because of that we need the sensorLayer_UpdateDelta of the next array element and not of the current.
+	                        record_pos_helper = record_pos + 1;
+	                        if(record_pos_helper > demo.length-1){record_pos_helper = 0;}	//if last array element with record_pos is reached, record_pos_helper exceeds the upper array boundary. In this case the helper jumps to the first array element
+	                        
+	                        sensorLayer_UpdateDelta_DEMOdiff = demo[record_pos_helper].globals.sensorLayer_UpdateDelta - sensorLayer_UpdateDelta;	//diff time between recorded data and playback sensorLayer_UpdateDelta
+	                        WORKERDELAY_DEMODATA = WORKERDELAY_DEMODATA + sensorLayer_UpdateDelta_DEMOdiff;		//adapt playback speed to recorded data with the worker delay
+	                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
+	                        if(log >= 2){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
+	
+	                        workerDSDATA.postMessage({
+	                                workerdelay:            WORKERDELAY_DEMODATA
+	                                ,dsurl:                 ""
+	                                ,dsport:                0
+	                                ,timeout:               demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
+	                                ,receivemode:   "GETDEMODATA"
+	                                ,arefpoint:             e.data.arefpoint});
+	                        record_pos = record_pos + 1;
+	                        if(record_pos > demo.length-1 || record_pos > demo_end_pos-1){          //jump to beginning if end of array or demo_end_pos is reached/ -1, because the array begins with 0
+	                                record_pos = demo_start_pos;
+	                                StopTransitionDelay = "true";
+	                                StopTransitionDelay_StartTime = Date.now();
+	                        }
+	                        break;
+                        default:
+                                //DS receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 DsServerURL
+                                        ,dsport:                DsPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETDSANDDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                }
+	}, false);
+	
+	
+	
+	
+	if(log >= 3){console.log("-+-+- APIMODE: ", APIMODE);}
+	//if(log >= 3){console.log("-+-+- workerDSDATA: ", workerDSDATA);}
+	//if(log >= 3){console.log("-+-+- cuircitID: ", cuircitID);}
+	//if(log >= 3){console.log("-+-+- aRefPointTMP: ", aRefPointTMP);}
+	//if(log >= 3){console.log("-+-+- Receive_DS_data(): ", Receive_DS_data);}	
+	//if(log >= 3){console.log("-+-+- aSensorData: ", aSensorData);}
+	
+	workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
+
+	
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	// receive data from pcars dedicated server (DS) and returns an array of PCARSdriver objects
+	//         Receive_DS_data(url,port,timeout,RetrivelMode)
+	// initial call of the worker
+	// initial call for map initialization
+
+	switch(APIMODE) {
+		case "DS":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+			break;
+		case "CREST":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
+			break;
+		case "DEMO":
+			//timeout parameter used for transerring demo_data array element to the worker
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP);
+			cuircitID = aDrivers.globals.attributes.TrackId;
+			break;
+		default:
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+	}
+	
+        
+	for (var i = 0; i < aDrivers.driverlist.length; i++ ){
+
+                // calculate GPS coordinates
+                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
+
+                // fill data array
+                aSensorData[i] = {
+                                "Key":                          aDrivers.driverlist[i].GetName()
+                                ,"MarkerLabel" :        buildDriverName ( aDrivers.driverlist[i].GetRacePosition(), aDrivers.driverlist[i].GetName() )
+                                ,"DateTime":            "2013-09-04T09:41:09+10:00"
+                                ,"Lat":                         gpsCoTmp["Lat"]
+                                ,"Long":                        gpsCoTmp["Long"]
+                                ,"Heading":                     286.0
+                                ,"Speed":                       aDrivers.driverlist[i].Speed
+                                ,"CSSTextClasses":      aDrivers.driverlist[i].GetCSSTextClass()
+                                ,"CSSCircleClasses":    aDrivers.driverlist[i].GetCSSCircleClass()
+                }
+                // bookmark current TrackID to detect track changes and adjust Map
+                //tmpcuircitID = aDrivers.driverlist[i].GetVariousParameter("TrackId");	//tmpcuircitID never used after here
+	}
+
+*/
+
 	
 	///// init W2UI elements
 	initW2UI();
-	initMap();
-
+		
+	
+	// init google map
+	init_map(cuircitID , aRefPointTMP);
+	//initMapTMP(); //tempoary test for migration
 
 };
 
 //////////////////////////////////////////////////////////////
 ///////////////////////  init Google Map
 //////////////////////////////////////////////////////////////
-function initMap(){
+function init_map(_TrackID , aRefPoint)
+{
+		//subclassing
+		GPSSensor.prototype = new google.maps.OverlayView();
+		
+		
+		// Create the Google Map
+		map = new google.maps.Map(d3.select("#map").node(), {
+			zoom: aRefPoint[_TrackID]["Zoom"],
+			
+			// use cuircit RefPoint for center google map
+			center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
+			mapTypeId: google.maps.MapTypeId.SATELLITE,
+			//deactivate google streetview
+			streetViewControl: false
+		});
+
+		if(log >= 3){console.log("-+-+- aSensorData-Array: ", aSensorData);}
+		sensorLayer = new GPSSensor(aSensorData);
+		sensorLayer.setMap(map);
+		
+		// bind tables to google Map as a kind of overlay
+    	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
+    	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
+		
+}
+
+function initMapTMP(){
 	
 		//////////////// Google Maps //////////////////////
 
@@ -119,6 +532,8 @@ function initMap(){
     	// bind tables to google Map
     	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
     	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
+    	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
+    	
 	
 };
 
@@ -183,14 +598,18 @@ function initW2UI(){
                 }
             ]
         });
-   
-    	function showStatus(){
-    		$('#item7').w2tag('Short Message');    		
-    	}    	
+       		
     
 	}); // end of function top toolbar	
 	
 };
+
+//W2UI function
+function showStatus(){
+	$('#item7').w2tag('Short Message');
+	//alert("test");
+}    
+
 
 function GPSSensor(initData) {
     //state information

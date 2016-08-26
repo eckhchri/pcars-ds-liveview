@@ -5,9 +5,12 @@
 <html lang="de">
   <head>
   		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-  		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+  		
+  		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 		<script src="toolbar.js"></script>
+	
+	
 		
 		<script>
 			var header = $('[data-role=header]').outerHeight();
@@ -48,6 +51,17 @@
 				text-align: center;				
 			 }
 			 
+			 #TOOLBARREPLAY {
+			 	position: 	absolute; 
+				left: 		30%; 
+				top: 		130px; 
+				width: 		800px; 
+				height: 	100px;
+				border:		1;
+				background:	grey;
+			 }
+			 
+			 
         </style>
   </head>
   <body>
@@ -58,28 +72,31 @@
 
 		<div data-role="navbar">
 			<!-- will be filled by external js class -->			  
-			<table class="TOOLBARHEADERTABLE">
+			<table class="TOOLBARHEADERTABLE" border=1>
 				<tr>
 					<td>
 						APIMODE
 					</td>					
 					<td>
-						| DS status		
+						DS status		
 					</td>
 					<td>
-						| DS joinable
+						DS joinable
 					</td>
 					<td>
-						| Session state
+						Session state
 					<td>
-						| Driver-table  
+						Driver-table  
 					</td>
 					<td>
-						| Track-table  
+						Track-table  
 					</td>
 					<td>
-						| Car-table  
-					</td>				
+						Car-table  
+					</td>
+					<td>
+						Replay-Box  
+					</td>					
 				</tr>
 				<tr>
 					<td id="APIMODE">
@@ -103,9 +120,14 @@
 					<td>
 						<input class="ui-mini" type="checkbox" name="CB-DISPLAYSTATISTICS" id="CB-DISPLAYSTATISTICS">
 					</td>
+					<td>
+						<input class="ui-mini" type="checkbox" name="CB-DISPLAYREPLAY" id="CB-DISPLAYREPLAY">
+					</td>
 					
 				</tr>
 			</table>
+			
+			<!--  -->
 			<div data-role="navbar">
 	        <ul><li><a href="#">Live View</a></li>
 		        <li><a href="#">Settings</a></li>
@@ -113,7 +135,46 @@
 	        </ul>
 	    	</div>
 	
-		</div>
+			<!--  -->
+	<!-- Replay dialog box -->
+	<div id="TOOLBARREPLAY">
+	
+		<table width=100%>
+			<tr>
+			<td id="">
+				<form>
+				    <div class="ui-field-contain">
+				        <select name="flip-7" id="flip-7" data-role="slider" data-mini="true">
+				            <option value="off">Off</option>
+				            <option value="on">On</option>
+				        </select>
+				    </div>
+				</form>
+			</td>			
+				<td>
+					<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-right ui-icon-arrow-r ">play</button>
+				</td>
+			<td>
+				<form>
+			    <div data-role="rangeslider" data-mini="true">			        
+			        <input type="range" name="range-1a" id="range-1a" min="0" max="100" value="40">
+			        <input type="range" name="range-1b" id="range-1b" min="0" max="100" value="80">
+			    </div>
+				</form>
+			</td>
+				<td>
+					<button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-plus">add file</button>
+				</td>			
+			</tr>
+				<tr>
+					<td>
+						Data Rec: 230
+					</td>
+				</tr>
+		</table>
+	</div>
+	
+</div> 
 
 		<a href="#" data-icon="grid" class="ui-btn-left ">Statistic/Replay/Debug</a>
     	<a href="#rightpanel_1" data-icon="gear" class="ui-btn-right ui-mini">Options</a>
@@ -124,12 +185,20 @@
 	</div><!-- /header -->
 
 	
-	  	<!-- rightpanel2  -->
-		<div class="TOOLBARRIGTHPANEL" data-role="panel" id="rightpanel_1" data-position="right" data-display="overlay" data-theme="a" class="ui-mini">
-        	<!-- will be filled by external js calls -->    	
+	<!-- rightpanel2  -->
+	<div class="TOOLBARRIGTHPANEL" data-role="panel" id="rightpanel_1" data-position="right" data-display="overlay" data-theme="a" class="ui-mini">
+       	<!-- will be filled by external js calls -->    	
         </div>
 	</div>
+	
+	
+	
     <script>
+    $(function() {
+		$( "#TOOLBARREPLAY" ).draggable();		
+		
+    });
+    
     
     var TB_HEADER = new PCARSTOOLBAR();   // TOOLBARHEADER
     //TB_HEADER.activateToolbar_Header();
