@@ -149,7 +149,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			xmlhttp.send();
 		}catch(err){
 			
-			//	if(log >= 3){console.log("Error while sending Request to DS!:" + err );}
+			//if(log >= 3){console.log("Error while sending Request to DS!:" + err );}
 			switch ( this.receivemode ){
 				case 	"GETDSDATA":  		return aDrivers;
 				
