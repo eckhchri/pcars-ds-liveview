@@ -2,12 +2,16 @@
 <html lang="de">
   <head>
 	<meta charset="utf-8"/>
-	<title>Project Cars DS - live view with position update.</title>
+	<title>Project Cars DS - live view with position update. W2UI</title>	
+    
          
 	<script src="https://maps.google.com/maps/api/js??v=3.exp&sensor=true"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.2.min.css" />
+    <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.2.min.js"></script>
  
  	<!-- CSS definitons-->
 	<link rel="stylesheet" href="./css/pcars.css">
@@ -59,24 +63,62 @@
 
         <!-- CSS definitions moved to ./css/pcars.css--> 
         <style type="text/css">
-
+		.tab {
+			min-width: 400px;
+		    width: 98%;
+		    min-height: 700px;
+		    height: 100%;
+		    border: 1px solid silver;
+		    border-top: 0px;
+		    display: none;
+		    padding: 10px;
+		    overflow: auto;
+		}
         </style>
      </head>
    <body>
-
-	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
-	<div id="map"></div>
-	<div id="DSdata">
+   
+   
+   
+   <!-- Toolbar top -->
+	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
+	
+	
+						
+	<!-- Tab Elemnts -->
+	<div id="tab-example">
+	    <div id="tabs" style="width: 100%; height: 29px;"></div>
+	                    	    
+	    <div id="LIVEVIEW" class="tab">			
+		        Google Maps initialisieren.
+		        <div id="map" class="tab"></div>					        	    	        	 
+	    </div>
+	    
+	    <div id="SETTINGS" class="tab">
+	        Settings Menue	        
+	    </div>
+	    <div id="STATISTICS" class="tab">
+	        Statistics - in progress
+	    </div>
+	    <div id="REPLAY" class="tab">
+	        Replay
+	    </div>
+	</div>
+   
+   	<div id="DSdata">
 		<p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br><p7></p7><br><p8></p8><br><p9></p9><br>----- Settings ----<br><p5></p5><br><p6></p6>
 		<div id="DSdataInformation"></div>
 		<div id="DSdataSettings"></div>
 	</div>
-	<div id="CarList">
-		<table id="carlisttable"></table>
-	</div>
+	
+   	<!-- TODO: bring to correct position in a specific tab -->
+   	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
 	<div id="TrackList">
 		<table id="tracklisttable"></table>
 		<div id="pager_tracklisttable"></div>
+	</div>
+	<div id="CarList">
+		<table id="carlisttable"></table>
 	</div>
 	<div id="DriverDataArea">
 		<table id="DriverDataTable"></table>
@@ -137,7 +179,7 @@
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;
-	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks
+	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks	
 	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
 	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
 	var StopRefreshTracklist	=	"false";
@@ -191,7 +233,11 @@
 	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
 	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}	
-
+	
+	
+	// init W2UI elemets
+	// info: moved to start of the script and in front of init_map() to show google maps within a W2UI tab in correct format
+	initW2UI();
 	
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
@@ -700,7 +746,7 @@
 			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
 	}
         
-        for (var i = 0; i < aDrivers.driverlist.length; i++ ){
+	for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
                 // calculate GPS coordinates
                 gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
@@ -719,8 +765,10 @@
                 }
                 // bookmark current TrackID to detect track changes and adjust Map
                 //tmpcuircitID = aDrivers.driverlist[i].GetVariousParameter("TrackId");	//tmpcuircitID never used after here
-        }
+	}
+	
 
+	
 	// init google map
 	init_map(cuircitID , aRefPointTMP);
 
@@ -1107,31 +1155,36 @@
 //////////////////////////////////////////////////////////////////////////
 function init_map(_TrackID , aRefPoint)
 {
-           //subclassing
-           GPSSensor.prototype = new google.maps.OverlayView();
-
-
-           // Create the Google Map
-           map = new google.maps.Map(d3.select("#map").node(), {
-               zoom: aRefPoint[_TrackID]["Zoom"],
-
-                // use cuircit RefPoint for center google map
+		//subclassing
+		GPSSensor.prototype = new google.maps.OverlayView();
+                              
+		// Create the Google Map
+		//map = new google.maps.Map(d3.select("#map").node(), {        	 
+		map = new google.maps.Map(d3.select("#LIVEVIEW").node(), {
+  
+				zoom: aRefPoint[_TrackID]["Zoom"],                
                 center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
                 //deactivate google streetview
-                streetViewControl: false
-           });
+				streetViewControl: false
+		});
 
-           //if(log >= 3){console.log("-+-+- aSensorData-Array: ", aSensorData);}
-           sensorLayer = new GPSSensor(aSensorData);
-           sensorLayer.setMap(map);
+		sensorLayer = new GPSSensor(aSensorData);
+		sensorLayer.setMap(map); 
+
+        //todo: maybe change from static to dynamic binding of HTML elemets
+        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
+       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
+       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
+       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
+       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
+       	
+       	return 1;
 }
+
 
 function changeMapSettings(newTrackObj, mapobj)
 {
-	//if(log >= 3){console.log("----- call function changeMapSettings() with track data: " , newTrackObj );}
-	//if(log >= 3){console.log("----- call function changeMapSettings() with map data: " , mapobj );}
-
 	//todo: replace map (global variable) with mapobj(if this is not a copy)
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 	map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
@@ -1602,6 +1655,71 @@ function ExportCSV(CSV,fileName){
 		document.body.removeChild(link);
 	}
 }
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+function initW2UI(){
+	
+	//// tab elements
+	var config = {
+		tabs: {
+			name: 'tabs',
+			active: 'LIVEVIEW',
+			tabs: [
+				{ id: 'LIVEVIEW', 	caption: 'Live View' },
+				{ id: 'SETTINGS', 	caption: 'Settings' },
+				{ id: 'STATISTICS', caption: 'Statistics' },
+				{ id: 'REPLAY', 	caption: 'Replay' },
+			],
+			onClick: function (event) {
+				$('#tab-example .tab').hide();
+				$('#tab-example #' + event.target).show();
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////
+	// start top toolbar
+	$(function () {
+		
+		$('#tabs').w2tabs(config.tabs);
+		$('#LIVEVIEW').show();
+   
+    
+		//////////////// Toolbar ///////////////////////////////
+		$('#toolbar').w2toolbar({
+            name: 'toolbar',
+            items: [
+                { type: 'check',  id: 'item1', caption: 'stop', icon: 'fa-check', checked: true },
+                { type: 'break',  id: 'break0' },
+                { type: 'menu',   id: 'item2', caption: 'Menu', icon: 'fa-table', count: 17, items: [
+                    { text: 'Item 1', icon: 'fa-camera', count: 5 }, 
+                    { text: 'Item 2', icon: 'fa-picture', disabled: true }, 
+                    { text: 'Item 3', icon: 'fa-glass', count: 12 }
+                ]},
+                { type: 'break', id: 'break1' },
+                { type: 'radio',  id: 'item3',  group: '1', caption: 'Radio 1', icon: 'fa-star', checked: true },
+                { type: 'radio',  id: 'item4',  group: '1', caption: 'Radio 2', icon: 'fa-heart' },
+                { type: 'break', id: 'break2' },
+                { type: 'drop',  id: 'item5', caption: 'Drop Down', icon: 'fa-plus', html: '<div style="padding: 10px">Drop down</div>' },
+                { type: 'break', id: 'break3' },
+                { type: 'html',  id: 'item6',
+                    html: '<div style="padding: 3px 10px;">'+
+                          ' Input:'+
+                          '    <input size="10" style="padding: 3px; border-radius: 2px; border: 1px solid silver"/>'+
+                          '</div>' 
+                },
+                { type: 'spacer' },                
+                { type: 'html', id: 'item7',
+                	html:	'<button class="btn" onclick="showStatus()" >Show  Status</button>' 	
+                }
+            ]
+        });
+       		
+    
+	}); // end of function top toolbar	
+	
+};
 
        </script>
    </body>
