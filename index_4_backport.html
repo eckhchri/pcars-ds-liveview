@@ -63,7 +63,17 @@
 
         <!-- CSS definitions moved to ./css/pcars.css--> 
         <style type="text/css">
-
+		.tab {
+			min-width: 400px;
+		    width: 98%;
+		    min-height: 700px;
+		    height: 100%;
+		    border: 1px solid silver;
+		    border-top: 0px;
+		    display: none;
+		    padding: 10px;
+		    overflow: auto;
+		}
         </style>
      </head>
    <body>
@@ -73,15 +83,17 @@
    <!-- Toolbar top -->
 	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
 	
-	<div id="map" class="tab">--</div>	
 	
+						
 	<!-- Tab Elemnts -->
 	<div id="tab-example">
 	    <div id="tabs" style="width: 100%; height: 29px;"></div>
-	            
+	                    	    
 	    <div id="LIVEVIEW" class="tab">			
-		        Google Maps initialisieren.		    	        	 
+		        Google Maps initialisieren.
+		        <div id="map" class="tab"></div>					        	    	        	 
 	    </div>
+	    
 	    <div id="SETTINGS" class="tab">
 	        Settings Menue	        
 	    </div>
@@ -222,6 +234,10 @@
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
 	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}	
 	
+	
+	// init W2UI elemets
+	// info: moved to start of the script and in front of init_map() to show google maps within a W2UI tab in correct format
+	initW2UI();
 	
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
@@ -751,8 +767,7 @@
                 //tmpcuircitID = aDrivers.driverlist[i].GetVariousParameter("TrackId");	//tmpcuircitID never used after here
 	}
 	
-	// init W2UI elemets
-	initW2UI();
+
 	
 	// init google map
 	init_map(cuircitID , aRefPointTMP);
@@ -1140,31 +1155,23 @@
 //////////////////////////////////////////////////////////////////////////
 function init_map(_TrackID , aRefPoint)
 {
-           //subclassing
-           GPSSensor.prototype = new google.maps.OverlayView();
-
-
-           // Create the Google Map
-           map = new google.maps.Map(d3.select("#map").node(), {
-               zoom: aRefPoint[_TrackID]["Zoom"],
-
-                // use cuircit RefPoint for center google map
+		//subclassing
+		GPSSensor.prototype = new google.maps.OverlayView();
+                              
+		// Create the Google Map
+		//map = new google.maps.Map(d3.select("#map").node(), {        	 
+		map = new google.maps.Map(d3.select("#LIVEVIEW").node(), {
+  
+				zoom: aRefPoint[_TrackID]["Zoom"],                
                 center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
                 //deactivate google streetview
-                streetViewControl: false
-           });
+				streetViewControl: false
+		});
 
-           
-           sensorLayer = new GPSSensor(aSensorData);
-           sensorLayer.setMap(map); 
-           
-           if(log >= 3){console.log("+-+-+--+ cuircitID:", _TrackID );}
-           if(log >= 3){console.log("+-+-+--+ aRefPointTMP:",  aRefPoint );}
-           if(log >= 3){console.log("+-+-+--+ aSensorData-Array: ", aSensorData);}
-           if(log >= 3){console.log("+-+-+--+ sensorLayer: ", sensorLayer);}
-           
-        
+		sensorLayer = new GPSSensor(aSensorData);
+		sensorLayer.setMap(map); 
+
         //todo: maybe change from static to dynamic binding of HTML elemets
         map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
        	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
@@ -1172,14 +1179,12 @@ function init_map(_TrackID , aRefPoint)
        	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
        	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
        	
-       	
+       	return 1;
 }
+
 
 function changeMapSettings(newTrackObj, mapobj)
 {
-	//if(log >= 3){console.log("----- call function changeMapSettings() with track data: " , newTrackObj );}
-	//if(log >= 3){console.log("----- call function changeMapSettings() with map data: " , mapobj );}
-
 	//todo: replace map (global variable) with mapobj(if this is not a copy)
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 	map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
