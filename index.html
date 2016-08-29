@@ -96,6 +96,9 @@
 	    
 	    <div id="SETTINGS" class="tab">
 	        Settings Menue	        
+	        <div id="CUR_APIMODE"></div>
+	        <div id="CUR_APIMODE"></div>
+	        <div id="CUR_DSSTATE"></div>	        
 	    </div>
 	    <div id="STATISTICS" class="tab">
 	        Statistics - in progress
@@ -106,7 +109,8 @@
 	</div>
    
    	<div id="DSdata">
-		<p0>-</p0><br><p1></p1><br><p2></p2><br><p3></p3><br><p4></p4><br><p7></p7><br><p8></p8><br><p9></p9><br>----- Settings ----<br><p5></p5><br><p6></p6>
+		<div id="CUR_DSURL"></div><br>
+		<div id="CUR_DSSTATE"></div><br><p2></p2><br><p3></p3><br><p4></p4><br><p7></p7><br><p8></p8><br><p9></p9><br>----- Settings ----<br><div id="CUR_APIMODE"></div><br><p6></p6>
 		<div id="DSdataInformation"></div>
 		<div id="DSdataSettings"></div>
 	</div>
@@ -444,16 +448,20 @@
 		
 		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
-                SessionState = e.data.globals.attributes.SessionState;
+		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
                 
 		// write in HTML page for DS status
-		document.getElementsByTagName('p0')[0].innerHTML = 'DS URL:   		' + DsServerURL + " : " +  DsPort; 
-		document.getElementsByTagName('p1')[0].innerHTML = 'DS Status:   	' + e.data.globals.state;
+		 
+		ChangeHtmlContentByID( '#CUR_DSURL' 	, "DS URL:  "	 + DsServerURL + " : " +  DsPort );
+		ChangeHtmlContentByID( '#CUR_DSSTATE' 	, "DS State: " + e.data.globals.state );
+		
 		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: 	' + e.data.globals.joinable;
 		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: 	' + e.data.globals.lobbyid;
 		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      	' + e.data.globals.now; 
-		document.getElementsByTagName('p5')[0].innerHTML = 'used API type:	' + APIMODE;
+				
+		ChangeHtmlContentByID( '#CUR_APIMODE' , "API: " + APIMODE );
+		
 		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
 		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"];		
 		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + SessionStage;
@@ -1690,19 +1698,27 @@ function initW2UI(){
 		$('#toolbar').w2toolbar({
             name: 'toolbar',
             items: [
-                { type: 'check',  id: 'item1', caption: 'stop', icon: 'fa-check', checked: true },
-                { type: 'break',  id: 'break0' },
-                { type: 'menu',   id: 'item2', caption: 'Menu', icon: 'fa-table', count: 17, items: [
+				{ type: 'html',  id: 'common_stats',
+                        html: '<div id="CUR_APIMODE" style="padding: 3px 10px;">' +
+                              'API' +
+                              '</div>' 
+				},
+				{ type: 'break',  id: 'break0' },
+                { type: 'check',  id: 'w2ui_drivertable', caption: 'drivers', icon: 'fa-check', checked: true },
+                { type: 'check',  id: 'w2ui_tracktable', caption: 'tracks', icon: 'fa-check', checked: true },
+                { type: 'check',  id: 'w2ui_cartable', caption: 'cars', icon: 'fa-check', checked: true },
+                { type: 'break',  id: 'break1' },
+                { type: 'menu',   id: 'item2', caption: 'Demo Files', icon: 'fa-table', items: [
                     { text: 'Item 1', icon: 'fa-camera', count: 5 }, 
                     { text: 'Item 2', icon: 'fa-picture', disabled: true }, 
                     { text: 'Item 3', icon: 'fa-glass', count: 12 }
                 ]},
-                { type: 'break', id: 'break1' },
+                { type: 'break', id: 'break2' },
                 { type: 'radio',  id: 'item3',  group: '1', caption: 'Radio 1', icon: 'fa-star', checked: true },
                 { type: 'radio',  id: 'item4',  group: '1', caption: 'Radio 2', icon: 'fa-heart' },
-                { type: 'break', id: 'break2' },
-                { type: 'drop',  id: 'item5', caption: 'Drop Down', icon: 'fa-plus', html: '<div style="padding: 10px">Drop down</div>' },
                 { type: 'break', id: 'break3' },
+                { type: 'drop',  id: 'item5', caption: 'Drop Down', icon: 'fa-plus', html: '<div style="padding: 10px">Drop down</div>' },
+                { type: 'break', id: 'break4' },
                 { type: 'html',  id: 'item6',
                     html: '<div style="padding: 3px 10px;">'+
                           ' Input:'+
