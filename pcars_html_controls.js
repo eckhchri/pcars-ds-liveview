@@ -44,8 +44,23 @@ function APIMODE_SetSelection( value ){
 
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
+//HTML content changer by object id
+function ChangeHtmlContentByID( id , innerhtml ){
+	
+	// go through all elements with this specific id
+	// info: 'body ' in front is needed to find all elements
+	$('body ' + id ).each(function(){				
+		$( this ).html( innerhtml );			   
+	});
+	
+	return 1;
+}
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
 //Prototyping
 HTMLCONTROL.prototype.DRIVERCOLOR_SetActiveElement=DRIVERCOLOR_SetActiveElement;
 HTMLCONTROL.prototype.DRIVERCOLOR_AddSelElement=DRIVERCOLOR_AddSelElement;
 HTMLCONTROL.prototype.DRIVERCOLOR_DelSelElement=DRIVERCOLOR_DelSelElement;
 HTMLCONTROL.prototype.APIMODE_SetSelection=APIMODE_SetSelection;
+HTMLCONTROL.prototype.ChangeHtmlContentByID=ChangeHtmlContentByID;
