@@ -80,37 +80,46 @@
    
    
    
-   <!-- Toolbar top -->
+	<!-- W2UI Toolbar top -->
 	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
 	
-	
-						
-	<!-- Tab Elemnts -->
+							
+	<!-- W2UI Tab Elemnts -->
 	<div id="tab-example">
 	    <div id="tabs" style="width: 100%; height: 29px;"></div>
 	                    	    
-	    <div id="LIVEVIEW" class="tab">			
-		        Google Maps initialisieren.
-		        <div id="map" class="tab"></div>					        	    	        	 
+	    <div id="W2UILIVEVIEW" class="tab">					        
+			<div id="map" class="tab">Google Maps initialisieren.</div>					        	    	        	 
 	    </div>
 	    
-	    <div id="SETTINGS" class="tab">
+	    <div id="W2UISETTINGS" class="tab">
 	        Settings Menue	        
-	        <div id="CUR_APIMODE"></div>
-	        <div id="CUR_APIMODE"></div>
-	        <div id="CUR_DSSTATE"></div>	        
+	        <div id="pcars-apimode"></div>
+	        <div id="pcars-apimode"></div>
+	        <div id="pcars-dsstate"></div>	        
 	    </div>
-	    <div id="STATISTICS" class="tab">
+	    <div id="W2UISTATISTICS" class="tab">
 	        Statistics - in progress
 	    </div>
-	    <div id="REPLAY" class="tab">
+	    <div id="W2UIREPLAY" class="tab">
 	        Replay
+	        <!-- todo: create Replay Object and inject HTML into div block -->
+	        <div id="PCARSREPLAY"></div>
 	    </div>
 	</div>
    
    	<div id="DSdata">
-		<div id="CUR_DSURL"></div><br>
-		<div id="CUR_DSSTATE"></div><br><p2></p2><br><p3></p3><br><p4></p4><br><p7></p7><br><p8></p8><br><p9></p9><br>----- Settings ----<br><div id="CUR_APIMODE"></div><br><p6></p6>
+		<div id="pcars-dsurl"></div>
+		<div id="pcars-dsstate"></div>
+		<div id="pcars-dsjoinable"></div>
+		<div id="pcars-dslobbyid"></div>
+		<div id="pcars-dsnow"></div>
+		<div id="pcars-trackname"></div>
+		<div id="pcars-dssessionstage"></div>
+		<div id="pcars-dssessionstate"></div>
+		<br>----- Settings ----<br>
+		<div id="pcars-apimode"></div>
+		<div id="pcars-displayduration"></div>
 		<div id="DSdataInformation"></div>
 		<div id="DSdataSettings"></div>
 	</div>
@@ -453,19 +462,17 @@
                 
 		// write in HTML page for DS status
 		 
-		ChangeHtmlContentByID( '#CUR_DSURL' 	, "DS URL:  "	 + DsServerURL + " : " +  DsPort );
-		ChangeHtmlContentByID( '#CUR_DSSTATE' 	, "DS State: " + e.data.globals.state );
+		ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
+		ChangeHtmlContentByID( '#pcars-dsstate' 	, "DS State: " 		+ e.data.globals.state );
+		ChangeHtmlContentByID( '#pcars-dsjoinable' 	, "DS Joinable: " 	+ e.data.globals.joinable );		
+		ChangeHtmlContentByID( '#pcars-dslobbyid' 	, "DS Lobby ID:	" 	+ e.data.globals.lobbyid );		
+		ChangeHtmlContentByID( '#pcars-dsnow' 		, "DS now: "		+ e.data.globals.now );				
+		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );		
+		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
+		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
+		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
+		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
 		
-		document.getElementsByTagName('p2')[0].innerHTML = 'DS Joinable: 	' + e.data.globals.joinable;
-		document.getElementsByTagName('p3')[0].innerHTML = 'DS Lobby ID: 	' + e.data.globals.lobbyid;
-		document.getElementsByTagName('p4')[0].innerHTML = 'DS now:      	' + e.data.globals.now; 
-				
-		ChangeHtmlContentByID( '#CUR_APIMODE' , "API: " + APIMODE );
-		
-		document.getElementsByTagName('p6')[0].innerHTML = 'Display Duration:      ' + DisplayDuration;
-		document.getElementsByTagName('p7')[0].innerHTML = 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"];		
-		document.getElementsByTagName('p8')[0].innerHTML = 'SessionStage:   ' + SessionStage;
-		document.getElementsByTagName('p9')[0].innerHTML = 'SessionState:   ' + SessionState;
 		
 		if(StopRefreshDriverlist == "false"){
 			var resttime = ConvertLaptimeInReadbaleFormat((e.data.globals.attributes.SessionTimeDuration-e.data.globals.attributes.SessionTimeElapsed)*1000);       //Times in seconds, but function need it in milliseconds, multiplied by 1000
@@ -1168,7 +1175,7 @@ function init_map(_TrackID , aRefPoint)
                               
 		// Create the Google Map
 		//map = new google.maps.Map(d3.select("#map").node(), {        	 
-		map = new google.maps.Map(d3.select("#LIVEVIEW").node(), {
+		map = new google.maps.Map(d3.select("#W2UILIVEVIEW").node(), {
   
 				zoom: aRefPoint[_TrackID]["Zoom"],                
                 center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
@@ -1668,16 +1675,18 @@ function ExportCSV(CSV,fileName){
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
 	
+	var w2ui;
+	
 	//// tab elements
 	var config = {
 		tabs: {
 			name: 'tabs',
-			active: 'LIVEVIEW',
+			active: 'W2UILIVEVIEW',
 			tabs: [
-				{ id: 'LIVEVIEW', 	caption: 'Live View' },
-				{ id: 'SETTINGS', 	caption: 'Settings' },
-				{ id: 'STATISTICS', caption: 'Statistics' },
-				{ id: 'REPLAY', 	caption: 'Replay' },
+				{ id: 'W2UILIVEVIEW', 	caption: 'Live View' },
+				{ id: 'W2UISETTINGS', 	caption: 'Settings' },
+				{ id: 'W2UISTATISTICS', caption: 'Statistics' },
+				{ id: 'W2UIREPLAY', 	caption: 'Replay' },
 			],
 			onClick: function (event) {
 				$('#tab-example .tab').hide();
@@ -1691,7 +1700,7 @@ function initW2UI(){
 	$(function () {
 		
 		$('#tabs').w2tabs(config.tabs);
-		$('#LIVEVIEW').show();
+		$('#W2UILIVEVIEW').show();
    
     
 		//////////////// Toolbar ///////////////////////////////
@@ -1699,7 +1708,7 @@ function initW2UI(){
             name: 'toolbar',
             items: [
 				{ type: 'html',  id: 'common_stats',
-                        html: '<div id="CUR_APIMODE" style="padding: 3px 10px;">' +
+                        html: '<div id="pcars-apimode" style="padding: 3px 10px;">' +
                               'API' +
                               '</div>' 
 				},
@@ -1729,11 +1738,33 @@ function initW2UI(){
                 { type: 'html', id: 'item7',
                 	html:	'<button class="btn" onclick="showStatus()" >Show  Status</button>' 	
                 }
-            ]
+            ],            
+			//////////////////////////////////////////////////////
+        	//// W2UI event handler
+			onClick: function(event) {
+	        	
+				if(log >= 3){console.log('---------- item '+ event.target + ' is clicked.')};
+				if (event.target != undefined) {
+		    			    
+		        	switch (event.target) {
+		        	
+		        		case "w2ui_tracktable": 	$( "#w2ui_tracktable" ).toggle(); break;
+		        	
+		            	case "w2ui_drivertable": 	$( "#DriverDataArea" ).toggle(); break;
+		             		             
+		             	case "w2ui_cartable": 		$( "#w2ui_cartable" ).toggle(); break;
+		        }		        
+		     }
+				
+				
+	    }        
         });
        		
     
-	}); // end of function top toolbar	
+	}); // end of function top toolbar
+	
+
+	
 	
 };
 
