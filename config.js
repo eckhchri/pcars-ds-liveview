@@ -1,3 +1,7 @@
+///////////////////////////////////////////////
+//global varibales definitions
+///////////////////////////////////////////////
+
 //Please your specific settings
 var DsServerURL 	= "MY-URL.com";
 var DsPort			= 9000;
@@ -8,8 +12,8 @@ var CRESTPort		= 8080;
 var APIMODE   =   "DS";		// Default API Mode
 
 //hide or unhide elements
-var	SHOWTRACKLIST 	=	true;	// [true|false]
-var SHOWCARLIST = true; 	// [true|false]
+var	SHOWTRACKLIST 	=	false;	// [true|false]
+var SHOWCARLIST 	=	true; 	// [true|false]
 var	SHOWDSDATA 		=	true;	// [true|false]
 var	SHOWDRIVERDATA 	=	true;	// [true|false]
 var SHOWSETTINGS	=	true;	// [true|false]

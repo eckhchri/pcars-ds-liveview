@@ -1713,9 +1713,11 @@ function initW2UI(){
                               '</div>' 
 				},
 				{ type: 'break',  id: 'break0' },
-                { type: 'check',  id: 'w2ui_drivertable', caption: 'drivers', icon: 'fa-check', checked: true },
-                { type: 'check',  id: 'w2ui_tracktable', caption: 'tracks', icon: 'fa-check', checked: true },
-                { type: 'check',  id: 'w2ui_cartable', caption: 'cars', icon: 'fa-check', checked: true },
+                { type: 'check',  id: 'w2ui_drivertable', caption: 'drivers', icon: 'fa-check', checked: SHOWDRIVERDATA },
+                { type: 'check',  id: 'w2ui_tracktable', caption: 'tracks', icon: 'fa-check', checked: SHOWTRACKLIST },
+                { type: 'check',  id: 'w2ui_cartable', caption: 'cars', icon: 'fa-check', checked: SHOWCARLIST },
+                { type: 'check',  id: 'w2ui_dsdata', caption: 'DS Data', icon: 'fa-check', checked: SHOWDSDATA },
+                { type: 'check',  id: 'w2ui_dssettings', caption: 'DS Set.', icon: 'fa-check', checked: SHOWSETTINGS },
                 { type: 'break',  id: 'break1' },
                 { type: 'menu',   id: 'item2', caption: 'Demo Files', icon: 'fa-table', items: [
                     { text: 'Item 1', icon: 'fa-camera', count: 5 }, 
@@ -1748,11 +1750,15 @@ function initW2UI(){
 		    			    
 		        	switch (event.target) {
 		        	
-		        		case "w2ui_tracktable": 	$( "#w2ui_tracktable" ).toggle(); break;
-		        	
-		            	case "w2ui_drivertable": 	$( "#DriverDataArea" ).toggle(); break;
-		             		             
-		             	case "w2ui_cartable": 		$( "#w2ui_cartable" ).toggle(); break;
+		        		case "w2ui_drivertable": 	$( "#DriverDataArea" ).toggle(); break;
+		        		
+		        		case "w2ui_tracktable": 	$( "#TrackList" ).toggle(); break;
+		        			             		             
+		             	case "w2ui_cartable": 		$( "#CarList" ).toggle(); break;
+		             			             	
+		             	case "w2ui_dsdata":			$( "#DSdata" ).toggle(); break;
+		             	
+		             	case "w2ui_dssettings":		$( "#Settings" ).toggle(); break;
 		        }		        
 		     }
 				
