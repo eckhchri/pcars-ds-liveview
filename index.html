@@ -83,31 +83,8 @@
 	<!-- W2UI Toolbar top -->
 	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
 	
-							
-	<!-- W2UI Tab Elemnts -->
-	<div id="tab-example">
-	    <div id="tabs" style="width: 100%; height: 29px;"></div>
-	                    	    
-	    <div id="W2UILIVEVIEW" class="tab">					        
-			<div id="map" class="tab">Google Maps initialisieren.</div>					        	    	        	 
-	    </div>
-	    
-	    <div id="W2UISETTINGS" class="tab">
-	        Settings Menue	        
-	        <div id="pcars-apimode"></div>
-	        <div id="pcars-apimode"></div>
-	        <div id="pcars-dsstate"></div>	        
-	    </div>
-	    <div id="W2UISTATISTICS" class="tab">
-	        Statistics - in progress
-	    </div>
-	    <div id="W2UIREPLAY" class="tab">
-	        Replay
-	        <!-- todo: create Replay Object and inject HTML into div block -->
-	        <div id="PCARSREPLAY"></div>
-	    </div>
-	</div>
-   
+	<div id="map">Google Maps.</div>
+				   
    	<div id="DSdata">
 		<div id="pcars-dsurl"></div>
 		<div id="pcars-dsstate"></div>
@@ -152,7 +129,7 @@
 			</select>
 		</fieldset>
 		</form>
-		
+
 		<label for="DRIVERCOLOR">color driver objects</label>
 		<select class="DRIVERCOLOR" name="DRIVERCOLOR" id="DRIVERCOLOR">
 	    	<option></option>
@@ -1174,9 +1151,7 @@ function init_map(_TrackID , aRefPoint)
 		GPSSensor.prototype = new google.maps.OverlayView();
                               
 		// Create the Google Map
-		//map = new google.maps.Map(d3.select("#map").node(), {        	 
-		map = new google.maps.Map(d3.select("#W2UILIVEVIEW").node(), {
-  
+		map = new google.maps.Map(d3.select("#map").node(), {        	 
 				zoom: aRefPoint[_TrackID]["Zoom"],                
                 center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
                 mapTypeId: google.maps.MapTypeId.SATELLITE,
@@ -1675,102 +1650,98 @@ function ExportCSV(CSV,fileName){
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
 	
-	var w2ui;
-	
-	//// tab elements
-	var config = {
-		tabs: {
-			name: 'tabs',
-			active: 'W2UILIVEVIEW',
-			tabs: [
-				{ id: 'W2UILIVEVIEW', 	caption: 'Live View' },
-				{ id: 'W2UISETTINGS', 	caption: 'Settings' },
-				{ id: 'W2UISTATISTICS', caption: 'Statistics' },
-				{ id: 'W2UIREPLAY', 	caption: 'Replay' },
-			],
-			onClick: function (event) {
-				$('#tab-example .tab').hide();
-				$('#tab-example #' + event.target).show();
-			}
-		}
-	}
+	//var w2ui;
 
 	/////////////////////////////////////////////////////////
 	// start top toolbar
 	$(function () {
-		
-		$('#tabs').w2tabs(config.tabs);
-		$('#W2UILIVEVIEW').show();
-   
     
 		//////////////// Toolbar ///////////////////////////////
 		$('#toolbar').w2toolbar({
             name: 'toolbar',
             items: [
-				{ type: 'html',  id: 'common_stats',
-                        html: '<div id="pcars-apimode" style="padding: 3px 10px;">' +
-                              'API' +
-                              '</div>' 
-				},
+				
+				{ type: 'break', id: 'break2' },
+				{ type: 'radio',  id: 'w2ui_liveview',  group: '1', caption: 'Liveview', icon: 'w2ui-icon-plus', checked: true },
+                { type: 'radio',  id: 'w2ui_replay',  group: '1', caption: 'Replay', icon: 'w2ui-icon-plus' },
+                { type: 'radio',  id: 'w2ui_statistics',  group: '1', caption: 'Statistics', icon: 'w2ui-icon-plus' },                
 				{ type: 'break',  id: 'break0' },
-                { type: 'check',  id: 'w2ui_drivertable', caption: 'drivers', icon: 'fa-check', checked: SHOWDRIVERDATA },
-                { type: 'check',  id: 'w2ui_tracktable', caption: 'tracks', icon: 'fa-check', checked: SHOWTRACKLIST },
-                { type: 'check',  id: 'w2ui_cartable', caption: 'cars', icon: 'fa-check', checked: SHOWCARLIST },
-                { type: 'check',  id: 'w2ui_dsdata', caption: 'DS Data', icon: 'fa-check', checked: SHOWDSDATA },
-                { type: 'check',  id: 'w2ui_dssettings', caption: 'DS Set.', icon: 'fa-check', checked: SHOWSETTINGS },
-                { type: 'break',  id: 'break1' },
-                { type: 'menu',   id: 'item2', caption: 'Demo Files', icon: 'fa-table', items: [
-                    { text: 'Item 1', icon: 'fa-camera', count: 5 }, 
-                    { text: 'Item 2', icon: 'fa-picture', disabled: true }, 
-                    { text: 'Item 3', icon: 'fa-glass', count: 12 }
+                { type: 'check',  id: 'w2ui_drivertable', caption: 'drivers', icon: 'w2ui-icon-check', checked: SHOWDRIVERDATA },
+                { type: 'check',  id: 'w2ui_tracktable', caption: 'tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
+                { type: 'check',  id: 'w2ui_cartable', caption: 'cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
+                { type: 'check',  id: 'w2ui_dsdata', caption: 'DS Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
+                { type: 'check',  id: 'w2ui_dssettings', caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },
+                { type: 'break',  id: 'break1' },                                                                                                       
+                { type: 'menu',   id: 'w2ui_apimode', caption: 'API Mode <div id="pcars-apimode"></div>', icon: 'w2ui-icon-columns', items: [
+                    { text: 'DS-Mode'  }, 
+                    { text: 'CREST-Mode'  }, 
+                    { text: 'DEMO' }
                 ]},
-                { type: 'break', id: 'break2' },
-                { type: 'radio',  id: 'item3',  group: '1', caption: 'Radio 1', icon: 'fa-star', checked: true },
-                { type: 'radio',  id: 'item4',  group: '1', caption: 'Radio 2', icon: 'fa-heart' },
                 { type: 'break', id: 'break3' },
-                { type: 'drop',  id: 'item5', caption: 'Drop Down', icon: 'fa-plus', html: '<div style="padding: 10px">Drop down</div>' },
-                { type: 'break', id: 'break4' },
-                { type: 'html',  id: 'item6',
-                    html: '<div style="padding: 3px 10px;">'+
-                          ' Input:'+
-                          '    <input size="10" style="padding: 3px; border-radius: 2px; border: 1px solid silver"/>'+
+                { type: 'html',  id: 'common_stats',
+                    html: '<div id="pcars-apimode" style="padding: 3px 10px;">' +
+                          'API' +
                           '</div>' 
-                },
+				},				                               
                 { type: 'spacer' },                
                 { type: 'html', id: 'item7',
                 	html:	'<button class="btn" onclick="showStatus()" >Show  Status</button>' 	
                 }
-            ],            
-			//////////////////////////////////////////////////////
-        	//// W2UI event handler
-			onClick: function(event) {
-	        	
-				if(log >= 3){console.log('---------- item '+ event.target + ' is clicked.')};
-				if (event.target != undefined) {
-		    			    
-		        	switch (event.target) {
-		        	
-		        		case "w2ui_drivertable": 	$( "#DriverDataArea" ).toggle(); break;
-		        		
-		        		case "w2ui_tracktable": 	$( "#TrackList" ).toggle(); break;
-		        			             		             
-		             	case "w2ui_cartable": 		$( "#CarList" ).toggle(); break;
-		             			             	
-		             	case "w2ui_dsdata":			$( "#DSdata" ).toggle(); break;
-		             	
-		             	case "w2ui_dssettings":		$( "#Settings" ).toggle(); break;
-		        }		        
-		     }
-				
-				
-	    }        
+            ],  
+            		
         });
-       		
-    
+
+			
+		if(log >= 3){console.log('---------- w2ui.toolbar ' ,  w2ui.toolbar )};		
+		
+		
+		//////////////////////////////////////////////////////
+    	//// W2UI event handler
+		w2ui.toolbar.on('*', function (event) { 
+			if (event.target != undefined) {
+			    
+				if(log >= 3){console.log('---------- w2ui Event ' ,  $( "#toolbar" )  )};
+				
+	        	switch (event.target) {
+	        	
+	        		case "w2ui_drivertable": 	
+	        									$( "#DriverDataArea" ).toggle();
+	        									//w2ui.toolbar.items[5].icon = "w2ui-icon-cross";
+	        									//w2ui.toolbar.refresh();	        									
+	        									//this.refresh();
+	        									//$( "#toolbar" ).refresh();
+	        									break;
+	        		
+	        		case "w2ui_tracktable": 	$( "#TrackList" ).toggle(); break;
+	        			             		             
+	             	case "w2ui_cartable": 		$( "#CarList" ).toggle(); break;
+	             			             	
+	             	case "w2ui_dsdata":			$( "#DSdata" ).toggle(); break;
+	             	
+	             	case "w2ui_dssettings":		$( "#Settings" ).toggle(); break;
+	             			             			             		             		
+	        	}
+	        	
+
+	     	}
+	    }); // end of w2ui.toolbar.on()
+		
+		
+		
+		      	
+		
 	}); // end of function top toolbar
-	
 
 	
+
+}; //
+	
+	
+
+///////////////////////////////////////
+// W2UI function
+function openSettings(){
+		
 	
 };
 
