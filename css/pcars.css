@@ -86,37 +86,38 @@
 	     .mapoverlay{
 	     		position:       absolute;
 				top:            45px;
-                left:           10px;                
-                border: 		2px solid black;
+                left:           10px;
+                right:			10px;                
+                border-width: 			1px;
+                border-style:			dashed;
                 -webkit-border-radius: 	30px;
 				-moz-border-radius: 	30px;
 				border-radius: 			30px;
-                
-                width:			90%;
-				min-width:		500px;
-				height:			90%;
-                min-height:		400px;
-                    
+                width:			95%;
+				height:			85%;
+			                    
 	     }
 	     
 	     #DSstatistic{	     		
-                background: 		hsla(390,80%,80%,0.8);
+                background: 		hsla(50,80%,80%,0.8);
 				background-image:	url('/pcars/images/background/pcars_logo03.png');
 				background-size:	70%;
 				background-repeat: 	no-repeat;
 				background-position:center;	
 				background-size:	contain;			
-				opacity: 			0.5;	  	     
+				opacity: 			0.5;
+				margin: 			auto;	  	     
 	     }
 	     
 	     #DSreplay{
-                background: 	hsla(600,70%,70%,0.8);
+                background: 		hsla(350,70%,70%,0.8);
                 background-image:	url('/pcars/images/background/pcars_logo01.jpg');
                 background-size:	70%;
 				background-repeat: 	no-repeat;
 				background-position:center;
 				background-size:	contain;                                
 				opacity: 			0.5;
+				margin: 			auto;
 	     }
 	     
 
