@@ -77,11 +77,48 @@
   		}
 
 	     #Settings{
-		position:       absolute;
+				position:       absolute;
                 left:           75%;
                 top:            25px;
                 background:     lightgrey
 	     }
+	     
+	     .mapoverlay{
+	     		position:       absolute;
+				top:            45px;
+                left:           10px;                
+                border: 		2px solid black;
+                -webkit-border-radius: 	30px;
+				-moz-border-radius: 	30px;
+				border-radius: 			30px;
+                
+                width:			90%;
+				min-width:		500px;
+				height:			90%;
+                min-height:		400px;
+                    
+	     }
+	     
+	     #DSstatistic{	     		
+                background: 		hsla(390,80%,80%,0.8);
+				background-image:	url('/pcars/images/background/pcars_logo03.png');
+				background-size:	70%;
+				background-repeat: 	no-repeat;
+				background-position:center;	
+				background-size:	contain;			
+				opacity: 			0.5;	  	     
+	     }
+	     
+	     #DSreplay{
+                background: 	hsla(600,70%,70%,0.8);
+                background-image:	url('/pcars/images/background/pcars_logo01.jpg');
+                background-size:	70%;
+				background-repeat: 	no-repeat;
+				background-position:center;
+				background-size:	contain;                                
+				opacity: 			0.5;
+	     }
+	     
 
 		
 		.stations, .stations svg {

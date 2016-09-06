@@ -17,6 +17,8 @@ var SHOWCARLIST 	=	true; 	// [true|false]
 var	SHOWDSDATA 		=	true;	// [true|false]
 var	SHOWDRIVERDATA 	=	true;	// [true|false]
 var SHOWSETTINGS	=	true;	// [true|false]
+var SHOWDSSTATISTIC =	false;	// [true|false]
+var SHOWDSRELAY		=	false;	// [true|false]
 
 //defines a delay for each worker to reduce CPU load
 var WORKERDELAY_TRACKLIST	=	5000; 	// in ms

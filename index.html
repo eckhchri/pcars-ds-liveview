@@ -40,6 +40,7 @@
 					$( "#CarList" ) .draggable();
 					$( "#DriverDataArea" ) .draggable();
 					$( "#Settings" ) .draggable();
+					//$( "#DSstatistic" ) .draggable();
                 });
 		
 		$(function() {
@@ -84,7 +85,18 @@
 	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
 	
 	<div id="map">Google Maps.</div>
-				   
+	
+	<!--  -->		   
+	<div id="DSstatistic" class="mapoverlay">
+		Todo: Statistiken
+		After implement a kind of recording Race Data, show some statistics of that.
+	</div>
+	
+	<!-- Replay -->	
+	<div id="DSreplay" class="mapoverlay">
+		Todo: Replay
+	</div>
+	
    	<div id="DSdata">
 		<div id="pcars-dsurl"></div>
 		<div id="pcars-dsstate"></div>
@@ -222,8 +234,10 @@
 	if ( SHOWDSDATA 	== false ) { 	$( "#DSdata" ).hide();			}						
 	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
-	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}	
-	
+	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}
+	if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
+	if ( SHOWDSRELAY	== false ) { 	$( "#DSreplay" ).hide();		}
+			
 	
 	// init W2UI elemets
 	// info: moved to start of the script and in front of init_map() to show google maps within a W2UI tab in correct format
@@ -1168,6 +1182,7 @@ function init_map(_TrackID , aRefPoint)
        	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
        	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
        	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
+       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
        	
        	return 1;
 }
@@ -1697,7 +1712,8 @@ function initW2UI(){
 		
 		//////////////////////////////////////////////////////
     	//// W2UI event handler
-		w2ui.toolbar.on('*', function (event) { 
+    	//w2ui.toolbar.on('*', function (event) { 
+		w2ui.toolbar.on('click', function (event) { 
 			if (event.target != undefined) {
 			    
 				if(log >= 3){console.log('---------- w2ui Event ' ,  $( "#toolbar" )  )};
@@ -1719,6 +1735,24 @@ function initW2UI(){
 	             	case "w2ui_dsdata":			$( "#DSdata" ).toggle(); break;
 	             	
 	             	case "w2ui_dssettings":		$( "#Settings" ).toggle(); break;
+	             		             	
+	             	case "w2ui_liveview":
+	             								if(log >= 3){console.log('---------- w2ui_liveview, event' ,  event)};
+	             								$( "#DSreplay" ).hide();
+												$( "#DSstatistic" ).hide(); 
+												break;	
+	             	
+	             	case "w2ui_statistics":		
+	             								if(log >= 3){console.log('---------- w2ui_statistics, event ' ,  event  )};
+	             								$( "#DSstatistic" ).fadeIn( "slow" ); 
+	             								$( "#DSreplay" ).hide();	             								
+	             								break;	             							
+	             	
+	             	case "w2ui_replay":		
+	             								if(log >= 3){console.log('---------- w2ui_replay, event ' ,  event )};
+	             								$( "#DSreplay" ).fadeIn( "slow" );
+	             								$( "#DSstatistic" ).hide();	             								             								 
+	             								break;
 	             			             			             		             		
 	        	}
 	        	
