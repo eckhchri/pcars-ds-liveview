@@ -402,8 +402,7 @@
 		if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker returned: e ', e );}
 		if ( e.data.avehiclelist.length > 0 ){
 			
-			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var
-			
+			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var			
 			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);
 		
 			//display vehicle data in table 
@@ -412,10 +411,8 @@
 			
 			// no additional worker call needed, because needed data available			
 			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
-						
-			
-		}else{
-			
+									
+		}else{			
 			// no return value from DS, start another run
 			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST start new Worker run.' );}
 			workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
@@ -427,8 +424,8 @@
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
-	var workerDSDATA      =       new Worker('./worker_dsdata.js');
-	sensorLayer_UpdateTime_old = Date.now();	//initialize a value for first time
+	var workerDSDATA			=	new Worker('./worker_dsdata.js');
+	sensorLayer_UpdateTime_old	=	Date.now();	//initialize a value for first time
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
@@ -437,8 +434,7 @@
 		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
                 
-		// write in HTML page for DS status
-		 
+		// write in HTML page for DS status		 
 		ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
 		ChangeHtmlContentByID( '#pcars-dsstate' 	, "DS State: " 		+ e.data.globals.state );
 		ChangeHtmlContentByID( '#pcars-dsjoinable' 	, "DS Joinable: " 	+ e.data.globals.joinable );		
@@ -462,12 +458,7 @@
 				document.getElementById("txtSessionStage").value = '';
 			}
 		}
-		
-		//todo:  replace document.get... by Jquery functionality
-		//$('#DSdataInformation').append( 
-		//				$("<p0>").text("DS URL2: " + DsServerURL + " : " +  DsPort)
-		//);
-		
+				
 		//Reset CSVs on a new Race Weekend
 		if (SessionState_old != "Loading" && SessionState == "Loading"){
 			for (var key in CSVExport) {
@@ -572,8 +563,6 @@
 				//gatthering all vehicle classes of the current race
 				aCurrentVehicleClasses[i] = e.data.driverlist[i].Name;
 				
-        		//tmpcuircitID = e.data.driverlist[i].variousParameters.TrackId;	//TrackId is available in globals, not necessary reading it from variousParameters
-        		//if(log >= 2){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: PosX:' + e.data.driverlist[i].PosX + ", Speed:" + e.data.driverlist[i].Speed);}	//analyzing problem with asynchronous marker updates
 		}
 		
 		
@@ -609,10 +598,10 @@
 
 		// in case track changes on DS adjust the map settings for new possition
         if ( cuircitID != tmpcuircitID ){
-		//if(log >= 3){console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP);}
-		if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
-		//map.setCenter({lat: 50.332733, lng: 6.943355});
-		changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
+			//if(log >= 3){console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP);}
+			if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
+			//map.setCenter({lat: 50.332733, lng: 6.943355});
+			changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
 
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
             if(log >= 3){console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);}
@@ -755,11 +744,8 @@
                                 ,"CSSTextClasses":      aDrivers.driverlist[i].GetCSSTextClass()
                                 ,"CSSCircleClasses":    aDrivers.driverlist[i].GetCSSCircleClass()
                 }
-                // bookmark current TrackID to detect track changes and adjust Map
-                //tmpcuircitID = aDrivers.driverlist[i].GetVariousParameter("TrackId");	//tmpcuircitID never used after here
 	}
 	
-
 	
 	// init google map
 	init_map(cuircitID , aRefPointTMP);
