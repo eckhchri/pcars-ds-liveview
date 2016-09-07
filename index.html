@@ -15,6 +15,7 @@
  
  	<!-- CSS definitons-->
 	<link rel="stylesheet" href="./css/pcars.css">
+	<link rel="stylesheet" href="./css/w2ui.css">
  	
 	<script src="./config.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
@@ -34,26 +35,21 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
-                $(function() {
-					$( "#DSdata" ).draggable();
-					$( "#TrackList" ) .draggable();
-					$( "#CarList" ) .draggable();
-					$( "#DriverDataArea" ) .draggable();
-					$( "#Settings" ) .draggable();
-					//$( "#DSstatistic" ) .draggable();
-                });
+		$(function() {
+				$( "#DSdata" ).draggable();
+				$( "#TrackList" ) .draggable();
+				$( "#CarList" ) .draggable();
+				$( "#DriverDataArea" ) .draggable();
+				$( "#Settings" ) .draggable();
+		});
 		
 		$(function() {
-            		$( "#DSdata" ).resizable({
-//             			animate: true
-						ghost: true
-            		});
-//		        $( "#tracklisttable" ).resizable({
-//               			ghost: true
-//            		});
-         	});
-	
-        </script>
+           		$( "#DSdata" ).resizable({
+					//animate: true
+					ghost: true
+           		});
+		});	
+	</script>
 
 	<!-- The jqGrid language file code-->
         <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css">
@@ -62,19 +58,8 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
 
 
-        <!-- CSS definitions moved to ./css/pcars.css--> 
-        <style type="text/css">
-		.tab {
-			min-width: 400px;
-		    width: 98%;
-		    min-height: 700px;
-		    height: 100%;
-		    border: 1px solid silver;
-		    border-top: 0px;
-		    display: none;
-		    padding: 10px;
-		    overflow: auto;
-		}
+        <!-- CSS definitions moved to folder ./css/ --> 
+        <style type="text/css">		
         </style>
      </head>
    <body>
@@ -1674,16 +1659,16 @@ function initW2UI(){
             name: 'toolbar',
             items: [
 				
-				{ type: 'break',  id: 'break2' },
+				{ type: 'break',  id: 'break0' },
 				{ type: 'radio',  id: 'w2ui_liveview',  	group: '1', caption: 'Liveview', icon: 'w2ui-icon-plus', checked: true },
                 { type: 'radio',  id: 'w2ui_replay',  		group: '1', caption: 'Replay', icon: 'w2ui-icon-plus' },
                 { type: 'radio',  id: 'w2ui_statistics',  	group: '1', caption: 'Statistics', icon: 'w2ui-icon-plus' },                
-				{ type: 'break',  id: 'break0' },
+				{ type: 'break',  id: 'break1' },
                 { type: 'check',  id: 'w2ui_drivertable', 	caption: 'drivers', icon: 'w2ui-icon-check', checked: SHOWDRIVERDATA },
                 { type: 'check',  id: 'w2ui_tracktable', 	caption: 'tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
                 { type: 'check',  id: 'w2ui_cartable', 		caption: 'cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
                 { type: 'check',  id: 'w2ui_dsdata', 		caption: 'DS Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
-                { type: 'break',  id: 'break1' },
+                { type: 'break',  id: 'break2' },
                 { type: 'check',  id: 'w2ui_dssettings', 	caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },                                                                                                                       
                 { type: 'menu',   id: 'w2ui_apimode', 		caption: 'API Mode <div id="pcars-apimode"></div>', icon: 'w2ui-icon-columns', items: [
                     { text: 'DS-Mode'  }, 

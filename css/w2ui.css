@@ -1,0 +1,11 @@
+.tab {
+			min-width: 400px;
+		    width: 98%;
+		    min-height: 700px;
+		    height: 100%;
+		    border: 1px solid silver;
+		    border-top: 0px;
+		    display: none;
+		    padding: 10px;
+		    overflow: auto;
+		}
