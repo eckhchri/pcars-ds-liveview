@@ -29,14 +29,10 @@
 	<script src="./get_url_param.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
 	<script src="./demo_data.js" charset="utf-8"></script>
-
-	<!--Ermoeglicht das verschieben von DIV Bloecken -->
-	<!-- Jquery UI needed for jTable-->
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script>
-
-	</script>
+	
+	<!-- Jquery UI needed for jTable and the function dragable/resize-->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 	<!-- The jqGrid language file code-->
         <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css">
@@ -44,11 +40,8 @@
         <!-- The atual jqGrid code -->
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
 
-
-        <!-- CSS definitions moved to folder ./css/ --> 
-        <style type="text/css">		
-        </style>
-     </head>
+	<!-- CSS definitions moved to folder ./css/ --> 	
+	</head>
    <body>
    
    
@@ -85,7 +78,6 @@
 		<div id="DSdataSettings"></div>
 	</div>
 	
-   	<!-- TODO: bring to correct position in a specific tab -->
    	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
 	<div id="TrackList" class="pcarswindowgrp2">
 		<table id="tracklisttable"></table>
@@ -357,10 +349,10 @@
 					{name:'refpoint', width:70, align:"center", sorttype:"text"},
 					{name:'comment', width:250, align:"left", sorttype:"text"},
 	        ],
-		caption: "List of available Tracks",
-		rowNum: 200,
-		//rowList:[10,20,30],
-		//pager: 'pager_tracklisttable',
+			caption: "List of available Tracks",
+			rowNum: 200,
+			//rowList:[10,20,30],
+			//pager: 'pager_tracklisttable',
 	});
 			
 	// add filter option bar
@@ -373,7 +365,7 @@
 	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd; width:50px" disabled></input>');
 
 
-	// car lis overview
+	// car list overview
 	jQuery("#carlisttable").jqGrid({	
 	        datatype: "local",
 	        height: 'auto',
@@ -388,7 +380,7 @@
 					{name:'comment', 	width:160, 	sorttype:"text", align:"left"},
 	        ],
 	        caption: "List of available Cars with properties.",
-		rowNum: 200,
+			rowNum: 200,
 	});
 	// add filter option bar
 	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
