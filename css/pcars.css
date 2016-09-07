@@ -142,3 +142,8 @@
 		.tableoption {
 			background:     lightgrey;
 		}
+		
+		.pcars-force-hide {
+			visibility:		hidden;
+		}
+		

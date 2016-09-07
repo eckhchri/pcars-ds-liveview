@@ -97,7 +97,7 @@
 		Todo: Replay
 	</div>
 	
-   	<div id="DSdata">
+   	<div id="DSdata" class="pcarswindowgrp2">
 		<div id="pcars-dsurl"></div>
 		<div id="pcars-dsstate"></div>
 		<div id="pcars-dsjoinable"></div>
@@ -115,19 +115,19 @@
 	
    	<!-- TODO: bring to correct position in a specific tab -->
    	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
-	<div id="TrackList">
+	<div id="TrackList" class="pcarswindowgrp2">
 		<table id="tracklisttable"></table>
 		<div id="pager_tracklisttable"></div>
 	</div>
-	<div id="CarList">
+	<div id="CarList" class="pcarswindowgrp2">
 		<table id="carlisttable"></table>
 	</div>
-	<div id="DriverDataArea">
+	<div id="DriverDataArea" class="pcarswindowgrp2">
 		<table id="DriverDataTable"></table>
 	</div>
 
 	<!-- definition of option panel-->	
-	<div id="Settings">
+	<div id="Settings" class="pcarswindowgrp2">
 		Settings: <br>
 
 		<!-- API dropdown -->
@@ -229,7 +229,7 @@
 		demo_end_pos = 0;
 	}
 								
-	// hide or unhide objects defined within config.js
+	// hide or unhide objects as defined within config.js
 	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();		}
 	if ( SHOWDSDATA 	== false ) { 	$( "#DSdata" ).hide();			}						
 	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
@@ -1665,8 +1665,6 @@ function ExportCSV(CSV,fileName){
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
 	
-	//var w2ui;
-
 	/////////////////////////////////////////////////////////
 	// start top toolbar
 	$(function () {
@@ -1676,18 +1674,18 @@ function initW2UI(){
             name: 'toolbar',
             items: [
 				
-				{ type: 'break', id: 'break2' },
-				{ type: 'radio',  id: 'w2ui_liveview',  group: '1', caption: 'Liveview', icon: 'w2ui-icon-plus', checked: true },
-                { type: 'radio',  id: 'w2ui_replay',  group: '1', caption: 'Replay', icon: 'w2ui-icon-plus' },
-                { type: 'radio',  id: 'w2ui_statistics',  group: '1', caption: 'Statistics', icon: 'w2ui-icon-plus' },                
+				{ type: 'break',  id: 'break2' },
+				{ type: 'radio',  id: 'w2ui_liveview',  	group: '1', caption: 'Liveview', icon: 'w2ui-icon-plus', checked: true },
+                { type: 'radio',  id: 'w2ui_replay',  		group: '1', caption: 'Replay', icon: 'w2ui-icon-plus' },
+                { type: 'radio',  id: 'w2ui_statistics',  	group: '1', caption: 'Statistics', icon: 'w2ui-icon-plus' },                
 				{ type: 'break',  id: 'break0' },
-                { type: 'check',  id: 'w2ui_drivertable', caption: 'drivers', icon: 'w2ui-icon-check', checked: SHOWDRIVERDATA },
-                { type: 'check',  id: 'w2ui_tracktable', caption: 'tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
-                { type: 'check',  id: 'w2ui_cartable', caption: 'cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
-                { type: 'check',  id: 'w2ui_dsdata', caption: 'DS Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
-                { type: 'check',  id: 'w2ui_dssettings', caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },
-                { type: 'break',  id: 'break1' },                                                                                                       
-                { type: 'menu',   id: 'w2ui_apimode', caption: 'API Mode <div id="pcars-apimode"></div>', icon: 'w2ui-icon-columns', items: [
+                { type: 'check',  id: 'w2ui_drivertable', 	caption: 'drivers', icon: 'w2ui-icon-check', checked: SHOWDRIVERDATA },
+                { type: 'check',  id: 'w2ui_tracktable', 	caption: 'tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
+                { type: 'check',  id: 'w2ui_cartable', 		caption: 'cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
+                { type: 'check',  id: 'w2ui_dsdata', 		caption: 'DS Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
+                { type: 'break',  id: 'break1' },
+                { type: 'check',  id: 'w2ui_dssettings', 	caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },                                                                                                                       
+                { type: 'menu',   id: 'w2ui_apimode', 		caption: 'API Mode <div id="pcars-apimode"></div>', icon: 'w2ui-icon-columns', items: [
                     { text: 'DS-Mode'  }, 
                     { text: 'CREST-Mode'  }, 
                     { text: 'DEMO' }
@@ -1707,8 +1705,7 @@ function initW2UI(){
         });
 
 			
-		if(log >= 3){console.log('---------- w2ui.toolbar ' ,  w2ui.toolbar )};		
-		
+		//if(log >= 3){console.log('---------- w2ui.toolbar ' ,  w2ui.toolbar )};				
 		
 		//////////////////////////////////////////////////////
     	//// W2UI event handler
@@ -1716,7 +1713,7 @@ function initW2UI(){
 		w2ui.toolbar.on('click', function (event) { 
 			if (event.target != undefined) {
 			    
-				if(log >= 3){console.log('---------- w2ui Event ' ,  $( "#toolbar" )  )};
+				//if(log >= 3){console.log('---------- w2ui Event ' ,  $( "#toolbar" )  )};
 				
 	        	switch (event.target) {
 	        	
@@ -1737,21 +1734,40 @@ function initW2UI(){
 	             	case "w2ui_dssettings":		$( "#Settings" ).toggle(); break;
 	             		             	
 	             	case "w2ui_liveview":
-	             								if(log >= 3){console.log('---------- w2ui_liveview, event' ,  event)};
 	             								$( "#DSreplay" ).hide();
-												$( "#DSstatistic" ).hide(); 
+												$( "#DSstatistic" ).hide();
+												$( ".pcarswindowgrp2" ).each(function( index ) {
+													$( this ).removeClass( "pcars-force-hide" );	             									
+             									});
+												this.enable('w2ui_drivertable');
+												this.enable('w2ui_tracktable');
+												this.enable('w2ui_cartable');
+												this.enable('w2ui_dsdata');
 												break;	
 	             	
 	             	case "w2ui_statistics":		
-	             								if(log >= 3){console.log('---------- w2ui_statistics, event ' ,  event  )};
 	             								$( "#DSstatistic" ).fadeIn( "slow" ); 
 	             								$( "#DSreplay" ).hide();	             								
+	             								$( ".pcarswindowgrp2" ).each(function( index ) {
+													$( this ).addClass( "pcars-force-hide" );	             									
+             									});
+	             								this.disable('w2ui_drivertable');
+	             								this.disable('w2ui_tracktable');
+	             								this.disable('w2ui_cartable');
+	             								this.disable('w2ui_dsdata');
+	             								
 	             								break;	             							
 	             	
-	             	case "w2ui_replay":		
-	             								if(log >= 3){console.log('---------- w2ui_replay, event ' ,  event )};
+	             	case "w2ui_replay":			             								
 	             								$( "#DSreplay" ).fadeIn( "slow" );
-	             								$( "#DSstatistic" ).hide();	             								             								 
+	             								$( "#DSstatistic" ).hide();	             									             								
+	             								$( ".pcarswindowgrp2" ).each(function( index ) {
+													$( this ).addClass( "pcars-force-hide" );	             									
+             									});
+	             								this.disable('w2ui_drivertable');
+	             								this.disable('w2ui_tracktable');
+	             								this.disable('w2ui_cartable');
+	             								this.disable('w2ui_dsdata');
 	             								break;
 	             			             			             		             		
 	        	}
