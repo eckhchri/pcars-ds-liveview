@@ -35,20 +35,7 @@
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script>
-		$(function() {
-				$( "#DSdata" ).draggable();
-				$( "#TrackList" ) .draggable();
-				$( "#CarList" ) .draggable();
-				$( "#DriverDataArea" ) .draggable();
-				$( "#Settings" ) .draggable();
-		});
-		
-		$(function() {
-           		$( "#DSdata" ).resizable({
-					//animate: true
-					ghost: true
-           		});
-		});	
+
 	</script>
 
 	<!-- The jqGrid language file code-->
@@ -230,7 +217,7 @@
 	
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
-	// BLOCK to set Default settings
+	// BLOCK to set settings
 	$( document ).ready(function() {
 		
 		//set default value for CSS coloration
@@ -238,7 +225,21 @@
 		HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );
 		
 		//set dropdown menu APIMODE	
-		HTMLCTRL.APIMODE_SetSelection( APIMODE );		
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );
+		
+		//make elements dragable/resizable
+		$(function() {
+			$( "#DSdata" ).draggable();
+			$( "#TrackList" ) .draggable();
+			$( "#CarList" ) .draggable();
+			$( "#DriverDataArea" ) .draggable();
+			$( "#Settings" ) .draggable();
+			
+			$( "#DSdata" ).resizable({
+				//animate: true
+				ghost: true
+       		});
+		});
 		
 	});
 
