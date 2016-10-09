@@ -262,12 +262,18 @@
 	}
 
 	/////////////////////////////////////
-	// Event Handler - Dropdown API
+	// Event Handler 
 	$("#APIMODE").change(function() {
 			$("#APIMODE option:selected").each(function() {
 					APIMODE = $( this ).text();
 			});			
 	}); // end #APIMODE change event
+	
+	// Recording button
+	$("#cmn-toggle-123").change(function() {
+			alert("test event");			
+	}); 
+	
 	
 	$( "#DRIVERCOLOR" ).change(function() {
         $("#DRIVERCOLOR option:selected").each(function() {
@@ -618,7 +624,8 @@
                 SessionState_old = SessionState;
                 SessionStage_old = SessionStage;
 
-		if (recording_demo_data == "true"){
+		// start recording data if option is enabled
+		if (isRecEnabled){
                         console.log("           {//" + recording_count);
                         console.log("                globals:{sensorLayer_UpdateDelta:"+sensorLayer_UpdateDelta+", state:\""+e.data.globals.state+"\", name:\""+e.data.globals.name+"\", lobbyid:"+e.data.globals.lobbyid+", joinable:\""+e.data.globals.joinable+"\", max_member_count:"+e.data.globals.max_member_count+", now:"+e.data.globals.now+", attributes:{TrackId:"+e.data.globals.attributes.TrackId+", SessionState:\""+e.data.globals.attributes.SessionState+"\", SessionStage:\""+e.data.globals.attributes.SessionStage+"\", GridSize:"+e.data.globals.attributes.GridSize+", MaxPlayers:"+e.data.globals.attributes.MaxPlayers+", SessionTimeDuration:"+e.data.globals.attributes.SessionTimeDuration+", SessionTimeElapsed:"+e.data.globals.attributes.SessionTimeElapsed+"}},");
                         console.log("                participants:[");
@@ -1660,14 +1667,17 @@ function initW2UI(){
                     html: '<div id="pcars-apimode" style="padding: 3px 10px;">' +
                           'API' +
                           '</div>' 
-				},				                               
+				},
+				{ type: 'break', id: 'break4' },
+				{ type: 'check',  id: 'w2ui_recbutton', 	caption: 'start recording', icon: 'w2ui-icon-check', checked: isRecEnabled },				
                 { type: 'spacer' },
-				{ type: 'html', id: 'item7',
-                	html:	'<p>Version: SCRIPTVERSION</p>' 	
-                },				
-                { type: 'html', id: 'item8',
+				{ type: 'html', id: 'item8',
                 	html:	'<button class="btn" onclick="showStatus()" >Show  Status</button>' 	
-                }
+                },
+				{ type: 'html', id: 'item9',
+                	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION + '</div>'
+                }				
+                
             ],  
             		
         });
@@ -1737,6 +1747,10 @@ function initW2UI(){
 	             								this.disable('w2ui_cartable');
 	             								this.disable('w2ui_dsdata');
 	             								break;
+												
+					case "w2ui_recbutton":		// toggle value
+												isRecEnabled = !isRecEnabled;
+												break;
 	             			             			             		             		
 	        	}
 	        	

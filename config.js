@@ -39,9 +39,7 @@ var StopTransitionDelay_minTimeRun = 1100; //milliseconds -
 var log = 3;
 
 // Recording
-// set log to 0 and recording_demo_data to true to record demo data via console.log and paste it to demo_data.js
-recording_demo_data 		= 	"false";
-isRecEnabled				=	'false';
+var isRecEnabled			=	false;
 var RecConfig				=	[];
 RecConfig['maxRecordSize']	=	999999;
 RecConfig['DataVersion']	=	1;		//in the case if data format will changed and recorded csv will loaded from file
