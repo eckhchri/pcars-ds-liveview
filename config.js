@@ -1,6 +1,7 @@
 ///////////////////////////////////////////////
 //global varibales definitions
 ///////////////////////////////////////////////
+var SCRIPTVERSION	= "0.3.0";
 
 //Please your specific settings
 var DsServerURL 	= "MY-URL.com";
@@ -37,8 +38,13 @@ var StopTransitionDelay_minTimeRun = 1100; //milliseconds -
 //Log Levels for console.log commands: 0 = off or special use, 1 = error, 2 = warning, 3 = info, 4 = extended info (output of variables for example)
 var log = 3;
 
+// Recording
 // set log to 0 and recording_demo_data to true to record demo data via console.log and paste it to demo_data.js
-recording_demo_data = "false";
+recording_demo_data 		= 	"false";
+isRecEnabled				=	'false';
+var RecConfig				=	[];
+RecConfig['maxRecordSize']	=	999999;
+RecConfig['DataVersion']	=	1;		//in the case if data format will changed and recorded csv will loaded from file
 
 //playback demo from start position to end position
 demo_start_pos = 0;

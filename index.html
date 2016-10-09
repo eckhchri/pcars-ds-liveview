@@ -28,6 +28,7 @@
 	<script src="./class_reference_points.js" charset="utf-8"></script>
 	<script src="./get_url_param.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
+	<script src="./pcars_recorder.js" charset="utf-8"></script>
 	<script src="./demo_data.js" charset="utf-8"></script>
 	
 	<!-- Jquery UI needed for jTable and the function dragable/resize-->
@@ -1660,8 +1661,11 @@ function initW2UI(){
                           'API' +
                           '</div>' 
 				},				                               
-                { type: 'spacer' },                
-                { type: 'html', id: 'item7',
+                { type: 'spacer' },
+				{ type: 'html', id: 'item7',
+                	html:	'<p>Version: SCRIPTVERSION</p>' 	
+                },				
+                { type: 'html', id: 'item8',
                 	html:	'<button class="btn" onclick="showStatus()" >Show  Status</button>' 	
                 }
             ],  
