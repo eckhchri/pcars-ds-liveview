@@ -26,7 +26,6 @@
 	<script src="./receive_ds_data.js" charset="utf-8"></script>
 	<script src="./calc_coordinates.js" charset="utf-8"></script>
 	<script src="./class_reference_points.js" charset="utf-8"></script>
-	<script src="./get_url_param.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
 	<script src="./pcars_recorder.js" charset="utf-8"></script>
 	<script src="./demo_data.js" charset="utf-8"></script>
@@ -44,7 +43,6 @@
 	<!-- CSS definitions moved to folder ./css/ --> 	
 	</head>
    <body>
-   
    
    
 	<!-- W2UI Toolbar top -->
@@ -1631,6 +1629,20 @@ function ExportCSV(CSV,fileName){
 		link.click();
 		document.body.removeChild(link);
 	}
+}
+
+function get_url_param( name )
+{
+	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+
+	var regexS = "[\\?&]"+name+"=([^&#]*)";
+	var regex = new RegExp( regexS );
+	var results = regex.exec( window.location.href );
+
+	if ( results == null )
+		return "";
+	else
+		return results[1];
 }
 
 
