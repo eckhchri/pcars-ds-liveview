@@ -40,9 +40,9 @@ var log = 3;
 
 // Recording
 var isRecEnabled			=	false;
-var RecConfig				=	[];
-RecConfig['maxRecordSize']	=	999999;
-RecConfig['DataVersion']	=	1;		//in the case if data format will changed and recorded csv will loaded from file
+var aRecConfig				=	[];
+aRecConfig['maxRecordSize']	=	999999;
+aRecConfig['DataVersion']	=	1;		//in the case if data format will changed and recorded csv will loaded from file
 
 //playback demo from start position to end position
 demo_start_pos = 0;

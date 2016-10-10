@@ -2,13 +2,16 @@
 function PCARSRECORDER(config)
 {
         // vars
-        this.maxRecordSize 		=	config('maxRecordSize');	// set max array size
-		this.DataVersion 		=	config('DataVersion');		// version of the data format etc
+        this.maxRecordSize 		=	config.maxRecordSize;	// set max array size
+		this.DataVersion 		=	config.DataVersion;		// version of the data format etc
         
 		//TODO: Maybe allocate Array with maxRecordSize for optimize performance
 		this.CurrentDataSize	=	0;
         this.data				=	[];   						// contains all replay data, each line includes one data record
 		this.aStatistics		=	[];							// array of severals statistics
+	
+	
+		if(log >= 3){console.log("---+++ Instance of PCARSRECORDER created:   ", this);}
 	
         return this;
 }
@@ -49,13 +52,13 @@ function loadData (path){
 
 function addDataset(racedata) {
 	// TODO:  define Format
-
+	if(log >= 3){console.log("---+++ PCARSRECORDER data added:   ", racedata);}
 
 	// TODO: really needed or could be deletd because of performance issues?
-	if ( this.data.length > this.maxDatasetSize ){
+//	if ( this.data.length > this.maxDatasetSize ){
 		// max size reached, do not add addtional entires
-		return 0;
-	}
+//		return 0;
+//	}
 	//this.data.raw.push({driver1, driver2, driver3});
 	
 	
@@ -68,3 +71,4 @@ PCARSRECORDER.prototype.getStatistics	=	getStatistics;
 PCARSRECORDER.prototype.getDatasetSize	=	getDatasetSize;
 PCARSRECORDER.prototype.clearDataSet	=	clearDataSet;
 PCARSRECORDER.prototype.loadData		=	loadData;
+PCARSRECORDER.prototype.addDataset		=	addDataset;
