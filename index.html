@@ -2,9 +2,8 @@
 <html lang="de">
   <head>
 	<meta charset="utf-8"/>
-	<title>Project Cars DS - live view with position update. W2UI</title>	
-    
-         
+	<title>Project Cars DS - live view with position update. W2UI - https://github.com/eckhchri/pcars-ds-liveview </title>	
+             
 	<script src="https://maps.google.com/maps/api/js??v=3.exp&sensor=true"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -13,10 +12,21 @@
 	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.2.min.css" />
     <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.2.min.js"></script>
  
- 	<!-- CSS definitons-->
+ 	<!-- CSS definitions moved to folder ./css/ --> 
 	<link rel="stylesheet" href="./css/pcars.css">
 	<link rel="stylesheet" href="./css/w2ui.css">
- 	
+ 		
+	<!-- Jquery UI needed for jTable and the function dragable/resize-->
+	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+	<!-- The jqGrid language file code-->
+	<link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css">
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-de.js"></script>
+	<!-- The atual jqGrid code -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
+
+	
 	<script src="./config.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
 	<script src="./pcars_track.js" charset="utf-8"></script>
@@ -30,20 +40,8 @@
 	<script src="./pcars_recorder.js" charset="utf-8"></script>
 	<script src="./demo_data.js" charset="utf-8"></script>
 	
-	<!-- Jquery UI needed for jTable and the function dragable/resize-->
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-	<!-- The jqGrid language file code-->
-        <link rel="stylesheet" type="text/css" media="screen" href="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/css/ui.jqgrid.css">
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-de.js"></script>
-        <!-- The atual jqGrid code -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
-
-	<!-- CSS definitions moved to folder ./css/ --> 	
-	</head>
-   <body>
-   
+   </head>
+  <body>
    
 	<!-- W2UI Toolbar top -->
 	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
@@ -54,6 +52,9 @@
 	<div id="DSstatistic" class="mapoverlay">
 		Todo: Statistiken
 		After implement a kind of recording Race Data, show some statistics of that.
+		<div id="pcars-rec-elemnr"></div>
+		<div id="pcars-rec-elemsize"></div>
+		
 	</div>
 	
 	<!-- Replay -->	
@@ -122,10 +123,15 @@
 		<p>
   			<label for="amount">DisplayDurationCorrector:</label>
 			<input type="text" id="amount" readonly style="border:0;">
+			<div id="slider-range-max"></div>
+		</p>		
+		<br>----<br>
+		<p>
+  			<label for="amount">GuiElementUpdateInterval</label>
+			<input type="text" id="gui_update_interval" readonly style="border:0;">
+			<div id="slider-gui_update_interval"></div>
 		</p>
-		<!-- Slider Duration -->
-		<div id="slider-range-max"></div>
-		
+				
 	</div>
 <script>
 
@@ -337,6 +343,22 @@
     		});
     		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
+	
+	$(function() {
+		$( "#slider-gui_update_interval" ).slider({
+			range: "max",
+			min:	1,
+			max:	10,
+      		value:	GuiUpdateIntervall, 
+			step:	1,
+			slide:	function( event, ui ) {
+						$( "#gui_update_interval" ).val( ui.value );
+						//set new value
+						GuiUpdateIntervall = ui.value;
+      			}
+    		});
+    		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
+  	});
 
 	// initiate jqGrid for DriverData
 	// todo: make table searchable   and  add new Theme
@@ -390,6 +412,22 @@
 	});
 	// add filter option bar
 	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	
+	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	////// create GUI worker thread
+	var workerGUIUPDATES      =       new Worker('./worker_guiupdates.js');	
+	var RecStatistics		  = 	[];
+	workerGUIUPDATES.addEventListener('message', function(e) {
+					if(log >= 3){console.log('+++++++++++ GUIUPDATE Worker');}
+					
+					RecStatistics	=	PCARS_Rec.getStatistics();
+					ChangeHtmlContentByID( '#pcars-rec-elemnr' 		, "Element number:  "	 	+ 	RecStatistics['number']  );
+					ChangeHtmlContentByID( '#pcars-rec-elemsize' 		, "Element size:  "	 	+ 	RecStatistics['size']  );
+					
+					workerGUIUPDATES.postMessage({workerdelay: GuiUpdateIntervall});				
+	}, false);
+	workerGUIUPDATES.postMessage({delay: GuiUpdateIntervall});
+	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create worker to get vehicle list

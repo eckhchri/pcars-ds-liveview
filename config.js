@@ -28,7 +28,8 @@ var WORKERDELAY_DSDATA  	=	100;    // in ms
 var DisplayDuration 		  = 500;		// initial duration for displaying marker updates
 var DisplayDurationCREST 	= 100;		// initial duration for displaying marker updates
 
-var UpdateRateDS = 500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
+var UpdateRateDS 			= 500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
+var GuiUpdateIntervall		=	3;	 //intervall fo updating GUI element,values etc. in seconds
 
 //StopTransitionDelay_minTimeRun - Time of disabled tranformWithEase function and using the transform function instead on SessionState and SessionStage changes. 
 //In this case the markers jump to a new init position on map, but this takes sometimes circa 1 second after the switch. For this jump the normal transform function is needed.
