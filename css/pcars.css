@@ -97,8 +97,25 @@
 				height:			85%;
 			                    
 	     }
+	
+		#DSRecStatistics{	     		
+				background-color:	grey;
+				opacity: 			0.95;
+				margin: 			auto;
+				position:       absolute;
+				bottom:           10px;
+                left:           10px;
+                right:			10px;                
+                border-width: 			1px;
+                border-style:			dashed;
+                -webkit-border-radius: 	2px;
+				-moz-border-radius: 	2px;
+				border-radius: 			2px;
+                width:			95%;
+				height:			5%;				
+	     }
 	     
-	     #DSstatistic{	     		
+		#DSstatistic{	     		
                 background: 		hsla(50,80%,80%,0.8);
 				background-image:	url('/pcars/images/background/pcars_logo03.png');
 				background-size:	70%;
