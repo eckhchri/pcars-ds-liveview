@@ -1839,6 +1839,7 @@ function initW2UI(){
 	             								break;
 												
 					case "w2ui_recbutton":		// toggle value
+												if ( !isRecEnabled){ PCARS_Rec.clearDataSet()};
 												isRecEnabled = !isRecEnabled;
 												if(log >= 3){console.log('------ w2ui isRecEnabled set to: ' , isRecEnabled  )};
 												break;
