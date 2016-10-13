@@ -261,6 +261,16 @@
 		//overwrite dropdown menu selection
 		HTMLCTRL.APIMODE_SetSelection( APIMODE );
 	}
+	
+	// check if url params overwrite the default CREST2 info
+	if (get_url_param('crest2url') && get_url_param('crest2port'))	{
+		CREST2ServerURL		=	get_url_param('crest2url');
+		CREST2Port			=	get_url_param('crest2port');
+		APIMODE				=	"CREST2";
+		DisplayDuration		=	DisplayDurationCREST;
+		//overwrite dropdown menu selection
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );
+	}
 
 	// check if url params overwrite the default autoExport option
 	if (get_url_param('autoexport')){
@@ -714,8 +724,8 @@
 			case "CREST2":                   //CREST2 receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
-                                        ,dsurl:                 CRESTServerURL
-                                        ,dsport:                CRESTPort
+                                        ,dsurl:                 CREST2ServerURL
+                                        ,dsport:                CREST2Port
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   "GETCREST2DRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -775,8 +785,8 @@
 			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
 			break;
 		case "CREST2":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCREST2DRIVERDATA", aRefPointTMP);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, 2000, "GETCREST2DRIVERDATA", aRefPointTMP);
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
