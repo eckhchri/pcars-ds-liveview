@@ -8,6 +8,8 @@ var DsServerURL 	= "MY-URL.com";
 var DsPort			= 9000;
 var CRESTServerURL 	= "localhost";
 var CRESTPort		= 8080;
+var CREST2ServerURL     = "localhost";
+var CREST2Port          = 8180;
 
 //default API mode, possible values: DS, CREST or DEMO
 var APIMODE   =   "DS";		// Default API Mode
