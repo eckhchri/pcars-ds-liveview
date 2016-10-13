@@ -29,6 +29,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				,"GETTRACKLIST"  	: "/api/list/tracks"
 				,"GETVEHICLELIST"  	: "/api/list/vehicles"
 				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true"
+				,"GETCREST2DRIVERDATA"	: "/crest/v2/api?gameStates=true&participants=true&eventInformation=true"
 				,"GETDEMODATA"    : ""
 			};	
 
@@ -161,6 +162,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				case	"GETVEHICLELIST":	return aEmptyArray;
 				
 				case	"GETCRESTDRIVERDATA":	return aDrivers;
+					
+				case	"GETCREST2DRIVERDATA":	return aDrivers;
 				
 				case	"GETDSANDDRIVERDATA":	return aDrivers;
 			} // end switch
@@ -404,6 +407,78 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				return aVehicleList;
 				
 			case  "GETCRESTDRIVERDATA":
+			
+				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
+				
+				//overwrite default values with CRESt specific ones
+				aDrivers.globals = {
+					"joinable":		"CREST Mode"
+					,"lobbyid":		"CREST Mode"
+					,"max_member_count":	"CREST Mode"
+					,"now":			"CREST Mode"
+					,"state":		"CREST Mode"
+					,"attributes":{
+						"TrackId":	TrackID
+						,"SessionStage":""
+						,"SessionState":myArr.gameStates.mSessionState
+					}
+				}
+				
+				// if no users joined return example Data
+				if ( myArr.participants.mNumParticipants == 0 ){
+				
+					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
+	
+					aDrivers.push( DriverDummy );
+	
+					if(log >= 3){console.log("+-+-+-: " ,  aDrivers);}				
+	
+					return aDrivers;
+				}
+	
+				
+				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
+	
+				for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
+				{
+					//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+					// read data of all participants and put it in an array of PCARSdriver objects
+					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
+					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;		
+					PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
+					
+					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
+					loopcnt++;
+
+					data.driverlist[index] =
+						new PCARSdriver(
+								0,												//RefId - NA
+								myArr.participants.mParticipantInfo[i].mName,	//Name
+								1,												//NA
+								0,												//GridPosition - NA
+								PosX,											//PositionX in meters
+								PosY,											//PositionY in meters
+								PosZ,											//PositionZ in meters
+								"NA",											//State - NA
+								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
+								0,												//FastestLapTime - NA
+								0,												//LastLapTime - NA
+								0,												//Orientation - NA
+								0,												//Speed - NA
+								999999,											//CurrentLap
+								2091910841/*,									//VehicleID
+								{ 	TrackId: TrackID					//TrackID
+									,GridSize : 0						//GridSize - NA
+								}*/
+							);
+				}
+	
+				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
+				return aDrivers;
+				   
+			case  "GETCREST2DRIVERDATA":
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
