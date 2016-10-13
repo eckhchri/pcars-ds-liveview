@@ -29,7 +29,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				,"GETTRACKLIST"  	: "/api/list/tracks"
 				,"GETVEHICLELIST"  	: "/api/list/vehicles"
 				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true"
-				,"GETCREST2DRIVERDATA"	: "/crest/v2/api?gameStates=true&participants=true&eventInformation=true"
+				,"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true"
 				,"GETDEMODATA"    : ""
 			};	
 
