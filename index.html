@@ -101,6 +101,7 @@
 	    	<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      		<option>DS</option>
 	      		<option>CREST</option>
+			<option>CREST2</option>
 	      		<option>DEMO</option>
 			</select>
 		</fieldset>
@@ -710,6 +711,15 @@
                                         ,receivemode:   "GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
+			case "CREST2":                   //CREST2 receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 CRESTServerURL
+                                        ,dsport:                CRESTPort
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   "GETCREST2DRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
                         case "DEMO":
                                 //DEMO receive mode
 
@@ -763,6 +773,10 @@
 		case "CREST":
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTMP});
 			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
+			break;
+		case "CREST2":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCREST2DRIVERDATA", aRefPointTMP);
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
