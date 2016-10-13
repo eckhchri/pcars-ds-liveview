@@ -34,4 +34,5 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 
 **Shared some info in Project CARS Forum**
 - http://forum.projectcarsgame.com/showthread.php?39269-Provide-GPS-coordinates-of-all-track-reference-points-GPS-calculation-in-javascript
+- http://pcars2.wmdportal.com/showthread.php?23757-pCars-1-(Aries)-Track-Feedback&p=947602&viewfull=1#post947602
 
