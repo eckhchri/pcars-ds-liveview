@@ -7,8 +7,8 @@
         
 	     #DSdata{
 				position: 	absolute; 
-				left: 		55%; 
-				top: 		0px; 
+				left: 		60%; 
+				top: 		35px; 
 				width: 		300px; 
 				height: 	200px;
 				border:		1;
@@ -17,8 +17,8 @@
 
 	     #TrackList{
 				position:       absolute;
-                left:           5%;
-                top:            30px;
+                left:           6%;
+                top:            63px;
                 border:         1;
 				text-align: 	center;
 	     }
@@ -34,8 +34,8 @@
 	     
 	     #CarList{
 				position:       absolute;
-                left:           5%;
-                top:            60px;
+                left:           7%;
+                top:            92px;
                 border:         1;
 				text-align: 	center;
 	     }
@@ -67,12 +67,11 @@
 	     #DriverDataArea{
 				position:       absolute;
 				left:           5%;
-				top:            0px;
+				top:            32px;
 				background:	lightgrey
 	     }
 	    	         
-	     #hide or unhide objects
-	     starthidden {
+	     #hide {
    				 display: none;
   		}
 

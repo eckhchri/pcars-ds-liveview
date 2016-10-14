@@ -1223,13 +1223,14 @@ function init_map(_TrackID , aRefPoint)
 		sensorLayer = new GPSSensor(aSensorData);
 		sensorLayer.setMap(map); 
 
-        //todo: maybe change from static to dynamic binding of HTML elemets
-        map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
-       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
-       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
-       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
-       	map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
-		map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
+        //todo: maybe change from static to dynamic binding of HTML elements
+		// deactivate because of problems with table height of div blocks
+        //map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
+       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
+       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
+       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
+       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
+		//map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
        	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
        	
        	return 1;

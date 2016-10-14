@@ -12,14 +12,14 @@ var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
 
 //default API mode, possible values: DS, CREST or DEMO
-var APIMODE   =   "DS";		// Default API Mode
+var APIMODE   =   "DEMO";		// Default API Mode
 
 //hide or unhide elements
 var	SHOWTRACKLIST 	=	false;	// [true|false]
-var SHOWCARLIST 	=	true; 	// [true|false]
-var	SHOWDSDATA 		=	true;	// [true|false]
-var	SHOWDRIVERDATA 	=	true;	// [true|false]
-var SHOWSETTINGS	=	true;	// [true|false]
+var SHOWCARLIST 	=	false 	// [true|false]
+var	SHOWDSDATA 		=	false;	// [true|false]
+var	SHOWDRIVERDATA 	=	false;	// [true|false]
+var SHOWSETTINGS	=	false;	// [true|false]
 var SHOWDSSTATISTIC =	false;	// [true|false]
 var SHOWDSRELAY		=	false;	// [true|false]
 var SHOWRECSTATISTIC=	true;	// [true|false]
@@ -49,7 +49,7 @@ aRecConfig['maxRecordSize']	=	999999;
 aRecConfig['DataVersion']	=	1;		//in the case if data format will changed and recorded csv will loaded from file
 
 //playback demo from start position to end position
-demo_start_pos = 0;
+demo_start_pos = 60;
 demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
 
 //CSS default
