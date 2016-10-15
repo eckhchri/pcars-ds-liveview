@@ -245,41 +245,39 @@
 		
 	});
 
-
-	// check if url params overwrite the default ds info
-	if (get_url_param('dsurl') && get_url_param('dsport'))	{
-			DsServerURL     =       get_url_param('dsurl');
-			DsPort          =       get_url_param('dsport');
-			APIMODE         =       "DS";
+	if (AllowUrlParams) {
+		// check if url params overwrite the default ds info
+		if (get_url_param('dsurl') && get_url_param('dsport'))	{
+				DsServerURL     =       get_url_param('dsurl');
+				DsPort          =       get_url_param('dsport');
+				APIMODE         =       "DS";
+				//overwrite dropdown menu selection
+				HTMLCTRL.APIMODE_SetSelection( APIMODE );
+		}
+		// check if url params overwrite the default CREST info
+		if (get_url_param('cresturl') && get_url_param('crestport'))	{
+			CRESTServerURL		=	get_url_param('cresturl');
+			CRESTPort			=	get_url_param('crestport');
+			APIMODE				=	"CREST";
+			DisplayDuration		=	DisplayDurationCREST;
 			//overwrite dropdown menu selection
 			HTMLCTRL.APIMODE_SetSelection( APIMODE );
-	}
-
-	// check if url params overwrite the default CREST info
-	if (get_url_param('cresturl') && get_url_param('crestport'))	{
-		CRESTServerURL		=	get_url_param('cresturl');
-		CRESTPort			=	get_url_param('crestport');
-		APIMODE				=	"CREST";
-		DisplayDuration		=	DisplayDurationCREST;
-		//overwrite dropdown menu selection
-		HTMLCTRL.APIMODE_SetSelection( APIMODE );
-	}
+		}
+		// check if url params overwrite the default CREST2 info
+		if (get_url_param('crest2url') && get_url_param('crest2port'))	{
+			CREST2ServerURL		=	get_url_param('crest2url');
+			CREST2Port			=	get_url_param('crest2port');
+			APIMODE				=	"CREST2";
+			DisplayDuration		=	DisplayDurationCREST;
+			//overwrite dropdown menu selection
+			HTMLCTRL.APIMODE_SetSelection( APIMODE );
+		}
+		// check if url params overwrite the default autoExport option
+		if (get_url_param('autoexport')){
+			autoExport = get_url_param('autoexport');
+		}
+	}//END AllowUrlParams check
 	
-	// check if url params overwrite the default CREST2 info
-	if (get_url_param('crest2url') && get_url_param('crest2port'))	{
-		CREST2ServerURL		=	get_url_param('crest2url');
-		CREST2Port			=	get_url_param('crest2port');
-		APIMODE				=	"CREST2";
-		DisplayDuration		=	DisplayDurationCREST;
-		//overwrite dropdown menu selection
-		HTMLCTRL.APIMODE_SetSelection( APIMODE );
-	}
-
-	// check if url params overwrite the default autoExport option
-	if (get_url_param('autoexport')){
-		autoExport = get_url_param('autoexport');
-	}
-
 	/////////////////////////////////////
 	// Event Handler 
 	$("#APIMODE").change(function() {

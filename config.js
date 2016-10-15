@@ -3,11 +3,14 @@
 ///////////////////////////////////////////////
 var SCRIPTVERSION	= "0.3.0";
 
+//Activate URL parameter interpretation
+var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
+
 //Please your specific settings
-var DsServerURL 	= "MY-URL.com";
-var DsPort			= 9000;
-var CRESTServerURL 	= "localhost";
-var CRESTPort		= 8080;
+var DsServerURL 		= "MY-URL.com";
+var DsPort				= 9000;
+var CRESTServerURL 		= "localhost";
+var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
 
