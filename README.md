@@ -3,6 +3,7 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 **Usage**:
 - Using default parameter: http://[your Webserver url]/index.html
 - change settings in config.js with an editor
+
 **Url paramters**
 - set AllowUrlParams to true in config.js
 - Overwriting default DS parameters:  
