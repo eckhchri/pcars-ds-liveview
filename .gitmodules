@@ -1,0 +1,3 @@
+[submodule "lib/lz-string"]
+	path = lib/lz-string
+	url = https://github.com/pieroxy/lz-string.git
