@@ -8,6 +8,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
+	<script src="./lib/FileSaver/FileSaver.js"></script>
+	<script language="javascript" src="./lib/JSONC/jsonc.min.js"></script>	
 	
 	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.2.min.css" />
     <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.2.min.js"></script>
@@ -87,9 +89,22 @@
 	<div id="DriverDataArea" class="pcarswindowgrp2">
 		<table id="DriverDataTable"></table>
 	</div>
-	<div id="DSRecStatistics">
-		<div id="pcars-rec-elemnr"></div>
-		<div id="pcars-rec-elemsize"></div>
+		<div id="DSRecStatistics" class="box">
+			<div class="box">
+				<div id="pcars-rec-elemnr" ></div>
+				<div id="pcars-rec-elemsize" ></div>		
+			</div>
+			<div class="box">
+				<button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_DEMO_FILE.pcars')">export data</button>
+			</div>
+			<div class="box">
+				<input id="RecFileUploader" type="file" name="Select PCARS File">
+				<output id="RecFileOutput">
+					file contents will appear here
+				</output>
+				
+			</div>
+		</div>
 	</div>
 
 	<!-- definition of option panel-->	
@@ -217,6 +232,9 @@
 	// info: moved to start of the script and in front of init_map() to show google maps within a W2UI tab in correct format
 	initW2UI();
 	
+	// init button and events for import Recording files from client
+	initRecFileReader( HTMLCTRL );
+	
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////
 	// BLOCK to set settings
@@ -289,9 +307,8 @@
 	// Recording button
 	$("#cmn-toggle-123").change(function() {
 			alert("test event");			
-	}); 
-	
-	
+	});
+			
 	$( "#DRIVERCOLOR" ).change(function() {
         $("#DRIVERCOLOR option:selected").each(function() {
         	var str1 = $( this ).val();
@@ -1664,6 +1681,16 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel,header_names,exclud
 	return CSV;
 }
 
+//SaveAsFile("text","filename.txt","text/plain;charset=utf-8");
+function SaveAsFile(t,f,m) {
+            try {
+                var b = new Blob([t],{type:m});
+                saveAs(b, f);
+            } catch (e) {
+                window.open("data:"+m+"," + encodeURIComponent(t), '_blank','');
+            }
+}
+
 function ExportCSV(CSV,fileName){
 
 	if (CSV == '') {
@@ -1722,6 +1749,27 @@ function get_url_param( name )
 		return results[1];
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+function initRecFileReader( HTMLCONTROLLHANDLE ){
+
+	var fileInput = document.getElementById("RecFileUploader");
+
+    readFile = function () {
+        var reader = new FileReader();
+        reader.onload = function () {
+			//  TODO: USE HTML Controll Function
+            //document.getElementById('RecFileOutput').innerHTML = reader.result;
+			HTMLCONTROLLHANDLE.ChangeHtmlContentByID('#RecFileOutput' , reader.result);
+
+			
+        };
+        // start reading the file. When it is done, calls the onload event defined above.
+        reader.readAsBinaryString(fileInput.files[0]);
+    };
+
+	fileInput.addEventListener('change', readFile);
+
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
