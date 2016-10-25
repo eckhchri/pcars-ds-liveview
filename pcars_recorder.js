@@ -2,16 +2,15 @@
 function PCARSRECORDER(config)
 {
         // vars
-        this.maxRecordSize 		=	config.maxRecordSize;			// set max array size
-		this.DataVersion 		=	config.DataVersion;				// version of the data format etc
-		this.FileContentPrefix	=	"___PCARSCompressedJSONC___";	// content prefix to identifiy the typ of compression for import decision
+        this.maxRecordSize 			=	config.maxRecordSize;			// set max array size
+		this.DataVersion 			=	config.DataVersion;				// version of the data format etc
+		this.FileContentPrefix		=	"___PCARSCompressedJSONC___";	// content prefix to identifiy the typ of compression for import decision, should be exactly 26 for slice file while import
+		this.isLzwComprEnabled 		= 	false;
         
 		//TODO: Maybe allocate Array with maxRecordSize for optimize performance
 		this.CurrentDataSize	=	0;							// in kbyte
-		this.data				=	[];
-        this.data.racedata		=	[];   						// contains all replay data, each line includes one data record
-		this.data.common		=	[];   						// contains all replay data, each line includes one data record
-		this.aStatistics		=	[];							// array of severals statistics
+		this.data				=	new Array();				       
+		this.aStatistics		=	new Array();				// array of severals statistics
 	
 	
 		if(log >= 3){console.log("---+++ Instance of PCARSRECORDER created:   ", this);}
@@ -29,13 +28,13 @@ function getStatistics (){
 }
 
 function getDatasetSize() {
-	return this.CurrentDataSize;
+	return this.data.length;
 }
 
 function clearDataSet() {
 	// clear all saved data of the object
 	// TODO: or let array exist and only clear CurrentDataSize?? or this.data.lenght=0 ??
-	this.data.racedata 		=	[]; 
+	this.data 				=	[]; 
 	this.CurrentDataSize	=	0;
 	
 	return 1;
@@ -44,12 +43,11 @@ function clearDataSet() {
 function exportDataCompressed(filename){
 
 	// do not export empty array
-	if (this.data.racedata.length >= 1){
-		
-		//TODO: Change structure to this.data.racedata and add Information like 	ExportFormatVersion=1.0				
+	if (this.data.length >= 1){
+	
 		SaveAsFile(
 				//Compress a JSON object as a Gzipped string after compress it using JSONC +  JSON to Array
-				this.FileContentPrefix + JSONC.pack(JSON.stringify(this.data), true ),				
+				this.FileContentPrefix + JSONC.pack(	JSON.stringify(this.data), this.isLzwComprEnabled ),				
 				filename,
 				"text/plain;charset=utf-8");	
 	}else{
@@ -64,21 +62,53 @@ function importData(compressedData){
 	//this.data = { lap1: {driver1: {posx: 21122; posy: 82766;}}}
 	//TODO: if URL/LOCAL check data format version from
 	//TODO:  //$.map( JSONC.pack( JSON.stringify(this.data), true ) , function(el) { return el }),	
+
 	
-	//Test data
-	compressedData 		= this.FileContentPrefix + JSONC.pack(JSON.stringify(this.data), true );
-	var isCompressed 	= false;
+	//ToDo: first clear all existing data  this.DataVersion
+	//this.clearDataSet();
 	
-	// first clear all existing data  this.DataVersion
-	this.clearDataSet();
 	
+	//Slice datastream
 	
 	//if (compressed)
+	//if(log >= 3){console.log('+++++++++++ PCARSREC importData(uncompressed data): ', this.unCompressData(compressedData) );};	
+	//alert (  JSONC.unpack( JSONC.pack(JSON.stringify(this.data), true ) , true ) );	
+	//var	jsonstringified			=	JSON.stringify(this.data);
+	//if(log >= 3){console.log('+++++++++++ PCARSREC jsonstringified:  ', jsonstringified );};		
+	//var teststringCompressed	= 	JSONC.pack(	jsonstringified	, true );
+	//if(log >= 3){console.log('+++++++++++ PCARSREC teststringCompressed:  ', teststringCompressed);};		
+	//var teststringUnCompressed	= 	JSONC.unpack(	teststringCompressed	);
+	//if(log >= 3){console.log('+++++++++++ PCARSREC compare:  ', jsonstringified + " ----------- " + teststringCompressed + " ----------- " + teststringUnCompressed  );};	
 	
+
+	this.data 	=	JSON.parse( 
+							JSONC.unpack(compressedData, this.isLzwComprEnabled) 
+						);
+	if(log >= 3){console.log('+++++++++++ PCARSREC parsed :  ', this.data );};	
 	
+/*	
+	console.log('+++++++++++ PCARSREC this.data:  ', this.data );
+	
+	var	jsonstringified			=	JSON.stringify( this.data );	
+	console.log('+++++++++++ PCARSREC jsonstringified:  ', jsonstringified + " (---size:" + jsonstringified.length + " ---)");
+	
+	var compressed	=	JSONC.pack( jsonstringified, this.isLzwComprEnabled	);
+	console.log('+++++++++++ PCARSREC compressed:  ', compressed  + " (---size:" + compressed.length + " ---)");
+			
+	var uncompressed	=	JSONC.unpack( compressed , this.isLzwComprEnabled	);
+	console.log('+++++++++++ PCARSREC uncompressed:  ', uncompressed + " (---size:" + uncompressed.length + " ---)");
+	
+	var parsed	=	JSON.parse( uncompressed	);
+	console.log('+++++++++++ PCARSREC parsed:  ', parsed + " (---size:" + parsed.length + " ---)");
+*/
+		
 	return 1;
 }
 
+function unCompressData(compressedStr, LzwComprEna){
+
+	return JSONC.unpack( compressedStr, LzwComprEna);
+}
 
 
 function addDataset(dataset) {
@@ -86,12 +116,11 @@ function addDataset(dataset) {
 	if(log >= 3){console.log("---+++ PCARSRECORDER data added:   ", dataset);}
 
 	// TODO: really needed or could be deletd because of performance issues?
-//	if ( this.data.length > this.maxDatasetSize ){
-		// max size reached, do not add addtional entires
+//	if ( this.data.length > this.maxDatasetSize ){		
 //		return 0;
 //	}
 			
-    this.data.racedata.push(dataset);
+    this.data.push(	dataset	);
 	this.CurrentDataSize++;
 		
 	return 1;
@@ -145,3 +174,4 @@ PCARSRECORDER.prototype.importData		=	importData;
 PCARSRECORDER.prototype.addDataset		=	addDataset;
 PCARSRECORDER.prototype.memorySizeOf	=	memorySizeOf;
 PCARSRECORDER.prototype.exportDataCompressed	=	exportDataCompressed;
+PCARSRECORDER.prototype.unCompressData	=	unCompressData;

@@ -1757,18 +1757,15 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
     readFile = function () {
         var reader = new FileReader();
         reader.onload = function () {
-			//  TODO: USE HTML Controll Function
-            //document.getElementById('RecFileOutput').innerHTML = reader.result;
-			HTMLCONTROLLHANDLE.ChangeHtmlContentByID('#RecFileOutput' , reader.result);
-
-			
+			//TODO: Is the Slice Index in each file Format the same? Or should it counted dynamically?            
+			HTMLCONTROLLHANDLE.ChangeHtmlContentByID('#RecFileOutput' ,  reader.result.slice(29) );			
+			PCARS_Rec.importData(reader.result.slice(29));			
         };
         // start reading the file. When it is done, calls the onload event defined above.
         reader.readAsBinaryString(fileInput.files[0]);
     };
 
 	fileInput.addEventListener('change', readFile);
-
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
