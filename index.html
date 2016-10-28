@@ -98,11 +98,7 @@
 				<button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_DEMO_FILE.pcars')">export data</button>
 			</div>
 			<div class="box">
-				<input id="RecFileUploader" type="file" name="Select PCARS File">
-				<output id="RecFileOutput">
-					file contents will appear here
-				</output>
-				
+				<input id="RecFileUploader" type="file" name="Select PCARS File">				
 			</div>
 		</div>
 	</div>
@@ -1752,19 +1748,17 @@ function get_url_param( name )
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initRecFileReader( HTMLCONTROLLHANDLE ){
 
-	var fileInput = document.getElementById("RecFileUploader");
+	var fileInput 	= 	document.getElementById("RecFileUploader");
 
     readFile = function () {
         var reader = new FileReader();
-        reader.onload = function () {
-			//TODO: Is the Slice Index in each file Format the same? Or should it counted dynamically?            
-			HTMLCONTROLLHANDLE.ChangeHtmlContentByID('#RecFileOutput' ,  reader.result.slice(29) );			
+        reader.onload = function () {			
+			//INFO: it slice file with static value 29. hopefully its each time the same!!            			
 			PCARS_Rec.importData(reader.result.slice(29));			
-        };
+        };		
         // start reading the file. When it is done, calls the onload event defined above.
         reader.readAsBinaryString(fileInput.files[0]);
     };
-
 	fileInput.addEventListener('change', readFile);
 }
 
