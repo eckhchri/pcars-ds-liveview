@@ -2,9 +2,9 @@
 function PCARSRECORDER(config)
 {
         // vars
-        this.maxRecordSize 			=	config.maxRecordSize;			// set max array size
-		this.DataVersion 			=	config.DataVersion;				// version of the data format etc
-		this.FileContentPrefix		=	"___PCARSCompressedJSONC___";	// content prefix to identifiy the typ of compression for import decision, should be exactly 26 for slice file while import
+        this.maxRecordSize 			=	config.maxRecordSize;						// set max array size
+		this.DataVersion 			=	config.DataVersion;							// version of the data format etc
+		this.FileContentPrefix		=	"___PCARSCompressedJSONC_v01___";			// content prefix to identifiy the typ of compression for import decision, should be exactly 26 for slice file while import
 		this.isLzwComprEnabled 		= 	false;
         
 		//TODO: Maybe allocate Array with maxRecordSize for optimize performance

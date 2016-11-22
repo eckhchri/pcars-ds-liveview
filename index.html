@@ -1753,13 +1753,20 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
     readFile = function () {
         var reader = new FileReader();
         reader.onload = function () {			
-			//INFO: it slice file with static value 29. hopefully its each time the same!!            			
-			PCARS_Rec.importData(reader.result.slice(29));			
+			//INFO: it slice file with static value 33. hopefully its each time the same length to cut off the prefix like "___PCARSCompressedJSONC_v01___" !!            			
+			PCARS_Rec.importData(reader.result.slice(33));			
         };		
         // start reading the file. When it is done, calls the onload event defined above.
         reader.readAsBinaryString(fileInput.files[0]);
     };
 	fileInput.addEventListener('change', readFile);
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+function initDemoData(aNewData, isSetDemoMode, ){
+
+
+	return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
