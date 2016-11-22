@@ -8,8 +8,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
-	<script src="./lib/FileSaver/FileSaver.js"></script>
-	<script language="javascript" src="./lib/JSONC/jsonc.min.js"></script>	
+	<script language="javascript" src="./lib/FileSaver/FileSaver.js"></script>	
+	<script language="javascript" src="./lib/jszip/jszip.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="http://w2ui.com/src/w2ui-1.4.2.min.css" />
     <script type="text/javascript" src="http://w2ui.com/src/w2ui-1.4.2.min.js"></script>
@@ -1764,15 +1764,17 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 
     readFile = function () {
         var reader = new FileReader();
-        reader.onload = function () {			
-			//INFO: it slice file with static value 33. hopefully its each time the same length to cut off the prefix like "___PCARSCompressedJSONC_v01___" !!            			
-			PCARS_Rec.importData(reader.result.slice(33));	
+        reader.onload = function () {
+
+			//INFO: it slice file with static value 33. hopefully its each time the same length to cut off the prefix like "___PCARSCompressedJSONC_v01___" !! 
+			// since moving to zip compression, set slice to 0
+			PCARS_Rec.importData(reader.result.slice(0));	
 
 			//switch to demo mode
 			HTMLCTRL.APIMODE_SetSelection( "DEMO" );
 			
 			//and initialize dome array with new data
-			initDemoData(PCARS_Rec.getCurrentData(), "yes")
+			//initDemoData(PCARS_Rec.getCurrentData(), "yes")    //-> async Read of zipFile, initDemoData(...) called within pcars_recorder.js 
 			
         };		
         // start reading the file. When it is done, calls the onload event defined above.
@@ -1784,30 +1786,28 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initDemoData(aNewData, SetApiModeTo ){
 
+	if(log >= 3){console.log('---------- initDemoData() before: ' ,  demo )};
 	//overwrite global array with new data
-	demo = aNewData;
+	demo = aNewData;	
+	if(log >= 3){console.log('---------- initDemoData() after: ' ,  demo )};
 			
 	//reset values to default
 	demo_start_pos 		= 0;
 	demo_end_pos 		= 9999;
 	record_pos 			= 0;
 	record_pos_helper 	= 0;	
-	
+		
 	return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
 	
-	/////////////////////////////////////////////////////////
 	// start top toolbar
-	$(function () {
-    
-		//////////////// Toolbar ///////////////////////////////
+	$(function () {		
 		$('#toolbar').w2toolbar({
             name: 'toolbar',
-            items: [
-				
+            items: [				
 				{ type: 'break',  id: 'break0' },
 				{ type: 'radio',  id: 'w2ui_liveview',  	group: '1', caption: 'Liveview', icon: 'w2ui-icon-plus', checked: true },
                 { type: 'radio',  id: 'w2ui_replay',  		group: '1', caption: 'Replay', icon: 'w2ui-icon-plus' },
@@ -1830,15 +1830,10 @@ function initW2UI(){
                 { type: 'spacer' },
 				{ type: 'html', id: 'item9',
                 	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION + '</div>'
-                }				
-                
-            ],  
-            		
+                }				                
+            ],              		
         });
-
-			
-		//if(log >= 3){console.log('---------- w2ui.toolbar ' ,  w2ui.toolbar )};				
-		
+								
 		//////////////////////////////////////////////////////
     	//// W2UI event handler
     	//w2ui.toolbar.on('*', function (event) { 

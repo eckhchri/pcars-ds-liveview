@@ -5,6 +5,7 @@ function PCARSRECORDER(config)
         this.maxRecordSize 			=	config.maxRecordSize;						// set max array size
 		this.DataVersion 			=	config.DataVersion;							// version of the data format etc
 		this.FileContentPrefix		=	"___PCARSCompressedJSONC_v01___";			// content prefix to identifiy the typ of compression for import decision, should be exactly 26 for slice file while import
+		this.FileNameInArchive		=	"data.pcars";
 		this.isLzwComprEnabled 		= 	false;
         
 		//TODO: Maybe allocate Array with maxRecordSize for optimize performance
@@ -47,14 +48,22 @@ function clearDataSet() {
 
 function exportDataCompressed(filename){
 
-	// do not export empty array
+	// do not export an empty array
 	if (this.data.length >= 1){
 	
-		SaveAsFile(
-				//Compress a JSON object as a Gzipped string after compress it using JSONC +  JSON to Array
-				this.FileContentPrefix + JSONC.pack(	JSON.stringify(this.data), this.isLzwComprEnabled ),				
-				filename,
-				"text/plain;charset=utf-8");	
+		var zip = new JSZip();
+		zip.file( this.FileNameInArchive , JSON.stringify( this.data ) 	);
+		
+		//add version information in extra file
+		zip.file("version.txt" , "CompressionVersion_ZIP_v1");
+		
+		//generate zip archive
+		zip.generateAsync({type:"blob", compression: "DEFLATE", compressionOptions : {level:9} })
+		.then(function(content) {
+			// using FileSaver.js, save zip file
+			saveAs(content, "PCARS_recording.zip" );
+		});
+								
 	}else{
 		alert("Data Array empty. No Export possible")
 	}
@@ -62,53 +71,33 @@ function exportDataCompressed(filename){
 	return 1;
 }
 
+
 function importData(compressedData){
-	// SOURCE could be:  URL, LOCAL, HASH
-	//this.data = { lap1: {driver1: {posx: 21122; posy: 82766;}}}
-	//TODO: if URL/LOCAL check data format version from
-	//TODO:  //$.map( JSONC.pack( JSON.stringify(this.data), true ) , function(el) { return el }),	
 
-	
-	//ToDo: first clear all existing data  this.DataVersion
-	//this.clearDataSet();
-	
-	
-	//Slice datastream
-	
-	//if (compressed)
-	//if(log >= 3){console.log('+++++++++++ PCARSREC importData(uncompressed data): ', this.unCompressData(compressedData) );};	
-	//alert (  JSONC.unpack( JSONC.pack(JSON.stringify(this.data), true ) , true ) );	
-	//var	jsonstringified			=	JSON.stringify(this.data);
-	//if(log >= 3){console.log('+++++++++++ PCARSREC jsonstringified:  ', jsonstringified );};		
-	//var teststringCompressed	= 	JSONC.pack(	jsonstringified	, true );
-	//if(log >= 3){console.log('+++++++++++ PCARSREC teststringCompressed:  ', teststringCompressed);};		
-	//var teststringUnCompressed	= 	JSONC.unpack(	teststringCompressed	);
-	//if(log >= 3){console.log('+++++++++++ PCARSREC compare:  ', jsonstringified + " ----------- " + teststringCompressed + " ----------- " + teststringUnCompressed  );};	
-	
+	if(log >= 3){console.log('+++++++++++ PCARSREC importData(). Importing new data !' );};	
 
-	this.data 	=	JSON.parse( 
-							JSONC.unpack(compressedData, this.isLzwComprEnabled) 
-						);
+	var new_zip = new JSZip();
+	new_zip.loadAsync(compressedData)
+	.then(function(zip) {
+		// select file within zip archive by filename
+		//TODO: replace "data.pcars"  this.FileNameInArchive . Cast to String needed?	
+		return zip.file( "data.pcars" ).async("string");
+	})		
+	.then(function success(uncompressedData) {
+        			
+		uncompressedData = JSON.parse(uncompressedData);
+		this.data = uncompressedData;
+		initDemoData(uncompressedData, "yes"); //-> Async Call
+				
+      }, function error(e) {
+		alert("Hilfe" + e);
+      });
+							
 	if(log >= 3){console.log('+++++++++++ PCARSREC parsed :  ', this.data );};	
 	
-/*	
-	console.log('+++++++++++ PCARSREC this.data:  ', this.data );
-	
-	var	jsonstringified			=	JSON.stringify( this.data );	
-	console.log('+++++++++++ PCARSREC jsonstringified:  ', jsonstringified + " (---size:" + jsonstringified.length + " ---)");
-	
-	var compressed	=	JSONC.pack( jsonstringified, this.isLzwComprEnabled	);
-	console.log('+++++++++++ PCARSREC compressed:  ', compressed  + " (---size:" + compressed.length + " ---)");
-			
-	var uncompressed	=	JSONC.unpack( compressed , this.isLzwComprEnabled	);
-	console.log('+++++++++++ PCARSREC uncompressed:  ', uncompressed + " (---size:" + uncompressed.length + " ---)");
-	
-	var parsed	=	JSON.parse( uncompressed	);
-	console.log('+++++++++++ PCARSREC parsed:  ', parsed + " (---size:" + parsed.length + " ---)");
-*/
-		
 	return 1;
 }
+
 
 function unCompressData(compressedStr, LzwComprEna){
 
