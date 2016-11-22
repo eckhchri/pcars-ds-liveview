@@ -91,16 +91,34 @@
 	<div id="DriverDataArea" class="pcarswindowgrp2">
 		<table id="DriverDataTable"></table>
 	</div>
-		<div id="DSRecStatistics" class="box">
+		<div id="DSRecStatistics" class="box">			
+			<div class="box">
+				<div>Start Recording:</div>
+			</div>
+			<div class="box">
+				<label class="switch">
+					<input type="checkbox" id="btn-start-rec-data">
+					<div class="slider round"></div>
+				</label>				
+			</div>
+			<div class="box">
+				<div>Export Data:</div>
+			</div>			
+			<div class="box">
+				<button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_DEMO_FILE.pcars')">export</button>
+			</div>
+			<div class="box">
+				<div>load from local File:</div>
+			</div>	
+			<div class="box">
+				<input id="RecFileUploader" type="file" name="Select PCARS File">				
+			</div>
+			<div class="box">
+				<div>Stats:</div>
+			</div>
 			<div class="box">
 				<div id="pcars-rec-elemnr" ></div>
 				<div id="pcars-rec-elemsize" ></div>		
-			</div>
-			<div class="box">
-				<button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_DEMO_FILE.pcars')">export data</button>
-			</div>
-			<div class="box">
-				<input id="RecFileUploader" type="file" name="Select PCARS File">				
 			</div>
 		</div>
 	</div>
@@ -182,8 +200,7 @@
 	PCARSd.SetExampleData();							// setDefaultValues
 	
 	var CSSClsChg			=	new CSSClassChanger(CSSDEFINITIONS);	// CSS defined in config.js
-	var PCARS_Rec			=	new PCARSRECORDER(aRecConfig);			// initialize PcarsRecording instance
-	var recording_count			=	0;	//used as array index comment during recording demo data
+	var PCARS_Rec			=	new PCARSRECORDER(aRecConfig);			// initialize PcarsRecording instance	
 	var record_pos;						//used for playback of data during DEMO mode
 	var record_pos_helper;          	//for WORKERDELAY_DEMODATA calculation needed
 	
@@ -224,6 +241,9 @@
 	if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
 	if ( SHOWDSRELAY	== false ) { 	$( "#DSreplay" ).hide();		}
 	if ( SHOWRECSTATISTIC== false ) { 	$( "#DSRecStatistics" ).hide();		}
+	
+	//Set toggles to correct
+	$("#btn-start-rec-data").prop( "checked", isRecEnabled);  // set state to button configure in config.js
 			
 	
 	// init W2UI elemets
@@ -248,10 +268,10 @@
 		//make elements dragable/resizable
 		$(function() {
 			$( "#DSdata" ).draggable();
-			$( "#TrackList" ) .draggable();
-			$( "#CarList" ) .draggable();
-			$( "#DriverDataArea" ) .draggable();
-			$( "#Settings" ) .draggable();
+			$( "#TrackList" ).draggable();
+			$( "#CarList" ).draggable();
+			$( "#DriverDataArea" ).draggable();
+			$( "#Settings" ).draggable();
 			
 			$( "#DSdata" ).resizable({
 				//animate: true
@@ -304,8 +324,13 @@
 	}); // end #APIMODE change event
 	
 	// Recording button
-	$("#cmn-toggle-123").change(function() {
-			alert("test event");			
+	$("#btn-start-rec-data").change(function() {
+			
+		//alert("Button Recording presse");			
+		if ( !isRecEnabled){ PCARS_Rec.clearDataSet()};
+		isRecEnabled = !isRecEnabled;	//switch between true/false
+		if(log >= 3){console.log('------ isRecEnabled set to: ' , isRecEnabled  )};
+			
 	});
 			
 	$( "#DRIVERCOLOR" ).change(function() {
@@ -691,31 +716,14 @@
                 SessionStage_old = SessionStage;
 
 		// start recording data if option is enabled
-		//TODO: maybe move Recoridng in loop in line 538 to reduce loops ???
-		if (isRecEnabled){
-		
+		if (isRecEnabled){		
 						// insert additional info before put into data record 
-						e.data.globals.sensorLayer_UpdateDelta	=	sensorLayer_UpdateDelta;
-					
+						e.data.globals.sensorLayer_UpdateDelta	=	sensorLayer_UpdateDelta;					
+						// add new data set
 						PCARS_Rec.addDataset({
 									globals:		e.data.globals,
 									participants:	e.data.driverlist
-								});
-								
-
-                        console.log("           {//" + recording_count);
-                        console.log("                globals:{sensorLayer_UpdateDelta:"+sensorLayer_UpdateDelta+", state:\""+e.data.globals.state+"\", name:\""+e.data.globals.name+"\", lobbyid:"+e.data.globals.lobbyid+", joinable:\""+e.data.globals.joinable+"\", max_member_count:"+e.data.globals.max_member_count+", now:"+e.data.globals.now+", attributes:{TrackId:"+e.data.globals.attributes.TrackId+", SessionState:\""+e.data.globals.attributes.SessionState+"\", SessionStage:\""+e.data.globals.attributes.SessionStage+"\", GridSize:"+e.data.globals.attributes.GridSize+", MaxPlayers:"+e.data.globals.attributes.MaxPlayers+", SessionTimeDuration:"+e.data.globals.attributes.SessionTimeDuration+", SessionTimeElapsed:"+e.data.globals.attributes.SessionTimeElapsed+"}},");
-                        console.log("                participants:[");
-                        for (var i = 0; i < e.data.driverlist.length; i++ ){
-                                if ((i+1) == e.data.driverlist.length){
-                                        console.log("                        {RefId:"+e.data.driverlist[i].RefID+", Name:\""+e.data.driverlist[i].Name+"\", IsPlayer:"+e.data.driverlist[i].IsPlayer+", GridPosition:"+e.data.driverlist[i].GridPosition+", VehicleId:\""+VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName)+"\", RacePosition:"+e.data.driverlist[i].RacePosition+", CurrentLap:"+e.data.driverlist[i].CurrentLap+", CurrentSector:"+e.data.driverlist[i].CurrentSector+", LastLapTime:"+e.data.driverlist[i].LastLapTime+", FastestLapTime:"+e.data.driverlist[i].FastestLapTime+", State:\""+e.data.driverlist[i].State+"\", Speed:"+e.data.driverlist[i].Speed+", PosX:"+e.data.driverlist[i].PosX+", PosY:"+e.data.driverlist[i].PosY+", PosZ:"+e.data.driverlist[i].PosZ+", Orientation:"+e.data.driverlist[i].Orientation+"}");
-                                }else{
-                                        console.log("                        {RefId:"+e.data.driverlist[i].RefID+", Name:\""+e.data.driverlist[i].Name+"\", IsPlayer:"+e.data.driverlist[i].IsPlayer+", GridPosition:"+e.data.driverlist[i].GridPosition+", VehicleId:\""+VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName)+"\", RacePosition:"+e.data.driverlist[i].RacePosition+", CurrentLap:"+e.data.driverlist[i].CurrentLap+", CurrentSector:"+e.data.driverlist[i].CurrentSector+", LastLapTime:"+e.data.driverlist[i].LastLapTime+", FastestLapTime:"+e.data.driverlist[i].FastestLapTime+", State:\""+e.data.driverlist[i].State+"\", Speed:"+e.data.driverlist[i].Speed+", PosX:"+e.data.driverlist[i].PosX+", PosY:"+e.data.driverlist[i].PosY+", PosZ:"+e.data.driverlist[i].PosZ+", Orientation:"+e.data.driverlist[i].Orientation+"},");
-                                }
-                        }
-                        console.log("                ]");
-                        console.log("        },");
-                        recording_count = recording_count + 1;
+								});								                      
                 }
 		
 		//call worker again for next itteration -> currently endless loop
@@ -1776,10 +1784,10 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initDemoData(aNewData, SetApiModeTo ){
 
-	// overwrite global array with new data
+	//overwrite global array with new data
 	demo = aNewData;
 			
-	//ToDO:   set start / end index to new values
+	//reset values to default
 	demo_start_pos 		= 0;
 	demo_end_pos 		= 9999;
 	record_pos 			= 0;
@@ -1809,14 +1817,9 @@ function initW2UI(){
                 { type: 'check',  id: 'w2ui_tracktable', 	caption: 'tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
                 { type: 'check',  id: 'w2ui_cartable', 		caption: 'cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
                 { type: 'check',  id: 'w2ui_dsdata', 		caption: 'DS Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
-				{ type: 'check',  id: 'w2ui_recstatistics', caption: 'Rec Statistic', icon: 'w2ui-icon-check', checked: SHOWRECSTATISTIC },
+				{ type: 'check',  id: 'w2ui_recstatistics', caption: 'Rec/Save/Load', icon: 'w2ui-icon-check', checked: SHOWRECSTATISTIC },
                 { type: 'break',  id: 'break2' },
-                { type: 'check',  id: 'w2ui_dssettings', 	caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },                                                                                                                       
-                { type: 'menu',   id: 'w2ui_apimode', 		caption: 'API Mode <div id="pcars-apimode"></div>', icon: 'w2ui-icon-columns', items: [
-                    { text: 'DS-Mode'  }, 
-                    { text: 'CREST-Mode'  }, 
-                    { text: 'DEMO' }
-                ]},
+                { type: 'check',  id: 'w2ui_dssettings', 	caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },
                 { type: 'break', id: 'break3' },
                 { type: 'html',  id: 'common_stats',
                     html: '<div id="pcars-apimode" style="padding: 3px 10px;">' +
@@ -1824,7 +1827,6 @@ function initW2UI(){
                           '</div>' 
 				},
 				{ type: 'break', id: 'break4' },
-				{ type: 'check',  id: 'w2ui_recbutton', 	caption: 'start recording', icon: 'w2ui-icon-check', checked: isRecEnabled },				
                 { type: 'spacer' },
 				{ type: 'html', id: 'item9',
                 	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION + '</div>'
@@ -1901,13 +1903,7 @@ function initW2UI(){
 	             								this.disable('w2ui_cartable');
 	             								this.disable('w2ui_dsdata');
 	             								break;
-												
-					case "w2ui_recbutton":		// toggle value
-												if ( !isRecEnabled){ PCARS_Rec.clearDataSet()};
-												isRecEnabled = !isRecEnabled;
-												if(log >= 3){console.log('------ w2ui isRecEnabled set to: ' , isRecEnabled  )};
-												break;
-	             			             			             		             		
+													             			             			             		             		
 	        	}
 	        	
 

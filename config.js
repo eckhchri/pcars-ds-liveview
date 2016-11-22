@@ -14,7 +14,7 @@ var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
 
-//default API mode, possible values: DS, CREST or DEMO
+//default API mode, possible values: DS, CREST, CREST2 or DEMO
 var APIMODE   =   "DEMO";		// Default API Mode
 
 //hide or unhide elements
@@ -46,13 +46,13 @@ var StopTransitionDelay_minTimeRun = 1100; //milliseconds -
 var log = 3;
 
 // Recording
-var isRecEnabled			=	false;
-var aRecConfig				=	[];
+var isRecEnabled			=	false;		//enables recording of data
+var aRecConfig				=	[];			//config hash
 aRecConfig['maxRecordSize']	=	999999;
-aRecConfig['DataVersion']	=	1;		//in the case if data format will changed and recorded csv will loaded from file
+aRecConfig['DataVersion']	=	1;			//in the case if data format will changed and recorded csv will loaded from file
 
 //playback demo from start position to end position
-demo_start_pos = 60;
+demo_start_pos = 50;
 demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
 
 //CSS default
