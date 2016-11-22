@@ -74,6 +74,8 @@
 		<br>----- Settings ----<br>
 		<div id="pcars-apimode"></div>
 		<div id="pcars-displayduration"></div>
+		<div id="pcars-record_pos"></div>
+		
 		<div id="DSdataInformation"></div>
 		<div id="DSdataSettings"></div>
 	</div>
@@ -297,6 +299,7 @@
 	$("#APIMODE").change(function() {
 			$("#APIMODE option:selected").each(function() {
 					APIMODE = $( this ).text();
+					if(log >= 3){console.log('------- Switch API Mode to: ', APIMODE );}										
 			});			
 	}); // end #APIMODE change event
 	
@@ -443,7 +446,7 @@
 	var workerGUIUPDATES      =       new Worker('./worker_guiupdates.js');	
 	var RecStatistics		  = 	[];
 	workerGUIUPDATES.addEventListener('message', function(e) {
-					if(log >= 3){console.log('+++++++++++ GUIUPDATE Worker');}
+					//if(log >= 3){console.log('+++++++++++ GUIUPDATE Worker');}
 					
 					RecStatistics	=	PCARS_Rec.getStatistics();
 					ChangeHtmlContentByID( '#pcars-rec-elemnr' 		, "Element number:  "	 	+ 	RecStatistics['number']  );
@@ -503,6 +506,7 @@
 		ChangeHtmlContentByID( '#pcars-dsnow' 		, "DS now: "		+ e.data.globals.now );				
 		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );		
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
+		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos );
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
@@ -735,7 +739,7 @@
                                         ,receivemode:   "GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-			case "CREST2":                   //CREST2 receive mode
+						case "CREST2":                   //CREST2 receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CREST2ServerURL
@@ -1365,21 +1369,21 @@ function refreshDriverList(a)
 		if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
 		_data = {   
-					refid:			a[i].RefID
+					refid:				a[i].RefID
 					,driverposition:	a[i].RacePosition	
 					,drivername:		a[i].Name
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
-					,lapnumber:		a[i].CurrentLap
+					,lapnumber:			a[i].CurrentLap
 					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
-					,lastlap:		ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
+					,lastlap:			ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
 					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
-					,gap2ahead:		Gaps.gap2ahead
-					,gap2first:		Gaps.gap2first
-					,isplayer:		ConvertIsPlayer(a[i].IsPlayer)
-					,posx:			a[i].PosX
-					,posy:			a[i].PosY
-					,posz:			a[i].PosZ
+					,gap2ahead:			Gaps.gap2ahead
+					,gap2first:			Gaps.gap2first
+					,isplayer:			ConvertIsPlayer(a[i].IsPlayer)
+					,posx:				a[i].PosX
+					,posy:				a[i].PosY
+					,posz:				a[i].PosZ
 		};
 		//decision if replace or add a row to jqGrid
 		/*if (i < GridSize){	//disabled, because after clearGridData GridSize is 0 every time
@@ -1754,7 +1758,14 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
         var reader = new FileReader();
         reader.onload = function () {			
 			//INFO: it slice file with static value 33. hopefully its each time the same length to cut off the prefix like "___PCARSCompressedJSONC_v01___" !!            			
-			PCARS_Rec.importData(reader.result.slice(33));			
+			PCARS_Rec.importData(reader.result.slice(33));	
+
+			//switch to demo mode
+			HTMLCTRL.APIMODE_SetSelection( "DEMO" );
+			
+			//and initialize dome array with new data
+			initDemoData(PCARS_Rec.getCurrentData(), "yes")
+			
         };		
         // start reading the file. When it is done, calls the onload event defined above.
         reader.readAsBinaryString(fileInput.files[0]);
@@ -1763,9 +1774,17 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
-function initDemoData(aNewData, isSetDemoMode, ){
+function initDemoData(aNewData, SetApiModeTo ){
 
-
+	// overwrite global array with new data
+	demo = aNewData;
+			
+	//ToDO:   set start / end index to new values
+	demo_start_pos 		= 0;
+	demo_end_pos 		= 9999;
+	record_pos 			= 0;
+	record_pos_helper 	= 0;	
+	
 	return 1;
 }
 

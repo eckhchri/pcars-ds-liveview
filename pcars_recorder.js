@@ -18,7 +18,7 @@ function PCARSRECORDER(config)
         return this;
 }
 
-function getStatistics (){
+function getStatistics(){
 	// size of array => this.getDatasetSize();
 	// used memory
 	// version
@@ -27,8 +27,13 @@ function getStatistics (){
 	return {number: this.getDatasetSize(), size: this.memorySizeOf (this.data)};
 }
 
-function getDatasetSize() {
+function getDatasetSize(){
 	return this.data.length;
+}
+
+function getCurrentData(){
+	//export the curent array of data
+	return this.data;
 }
 
 function clearDataSet() {
@@ -169,9 +174,10 @@ function memorySizeOf(obj) {
 
 PCARSRECORDER.prototype.getStatistics	=	getStatistics;
 PCARSRECORDER.prototype.getDatasetSize	=	getDatasetSize;
+PCARSRECORDER.prototype.getCurrentData 	=	getCurrentData;
 PCARSRECORDER.prototype.clearDataSet	=	clearDataSet;
 PCARSRECORDER.prototype.importData		=	importData;
 PCARSRECORDER.prototype.addDataset		=	addDataset;
 PCARSRECORDER.prototype.memorySizeOf	=	memorySizeOf;
-PCARSRECORDER.prototype.exportDataCompressed	=	exportDataCompressed;
 PCARSRECORDER.prototype.unCompressData	=	unCompressData;
+PCARSRECORDER.prototype.exportDataCompressed	=	exportDataCompressed;
