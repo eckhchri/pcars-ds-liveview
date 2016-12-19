@@ -98,13 +98,6 @@ function importData(compressedData){
 	return 1;
 }
 
-
-function unCompressData(compressedStr, LzwComprEna){
-
-	return JSONC.unpack( compressedStr, LzwComprEna);
-}
-
-
 function addDataset(dataset) {
 	// TODO:  define Format
 	if(log >= 3){console.log("---+++ PCARSRECORDER data added:   ", dataset);}
@@ -168,5 +161,4 @@ PCARSRECORDER.prototype.clearDataSet	=	clearDataSet;
 PCARSRECORDER.prototype.importData		=	importData;
 PCARSRECORDER.prototype.addDataset		=	addDataset;
 PCARSRECORDER.prototype.memorySizeOf	=	memorySizeOf;
-PCARSRECORDER.prototype.unCompressData	=	unCompressData;
 PCARSRECORDER.prototype.exportDataCompressed	=	exportDataCompressed;
