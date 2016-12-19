@@ -74,7 +74,7 @@ function exportDataCompressed(filename){
 
 function importData(compressedData){
 
-	if(log >= 3){console.log('+++++++++++ PCARSREC importData(). Importing new data !' );};	
+	if(log >= 3){console.log('+++++++++++ PCARSREC importData(). Importing new compressed data: ', compressedData );};	
 
 	var new_zip = new JSZip();
 	new_zip.loadAsync(compressedData)
@@ -86,11 +86,12 @@ function importData(compressedData){
 	.then(function success(uncompressedData) {
         			
 		uncompressedData = JSON.parse(uncompressedData);
-		this.data = uncompressedData;
+		//TODO: really needed to save import to this.data?????????????????????????????????????????
+		//this.data = uncompressedData;
 		initDemoData(uncompressedData, "yes"); //-> Async Call
 				
       }, function error(e) {
-		alert("Hilfe" + e);
+		alert("Error unzip: " + e);
       });
 							
 	if(log >= 3){console.log('+++++++++++ PCARSREC parsed :  ', this.data );};	

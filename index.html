@@ -412,7 +412,39 @@
     		});
     		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
-
+	
+	
+	// in the case of APIMODE==DEMO, load zipped demo file to variable demo
+	if ( APIMODE == "DEMO" )
+	{		
+		//http://api.jquery.com/jQuery.ajax/       
+		$.ajax({			
+		    type:    		"GET",
+		    url:     		"http://www.eckhchri.de/pcars/data/demo/PCARS_recording.zip",
+		    contentType:	'application/zip',
+	        dataType:		'text',
+			beforeSend: function( xhr ) {
+				xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
+			},
+		    success: function(zip-stream) {
+		        if(log >= 3){console.log('+++++++++++ Ajax Load File: ', zip-stream );}
+		        PCARS_Rec.importData(zip-stream); // including decompress and set variable demo with new data via initdemodata()
+		    },
+		    statusCode: {
+		        404: function() {
+		          alert( "page not found" );
+		        }
+		    },
+		    error:   function(e) {
+		        // An error occurred
+		    	alert("Error Test12345");
+		        //demo = {};
+		    }
+		});
+		
+	}
+	
+	
 	// initiate jqGrid for DriverData
 	// todo: make table searchable   and  add new Theme
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
@@ -1785,6 +1817,7 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 	//TODO:  Reset fileInput. Needed to load file with same name again
 	if(log >= 3){console.log('---------- initRecFileReader (fileInput): ' ,  fileInput )};
 }
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initDemoData(aNewData, SetApiModeTo ){
