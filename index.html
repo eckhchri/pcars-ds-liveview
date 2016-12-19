@@ -8,8 +8,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
-	<script language="javascript" src="./lib/FileSaver/FileSaver.js"></script>	
-	<script language="javascript" src="./lib/jszip/jszip.min.js"></script>
+	<script src="./lib/FileSaver/FileSaver.js"></script>	
+	<script src="./lib/jszip/jszip.min.js"></script>
 			
 	<link rel="stylesheet" type="text/css" href="./lib/w2ui/w2ui-1.4.3.min.css" />
     <script type="text/javascript" src="./lib/w2ui/w2ui-1.4.3.min.js"></script>
@@ -1781,6 +1781,9 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
         reader.readAsBinaryString(fileInput.files[0]);
     };
 	fileInput.addEventListener('change', readFile);
+
+	//TODO:  Reset fileInput. Needed to load file with same name again
+	if(log >= 3){console.log('---------- initRecFileReader (fileInput): ' ,  fileInput )};
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
