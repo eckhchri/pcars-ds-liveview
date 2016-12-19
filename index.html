@@ -426,9 +426,9 @@
 			beforeSend: function( xhr ) {
 				xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
 			},
-		    success: function(zip-stream) {
-		        if(log >= 3){console.log('+++++++++++ Ajax Load File: ', zip-stream );}
-		        PCARS_Rec.importData(zip-stream); // including decompress and set variable demo with new data via initdemodata()
+		    success: function(text) {
+		        //if(log >= 3){console.log('+++++++++++ Ajax Load File: ', text );}
+		        PCARS_Rec.importData(text); // including decompress and set variable demo with new data via initdemodata()
 		    },
 		    statusCode: {
 		        404: function() {
