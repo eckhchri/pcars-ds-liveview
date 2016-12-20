@@ -120,6 +120,19 @@
 				<div id="pcars-rec-elemnr" ></div>
 				<div id="pcars-rec-elemsize" ></div>		
 			</div>
+			<div class="box">				
+				<div>Start Abspielen</div>
+				<div>Stop</div>
+			</div>
+			<div class="box">				
+				<div>change via GUI: demo_start_pos:</div>
+				<div>change via GUI: demo_end_pos</div>
+			</div>
+			<div class="box">
+				<div id="pcars-record_pos"></div>
+				<div id="pcars-record_max"></div>
+			<div class="box">
+			
 		</div>
 	</div>
 
@@ -361,8 +374,7 @@
         });            
 	}); // end #DRIVERCOLOR change Venet
 
-	
-	
+		
 	// Event handler for Slider
 	$(function() {
 		$( "#slider-range-max" ).slider({
@@ -415,13 +427,10 @@
 	
 	// in the case of APIMODE==DEMO, load zipped demo file to variable demo
 	if ( APIMODE == "DEMO" )
-	{	
-		
-		open_popup_load_demofile();
-						
+	{			
+		open_popup_load_demofile();						
 	}
-	
-	
+		
 	// initiate jqGrid for DriverData
 	// todo: make table searchable   and  add new Theme
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
@@ -540,7 +549,7 @@
 		ChangeHtmlContentByID( '#pcars-dsnow' 		, "DS now: "		+ e.data.globals.now );				
 		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );		
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
-		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos );
+		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos + " / "  + demo.length);		
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
