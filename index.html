@@ -114,6 +114,9 @@
 				<input id="RecFileUploader" type="file" name="Select PCARS File">				
 			</div>
 			<div class="box">
+				<button id="btn-load-demo-file" class="btn" onclick="open_popup_load_demofile();">Load from URL</button>
+			</div>
+			<div class="box">
 				<div>Stats:</div>
 			</div>
 			<div class="box">
@@ -1843,8 +1846,7 @@ function LoadDemoFile(){
 			beforeSend: function( xhr ) {
 				xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
 			},
-		    success: function(text) {
-		        //if(log >= 3){console.log('+++++++++++ Ajax Load File: ', text );}
+		    success: function(text) {		        
 		        PCARS_Rec.importData(text); // including decompress and set variable demo with new data via initdemodata()
 		    },
 		    statusCode: {
@@ -1854,19 +1856,18 @@ function LoadDemoFile(){
 		    },
 		    error:   function(e) {
 		        // An error occurred
-		    	alert("Error Test12345");
-		        //demo = {};
+		    	alert("Error! Could not load file.");
 		    }
 		});
   	
     });			
 }
 
-function open_popup_load_demofile(){
-	//http://api.jquery.com/jQuery.ajax/  				
+function open_popup_load_demofile(){	  				
 	// get list of available demo files in path ./data/demo/
 	var url1 = GetURLPath() + "helper/dir_listing_demo.php";
 	
+	//http://api.jquery.com/jQuery.ajax/
 	$.ajax({			
 	    type:    		"GET",
 	    url:     		url1,
@@ -1875,12 +1876,12 @@ function open_popup_load_demofile(){
 	    success: function(text) {
 	    	var htmlselection = '<option value=""></option>';
 			for (i = 0; i < text.length; i++){		    	   
-				htmlselection += '<option value="' + text[i] +'">' + text[i] + '</option>';   
+				htmlselection += '<option value="' + text[i] +'">' + text[i] + ' ( ' + url1 +' )' + '</option>';   
 			}		    
 	        
 	        // open popup window with selection field
 			w2popup.open({
-	        	width: 400,
+	        	width: 600,
 	            height: 150,
 	            title:	'Popup Loading Demo Files',
 	            body:			            
