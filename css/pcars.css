@@ -96,8 +96,11 @@
 				height:			85%;
 			                    
 	     }
+	     
+		
 	
 		#DSRecStatistics{	     		
+				display: 			table;
 				background-color:	grey;
 				opacity: 			0.95;
 				margin: 			auto;
@@ -115,10 +118,20 @@
 				
 	     }
 		 .box{
-			float: 			left;
+		 	display: 		table-cell;		 	
+			
 			padding:		10px;
 			border:			1px;
 		 }
+		 
+		div.replay_row{
+			display:	table-row;
+			position:	center;		
+		}
+		div.replay_cell{
+			display:table-row;		
+		}
+		 
 	     
 		#DSstatistic{	     		
                 background: 		hsla(50,80%,80%,0.8);
@@ -211,11 +224,11 @@
 }
 
 input:checked + .slider {
-  background-color: red;
+  background-color: #2196F3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px red;
+  box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {

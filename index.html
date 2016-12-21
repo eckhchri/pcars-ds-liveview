@@ -17,6 +17,7 @@
  	<!-- CSS definitions moved to folder ./css/ --> 
 	<link rel="stylesheet" href="./css/pcars.css">
 	<link rel="stylesheet" href="./css/w2ui.css">
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
  		
 	<!-- Jquery UI needed for jTable and the function dragable/resize-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -28,6 +29,7 @@
 	<!-- The atual jqGrid code -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
 
+	
 	
 	<script src="./config.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
@@ -91,8 +93,42 @@
 	<div id="DriverDataArea" class="pcarswindowgrp2">
 		<table id="DriverDataTable"></table>
 	</div>
-		<div id="DSRecStatistics" class="box">			
+	
+	
+	
+	<div id="DSRecStatistics" class="box">
+	<!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
+		<div class="replay_row">
+			<div class="box">				
+				<div><i class="fa fa-backward fa-2x"></i></div>				
+			</div>
 			<div class="box">
+				<div><i class="fa fa-pause fa-2x"></i></div>
+			</div>
+			<div class="box">				
+				<div><i class="fa fa-play fa-2x"></i></div>				
+			</div>
+			
+			<div class="box">
+				<div><i class="fa fa-fast-forward fa-2x"></i></div>
+			</div>
+			<div class="box">				
+				<div>loop start pos:</div>
+				<div><input name="field_textarea" type="number" size="3" maxlength="3" style="width: 40px;"/></div>
+			</div>
+			
+			<div class="box">
+				<div>loop end pos:</div>
+				<div><input name="field_textarea" type="number" size="3" maxlength="3" style="width: 40px;"/></div>
+			</div>
+			
+			<div class="box">
+				<div id="pcars-record_pos"></div>
+				<div id="pcars-record_max"></div>
+			</div>
+		</div>	
+		<div class="replay_row">
+			<div class="box replay_cell">
 				<div>Start Recording:</div>
 			</div>
 			<div class="box">
@@ -117,27 +153,15 @@
 				<button id="btn-load-demo-file" class="btn" onclick="open_popup_load_demofile();">Load from URL</button>
 			</div>
 			<div class="box">
-				<div>Stats:</div>
-			</div>
+				<div>Rec Stats:</div>
+			</div>	
 			<div class="box">
 				<div id="pcars-rec-elemnr" ></div>
 				<div id="pcars-rec-elemsize" ></div>		
-			</div>
-			<div class="box">				
-				<div>Start Abspielen</div>
-				<div>Stop</div>
-			</div>
-			<div class="box">				
-				<div>change via GUI: demo_start_pos:</div>
-				<div>change via GUI: demo_end_pos</div>
-			</div>
-			<div class="box">
-				<div id="pcars-record_pos"></div>
-				<div id="pcars-record_max"></div>
-			<div class="box">
-			
+			</div>				
 		</div>
 	</div>
+	
 
 	<!-- definition of option panel-->	
 	<div id="Settings" class="pcarswindowgrp2">
