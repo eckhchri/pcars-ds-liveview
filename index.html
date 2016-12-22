@@ -29,8 +29,6 @@
 	<!-- The atual jqGrid code -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
 
-	
-	
 	<script src="./config.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
 	<script src="./pcars_track.js" charset="utf-8"></script>
@@ -41,9 +39,8 @@
 	<script src="./calc_coordinates.js" charset="utf-8"></script>
 	<script src="./class_reference_points.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
-	<script src="./pcars_recorder.js" charset="utf-8"></script>
-	<!-- <script src="./demo_data.js" charset="utf-8"></script>  -->
-	
+	<script src="./pcars_recorder.js" charset="utf-8"></script>	
+		
    </head>
   <body>
    
@@ -94,8 +91,7 @@
 		<table id="DriverDataTable"></table>
 	</div>
 	
-	
-	
+
 	<div id="DSRecStatistics" class="box">
 	<!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
 		<div class="replay_row">
@@ -107,21 +103,18 @@
 			</div>
 			<div class="box">				
 				<div><i class="fa fa-play fa-2x"></i></div>				
-			</div>
-			
+			</div>			
 			<div class="box">
 				<div><i class="fa fa-fast-forward fa-2x"></i></div>
 			</div>
 			<div class="box">				
 				<div>loop start pos:</div>
 				<div><input name="field_textarea" type="number" size="3" maxlength="3" style="width: 40px;"/></div>
-			</div>
-			
+			</div>			
 			<div class="box">
 				<div>loop end pos:</div>
 				<div><input name="field_textarea" type="number" size="3" maxlength="3" style="width: 40px;"/></div>
 			</div>
-			
 			<div class="box">
 				<div id="pcars-record_pos"></div>
 				<div id="pcars-record_max"></div>
@@ -365,18 +358,14 @@
 	$("#APIMODE").change(function() {
 			$("#APIMODE option:selected").each(function() {
 					APIMODE = $( this ).text();
-					if(log >= 3){console.log('------- Switch API Mode to: ', APIMODE );}										
+					if(log >= 4){console.log('------- Switch API Mode to: ', APIMODE );}										
 			});			
 	}); // end #APIMODE change event
 	
 	// Recording button
-	$("#btn-start-rec-data").change(function() {
-			
-		//alert("Button Recording presse");			
+	$("#btn-start-rec-data").change(function() {			
 		if ( !isRecEnabled){ PCARS_Rec.clearDataSet()};
-		isRecEnabled = !isRecEnabled;	//switch between true/false
-		if(log >= 3){console.log('------ isRecEnabled set to: ' , isRecEnabled  )};
-			
+		isRecEnabled = !isRecEnabled;	//switch between true/false					
 	});
 			
 	$( "#DRIVERCOLOR" ).change(function() {
@@ -416,8 +405,8 @@
 			max: 1000,
       			value: DisplayDurationCorrector, 
 			step: 25,
-      			slide: function( event, ui ) {
-        			$( "#amount" ).val( ui.value );
+			slide: function( event, ui ) {
+        		$( "#amount" ).val( ui.value );
 				//set new value
 				DisplayDurationCorrector = ui.value;
       			}
@@ -461,7 +450,6 @@
 	
 		
 	// initiate jqGrid for DriverData
-	// todo: make table searchable   and  add new Theme
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
@@ -481,15 +469,10 @@
 			rowNum: 200,
 			//rowList:[10,20,30],
 			//pager: 'pager_tracklisttable',
-	});
-			
-	// add filter option bar
+	});			
+	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
-
-	// add StopRefresh Table button in jqgrid header
-	//Method with checkbox
-	//$('#TrackList span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbTracklistRefresh"/>');
-	//Method with Button
+	//add StopRefresh table button within jqgrid header - Method with Button
 	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd; width:50px" disabled></input>');
 
 
@@ -535,25 +518,19 @@
 	
 	workerVEHICLELIST.addEventListener('message', function(e) {
 		
-		if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker returned: e ', e );}
+		if(log >= 4){console.log('+++++++++++ GETVEHICLELIST Worker returned: e ', e );}
 		if ( e.data.avehiclelist.length > 0 ){
 			
 			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var			
-			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);
-		
+			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);		
 			//display vehicle data in table 
 			PCARSVehicleList.setVehicleData(aVehicleList);
 			refreshVehicleList(PCARSVehicleList);
-			
-			// no additional worker call needed, because needed data available			
-			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST Worker stopped and copy data to aVehicleList', aVehicleList );}
 									
 		}else{			
 			// no return value from DS, start another run
-			if(log >= 3){console.log('+++++++++++ GETVEHICLELIST start new Worker run.' );}
 			workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
-		}
-		
+		}		
 	}, false);
 	workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
 	
@@ -565,7 +542,7 @@
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
-		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+		if(log >= 4){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
 		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
@@ -651,7 +628,7 @@
 			}
 		}
 
-		if(log >= 3){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
+		if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		
 		/////////////////////////////////////////// update driver data /////////////////////
 		// refresh table of Driver data
@@ -663,8 +640,8 @@
 		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
 
 		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
-                //if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
-                //if (SessionState_old == "" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}         //Hide if you open the website during "Loading"
+		//if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
+		//if (SessionState_old == "" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}         //Hide if you open the website during "Loading"
 		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
 		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
@@ -679,7 +656,7 @@
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
 
-				if(log >= 3){console.log('+++++++++++ DriverData Array  ', e.data.driverlist);}
+				if(log >= 4){console.log('+++++++++++ DriverData Array  ', e.data.driverlist);}
 				
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
@@ -698,8 +675,7 @@
 				}
 				
 				//gatthering all vehicle classes of the current race
-				aCurrentVehicleClasses[i] = e.data.driverlist[i].Name;
-				
+				aCurrentVehicleClasses[i] = e.data.driverlist[i].Name;				
 		}
 		
 		
@@ -714,7 +690,6 @@
 		}
 	
 		
-		
         sensorLayer_UpdateTime = Date.now();
 		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
 		sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
@@ -728,14 +703,13 @@
 		}
 		if (DisplayDuration < 0) { DisplayDuration = 0 }        //catch a negative value
 		if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration
-		if(log >= 2){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
+		if(log >= 4){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}
                 
-		if(log >= 3){console.log("++++++++ aSensorData_NEW" , aSensorData);}
+		if(log >= 4){console.log("++++++++ aSensorData_NEW" , aSensorData);}
 		sensorLayer.update(aSensorData);
 
 		// in case track changes on DS adjust the map settings for new possition
-        if ( cuircitID != tmpcuircitID ){
-			//if(log >= 3){console.log("----------- TrackID SHOULDbe changed: ", aRefPointTMP);}
+        if ( cuircitID != tmpcuircitID ){			
 			if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
 			//map.setCenter({lat: 50.332733, lng: 6.943355});
 			changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
@@ -770,13 +744,12 @@
 						PCARS_Rec.addDataset({
 									globals:		e.data.globals,
 									participants:	e.data.driverlist
-								});								                      
-                }
+						});								                      
+		}
 		
 		//call worker again for next itteration -> currently endless loop
 		switch(APIMODE) {
-                        case "DS":
-                                //DS receive mode
+                        case "DS": //DS receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 DsServerURL
@@ -785,7 +758,7 @@
                                         ,receivemode:   "GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-                        case "CREST":                   //CREST receive mode
+                        case "CREST": //CREST receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CRESTServerURL
@@ -794,7 +767,7 @@
                                         ,receivemode:   "GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-						case "CREST2":                   //CREST2 receive mode
+						case "CREST2":  //CREST2 receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CREST2ServerURL
@@ -803,8 +776,7 @@
                                         ,receivemode:   "GETCREST2DRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-                        case "DEMO":
-                                //DEMO receive mode
+                        case "DEMO":   //DEMO receive mode
 
 	                        //Calculation of WORKERDELAY_DEMODATA to adapt the playback speed to the recording speed
 	                        //The record_pos is the array element of the recorded data and correlates to one worker run. Each element includes the sensorLayer_UpdateDelta. This is the time between the last and the current worker run. Now we calculate the WORKERDELAY_DEMODATA, which is the delay to the next worker run. Because of that we need the sensorLayer_UpdateDelta of the next array element and not of the current.
@@ -897,30 +869,21 @@
 
 	// add map Listener
 	map.addListener('zoom_changed', function() {
-		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
-        	StopTransitionDelay = "true";
-        	//StopTransitionDelay_StartTime = Date.now();
-        	sensorLayer.interruptTransition();
-        	sensorLayer.update(aSensorData);
-		if(log >= 3){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
+		if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
+		StopTransitionDelay = "true";
+        //StopTransitionDelay_StartTime = Date.now();
+		sensorLayer.interruptTransition();
+		sensorLayer.update(aSensorData);
+		if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
   	});
 
 	// create Table with list of all tracks
 	// checkbox Event handling
 	$('#cbTracklistRefresh').click(function () {
-
-		/* Method with checkbox
-		if ($('#cbTracklistRefresh').is(':checked') == true) {
-			StopRefreshTracklist 	= "true";
-			WORKERDELAY_TRACKLIST 	= 10000;
-		}else{
-			StopRefreshTracklist 	= "false";
-			WORKERDELAY_TRACKLIST	= 5000;
-		}*/
+	
 		//Method with button
 		var self = this;
-		changeRefreshTracklist(self);
-                
+		changeRefreshTracklist(self);                
 	});
 	
 	function changeRefreshTracklist(data){
@@ -968,7 +931,6 @@
 	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTMP });
 
 
-
 	//todo: add subgrid for more drivers information
 	jQuery("#DriverDataTable").jqGrid({
                 datatype: "local",
@@ -989,7 +951,7 @@
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
-			{name:'gap2first',width:30, align:"center",sorttype:"text"},
+						{name:'gap2first',width:30, align:"center",sorttype:"text"},
                         {name:'isplayer',width:20, align:"center",sorttype:"text"},
                         {name:'posx',hidden: true,width:20, align:"center",sorttype:"float"},
                         {name:'posy',hidden: true,width:20, align:"center",sorttype:"float"},
@@ -1014,21 +976,20 @@
 	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Pause automatic refresh of table" id="cbDriverlistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;">');
 			
 	// checkbox Event handling
-        $('#cbDriverlistRefresh').click(function () {
+	$('#cbDriverlistRefresh').click(function () {
 
-                /* Method with checkbox
-                if ($('#cbDriverlistRefresh').is(':checked') == true) {
-                        StopRefreshDriverlist   = "true";
-                }else{
-                        StopRefreshDriverlist  	= "false";
-                }*/
-                //Method with Button
-                var self = this;
-                changeRefreshDriverlist(self);
-                                                
-        });
+		/* Method with checkbox
+		if ($('#cbDriverlistRefresh').is(':checked') == true) {
+			StopRefreshDriverlist   = "true";
+		}else{
+			StopRefreshDriverlist  	= "false";
+		}*/
+		//Method with Button
+		var self = this;
+		changeRefreshDriverlist(self);                                                
+	});
         
-        function changeRefreshDriverlist(data){
+	function changeRefreshDriverlist(data){
                 if(data.value === "Pause"){
                         StopRefreshDriverlist   = "true";
                         data.value = "Play";
@@ -1040,11 +1001,9 @@
                         data.title = "Pause automatic refresh of table";
                         data.style="background-color:#dddddd";
                 }
-        }
+	}
 
-	$('#cbDriverlistExport').click(function () {
-		//jqGrid("getRowData") used, because with jqGrid("getGridParam", "data") is nor sort possible. getRowData is automatically sorted like you see it on the website, but only works for the current page if you have a pager enabled.
-		//JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getGridParam", "data"), "",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","posx","posy","posz",],"Report_DriverTable");
+	$('#cbDriverlistExport').click(function () {		
 		ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","posx","posy","posz",]/*,"Report_DriverTable"*/),"Report_DriverTable");
 	});
 	
@@ -1094,63 +1053,7 @@
                               
                this.draw = function () {                   
                    var padding = 10;
-                   _projection = this.getProjection();
-		  
-					// complete block moved to update function
-		/*
-                   var marker = _div.selectAll("svg")
-                       .data(_data, function (d) { return d.Key; })
-                       .each(transform) // update existing markers
-                        .enter().append("svg:svg")
-                       .each(transform)
-                       //.attr("class", "marker");
-                   		.attr("class", function (d){ return d.CSSTextClasses });
-           
-                   
-		   		   //if(log >= 3){console.log("++ Marker" , marker);}
-
-                   // Add a circle.
-                   marker.append("svg:circle") 
-                       .attr("r", 4.5)
-                       .attr("cx", padding)
-                       .attr("cy", padding)
-                       .attr("class", function (d){ return d.CSSCircleClasses } );
-		       		   //.style("fill", "red");
-
-					//todo experimental method call	
-					//marker.text("test123456");	
-					if(log >= 3){console.log("Marker: " , marker);}
-		
-
-                   // Add a label.
-					if(log >= 3){console.log ("++++ in function draw() ->  aSensorData: " , aSensorData);}
-                   marker.append("svg:text")
-                       .attr("x", padding + 7)
-                       .attr("y", padding)
-                       .attr("dy", ".31em")
-			//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
-			//      it seem that the function within .text(...) will called only once at the beginning 
-			//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
-		       .text(function (d) {
-						//if(log >= 4){console.log("+++++ d: " , d );}
-						//if(log >= 4){console.log("+++++ this: " , this );}
-
-						for (var i = 0; i < aSensorData.length; i++){
-						
-							//if(log >= 4){console.log(" for Update MarkerLabel:" , aSensorData);}
-							if (aSensorData[i].Key == d.Key){
-								if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
-								return  aSensorData[i].MarkerLabel;
-							}
-						}
-						
-						//todo: during update d is not an array its an individual hash
-						//if(log >= 3){console.log("++++not array:");}
-						return d.MarkerLabel;
-						
-					})
-               //       .text(function (d) { return d.Key; });                                      
-			*/
+                   _projection = this.getProjection();		  
                };
 
                this.onRemove = function () {
@@ -1172,8 +1075,7 @@
 			   var CurrentTime = Date.now();
 			   var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
 
-			   if( StopTransitionDelay == "true" )
-			   {
+			   if( StopTransitionDelay == "true" ){
 					if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
 					//this.draw();
 					marker = _div.selectAll("svg")
@@ -1188,7 +1090,6 @@
 					if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
 			
 			   }else{
-
 					if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
 					//this.draw();
 	
@@ -1219,16 +1120,15 @@
 				//      it seem that the function within .text(...) will called only once at the beginning
 				//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
 				.text(function (d) {
-					if(log >= 4){console.log("+++++ d: " , d );}
+					//if(log >= 4){console.log("+++++ d: " , d );}
 
 					for (var i = 0; i < aSensorData.length; i++){
 						if (aSensorData[i].Key == d.Key){
-						if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
-						return  aSensorData[i].MarkerLabel;
+							//if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
+							return  aSensorData[i].MarkerLabel;
 						}
 					}
 					return d.MarkerLabel;
-
 				})
 				
 			// Update CSS classes new
@@ -1270,7 +1170,7 @@
 				}
             }; // end interruptTransition()
             
-          }
+          } // end GPSSensor(initData)
 
 
 //////////////////////////////////////////////////////////////////////////
@@ -1307,8 +1207,7 @@ function init_map(_TrackID , aRefPoint)
 }
 
 
-function changeMapSettings(newTrackObj, mapobj)
-{
+function changeMapSettings(newTrackObj, mapobj){
 	//todo: replace map (global variable) with mapobj(if this is not a copy)
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 	map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
@@ -1323,14 +1222,13 @@ function changeMapSettings(newTrackObj, mapobj)
 }
 
 ///////////////////
-function refreshTrackList(a)
-{
+function refreshTrackList(a){
 	//if(log >= 3){console.log("------------------------ refreshTrackList() parameter a : " , a);}
 
 	// if set to true, no refresh of table wanted
 	if (StopRefreshTracklist == "true")
 	{
-		if(log >= 3){console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );}
+		if(log >= 4){console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );}
 		return 1;
 	}
 
@@ -1340,9 +1238,7 @@ function refreshTrackList(a)
 	var gridcnt = 0;
 	var _data;
 	
-	for (var key in a ){
-
-		//if(log >= 3){console.log("--- Info for loop value a[key]: ", a[key]);}
+	for (var key in a ){		
 		_data = {
                                         id:             gridcnt
                                         ,trackid:       a[key]["trackid"]
@@ -1362,8 +1258,8 @@ function refreshTrackList(a)
 }
 
 //fill
-function refreshVehicleList(aVL)
-{
+function refreshVehicleList(aVL){
+	
 	a	=	aVL.getVehicleList();
 	var _data;
 	
@@ -1390,15 +1286,12 @@ function refreshVehicleList(aVL)
 }
 
 //////////////////
-function refreshDriverList(a)
-{
+function refreshDriverList(a){
 	// if set to true, no refresh of table wanted
-        if (StopRefreshDriverlist == "true") {
+	if (StopRefreshDriverlist == "true") {
                 if(log >= 3){console.log("--- INFO stop refresh tracklist because StopRefreshDriverlist set to:", StopRefreshDriverlist );}
                 return 1;
-        }
-
-	if(log >= 2){console.log("refreshDriverList(e): " , a);}
+	}
 
 	var _data;
 	var _allDrivers = new Array();
@@ -1407,8 +1300,8 @@ function refreshDriverList(a)
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
 
-        // get current size of the table
-        //var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	//disabled, because after clearGridData it is 0 every time
+	// get current size of the table
+    //var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	//disabled, because after clearGridData it is 0 every time
 
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
@@ -1456,30 +1349,27 @@ function refreshDriverList(a)
 
 	//Hide columns diff and gap during SessionStage Race1 and Race2
 	if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
-		if(log >= 3){console.log("Hide Gaps");}
+		//if(log >= 3){console.log("Hide Gaps");}
 		jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
 	}
 	if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
-		if(log >= 3){console.log("Show Gaps");}
+		//if(log >= 3){console.log("Show Gaps");}
 		jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
 	}
 
 	jQuery("#DriverDataTable").trigger("reloadGrid");
 
-
 	return 1;
 }
 
-function buildDriverName(drivername , raceposition)
-{
+function buildDriverName(drivername , raceposition){
 	// Diego Xavier on race position 5 => "5-Diego Xavier"
 	return raceposition + "-" + drivername;
 }
 
 function transformVehicleObjectToHash(a){
 	
-	var hash = {};
-	
+	var hash = {};	
 	for (var i=0; i < a.length; i++){
 		// '' + a[i].vehicleid -> needed to convert negative numbers to string
 		hash[ '' + a[i].vehicleid ] = a[i].name;
@@ -1525,8 +1415,7 @@ function buildTracklist( aTrackList , aRefPoint ){
 	var aSkipList		= []; //List of all existing RefIDs
 
 	// go through all responded tracks from pcars dedicated server
-	for (var i=0; i < aTrackList.length; i++)
-	{
+	for (var i=0; i < aTrackList.length; i++) {
 		tmpObject = aTrackList[i];
 
 		//if refpoint for a track exists
@@ -1558,8 +1447,7 @@ function buildTracklist( aTrackList , aRefPoint ){
 			
 	//fill up with refpoint entries that are not listed in DS array
 	for (var key in aRefPointInt ){
-		
-		
+				
 		//skip run if allready found 
 		if ( aSkipList['' + key] ){
 			continue;		
@@ -1790,10 +1678,9 @@ function ExportCSV(CSV,fileName){
 	}
 }
 
-function get_url_param( name )
-{
+function get_url_param( name ) {
+	
 	name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
-
 	var regexS = "[\\?&]"+name+"=([^&#]*)";
 	var regex = new RegExp( regexS );
 	var results = regex.exec( window.location.href );
@@ -1900,7 +1787,7 @@ function open_popup_load_demofile(){
 	    //contentType:	'application/zip',
 	    dataType:		'json',			
 	    success: function(text) {
-	    	var htmlselection = '<option value=""></option>';
+	    	var htmlselection;
 			for (i = 0; i < text.length; i++){		    	   
 				htmlselection += '<option value="' + text[i] +'">' + text[i] + '</option>';   
 			}		    
@@ -1910,7 +1797,8 @@ function open_popup_load_demofile(){
 	        	width: 600,
 	            height: 150,
 	            title:	'Popup Loading Demo Files',
-	            body:			            
+	            body:
+	            	'<div height="100%" align="center" vertical-align="middle">' +
 		            '<label for="pcars_demofile_select">Select a file</label>' +
 		            '<select id="pcars_demofile_select" name="pcars_demofile_select">' +
 		              '<optgroup label="files online from ' + url1  + '">' +
@@ -1919,7 +1807,8 @@ function open_popup_load_demofile(){
 		              '<optgroup label="Other files">' +
 		                '<option value="somefile">Some other file from git URL</option>' +			                
 		              '</optgroup>' +
-		            '</select>',
+		            '</select>' +
+		            '</div>',
 	            buttons:	'<button class="w2ui-btn" onclick="w2popup.close();LoadDemoFile();">Load</button>'+
 	              			'<button class="w2ui-btn" onclick="w2popup.close()">Cancel</button>',
 				onClose: 	function (event) { 
@@ -2038,15 +1927,10 @@ function initW2UI(){
 	     	}
 	    }); // end of w2ui.toolbar.on()
 		
-		
-		
-		      	
-		
 	}); // end of function top toolbar
 
 	
-
-}; //
+}; // end of initW2UI()
 
 
        </script>
