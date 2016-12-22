@@ -42,7 +42,7 @@
 	<script src="./class_reference_points.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
 	<script src="./pcars_recorder.js" charset="utf-8"></script>
-	<script src="./demo_data.js" charset="utf-8"></script>
+	<!-- <script src="./demo_data.js" charset="utf-8"></script>  -->
 	
    </head>
   <body>
@@ -271,6 +271,12 @@
 	if(demo_end_pos < 0){
 		demo_end_pos = 0;
 	}
+	
+	// in the case of APIMODE==DEMO, load zipped demo file to variable demo
+	if ( APIMODE == "DEMO" )
+	{			
+		open_popup_load_demofile();						
+	}
 								
 	// hide or unhide objects as defined within config.js
 	if ( SHOWTRACKLIST 	== false ) { 	$( "#TrackList" ).hide();		}
@@ -452,11 +458,7 @@
     		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
 	
-	// in the case of APIMODE==DEMO, load zipped demo file to variable demo
-	if ( APIMODE == "DEMO" )
-	{			
-		open_popup_load_demofile();						
-	}
+	
 		
 	// initiate jqGrid for DriverData
 	// todo: make table searchable   and  add new Theme
@@ -1900,7 +1902,7 @@ function open_popup_load_demofile(){
 	    success: function(text) {
 	    	var htmlselection = '<option value=""></option>';
 			for (i = 0; i < text.length; i++){		    	   
-				htmlselection += '<option value="' + text[i] +'">' + text[i] + ' ( ' + url1 +' )' + '</option>';   
+				htmlselection += '<option value="' + text[i] +'">' + text[i] + '</option>';   
 			}		    
 	        
 	        // open popup window with selection field
@@ -1911,7 +1913,7 @@ function open_popup_load_demofile(){
 	            body:			            
 		            '<label for="pcars_demofile_select">Select a file</label>' +
 		            '<select id="pcars_demofile_select" name="pcars_demofile_select">' +
-		              '<optgroup label="files online">' +
+		              '<optgroup label="files online from ' + url1  + '">' +
 		              	htmlselection	+ 	
 		              '</optgroup>' +
 		              '<optgroup label="Other files">' +

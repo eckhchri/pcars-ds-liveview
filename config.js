@@ -31,10 +31,10 @@ var SHOWRECSTATISTIC=	true;	// [true|false]
 var WORKERDELAY_TRACKLIST	=	5000; 	// in ms
 var WORKERDELAY_DSDATA  	=	100;    // in ms
 
-var DisplayDuration 		  = 500;		// initial duration for displaying marker updates
-var DisplayDurationCREST 	= 100;		// initial duration for displaying marker updates
+var DisplayDuration			=	500;		// initial duration for displaying marker updates
+var DisplayDurationCREST 	=	100;		// initial duration for displaying marker updates
 
-var UpdateRateDS 			= 500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
+var UpdateRateDS 			=	500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
 var GuiUpdateIntervall		=	3;	 //intervall fo updating GUI element,values etc. in seconds
 
 //StopTransitionDelay_minTimeRun - Time of disabled tranformWithEase function and using the transform function instead on SessionState and SessionStage changes. 
@@ -50,6 +50,22 @@ var isRecEnabled			=	false;		//enables recording of data
 var aRecConfig				=	[];			//config hash
 aRecConfig['maxRecordSize']	=	999999;
 aRecConfig['DataVersion']	=	1;			//in the case if data format will changed and recorded csv will loaded from file
+
+//demo initial data, currently that must not be empty
+var demo = [
+                {//0
+                    globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"ViperDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, attributes:{TrackId:1768660198, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0}},
+                    participants:[
+                            {RefId:9234567, Name:"NO_PARTICIPANT_TestData", IsPlayer:0, GridPosition:3, VehicleId:"-886212684", RacePosition:0, CurrentLap:99, CurrentSector:0, LastLapTime:9999, FastestLapTime:9000, State:"StateTest", Speed:100, PosX:271, PosY:277, PosZ:288, Orientation:0}
+                    ]
+            },
+               {//1
+                    globals:{sensorLayer_UpdateDelta:662, state:"Running", name:"ViperDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966149, attributes:{TrackId:1768660198, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0}},
+                    participants:[
+                            {RefId:9234567, Name:"NO_PARTICIPANT_TestData", IsPlayer:0, GridPosition:3, VehicleId:"Caterham Seven Classic", RacePosition:0, CurrentLap:99, CurrentSector:0, LastLapTime:9999, FastestLapTime:9000, State:"StateTest", Speed:100, PosX:271, PosY:277, PosZ:288, Orientation:0}
+                    ]
+            }
+           ];
 
 //playback demo from start position to end position
 demo_start_pos = 50;
