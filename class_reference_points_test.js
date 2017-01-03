@@ -1,4 +1,4 @@
-/// Reference Object
+/// Reference Object test
 // CLASS of RefPoints
 function Refpoint(circuit_id)
 {
