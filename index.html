@@ -3,14 +3,57 @@
   <head>
 	<meta charset="utf-8"/>
 	<title>Project Cars DS - live view with position update. W2UI - https://github.com/eckhchri/pcars-ds-liveview </title>	
-             
-	<script src="https://maps.google.com/maps/api/js??v=3.exp&sensor=true"></script>
+ 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/js-url/1.8.6/url.min.js"></script>
 	<script src="./lib/FileSaver/FileSaver.js"></script>	
 	<script src="./lib/jszip/jszip.min.js"></script>
+	
+	<!-- dynamicly load google maps with/without API key if available -->	
+	<script type="text/javascript">	
+		//function definition
+		function GetURLPath(){
+			var str1 = document.location.origin + document.location.pathname;
+			//TODO: do not replace with fixed value
+			return str1.replace("index.html","");  	
+		}
 			
+		var head= document.getElementsByTagName('head')[0];
+		var script= document.createElement('script');
+		script.type= 'text/javascript';
+		
+		var url_google_api_key =	GetURLPath() + "config2_googleapikey.txt";
+		console.log('------- INFO: load google maps library from url: ', url_google_api_key );
+
+		// load specific demo file		     
+		$.ajax({			
+		    type:    		"GET",
+		    url:     		url_google_api_key,
+		    contentType:	'text/plain',
+	        dataType:		'text',
+	        async: 			false,
+			success: function(apikey) {		        
+		        //load with api key
+		        script.src= 'https://maps.google.com/maps/api/js?v=3.exp&key=' + apikey;
+	        	head.appendChild(script);
+	        	console.log('------- INFO: load google maps library WITH API key: ', apikey );
+		    },
+		    statusCode: {
+		        404: function() {
+		        	// file not found, load without api key		        	
+		        	script.src= 'https://maps.google.com/maps/api/js?v=3.exp';
+		        	head.appendChild(script);
+		        	console.log('------- INFO: load google maps library withOUT API key (404)!');
+		        }
+		    },
+		    error:   function(e) {
+		        // An error occurred, load without api key		    	
+		    	console.log('------- INFO: load google maps library withOUT API key error: ', e);
+		    }
+		});
+	</script>
+				
 	<link rel="stylesheet" type="text/css" href="./lib/w2ui/w2ui-1.4.3.min.css" />
     <script type="text/javascript" src="./lib/w2ui/w2ui-1.4.3.min.js"></script>
  
@@ -1691,11 +1734,7 @@ function get_url_param( name ) {
 		return results[1];
 }
 
-function GetURLPath(){
-	var str1 = document.location.origin + document.location.pathname;
-	//TODO: do not replace with fixed value
-	return str1.replace("index.html","");  	
-}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initRecFileReader( HTMLCONTROLLHANDLE ){
