@@ -62,7 +62,7 @@ var demo = [
            ];
 
 //playback demo from start position to end position
-demo_start_pos = 50;
+demo_start_pos = 0;
 demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
 
 //CSS default

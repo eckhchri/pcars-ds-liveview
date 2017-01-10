@@ -120,6 +120,9 @@
 		
 		<div id="DSdataInformation"></div>
 		<div id="DSdataSettings"></div>
+		<div id="demo_start_pos"></div>
+		<div id="demo_end_pos"></div>
+		
 	</div>
 	
    	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
@@ -152,11 +155,11 @@
 			</div>
 			<div class="box">				
 				<div>loop start pos:</div>
-				<div><input name="field_textarea" type="number" size="3" maxlength="3" style="width: 40px;"/></div>
+				<div><input name="field_textarea" id="loop_start_pos" type="number" size="4" maxlength="4" style="width: 45px;"/></div>
 			</div>			
 			<div class="box">
 				<div>loop end pos:</div>
-				<div><input name="field_textarea" type="number" size="3" maxlength="3" style="width: 40px;"/></div>
+				<div><input name="field_textarea" id="loop_end_pos" type="number" size="4" maxlength="4" style="width: 45px;"/></div>
 			</div>
 			<div class="box">
 				<div id="pcars-record_pos"></div>
@@ -299,14 +302,21 @@
 		Race2:		""
 	}
 
+	//preset HTML elemets
+	setParamDemoStartPos(demo_start_pos , true);
+	setParamDemoEndPos(demo_end_pos, true);
 	// catch demo array boundary breaks
 	if(demo_start_pos > demo.length-1 || demo_start_pos < 0){
-		demo_start_pos = 0;
+		setParamDemoStartPos(0 , true);
+		//demo_start_pos = 0;
 	}
 	record_pos = demo_start_pos;
+	
 	if(demo_end_pos < 0){
-		demo_end_pos = 0;
+		setParamDemoEndPos(9999 , true);
+		//demo_end_pos = 0;		
 	}
+		
 	
 	// in the case of APIMODE==DEMO, load zipped demo file to variable demo
 	if ( APIMODE == "DEMO" )
@@ -410,7 +420,16 @@
 		if ( !isRecEnabled){ PCARS_Rec.clearDataSet()};
 		isRecEnabled = !isRecEnabled;	//switch between true/false					
 	});
-			
+	
+	//changing loop positions
+	$("#loop_start_pos").change(function() {		
+		setParamDemoStartPos( $( this ).val(), false );
+	});
+	$("#loop_end_pos").change(function() {		
+		setParamDemoEndPos( $( this ).val(), false );		
+	});
+	
+	
 	$( "#DRIVERCOLOR" ).change(function() {
         $("#DRIVERCOLOR option:selected").each(function() {
         	var str1 = $( this ).val();
@@ -602,6 +621,9 @@
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
+		ChangeHtmlContentByID( '#demo_start_pos' 	, "demo_start_pos:   " + demo_start_pos );
+		ChangeHtmlContentByID( '#demo_end_pos' 	, "demo_end_pos:   " + demo_end_pos );
+		
 		
 		
 		if(StopRefreshDriverlist == "false"){
@@ -826,10 +848,21 @@
 	                        record_pos_helper = record_pos + 1;
 	                        if(record_pos_helper > demo.length-1){record_pos_helper = 0;}	//if last array element with record_pos is reached, record_pos_helper exceeds the upper array boundary. In this case the helper jumps to the first array element
 	                        
-	                        sensorLayer_UpdateDelta_DEMOdiff = demo[record_pos_helper].globals.sensorLayer_UpdateDelta - sensorLayer_UpdateDelta;	//diff time between recorded data and playback sensorLayer_UpdateDelta
+	                        if(log >= 3){console.log("ERROR: -------- record_pos: ",  record_pos , " - " , typeof record_pos );}
+	                        if(log >= 3){console.log("ERROR: -------- record_pos_helper: ", typeof record_pos_helper );}
+	                        if(log >= 3){console.log("ERROR: -------- demo_start_pos: ",  typeof demo_start_pos );}
+	                        if(log >= 3){console.log("ERROR: -------- demo_end_pos: ",  typeof demo_end_pos );}
+	                        
+	                        try {
+	                        	sensorLayer_UpdateDelta_DEMOdiff = demo[record_pos_helper].globals.sensorLayer_UpdateDelta - sensorLayer_UpdateDelta;	//diff time between recorded data and playback sensorLayer_UpdateDelta	                        	
+	                        } catch (e) {
+	                        	if(log >= 3){console.log("ERROR: -------- record_pos_helper error catch: ", e);}	                        
+	                        }
+	                        
+	                        
 	                        WORKERDELAY_DEMODATA = WORKERDELAY_DEMODATA + sensorLayer_UpdateDelta_DEMOdiff;		//adapt playback speed to recorded data with the worker delay
 	                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
-	                        if(log >= 2){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
+	                  		if(log >= 2){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
 	
 	                        workerDSDATA.postMessage({
 	                                workerdelay:            WORKERDELAY_DEMODATA
@@ -838,9 +871,14 @@
 	                                ,timeout:               demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
 	                                ,receivemode:   "GETDEMODATA"
 	                                ,arefpoint:             e.data.arefpoint});
+	                        
 	                        record_pos = record_pos + 1;
 	                        if(record_pos > demo.length-1 || record_pos > demo_end_pos-1){          //jump to beginning if end of array or demo_end_pos is reached/ -1, because the array begins with 0
 	                                record_pos = demo_start_pos;
+	                        		if (typeof record_pos !== 'number'){
+	                        			if(log >= 3){console.log("ERROR: -------- var type changes of record_pos to: ",  typeof record_pos );}	                        			
+	                        		}
+	                        
 	                                StopTransitionDelay = "true";
 	                                StopTransitionDelay_StartTime = Date.now();
 	                        }
@@ -1775,8 +1813,10 @@ function initDemoData(aNewData, SetApiModeTo ){
 	if(log >= 3){console.log('---------- initDemoData() after: ' ,  demo )};
 			
 	//reset values to default
-	demo_start_pos 		= 0;
-	demo_end_pos 		= 9999;
+	//demo_start_pos 		= 0;
+	setParamDemoStartPos( 0 , true );
+	//demo_end_pos 		= 9999;
+	setParamDemoEndPos( demo.length-1 , true );	
 	record_pos 			= 0;
 	record_pos_helper 	= 0;	
 		
@@ -1859,6 +1899,69 @@ function open_popup_load_demofile(){
 	        if(log >= 3){console.log('+++++++++++ ERROR Ajax listing files: ', e );}
 	    }
 	});		
+}
+
+function setParamDemoStartPos(new_val, isHtmlChange){	
+	//convert each time to a number
+	new_val 	=	Number(new_val);
+	
+	//validate new value
+	if (typeof new_val 	=== 'number'		&&
+		new_val  		>=	0				&&
+		new_val			<	demo_end_pos	&&			
+		new_val  		<	demo.length			
+	){
+		demo_start_pos			= new_val;
+		
+		//each time jump to beginning of the loop
+		record_pos			= new_val;
+		record_pos_helper 	= record_pos+1;
+		
+		if (isHtmlChange){
+			$("#loop_start_pos").val( new_val ).change();
+		}
+		
+	}else{
+		if(log >= 3){console.log('WARN: ----------- typeof new_val: ', typeof new_val  );}
+		if(log >= 3){console.log('WARN: ----------- size: ', new_val  );}
+		
+		// set to minum possible value
+		$("#loop_start_pos").val( 0 ).change();		
+	}
+	
+	return 1;
+}
+
+function setParamDemoEndPos(new_val, isHtmlChange){
+	//convert each time to a number
+	new_val 	=	Number(new_val);
+	
+	if (	typeof new_val 	=== 'number'		&&
+			new_val  		>=	0				&&
+			new_val			>	demo_start_pos	&&			
+			new_val  		<	demo.length			
+	){
+		demo_end_pos		= Number(new_val);
+	
+		//TODO: check if vars record* should be set to a new value
+		if(record_pos > new_val ){
+			record_pos			= new_val - 1;
+			record_pos_helper 	= new_val;
+		}
+		
+		if (isHtmlChange){
+			$("#loop_end_pos").val( new_val ).change();
+		}
+		
+	}else{
+		if(log >= 3){console.log('WARN: ----------- typeof new_val: ', typeof new_val  );}
+		if(log >= 3){console.log('WARN: ----------- size: ', new_val  );}
+		
+		// set to maximum possible value
+		$("#loop_end_pos").val( demo.length-1 ).change();		
+	}
+	
+	return 1;
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
