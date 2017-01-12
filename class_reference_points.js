@@ -686,6 +686,64 @@ function Refpoint(circuit_id)
 	//Autodromo Nazionale Monza Short
 	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": ""});
 	
+	//Autodromo Algarve
+	aRefPoints[9999990001] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":		37.231121
+		,"refLong":		-8.628299
+		,"rotation":		0
+		,"cor_r_Long":		0
+		,"cor_r_Lat":		0
+		,"cor_PosX_mul":	1
+		,"cor_PosY_mul":	1
+		,"Name":		"Autodromo Algarve"
+		,"Name2":		"Autodromo_Algarve Autodromo_Algarve"	//mTrackLocation:"Autodromo_Algarve",mTrackVariation:"Autodromo_Algarve"
+		,"Zoom":		15
+		,"MapInitLat":	37.231121
+		,"MapInitLong":	-8.628299
+		,"Comment":		"initial added, Dummy Track ID"
+		});
+	
+	//Circuit of the Americas
+	aRefPoints[9999990002] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":		30.135114
+		,"refLong":		-97.634090
+		,"rotation":		0
+		,"cor_r_Long":		0
+		,"cor_r_Lat":		0
+		,"cor_PosX_mul":	1
+		,"cor_PosY_mul":	1
+		,"Name":		"Circuit of the Americas"
+		,"Name2":		"Circuit_of_the_Americas Grand Prix"	//mTrackLocation:"Circuit_of_the_Americas",mTrackVariation:"Grand Prix"
+		,"Zoom":		15
+		,"MapInitLat":	30.135114
+		,"MapInitLong":	-97.634090
+		,"Comment":		"initial added, Dummy Track ID"
+		});
+
+	//Daytona International Speedway
+	aRefPoints[9999990003] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":		29.185507
+		,"refLong":		-81.069100
+		,"rotation":		0
+		,"cor_r_Long":		0
+		,"cor_r_Lat":		0
+		,"cor_PosX_mul":	1
+		,"cor_PosY_mul":	1
+		,"Name":		"Daytona International Speedway"
+		,"Name2":		"Daytona International Speedway Tri_Oval"	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Tri_Oval"
+		,"Zoom":		15
+		,"MapInitLat":	29.185507
+		,"MapInitLong":	-81.069100
+		,"Comment":		"initial added, Dummy Track ID"
+		});			
+	//Daytona International Speedway Road Course
+	aRefPoints[9999990004] = CopyObjectWithModifications(aRefPoints[9999990003], {"Name": "Daytona International Speedway Road Course","Name2": "Daytona International Speedway Road_Course"});	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Road_Course"
+	//Daytona International Speedway Rally Cross
+	aRefPoints[9999990005] = CopyObjectWithModifications(aRefPoints[9999990003], {"Name": "Daytona International Speedway Rally Cross","Name2": "Daytona International Speedway Rally_Cross"});	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Rally_Cross"
+	
 	//// fictional tracks
 	//Azure Coast
 	aRefPoints[560711985] = CopyObjectWithModifications(aRefPoints[8888888888],
