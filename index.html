@@ -10,15 +10,15 @@
 	<script src="./lib/FileSaver/FileSaver.js"></script>	
 	<script src="./lib/jszip/jszip.min.js"></script>
 	
-	<!-- dynamicly load google maps with/without API key if available -->	
+	<!-- dynamicly load google maps with/without API key if available -->  	
 	<script type="text/javascript">	
 		//function definition
 		function GetURLPath(){
-			var str1 = document.location.origin + document.location.pathname;
-			//TODO: do not replace with fixed value
-			return str1.replace("index.html","");  	
-		}
-			
+			var str1 = document.location.origin + document.location.pathname;		
+			//get the path without any filename at the end. Static variant: return str1.replace("index.html","");  			
+			return	str1.substr(0, str1.lastIndexOf("/") + 1 );
+		}		
+	
 		var head= document.getElementsByTagName('head')[0];
 		var script= document.createElement('script');
 		script.type= 'text/javascript';
@@ -53,7 +53,7 @@
 		    }
 		});
 	</script>
-				
+		
 	<link rel="stylesheet" type="text/css" href="./lib/w2ui/w2ui-1.4.3.min.css" />
     <script type="text/javascript" src="./lib/w2ui/w2ui-1.4.3.min.js"></script>
  
@@ -319,8 +319,7 @@
 		
 	
 	// in the case of APIMODE==DEMO, load zipped demo file to variable demo
-	if ( APIMODE == "DEMO" )
-	{			
+	if ( APIMODE == "DEMO" ) {			
 		open_popup_load_demofile();						
 	}
 								
@@ -1257,34 +1256,34 @@
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
-function init_map(_TrackID , aRefPoint)
-{
-		//subclassing
-		GPSSensor.prototype = new google.maps.OverlayView();
-                              
-		// Create the Google Map
-		map = new google.maps.Map(d3.select("#map").node(), {        	 
-				zoom: aRefPoint[_TrackID]["Zoom"],                
-                center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
-                mapTypeId: google.maps.MapTypeId.SATELLITE,
-                //deactivate google streetview
-				streetViewControl: false
-		});
-
-		sensorLayer = new GPSSensor(aSensorData);
-		sensorLayer.setMap(map); 
-
-        //todo: maybe change from static to dynamic binding of HTML elements
-		// deactivate because of problems with table height of div blocks
-        //map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
-       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
-       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
-       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
-       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
-		//map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
-       	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
-       	
-       	return 1;
+function init_map(_TrackID , aRefPoint){
+        	  
+	//subclassing			
+	if(log >= 3){console.log("INFO: typeof google map object: ", typeof google);}
+	GPSSensor.prototype = new google.maps.OverlayView();
+						
+	map = new google.maps.Map(d3.select("#map").node(), {        	 
+			zoom: aRefPoint[_TrackID]["Zoom"],                
+		    center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
+			mapTypeId: google.maps.MapTypeId.SATELLITE,
+		    //deactivate google streetview
+			streetViewControl: false
+	});
+		
+	sensorLayer = new GPSSensor(aSensorData);
+	sensorLayer.setMap(map); 
+		
+	//todo: maybe change from static to dynamic binding of HTML elements
+	// deactivate because of problems with table height of div blocks
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
+	//map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
+	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
+		       	
+	return 1;		       				
 }
 
 
