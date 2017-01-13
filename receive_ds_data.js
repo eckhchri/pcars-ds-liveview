@@ -5,9 +5,8 @@
 // http://[DS URL]:9000/api/session/status?attributes&members&participants
 function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 
-	// todo:   Globale variablen füllen ???? oder als Rueckgabewert aus der Function?
-	this.url		=	url;
-	this.port		=	port;
+	this.url			=	url;
+	this.port			=	port;
 	this.fullurl		=	'http://' +  url + ':' + port;
 	this.timeout		=	timeout;
 	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
@@ -15,11 +14,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 
 	//if(log >= 3){console.log("Receive_DS_data() --- receivemode: " , receivemode);}
 
-	if (this.receivevariant == undefined)
-	{
+	if (this.receivevariant == undefined){
 		this.receivevariant = "GETDRIVERDATE";
 	}
-
 
 	// todo: Mapping HASH fuer receivevariant festlegen
 	var aReceiveModes = {
@@ -56,11 +53,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			,"SessionState":""
 		}
 	}
-
 	aDrivers.driverlist	=	new Array();
 	
-	var data			=	new Array();
-	data.driverlist 	=	[];
 	var aEmptyArray		=	new Array();
 	var TrackName;
 	var TrackID;
@@ -74,15 +68,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		/*var recording_position = timeout;
 		var demo_el = demo[recording_position];*/
 		var demo_el = timeout;
-		data.globals = {
-			"joinable":		demo_el.globals.joinable
-			,"lobbyid":		demo_el.globals.lobbyid
+		aDrivers.globals = {
+			"joinable":				demo_el.globals.joinable
+			,"lobbyid":				demo_el.globals.lobbyid
 			,"max_member_count":	demo_el.globals.max_member_count
-			,"now":			demo_el.globals.now
-			,"state":		demo_el.globals.state
-			,"name":		demo_el.globals.name
+			,"now":					demo_el.globals.now
+			,"state":				demo_el.globals.state
+			,"name":				demo_el.globals.name
 			,"attributes":{
-				"TrackId":		demo_el.globals.attributes.TrackId
+				"TrackId":			demo_el.globals.attributes.TrackId
 				,"GridSize":		demo_el.globals.attributes.GridSize
 				,"MaxPlayers":		demo_el.globals.attributes.MaxPlayers
 				,"SessionStage":	demo_el.globals.attributes.SessionStage
@@ -94,13 +88,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
                                                 
 		for (var i = 0;i<demo_el.participants.length;i++){
                 	
-			//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
-			//read data of all participants and put it in an array of PCARSdriver objects
-                	
+			//read data of all participants and put it in an array of PCARSdriver objects                	
 			index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
 			loopcnt++;
 
-			data.driverlist[index] =
+			aDrivers.driverlist[index] =
 							new PCARSdriver(
 								demo_el.participants[i].RefId,
 								demo_el.participants[i].Name,
@@ -117,27 +109,20 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								demo_el.participants[i].Orientation,
 								demo_el.participants[i].Speed,
 								demo_el.participants[i].CurrentLap,
-								demo_el.participants[i].VehicleId/*,
-								{
-									TrackId: demo_el.globals.attributes.TrackId
-									,GridSize: demo_el.globals.attributes.GridSize
-								}*/
+								demo_el.participants[i].VehicleId
 							);
 		}
                 
-		return data;
+		return aDrivers;
                 
 	}else{
 
 		// http://www.w3.org/TR/2006/WD-XMLHttpRequest-20060405/
 		var xmlhttp = new XMLHttpRequest();
-	
-	
+		
 		// make an  xmlhttp request (synchr)
-		// todo: Evtl. weniger Parameter bei der API abfragen um die Performance zu erhoehen:  /api/session/status?attributes&participants
 		xmlhttp.open(
-				"GET",
-	//			 fullurl + "/api/session/status?attributes&members&participants"
+				"GET",				
 				fullurl + aReceiveModes[this.receivemode]
 				// optional parameter for decison: async = true, sync = false
 				, false
@@ -151,8 +136,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			//if(log >= 3){console.log("Error while sending Request to DS!:" + err );}
 			switch ( this.receivemode ){
 				case 	"GETDSDATA":  		return aDrivers;
-				
-				// todo: check if retrun value ist correct
+					
 				case  	"GETDRIVERDATE":	return aDrivers;	
 	
 				case	"GETTRACKLIST":		return aEmptyArray;
@@ -164,17 +148,12 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				case	"GETCREST2DRIVERDATA":	return aDrivers;
 				
 				case	"GETDSANDDRIVERDATA":	return aDrivers;
-			} // end switch
-	
+			} // end switch	
 		}
+
+		//sucessfull request
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {	
 	
-		// could onyl be set in Synchronous mode
-	  	// xmlhttp.timeout = this.timeout;  
-			
-		if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{	
-	
-			//document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
 			//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
 			var myArr 			= JSON.parse( xmlhttp.responseText );
 			var arrayoutput 	= myArr.toString();
@@ -187,17 +166,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	
 			case  "GETDSANDDRIVERDATA":
 	
-				//https://github.com/eckhchri/pcars-ds-liveview/issues/29
-				//return an object like:
-				//  data.aDrivers[]
-				//  data.globals{}
-	
-				
 				// collect DS common data
 				if ( myArr.response.state == "Idle" ){
 	
 						//	Todo: put all values into Array?
-						data.globals = {
+						aDrivers.globals = {
 	                                         	"joinable":				myArr.response.joinable
 		                                        ,"lobbyid":             myArr.response.lobbyid
 		                                        ,"max_member_count":    myArr.response.max_member_count
@@ -206,7 +179,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                     }
 				}else if ( myArr.response.state == "Running" ){
 	
-						data.globals = {
+						aDrivers.globals = {
 		                                         "joinable":            myArr.response.joinable
 		                                        ,"lobbyid":             myArr.response.lobbyid
 		                                        ,"max_member_count":    myArr.response.max_member_count
@@ -216,7 +189,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	        	                                }
 				}else{
 					// in case of othe stati return a defined value
-					data.globals = {
+					aDrivers.globals = {
 	                        "joinable":            "unknown mode"
 	                       ,"lobbyid":             "unknown mode"
 	                       ,"max_member_count":    "unknown mode"
@@ -225,33 +198,30 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	                       ,"name":                "unknown mode"
 	                       }
 				}
-				data.globals.attributes = new Array();
+				
+				aDrivers.globals.attributes = new Array();
 				//cath all attributes
 				for (var key in myArr.response.attributes) {
-				
-					data.globals.attributes[key] =  myArr.response.attributes[key];
+					aDrivers.globals.attributes[key] =  myArr.response.attributes[key];
 				}
-				
-					
+									
 				// collect Driverdata
 				if ( myArr.response.participants.length == 0 ){
 	
 					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
-	
 					// put empty dummy object into array
-					data.driverlist.push( DriverDummy );
+					aDrivers.driverlist.push( DriverDummy );
 	
 				}else{
 	
 					for (var i = 0;i<myArr.response.participants.length;i++){
 						
-	        	                        //if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
-		                                // read data of all participants and put it in an array of PCARSdriver objects
-						
-	                					index = CalculateIndexDriverArray (myArr.response.participants[i].attributes.RacePosition, loopcnt);
-	                					loopcnt++;
+							//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+							// read data of all participants and put it in an array of PCARSdriver objects						
+							index = CalculateIndexDriverArray (myArr.response.participants[i].attributes.RacePosition, loopcnt);
+							loopcnt++;
 
-	                					data.driverlist[index] =
+							aDrivers.driverlist[index] =
 		                                        new PCARSdriver(
 		                                                myArr.response.participants[i].attributes.RefId,
 		                                                myArr.response.participants[i].attributes.Name,
@@ -268,78 +238,22 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                                myArr.response.participants[i].attributes.Orientation,
 		                                                myArr.response.participants[i].attributes.Speed,
 		                                                myArr.response.participants[i].attributes.CurrentLap,
-		                                                myArr.response.participants[i].attributes.VehicleId/*,
-		                                                {       
-		                                        				TrackId: myArr.response.attributes.TrackId
-		                                                        ,GridSize: myArr.response.attributes.GridSize
-		                                                }*/
+		                                                myArr.response.participants[i].attributes.VehicleId
 		                                         	);
 					}
 	
 					// return information
-					return data;
-				}
-				
-				return data;
-	
-				
-				
-			case  "GETDRIVERDATE":
-			
-				// if no users joined return example Data
-				if ( myArr.response.participants.length == 0 ){
-				
-					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
-	
-					aDrivers.push( DriverDummy );
-	
-					if(log >= 3){console.log("+-+-+-: " ,  aDrivers);}
-	
 					return aDrivers;
 				}
-			 
-				for (var i = 0;i<myArr.response.participants.length;i++)
-				{
-					//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
-					// read data of all participants and put it in an array of PCARSdriver objects
-					
-					index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
-					loopcnt++;
-
-					data.driverlist[index] =
-						new PCARSdriver(myArr.response.participants[i].attributes.RefId,
-							myArr.response.participants[i].attributes.Name,
-							myArr.response.participants[i].attributes.IsPlayer,
-							myArr.response.participants[i].attributes.GridPosition,
-							myArr.response.participants[i].attributes.PositionX,
-							myArr.response.participants[i].attributes.PositionY,
-							myArr.response.participants[i].attributes.PositionZ,
-							myArr.response.participants[i].attributes.State,
-							myArr.response.participants[i].attributes.CurrentSector,
-							myArr.response.participants[i].attributes.RacePosition,
-							myArr.response.participants[i].attributes.FastestLapTime,
-							myArr.response.participants[i].attributes.LastLapTime,
-							myArr.response.participants[i].attributes.Orientation,
-							myArr.response.participants[i].attributes.Speed,
-							myArr.response.participants[i].attributes.CurrentLap,
-	                        			myArr.response.participants[i].attributes.VehicleId/*,
-							{ 	TrackId: myArr.response.attributes.TrackId
-								,GridSize : myArr.response.attributes.GridSize
-							}*/
-							);
 				
-				}
+				return aDrivers;
 	
-				return aDrivers;		
-	
-				
+								
 			case "GETTRACKLIST":
-	
-				// todo: Auslesen der trackIDs und den dazugehoerigen Namen
-	
+
 				// if no users joined return example Data
 				if(log >= 3){console.log("++++++++++++++++ GETTRACKLIST / received data" , myArr );}
-				// todo FAILURE within check !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
+
 				if ( myArr.response.list.length == 0 ){
 					
 						if(log >= 3){console.log("no Participants found in DS, leave function!");}
@@ -347,13 +261,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 						return aDrivers;
 				}
 				
-				//if(log >= 3){console.log("++++TRACKLIST: " ,  myArr);}
-	
 				var aTrackList = new Array;
 	
-				for (var i = 0;i<myArr.response.list.length;i++)
-	                        {
-					//build array of PCARSTRACK objects 
+				//build array of PCARSTRACK objects
+				for (var i = 0;i<myArr.response.list.length;i++) {					 
 					aTrackList.push (  
 								new PCARSTRACK (
 									myArr.response.list[i].id,
@@ -362,15 +273,12 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								)
 							);
 				}							
-	
-				//console.log("+++++++++++++++ aTrackList: " , aTrackList);			
-	
+			
+				//if(log >= 3){console.log("++++ aTrackList: " ,  aTrackList);}
 				return aTrackList;
 				
 			case "GETVEHICLELIST":
 	
-				//if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST / received data" , myArr.response );}
-				
 				// if no vehicle data returned return empty data			
 				if ( myArr.response.list.length == 0 ){
 	
@@ -378,16 +286,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					        
 					return aEmptyArray;
 				}
-				
-				//if(log >= 3){console.log("++++ GETVEHICLELIST: " ,  myArr);}
-	
+					
 				var aVehicleList = new Array;
 	
-				for (var i = 0;i<myArr.response.list.length;i++)
-				{
-					
-					//if(log >= 4){console.log("++++ GETVEHICLELIST Aray element id: " + i + " " ,  myArr.response.list[i]);}
-					//build array of PCARSTRACK objects 
+				for (var i = 0;i<myArr.response.list.length;i++) {					
+					//build array of PCARSVEHICLE objects 
 					aVehicleList.push (  
 								new PCARSVEHICLE (
 									myArr.response.list[i].id,
@@ -397,9 +300,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 							);
 				}							
 	
-				//if(log >= 3){console.log("+++++++++++++++ aTrackList: " , aTrackList);}			
-	
+				//if(log >= 3){console.log("+++++++++++++++ aTrackList: " , aTrackList);}				
 				return aVehicleList;
+				
 				
 			case  "GETCRESTDRIVERDATA":
 			
@@ -456,10 +359,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								0,												//Orientation - NA
 								0,												//Speed - NA
 								999999,											//CurrentLap
-								2091910841/*,									//VehicleID
-								{ 	TrackId: TrackID					//TrackID
-									,GridSize : 0						//GridSize - NA
-								}*/
+								2091910841
 							);
 				}
 	
@@ -520,10 +420,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								0,												//Orientation - NA
 								0,												//Speed - NA
 								999999,											//CurrentLap
-								2091910841/*,									//VehicleID
-								{ 	TrackId: TrackID					//TrackID
-									,GridSize : 0						//GridSize - NA
-								}*/
+								2091910841
 							);
 				}
 	
@@ -539,11 +436,12 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		aDrivers.push ( DriverDummy );
 		return aDrivers;
         }  // end else
-
 }
 
-function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation)
-{
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation){
         //combines the TrackName and TrackVariation from the Game API to one Name
         var TrackName;
         if (TrackVariation == ""){
@@ -554,8 +452,8 @@ function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation)
         
         return TrackName;
 }
-function GetTrackIDbyName(TrackName , TMP_RefPoint)
-{
+
+function GetTrackIDbyName(TrackName , TMP_RefPoint){
        //returns the TrackID for the Game API Name
         var TMP_TrackID = 9999999999;   //Default TrackID
         //var TMP_RefPoint = new Refpoint();
@@ -573,8 +471,8 @@ function GetTrackIDbyName(TrackName , TMP_RefPoint)
         }
         return TMP_TrackID;
 }
-function CalculateIndexDriverArray (RacePostion, LoopCnt){
-	
+
+function CalculateIndexDriverArray (RacePostion, LoopCnt){	
 	//decide if Racepsotion or Gridpostion is used as index for drivers array
 	if (RacePostion != 0){
 		 index = RacePostion -1; // -1 because RacePost starts with 1
