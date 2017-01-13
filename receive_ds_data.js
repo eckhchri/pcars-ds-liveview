@@ -60,6 +60,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	aDrivers.driverlist	=	new Array();
 	
 	var data			=	new Array();
+	data.driverlist 	=	[];
 	var aEmptyArray		=	new Array();
 	var TrackName;
 	var TrackID;
@@ -70,7 +71,6 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	var loopcnt = 0;	// use as index if RacePosition is 0 during several session states
 	
 	if(this.receivemode == "GETDEMODATA"){
-		data.driverlist = [];
 		/*var recording_position = timeout;
 		var demo_el = demo[recording_position];*/
 		var demo_el = timeout;
@@ -91,9 +91,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				,"SessionTimeElapsed":	demo_el.globals.attributes.SessionTimeElapsed
 			}
 		}
-                
-                
-                
+                                                
 		for (var i = 0;i<demo_el.participants.length;i++){
                 	
 			//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
@@ -234,10 +232,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					data.globals.attributes[key] =  myArr.response.attributes[key];
 				}
 				
-	
-				//prepare empty array
-				data.driverlist = [];
-				
+					
 				// collect Driverdata
 				if ( myArr.response.participants.length == 0 ){
 	
