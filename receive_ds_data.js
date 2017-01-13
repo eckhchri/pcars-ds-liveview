@@ -408,36 +408,29 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
-					"joinable":		"CREST Mode"
-					,"lobbyid":		"CREST Mode"
+					"joinable":				"CREST Mode"
+					,"lobbyid":				"CREST Mode"
 					,"max_member_count":	"CREST Mode"
-					,"now":			"CREST Mode"
-					,"state":		"CREST Mode"
+					,"now":					"CREST Mode"
+					,"state":				"CREST Mode"
 					,"attributes":{
-						"TrackId":	TrackID
-						,"SessionStage":""
-						,"SessionState":myArr.gameStates.mSessionState
+						"TrackId":			TrackID
+						,"SessionStage":	""
+						,"SessionState":	myArr.gameStates.mSessionState
 					}
 				}
 				
 				// if no users joined return example Data
-				if ( myArr.participants.mNumParticipants == 0 ){
-				
-					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
-	
-					aDrivers.push( DriverDummy );
-	
-					if(log >= 3){console.log("+-+-+-: " ,  aDrivers);}				
-	
+				if ( myArr.participants.mNumParticipants == 0 ){				
+					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}	
+					aDrivers.push( DriverDummy );						
 					return aDrivers;
 				}
-	
-				
+					
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
 	
-				for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
-				{
-					//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
+										
 					// read data of all participants and put it in an array of PCARSdriver objects
 					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;		
@@ -446,7 +439,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
 					loopcnt++;
 
-					data.driverlist[index] =
+					aDrivers.driverlist[index] =
 						new PCARSdriver(
 								0,												//RefId - NA
 								myArr.participants.mParticipantInfo[i].mName,	//Name
@@ -480,36 +473,28 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
-					"joinable":		"CREST Mode"
-					,"lobbyid":		"CREST Mode"
+					"joinable":				"CREST Mode"
+					,"lobbyid":				"CREST Mode"
 					,"max_member_count":	"CREST Mode"
-					,"now":			"CREST Mode"
-					,"state":		"CREST Mode"
+					,"now":					"CREST Mode"
+					,"state":				"CREST Mode"
 					,"attributes":{
-						"TrackId":	TrackID
-						,"SessionStage":""
-						,"SessionState":myArr.gameStates.mSessionState
+						"TrackId":			TrackID
+						,"SessionStage":	""
+						,"SessionState":	myArr.gameStates.mSessionState
 					}
 				}
 				
 				// if no users joined return example Data
-				if ( myArr.participants.mNumParticipants == 0 ){
-				
-					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
-	
-					aDrivers.push( DriverDummy );
-	
-					if(log >= 3){console.log("+-+-+-: " ,  aDrivers);}				
-	
+				if ( myArr.participants.mNumParticipants == 0 ){				
+					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}	
+					aDrivers.push( DriverDummy );						
 					return aDrivers;
-				}
-	
+				}	
 				
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
 	
-				for (var i = 0;i<myArr.participants.mNumParticipants;i++)	//check if mNumParticipants works correct
-				{
-					//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
 					// read data of all participants and put it in an array of PCARSdriver objects
 					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
@@ -518,7 +503,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
 					loopcnt++;
 
-					data.driverlist[index] =
+					aDrivers.driverlist[index] =
 						new PCARSdriver(
 								0,												//RefId - NA
 								myArr.participants.mParticipantInfo[i].mName,	//Name
