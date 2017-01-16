@@ -1060,7 +1060,7 @@ function Refpoint(circuit_id)
 	//Mercedes Ice Training Track Full Track
 	aRefPoints[9999990032] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
-		,"Name":         "Mercedes Ice Training Track Full Track"
+		"Name":         "Mercedes Ice Training Track Full Track"
 		,"Name2":	 "Mercedes Ice Training Track Test"	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"Test"
 		,"Comment": "fictional, initially added, Dummy Track ID, Dummy DS name"
 		});
@@ -1078,7 +1078,7 @@ function Refpoint(circuit_id)
 	//Sampala Snow Circuit Prototype
 	aRefPoints[9999990037] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
-		,"Name":         "Sampala Snow Circuit Prototype"
+		"Name":         "Sampala Snow Circuit Prototype"
 		,"Name2":	 "Sampala"	//"mTrackLocation":"Sampala","mTrackVariation":""
 		,"Comment": "fictional, initially added, Dummy Track ID, Dummy DS name"
 		});
