@@ -1033,9 +1033,9 @@
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
 						{name:'gap2first',width:30, align:"center",sorttype:"text"},
                         {name:'isplayer',width:20, align:"center",sorttype:"text"},
-                        {name:'posx',hidden: JQGridIsDriversPOSHidden, width:30, align:"center",sorttype:"float"},
-                        {name:'posy',hidden: JQGridIsDriversPOSHidden, width:30, align:"center",sorttype:"float"},
-                        {name:'posz',hidden: JQGridIsDriversPOSHidden, width:30, align:"center",sorttype:"float"}
+                        {name:'posx',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
+                        {name:'posy',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
+                        {name:'posz',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"}
                 ],
                 afterInsertRow: function (rowid, rowdata) {
 			if (rowdata.driverposition == 1){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });}
