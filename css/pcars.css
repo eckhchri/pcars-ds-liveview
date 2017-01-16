@@ -135,7 +135,7 @@
 	     
 		#DSstatistic{	     		
                 background: 		hsla(50,80%,80%,0.8);
-				background-image:	url('/pcars/images/background/pcars_logo03.png');
+				background-image:	url('../images/background/pcars_logo03.png');
 				background-size:	70%;
 				background-repeat: 	no-repeat;
 				background-position:center;	
@@ -146,7 +146,7 @@
 	     
 	     #DSreplay{
                 background: 		hsla(350,70%,70%,0.8);
-                background-image:	url('/pcars/images/background/pcars_logo01.jpg');
+                background-image:	url('../images/background/pcars_logo01.jpg');
                 background-size:	70%;
 				background-repeat: 	no-repeat;
 				background-position:center;
