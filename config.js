@@ -84,3 +84,7 @@ var CSSDEFINITIONS = {
 //Automatic CSV Export of all session results after a race weekend, a download dialog will pop up
 //The Export is called if the SessionState changes to "PostRace"
 var autoExport = "false";
+
+////////////JQgrid design ///////
+var JQGridIsDriversPOSHidden	=	true;   // [true | false] used for PosX,PosY,PosZ
+
