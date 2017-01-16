@@ -86,5 +86,5 @@ var CSSDEFINITIONS = {
 var autoExport = "false";
 
 ////////////JQgrid design ///////
-var JQGridIsDriversPOSHidden	=	true;   // [true | false] used for PosX,PosY,PosZ
+var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
 
