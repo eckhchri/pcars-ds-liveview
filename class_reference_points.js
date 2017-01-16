@@ -701,7 +701,7 @@ function Refpoint(circuit_id)
 		,"Zoom":		15
 		,"MapInitLat":	37.231121
 		,"MapInitLong":	-8.628299
-		,"Comment":		"initial added, Dummy Track ID"
+		,"Comment":		"initially added, Dummy Track ID, Dummy DS name"
 		});
 	
 	//Circuit of the Americas
@@ -719,7 +719,7 @@ function Refpoint(circuit_id)
 		,"Zoom":		15
 		,"MapInitLat":	30.135114
 		,"MapInitLong":	-97.634090
-		,"Comment":		"initial added, Dummy Track ID"
+		,"Comment":		"initially added, Dummy Track ID, Dummy DS name"
 		});
 
 	//Daytona International Speedway
@@ -737,12 +737,254 @@ function Refpoint(circuit_id)
 		,"Zoom":		15
 		,"MapInitLat":	29.185507
 		,"MapInitLong":	-81.069100
-		,"Comment":		"initial added, Dummy Track ID"
+		,"Comment":		"initially added, Dummy Track ID, Dummy DS name"
 		});			
 	//Daytona International Speedway Road Course
 	aRefPoints[9999990004] = CopyObjectWithModifications(aRefPoints[9999990003], {"Name": "Daytona International Speedway Road Course","Name2": "Daytona International Speedway Road_Course"});	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Road_Course"
 	//Daytona International Speedway Rally Cross
 	aRefPoints[9999990005] = CopyObjectWithModifications(aRefPoints[9999990003], {"Name": "Daytona International Speedway Rally Cross","Name2": "Daytona International Speedway Rally_Cross"});	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Rally_Cross"
+	
+	//Dirtfish Pro Rallycross Course
+	aRefPoints[9999990008] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        47.538834
+		,"refLong":      -121.814374
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Dirtfish Pro Rallycross Course"	//error in API, there is the name "Rallyross"
+		,"Name2":	 "DirtFish Stage 1"	//"mTrackLocation":"DirtFish","mTrackVariation":"Stage 3", error in API, Stage 3 two times included
+		,"Zoom":         15
+		,"MapInitLat":   47.538834
+		,"MapInitLong":  -121.814374
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+	//Dirtfish Boneyard Course
+	aRefPoints[9999990006] = CopyObjectWithModifications(aRefPoints[9999990008], {"Name": "Dirtfish Boneyard Course","Name2": "DirtFish Stage 2"});	//"mTrackLocation":"DirtFish","mTrackVariation":"Stage 2"
+	//Dirtfish Mill Run Course
+	aRefPoints[9999990007] = CopyObjectWithModifications(aRefPoints[9999990008], {"Name": "Dirtfish Mill Run Course","Name2": "DirtFish Stage 3"});	//"mTrackLocation":"DirtFish","mTrackVariation":"Stage 3"
+	
+	//Fuji Speedway
+	aRefPoints[9999990009] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        35.370394
+		,"refLong":      138.927871
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Fuji Speedway"
+		,"Name2":	 "Fuji Grand Prix"	//"mTrackLocation":"Fuji","mTrackVariation":"Grand Prix"
+		,"Zoom":         15
+		,"MapInitLat":   35.370394
+		,"MapInitLong":  138.927871
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+		
+	//Indianapolis Road Course
+	aRefPoints[9999990010] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        39.794972
+		,"refLong":      -86.234559
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Indianapolis Road Course"
+		,"Name2":	 "Indianapolis Road_Course"	//"mTrackLocation":"Indianapolis","mTrackVariation":"Road_Course"
+		,"Zoom":         15
+		,"MapInitLat":   39.794972
+		,"MapInitLong":  -86.234559
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+	//Indianapolis Speedway Oval
+	aRefPoints[9999990011] = CopyObjectWithModifications(aRefPoints[9999990010], {"Name": "Indianapolis Speedway Oval","Name2": "Indianapolis Oval"});	//"mTrackLocation":"Indianapolis","mTrackVariation":"Oval"
+
+	//Knockhill Racing Circuit
+	aRefPoints[9999990015] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        56.129532
+		,"refLong":      -3.504984
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Knockhill Racing Circuit"
+		,"Name2":	 "Knockhill Racing"	//"mTrackLocation":"Knockhill","mTrackVariation":"Racing"
+		,"Zoom":         15
+		,"MapInitLat":   56.129532
+		,"MapInitLong":  -3.504984
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});	
+	//Knockhill International Reverse
+	aRefPoints[9999990012] = CopyObjectWithModifications(aRefPoints[9999990015], {"Name": "Knockhill International Reverse","Name2": "Knockhill International_Reverse"});	//"mTrackLocation":"Knockhill","mTrackVariation":"International_Reverse"
+	//Knockhill National
+	aRefPoints[9999990013] = CopyObjectWithModifications(aRefPoints[9999990015], {"Name": "Knockhill National","Name2": "Knockhill National"});	//"mTrackLocation":"Knockhill","mTrackVariation":"National"
+	//Knockhill National Reverse
+	aRefPoints[9999990014] = CopyObjectWithModifications(aRefPoints[9999990015], {"Name": "Knockhill National Reverse","Name2": "Knockhill National_Reverse"});	//"mTrackLocation":"Knockhill","mTrackVariation":"National_Reverse"
+	//Knockhill Rallycross
+	aRefPoints[9999990016] = CopyObjectWithModifications(aRefPoints[9999990015], {"Name": "Knockhill Rallycross","Name2": "Knockhill Rallycross"});	//"mTrackLocation":"Knockhill","mTrackVariation":"Rallycross"
+	//Knockhill Tri-Oval
+	aRefPoints[9999990017] = CopyObjectWithModifications(aRefPoints[9999990015], {"Name": "Knockhill Tri-Oval","Name2": "Knockhill Tri_Oval"});	//"mTrackLocation":"Knockhill","mTrackVariation":"Tri_Oval"
+	
+	//Lankebanen Rallycross
+	aRefPoints[9999990018] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        63.405690
+		,"refLong":      10.919449
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Lankebanen Rallycross"
+		,"Name2":	 "Hell Rallycross"	//"mTrackLocation":"Hell","mTrackVariation":"Rallycross"
+		,"Zoom":         15
+		,"MapInitLat":   63.405690
+		,"MapInitLong":  10.919449
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+		
+	//Loheac-Bretagne Rallycross
+	aRefPoints[9999990019] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        47.863467
+		,"refLong":      -118.190968
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Loheac"
+		,"Name2":	 "Loheac Grand Prix"	//"mTrackLocation":"Loheac","mTrackVariation":"Grand Prix"
+		,"Zoom":         15
+		,"MapInitLat":   47.863467
+		,"MapInitLong":  -1.895317
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+
+	//Long Beach
+	aRefPoints[9999990020] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        33.764420
+		,"refLong":      -118.190968
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Long Beach"
+		,"Name2":	 "Long Beach Long Beach"	//"mTrackLocation":"Long Beach","mTrackVariation":"Long Beach"
+		,"Zoom":         15
+		,"MapInitLat":   33.764420
+		,"MapInitLong":  -118.190968
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+
+	//Lydden Hill
+	aRefPoints[9999990021] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        51.177736
+		,"refLong":      1.199318
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Lydden Hill GP"
+		,"Name2":	 "Lydden Hill Circuit"	//"mTrackLocation":"Lydden Hill","mTrackVariation":"Circuit"
+		,"Zoom":         15
+		,"MapInitLat":   51.177736
+		,"MapInitLong":  1.199318
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+	//Lydden Hill Rallycross
+	aRefPoints[9999990022] = CopyObjectWithModifications(aRefPoints[9999990021], {"Name": "Lydden Hill Rallycross","Name2": "Lydden Hill RX"});	//"mTrackLocation":"Lydden Hill","mTrackVariation":"RX"
+
+	//Porsche Leipzig Test Track, not in game at the moment
+	aRefPoints[9999990023] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        51.405441
+		,"refLong":      12.298670
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Porsche Leipzig Test Track"
+		,"Name2":	 "Porsche Leipzig Test Track"	//"mTrackLocation":"?","mTrackVariation":"?"
+		,"Zoom":         15
+		,"MapInitLat":   51.405441
+		,"MapInitLong":  12.298670
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+
+	//Red Bull Ring GP
+	aRefPoints[9999990025] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        47.222579
+		,"refLong":      14.763244
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Red Bull Ring GP"
+		,"Name2":	 "Red_Bull_Ring Grand Prix"	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"Grand Prix"
+		,"Zoom":         15
+		,"MapInitLat":   47.222579
+		,"MapInitLong":  14.763244
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+	//Red Bull Ring Club
+	aRefPoints[9999990024] = CopyObjectWithModifications(aRefPoints[9999990025], {"Name": "Red Bull Ring Club","Name2": "Red_Bull_Ring Club"});	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"Club"
+	//Red Bull Ring National
+	aRefPoints[9999990026] = CopyObjectWithModifications(aRefPoints[9999990025], {"Name": "Red Bull Ring National","Name2": "Red_Bull_Ring National"});	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"National"
+
+	//Sugo Race Circuit
+	aRefPoints[9999990027] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        38.140897
+		,"refLong":      140.776549
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Sugo"
+		,"Name2":	 "Sugo Grand Prix"	//"mTrackLocation":"Sugo","mTrackVariation":"Grand Prix"
+		,"Zoom":         15
+		,"MapInitLat":   38.140897
+		,"MapInitLong":  140.776549
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+
+	//Texas Motor Speedway
+	aRefPoints[9999990028] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        33.036859
+		,"refLong":      -97.281377
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Texas Motor Speedway"
+		,"Name2":	 "Texas Motor Speedway Tri_Oval"	//"mTrackLocation":"Texas Motor Speedway","mTrackVariation":"Tri_Oval"
+		,"Zoom":         15
+		,"MapInitLat":   33.036859
+		,"MapInitLong":  -97.281377
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+	//Texas Motor Speedway Infield Course
+	aRefPoints[9999990029] = CopyObjectWithModifications(aRefPoints[9999990028], {"Name": "Texas Motor Speedway Infield Course","Name2": "Texas Motor Speedway Infield_RC"});	//"mTrackLocation":"Texas Motor Speedway","mTrackVariation":"Infield_RC"
+	//Texas Motor Speedway Road Course
+	aRefPoints[9999990030] = CopyObjectWithModifications(aRefPoints[9999990028], {"Name": "Texas Motor Speedway Road Course","Name2": "Texas Motor Speedway RC"});	//"mTrackLocation":"Texas Motor Speedway","mTrackVariation":"RC"
 	
 	//// fictional tracks
 	//Azure Coast
@@ -814,6 +1056,32 @@ function Refpoint(circuit_id)
 		"Name":         "Bannochbrae Road Circuit"
 		,"Comment": 	"fictional track"
         });
+	
+	//Mercedes Ice Training Track Full Track
+	aRefPoints[9999990032] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		,"Name":         "Mercedes Ice Training Track Full Track"
+		,"Name2":	 "Mercedes Ice Training Track Test"	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"Test"
+		,"Comment": "fictional, initially added, Dummy Track ID, Dummy DS name"
+		});
+	//Mercedes Ice Training Track East Circuit
+	aRefPoints[9999990031] = CopyObjectWithModifications(aRefPoints[9999990032], {"Name": "Mercedes Ice Training Track East Circuit","Name2": "Mercedes Ice Training Track East"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"East"
+	//Mercedes Ice Training Track East Circuit
+	aRefPoints[9999990033] = CopyObjectWithModifications(aRefPoints[9999990032], {"Name": "Mercedes Ice Training Track North Circuit","Name2": "Mercedes Ice Training Track North"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"North"
+	//Mercedes Ice Training Track North East Circuit
+	aRefPoints[9999990034] = CopyObjectWithModifications(aRefPoints[9999990032], {"Name": "Mercedes Ice Training Track North East Circuit","Name2": "Mercedes Ice Training Track NorthEast"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"NorthEast"
+	//Mercedes Ice Training Track South Circuit
+	aRefPoints[9999990035] = CopyObjectWithModifications(aRefPoints[9999990032], {"Name": "Mercedes Ice Training Track South Circuit","Name2": "Mercedes Ice Training Track South"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"South"
+	//Mercedes Ice Training Track West Circuit
+	aRefPoints[9999990036] = CopyObjectWithModifications(aRefPoints[9999990032], {"Name": "Mercedes Ice Training Track West Circuit","Name2": "Mercedes Ice Training Track West"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"West"
+
+	//Sampala Snow Circuit Prototype
+	aRefPoints[9999990037] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		,"Name":         "Sampala Snow Circuit Prototype"
+		,"Name2":	 "Sampala"	//"mTrackLocation":"Sampala","mTrackVariation":""
+		,"Comment": "fictional, initially added, Dummy Track ID, Dummy DS name"
+		});
 	
 	//// fictional Kart tracks	
 	//Summerton
