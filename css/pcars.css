@@ -134,14 +134,15 @@
 		 
 	     
 		#DSstatistic{	     		
-                background: 		hsla(50,80%,80%,0.8);
-				background-image:	url('../images/background/pcars_logo03.png');
-				background-size:	70%;
+	/*			background: 		hsla(50,80%,80%,0.8);							*/
+				background:			lightgrey;
+	/*			background-image:	url('../images/background/pcars_logo03.png');		*/
+				background-size:	99%;
 				background-repeat: 	no-repeat;
 				background-position:center;	
 				background-size:	contain;			
-				opacity: 			0.5;
-				margin: 			auto;	  	     
+				opacity: 			1;
+				margin: 			auto; 
 	     }
 	     
 	     #DSreplay{

@@ -14,6 +14,25 @@ var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
 
+var aAPIMODEMAPPING = 
+	{
+		'DS' : {
+			'url'	     		:	'www.eckhchri.de',
+			'port'	     		:	80,
+			'delay'	     		:	2000,
+			'firstdelay' 		:	100,
+			'receivemode'		:	'GETDSANDDRIVERDATA',
+			'driverdatamode'	:	'GETDRIVERDATE',
+			'tracklistmode'		: 	'GETTRACKLIST'
+				
+	},
+		'CREST' : {
+			'driverdate' :  'GETCRESTDRIVERDATA'
+	}
+}
+
+
+
 //default API mode, possible values: DS, CREST, CREST2 or DEMO
 var APIMODE   =   "DEMO";		// Default API Mode
 
@@ -62,8 +81,9 @@ var demo = [
            ];
 
 //playback demo from start position to end position
-demo_start_pos = 0;
-demo_end_pos = 9999;  //if the demo array is smaller, then the array length is used as end position
+demo_start_pos 		= 0;
+demo_end_pos 		= 9999;	//if the demo array is smaller, then the array length is used as end position
+replay_step_size	= 5;	//used to simulate a fast forward[1=one step; 2=two steps, ...]
 
 //CSS default
 var CSSDEFAULTSET = 'colortop3';  //use the value of the selection Box #DRIVERCOLOR
