@@ -700,12 +700,12 @@ function Refpoint(circuit_id)
 	//Autodromo Algarve
 	aRefPoints[9999990001] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":		37.231121
-		,"refLong":		-8.628299
-		,"rotation":		0
+		"refLat":		37.231240
+		,"refLong":		-8.629394
+		,"rotation":		-74.2
 		,"cor_r_Long":		0
 		,"cor_r_Lat":		0
-		,"cor_PosX_mul":	1
+		,"cor_PosX_mul":	1.003
 		,"cor_PosY_mul":	1
 		,"Name":		"Autodromo Algarve"
 		,"Name2":		"Autodromo_Algarve Autodromo_Algarve"	//mTrackLocation:"Autodromo_Algarve",mTrackVariation:"Autodromo_Algarve"
