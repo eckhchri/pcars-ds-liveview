@@ -83,7 +83,7 @@ var demo = [
 //playback demo from start position to end position
 demo_start_pos 		= 0;
 demo_end_pos 		= 9999;	//if the demo array is smaller, then the array length is used as end position
-replay_step_size	= 5;	//used to simulate a fast forward[1=one step; 2=two steps, ...]
+replay_step_size	= 1;	//used to simulate a fast forward[1=one step; 2=two steps, ...]
 
 //CSS default
 var CSSDEFAULTSET = 'colortop3';  //use the value of the selection Box #DRIVERCOLOR
