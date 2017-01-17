@@ -712,15 +712,15 @@ function Refpoint(circuit_id)
 		,"Zoom":		15
 		,"MapInitLat":	37.231121
 		,"MapInitLong":	-8.628299
-		,"Comment":		"initially added, Dummy Track ID, Dummy DS name"
+		,"Comment":		"refPoint set, Dummy Track ID, Dummy DS name"
 		});
 	
 	//Circuit of the Americas
 	aRefPoints[9999990002] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":		30.135114
-		,"refLong":		-97.634090
-		,"rotation":		0
+		"refLat":		30.131930
+		,"refLong":		-97.639797
+		,"rotation":		-0.6
 		,"cor_r_Long":		0
 		,"cor_r_Lat":		0
 		,"cor_PosX_mul":	1
@@ -730,7 +730,7 @@ function Refpoint(circuit_id)
 		,"Zoom":		15
 		,"MapInitLat":	30.135114
 		,"MapInitLong":	-97.634090
-		,"Comment":		"initially added, Dummy Track ID, Dummy DS name"
+		,"Comment":		"refPoint set, Dummy Track ID, Dummy DS name"
 		});
 
 	//Daytona International Speedway
