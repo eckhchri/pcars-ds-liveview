@@ -575,7 +575,7 @@ function Refpoint(circuit_id)
 		,"Comment": "live check"
 		});
 	//Greenwood Karting Circuit - Kart track of Spa-Franchorchamps
-	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit"});
+	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit","Name2": ""});
 		
 	//Circuit de Barcelona-Catalunya GP
 	aRefPoints[521933422] = CopyObjectWithModifications(aRefPoints[9999999999],
