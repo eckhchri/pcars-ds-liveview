@@ -82,6 +82,15 @@ function Refpoint(circuit_id)
 		,"MapInitLat":	49.329796
 		,"MapInitLong":	8.571180
 		});
+	//Hockenheim Rallycross
+	aRefPoints[9999990039] = CopyObjectWithModifications(aRefPoints[1695182971],
+		{
+		"Name":		"Hockenheim Rallycross"
+		,"Name2":	""			//"mTrackLocation":"Hockenheim","mTrackVariation":"Short"
+		,"MapInitLat":	49.329796
+		,"MapInitLong":	8.571180
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
 
 	//Dubai Autodrome GP
 	aRefPoints[-661887517] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -230,7 +239,9 @@ function Refpoint(circuit_id)
                 });
         //Le Circuit Bugatti
 	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Name2": "Le Mans Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});	//"mTrackLocation":"Le Mans","mTrackVariation":"Le Circuit Bugatti"
-        
+	//Le Mans Karting International
+	aRefPoints[9999990044] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Karting International","Name2": "Le Mans Karting International Le Mans Karting International","Comment": "initially added, Dummy Track ID, Dummy DS name"});	//"mTrackLocation":"Le Mans Karting International","mTrackVariation":"Le Mans Karting International"
+	
         //Ruapuna Park GP
         aRefPoints[1277693448] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
@@ -1083,6 +1094,14 @@ function Refpoint(circuit_id)
 		,"Comment": "fictional, initially added, Dummy Track ID, Dummy DS name"
 		});
 	
+	//Wildcrest Rally Cross
+	aRefPoints[9999990038] = CopyObjectWithModifications(aRefPoints[8888888888],
+		{
+		"Name":         "Wildcrest"
+		,"Name2":	 "Wildcrest Rally_Cross"	//"mTrackLocation":"Wildcrest","mTrackVariation":"Rally_Cross"
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		});
+	
 	//// fictional Kart tracks	
 	//Summerton
 	aRefPoints[-44748320] = CopyObjectWithModifications(aRefPoints[8888888888],
@@ -1149,6 +1168,15 @@ function Refpoint(circuit_id)
 	//Silverstone Classic - copy of Silverstone GP
 	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"rotation": 0.2,"Name": "Silverstone Classic","Name2": "","Comment": "finished"});
 	
+	//Circuit de Spa Franchorchamps Historic
+	aRefPoints[9999990040] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Circuit de Spa Franchorchamps Historic","Name2": "Circuit de Spa-Francorchamps Historic","Comment": "initially added, Dummy Track ID, Dummy DS name"});	//"mTrackLocation":"Circuit de Spa-Francorchamps","mTrackVariation":"Historic"
+
+	//Autodromo Nazionale Monza Historic GP
+	aRefPoints[9999990041] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Historic GP","Name2": "Autodromo Nazionale Monza Historic_GP","Comment": "initially added, Dummy Track ID, Dummy DS name"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_GP"
+	//Autodromo Nazionale Monza Historic Oval
+	aRefPoints[9999990042] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Historic Oval","Name2": "Autodromo Nazionale Monza Historic_Oval","Comment": "initially added, Dummy Track ID, Dummy DS name"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Oval"
+	//Autodromo Nazionale Monza Historic Oval + GP Mix
+	aRefPoints[9999990043] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Historic Oval + GP Mix","Name2": "Autodromo Nazionale Monza Historic_Mix","Comment": "initially added, Dummy Track ID, Dummy DS name"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Mix"
 	
 
 ///////////////////////////////////////////////////////////////////////////	
