@@ -538,7 +538,7 @@
 	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 	//add StopRefresh table button within jqgrid header - Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Stop" style="background-color:#dddddd; width:50px" disabled></input>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>');
 
 
 	// car list overview
@@ -971,17 +971,17 @@
 	});
 	
 	function changeRefreshTracklist(data){
-                if(data.value === "Stop"){
+                if(data.value === "Pause"){
                         StopRefreshTracklist    = "true";
                         WORKERDELAY_TRACKLIST   = 10000;
-                        data.value = "Start";
-                        data.title = "Start automatic refresh of table";
+                        data.value = "Play";
+                        data.title = "Resume automatic refresh of table";
                         data.style="background-color:#ffffff";
                 }else{
                         StopRefreshTracklist    = "false";
                         WORKERDELAY_TRACKLIST   = 5000;
-                        data.value = "Stop";
-                        data.title = "Stop automatic refresh of table";
+                        data.value = "Pause";
+                        data.title = "Pause automatic refresh of table";
                         data.style="background-color:#dddddd";
                 }
         }
