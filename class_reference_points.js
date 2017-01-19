@@ -702,17 +702,17 @@ function Refpoint(circuit_id)
 		{
 		"refLat":		37.231240
 		,"refLong":		-8.629394
-		,"rotation":		-74.2
+		,"rotation":		-74.3
 		,"cor_r_Long":		0
 		,"cor_r_Lat":		0
 		,"cor_PosX_mul":	1.003
 		,"cor_PosY_mul":	1
 		,"Name":		"Autodromo Algarve"
 		,"Name2":		"Autodromo_Algarve Autodromo_Algarve"	//mTrackLocation:"Autodromo_Algarve",mTrackVariation:"Autodromo_Algarve"
-		,"Zoom":		15
+		,"Zoom":		16
 		,"MapInitLat":	37.231121
 		,"MapInitLong":	-8.628299
-		,"Comment":		"refPoint set, Dummy Track ID, Dummy DS name"
+		,"Comment":		"last check, Dummy Track ID, Dummy DS name"
 		});
 	
 	//Circuit of the Americas
