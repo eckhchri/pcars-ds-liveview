@@ -116,6 +116,10 @@ function addDataset(dataset) {
 }
 
 function memorySizeOf(obj) {
+	
+	//todo: check if it is possible to optimized MemSizeCalculation
+	return "disabled";
+	
     var bytes = 0;
 
     function sizeOf(obj) {

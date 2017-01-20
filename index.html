@@ -570,9 +570,8 @@
 	var workerGUIUPDATES      =       new Worker('./worker_guiupdates.js');	
 	var RecStatistics		  = 	[];
 	workerGUIUPDATES.addEventListener('message', function(e) {
-					//if(log >= 3){console.log('+++++++++++ GUIUPDATE Worker');}
-					//TODO: chec if this cost performance to count memsize of the array
-					RecStatistics	=	PCARS_Rec.getStatistics();
+					//if(log >= 3){console.log('+++++++++++ GUIUPDATE Worker');}					
+					RecStatistics			=	PCARS_Rec.getStatistics();
 					ChangeHtmlContentByID( '#pcars-rec-elemnr' 		, "Element number:  "	 	+ 	RecStatistics['number']  );
 					ChangeHtmlContentByID( '#pcars-rec-elemsize' 		, "Element size:  "	 	+ 	RecStatistics['size']  );
 					
