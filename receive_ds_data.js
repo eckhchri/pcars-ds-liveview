@@ -375,7 +375,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								0,												//LastLapTime - NA
 								0,												//Orientation - NA
 								0,												//Speed - NA
-								999999,											//CurrentLap
+								myArr.participants.mParticipantInfo[i].mCurrentLap,						//CurrentLap
 								2091910841
 							);
 				}
@@ -436,7 +436,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								0,												//LastLapTime - NA
 								0,												//Orientation - NA
 								0,												//Speed - NA
-								999999,											//CurrentLap
+								myArr.participants.mParticipantInfo[i].mCurrentLap,						//CurrentLap
 								2091910841
 							);
 				}
