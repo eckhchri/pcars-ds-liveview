@@ -369,7 +369,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								PosY,											//PositionY in meters
 								PosZ,											//PositionZ in meters
 								"NA",											//State - NA
-								this.aSectormapping[ myArr.participants.mParticipantInfo[i].mCurrentSector ],		//CurrentSector
+								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
 								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 								0,												//FastestLapTime - NA
 								0,												//LastLapTime - NA
@@ -430,7 +430,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								PosY,											//PositionY in meters
 								PosZ,											//PositionZ in meters
 								"NA",											//State - NA
-								this.aSectormapping[ myArr.participants.mParticipantInfo[i].mCurrentSector ],		//CurrentSector
+								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
 								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 								0,												//FastestLapTime - NA
 								0,												//LastLapTime - NA
