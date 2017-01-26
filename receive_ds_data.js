@@ -11,6 +11,22 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	this.timeout		=	timeout;
 	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
 	this.aRefPointTMP	=	aRefPointTMP;		// hash off all available RefPoints
+	
+	//CurrentSector has to be mapped
+	// API Sector 	- Real Sector
+	// 	3 			- 	1
+	// 	1 			- 	2
+	// 	2 			- 	3
+	//	0			-	0
+	//this.aSectormapping = {};
+	this.aSectormapping = {
+				"3": '1',
+				"1": '2',
+				"2": '3',
+				"0": '0'
+	};
+	
+	
 
 	//if(log >= 3){console.log("Receive_DS_data() --- receivemode: " , receivemode);}
 
@@ -102,6 +118,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								demo_el.participants[i].PosY,
 								demo_el.participants[i].PosZ,
 								demo_el.participants[i].State,
+								//no mappaing of the sector needed, because within Export correct values included
 								demo_el.participants[i].CurrentSector,
 								demo_el.participants[i].RacePosition,
 								demo_el.participants[i].FastestLapTime,
@@ -231,7 +248,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                                myArr.response.participants[i].attributes.PositionY,
 		                                                myArr.response.participants[i].attributes.PositionZ,
 		                                                myArr.response.participants[i].attributes.State,
-		                                                myArr.response.participants[i].attributes.CurrentSector,
+		                                                this.aSectormapping[ myArr.response.participants[i].attributes.CurrentSector ],		                                                
 		                                                myArr.response.participants[i].attributes.RacePosition,
 		                                                myArr.response.participants[i].attributes.FastestLapTime,
 		                                                myArr.response.participants[i].attributes.LastLapTime,
@@ -352,7 +369,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								PosY,											//PositionY in meters
 								PosZ,											//PositionZ in meters
 								"NA",											//State - NA
-								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+								this.aSectormapping[ myArr.participants.mParticipantInfo[i].mCurrentSector ],		//CurrentSector
 								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 								0,												//FastestLapTime - NA
 								0,												//LastLapTime - NA
@@ -413,7 +430,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								PosY,											//PositionY in meters
 								PosZ,											//PositionZ in meters
 								"NA",											//State - NA
-								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+								this.aSectormapping[ myArr.participants.mParticipantInfo[i].mCurrentSector ],		//CurrentSector
 								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 								0,												//FastestLapTime - NA
 								0,												//LastLapTime - NA
