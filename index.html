@@ -569,12 +569,10 @@
 	////// create GUI worker thread
 	var workerGUIUPDATES      =       new Worker('./worker_guiupdates.js');	
 	var RecStatistics		  = 	[];
-	workerGUIUPDATES.addEventListener('message', function(e) {
-					//if(log >= 3){console.log('+++++++++++ GUIUPDATE Worker');}					
+	workerGUIUPDATES.addEventListener('message', function(e) {			
 					RecStatistics			=	PCARS_Rec.getStatistics();
 					ChangeHtmlContentByID( '#pcars-rec-elemnr' 		, "Element number:  "	 	+ 	RecStatistics['number']  );
-					ChangeHtmlContentByID( '#pcars-rec-elemsize' 		, "Element size:  "	 	+ 	RecStatistics['size']  );
-					
+					ChangeHtmlContentByID( '#pcars-rec-elemsize' 		, "Element size:  "	 	+ 	RecStatistics['size']  );					
 					workerGUIUPDATES.postMessage({workerdelay: GuiUpdateIntervall});				
 	}, false);
 	workerGUIUPDATES.postMessage({delay: GuiUpdateIntervall});
@@ -772,8 +770,6 @@
 		if (DisplayDuration < 0) { DisplayDuration = 0 }        //catch a negative value
 		if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration		
 		
-		//if(log >= 4){console.log("+++++++++DisplayDuration:    ",DisplayDuration);}                
-		//if(log >= 4){console.log("++++++++ aSensorData_NEW" , aSensorData);}
 		sensorLayer.update(aSensorData);
 
 		// in case track changes on DS adjust the map settings for new possition
@@ -783,7 +779,6 @@
 			changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
 
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
-            if(log >= 3){console.log("----------- TrackID changed. Call map.SetCenter(),  cuircitID / tmpcuircitID " + cuircitID + " / " + tmpcuircitID);}
 		}
 		
 		if (SessionState_old != "Race" && SessionState == "Race"){   //Unhide markers after calculation, with a delay of 1000 ms
@@ -890,7 +885,7 @@
                                         ,dsurl:                 DsServerURL
                                         ,dsport:                DsPort
                                         ,timeout:               XMLHTTPTimeout
-                                        ,receivemode:   "GETDSANDDRIVERDATA"
+                                        ,receivemode:   		"GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                 }
 	}, false);
@@ -927,18 +922,18 @@
         
 	for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
-                // calculate GPS coordinates
+               // calculate GPS coordinates
                 gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
 
                 // fill data array
                 aSensorData[i] = {
-                                "Key":                          aDrivers.driverlist[i].GetName()
+                                "Key":					aDrivers.driverlist[i].GetName()
                                 ,"MarkerLabel" :        buildDriverName ( aDrivers.driverlist[i].GetRacePosition(), aDrivers.driverlist[i].GetName() )
                                 ,"DateTime":            "2013-09-04T09:41:09+10:00"
-                                ,"Lat":                         gpsCoTmp["Lat"]
-                                ,"Long":                        gpsCoTmp["Long"]
-                                ,"Heading":                     286.0
-                                ,"Speed":                       aDrivers.driverlist[i].Speed
+                                ,"Lat":					gpsCoTmp["Lat"]
+                                ,"Long":				gpsCoTmp["Long"]
+                                ,"Heading":				286.0
+                                ,"Speed":				aDrivers.driverlist[i].Speed
                                 ,"CSSTextClasses":      aDrivers.driverlist[i].GetCSSTextClass()
                                 ,"CSSCircleClasses":    aDrivers.driverlist[i].GetCSSCircleClass()
                 }
@@ -981,7 +976,7 @@
                         data.title = "Pause automatic refresh of table";
                         data.style="background-color:#dddddd";
                 }
-        }
+	}
 
 
 	// create worker for Tracklist updates //////////////////////////////////////////////////////////////////////
@@ -1148,82 +1143,82 @@
 			
 				var marker;
 				var padding = 10;
-					
+						
 				//update internal data which drive redrawing on zoom_changed
 				_data = data.slice();
-			   
-			   //Detect time between StopTransitionDelay set to "true" and now
-			   var CurrentTime = Date.now();
-			   var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
-
-			   if( StopTransitionDelay == "true" ){
-					if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
-					//this.draw();
-					marker = _div.selectAll("svg")
-						.data(_data, function (d) { return d.Key; })
-						.each(transform) // update existing markers
-						.enter().append("svg:svg")
-						.each(transform)
-						.attr("class", function (d){ return d.CSSTextClasses });
+				   
+				//Detect time between StopTransitionDelay set to "true" and now
+				var CurrentTime = Date.now();
+				var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
 	
-					// reset to default after zoom event finished. 
-					//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
-					if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
-			
-			   }else{
-					if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
-					//this.draw();
-	
-					marker = _div.selectAll("svg")
-						.data(_data, function (d) { return d.Key; })
-						.each(transformWithEase) // update existing markers
-						.enter().append("svg:svg")
-						.each(transform)
-						.attr("class", function (d){ return d.CSSTextClasses });
-	
-					// reset to default after zoom event finished
-					//StopTransitionDelay = "false";
-			  }
-			
-			// Add a circle.
-			marker.append("svg:circle")
-				.attr("r", 4.5)
-				.attr("cx", padding)
-				.attr("cy", padding)
-				.attr("class", function (d){ return d.CSSCircleClasses } );
-
-			// Add a label.
-			marker.append("svg:text")
-				.attr("x", padding + 7)
-				.attr("y", padding)
-				.attr("dy", ".31em")
-				//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
-				//      it seem that the function within .text(...) will called only once at the beginning
-				//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
-				.text(function (d) {
-					//if(log >= 4){console.log("+++++ d: " , d );}
-
-					for (var i = 0; i < aSensorData.length; i++){
-						if (aSensorData[i].Key == d.Key){
-							//if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
-							return  aSensorData[i].MarkerLabel;
-						}
-					}
-					return d.MarkerLabel;
-				})
+				if( StopTransitionDelay == "true" ){
+						if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
+						//this.draw();
+						marker = _div.selectAll("svg")
+							.data(_data, function (d) { return d.Key; })
+							.each(transform) // update existing markers
+							.enter().append("svg:svg")
+							.each(transform)
+							.attr("class", function (d){ return d.CSSTextClasses });
+		
+						// reset to default after zoom event finished. 
+						//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
+						if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
 				
-			// Update CSS classes new
-			var svgs = _div.selectAll("circle")
-						.data(_data, function (d){ return d.Key; })
-						.attr("class" ,(function(d){ return d.CSSCircleClasses; }));
+				}else{
+						if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
+						//this.draw();
+		
+						marker = _div.selectAll("svg")
+							.data(_data, function (d) { return d.Key; })
+							.each(transformWithEase) // update existing markers
+							.enter().append("svg:svg")
+							.each(transform)
+							.attr("class", function (d){ return d.CSSTextClasses });
+		
+						// reset to default after zoom event finished
+						//StopTransitionDelay = "false";
+				}
 			
-			// Update labels new
-			var svgs = _div.selectAll("text")
-						.data(_data, function (d){ return d.Key; })
-						.text(function(d){ return d.MarkerLabel; });
-
-			// delete unneeded svg objects from dom tree
-			this.CleanupDriverObjects(_data);			
+				// Add a circle.
+				marker.append("svg:circle")
+					.attr("r", 4.5)
+					.attr("cx", padding)
+					.attr("cy", padding)
+					.attr("class", function (d){ return d.CSSCircleClasses } );
+	
+				// Add a label.
+				marker.append("svg:text")
+					.attr("x", padding + 7)
+					.attr("y", padding)
+					.attr("dy", ".31em")
+					//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
+					//      it seem that the function within .text(...) will called only once at the beginning
+					//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
+					.text(function (d) {
+						//if(log >= 4){console.log("+++++ d: " , d );}
+	
+						for (var i = 0; i < aSensorData.length; i++){
+							if (aSensorData[i].Key == d.Key){
+								//if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
+								return  aSensorData[i].MarkerLabel;
+							}
+						}
+						return d.MarkerLabel;
+					})
+					
+				// Update CSS classes new
+				var svgs = _div.selectAll("circle")
+							.data(_data, function (d){ return d.Key; })
+							.attr("class" ,(function(d){ return d.CSSCircleClasses; }));
+				
+				// Update labels new
+				var svgs = _div.selectAll("text")
+							.data(_data, function (d){ return d.Key; })
+							.text(function(d){ return d.MarkerLabel; });
+	
+				// delete unneeded svg objects from dom tree
+				this.CleanupDriverObjects(_data);			
 			
 		  	}; //end update()
             
@@ -1237,8 +1232,7 @@
 		  		var svgs = 	d3.selectAll("svg")
 		  					.each(function( d ) {
 		  							if ( aTmp[d.Key] == undefined ) {		  								
-		  								//if(log >= 4){console.log("---- CleanupDriverObjects() - Ghost car deleted from map d.Key: " , d.Key);}
-		  								this.remove(); 	// delete svg object
+		  								this.remove(); 	// delete svg object / ghots cars
 		  							}	
 		  					});
 		  	}; // end CleanupDriverObjects()
@@ -1304,11 +1298,9 @@ function changeMapSettings(newTrackObj, mapobj){
 
 ///////////////////
 function refreshTrackList(a){
-	//if(log >= 3){console.log("------------------------ refreshTrackList() parameter a : " , a);}
 
 	// if set to true, no refresh of table wanted
-	if (StopRefreshTracklist == "true")
-	{
+	if (StopRefreshTracklist == "true") {
 		if(log >= 4){console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );}
 		return 1;
 	}
@@ -1388,14 +1380,13 @@ function refreshDriverList(a){
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
 	for (i=0; i < a.length; i++) {
-		//if(log >= 3){console.log("update data on row: " + i + " / " + a.data[i]);}
 		
 		if (i == 0){
 			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i].FastestLapTime);
 		}else{
 			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
 		}
-		if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
+		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
 		_data = {   
 					refid:				a[i].RefID
@@ -1415,18 +1406,11 @@ function refreshDriverList(a){
 					,posy:				a[i].PosY
 					,posz:				a[i].PosZ
 		};
-		//decision if replace or add a row to jqGrid
-		/*if (i < GridSize){	//disabled, because after clearGridData GridSize is 0 every time
-				jQuery("#DriverDataTable").jqGrid('setRowData',i, _data);
-				//if(log >= 3){console.log("+++++ set " + i );}
-		}else{*/
-				jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
-				//if(log >= 3){console.log("+++++ add " + i );}
-		//}
+		//update line
+		jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
 	
 		//build hash for clean up map	
 		_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};
-
 	}
 
 	//Hide columns diff and gap during SessionStage Race1 and Race2
@@ -1465,8 +1449,7 @@ function VehicleIdToName(id, array){
 	if (array[id]){
 		return array[id];	
 	} else {
-		// in the case vehilce IDs not in hash
-		if(log >= 3){console.log("------- VehicleIdToName(), vehicle ID unknown: " , id)};
+		// in the case vehilce IDs not in hash		
 	}
 	//if ID not found return id
 	return id;
@@ -1570,8 +1553,7 @@ function CalcGaps(bestLaptime,bestLaptimeFirst,bestLaptimeAhead){
 	return Gaps;
 }
 
-function ConvertLaptimeInReadbaleFormat(milliseconds)
-{
+function ConvertLaptimeInReadbaleFormat(milliseconds){
 	//todo: implemet date format with leading zeros for seconds and milliseconds
 	//var date = new Date(milliseconds);
 	
@@ -1661,48 +1643,7 @@ function JSONToCSVConvertor(JSONData, ReportTitle, ShowLabel,header_names,exclud
 		//add a line break after each row
 		CSV += row + '\r\n';
 	}
-        
-	/*if (CSV == '') {
-		alert("Invalid data");
-		return;
-	}
-
-	if(!fileName){
-		//Generate a file name
-		fileName = "MyReport_";
-		//this will remove the blank-spaces from the title and replace it with an underscore
-		fileName += ReportTitle.replace(/ /g,"_");
-	}
-
-	if (navigator.appName == "Microsoft Internet Explorer") {
-		var oWin = window.open();
-		oWin.document.write('sep=,\r\n' + CSV);
-		oWin.document.close();
-		oWin.document.execCommand('SaveAs', true, fileName + ".csv");
-		oWin.close();
-	} else{
-		//Initialize file format you want csv or xls
-		var uri = 'data:text/csv;charset=utf-8,' + escape(CSV);
-
-		// Now the little tricky part.
-		// you can use either>> window.open(uri);
-		// but this will not work in some browsers
-		// or you will not get the correct file extension
-
-		//this trick will generate a temp <a /> tag
-		var link = document.createElement("a");
-		link.href = uri;
-
-		//set the visibility hidden so it will not effect on your web-layout
-		link.style = "visibility:hidden";
-		link.download = fileName + ".csv";
-
-		//this part will append the anchor tag and remove it after automatic click
-		document.body.appendChild(link);
-		link.click();
-		document.body.removeChild(link);
-	}*/
-	
+        	
 	return CSV;
 }
 
@@ -1791,32 +1732,25 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 			//switch to demo mode
 			HTMLCTRL.APIMODE_SetSelection( "DEMO" );
 			
-			//and initialize dome array with new data
-			//initDemoData(PCARS_Rec.getCurrentData(), "yes")    //-> async Read of zipFile, initDemoData(...) called within pcars_recorder.js 
-			
+			//and initialize demo array with new data -> because of async read of zipFile, initDemoData(...) called within pcars_recorder.js 			
         };		
         // start reading the file. When it is done, calls the onload event defined above.
         reader.readAsBinaryString(fileInput.files[0]);
     };
 	fileInput.addEventListener('change', readFile);
 
-	//TODO:  Reset fileInput. Needed to load file with same name again
-	if(log >= 3){console.log('---------- initRecFileReader (fileInput): ' ,  fileInput )};
+	//TODO:  Reset fileInput. Needed to load file with same name again	
 }
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initDemoData(aNewData, SetApiModeTo ){
 
-	if(log >= 3){console.log('---------- initDemoData() before: ' ,  demo )};
 	//overwrite global array with new data
 	demo = aNewData;	
-	if(log >= 3){console.log('---------- initDemoData() after: ' ,  demo )};
 			
 	//reset values to default
-	//demo_start_pos 		= 0;
 	setParamDemoStartPos( 0 , true );
-	//demo_end_pos 		= 9999;
 	setParamDemoEndPos( demo.length-1 , true );	
 	record_pos 			= 0;
 	record_pos_helper 	= 0;	
@@ -1922,10 +1856,7 @@ function setParamDemoStartPos(new_val, isHtmlChange){
 			$("#loop_start_pos").val( new_val ).change();
 		}
 		
-	}else{
-		if(log >= 3){console.log('WARN: ----------- typeof new_val: ', typeof new_val  );}
-		if(log >= 3){console.log('WARN: ----------- size: ', new_val  );}
-		
+	}else{				
 		// set to minum possible value
 		$("#loop_start_pos").val( 0 ).change();		
 	}
@@ -1954,10 +1885,7 @@ function setParamDemoEndPos(new_val, isHtmlChange){
 			$("#loop_end_pos").val( new_val ).change();
 		}
 		
-	}else{
-		if(log >= 3){console.log('WARN: ----------- typeof new_val: ', typeof new_val  );}
-		if(log >= 3){console.log('WARN: ----------- size: ', new_val  );}
-		
+	}else{		
 		// set to maximum possible value
 		$("#loop_end_pos").val( demo.length-1 ).change();		
 	}
@@ -2011,9 +1939,7 @@ function initW2UI(){
     	//w2ui.toolbar.on('*', function (event) { 
 		w2ui.toolbar.on('click', function (event) { 
 			if (event.target != undefined) {
-			    
-				//if(log >= 3){console.log('---------- w2ui Event ' ,  $( "#toolbar" )  )};
-				
+	    		
 	        	switch (event.target) {
 	        	
 	        		case "w2ui_drivertable": 	
