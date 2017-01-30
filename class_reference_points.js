@@ -736,9 +736,9 @@ function Refpoint(circuit_id)
 	//Daytona International Speedway
 	aRefPoints[9999990003] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":		29.185507
-		,"refLong":		-81.069100
-		,"rotation":		0
+		"refLat":		29.185563
+		,"refLong":		-81.069434
+		,"rotation":		-125.8
 		,"cor_r_Long":		0
 		,"cor_r_Lat":		0
 		,"cor_PosX_mul":	1
@@ -748,7 +748,7 @@ function Refpoint(circuit_id)
 		,"Zoom":		15
 		,"MapInitLat":	29.185507
 		,"MapInitLong":	-81.069100
-		,"Comment":		"initially added, Dummy Track ID, Dummy DS name"
+		,"Comment":		"refPoint set, Dummy Track ID, Dummy DS name"
 		});			
 	//Daytona International Speedway Road Course
 	aRefPoints[9999990004] = CopyObjectWithModifications(aRefPoints[9999990003], {"Name": "Daytona International Speedway Road Course","Name2": "Daytona International Speedway Road_Course"});	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Road_Course"
