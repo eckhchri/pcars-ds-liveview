@@ -698,12 +698,7 @@
 				ExportCSV(CSVall,"Results");
 			}
 		}
-
-		if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
-		
-		/////////////////////////////////////////// update driver data /////////////////////
-		// refresh table of Driver data
-        refreshDriverList(e.data.driverlist);
+		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		
 		//todo var declaration needed within loop ???
 		var tmpcuircitID;
@@ -723,12 +718,16 @@
 		
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
+			
+				//convert vehicleID to VehicleName
+				e.data.driverlist[i].VehicleId	=  VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName);
 
+				//gatthering all vehicle classes of the current race
+				aCurrentVehicleClasses[i] = e.data.driverlist[i].VehicleId;
+				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
 
-				if(log >= 4){console.log('+++++++++++ DriverData Array  ', e.data.driverlist);}
-				
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 				
@@ -743,23 +742,21 @@
 						,"Speed":			e.data.driverlist[i].Speed
 						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
 						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass(PCARSVehicleList.idToClassMappingNormalized)
-				}
-				
-				//gatthering all vehicle classes of the current race
-				aCurrentVehicleClasses[i] = e.data.driverlist[i].Name;				
-		}
-		
+				}												
+		}// end update map
 		
 		//todo: dynamically fill up selection box with vehicle classes
-		if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
+		//if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
 		var lcvc 	= aCurrentVehicleClasses.length;
 		var tmpcvc	= "";		
-		for(var i = 0; i < lcvc; i++){
-			
+		for(var i = 0; i < lcvc; i++){			
 			tmpcvc	=	aCurrentVehicleClasses[i];
 			HTMLCTRL.DRIVERCOLOR_AddSelElement(tmpcvc , tmpcvc);
 		}
-	
+		
+		/////////////////////////////////////////// update driver data /////////////////////
+		// refresh table of Driver data
+        refreshDriverList(e.data.driverlist);
 		
         sensorLayer_UpdateTime = Date.now();
 		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
@@ -1407,7 +1404,8 @@ function refreshDriverList(a){
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
 					,lapnumber:			a[i].CurrentLap
-					,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
+//Issue82			,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
+					,vehiclename:		a[i].VehicleId 						
 					,lastlap:			ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
 					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
 					,gap2ahead:			Gaps.gap2ahead
