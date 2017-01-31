@@ -144,6 +144,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				// optional parameter for decison: async = true, sync = false
 				, false
 			    );
+		xmlhttp.overrideMimeType("application/xml; charset=UTF-8");
+		//xmlhttp.responseType("application/xml; charset=UTF-8");
 	
 		// send request
 		try{
