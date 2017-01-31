@@ -37,8 +37,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
 				"GETTRACKLIST"  		: "/api/list/tracks",
 				"GETVEHICLELIST"  		: "/api/list/vehicles",
-				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true",
-				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true",
+				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true",
+				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true",
 				"GETDEMODATA"    		: ""
 			};	
 
@@ -335,8 +335,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					,"state":				"CREST Mode"
 					,"attributes":{
 						"TrackId":			TrackID
-						,"SessionStage":	""
-						,"SessionState":	myArr.gameStates.mSessionState
+						,"SessionStage":	myArr.gameStates.mSessionState
+						,"SessionState":	myArr.gameStates.mGameState
+						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
+						,"SessionTimeElapsed":	0
 					}
 				}
 				
@@ -397,8 +399,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					,"state":				"CREST Mode"
 					,"attributes":{
 						"TrackId":			TrackID
-						,"SessionStage":	""
-						,"SessionState":	myArr.gameStates.mSessionState
+						,"SessionStage":	myArr.gameStates.mSessionState
+						,"SessionState":	myArr.gameStates.mGameState
+						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
+						,"SessionTimeElapsed":	0
 					}
 				}
 				
