@@ -18,7 +18,6 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	// 	1 			- 	2
 	// 	2 			- 	3
 	//	0			-	0
-	//this.aSectormapping = {};
 	this.aSectormapping = {
 				"3": '1',
 				"1": '2',
@@ -27,23 +26,20 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	};
 	
 	
-
 	//if(log >= 3){console.log("Receive_DS_data() --- receivemode: " , receivemode);}
 
 	if (this.receivevariant == undefined){
-		this.receivevariant = "GETDRIVERDATE";
+		this.receivevariant = "GETDSANDDRIVERDATA";
 	}
 
 	// todo: Mapping HASH fuer receivevariant festlegen
 	var aReceiveModes = {
-				 "GETDRIVERDATE" 	: "/api/session/status?attributes&members&participants"
-				,"GETDSDATA"	 	: "/api/session/status?attributes&members&participants"
-				,"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants"
-				,"GETTRACKLIST"  	: "/api/list/tracks"
-				,"GETVEHICLELIST"  	: "/api/list/vehicles"
-				,"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true"
-				,"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true"
-				,"GETDEMODATA"    : ""
+				"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
+				"GETTRACKLIST"  		: "/api/list/tracks",
+				"GETVEHICLELIST"  		: "/api/list/vehicles",
+				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true",
+				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true",
+				"GETDEMODATA"    		: ""
 			};	
 
 //todo: Decison Using XMLHTTP class oder   THREE
@@ -144,6 +140,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				// optional parameter for decison: async = true, sync = false
 				, false
 			    );
+		//force UTF encoding for issue #79
 		xmlhttp.overrideMimeType("application/xml; charset=UTF-8");
 		//xmlhttp.responseType("application/xml; charset=UTF-8");
 	
@@ -154,9 +151,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			
 			//if(log >= 3){console.log("Error while sending Request to DS!:" + err );}
 			switch ( this.receivemode ){
-				case 	"GETDSDATA":  		return aDrivers;
-					
-				case  	"GETDRIVERDATE":	return aDrivers;	
+			
+				case	"GETDSANDDRIVERDATA":	return aDrivers;
 	
 				case	"GETTRACKLIST":		return aEmptyArray;
 				
@@ -166,7 +162,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					
 				case	"GETCREST2DRIVERDATA":	return aDrivers;
 				
-				case	"GETDSANDDRIVERDATA":	return aDrivers;
+
 			} // end switch	
 		}
 
@@ -174,12 +170,16 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		if (xmlhttp.readyState==4 && xmlhttp.status==200) {	
 	
 			//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
+			// TODO: JSON.parse and UTF Strings:  http://stackoverflow.com/questions/18264519/javascript-json-parse-utf-8-problems?rq=1
 			var myArr 			= JSON.parse( xmlhttp.responseText );
 			var arrayoutput 	= myArr.toString();
 			var DriverDummy		= new PCARSdriver();
 			DriverDummy.SetExampleData();
-	
-			if(log >= 3){console.log("ReceiveDsData complete array" , myArr);}
+							
+			//if(log >= 3){console.log("xmlhttp.responseType" , xmlhttp.responseType );}
+			//if(log >= 3){console.log("xmlhttp.getAllResponseHeaders()" , xmlhttp.getAllResponseHeaders() );}
+			if(log >= 3){console.log("xmlhttp.responseText WITHOUT JSON.parse(): " , xmlhttp.responseText);}
+			if(log >= 3){console.log("ReceiveDsData complete array. Converted with JSON.parse(): " , myArr);}
 	
 		   switch ( this.receivemode ) {
 	
@@ -300,9 +300,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	
 				// if no vehicle data returned return empty data			
 				if ( myArr.response.list.length == 0 ){
-	
-					if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST  array length=0 .");}
-					        
+					if(log >= 3){console.log("++++++++++++++++ GETVEHICLELIST  array length=0 .");}					        
 					return aEmptyArray;
 				}
 					
