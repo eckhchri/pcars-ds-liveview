@@ -741,14 +741,14 @@ function Refpoint(circuit_id)
 		,"rotation":		-125.8
 		,"cor_r_Long":		0
 		,"cor_r_Lat":		0
-		,"cor_PosX_mul":	1
+		,"cor_PosX_mul":	1.001
 		,"cor_PosY_mul":	1
 		,"Name":		"Daytona International Speedway"
 		,"Name2":		"Daytona International Speedway Tri_Oval"	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Tri_Oval"
-		,"Zoom":		15
-		,"MapInitLat":	29.185507
+		,"Zoom":		16
+		,"MapInitLat":	29.185007
 		,"MapInitLong":	-81.069100
-		,"Comment":		"refPoint set, Dummy Track ID, Dummy DS name"
+		,"Comment":		"last check, Dummy Track ID, Dummy DS name"
 		});			
 	//Daytona International Speedway Road Course
 	aRefPoints[9999990004] = CopyObjectWithModifications(aRefPoints[9999990003], {"Name": "Daytona International Speedway Road Course","Name2": "Daytona International Speedway Road_Course"});	//mTrackLocation:"Daytona International Speedway",mTrackVariation:"Road_Course"
