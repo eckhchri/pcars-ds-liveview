@@ -657,7 +657,7 @@
 			if(resttime != "-"){
 				resttime = '  Time: ' + resttime;
 			}
-			if (SessionState == "Race"){
+			if (SessionState == "Race" || SessionState == 2 || SessionState == 3){	//SessionState 2 and 3 is for CREST mode, enum for GAME_INGAME_PLAYING and GAME_INGAME_PAUSED
 				document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + resttime.slice(0,-4);     //slice for deleting the milliseconds part of the time
 			}else{
 				document.getElementById("txtSessionStage").value = '';

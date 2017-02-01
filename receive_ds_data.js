@@ -25,6 +25,42 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				"0": '0'
 	};
 	
+	var CREST_mGameState = [
+		"GAME_EXITED",
+		"GAME_FRONT_END",
+		"GAME_INGAME_PLAYING",
+		"GAME_INGAME_PAUSED",
+		"GAME_INGAME_INMENU_TIME_TICKING",
+		"GAME_INGAME_RESTARTING",
+		"GAME_INGAME_REPLAY",
+		"GAME_FRONT_END_REPLAY",
+		//-------------
+		"GAME_MAX"
+	];
+
+	var CREST_mSessionState = [
+		"SESSION_INVALID",
+		"SESSION_PRACTICE",
+		"SESSION_TEST",
+		"SESSION_QUALIFY",
+		"SESSION_FORMATION_LAP",
+		"SESSION_RACE",
+		"SESSION_TIME_ATTACK",
+		//-------------
+		"SESSION_MAX"
+	];
+
+	var CREST_mRaceState = [
+		"RACESTATE_INVALID",
+		"RACESTATE_NOT_STARTED",
+		"RACESTATE_RACING",
+		"RACESTATE_FINISHED",
+		"RACESTATE_DISQUALIFIED",
+		"RACESTATE_RETIRED",
+		"RACESTATE_DNF",
+		//-------------
+		"RACESTATE_MAX"
+	];
 	
 	//if(log >= 3){console.log("Receive_DS_data() --- receivemode: " , receivemode);}
 
