@@ -176,10 +176,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				// optional parameter for decison: async = true, sync = false
 				, false
 			    );
-		//force UTF encoding for issue #79
+		//force UTF8 encoding for issue #79
 		xmlhttp.overrideMimeType("application/xml; charset=UTF-8");
 		
-
 		// send request
 		try{
 			xmlhttp.send();
@@ -211,12 +210,13 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			var arrayoutput 	= myArr.toString();
 			var DriverDummy		= new PCARSdriver();
 			DriverDummy.SetExampleData();
-							
+			
+			//Issue #79 UTF8 Encoding within Driver Names
 			//if(log >= 3){console.log("xmlhttp.responseType" , xmlhttp.responseType );}
 			//if(log >= 3){console.log("xmlhttp.getAllResponseHeaders()" , xmlhttp.getAllResponseHeaders() );}
-			if(log >= 3){console.log("xmlhttp: " , xmlhttp);}
-			if(log >= 3){console.log("xmlhttp.responseText WITHOUT JSON.parse(): " , xmlhttp.responseText);}
-			if(log >= 3){console.log("ReceiveDsData complete array. Converted with JSON.parse(): " , myArr);}
+			//if(log >= 3){console.log("xmlhttp: " , xmlhttp);}
+			//if(log >= 3){console.log("xmlhttp.responseText WITHOUT JSON.parse(): " , xmlhttp.responseText);}
+			//if(log >= 3){console.log("ReceiveDsData complete array. Converted with JSON.parse(): " , myArr);}
 	
 		   switch ( this.receivemode ) {
 	
@@ -232,6 +232,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
+		                                        ,"attributes":			{}
 		                                     }
 				}else if ( myArr.response.state == "Running" ){
 	
@@ -242,6 +243,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
 		                                        ,"name":                myArr.response.name
+		                                        ,"attributes":			{}
 	        	                                }
 				}else{
 					// in case of othe stati return a defined value
@@ -252,10 +254,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	                       ,"now":                 "unknown mode"
 	                       ,"state":               "unknown mode"
 	                       ,"name":                "unknown mode"
+	                       ,"attributes":			{}
 	                       }
 				}
 				
-				aDrivers.globals.attributes = new Array();
+
 				//cath all attributes
 				for (var key in myArr.response.attributes) {
 					aDrivers.globals.attributes[key] =  myArr.response.attributes[key];
@@ -298,6 +301,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                         	);
 					}
 	
+					if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
 					// return information
 					return aDrivers;
 				}

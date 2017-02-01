@@ -94,7 +94,7 @@ function importData(compressedData){
 		alert("Error unzip: " + e);
       });
 	
-	if(log >= 3){console.log('+++++++++++ PCARSREC importData(). successfully imported data.');};
+	//if(log >= 3){console.log('+++++++++++ PCARSREC importData(). successfully imported data.');};
 	//if(log >= 3){console.log('+++++++++++ PCARSREC parsed :  ', this.data );};  //output of complete array after unzip.	
 	
 	return 1;
@@ -102,15 +102,15 @@ function importData(compressedData){
 
 function addDataset(dataset) {
 	// TODO:  define Format
-	if(log >= 3){console.log("---+++ PCARSRECORDER data added:   ", dataset);}
+	//if(log >= 3){console.log("---+++ PCARSRECORDER data added:   ", dataset);}
 
 	// TODO: really needed or could be deletd because of performance issues?
 //	if ( this.data.length > this.maxDatasetSize ){		
 //		return 0;
 //	}
 			
-    this.data.push(	dataset	);
-	this.CurrentDataSize++;
+    this.data.push(	dataset	);    
+	this.CurrentDataSize++;		
 		
 	return 1;
 }

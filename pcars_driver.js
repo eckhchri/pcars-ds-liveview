@@ -109,7 +109,7 @@ function SetExampleData() {
 
 
 function GetCSSTextClass() {
-	var css = "marker markertext";
+	var css = "marker markertext driverlabel";
 	
 	return css;
 }
