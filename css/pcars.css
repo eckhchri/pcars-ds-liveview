@@ -156,17 +156,16 @@
 				margin: 			auto;
 	     }
 	     
-
 		
 		.stations, .stations svg {
 			position: absolute;
 		}
 
 		.stations svg {
-			width: 60px;
-			height: 20px;
-			padding-right: 100px;
-			font: 10px sans-serif;
+			/*width: 10px;
+			height: 20px;*/
+			/*padding-right: 100px;*/ /* overflow: hidden not possible if padding-right is enabled*/					
+			font: 10px sans-serif;						
 		}
 
 		.stations circle {

@@ -1,8 +1,8 @@
 // CLASS of an pCars Driver
-function CSSClassChanger(aCSSDefinition)
-{
+function CSSClassChanger(aCSSDefinition){
+	
 	this.CurrentState	= "";
-	this.aCSSClasses 	= new Array(); 	//Array of all handled CSS Clases
+	this.aCSSClasses 	= new Array(); 	//Array of all handled CSS classes
 	// structure:
 	//		aCSSClasses['hideallsvgs']
 	//		aCSSClasses['CSSTOP3VEHICLES']
@@ -12,7 +12,6 @@ function CSSClassChanger(aCSSDefinition)
 	this.aCSSDef = aCSSDefinition;	// copy CSS definitions into local varaibale
 	
 	//return this;
-
 }
 
 	// usage:
@@ -38,24 +37,53 @@ function CSSClassChanger(aCSSDefinition)
 	};
 	
 	// a function to clear all css clases that were managed by this object
-	function ClearAllCssClases()
-	{
+	function ClearAllCssClases(){
+		
 		for (var key in this.aCSSClasses){
-			
 			//delete css class from html DOM structure
-			if(this.aCSSClasses[key]) setStyle( '', this.aCSSClasses[key] );
-			
-			//delte from internale list
+			if(this.aCSSClasses[key]) setStyle( '', this.aCSSClasses[key] );			
+			//delete from internale list
 			delete this.aCSSClasses[key];
 		}
 		
 		return 1;
 	}
 	
+	//cut driverlabe to display only race position
+	function setDriverLabelStyle(mode){
+		
+		switch (mode){
+		
+		case "cutdriverlabel":
+			//delete this.aCSSClasses['styledriverlabel'];
+			var CSSStyleHandle = setStyle(
+				    '.driverlabel{\n'				+ 								    			    
+						'/*max-width: 29px;*/\n'	+
+						'max-width: 5ch; \n'		+
+						'overflow: hidden; \n'		+
+						'text-overflow: clip; \n'	+
+						'white-space: nowrap; \n'	+
+					'}\n',
+				    CSSStyleHandle );
+		
+			//remember object handle
+			this.aCSSClasses['styledriverlabel']	=	(CSSStyleHandle);
+			break;
+			
+		case "normal":
+			
+				setStyle( '', this.aCSSClasses['styledriverlabel'] );
+			
+			delete this.aCSSClasses['styledriverlabel'];
+			break;
+		
+		}
+		
+	}
+	
 
 	// hide svg objects during change of race session
-	function HideAllSvg()
-	{
+	function HideAllSvg() {
 		var CSSStyleHandle = setStyle(
 				    '.marker{ display: none; } \n',
 				    CSSStyleHandle );
@@ -64,6 +92,7 @@ function CSSClassChanger(aCSSDefinition)
 		
 		return 1;
 	}
+	
 	//unhide svg ojects
 	function UnHideAllSvg(){
 		
@@ -90,3 +119,4 @@ CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
 CSSClassChanger.prototype.UnHideAllSvg=UnHideAllSvg;
 CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
+CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
