@@ -142,8 +142,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			    );
 		//force UTF encoding for issue #79
 		xmlhttp.overrideMimeType("application/xml; charset=UTF-8");
-		//xmlhttp.responseType("application/xml; charset=UTF-8");
-	
+		
+
 		// send request
 		try{
 			xmlhttp.send();
@@ -167,8 +167,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		}
 
 		//sucessfull request
-		if (xmlhttp.readyState==4 && xmlhttp.status==200) {	
-	
+		if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+
 			//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
 			// TODO: JSON.parse and UTF Strings:  http://stackoverflow.com/questions/18264519/javascript-json-parse-utf-8-problems?rq=1
 			var myArr 			= JSON.parse( xmlhttp.responseText );
@@ -178,6 +178,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 							
 			//if(log >= 3){console.log("xmlhttp.responseType" , xmlhttp.responseType );}
 			//if(log >= 3){console.log("xmlhttp.getAllResponseHeaders()" , xmlhttp.getAllResponseHeaders() );}
+			if(log >= 3){console.log("xmlhttp: " , xmlhttp);}
 			if(log >= 3){console.log("xmlhttp.responseText WITHOUT JSON.parse(): " , xmlhttp.responseText);}
 			if(log >= 3){console.log("ReceiveDsData complete array. Converted with JSON.parse(): " , myArr);}
 	

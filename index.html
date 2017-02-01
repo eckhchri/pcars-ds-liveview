@@ -235,6 +235,15 @@
 	    	<option value="colortop3">Top 3 vehicles</option>
 	    	<option value="deletecssclasses">reset CSS Classes</option>
 		</select>
+		
+		<br>
+		<label for="DRIVERLABELSTYLE">Driverlabel Options</label>
+		<select class="DRIVERLABELSTYLE" name="DRIVERLABELSTYLE" id="DRIVERLABELSTYLE">
+	    	<option></option>
+	    	<option value="normal">Normal Labels</option>
+	    	<option value="cutdriverlabel">Cut Labels</option>	    	
+		</select>
+		
 	
 		<br>----<br>
   			<label for="amount">WORKERDELAY_DSDATA:</label>
@@ -378,6 +387,9 @@
        		});
 		});
 		
+		
+		CSSClsChg.setCutDriverLabel();
+		
 	});
 
 	if (AllowUrlParams) {
@@ -412,6 +424,8 @@
 			autoExport = get_url_param('autoexport');
 		}
 	}//END AllowUrlParams check
+	
+		
 	
 	/////////////////////////////////////
 	// Event Handler 
@@ -465,7 +479,15 @@
         });            
 	}); // end #DRIVERCOLOR change Venet
 
-		
+	$( "#DRIVERLABELSTYLE" ).change(function() {
+        $("#DRIVERLABELSTYLE option:selected").each(function() {
+        	
+               		CSSClsChg.setDriverLabelStyle($( this ).val());	        			         	
+        });            
+	}); // end #DRIVERLABELSTYLE change Venet
+	
+	
+	
 	// Event handler for Slider
 	$(function() {
 		$( "#slider-range-max" ).slider({
@@ -732,7 +754,7 @@
 				//fill data array
 				aSensorData[i] = {
 						"Key": 				e.data.driverlist[i].Name
-						,"MarkerLabel" :	e.data.driverlist[i].RacePosition + "-" + e.data.driverlist[i].Name
+						,"MarkerLabel" :	buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )						
 						,"DateTime":		"2013-09-04T09:41:09+10:00"
 						,"Lat": 			gpsCoTmp["Lat"]
 						,"Long": 			gpsCoTmp["Long"]
@@ -928,7 +950,7 @@
                 // fill data array
                 aSensorData[i] = {
                                 "Key":					aDrivers.driverlist[i].GetName()
-                                ,"MarkerLabel" :        buildDriverName ( aDrivers.driverlist[i].GetRacePosition(), aDrivers.driverlist[i].GetName() )
+                                ,"MarkerLabel" :        buildDriverName( aDrivers.driverlist[i].GetName() , aDrivers.driverlist[i].GetRacePosition() )
                                 ,"DateTime":            "2013-09-04T09:41:09+10:00"
                                 ,"Lat":					gpsCoTmp["Lat"]
                                 ,"Long":				gpsCoTmp["Long"]
@@ -1214,7 +1236,7 @@
 				
 				// Update labels new
 				var svgs = _div.selectAll("text")
-							.data(_data, function (d){ return d.Key; })
+							.data(_data, function (d){ return d.Key; })							
 							.text(function(d){ return d.MarkerLabel; });
 	
 				// delete unneeded svg objects from dom tree
@@ -1430,7 +1452,7 @@ function refreshDriverList(a){
 
 function buildDriverName(drivername , raceposition){
 	// Diego Xavier on race position 5 => "5-Diego Xavier"
-	return raceposition + "-" + drivername;
+	return raceposition + " - " + drivername;
 }
 
 function transformVehicleObjectToHash(a){
