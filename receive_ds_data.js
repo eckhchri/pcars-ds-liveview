@@ -25,7 +25,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 				"0": '0'
 	};
 	
-	CREST_mGameState = [
+	var CREST_mGameState = [
 		"GAME_EXITED",
 		"GAME_FRONT_END",
 		"GAME_INGAME_PLAYING",
@@ -38,7 +38,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		"GAME_MAX"
 	];
 
-	CREST_mSessionState = [
+	var CREST_mSessionState = [
 		"SESSION_INVALID",
 		"SESSION_PRACTICE",
 		"SESSION_TEST",
@@ -50,7 +50,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		"SESSION_MAX"
 	];
 
-	CREST_mRaceState = [
+	var CREST_mRaceState = [
 		"RACESTATE_INVALID",
 		"RACESTATE_NOT_STARTED",
 		"RACESTATE_RACING",
