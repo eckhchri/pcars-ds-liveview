@@ -742,11 +742,13 @@
 				//gatthering all vehicle classes of the current race
 				aCurrentVehicleClasses[i] = e.data.driverlist[i].VehicleId;
 				
+				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
 
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
+//TODO for CSS:	e.data.driverlist[i].setVehicleClassName(aMapVehicleNameClassName(e.data.driverlist[i].VehicleId));
 				
 				//fill data array
 				aSensorData[i] = {
@@ -763,6 +765,11 @@
 		}// end update map
 		
 		//todo: dynamically fill up selection box with vehicle classes
+		//mapping Source
+		//PCARS1-DS:   api/list/vehicles
+		//PCARS1-CREST Not possible: no information regarding used vehicle available
+		//PCARS2-DS:   ??
+		//PCARS2-CREST ??
 		//if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
 		var lcvc 	= aCurrentVehicleClasses.length;
 		var tmpcvc	= "";		

@@ -2,22 +2,23 @@
 function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId/*, variousParameters*/)
 {
         // vars
-        this.RefID			=	RefID;
-        this.Name      		=	Name;
-        this.IsPlayer  		= 	IsPlayer;
-        this.GridPosition   =	GridPosition;
-        this.PosX      		=	PosX;
-        this.PosY      		=	PosY;
-        this.PosZ      		=	PosZ;
-        this.State     		=	State;
-        this.CurrentSector 	=   CurrentSector;
-        this.RacePosition  	=   RacePosition;
-        this.FastestLapTime	=   FLapTime;
-        this.LastLapTime   	=   LLapTime;
-        this.Orientation   	=   Orient;
-        this.Speed	   		=   Spd;
-        this.CurrentLap		=	CurrentLap;
-        this.VehicleId		=	VehicleId;		
+        this.RefID				=	RefID;
+        this.Name      			=	Name;
+        this.IsPlayer  			= 	IsPlayer;
+        this.GridPosition   	=	GridPosition;
+        this.PosX      			=	PosX;
+        this.PosY      			=	PosY;
+        this.PosZ      			=	PosZ;
+        this.State     			=	State;
+        this.CurrentSector 		=   CurrentSector;
+        this.RacePosition  		=   RacePosition;
+        this.FastestLapTime		=   FLapTime;
+        this.LastLapTime   		=   LLapTime;
+        this.Orientation   		=   Orient;
+        this.Speed	   			=   Spd;
+        this.CurrentLap			=	CurrentLap;
+        this.VehicleId			=	VehicleId;	
+        this.VehicleClassName 	=   undefined;  // will be set in index.html because this information is not available within all API modes
 
         //private vars
         var privateLat;
@@ -107,6 +108,11 @@ function SetExampleData() {
 	return 1;
 }
 
+function setVehicleClassName(vcn){
+	
+	this.VehicleClassName = vcn;
+	return 1;
+}
 
 function GetCSSTextClass() {
 	var css = "marker markertext driverlabel";
@@ -150,6 +156,7 @@ PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
 PCARSdriver.prototype.SetExampleData=SetExampleData;
+PCARSdriver.prototype.setVehicleClassName=setVehicleClassName;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
 
