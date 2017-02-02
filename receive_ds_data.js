@@ -243,7 +243,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
 		                                        ,"name":                myArr.response.name
-		                                        ,"attributes":			{}
+		                                        ,"attributes":		{
+								"TrackId":		myArr.response.attributes.TrackId
+								,"GridSize":		myArr.response.attributes.GridSize
+								,"MaxPlayers":		myArr.response.attributes.MaxPlayers
+								,"SessionStage":	myArr.response.attributes.SessionStage
+								,"SessionState":	myArr.response.attributes.SessionState
+								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
+								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed								
+								}
 	        	                                }
 				}else{
 					// in case of othe stati return a defined value
@@ -258,11 +266,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	                       }
 				}
 				
-
+				/* attributes now single mapped above in the "Running" state, because there are 63 attributes and they need a lot of space during recording
 				//cath all attributes
 				for (var key in myArr.response.attributes) {
 					aDrivers.globals.attributes[key] =  myArr.response.attributes[key];
-				}
+				}*/
 									
 				// collect Driverdata
 				if ( myArr.response.participants.length == 0 ){
