@@ -241,8 +241,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 								,"SessionTimeDuration":	0
 								,"SessionTimeElapsed":	0
 								}
-	        	                                }
-		                                     }
+						}
 				}else if ( myArr.response.state == "Running" ){
 	
 						aDrivers.globals = {
