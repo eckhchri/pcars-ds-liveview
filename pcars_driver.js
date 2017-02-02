@@ -131,11 +131,16 @@ function GetCSSCircleClass(aVehicleidToClass){
 	}
 	
 	//decision if real player or ai
-	if (this.IsPlayer == 1)
-	{
+	if (this.IsPlayer == 1) {
 		css += " CSS_IsRealPlayer";
 	}else{
 		css += " CSS_IsAiPlayer";
+	}
+	
+	if (this.VehicleClassName){
+		
+		//Todo:   MapVehicleClassNameToStringWithoutWhitSPaces()
+		css += " CSS_GT3";
 	}
 	
 	//return a string of CSS classes

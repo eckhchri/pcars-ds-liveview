@@ -291,7 +291,7 @@
 	var SessionStage_old		=	"";
 	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
-	var	aCurrentVehicleClasses	=	new Array();		//array of all vehicle classes within the current race
+	var	aCurrentVehicleClasses	=	new Array();					//array of all vehicle classes within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
 	
@@ -468,9 +468,10 @@
 	        	case "deletecssclasses":
 	        		CSSClsChg.ClearAllCssClases();
 	        		break;
-	        		
+	        	
+	        	// for all dynamic generated selections
 	    	    default:
-	        		CSSClsChg.ClearAllCssClases();
+	        		CSSClsChg.;
 	    			break;
 	        }
         });            
@@ -738,17 +739,18 @@
 			
 				//convert vehicleID to VehicleName
 				e.data.driverlist[i].VehicleId	=  VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName);
-
-				//gatthering all vehicle classes of the current race
-				aCurrentVehicleClasses[i] = e.data.driverlist[i].VehicleId;
-				
 				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
 
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
-//TODO for CSS:	e.data.driverlist[i].setVehicleClassName(aMapVehicleNameClassName(e.data.driverlist[i].VehicleId));
+				
+				//TODO for dynamic CSS calculation	
+				//e.data.driverlist[i].setVehicleClassName(aMapVehicleNameClassName(e.data.driverlist[i].VehicleClassName));
+				e.data.driverlist[i].setVehicleClassName("CSS_GT3");
+				//gatthering all vehicle classes of the current race
+				aCurrentVehicleClasses[i] = e.data.driverlist[i].VehicleClassName;
 				
 				//fill data array
 				aSensorData[i] = {
@@ -773,7 +775,8 @@
 		//if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
 		var lcvc 	= aCurrentVehicleClasses.length;
 		var tmpcvc	= "";		
-		for(var i = 0; i < lcvc; i++){			
+		for(var i = 0; i < lcvc; i++){
+			if(log >= 3){console.log("CSS Vehicle Classes: ", aCurrentVehicleClasses[i] )};
 			tmpcvc	=	aCurrentVehicleClasses[i];
 			HTMLCTRL.DRIVERCOLOR_AddSelElement(tmpcvc , tmpcvc);
 		}

@@ -113,6 +113,18 @@ function CSSClassChanger(aCSSDefinition){
 		
 		return 1;
 	}
+	
+	function ColorDynClasses(mode){
+
+
+		var CSSStyleHandle = setStyle(
+			    '.CSS_GT3 {fill: red;}\n',
+			    CSSStyleHandle );
+		//		remember object handle
+		this.aCSSClasses['CSSDYNAMICS']	=	(CSSStyleHandle);
+	
+	return 1;
+	}
 
 CSSClassChanger.prototype.setStyle=setStyle;
 CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
@@ -120,3 +132,4 @@ CSSClassChanger.prototype.UnHideAllSvg=UnHideAllSvg;
 CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
 CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
+CSSClassChanger.prototype.ColorDynClasses=ColorDynClasses;
