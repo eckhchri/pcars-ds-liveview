@@ -118,12 +118,20 @@ function CSSClassChanger(aCSSDefinition){
 
 
 		var CSSStyleHandle = setStyle(
-			    '.CSS_GT3 {fill: red;}\n',
+				//this.aCSSDef['CSSSAMEVEHICLECLASSESstr'],
+				'.CSS_GT3 {fill: red;}\n',
 			    CSSStyleHandle );
 		//		remember object handle
 		this.aCSSClasses['CSSDYNAMICS']	=	(CSSStyleHandle);
+		
+		
 	
-	return 1;
+		return 1;
+	}
+	
+	function ColorSameClass(){
+		
+		return 1;
 	}
 
 CSSClassChanger.prototype.setStyle=setStyle;
@@ -133,3 +141,4 @@ CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
 CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
 CSSClassChanger.prototype.ColorDynClasses=ColorDynClasses;
+CSSClassChanger.prototype.ColorSameClass=ColorSameClass;

@@ -234,6 +234,7 @@
 	    	<option value="hidedrivers">hide-drivers</option>
 	    	<option value="unhidedrivers">unhide-drivers</option>
 	    	<option value="colortop3">Top 3 vehicles</option>
+	    	<option value="colorsameclass">Same classes</option>
 	    	<option value="deletecssclasses">reset CSS Classes</option>
 		</select>
 		
@@ -282,7 +283,7 @@
 	var DisplayDurationCorrector =	0;
 	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks	
 	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
-	var aVehicleIdToName		=	new Array();			// hash to translate vehicleID to VehicleName
+	
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var SessionState			=	"";
@@ -291,6 +292,7 @@
 	var SessionStage_old		=	"";
 	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
+	var aVehicleIdToName		=	PCARSVehicleList.idToNameMapping;			// hash to translate vehicleID to VehicleName
 	var	aCurrentVehicleClasses	=	new Array();					//array of all vehicle classes within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
@@ -465,13 +467,17 @@
 	        		CSSClsChg.ColorTop3vehicles();
 		    		break;
 		    		
+	        	case "colorsameclass":
+	        		CSSClsChg.ColorSameClass();
+	        		break;
+		    		
 	        	case "deletecssclasses":
 	        		CSSClsChg.ClearAllCssClases();
 	        		break;
 	        	
 	        	// for all dynamic generated selections
 	    	    default:
-	        		CSSClsChg.;
+	        		CSSClsChg.ColorDynClasses();
 	    			break;
 	        }
         });            
@@ -600,6 +606,7 @@
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create worker to get vehicle list
+/*	
 	var workerVEHICLELIST      =       new Worker('./worker_vehiclelist.js');
 	
 	workerVEHICLELIST.addEventListener('message', function(e) {
@@ -618,7 +625,8 @@
 			workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
 		}		
 	}, false);
-	workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
+*/
+//	workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
 	
 
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -746,12 +754,9 @@
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 				
-				//TODO for dynamic CSS calculation	
-				//e.data.driverlist[i].setVehicleClassName(aMapVehicleNameClassName(e.data.driverlist[i].VehicleClassName));
-				e.data.driverlist[i].setVehicleClassName("CSS_GT3");
-				//gatthering all vehicle classes of the current race
-				aCurrentVehicleClasses[i] = e.data.driverlist[i].VehicleClassName;
-				
+				//collect all vehicle classes of the current race
+				aCurrentVehicleClasses[i] = e.data.driverlist[i].setVehicleClassNameByMapping(PCARSVehicleList.NameToClassMappingNormalized);				
+								
 				//fill data array
 				aSensorData[i] = {
 						"Key": 				e.data.driverlist[i].Name
@@ -762,8 +767,9 @@
 						,"Heading":			286.0
 						,"Speed":			e.data.driverlist[i].Speed
 						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
-						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass(PCARSVehicleList.idToClassMappingNormalized)
-				}												
+						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass()
+				}
+												
 		}// end update map
 		
 		//todo: dynamically fill up selection box with vehicle classes
@@ -772,11 +778,9 @@
 		//PCARS1-CREST Not possible: no information regarding used vehicle available
 		//PCARS2-DS:   ??
 		//PCARS2-CREST ??
-		//if(log >= 3){console.log('+++++++++ aCurrentVehicleClasses:', aCurrentVehicleClasses)};
 		var lcvc 	= aCurrentVehicleClasses.length;
 		var tmpcvc	= "";		
-		for(var i = 0; i < lcvc; i++){
-			if(log >= 3){console.log("CSS Vehicle Classes: ", aCurrentVehicleClasses[i] )};
+		for(var i = 0; i < lcvc; i++){			
 			tmpcvc	=	aCurrentVehicleClasses[i];
 			HTMLCTRL.DRIVERCOLOR_AddSelElement(tmpcvc , tmpcvc);
 		}
@@ -891,7 +895,7 @@
 	                                ,dsurl:                 ""
 	                                ,dsport:                0
 	                                ,timeout:               demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
-	                                ,receivemode:   "GETDEMODATA"
+	                                ,receivemode:   		"GETDEMODATA"
 	                                ,arefpoint:             e.data.arefpoint});
 	                        
 	                      //prepare next step size for e.g. fast forward scenarios 
@@ -948,7 +952,8 @@
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
 			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
 	}
-        
+
+	//only used for the first input
 	for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
                // calculate GPS coordinates

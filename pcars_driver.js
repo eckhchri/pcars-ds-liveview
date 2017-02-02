@@ -18,7 +18,7 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.Speed	   			=   Spd;
         this.CurrentLap			=	CurrentLap;
         this.VehicleId			=	VehicleId;	
-        this.VehicleClassName 	=   undefined;  // will be set in index.html because this information is not available within all API modes
+        this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
 
         //private vars
         var privateLat;
@@ -108,27 +108,29 @@ function SetExampleData() {
 	return 1;
 }
 
-function setVehicleClassName(vcn){
+function setVehicleClassNameByMapping(mapping){
 	
-	this.VehicleClassName = vcn;
-	return 1;
+	//set VehicleClass by mapping information; if no math it is undefined
+	if (mapping){
+		this.VehicleClassName = mapping['' + this.VehicleId];
+	}
+		
+	return this.VehicleClassName;
 }
 
 function GetCSSTextClass() {
-	var css = "marker markertext driverlabel";
+	var css = "driverlabel";
 	
 	return css;
 }
 
-function GetCSSCircleClass(aVehicleidToClass){
+function GetCSSCircleClass(){
 	
 	//Example: CSS_RacePos_1
 	var css = "CSS_RacePos_" + this.RacePosition;
 	
-	// todo:  add dynamic vehicle Class mapping
-	if (aVehicleidToClass){
-		css +=	" CSS_Vehicle_" + aVehicleidToClass['' + this.VehicleId];
-	}
+	//add css name of vehicle class
+	css +=	" CSS_Vehicle_" + this.VehicleClassName;	
 	
 	//decision if real player or ai
 	if (this.IsPlayer == 1) {
@@ -136,13 +138,7 @@ function GetCSSCircleClass(aVehicleidToClass){
 	}else{
 		css += " CSS_IsAiPlayer";
 	}
-	
-	if (this.VehicleClassName){
 		
-		//Todo:   MapVehicleClassNameToStringWithoutWhitSPaces()
-		css += " CSS_GT3";
-	}
-	
 	//return a string of CSS classes
 	return css;
 }
@@ -161,7 +157,8 @@ PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
 PCARSdriver.prototype.SetExampleData=SetExampleData;
-PCARSdriver.prototype.setVehicleClassName=setVehicleClassName;
+PCARSdriver.prototype.setVehicleClassNameByMapping=setVehicleClassNameByMapping;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
+
 
