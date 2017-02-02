@@ -232,7 +232,16 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
-		                                        ,"attributes":			{}
+		                                        ,"attributes":		{
+								"TrackId":		9999999999
+								,"GridSize":		0
+								,"MaxPlayers":		0
+								,"SessionStage":	""
+								,"SessionState":	""
+								,"SessionTimeDuration":	0
+								,"SessionTimeElapsed":	0
+								}
+	        	                                }
 		                                     }
 				}else if ( myArr.response.state == "Running" ){
 	
@@ -262,7 +271,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	                       ,"now":                 "unknown mode"
 	                       ,"state":               "unknown mode"
 	                       ,"name":                "unknown mode"
-	                       ,"attributes":			{}
+	                       ,"attributes":		{
+					"TrackId":		9999999999
+					,"GridSize":		0
+					,"MaxPlayers":		0
+					,"SessionStage":	""
+					,"SessionState":	""
+					,"SessionTimeDuration":	0
+					,"SessionTimeElapsed":	0
+					}
 	                       }
 				}
 				
