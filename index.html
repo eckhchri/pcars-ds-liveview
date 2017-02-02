@@ -293,7 +293,7 @@
 	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
 	var aVehicleIdToName		=	PCARSVehicleList.idToNameMapping;			// hash to translate vehicleID to VehicleName
-	var	aCurrentVehicleClasses	=	new Array();					//array of all vehicle classes within the current race
+	var	aCurrentVehicleClasses	=	{};	// all vehicle classes within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
 	
@@ -468,7 +468,7 @@
 		    		break;
 		    		
 	        	case "colorsameclass":
-	        		CSSClsChg.ColorSameClass();
+	        		CSSClsChg.ColorSameClass( aCurrentVehicleClasses );
 	        		break;
 		    		
 	        	case "deletecssclasses":
@@ -755,7 +755,7 @@
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 				
 				//collect all vehicle classes of the current race
-				aCurrentVehicleClasses[i] = e.data.driverlist[i].setVehicleClassNameByMapping(PCARSVehicleList.NameToClassMappingNormalized);				
+				aCurrentVehicleClasses[ e.data.driverlist[i].setVehicleClassNameByMapping(PCARSVehicleList.NameToClassMappingNormalized) ] = 1;  				
 								
 				//fill data array
 				aSensorData[i] = {
@@ -773,17 +773,16 @@
 		}// end update map
 		
 		//todo: dynamically fill up selection box with vehicle classes
+		//Todo: Only update if Vehicle clasess changes ?!?
 		//mapping Source
 		//PCARS1-DS:   api/list/vehicles
 		//PCARS1-CREST Not possible: no information regarding used vehicle available
 		//PCARS2-DS:   ??
-		//PCARS2-CREST ??
-		var lcvc 	= aCurrentVehicleClasses.length;
-		var tmpcvc	= "";		
-		for(var i = 0; i < lcvc; i++){			
-			tmpcvc	=	aCurrentVehicleClasses[i];
-			HTMLCTRL.DRIVERCOLOR_AddSelElement(tmpcvc , tmpcvc);
-		}
+		//PCARS2-CREST ??								
+		for (var key in aCurrentVehicleClasses ){				//use slow for loop because it has a low number of entries
+			HTMLCTRL.DRIVERCOLOR_AddSelElement(key , key);						
+		}		
+		
 		
 		/////////////////////////////////////////// update driver data /////////////////////
 		// refresh table of Driver data

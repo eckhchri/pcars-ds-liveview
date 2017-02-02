@@ -114,9 +114,8 @@ function CSSClassChanger(aCSSDefinition){
 		return 1;
 	}
 	
+	//
 	function ColorDynClasses(mode){
-
-
 		var CSSStyleHandle = setStyle(
 				//this.aCSSDef['CSSSAMEVEHICLECLASSESstr'],
 				'.CSS_GT3 {fill: red;}\n',
@@ -124,12 +123,23 @@ function CSSClassChanger(aCSSDefinition){
 		//		remember object handle
 		this.aCSSClasses['CSSDYNAMICS']	=	(CSSStyleHandle);
 		
-		
-	
 		return 1;
 	}
 	
-	function ColorSameClass(){
+	//all cars from same class get same color
+	function ColorSameClass( aVCls ){		
+		var CSScls;
+		var cnt;
+		for (var key in aVCls){
+			
+			//Todo: add specific CSS style for each VehicleClass
+			var CSSStyleHandle = setStyle(
+			    '.CSS_Vehicle_' + key +'{ fill: red; } \n',
+			    CSSStyleHandle );
+		}
+		//remember object handle
+		
+				
 		
 		return 1;
 	}
