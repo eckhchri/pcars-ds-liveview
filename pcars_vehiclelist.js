@@ -40,7 +40,7 @@ function setVehicleData(aVL){
 }
 
 function _ClassNormalization(str){
-	return str.replace(/ /g, '_');;
+	return str.replace(/ /g, '_');
 }
 
 function getVehicleList(){
@@ -68,7 +68,6 @@ function getVehicleClassByName(){
 }
 
 /////////////////////////////// static mapping ////////////////////
-
 var aVehicleInfo = [
  {
    "id" : 9503224,
@@ -696,8 +695,6 @@ var aVehicleInfo = [
    "class" : "Trans-Am"
  }
 ];
-
-
 
 
 ////////////////////

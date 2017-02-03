@@ -4,7 +4,7 @@
 var SCRIPTVERSION	= "0.3.0";
 
 //Activate URL parameter interpretation
-var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
+var AllowUrlParams	= true;		//[true|false]	to igrnore URL parameters for security reasons
 
 //Please your specific settings
 var DsServerURL 		= "MY-URL.com";
@@ -94,12 +94,49 @@ CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_1 {fill: gold; stroke-width: 3px }\n';
 CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_2 {fill: silver; stroke-width: 3px }\n';
 CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_3 {fill: #CD7F32; stroke-width: 3px }\n';
 var CSSSAMEVEHICLECLASSESstr ='';
-CSSSAMEVEHICLECLASSESstr = 'CSS_GT3 {fill: darkblue;}\n';
+CSSSAMEVEHICLECLASSESstr = '.CSS_GT3 {fill: darkblue;}\n';
+'circle.CSS_Vehicle_GT4 {fill: darkblue;}\n';
+
+var CSSCOLORSELECTION = new Array();
+CSSCOLORSELECTION[0] = '{ fill: chocolate; } \n';
+CSSCOLORSELECTION[1] = '{ fill: blue; } \n';
+CSSCOLORSELECTION[2] = '{ fill: red; } \n';
+CSSCOLORSELECTION[3] = '{ fill: yellow; } \n';
+CSSCOLORSELECTION[4] = '{ fill: green; } \n';
+CSSCOLORSELECTION[5] = '{ fill: darkblue; } \n';
+CSSCOLORSELECTION[6] = '{ fill: white; } \n';
+CSSCOLORSELECTION[7] = '{ fill: brown; } \n';
+CSSCOLORSELECTION[8] = '{ fill: cornflowerblue; } \n';
+CSSCOLORSELECTION[9] = '{ fill: darkgrey; } \n';
+CSSCOLORSELECTION[10] = '{ fill: darkmagenta; } \n';
+CSSCOLORSELECTION[11] = '{ fill: darkorange; } \n';
+CSSCOLORSELECTION[12] = '{ fill: darkred; } \n';
+CSSCOLORSELECTION[13] = '{ fill: darksalmon; } \n';
+CSSCOLORSELECTION[14] = '{ fill: darkviolet; } \n';
+CSSCOLORSELECTION[15] = '{ fill: deepskyblue; } \n';
+CSSCOLORSELECTION[16] = '{ fill: lavender; } \n';
+CSSCOLORSELECTION[17] = '{ fill: indigo; } \n';
+CSSCOLORSELECTION[18] = '{ fill: khaki; } \n';
+CSSCOLORSELECTION[19] = '{ fill: hotpink; } \n';
+CSSCOLORSELECTION[20] = '{ fill: lawngreen; } \n';
+CSSCOLORSELECTION[21] = '{ fill: lightsalmon; } \n';
+CSSCOLORSELECTION[22] = '{ fill: lightseagreen; } \n';
+CSSCOLORSELECTION[23] = '{ fill: lightslategrey; } \n';
+CSSCOLORSELECTION[24] = '{ fill: lightyellow; } \n';
+CSSCOLORSELECTION[25] = '{ fill: limegreen; } \n';
+CSSCOLORSELECTION[26] = '{ fill: maroon; } \n';
+CSSCOLORSELECTION[27] = '{ fill: purple; } \n';
+CSSCOLORSELECTION[28] = '{ fill: navy; } \n';
+CSSCOLORSELECTION[29] = '{ fill: orchid; } \n';
+	
 
 var CSSDEFINITIONS = {
 		CSSTOP3VEHICLES:		CSSTOP3VEHICLESstr,
-		CSSSAMEVEHICLECLASSES:  CSSSAMEVEHICLECLASSESstr
+		CSSSAMEVEHICLECLASSES:  CSSSAMEVEHICLECLASSESstr,
+		'CSSCOLORSELECTION': 	CSSCOLORSELECTION
 	};
+
+
 
 //Automatic CSV Export of all session results after a race weekend, a download dialog will pop up
 //The Export is called if the SessionState changes to "PostRace"

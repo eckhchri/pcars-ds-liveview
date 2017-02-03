@@ -103,6 +103,7 @@ function SetExampleData() {
         this.Speed			=   100;
         this.VehicleId		=	-886212684;
         this.CurrentLap		=	99;
+        this.VehicleClassName 	=   'undefined';
         //this.variousParameters = {TrackId: 9999999999};
         
 	return 1;
@@ -119,6 +120,7 @@ function setVehicleClassNameByMapping(mapping){
 }
 
 function GetCSSTextClass() {
+	//TODO:  var css = "marker markertext"; -> marker needed for hiding text
 	var css = "driverlabel";
 	
 	return css;
@@ -130,7 +132,10 @@ function GetCSSCircleClass(){
 	var css = "CSS_RacePos_" + this.RacePosition;
 	
 	//add css name of vehicle class
-	css +=	" CSS_Vehicle_" + this.VehicleClassName;	
+	css +=	" CSS_VehicleClass_" + this.VehicleClassName;	
+	
+	//color same vehicle names
+	css +=	" CSS_VehicleName_" + this.getVehicleNameNormalized();
 	
 	//decision if real player or ai
 	if (this.IsPlayer == 1) {
@@ -141,6 +146,13 @@ function GetCSSCircleClass(){
 		
 	//return a string of CSS classes
 	return css;
+}
+
+//
+function getVehicleNameNormalized(){
+	
+	//TODO: If this.VehicleId is an negativeID it should be also converted	
+	return this.VehicleId.replace(/ /g, '_');
 }
 
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
@@ -160,5 +172,6 @@ PCARSdriver.prototype.SetExampleData=SetExampleData;
 PCARSdriver.prototype.setVehicleClassNameByMapping=setVehicleClassNameByMapping;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
+PCARSdriver.prototype.getVehicleNameNormalized=getVehicleNameNormalized;
 
 

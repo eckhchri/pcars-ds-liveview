@@ -234,7 +234,8 @@
 	    	<option value="hidedrivers">hide-drivers</option>
 	    	<option value="unhidedrivers">unhide-drivers</option>
 	    	<option value="colortop3">Top 3 vehicles</option>
-	    	<option value="colorsameclass">Same classes</option>
+	    	<option value="colorsamename">same vehicles</option>
+	    	<option value="colorsameclass">same classes</option>
 	    	<option value="deletecssclasses">reset CSS Classes</option>
 		</select>
 		
@@ -294,6 +295,7 @@
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
 	var aVehicleIdToName		=	PCARSVehicleList.idToNameMapping;			// hash to translate vehicleID to VehicleName
 	var	aCurrentVehicleClasses	=	{};	// all vehicle classes within the current race
+	var	aCurrentVehicleNames	=	{};	// all vehicle names within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
 	PCARSd.SetExampleData();							// setDefaultValues
 	
@@ -471,6 +473,10 @@
 	        		CSSClsChg.ColorSameClass( aCurrentVehicleClasses );
 	        		break;
 		    		
+	        	case "colorsamename":	        		
+	        		CSSClsChg.ColorSameVName( aCurrentVehicleNames );
+        			break;
+	        		
 	        	case "deletecssclasses":
 	        		CSSClsChg.ClearAllCssClases();
 	        		break;
@@ -755,7 +761,8 @@
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 				
 				//collect all vehicle classes of the current race
-				aCurrentVehicleClasses[ e.data.driverlist[i].setVehicleClassNameByMapping(PCARSVehicleList.NameToClassMappingNormalized) ] = 1;  				
+				aCurrentVehicleClasses[ e.data.driverlist[i].setVehicleClassNameByMapping(PCARSVehicleList.NameToClassMappingNormalized) ] = 1; 
+				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized()] = 1;
 								
 				//fill data array
 				aSensorData[i] = {
@@ -778,11 +785,12 @@
 		//PCARS1-DS:   api/list/vehicles
 		//PCARS1-CREST Not possible: no information regarding used vehicle available
 		//PCARS2-DS:   ??
-		//PCARS2-CREST ??								
+		//PCARS2-CREST ??
+		/*		
 		for (var key in aCurrentVehicleClasses ){				//use slow for loop because it has a low number of entries
 			HTMLCTRL.DRIVERCOLOR_AddSelElement(key , key);						
 		}		
-		
+		*/
 		
 		/////////////////////////////////////////// update driver data /////////////////////
 		// refresh table of Driver data

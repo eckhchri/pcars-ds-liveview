@@ -72,23 +72,20 @@ function CSSClassChanger(aCSSDefinition){
 			
 		case "normal":
 			
-				setStyle( '', this.aCSSClasses['styledriverlabel'] );
+			setStyle( '', this.aCSSClasses['styledriverlabel'] );
 			
 			delete this.aCSSClasses['styledriverlabel'];
-			break;
-		
-		}
-		
-	}
-	
+			break;		
+		}		
+	}	
 
 	// hide svg objects during change of race session
-	function HideAllSvg() {
-		var CSSStyleHandle = setStyle(
-				    '.marker{ display: none; } \n',
-				    CSSStyleHandle );
+	function HideAllSvg() {		
+		//clear all other individual CSS definitions
+		this.ClearAllCssClases();
+		
 		//remember object handle
-		this.aCSSClasses['hideallsvgs']	=	(CSSStyleHandle);
+		this.aCSSClasses['hideallsvgs']	= setStyle(   '.marker{ display: none; } \n');	
 		
 		return 1;
 	}
@@ -96,51 +93,62 @@ function CSSClassChanger(aCSSDefinition){
 	//unhide svg ojects
 	function UnHideAllSvg(){
 		
-		if(this.aCSSClasses['hideallsvgs']) setStyle( '', this.aCSSClasses['hideallsvgs'] );
+		if(this.aCSSClasses['hideallsvgs']) setStyle( '' );
 		delete this.aCSSClasses['hideallsvgs'];
 		
 		return 1;
 	}
+	
 	//color the first tree vehicles
 	function ColorTop3vehicles(){
 		
-		var CSScls;
-		if (this.aCSSDef['CSSTOP3VEHICLES']) {
-					this.aCSSClasses['CSSTOP3VEHICLES'] = setStyle(this.aCSSDef['CSSTOP3VEHICLES'],CSScls);
-		}else{
-			if(log >= 2){console.log('++ WARNING ++ CSSClassChanger() missing CSS definition CSSTOP3VEHICLES: ', this.aCSSDef['CSSTOP3VEHICLES'] );}
-		}
+		//clear all other individual CSS definitions
+		this.ClearAllCssClases();
 		
+		var CSScls;		
+		this.aCSSClasses['CSSTOP3VEHICLES'] = setStyle(this.aCSSDef['CSSTOP3VEHICLES'],CSScls);
+				
 		return 1;
 	}
 	
 	//
 	function ColorDynClasses(mode){
-		var CSSStyleHandle = setStyle(
-				//this.aCSSDef['CSSSAMEVEHICLECLASSESstr'],
-				'.CSS_GT3 {fill: red;}\n',
-			    CSSStyleHandle );
+		 
 		//		remember object handle
-		this.aCSSClasses['CSSDYNAMICS']	=	(CSSStyleHandle);
+		this.aCSSClasses['CSSDYNAMICS']	=	setStyle( 'circle.CSS_Vehicle_GT4 {fill: gold; stroke-width: 3px \n}' );
 		
-		return 1;
+		return 1;		
 	}
 	
-	//all cars from same class get same color
-	function ColorSameClass( aVCls ){		
-		var CSScls;
-		var cnt;
-		for (var key in aVCls){
-			
-			//Todo: add specific CSS style for each VehicleClass
-			var CSSStyleHandle = setStyle(
-			    '.CSS_Vehicle_' + key +'{ fill: red; } \n',
-			    CSSStyleHandle );
+	//color same vehicles names
+	function ColorSameVName( aVNames ){
+		
+		//clear all other individual CSS definitions
+		this.ClearAllCssClases();
+		
+		var cnt = 0;
+		for (var key in aVNames){						
+			//generate new CSS styl and remember it
+			this.aCSSClasses['CSName'+cnt]	=	setStyle('circle.CSS_VehicleName_' + key + CSSDEFINITIONS['CSSCOLORSELECTION'][cnt]);			
+			cnt++;
 		}
-		//remember object handle
+								
+		return 1;		
+	}	
+	
+	//all cars from same class get same color
+	function ColorSameClass( aVCls ){	
 		
-				
+		//clear all other individual CSS definitions
+		this.ClearAllCssClases();
 		
+		var cnt = 0;
+		for (var key in aVCls){			
+			//generate new CSS styl and remember it
+			this.aCSSClasses['CSClass'+cnt]	=	setStyle('circle.CSS_VehicleClass_' + key + CSSDEFINITIONS['CSSCOLORSELECTION'][cnt] );			
+			cnt++;
+		}
+			
 		return 1;
 	}
 
@@ -151,4 +159,5 @@ CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
 CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
 CSSClassChanger.prototype.ColorDynClasses=ColorDynClasses;
+CSSClassChanger.prototype.ColorSameVName=ColorSameVName;
 CSSClassChanger.prototype.ColorSameClass=ColorSameClass;
