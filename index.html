@@ -1306,8 +1306,13 @@ function init_map(_TrackID , aRefPoint){
 		    center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 		    //deactivate google streetview
-			streetViewControl: false
+			streetViewControl: false,
+			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
+			scaleControl: true		//shows maps scale in the bottom right
 	});
+	
+	//deactivate the automatic 45° Tilt View on closest zoom steps
+	map.setTilt(0);
 		
 	sensorLayer = new GPSSensor(aSensorData);
 	sensorLayer.setMap(map); 
