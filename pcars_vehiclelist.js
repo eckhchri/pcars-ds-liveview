@@ -4,8 +4,9 @@ function PCARSVEHICLELIST() {
         //this.name							=	"";
         this.idToNameMapping				=	{};			//mapping between vehicleid and name
         this.idToClassMapping				=	{};			//mapping between vehicleid and class
-        this.idToClassMappingNormalized		=	{};			//mapping between vehicleid and class
-        this.NameToClassMappingNormalized	=	{};			//mapping between VehicleName and VehicleNameNormalized
+        this.idToClassMappingNormalized		=	{};			//mapping between vehicleid and class normalized
+        this.NameToClassMapping				=	{};			//mapping between VehicleName and VehicleName
+        this.NameToClassMappingNormalized	=	{};			//mapping between VehicleName and VehicleNameNormalized        
         this.aVehicleList					=	[]; 		//array of pcars_vehicle objects
         this.DataAvaiavle					=	0;			// to check if data was set
                 
@@ -31,12 +32,25 @@ function setVehicleData(aVL){
 		this.idToNameMapping[aVL[i].id] 					=	aVL[i].name;
 		this.idToClassMapping[aVL[i].id] 					=	aVL[i].class;
 		this.idToClassMappingNormalized[aVL[i].id]			=	_ClassNormalization( aVL[i].class );
+		this.NameToClassMapping[aVL[i].name]				=	aVL[i].class
 		this.NameToClassMappingNormalized[aVL[i].name]		=	_ClassNormalization( aVL[i].class );						
 	}	
 		
 	this.DataAvaiavle = 1;
 	
 	return 1;
+}
+
+function getClassNormalizedByString(VId){	
+
+	//decision if mapping via VehicleID or Name	
+	if (this.NameToClassMappingNormalized[VId]){
+			
+		return  this.NameToClassMappingNormalized[VId];
+	}else{
+		
+		this.idToClassMapping[VId]
+	}
 }
 
 function _ClassNormalization(str){
@@ -702,6 +716,7 @@ PCARSVEHICLELIST.prototype.setVehicleData=setVehicleData;
 PCARSVEHICLELIST.prototype.getVehicleClasses=getVehicleClasses;
 PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
 PCARSVEHICLELIST.prototype.getVehicleClassByName=getVehicleClassByName;
+PCARSVEHICLELIST.prototype.getClassNormalizedByString=getClassNormalizedByString;
 
 
 

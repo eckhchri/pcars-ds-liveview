@@ -103,20 +103,21 @@ function SetExampleData() {
         this.Speed			=   100;
         this.VehicleId		=	-886212684;
         this.CurrentLap		=	99;
-        this.VehicleClassName 	=   'undefined';
-        //this.variousParameters = {TrackId: 9999999999};
+        this.VehicleClassName 	=   'undefined';        
         
 	return 1;
 }
 
 function setVehicleClassNameByMapping(mapping){
-	
 	//set VehicleClass by mapping information; if no math it is undefined
-	if (mapping){
-		this.VehicleClassName = mapping['' + this.VehicleId];
+	if (mapping['' + this.VehicleId]){
+		
+		return this.VehicleClassName = mapping['' + this.VehicleId];
+	}else{
+		//if this.VehicleId was not converted to VehicleName
+		return this.VehicleClassName = "not defined";
 	}
 		
-	return this.VehicleClassName;
 }
 
 function GetCSSTextClass() {
@@ -149,11 +150,16 @@ function GetCSSCircleClass(){
 }
 
 //
-function getVehicleNameNormalized(){
-	
+function getVehicleNameNormalized(){	
 	//TODO: If this.VehicleId is an negativeID it should be also converted	
 	return this.VehicleId.replace(/ /g, '_');
 }
+
+function getVehicleClassName(){	
+	return this.VehicleClassName;
+}
+
+
 
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
 PCARSdriver.prototype.GetRefID=GetRefID;
@@ -173,5 +179,6 @@ PCARSdriver.prototype.setVehicleClassNameByMapping=setVehicleClassNameByMapping;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
 PCARSdriver.prototype.getVehicleNameNormalized=getVehicleNameNormalized;
+PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
 
 

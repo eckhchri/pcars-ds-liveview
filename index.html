@@ -752,18 +752,21 @@
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
 				//convert vehicleID to VehicleName
-				e.data.driverlist[i].VehicleId	=  VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName);
+				e.data.driverlist[i].VehicleId			=  VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName);				
 				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
 
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
+
+				//set vehicle class full name
+				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.NameToClassMapping );
 				
 				//collect all vehicle classes of the current race
-				aCurrentVehicleClasses[ e.data.driverlist[i].setVehicleClassNameByMapping(PCARSVehicleList.NameToClassMappingNormalized) ] = 1; 
+				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId ) ] = 1; 
 				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized()] = 1;
-								
+												
 				//fill data array
 				aSensorData[i] = {
 						"Key": 				e.data.driverlist[i].Name
@@ -778,7 +781,6 @@
 				}
 												
 		}// end update map
-		
 		//todo: dynamically fill up selection box with vehicle classes
 		//Todo: Only update if Vehicle clasess changes ?!?
 		//mapping Source
@@ -1056,7 +1058,7 @@
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
-                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ' ],
+                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ' ],
                 colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
                         {name:'driverposition', width:18, sorttype:"int", search:true},
@@ -1065,6 +1067,7 @@
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
                         {name:'lapnumber',width:18, align:"center",sorttype:"int"},
                         {name:'vehiclename',width:90,sorttype:"text"},
+                        {name:'vehicleclass',width:15,sorttype:"text"},
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
@@ -1402,6 +1405,7 @@ function refreshVehicleList(aVL){
 //////////////////
 function refreshDriverList(a){
 	// if set to true, no refresh of table wanted
+	// TODO: or if Driverlist ist not displays	
 	if (StopRefreshDriverlist == "true") {
                 if(log >= 3){console.log("--- INFO stop refresh tracklist because StopRefreshDriverlist set to:", StopRefreshDriverlist );}
                 return 1;
@@ -1436,8 +1440,8 @@ function refreshDriverList(a){
 					,driverstate:		a[i].State
 					,driversector:		a[i].CurrentSector
 					,lapnumber:			a[i].CurrentLap
-//Issue82			,vehiclename:		VehicleIdToName(a[i].VehicleId , aVehicleIdToName)	//in DEMO mode a[i].VehicleId contains directly the VehicleName and the VehicleIdToName returns it back
-					,vehiclename:		a[i].VehicleId 						
+					,vehiclename:		a[i].VehicleId
+					,vehicleclass:		a[i].VehicleClassName
 					,lastlap:			ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
 					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
 					,gap2ahead:			Gaps.gap2ahead
