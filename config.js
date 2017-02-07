@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////
 //global varibales definitions
 ///////////////////////////////////////////////
-var SCRIPTVERSION	= "0.3.0";
+var SCRIPTVERSION	= "0.3.1";
 
 //Activate URL parameter interpretation
 var AllowUrlParams	= true;		//[true|false]	to igrnore URL parameters for security reasons
