@@ -85,16 +85,18 @@ function CSSClassChanger(aCSSDefinition){
 		this.ClearAllCssClases();
 		
 		//remember object handle
-		this.aCSSClasses['hideallsvgs']	= setStyle(   '.marker{ display: none; } \n');	
+		this.aCSSClasses['hideallsvgs']	= setStyle(   'svg.driverlabel{ display: none; } \n');	
 		
 		return 1;
 	}
 	
 	//unhide svg ojects
-	function UnHideAllSvg(){
-		
-		if(this.aCSSClasses['hideallsvgs']) setStyle( '' );
-		delete this.aCSSClasses['hideallsvgs'];
+	function UnHideAllSvg(){				
+		//set an empty style to unhide markers
+		//this.aCSSClasses['hideallsvgs']	= setStyle(   'svg.driverlabel{display: block;} \n');		
+		//delete this.aCSSClasses['hideallsvgs'];
+		//TODO: because unhide not working correctly as workaround we use ClearAllCssClases()
+		this.ClearAllCssClases();
 		
 		return 1;
 	}

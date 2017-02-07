@@ -1,6 +1,6 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId/*, variousParameters*/)
-{
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId){
+	
         // vars
         this.RefID				=	RefID;
         this.Name      			=	Name;
@@ -121,10 +121,14 @@ function setVehicleClassNameByMapping(mapping){
 }
 
 function GetCSSTextClass() {
-	//TODO:  var css = "marker markertext"; -> marker needed for hiding text
 	var css = "driverlabel";
 	
 	return css;
+}
+
+
+function GetCSSGridClass(){	
+	return	" CSS_VehicleClass_" + this.getVehicleClassNormalized() + " CSS_VehicleName_" + this.getVehicleNameNormalized();
 }
 
 function GetCSSCircleClass(){
@@ -133,7 +137,7 @@ function GetCSSCircleClass(){
 	var css = "CSS_RacePos_" + this.RacePosition;
 	
 	//add css name of vehicle class
-	css +=	" CSS_VehicleClass_" + this.VehicleClassName;	
+	css +=	" CSS_VehicleClass_" + this.getVehicleClassNormalized();	
 	
 	//color same vehicle names
 	css +=	" CSS_VehicleName_" + this.getVehicleNameNormalized();
@@ -149,16 +153,18 @@ function GetCSSCircleClass(){
 	return css;
 }
 
-//
 function getVehicleNameNormalized(){	
-	//TODO: If this.VehicleId is an negativeID it should be also converted	
+	//TODO: If this.VehicleId is an negativeID it should be also converted to a valid string	
 	return this.VehicleId.replace(/ /g, '_');
+}
+
+function getVehicleClassNormalized(){		
+	return this.VehicleClassName.replace(/ /g, '_');
 }
 
 function getVehicleClassName(){	
 	return this.VehicleClassName;
 }
-
 
 
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
@@ -177,8 +183,10 @@ PCARSdriver.prototype.GetPosColor=GetPosColor;
 PCARSdriver.prototype.SetExampleData=SetExampleData;
 PCARSdriver.prototype.setVehicleClassNameByMapping=setVehicleClassNameByMapping;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
+PCARSdriver.prototype.GetCSSGridClass=GetCSSGridClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
 PCARSdriver.prototype.getVehicleNameNormalized=getVehicleNameNormalized;
+PCARSdriver.prototype.getVehicleClassNormalized=getVehicleClassNormalized;
 PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
 
 

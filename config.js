@@ -98,7 +98,7 @@ CSSSAMEVEHICLECLASSESstr = '.CSS_GT3 {fill: darkblue;}\n';
 'circle.CSS_Vehicle_GT4 {fill: darkblue;}\n';
 
 var CSSCOLORSELECTION = new Array();
-CSSCOLORSELECTION[0] = '{ fill: chocolate; } \n';
+CSSCOLORSELECTION[0] = '{ fill: chocolate;\n background: black;} \n';
 CSSCOLORSELECTION[1] = '{ fill: blue; } \n';
 CSSCOLORSELECTION[2] = '{ fill: red; } \n';
 CSSCOLORSELECTION[3] = '{ fill: yellow; } \n';

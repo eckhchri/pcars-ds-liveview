@@ -732,12 +732,10 @@
 		}
 		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		
-		//todo var declaration needed within loop ???
-		var tmpcuircitID;
-		tmpcuircitID = e.data.globals.attributes.TrackId;
-		if(log >= 3){console.log("tmpcuircitID worker: ", tmpcuircitID);}
+		//keep cuircitID in mind for next run
+		var tmpcuircitID = e.data.globals.attributes.TrackId;		
 
-		if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
+		//if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
 		//if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
 		//if (SessionState_old == "" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}         //Hide if you open the website during "Loading"
 		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
@@ -765,7 +763,7 @@
 				
 				//collect all vehicle classes of the current race
 				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId ) ] = 1; 
-				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized()] = 1;
+				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized() ] = 1;
 												
 				//fill data array
 				aSensorData[i] = {
@@ -779,6 +777,9 @@
 						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
 						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass()
 				}
+				
+				//TODO: check if it it possible to merge aSensorData + e.data.driverlist to prevent data redundancy refreshDriverList() + sensorLayer.update()
+				e.data.driverlist[i].CSSGridClasses = e.data.driverlist[i].GetCSSGridClass();
 												
 		}// end update map
 		//todo: dynamically fill up selection box with vehicle classes
@@ -978,7 +979,7 @@
                                 ,"Heading":				286.0
                                 ,"Speed":				aDrivers.driverlist[i].Speed
                                 ,"CSSTextClasses":      aDrivers.driverlist[i].GetCSSTextClass()
-                                ,"CSSCircleClasses":    aDrivers.driverlist[i].GetCSSCircleClass()
+                                ,"CSSCircleClasses":    ''
                 }
 	}
 	
@@ -1052,14 +1053,14 @@
 
 	//todo: add subgrid for more drivers information
 	jQuery("#DriverDataTable").jqGrid({
-                datatype: "local",
-                height: 'auto',
+		datatype: "local",
+		height: 'auto',
 		width: 910,
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
-                colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ' ],
-                colModel:[
+		colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
                         {name:'driverposition', width:18, sorttype:"int", search:true},
                         {name:'drivername', width:100,sorttype:"text", search:true},
@@ -1075,12 +1076,39 @@
                         {name:'isplayer',width:20, align:"center",sorttype:"text"},
                         {name:'posx',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
                         {name:'posy',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
-                        {name:'posz',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"}
+                        {name:'posz',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
+                        {name:'cssclasses',hidden: true, width:1, align:"center", sorttype:"text"}
                 ],
-                afterInsertRow: function (rowid, rowdata) {
-			if (rowdata.driverposition == 1){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });}
-			if (rowdata.driverposition == 2){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'silver' });}
-			if (rowdata.driverposition == 3){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: '#CD7F32' });}
+//TODO:
+/*
+		cellattr: function(rowId, val, rawObject) {                    
+                        return " class='CSS_VehicleClass_GT_4'";                    
+                },
+*/
+		afterInsertRow: function (rowid, rowdata, rowelem) {
+			//Set data for row
+			//if (rowdata.driverposition == 1){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });}
+			
+			//Set data for a cell - http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+			if (rowdata.driverposition == 1){jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'drivername', '', { background: 'gold' });}
+			if (rowdata.driverposition == 2){jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'drivername', '', { background: 'silver' });}
+			if (rowdata.driverposition == 3){jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'drivername', '', { background: '#CD7F32' });}
+			
+			// set CSS Styles -			
+//1			jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'vehicleclass', '', { background: '#CD1E32' });
+			//http://stackoverflow.com/questions/2874906/jqgrid-setcell-method-how-to-set-class-of-the-fourth-parameter
+			$("#DriverDataTable").jqGrid('setCell', rowid, 'vehicleclass', '', rowdata['cssclasses']);
+			
+//TODO:		
+			if(log >= 3){console.log("--- jqGrid rowdata[]: ", rowdata );}			
+			//http://stackoverflow.com/questions/3244909/how-can-i-change-the-background-color-of-a-cell-in-a-jqgrid-custom-formatter
+			//			$("#DriverDataTable").setCell(rowId, 'vehicleclass', '', {'background-color':'#' + 'silver'});
+			//$("tr.jqgrow#"+rowid).addClass( "CSS_VehicleClass_" + rowdata['vehicleclass'] );
+			//$("tr.jqgrow#"+rowid).addClass( "CSS_VehicleClass_" + rowdata['vehicleclass'] );
+						
+			//TODO: set color of CLASS/Vehiclename
+			//jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });
+					
 		}
 	});
 	
@@ -1409,15 +1437,14 @@ function refreshVehicleList(aVL){
 
 //////////////////
 function refreshDriverList(a){
-	// if set to true, no refresh of table wanted
-	// TODO: or if Driverlist ist not displays	
-	if (StopRefreshDriverlist == "true") {
-                if(log >= 3){console.log("--- INFO stop refresh tracklist because StopRefreshDriverlist set to:", StopRefreshDriverlist );}
+	// stop refreshing jqgrid in several cases
+	if (StopRefreshDriverlist == "true" || jQuery("#DriverDataTable").getGridParam('gridstate') == 'hidden') {
+                if(log >= 3){console.log("--- INFO stop refresh driverlist because StopRefreshDriverlist or grid is in status hidden!"  );}
                 return 1;
 	}
-
+	
 	var _data;
-	var _allDrivers = new Array();
+	//var _allDrivers = new Array();
 	var Gaps = [];
 
 	// clean complete table befor reloading new data to prevent ghost entries
@@ -1455,12 +1482,14 @@ function refreshDriverList(a){
 					,posx:				a[i].PosX
 					,posy:				a[i].PosY
 					,posz:				a[i].PosZ
+					,cssclasses:		a[i].CSSGridClasses
 		};
 		//update line
 		jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
 	
-		//build hash for clean up map	
-		_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};
+		//build hash for clean up map
+		//deactivated 07.02.2017
+		//_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};		
 	}
 
 	//Hide columns diff and gap during SessionStage Race1 and Race2
