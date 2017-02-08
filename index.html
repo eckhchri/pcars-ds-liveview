@@ -1388,12 +1388,13 @@ function refreshTrackList(a){
 function refreshVehicleList(a){
 	
 	var _data;
-	
-	if(log >= 3){console.log("--- INFO refreshVehicleList aVL: ", a );}
-	
+					
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#carlisttable").jqGrid("clearGridData");	
-		
+	
+	//TODO: optimize way to load data 
+	// http://www.trirand.com/jqgridwiki/doku.php?id=wiki:retrieving_data
+	// Using data and localReader ???
 	for (i=0; i < a.length; i++) {
 		_data = {
    					vehicleid:		a[i].vehicleid,
@@ -1402,11 +1403,8 @@ function refreshVehicleList(a){
 					availability:	a[i].availability,
 					link:			a[i].link,					
 					comment:		a[i].comment
-				};
-		
-		if(log >= 3){console.log("--- INFO refreshVehicleList add Data: ", _data );}
-		jQuery("#carlisttable").jqGrid('addRowData',i, _data);
-		
+				};		
+		jQuery("#carlisttable").jqGrid('addRowData',i, _data);		
 	}
 	
 	return 1;	
