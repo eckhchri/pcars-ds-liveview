@@ -582,20 +582,23 @@
 	        datatype: "local",
 	        height: 'auto',
 	        hiddengrid: true,
-	        colNames:['ID','CarName','class','Set1', 'Set2','Comment'],
+	        colNames:['ID','Name','class', 'Availability', 'link', 'Comment'],
 	        colModel:[
-					{name:'vehicleid', 	width:100, 	sorttype:"float",align:"left", index:'id', formatter: 'float'},
-					{name:'name', 		width:100, 	sorttype:"text"},
-					{name:'cls',  		width:200, 	sorttype:"text"},
-					{name:'set1', 		width:40, 	sorttype:"text", align:"right"},
-					{name:'set2', 		width:90, 	sorttype:"text", align:"center"},
-					{name:'comment', 	width:160, 	sorttype:"text", align:"left"},
+					{name:'vehicleid', 		width:100, 	sorttype:"float",align:"left", index:'id', formatter: 'float'},
+					{name:'name', 			width:260, 	sorttype:"text"},
+					{name:'cls',  			width:120, 	sorttype:"text"},
+					{name:'availability', 	width:70, 	sorttype:"text", align:"center"},
+					{name:'link', 			width:40, 	sorttype:"text", align:"right"},					
+					{name:'comment', 		width:160, 	sorttype:"text", align:"left"},
 	        ],
 	        caption: "List of available Cars with properties.",
 			rowNum: 200,
 	});
 	// add filter option bar
 	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	
+	//set vehicleListtable data	
+	refreshVehicleList( PCARSVehicleList.getVehicleList() );	
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	////// create GUI worker thread
@@ -608,33 +611,7 @@
 					workerGUIUPDATES.postMessage({workerdelay: GuiUpdateIntervall});				
 	}, false);
 	workerGUIUPDATES.postMessage({delay: GuiUpdateIntervall});
-	
-	
-	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	// create worker to get vehicle list
-/*	
-	var workerVEHICLELIST      =       new Worker('./worker_vehiclelist.js');
-	
-	workerVEHICLELIST.addEventListener('message', function(e) {
 		
-		if(log >= 4){console.log('+++++++++++ GETVEHICLELIST Worker returned: e ', e );}
-		if ( e.data.avehiclelist.length > 0 ){
-			
-			aVehicleList	=	e.data.avehiclelist;	//copy the array of vehicle objects to global var			
-			aVehicleIdToName = transformVehicleObjectToHash(aVehicleList);		
-			//display vehicle data in table 
-			PCARSVehicleList.setVehicleData(aVehicleList);
-			refreshVehicleList(PCARSVehicleList);
-									
-		}else{			
-			// no return value from DS, start another run
-			workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
-		}		
-	}, false);
-*/
-//	workerVEHICLELIST.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETVEHICLELIST", arefpoint: aRefPointTMP});
-	
-
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
 	var workerDSDATA			=	new Worker('./worker_dsdata.js');
@@ -1408,28 +1385,28 @@ function refreshTrackList(a){
 }
 
 //fill
-function refreshVehicleList(aVL){
+function refreshVehicleList(a){
 	
-	a	=	aVL.getVehicleList();
 	var _data;
 	
 	if(log >= 3){console.log("--- INFO refreshVehicleList aVL: ", a );}
 	
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#carlisttable").jqGrid("clearGridData");	
-	
-	
+		
 	for (i=0; i < a.length; i++) {
 		_data = {
-   					vehicleid:	a[i].vehicleid,
-					name:		a[i].name,
-					cls:		a[i].cls,
-					set1:		"-",
-					set2:		"-",
-					comment:	"-"
+   					vehicleid:		a[i].vehicleid,
+					name:			a[i].name,
+					cls:			a[i].cls,
+					availability:	a[i].availability,
+					link:			a[i].link,					
+					comment:		a[i].comment
 				};
 		
+		if(log >= 3){console.log("--- INFO refreshVehicleList add Data: ", _data );}
 		jQuery("#carlisttable").jqGrid('addRowData',i, _data);
+		
 	}
 	
 	return 1;	

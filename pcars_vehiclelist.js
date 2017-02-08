@@ -7,27 +7,29 @@ function PCARSVEHICLELIST() {
         this.idToClassMappingNormalized		=	{};			//mapping between vehicleid and class normalized
         this.NameToClassMapping				=	{};			//mapping between VehicleName and VehicleName
         this.NameToClassMappingNormalized	=	{};			//mapping between VehicleName and VehicleNameNormalized        
-        this.aVehicleList					=	[]; 		//array of pcars_vehicle objects
-        this.DataAvaiavle					=	0;			// to check if data was set
-                
-        this.setVehicleData(aVehicleInfo);					//init static mappings, also without using DS input
+        this.aVehicleList					=	[]; 		//array of pcars_vehicle objects       
+        this.aVehicleInfo					=	{};			//array of all relevant vehicle info, name, class, wiki links
+        
+        
+        this.loadVehicleDate();
+        this.setVehicleData(this.aVehicleInfo);			//init array of this object
         
         return this;
 }
 
 //fill the object with data
 function setVehicleData(aVL){
-	
-	l 	= 	aVL.length; 				// length of the vehicle list
-	l2	=	this.aVehicleList.length;	// length of the current vehicle list
-	
-	for (i = 0; i < l; i++) {					
-		this.aVehicleList[l2] =  new  PCARSVEHICLE(
+		
+	for (i = 0; i < aVL.length; i++) {					
+		this.aVehicleList[i] =  new  PCARSVEHICLE(
 										aVL[i].id, 
 										aVL[i].name, 
-										aVL[i].class); 
-		l2++;						
-		
+										aVL[i].class,
+										'',
+										'PCARS1',
+										'-'
+										); 
+								
 		//create mappings for faster access in futher scenarios
 		this.idToNameMapping[aVL[i].id] 					=	aVL[i].name;
 		this.idToClassMapping[aVL[i].id] 					=	aVL[i].class;
@@ -35,11 +37,10 @@ function setVehicleData(aVL){
 		this.NameToClassMapping[aVL[i].name]				=	aVL[i].class
 		this.NameToClassMappingNormalized[aVL[i].name]		=	_ClassNormalization( aVL[i].class );						
 	}	
-		
-	this.DataAvaiavle = 1;
-	
+			
 	return 1;
 }
+
 
 function getClassNormalizedByString(VId){	
 
@@ -57,9 +58,6 @@ function _ClassNormalization(str){
 	return str.replace(/ /g, '_');
 }
 
-function getVehicleList(){
-	return this.aVehicleList;
-}
 
 function compareAPIListwithCSV(){
 	
@@ -81,8 +79,17 @@ function getVehicleClassByName(){
  
 }
 
+function getVehicleList(){
+	//return an array of PCARSVehicle objects
+	return this.aVehicleList;
+}
+
+
 /////////////////////////////// static mapping ////////////////////
-var aVehicleInfo = [
+
+function loadVehicleDate(){
+
+this.aVehicleInfo = [
  {
    "id" : 9503224,
    "name" : "BMW 320 TC",
@@ -710,6 +717,7 @@ var aVehicleInfo = [
  }
 ];
 
+}// end load vehicle data
 
 ////////////////////
 PCARSVEHICLELIST.prototype.setVehicleData=setVehicleData;
@@ -717,6 +725,8 @@ PCARSVEHICLELIST.prototype.getVehicleClasses=getVehicleClasses;
 PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
 PCARSVEHICLELIST.prototype.getVehicleClassByName=getVehicleClassByName;
 PCARSVEHICLELIST.prototype.getClassNormalizedByString=getClassNormalizedByString;
+PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
+PCARSVEHICLELIST.prototype.loadVehicleDate=loadVehicleDate;
 
 
 
