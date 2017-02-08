@@ -154,8 +154,11 @@ function GetCSSCircleClass(){
 }
 
 function getVehicleNameNormalized(){	
-	//TODO: If this.VehicleId is an negativeID it should be also converted to a valid string	
-	return this.VehicleId.replace(/ /g, '_');
+	//TODO: If this.VehicleId is an negativeID it should be also converted to a valid string
+	if (typeof this.VehicleId === 'string'){
+		return this.VehicleId.replace(/ /g, '_');		
+	}	
+	return this.VehicleId;	
 }
 
 function getVehicleClassNormalized(){		
