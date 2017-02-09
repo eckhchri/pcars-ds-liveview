@@ -758,8 +758,8 @@ function Refpoint(circuit_id)
 	//Dirtfish Pro Rallycross Course
 	aRefPoints[9999990008] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        47.538834
-		,"refLong":      -121.814374
+		"refLat":        47.540174
+		,"refLong":      -121.815198
 		,"rotation":     0
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
@@ -767,10 +767,10 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Dirtfish Pro Rallycross Course"	//error in API, there is the name "Rallyross"
 		,"Name2":	 "DirtFish Stage 1"	//"mTrackLocation":"DirtFish","mTrackVariation":"Stage 3", error in API, Stage 3 two times included
-		,"Zoom":         15
+		,"Zoom":         17
 		,"MapInitLat":   47.538834
 		,"MapInitLong":  -121.814374
-		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		,"Comment": "last check, Dummy Track ID, Dummy DS name"
 		});
 	//Dirtfish Boneyard Course
 	aRefPoints[9999990006] = CopyObjectWithModifications(aRefPoints[9999990008], {"Name": "Dirtfish Boneyard Course","Name2": "DirtFish Stage 2"});	//"mTrackLocation":"DirtFish","mTrackVariation":"Stage 2"
@@ -789,10 +789,10 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Fuji Speedway"
 		,"Name2":	 "Fuji Grand Prix"	//"mTrackLocation":"Fuji","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
-		,"MapInitLat":   35.370394
+		,"Zoom":         16
+		,"MapInitLat":   35.370554
 		,"MapInitLong":  138.927871
-		,"Comment": "refPoint set, Dummy Track ID, Dummy DS name"
+		,"Comment": "last check, Dummy Track ID, Dummy DS name"
 		});
 		
 	//Indianapolis Road Course
