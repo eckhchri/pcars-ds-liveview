@@ -780,9 +780,9 @@ function Refpoint(circuit_id)
 	//Fuji Speedway
 	aRefPoints[9999990009] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        35.370394
-		,"refLong":      138.927871
-		,"rotation":     0
+		"refLat":        35.373886
+		,"refLong":      138.929636
+		,"rotation":     1.35
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
@@ -792,7 +792,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   35.370394
 		,"MapInitLong":  138.927871
-		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		,"Comment": "refPoint set, Dummy Track ID, Dummy DS name"
 		});
 		
 	//Indianapolis Road Course
