@@ -505,9 +505,7 @@
     		});
     		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
-	
-	
-		
+				
 	// initiate jqGrid for DriverData
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
 	jQuery("#tracklisttable").jqGrid({	
@@ -524,6 +522,10 @@
 					{name:'refpoint', width:70, align:"center", sorttype:"text"},
 					{name:'comment', width:250, align:"left", sorttype:"text"},
 	        ],
+			onHeaderClick: function(gridstate){ 			        	
+				//dynamic update of height of the div block        		       
+				jQuery('#TrackList').height(0);
+    		},  
 			caption: "List of available Tracks",
 			rowNum: 200,
 			//rowList:[10,20,30],
@@ -549,8 +551,12 @@
 					{name:'link', 			width:40, 	sorttype:"text", align:"right"},					
 					{name:'comment', 		width:160, 	sorttype:"text", align:"left"},
 	        ],
+	    	onHeaderClick: function(gridstate){ 			        	
+    			//dynamic update of height of the div block
+    			jQuery('#CarList').height( 0 );        		       
+    		},
 	        caption: "List of available Cars with properties.",
-			rowNum: 200,
+			rowNum: 200,		
 	});
 	// add filter option bar
 	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
@@ -733,7 +739,7 @@
 		/////////////////////////////////////////// update driver data /////////////////////
 		// refresh table of Driver data
         refreshDriverList(e.data.driverlist);
-		
+				
         sensorLayer_UpdateTime = Date.now();
 		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
 		sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
@@ -1014,6 +1020,11 @@
                         {name:'posz',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
                         {name:'cssclasses',hidden: true, width:1, align:"center", sorttype:"text"}
                 ],
+		onHeaderClick: function(gridstate){ 			        	
+        			//dynamic update of height of the div block
+        			//jQuery('#DriverDataArea').height( jQuery('#DriverDataTable').height());        		       
+					jQuery('#DriverDataArea').height(0);
+        		},         
 //TODO:
 /*
 		cellattr: function(rowId, val, rawObject) {                    
