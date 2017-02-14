@@ -583,7 +583,7 @@
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
-		if(log >= 4){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+		//if(log >= 4){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
 		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
@@ -603,8 +603,7 @@
 		ChangeHtmlContentByID( '#demo_start_pos' 	, "demo_start_pos:   " + demo_start_pos );
 		ChangeHtmlContentByID( '#demo_end_pos' 	, "demo_end_pos:   " + demo_end_pos );
 		
-		
-		
+				
 		if(StopRefreshDriverlist == "false"){
 			var resttime = ConvertLaptimeInReadbaleFormat((e.data.globals.attributes.SessionTimeDuration-e.data.globals.attributes.SessionTimeElapsed)*1000);       //Times in seconds, but function need it in milliseconds, multiplied by 1000
 			if(resttime != "-"){
@@ -687,6 +686,9 @@
 			sensorLayer.interruptTransition();
 		}
 		
+		//init array for calculate InClassRacePosition		
+		var aInClass = {};
+
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
@@ -705,24 +707,40 @@
 				//collect all vehicle classes of the current race
 				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId ) ] = 1; 
 				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized() ] = 1;
+								
+				//calculate "in class race position"
+				//IMPORTANT assumption!!!!   :  Dirverarray is delivered in order of race positions				
+				if (aInClass[ e.data.driverlist[i].VehicleClassName ] ){					
+					//increment if class existing
+					aInClass[ e.data.driverlist[i].VehicleClassName ]++;
+				}else{
+					//init value
+					aInClass[ e.data.driverlist[i].VehicleClassName ] = 1;
+				}
+				// set the InClassRaceposition value
+				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
+				
 												
 				//fill data array
 				aSensorData[i] = {
-						"Key": 				e.data.driverlist[i].Name
-						,"MarkerLabel" :	buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )						
-						,"DateTime":		"2013-09-04T09:41:09+10:00"
-						,"Lat": 			gpsCoTmp["Lat"]
-						,"Long": 			gpsCoTmp["Long"]
-						,"Heading":			286.0
-						,"Speed":			e.data.driverlist[i].Speed
-						,"CSSTextClasses":	e.data.driverlist[i].GetCSSTextClass()
+						"Key": 					e.data.driverlist[i].Name
+						,"MarkerLabel" :		buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )						
+						,"DateTime":			"2013-09-04T09:41:09+10:00"
+						,"Lat": 				gpsCoTmp["Lat"]
+						,"Long": 				gpsCoTmp["Long"]
+						,"Heading":				286.0
+						,"Speed":				e.data.driverlist[i].Speed
+						,"CSSTextClasses":		e.data.driverlist[i].GetCSSTextClass()
 						,"CSSCircleClasses":	e.data.driverlist[i].GetCSSCircleClass()
+						,"InClassPos":			aInClass[ e.data.driverlist[i].VehicleClassName ]
 				}
 				
 				//TODO: check if it it possible to merge aSensorData + e.data.driverlist to prevent data redundancy refreshDriverList() + sensorLayer.update()
 				e.data.driverlist[i].CSSGridClasses = e.data.driverlist[i].GetCSSGridClass();
-												
+																					
 		}// end update map
+
+		
 		//todo: dynamically fill up selection box with vehicle classes
 		//Todo: Only update if Vehicle clasess changes ?!?
 		//mapping Source
@@ -743,7 +761,7 @@
         sensorLayer_UpdateTime = Date.now();
 		sensorLayer_UpdateDelta = sensorLayer_UpdateTime - sensorLayer_UpdateTime_old;	//Determine time duration between recent and currrent worker run
 		sensorLayer_UpdateTime_old = sensorLayer_UpdateTime;
-		if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
+		//if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
                 
 		//Calculation of dynamic DisplayDuration
 		if ((APIMODE == "DS" || APIMODE == "DEMO") && sensorLayer_UpdateDelta < UpdateRateDS) {
@@ -1000,7 +1018,7 @@
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
-		colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'InClassPos', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
                         {name:'driverposition', width:18, sorttype:"int", search:true},
@@ -1010,6 +1028,7 @@
                         {name:'lapnumber',width:18, align:"center",sorttype:"int"},
                         {name:'vehiclename',width:90,sorttype:"text"},
                         {name:'vehicleclass',width:15,sorttype:"text"},
+                        {name:'inclassposition', width:18, sorttype:"int", search:true},
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
@@ -1410,23 +1429,24 @@ function refreshDriverList(a){
 		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
 		_data = {   
-					refid:				a[i].RefID
-					,driverposition:	a[i].RacePosition	
-					,drivername:		a[i].Name
-					,driverstate:		a[i].State
-					,driversector:		a[i].CurrentSector
-					,lapnumber:			a[i].CurrentLap
-					,vehiclename:		a[i].VehicleId
-					,vehicleclass:		a[i].VehicleClassName
-					,lastlap:			ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
-					,fastestlap:		ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
-					,gap2ahead:			Gaps.gap2ahead
-					,gap2first:			Gaps.gap2first
-					,isplayer:			ConvertIsPlayer(a[i].IsPlayer)
-					,posx:				a[i].PosX
-					,posy:				a[i].PosY
-					,posz:				a[i].PosZ
-					,cssclasses:		a[i].CSSGridClasses
+					refid:					a[i].RefID
+					,driverposition:		a[i].RacePosition	
+					,drivername:			a[i].Name
+					,driverstate:			a[i].State
+					,driversector:			a[i].CurrentSector
+					,lapnumber:				a[i].CurrentLap
+					,vehiclename:			a[i].VehicleId
+					,vehicleclass:			a[i].VehicleClassName
+					,inclassposition:		a[i].InClassPos
+					,lastlap:				ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
+					,fastestlap:			ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
+					,gap2ahead:				Gaps.gap2ahead
+					,gap2first:				Gaps.gap2first
+					,isplayer:				ConvertIsPlayer(a[i].IsPlayer)
+					,posx:					a[i].PosX
+					,posy:					a[i].PosY
+					,posz:					a[i].PosZ
+					,cssclasses:			a[i].CSSGridClasses
 		};
 		//update line
 		jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
