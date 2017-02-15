@@ -272,6 +272,10 @@
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
 	
+	var aRacestats		= {};
+	//var aRacestats		= 	{ 1: {test: 'testok', test1: 'test1ok'}};		//save race statistics
+	//aRacestats['0']		=	{};		//pre initialise second level of this structure
+	
 	var CSVExport = {	//CSV Export Data
 		Practice1:	"",
 		Practice2:	"",
@@ -740,9 +744,48 @@
 				
 				//TODO: check if it it possible to merge aSensorData + e.data.driverlist to prevent data redundancy refreshDriverList() + sensorLayer.update()
 				e.data.driverlist[i].CSSGridClasses = e.data.driverlist[i].GetCSSGridClass();
+				
+				
+				//////////////////////////////////////////////////////////////////////////////////////
+				//save race statistics
+				
+				//format version 1
+				/*
+				var curlap		=	e.data.driverlist[i].CurrentLap;
+				var curRacePos	=	e.data.driverlist[i].RacePosition;
+				//init objects									
+				if (! aRacestats[ curlap ] ){ aRacestats[ curlap ] = {}; }
+				if (! aRacestats[ curlap ][ curRacePos ]){ aRacestats[ curlap ][ curRacePos ] = {}; }
+				
+				aRacestats[ curlap ][ curRacePos ] = {												
+												'drivername':  	e.data.driverlist[i].Name,
+												'laptime':	 	e.data.driverlist[i].Laptime														
+										};
+				*/
+				//format version 2
+				/* {
+		            "name": "Mark Webber",
+            		"placing": [2, 3, 3, 3 ],
+            		"pitstops": [3]
+        		},      		*/
+				var drivername		=	e.data.driverlist[i].Name;
+        		var curlap			=	e.data.driverlist[i].CurrentLap;
+        		var curRacePos		=	e.data.driverlist[i].RacePosition;
+        		if (!aRacestats[ drivername ]){
+        			aRacestats[ drivername ] 			= {};
+        			aRacestats[ drivername ].name 		= drivername;
+        			aRacestats[ drivername ].pitstops	= [];
+        			aRacestats[ drivername ].placing	= [];
+        		}
+        		        		 
+        		aRacestats[ drivername ].placing[curlap]	=	curRacePos;
+        										
 																					
 		}// end update map
 
+		
+		if(log >= 3){console.log("+++++++++ aRacestats: ", aRacestats);}
+		
 		
 		//todo: dynamically fill up selection box with vehicle classes
 		//Todo: Only update if Vehicle clasess changes ?!?
@@ -2038,7 +2081,7 @@ function initW2UI(){
 	             								
 	             								//trigger lap Statistic call
 	             								//alert ("test");
-	             								initLap_LapChart();
+	             								initLap_LapChart( transformData(aRacestats) );
 	             								break;	             							
 	             	
 	             	case "w2ui_replay":			             								
