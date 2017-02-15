@@ -762,24 +762,28 @@
 												'laptime':	 	e.data.driverlist[i].Laptime														
 										};
 				*/
+				//////////////////////////////////////////////////////////////////////////
 				//format version 2
 				/* {
 		            "name": "Mark Webber",
             		"placing": [2, 3, 3, 3 ],
             		"pitstops": [3]
         		},      		*/
-				var drivername		=	e.data.driverlist[i].Name;
-        		var curlap			=	e.data.driverlist[i].CurrentLap;
-        		var curRacePos		=	e.data.driverlist[i].RacePosition;
-        		if (!aRacestats[ drivername ]){
-        			aRacestats[ drivername ] 			= {};
-        			aRacestats[ drivername ].name 		= drivername;
-        			aRacestats[ drivername ].pitstops	= [];
-        			aRacestats[ drivername ].placing	= [];
+        		
+        		if(e.data.driverlist[i].Name != ""){
+					var drivername		=	e.data.driverlist[i].Name;
+	        		var curlap			=	e.data.driverlist[i].CurrentLap;
+	        		var curRacePos		=	e.data.driverlist[i].RacePosition;
+	        		if (!aRacestats[ drivername ]){
+	        			aRacestats[ drivername ] 			= {};
+	        			aRacestats[ drivername ].name 		= drivername;
+	        			aRacestats[ drivername ].pitstops	= [];
+	        			aRacestats[ drivername ].placing	= [];
+	        		}
+	        		        		 
+	        		aRacestats[ drivername ].placing[curlap]	=	curRacePos;
         		}
-        		        		 
-        		aRacestats[ drivername ].placing[curlap]	=	curRacePos;
-        										
+        		
 																					
 		}// end update map
 
