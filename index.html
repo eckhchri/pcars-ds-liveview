@@ -280,6 +280,9 @@
 		Race1:		"",
 		Race2:		""
 	}
+	
+	//init array for calculate InClassRacePosition		
+	var aInClass;
 
 	//preset HTML elemets
 	setParamDemoStartPos(demo_start_pos , true);
@@ -686,8 +689,8 @@
 			sensorLayer.interruptTransition();
 		}
 		
-		//init array for calculate InClassRacePosition		
-		var aInClass = [];
+		//reset array		
+		aInClass = {};
 
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
@@ -739,22 +742,6 @@
 				e.data.driverlist[i].CSSGridClasses = e.data.driverlist[i].GetCSSGridClass();
 																					
 		}// end update map
-		
-		//hide or unhide column
-		//TODO:  hding a column is not working: http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
-		//if(log >= 3){console.log("+++++++++DriverDataTable: aInClass.length: ", Object.keys(aInClass).length );}
-		if(log >= 3){console.log("+++++++++DriverDataTable: ColName: ", jQuery("DriverDataTable").jqGrid('hideCol', 'inclassposition')  );}
-		if ( Object.keys(aInClass).length <= 1 ){			
-			jQuery("DriverDataTable").jqGrid('hideCol', 'inclassposition');	
-			if(log >= 3){console.log("+++++++++DriverDataTable: hideCol() !" );}
-			//jQuery("#DriverDataTable").jqGrid('addRowData'
-		}else{			
-			jQuery("DriverDataTable").jqGrid('showCol', 'inclassposition');
-			if(log >= 3){console.log("+++++++++DriverDataTable: showCol() !" ) ;}
-		}
-
-		
-		
 
 		
 		//todo: dynamically fill up selection box with vehicle classes
@@ -1030,21 +1017,21 @@
 	jQuery("#DriverDataTable").jqGrid({
 		datatype: "local",
 		height: 'auto',
-		width: 950,
+		width: 910,
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
-		colNames:['RefID','overall Pos', 'Pos in class', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
-                        {name:'driverposition', width:20, sorttype:"int", search:true},
-                        {name:'inclassposition', width:20, sorttype:"int", search:true},
+                        {name:'driverposition', width:18, sorttype:"int", search:true},
+			{name:'inclassposition', width:18, sorttype:"int", search:true},
                         {name:'drivername', width:100,sorttype:"text", search:true},
                         {name:'driverstate',width:40, align:"center",sorttype:"text"},
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
                         {name:'lapnumber',width:18, align:"center",sorttype:"int"},
                         {name:'vehiclename',width:90,sorttype:"text"},
-                        {name:'vehicleclass',width:15,sorttype:"text"},                        
+                        {name:'vehicleclass',width:15,sorttype:"text"},
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
@@ -1316,11 +1303,11 @@ function init_map(_TrackID , aRefPoint){
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 		    //deactivate google streetview
 			streetViewControl: false,
-			rotateControl: true,		// control for changing Tilt (0Â° or 45Â°) and for map rotation
+			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
 			scaleControl: true		//shows maps scale in the bottom right
 	});
 	
-	//deactivate the automatic 45Â° Tilt View on closest zoom steps
+	//deactivate the automatic 45° Tilt View on closest zoom steps
 	map.setTilt(0);
 		
 	sensorLayer = new GPSSensor(aSensorData);
@@ -1446,14 +1433,14 @@ function refreshDriverList(a){
                 
 		_data = {   
 					refid:					a[i].RefID
-					,driverposition:		a[i].RacePosition	
+					,driverposition:		a[i].RacePosition
+					,inclassposition:		a[i].InClassPos
 					,drivername:			a[i].Name
 					,driverstate:			a[i].State
 					,driversector:			a[i].CurrentSector
 					,lapnumber:				a[i].CurrentLap
 					,vehiclename:			a[i].VehicleId
 					,vehicleclass:			a[i].VehicleClassName
-					,inclassposition:		a[i].InClassPos
 					,lastlap:				ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
 					,fastestlap:			ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
 					,gap2ahead:				Gaps.gap2ahead
@@ -1480,6 +1467,13 @@ function refreshDriverList(a){
 	if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
 		//if(log >= 3){console.log("Show Gaps");}
 		jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
+	}
+	
+	// hide inclassposition drivertable column, if there is only one vehicle class active
+	if (Object.keys(aInClass).length <= 1){
+		jQuery("#DriverDataTable").hideCol(["inclassposition"]);
+	} else {
+		jQuery("#DriverDataTable").showCol(["inclassposition"]);
 	}
 
 	jQuery("#DriverDataTable").trigger("reloadGrid");
@@ -2074,4 +2068,3 @@ function initW2UI(){
        </script>
    </body>
 </html>
-
