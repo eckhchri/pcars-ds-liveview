@@ -687,7 +687,7 @@
 		}
 		
 		//init array for calculate InClassRacePosition		
-		var aInClass = {};
+		var aInClass = [];
 
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
@@ -739,6 +739,22 @@
 				e.data.driverlist[i].CSSGridClasses = e.data.driverlist[i].GetCSSGridClass();
 																					
 		}// end update map
+		
+		//hide or unhide column
+		//TODO:  hding a column is not working: http://www.trirand.com/jqgridwiki/doku.php?id=wiki:methods
+		//if(log >= 3){console.log("+++++++++DriverDataTable: aInClass.length: ", Object.keys(aInClass).length );}
+		if(log >= 3){console.log("+++++++++DriverDataTable: ColName: ", jQuery("DriverDataTable").jqGrid('hideCol', 'inclassposition')  );}
+		if ( Object.keys(aInClass).length <= 1 ){			
+			jQuery("DriverDataTable").jqGrid('hideCol', 'inclassposition');	
+			if(log >= 3){console.log("+++++++++DriverDataTable: hideCol() !" );}
+			//jQuery("#DriverDataTable").jqGrid('addRowData'
+		}else{			
+			jQuery("DriverDataTable").jqGrid('showCol', 'inclassposition');
+			if(log >= 3){console.log("+++++++++DriverDataTable: showCol() !" ) ;}
+		}
+
+		
+		
 
 		
 		//todo: dynamically fill up selection box with vehicle classes
@@ -1014,21 +1030,21 @@
 	jQuery("#DriverDataTable").jqGrid({
 		datatype: "local",
 		height: 'auto',
-		width: 910,
+		width: 950,
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
-		colNames:['RefID','Pos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'InClassPos', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','overall Pos', 'Pos in class', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
-                        {name:'driverposition', width:18, sorttype:"int", search:true},
+                        {name:'driverposition', width:20, sorttype:"int", search:true},
+                        {name:'inclassposition', width:20, sorttype:"int", search:true},
                         {name:'drivername', width:100,sorttype:"text", search:true},
                         {name:'driverstate',width:40, align:"center",sorttype:"text"},
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
                         {name:'lapnumber',width:18, align:"center",sorttype:"int"},
                         {name:'vehiclename',width:90,sorttype:"text"},
-                        {name:'vehicleclass',width:15,sorttype:"text"},
-                        {name:'inclassposition', width:18, sorttype:"int", search:true},
+                        {name:'vehicleclass',width:15,sorttype:"text"},                        
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
