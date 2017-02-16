@@ -272,9 +272,9 @@
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
 	
-	var aRacestats		= {};
-	//var aRacestats		= 	{ 1: {test: 'testok', test1: 'test1ok'}};		//save race statistics
-	//aRacestats['0']		=	{};		//pre initialise second level of this structure
+	// race statistics powered by lapChart library
+	var aRacestats			= {};
+	aRacestats['drivers']	= {};
 	
 	var CSVExport = {	//CSV Export Data
 		Practice1:	"",
@@ -772,16 +772,19 @@
         		
         		if(e.data.driverlist[i].Name != ""){
 					var drivername		=	e.data.driverlist[i].Name;
-	        		var curlap			=	e.data.driverlist[i].CurrentLap;
+	        		var curlap			=	e.data.driverlist[i].CurrentLap;		// use driverlist[0] instead of driverlist[i] ? 
 	        		var curRacePos		=	e.data.driverlist[i].RacePosition;
-	        		if (!aRacestats[ drivername ]){
-	        			aRacestats[ drivername ] 			= {};
-	        			aRacestats[ drivername ].name 		= drivername;
-	        			aRacestats[ drivername ].pitstops	= [];
-	        			aRacestats[ drivername ].placing	= [];
+	        		if (!aRacestats['drivers'][ drivername ]){
+	        			aRacestats['drivers'][ drivername ] 			= {};
+	        			aRacestats['drivers'][ drivername ].name 		= drivername;
+	        			aRacestats['drivers'][ drivername ].pitstops	= [];
+	        			aRacestats['drivers'][ drivername ].placing		= [];
+	        			aRacestats['drivers'][ drivername ].mechanical	= [];
+	        			aRacestats['drivers'][ drivername ].accident	= [];
 	        		}
 	        		        		 
-	        		aRacestats[ drivername ].placing[curlap]	=	curRacePos;
+	        		aRacestats['drivers'][ drivername ].placing[curlap]	=	curRacePos;
+	        		aRacestats['lapCount']								=	e.data.driverlist[0].CurrentLap; // use lap count from first position
         		}
         		
 																					
@@ -1237,33 +1240,30 @@
 				//Detect time between StopTransitionDelay set to "true" and now
 				var CurrentTime = Date.now();
 				var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
-	
+				
 				if( StopTransitionDelay == "true" ){
-						if(log >= 3){console.log ("++++++++++++++++++++++++++++++ stopped StopTransitionDelay: " + StopTransitionDelay + " , TimeRun:" + StopTransitionDelay_TimeRun);}
-						//this.draw();
-						marker = _div.selectAll("svg")
+												
+						marker = _div.selectAll(".stations, svg")
 							.data(_data, function (d) { return d.Key; })
 							.each(transform) // update existing markers
 							.enter().append("svg:svg")
 							.each(transform)
 							.attr("class", function (d){ return d.CSSTextClasses });
 		
-						// reset to default after zoom event finished. 
+						//reset to default after zoom event finished. 
 						//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
 						if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
 				
 				}else{
-						if(log >= 3){console.log ("++++++++++++++++++++++++++++++ normal StopTransitionDelay: " , StopTransitionDelay );}
-						//this.draw();
-		
-						marker = _div.selectAll("svg")
+								
+						marker = _div.selectAll(".stations, svg")
 							.data(_data, function (d) { return d.Key; })
 							.each(transformWithEase) // update existing markers
 							.enter().append("svg:svg")
 							.each(transform)
 							.attr("class", function (d){ return d.CSSTextClasses });
 		
-						// reset to default after zoom event finished
+						//reset to default after zoom event finished
 						//StopTransitionDelay = "false";
 				}
 			
@@ -1315,8 +1315,8 @@
 		  		for ( i = 0; i < data.length; i++) {
 		  			aTmp[data[i].Key] = "";
 		  		}
-		  			
-		  		var svgs = 	d3.selectAll("svg")
+		  		
+		  		var svgs = 	d3.selectAll("svg, .driverlabel")
 		  					.each(function( d ) {
 		  							if ( aTmp[d.Key] == undefined ) {		  								
 		  								this.remove(); 	// delete svg object / ghots cars
@@ -1326,9 +1326,8 @@
 
 			this.interruptTransition = function (){
 		  		// interrupt transition while zoom event
-				if(_div != null){
-					_div.selectAll("svg")
-						.interrupt();
+				if(_div != null){					
+					_div.selectAll("svg, .driverlabel").interrupt();
 				}
             }; // end interruptTransition()
             
