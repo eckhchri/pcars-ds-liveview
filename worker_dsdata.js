@@ -20,7 +20,7 @@ self.addEventListener('message', function(e) {
 			
 			//Workaround: needed to have a valid and full RefPoint hash in addEventListener function
 			a["arefpoint"] = e.data.arefpoint;
-			if(log >= 3){console.log("DSdata complete array: " , a);}
+			//if(log >= 3){console.log("DSdata complete array: " , a);}
 			
 			// return result to main thread after timeout
 			self.postMessage(a);
