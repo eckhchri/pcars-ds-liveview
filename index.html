@@ -783,8 +783,8 @@
 	        			aRacestats['drivers'][ drivername ].accident	= [];
 	        		}
 	        		        		 
-	        		aRacestats['drivers'][ drivername ].placing[curlap]	=	curRacePos;
-	        		aRacestats['lapCount']								=	e.data.driverlist[0].CurrentLap; // use lap count from first position
+	        		aRacestats['drivers'][ drivername ].placing[curlap-1]	=	curRacePos;
+	        		aRacestats['lapCount']									=	e.data.driverlist[0].CurrentLap; // use lap count from first position
         		}
         		
 																					
@@ -910,7 +910,7 @@
 	                        
 	                        WORKERDELAY_DEMODATA = WORKERDELAY_DEMODATA + sensorLayer_UpdateDelta_DEMOdiff;		//adapt playback speed to recorded data with the worker delay
 	                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
-	                  		if(log >= 2){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
+	                  		//if(log >= 4){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
 	
 	                        workerDSDATA.postMessage({
 	                                workerdelay:            WORKERDELAY_DEMODATA
@@ -1317,6 +1317,7 @@
 		  		}
 		  		
 		  		var svgs = 	d3.selectAll("svg, .driverlabel")
+		  					.filter(".driverlabel")			// needed to prevent action to other svg in this project like LapChart
 		  					.each(function( d ) {
 		  							if ( aTmp[d.Key] == undefined ) {		  								
 		  								this.remove(); 	// delete svg object / ghots cars
@@ -1451,7 +1452,7 @@ function refreshVehicleList(a){
 function refreshDriverList(a){
 	// stop refreshing jqgrid in several cases
 	if (StopRefreshDriverlist == "true" || jQuery("#DriverDataTable").getGridParam('gridstate') == 'hidden') {
-                if(log >= 3){console.log("--- INFO stop refresh driverlist because StopRefreshDriverlist or grid is in status hidden!"  );}
+                //if(log >= 4){console.log("--- INFO stop refresh driverlist because StopRefreshDriverlist or grid is in status hidden!"  );}
                 return 1;
 	}
 	
