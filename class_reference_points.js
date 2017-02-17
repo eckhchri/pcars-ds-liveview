@@ -1069,11 +1069,21 @@ function Refpoint(circuit_id)
         });
 	
 	//Mercedes Ice Training Track Full Track
-	aRefPoints[9999990032] = CopyObjectWithModifications(aRefPoints[8888888888],
+	aRefPoints[9999990032] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"Name":         "Mercedes Ice Training Track Full Track"
+		"refLat":        65.549746
+		,"refLong":      17.578392
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Mercedes Ice Training Track Full Track"
 		,"Name2":	 "Mercedes Ice Training Track Test"	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"Test"
-		,"Comment": "fictional, initially added, Dummy Track ID, Dummy DS name"
+		,"Zoom":         15
+		,"MapInitLat":   65.549746
+		,"MapInitLong":  17.578392
+		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
 		});
 	//Mercedes Ice Training Track East Circuit
 	aRefPoints[9999990031] = CopyObjectWithModifications(aRefPoints[9999990032], {"Name": "Mercedes Ice Training Track East Circuit","Name2": "Mercedes Ice Training Track East"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"East"
