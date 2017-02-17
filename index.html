@@ -790,6 +790,9 @@
 																					
 		}// end update map
 
+		// show coordinates of first driver in console for trackmap generation
+		if(log >= 3 && aSensorData[0]){console.log("-,[" + aSensorData[0].Long.toFixed(6) + "," +  aSensorData[0].Lat.toFixed(6) + "]");}
+		if(log >= 3 && e.data.driverlist[0]){console.log("+,[" + e.data.driverlist[0].PosX.toFixed(0) + "," + e.data.driverlist[0].PosZ.toFixed(0) + "]");}
 		
 		if(log >= 3){console.log("+++++++++ aRacestats: ", aRacestats);}
 		
@@ -1350,11 +1353,11 @@ function init_map(_TrackID , aRefPoint){
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 		    //deactivate google streetview
 			streetViewControl: false,
-			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
+			rotateControl: true,		// control for changing Tilt (0Â° or 45Â°) and for map rotation
 			scaleControl: true		//shows maps scale in the bottom right
 	});
 	
-	//deactivate the automatic 45° Tilt View on closest zoom steps
+	//deactivate the automatic 45Â° Tilt View on closest zoom steps
 	map.setTilt(0);
 		
 	sensorLayer = new GPSSensor(aSensorData);
