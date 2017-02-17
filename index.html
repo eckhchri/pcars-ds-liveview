@@ -1339,10 +1339,37 @@
 
 
 //////////////////////////////////////////////////////////////////////////
+function loadTrackMap(_TrackID){
+        	  
+	//Todo: http://stackoverflow.com/questions/18197138/how-to-wait-on-d3-json-to-finish        	  
+	//load trackmaps if available        	      
+    //var trackmapFilePath	= "/pcars/data/trackmaps/"+ _TrackID +".json";
+	var trackmapFilePath	= "/pcars/data/trackmaps/1695182971.json";
+	var geodata = d3.json(trackmapFilePath, function(data) {
+
+		var retval = "1";
+		if(log >= 3){console.log("init_map() data: ", data );}
+		if (data){
+			
+			// do something
+				
+		}		
+	}); 
+	
+	if(log >= 3){console.log("init_map() geodata: ", geodata );}
+	
+	return geodata;
+        	  
+}          
+          
+//////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
 function init_map(_TrackID , aRefPoint){
-        	  
+
+	var geodata2 = loadTrackMap(_TrackID);
+	if(log >= 3){console.log("init_map() geodata2: ", geodata2 );}
+	
 	//subclassing			
 	if(log >= 3){console.log("INFO: typeof google map object: ", typeof google);}
 	GPSSensor.prototype = new google.maps.OverlayView();
