@@ -1000,17 +1000,8 @@
 	
 	
 	// init google map
-	init_map(cuircitID , aRefPointTMP);
-
-	// add map Listener
-	map.addListener('zoom_changed', function() {
-		if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
-		StopTransitionDelay = "true";
-        //StopTransitionDelay_StartTime = Date.now();
-		sensorLayer.interruptTransition();
-		sensorLayer.update(aSensorData);
-		if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
-  	});
+	//init_map(cuircitID , aRefPointTMP);
+	init_map_with_geojson(cuircitID , aRefPointTMP);
 
 	// create Table with list of all tracks
 	// checkbox Event handling
@@ -1339,36 +1330,27 @@
 
 
 //////////////////////////////////////////////////////////////////////////
-function loadTrackMap(_TrackID){
-        	  
-	//Todo: http://stackoverflow.com/questions/18197138/how-to-wait-on-d3-json-to-finish        	  
-	//load trackmaps if available        	      
-    //var trackmapFilePath	= "/pcars/data/trackmaps/"+ _TrackID +".json";
-	var trackmapFilePath	= "/pcars/data/trackmaps/1695182971.json";
-	var geodata = d3.json(trackmapFilePath, function(data) {
-
-		var retval = "1";
-		if(log >= 3){console.log("init_map() data: ", data );}
-		if (data){
-			
-			// do something
-				
-		}		
-	}); 
-	
-	if(log >= 3){console.log("init_map() geodata: ", geodata );}
-	
-	return geodata;
-        	  
+function init_map_with_geojson(_TrackID, aRefPoint){
+	      	  
+	//load trackmaps if available
+	//var trackmapFilePath	= "/pcars/data/trackmaps/16951829712.json";   //used to force a special file
+    var trackmapFilePath	= "/pcars/data/trackmaps/"+ _TrackID +".json";		
+	d3.json(trackmapFilePath, function( gjdata ) {
+		
+		if (typeof gjdata === 'undefined' || !gjdata){								
+			if(log >= 3){console.log("init_map_with_geojson() gjdata is empty or null:  ", gjdata );}
+		}	
+		
+		init_map(_TrackID , aRefPoint, gjdata);
+	});         	  
 }          
           
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
-function init_map(_TrackID , aRefPoint){
+function init_map(_TrackID , aRefPoint, gjdata){
 
-	var geodata2 = loadTrackMap(_TrackID);
-	if(log >= 3){console.log("init_map() geodata2: ", geodata2 );}
+	if(log >= 3){console.log("init_map() gjdata: ", gjdata );}
 	
 	//subclassing			
 	if(log >= 3){console.log("INFO: typeof google map object: ", typeof google);}
@@ -1389,6 +1371,17 @@ function init_map(_TrackID , aRefPoint){
 		
 	sensorLayer = new GPSSensor(aSensorData);
 	sensorLayer.setMap(map); 
+	
+	// add map Listener
+	map.addListener('zoom_changed', function() {
+		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
+		StopTransitionDelay = "true";
+        //StopTransitionDelay_StartTime = Date.now();
+		sensorLayer.interruptTransition();
+		sensorLayer.update(aSensorData);
+		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
+  	});
+
 		
 	//todo: maybe change from static to dynamic binding of HTML elements
 	// deactivate because of problems with table height of div blocks
