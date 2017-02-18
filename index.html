@@ -833,8 +833,8 @@
 		// in case track changes on DS adjust the map settings for new possition
         if ( cuircitID != tmpcuircitID ){			
 			if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
-			//map.setCenter({lat: 50.332733, lng: 6.943355});
-			changeMapSettings(e.data.arefpoint[tmpcuircitID] , map);
+			//map.setCenter({lat: 50.332733, lng: 6.943355});			
+			changeMapSettings_with_geojson(e.data.arefpoint[tmpcuircitID] , map , tmpcuircitID);
 
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
 		}
@@ -1396,14 +1396,27 @@ function init_map(_TrackID , aRefPoint, gjdata){
 	return 1;		       				
 }
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
+/// change map settings
+function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
+	
+	var trackmapFilePath	= "/pcars/data/trackmaps/"+ trackid +".json";		
+	d3.json(trackmapFilePath, function( gjdata ) {
+		
+		if (typeof gjdata === 'undefined' || !gjdata){								
+			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
+		}	
+		
+		changeMapSettings(newTrackObj, mapobj, gjdata);
+	});         	  
+	
+}
 
-function changeMapSettings(newTrackObj, mapobj){
-	//todo: replace map (global variable) with mapobj(if this is not a copy)
+function changeMapSettings(newTrackObj, mapobj, gjdata){
+	//todo: replace map (global variable) with mapobj(if this is not a copy) intead of usage of the global variable
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 	map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
-
 	map.setZoom(newTrackObj["Zoom"]);
-
 	StopTransitionDelay = "true";
 	StopTransitionDelay_StartTime = Date.now();
 
