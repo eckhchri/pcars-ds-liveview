@@ -39,12 +39,12 @@ function Refpoint(circuit_id)
         //Default for fictional tracks
         aRefPoints[8888888888] = CopyObjectWithModifications(aRefPoints[9999999999],
                 {
-                "refLat":        62.552546
-                ,"refLong":      -45.678026
-                ,"Name":         "Greenland"
+                "refLat":        40.997664
+                ,"refLong":      -113.566253
+                ,"Name":         "Salt Lake USA"
                 ,"Zoom":         15
-                ,"MapInitLat":   41.036357
-                ,"MapInitLong":  -113.535295
+                ,"MapInitLat":   40.997664
+                ,"MapInitLong":  -113.566253
                 ,"Comment": "Default for fictional tracks"
                 });
 	
