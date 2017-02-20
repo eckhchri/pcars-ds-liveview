@@ -285,6 +285,13 @@
 		Race2:		""
 	}
 	
+	//Trackmap Google GPS coordinates
+	var tmGPS = {
+		"line_mid" : []
+		,"line_outer": []
+		,"line_inner": []
+	};
+	
 	//init array for calculate InClassRacePosition		
 	var aInClass;
 
@@ -1412,10 +1419,12 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 					//if(log >= 3){console.log("gjdata pre calculation " + key + ": "+ JSON.stringify(gjdata[key]));}
 					for (var i = 0; i < gjdata[key].length; i++ ){
 						gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
-						gjdata[key][i][0] = gpsCoTmp.Long;      //if numbers to long you can shorten it with gpsCoTmp.Long.toFixed(6)
-						gjdata[key][i][1] = gpsCoTmp.Lat;
+						//gjdata[key][i][0] = gpsCoTmp.Long;      //if numbers to long you can shorten it with gpsCoTmp.Long.toFixed(6)
+						//gjdata[key][i][1] = gpsCoTmp.Lat;
+						tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 					}
-					if(log >= 3){console.log("gjdata " + key + ": "+ JSON.stringify(gjdata[key]));}
+					//if(log >= 3){console.log("gjdata " + key + ": "+ JSON.stringify(gjdata[key]));}
+					if(log >= 3){console.log("Google GPS " + key + ": "+ JSON.stringify(tmGPS[key]));}
 				}
 			}
 		}
