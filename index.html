@@ -1407,26 +1407,17 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
 		}else{
 			//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
-			for (var i = 0; i < gjdata.line_mid.length; i++ ){
-				gpsCoTmp = calc_coordinates (trackid , gjdata.line_mid[i][0] , gjdata.line_mid[i][1] , aRefPointTMP);
-				gjdata.line_mid[i][0] = gpsCoTmp.Long.toFixed(6);
-				gjdata.line_mid[i][1] = gpsCoTmp.Lat.toFixed(6);
+			for (var key in gjdata) {
+				if (key != "comment"){
+					//if(log >= 3){console.log("gjdata pre calculation " + key + ": "+ JSON.stringify(gjdata[key]));}
+					for (var i = 0; i < gjdata[key].length; i++ ){
+						gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
+						gjdata[key][i][0] = gpsCoTmp.Long;      //if numbers to long you can shorten it with gpsCoTmp.Long.toFixed(6)
+						gjdata[key][i][1] = gpsCoTmp.Lat;
+					}
+					if(log >= 3){console.log("gjdata " + key + ": "+ JSON.stringify(gjdata[key]));}
+				}
 			}
-			if(log >= 3){console.log("gjdata mid line: " + gjdata.line_mid );}
-
-			for (var i = 0; i < gjdata.line_outer.length; i++ ){
-				gpsCoTmp = calc_coordinates (trackid , gjdata.line_outer[i][0] , gjdata.line_outer[i][1] , aRefPointTMP);
-				gjdata.line_outer[i][0] = gpsCoTmp.Long.toFixed(6);
-				gjdata.line_outer[i][1] = gpsCoTmp.Lat.toFixed(6);
-			}
-			if(log >= 3){console.log("gjdata outer line: " + gjdata.line_outer );}
-
-			for (var i = 0; i < gjdata.line_inner.length; i++ ){
-				gpsCoTmp = calc_coordinates (trackid , gjdata.line_inner[i][0] , gjdata.line_inner[i][1] , aRefPointTMP);
-				gjdata.line_inner[i][0] = gpsCoTmp.Long.toFixed(6);
-				gjdata.line_inner[i][1] = gpsCoTmp.Lat.toFixed(6);
-			}
-			if(log >= 3){console.log("gjdata inner line: " + gjdata.line_inner );}
 		}
 		
 		changeMapSettings(newTrackObj, mapobj, gjdata);
