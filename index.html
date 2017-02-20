@@ -272,6 +272,11 @@
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
 	
+	//PolyLine global vars for trackmaps
+	var PolyLineMid		=	null;
+	var PolyLineOuter	=	null;
+	var PolyLineInner	=	null;
+	
 	// race statistics powered by lapChart library
 	var aRacestats			= {};
 	aRacestats['drivers']	= {};
@@ -1402,20 +1407,42 @@ function init_map(_TrackID , aRefPoint, gjdata){
 
 	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de
 	//Todo: init Polyline with standard coordinates, in changeMapSettings() push now varibales to Polyline
-	var flightPlanCoordinates = [
+	var InitialCoordinates = [
     		{lat: 37.772, lng: -122.214},
     		{lat: 21.291, lng: -157.821},
     		{lat: -18.142, lng: 178.431},
     		{lat: -27.467, lng: 153.027}
   	];
-  	var flightPath = new google.maps.Polyline({
-		path: flightPlanCoordinates,
+	
+	//init inner line PolyLine object
+  	PolyLineMid	= new google.maps.Polyline({
+		path: InitialCoordinates,
     	geodesic: true,
     	strokeColor: '#FF0000',
     	strokeOpacity: 1.0,
     	strokeWeight: 2
 	});
-	flightPath.setMap(map);
+  	PolyLineMid.setMap(map);
+  	
+ 	//init inner line PolyLine object
+  	PolyLineInner	= new google.maps.Polyline({
+		path: InitialCoordinates,
+    	geodesic: true,
+    	strokeColor: '#FF0000',
+    	strokeOpacity: 1.0,
+    	strokeWeight: 2
+	});
+  	PolyLineInner.setMap(map);
+  	
+  	//init inner line PolyLine object
+  	PolyLineOuter	= new google.maps.Polyline({
+		path: InitialCoordinates,
+    	geodesic: true,
+    	strokeColor: '#FF0000',
+    	strokeOpacity: 1.0,
+    	strokeWeight: 2
+	});
+  	PolyLineOuter.setMap(map);
 	
 	
 	return 1;		       				
@@ -1425,11 +1452,12 @@ function init_map(_TrackID , aRefPoint, gjdata){
 /// change map settings
 function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	
-	var trackmapFilePath	= "./data/trackmaps/"+ trackid +".json";		
+	var trackmapFilePath	= "./data/trackmaps/"+ trackid +".json";
+	
 	d3.json(trackmapFilePath, function( gjdata ) {
 		
 		if (typeof gjdata === 'undefined' || !gjdata){								
-			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
+			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}			
 		}else{
 			//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
 			for (var key in gjdata) {
@@ -1447,7 +1475,7 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 			}
 		}
 		
-		changeMapSettings(newTrackObj, mapobj, gjdata);
+		changeMapSettings(newTrackObj, mapobj, tmGPS);
 	});         	  
 	
 }
@@ -1460,6 +1488,52 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	StopTransitionDelay = "true";
 	StopTransitionDelay_StartTime = Date.now();
 
+	if ( gjdata ){
+		//trackmaps updates with polyline
+		//delete old instance
+		PolyLineMid.setMap(null);	
+		PolyLineOuter.setMap(null);
+		PolyLineInner.setMap(null);
+		
+		//create new instance MidLine if available
+		if ( gjdata['line_mid'] ){		
+			PolyLineMid = new google.maps.Polyline({
+			    path: gjdata['line_mid'],
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: 2
+			  });
+			
+			PolyLineMid.setMap(map);
+		}
+		
+		//create new instance innerLine if available
+		if ( gjdata['line_inner'] ){		
+			PolyLineInner = new google.maps.Polyline({
+			    path: gjdata['line_inner'],
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: 2
+			  });
+			
+			PolyLineInner.setMap(map);
+		}
+		
+		//create new instance OuterLine if available
+		if ( gjdata['line_outer'] ){		
+			PolyLineOuter = new google.maps.Polyline({
+			    path: gjdata['line_outer'],
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: 2
+			  });
+			
+			PolyLineOuter.setMap(map);
+		}
+	
+	}// end map track polyline
+	
+	
 	//todo: change also picture Overlay prevered mapsourc(google,openstreetmap) in needed
 	return 1;
 }
