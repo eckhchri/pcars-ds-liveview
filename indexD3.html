@@ -78,9 +78,72 @@
 
     <input type="checkbox" id="checkbox1" />
 
-    <script type="text/javascript">
+    <script type="text/javascript" charset="utf-8">
 	
 
+    
+    var data = [{
+			"globals":{
+					"joinable":"true",
+					"lobbyid":109775242963700000,
+					"max_member_count":3,
+					"now":1459966198,
+					"state":"Running",
+					"attributes":{
+						"TrackId":1768660198,
+						"GridSize":10
+						},
+					"sensorLayer_UpdateDelta":557
+					},
+			"participants":[
+					{
+ 						"aSectormapping":{"0":"0","1":"2","2":"3","3":"1"},
+ 						"RefID":36608,
+ 						"Name":"Benjamin Hall",
+ 						"IsPlayer":0,
+ 						"GridPosition":7,
+ 						"PosX":-633540,
+ 						"VehicleId":"Ruf CTR"
+						},
+						{
+ 						"aSectormapping":{"0":"0","1":"2","2":"3","3":"1"},
+ 						"RefID":36608,
+ 						"Name":"Benjamin Höll??Ü",
+ 						"IsPlayer":0,
+ 						"GridPosition":7,
+ 						"PosX":-633540,
+ 						"VehicleId":"Ruf CTR"
+ 					}],
+     	}];
+
+var data2 = JSON.stringify(data);
+
+console.log("JSON.stringify: ", data2 );	
+console.log("JSON.parse: ", JSON.parse( data2 ) );  
+
+///////////////////////////////////////////////////
+var obj = {"key":"füßchen", "some": [1,2,3]}
+
+var json = JSON.stringify(obj)
+json  = json.replace(/[\u007F-\uFFFF]/g, function(chr) {
+    return "\\u" + ("0000" + chr.charCodeAt(0).toString(16)).substr(-4)
+})
+
+console.log("JSON: ", json);
+console.log("JSON.parse(): " , JSON.parse(json) );
+    
+///////////////////////////////////////////////////    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
 //Test Object;
 
 	var DriverDummy		= new PCARSdriver();
@@ -311,7 +374,7 @@ var _data3  = [
 			];
 		
 var selection = d3.select("body").selectAll("p")
-	.data(_data3, function (d){ return d.key; })
+	.data(_data3, function (d){ return d; })
 	.enter().append("p")
 	.text(function(d) { return "I’m number " + d.label + "!"; });
 console.log("----- current Output: selection ", selection);
@@ -345,6 +408,47 @@ console.log("----- current Output: selection2 ", selection2);
 			});
  
  console.log("----- _marker3-3: tmp1  " , tmp1);
+ 
+ 
+ 
+ var data = [{
+	 			"globals":{
+	 					"joinable":"true",
+	 					"lobbyid":109775242963700000,
+	 					"max_member_count":3,
+	 					"now":1459966198,
+	 					"state":"Running",
+	 					"attributes":{
+	 						"TrackId":1768660198,
+	 						"GridSize":10
+	 						},
+	 					"sensorLayer_UpdateDelta":557
+	 					},
+	 			"participants":[
+							{
+		 						"aSectormapping":{"0":"0","1":"2","2":"3","3":"1"},
+		 						"RefID":36608,
+		 						"Name":"Benjamin Hall",
+		 						"IsPlayer":0,
+		 						"GridPosition":7,
+		 						"PosX":-633540,
+		 						"VehicleId":"Ruf CTR"
+	 						},
+	 						{
+		 						"aSectormapping":{"0":"0","1":"2","2":"3","3":"1"},
+		 						"RefID":36608,
+		 						"Name":"Benjamin Höll",
+		 						"IsPlayer":0,
+		 						"GridPosition":7,
+		 						"PosX":-633540,
+		 						"VehicleId":"Ruf CTR"
+		 					}],
+             	}];
+ 
+var data2 = JSON.stringify(data);
+
+console.log("JSON.stringify: ", data2 );					
+ 
  
   
 

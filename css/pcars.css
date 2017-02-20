@@ -186,6 +186,12 @@
 			background-color:	transparent;
 		}
 		
+		//Test for jqgrid Cell background
+		 .cvteste {
+            background-color: green;
+        }
+		
+		
 		
 /* The switch - the box around the slider */
 .switch {
