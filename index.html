@@ -1400,7 +1400,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
 /// change map settings
 function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	
-	var trackmapFilePath	= "/pcars/data/trackmaps/"+ trackid +".json";		
+	var trackmapFilePath	= "./data/trackmaps/"+ trackid +".json";		
 	d3.json(trackmapFilePath, function( gjdata ) {
 		
 		if (typeof gjdata === 'undefined' || !gjdata){								
