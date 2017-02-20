@@ -1326,6 +1326,10 @@
 				}
             }; // end interruptTransition()
             
+            
+            
+            
+            
           } // end GPSSensor(initData)
 
 
@@ -1392,7 +1396,73 @@ function init_map(_TrackID , aRefPoint, gjdata){
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
 	//map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
-		       	
+	
+	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de
+	//////////////
+	var flightPlanCoordinates = [
+    {lat: 37.772, lng: -122.214},
+    {lat: 21.291, lng: -157.821},
+    {lat: -18.142, lng: 178.431},
+    {lat: -27.467, lng: 153.027}
+  ];
+  var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 2
+  });
+
+  	flightPath.setMap(map);
+	
+	
+	
+	//display geojson
+	var polyline;
+	polyline = new google.maps.Polyline({
+          map: map
+        });
+	
+	var context;
+    var width;
+    var height;
+    var path;
+    var graticule;
+    var equator;
+    var projection;
+	
+	d3init();
+	
+	function d3init() {
+        width = map.getDiv().offsetWidth;
+        height = map.getDiv().offsetHeight;
+
+        projection = d3.geo.equirectangular()
+          .translate([0, 0])
+          .scale(52.29578)
+          .precision(2)
+
+        context = new PolylineContext();
+        path = d3.geo.path().projection(projection).context(context);
+        equator = {type: 'LineString', coordinates: [[-180, 20], [-90, 0], [0, -20], [90, 0], [180, 20]]};
+
+        render();
+      }
+
+      function render() {
+        polyline.setOptions({
+          strokeColor: 'red',
+          strokeWeight: 2
+        });
+        //context.setCurrent(polyline.getPath());
+        context.currentPath = polyline.getPath();
+
+        path(equator);
+      }
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+	
+	
 	return 1;		       				
 }
 
@@ -1413,7 +1483,7 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 					for (var i = 0; i < gjdata[key].length; i++ ){
 						gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
 						gjdata[key][i][0] = gpsCoTmp.Long;      //if numbers to long you can shorten it with gpsCoTmp.Long.toFixed(6)
-						gjdata[key][i][1] = gpsCoTmp.Lat;
+						gjdata[key][i][1] = gpsCoTmp.Lat;						
 					}
 					if(log >= 3){console.log("gjdata " + key + ": "+ JSON.stringify(gjdata[key]));}
 				}
