@@ -16,7 +16,7 @@ self.addEventListener('message', function(e) {
 	var aDsData = setTimeout(function(){
 		
 			//console.log("DSdata complete before function call with e: ", e);
-			var a 	= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode, e.data.arefpoint);
+			var a 	= Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode, e.data.arefpoint, {'originaldatasource': e.data.originaldatasource });
 			
 			//Workaround: needed to have a valid and full RefPoint hash in addEventListener function
 			a["arefpoint"] = e.data.arefpoint;

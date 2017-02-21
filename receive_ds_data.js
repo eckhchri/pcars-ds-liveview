@@ -3,14 +3,17 @@
 
 //Receive_DS_data("[DS URL]]",9000);
 // http://[DS URL]:9000/api/session/status?attributes&members&participants
-function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
+function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam){
 
-	this.url			=	url;
-	this.port			=	port;
-	this.fullurl		=	'http://' +  url + ':' + port;
-	this.timeout		=	timeout;
-	this.receivemode	=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
-	this.aRefPointTMP	=	aRefPointTMP;		// hash off all available RefPoints
+	this.url				=	url;
+	this.port				=	port;
+	this.fullurl			=	'http://' +  url + ':' + port;
+	this.timeout			=	timeout;
+	this.receivemode		=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
+	this.aRefPointTMP		=	aRefPointTMP;		// hash off all available RefPoints
+	this.confParam			=	confParam;	
+	
+	
 	
 	//CurrentSector has to be mapped
 	// API Sector 	- Real Sector
@@ -62,7 +65,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		"RACESTATE_MAX"
 	];
 	
-	//if(log >= 3){console.log("Receive_DS_data() --- receivemode: " , receivemode);}
+	//if(log >= 3){console.log("Receive_DS_data() --- receivemode this: " , this);}
 
 	if (this.receivevariant == undefined){
 		this.receivevariant = "GETDSANDDRIVERDATA";
@@ -124,7 +127,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			,"now":					demo_el.globals.now
 			,"state":				demo_el.globals.state
 			,"name":				demo_el.globals.name
-			,"datasource":			"DEMO"
+			,"datasource":			this.confParam['originaldatasource']
 			,"attributes":{
 				"TrackId":			demo_el.globals.attributes.TrackId
 				,"GridSize":		demo_el.globals.attributes.GridSize
