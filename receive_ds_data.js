@@ -119,7 +119,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	if(this.receivemode == "GETDEMODATA"){
 		/*var recording_position = timeout;
 		var demo_el = demo[recording_position];*/
-		var demo_el = timeout;
+		var demo_el = timeout;		
 		aDrivers.globals = {
 			"joinable":				demo_el.globals.joinable
 			,"lobbyid":				demo_el.globals.lobbyid
@@ -127,7 +127,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			,"now":					demo_el.globals.now
 			,"state":				demo_el.globals.state
 			,"name":				demo_el.globals.name
-			,"datasource":			this.confParam['originaldatasource']
+			,"datasource":			confParam['originaldatasource']
 			,"attributes":{
 				"TrackId":			demo_el.globals.attributes.TrackId
 				,"GridSize":		demo_el.globals.attributes.GridSize

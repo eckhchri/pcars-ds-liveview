@@ -598,7 +598,7 @@
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
-		//if(log >= 4){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+		//if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
 		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
@@ -884,7 +884,7 @@
                                         ,dsurl:                 DsServerURL
                                         ,dsport:                DsPort
                                         ,timeout:               XMLHTTPTimeout
-                                        ,receivemode:   "GETDSANDDRIVERDATA"
+                                        ,receivemode:   		"GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
                         case "CREST": //CREST receive mode
@@ -893,7 +893,7 @@
                                         ,dsurl:                 CRESTServerURL
                                         ,dsport:                CRESTPort
                                         ,timeout:               XMLHTTPTimeout
-                                        ,receivemode:   "GETCRESTDRIVERDATA"
+                                        ,receivemode:   		"GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
 						case "CREST2":  //CREST2 receive mode
@@ -902,7 +902,7 @@
                                         ,dsurl:                 CREST2ServerURL
                                         ,dsport:                CREST2Port
                                         ,timeout:               XMLHTTPTimeout
-                                        ,receivemode:   "GETCREST2DRIVERDATA"
+                                        ,receivemode:   		"GETCREST2DRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
                         case "DEMO":   //DEMO receive mode
@@ -929,7 +929,7 @@
 	                                ,dsport:                0
 	                                ,timeout:               demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
 	                                ,receivemode:   		"GETDEMODATA"
-	                                ,originaldatasource:	e.data.datasource	//keep original datasource 
+	                                ,originaldatasource:	demo[record_pos]['globals']['datasource']	//keep original datasource 
 	                                ,arefpoint:             e.data.arefpoint});
 	                        
 	                      //prepare next step size for e.g. fast forward scenarios 
@@ -978,7 +978,7 @@
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", arefpoint: aRefPointTMP});
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA",arefpoint: aRefPointTMP});
 			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP);
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			break;
