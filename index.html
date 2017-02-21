@@ -598,7 +598,7 @@
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
-		//if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
 		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
@@ -978,7 +978,7 @@
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA",arefpoint: aRefPointTMP});
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'], arefpoint: aRefPointTMP});
 			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP, {originaldatasource : demo[record_pos]['globals']['datasource']});
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			break;
