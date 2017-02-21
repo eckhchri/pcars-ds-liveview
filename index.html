@@ -979,7 +979,7 @@
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA",arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP);
+			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP, {originaldatasource : demo[record_pos]['globals']['datasource']});
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			break;
 		default:
