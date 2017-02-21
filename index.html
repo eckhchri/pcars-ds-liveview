@@ -1389,6 +1389,52 @@ function init_map(_TrackID , aRefPoint, gjdata){
 		sensorLayer.interruptTransition();
 		sensorLayer.update(aSensorData);
 		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
+		
+		// reset Polylines on zoom change with changing lineWeight
+		var zoom = map.getZoom();
+                var lineWeight = zoom/16;  //ToDo: search better algorithm
+
+                if(log >= 3){console.log("lineWeight ", lineWeight);}
+
+                PolyLineMid.setMap(null);
+                PolyLineOuter.setMap(null);
+                PolyLineInner.setMap(null);
+
+                //create new instance MidLine if available
+                if ( tmGPS['line_mid'] ){
+                        PolyLineMid = new google.maps.Polyline({
+                            path: tmGPS['line_mid'],
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: lineWeight
+                          });
+
+                        PolyLineMid.setMap(map);
+                }
+
+                //create new instance innerLine if available
+                if ( tmGPS['line_inner'] ){
+                        PolyLineInner = new google.maps.Polyline({
+                            path: tmGPS['line_inner'],
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: lineWeight
+                          });
+
+                        PolyLineInner.setMap(map);
+                }
+
+                //create new instance OuterLine if available
+                if ( tmGPS['line_outer'] ){
+                        PolyLineOuter = new google.maps.Polyline({
+                            path: tmGPS['line_outer'],
+                            strokeColor: '#FF0000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: lineWeight
+                          });
+
+                        PolyLineOuter.setMap(map);
+                }
   	});
 
 		
