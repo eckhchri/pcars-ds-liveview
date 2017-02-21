@@ -1374,11 +1374,11 @@ function init_map(_TrackID , aRefPoint, gjdata){
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 		    //deactivate google streetview
 			streetViewControl: false,
-			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
+			rotateControl: true,		// control for changing Tilt (0Â° or 45Â°) and for map rotation
 			scaleControl: true		//shows maps scale in the bottom right
 	});
 	
-	//deactivate the automatic 45° Tilt View on closest zoom steps
+	//deactivate the automatic 45Â° Tilt View on closest zoom steps
 	map.setTilt(0);
 		
 	sensorLayer = new GPSSensor(aSensorData);
@@ -1462,15 +1462,15 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 			//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
 			for (var key in gjdata) {
 				if (key != "comment"){
-					//if(log >= 3){console.log("gjdata pre calculation " + key + ": "+ JSON.stringify(gjdata[key]));}
+					//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
 					for (var i = 0; i < gjdata[key].length; i++ ){
 						gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
 						//gjdata[key][i][0] = gpsCoTmp.Long;      //if numbers to long you can shorten it with gpsCoTmp.Long.toFixed(6)
 						//gjdata[key][i][1] = gpsCoTmp.Lat;
 						tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 					}
-					//if(log >= 3){console.log("gjdata " + key + ": "+ JSON.stringify(gjdata[key]));}
-					if(log >= 3){console.log("Google GPS " + key + ": "+ JSON.stringify(tmGPS[key]));}
+					//if(log >= 3){console.log("gjdata ", key, ": ", gjdata[key]);}
+					if(log >= 3){console.log("Google GPS ", key, ": ", tmGPS[key]);}
 				}
 			}
 		}
