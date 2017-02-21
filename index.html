@@ -291,11 +291,7 @@
 	}
 	
 	//Trackmap Google GPS coordinates
-	var tmGPS = {
-		"line_mid" : []
-		,"line_outer": []
-		,"line_inner": []
-	};
+	var tmGPS = {};
 	
 	//init array for calculate InClassRacePosition		
 	var aInClass;
@@ -1461,6 +1457,7 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 		}else{
 			//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
 			for (var key in gjdata) {
+				tmGPS[key] = [];
 				if (key != "comment"){
 					//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
 					for (var i = 0; i < gjdata[key].length; i++ ){
