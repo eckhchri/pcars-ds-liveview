@@ -95,6 +95,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		,"max_member_count":	"default parameters"
 		,"now":			"default parameters"
 		,"state":		"default parameters"
+		,"datasource":	"default parameters"
 		,"attributes":{
 			"TrackId":      9999999999
 			,"SessionStage":""
@@ -123,6 +124,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 			,"now":					demo_el.globals.now
 			,"state":				demo_el.globals.state
 			,"name":				demo_el.globals.name
+			,"datasource":			"DEMO"
 			,"attributes":{
 				"TrackId":			demo_el.globals.attributes.TrackId
 				,"GridSize":		demo_el.globals.attributes.GridSize
@@ -232,6 +234,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
+		                                        ,"datasource":			"DSPCARS1"
 		                                        ,"attributes":		{
 								"TrackId":		9999999999
 								,"GridSize":		0
@@ -250,6 +253,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
+		                                        ,"datasource":			"DSPCARS1"
 		                                        ,"name":                myArr.response.name
 		                                        ,"attributes":		{
 								"TrackId":		myArr.response.attributes.TrackId
@@ -269,6 +273,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 	                       ,"max_member_count":    "unknown mode"
 	                       ,"now":                 "unknown mode"
 	                       ,"state":               "unknown mode"
+	                       ,"datasource":		   "DSPCARS1"
 	                       ,"name":                "unknown mode"
 	                       ,"attributes":		{
 					"TrackId":		9999999999
@@ -325,7 +330,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 		                                         	);
 					}
 	
-					if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
+					//if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
 					// return information
 					return aDrivers;
 				}
@@ -398,6 +403,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					,"max_member_count":	"CREST Mode"
 					,"now":					"CREST Mode"
 					,"state":				"CREST Mode"
+					,"datasource":			"CRESTv1"
 					,"attributes":{
 						"TrackId":			TrackID
 						,"SessionStage":	myArr.gameStates.mSessionState
@@ -462,6 +468,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP){
 					,"max_member_count":	"CREST Mode"
 					,"now":					"CREST Mode"
 					,"state":				"CREST Mode"
+					,"datasource":			"CRESTv2"
 					,"attributes":{
 						"TrackId":			TrackID
 						,"SessionStage":	myArr.gameStates.mSessionState
