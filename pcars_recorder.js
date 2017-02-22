@@ -84,19 +84,16 @@ function importData(compressedData){
 		return zip.file( "data.pcars" ).async("string");
 	})		
 	.then(function success(uncompressedData) {
-    		
+    			
 		uncompressedData = JSON.parse(uncompressedData);
 		//TODO: really needed to save import to this.data?????????????????????????????????????????
-		//this.data = uncompressedData;
+		//this.data = uncompressedData;		  
 		initDemoData(uncompressedData, "yes"); //-> Async Call
 				
       }, function error(e) {
 		alert("Error unzip: " + e);
       });
-	
-	//if(log >= 3){console.log('+++++++++++ PCARSREC importData(). successfully imported data.');};
-	//if(log >= 3){console.log('+++++++++++ PCARSREC parsed :  ', this.data );};  //output of complete array after unzip.	
-	
+		
 	return 1;
 }
 
