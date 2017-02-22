@@ -1504,7 +1504,8 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	d3.json(trackmapFilePath, function( gjdata ) {
 		
 		if (typeof gjdata === 'undefined' || !gjdata){								
-			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}			
+			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
+			tmGPS = {};	//clear trackmap data if there is no new trackmap data available
 		}else{
 			//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
 			for (var key in gjdata) {
