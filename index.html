@@ -828,7 +828,7 @@
 		//if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
                 
 		//Calculation of dynamic DisplayDuration
-		if ((APIMODE == "DS" || APIMODE == "DEMO") && sensorLayer_UpdateDelta < UpdateRateDS) {
+		if ((e.data.globals.datasource == "DSPCARS1" || e.data.globals.datasource == "DSPCARS2") && sensorLayer_UpdateDelta < UpdateRateDS) {
 				DisplayDuration = UpdateRateDS + DisplayDurationCorrector       //If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
 		}else{
 				DisplayDuration = sensorLayer_UpdateDelta  + DisplayDurationCorrector;
