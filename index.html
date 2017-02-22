@@ -1462,35 +1462,9 @@ function init_map(_TrackID , aRefPoint, gjdata){
   	];
 	
 	//init inner line PolyLine object
-  	PolyLineMid	= new google.maps.Polyline({
-		path: InitialCoordinates,
-    	geodesic: true,
-    	strokeColor: '#E0E0E0',
-    	strokeOpacity: 0.5,
-    	strokeWeight: zoom_settings[zoom_level].lineWeightMid
-	});
-  	PolyLineMid.setMap(map);
-  	
- 	//init inner line PolyLine object
-  	PolyLineInner	= new google.maps.Polyline({
-		path: InitialCoordinates,
-    	geodesic: true,
-    	strokeColor: '#FF0000',
-    	strokeOpacity: 1.0,
-    	strokeWeight: zoom_settings[zoom_level].lineWeight
-	});
-  	PolyLineInner.setMap(map);
-  	
-  	//init inner line PolyLine object
-  	PolyLineOuter	= new google.maps.Polyline({
-		path: InitialCoordinates,
-    	geodesic: true,
-    	strokeColor: '#FF0000',
-    	strokeOpacity: 1.0,
-    	strokeWeight: zoom_settings[zoom_level].lineWeight
-	});
-  	PolyLineOuter.setMap(map);
-	
+	PolyLineMid	= new google.maps.Polyline({});
+	PolyLineInner	= new google.maps.Polyline({});
+	PolyLineOuter	= new google.maps.Polyline({});
 	
 	return 1;		       				
 }
