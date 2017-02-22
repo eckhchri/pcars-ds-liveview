@@ -277,6 +277,8 @@
 	var PolyLineOuter	=	null;
 	var PolyLineInner	=	null;
 	
+	var zoom_level;         //Google Maps zoom level
+	
 	// race statistics powered by lapChart library
 	var aRacestats			= {};
 	aRacestats['drivers']	= {};
@@ -1378,6 +1380,8 @@ function init_map(_TrackID , aRefPoint, gjdata){
 	
 	//deactivate the automatic 45° Tilt View on closest zoom steps
 	map.setTilt(0);
+	
+	zoom_level = aRefPoint[_TrackID]["Zoom"];   //get initial zoom for zoom_settings
 		
 	sensorLayer = new GPSSensor(aSensorData);
 	sensorLayer.setMap(map); 
@@ -1391,11 +1395,10 @@ function init_map(_TrackID , aRefPoint, gjdata){
 		sensorLayer.update(aSensorData);
 		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
 		
-		// reset Polylines on zoom change with changing lineWeight
-		var zoom = map.getZoom();
-                var lineWeight = zoom/16;  //ToDo: search better algorithm
-
-                if(log >= 3){console.log("lineWeight ", lineWeight);}
+		zoom_level = map.getZoom();	//get new changed zoom level
+		if(log >= 3){console.log("zoom:", zoom_level, " ,lineWeight:", zoom_settings[zoom_level].lineWeight);}
+		
+		// reset Polylines on zoom change with changing lineWeight 
 
                 PolyLineMid.setMap(null);
                 PolyLineOuter.setMap(null);
@@ -1407,7 +1410,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
                             path: tmGPS['line_mid'],
                             strokeColor: '#FF0000',
                             strokeOpacity: 1.0,
-                            strokeWeight: lineWeight
+                            strokeWeight: zoom_settings[zoom_level].lineWeight
                           });
 
                         PolyLineMid.setMap(map);
@@ -1419,7 +1422,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
                             path: tmGPS['line_inner'],
                             strokeColor: '#FF0000',
                             strokeOpacity: 1.0,
-                            strokeWeight: lineWeight
+                            strokeWeight: zoom_settings[zoom_level].lineWeight
                           });
 
                         PolyLineInner.setMap(map);
@@ -1431,7 +1434,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
                             path: tmGPS['line_outer'],
                             strokeColor: '#FF0000',
                             strokeOpacity: 1.0,
-                            strokeWeight: lineWeight
+                            strokeWeight: zoom_settings[zoom_level].lineWeight
                           });
 
                         PolyLineOuter.setMap(map);
@@ -1464,7 +1467,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
     	geodesic: true,
     	strokeColor: '#FF0000',
     	strokeOpacity: 1.0,
-    	strokeWeight: 2
+    	strokeWeight: zoom_settings[zoom_level].lineWeight
 	});
   	PolyLineMid.setMap(map);
   	
@@ -1474,7 +1477,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
     	geodesic: true,
     	strokeColor: '#FF0000',
     	strokeOpacity: 1.0,
-    	strokeWeight: 2
+    	strokeWeight: zoom_settings[zoom_level].lineWeight
 	});
   	PolyLineInner.setMap(map);
   	
@@ -1484,7 +1487,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
     	geodesic: true,
     	strokeColor: '#FF0000',
     	strokeOpacity: 1.0,
-    	strokeWeight: 2
+    	strokeWeight: zoom_settings[zoom_level].lineWeight
 	});
   	PolyLineOuter.setMap(map);
 	
@@ -1546,7 +1549,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 			    path: gjdata['line_mid'],
 			    strokeColor: '#FF0000',
 			    strokeOpacity: 1.0,
-			    strokeWeight: 2
+			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 			  });
 			
 			PolyLineMid.setMap(map);
@@ -1558,7 +1561,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 			    path: gjdata['line_inner'],
 			    strokeColor: '#FF0000',
 			    strokeOpacity: 1.0,
-			    strokeWeight: 2
+			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 			  });
 			
 			PolyLineInner.setMap(map);
@@ -1570,7 +1573,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 			    path: gjdata['line_outer'],
 			    strokeColor: '#FF0000',
 			    strokeOpacity: 1.0,
-			    strokeWeight: 2
+			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 			  });
 			
 			PolyLineOuter.setMap(map);
