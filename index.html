@@ -1534,9 +1534,13 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 
 		
 	//delete old polyline instances each time a map change is triggert, not matter if new ones will created
+	http://stackoverflow.com/questions/14853084/how-to-remove-all-the-polylines-from-a-map
 	PolyLineMid.setMap(null);	
+	PolyLineMid.remove();
 	PolyLineOuter.setMap(null);
+	PolyLineOuter.remove();
 	PolyLineInner.setMap(null);
+	PolyLineInner.remove();
 	
 	if ( gjdata ){				
 		//create new instance MidLine if available
