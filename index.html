@@ -1408,9 +1408,9 @@ function init_map(_TrackID , aRefPoint, gjdata){
                 if ( tmGPS['line_mid'] ){
                         PolyLineMid = new google.maps.Polyline({
                             path: tmGPS['line_mid'],
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 1.0,
-                            strokeWeight: zoom_settings[zoom_level].lineWeight
+                            strokeColor: '#E0E0E0',
+                            strokeOpacity: 0.5,
+                            strokeWeight: zoom_settings[zoom_level].lineWeightMid
                           });
 
                         PolyLineMid.setMap(map);
@@ -1465,9 +1465,9 @@ function init_map(_TrackID , aRefPoint, gjdata){
   	PolyLineMid	= new google.maps.Polyline({
 		path: InitialCoordinates,
     	geodesic: true,
-    	strokeColor: '#FF0000',
-    	strokeOpacity: 1.0,
-    	strokeWeight: zoom_settings[zoom_level].lineWeight
+    	strokeColor: '#E0E0E0',
+    	strokeOpacity: 0.5,
+    	strokeWeight: zoom_settings[zoom_level].lineWeightMid
 	});
   	PolyLineMid.setMap(map);
   	
@@ -1548,9 +1548,9 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 		if ( gjdata['line_mid'] ){		
 			PolyLineMid = new google.maps.Polyline({
 			    path: gjdata['line_mid'],
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
+			    strokeColor: '#E0E0E0',
+			    strokeOpacity: 0.5,
+			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeightMid
 			  });
 			
 			PolyLineMid.setMap(map);
