@@ -145,3 +145,28 @@ var autoExport = "false";
 ////////////JQgrid design ///////
 var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
 
+//settings for trackmap and markers depending on zoom level of Google Maps
+var zoom_settings = [
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  0
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  1
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  2
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  3
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  4
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  5
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  6
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  7
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  8
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom  9
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom 10
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom 11
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom 12
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom 13
+        {"lineWeight": 0.1,     "markerRadius": 4.5},   //zoom 14
+        {"lineWeight": 0.3,     "markerRadius": 4.5},   //zoom 15
+        {"lineWeight": 0.5,     "markerRadius": 4.5},   //zoom 16
+        {"lineWeight": 0.5,     "markerRadius": 4.5},   //zoom 17
+        {"lineWeight": 1,       "markerRadius": 4.5},   //zoom 18
+        {"lineWeight": 2,       "markerRadius": 4.5},   //zoom 19
+        {"lineWeight": 3,       "markerRadius": 4.5},   //zoom 20
+        {"lineWeight": 4,       "markerRadius": 4.5}    //zoom 21
+];
