@@ -1374,11 +1374,11 @@ function init_map(_TrackID , aRefPoint, gjdata){
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 		    //deactivate google streetview
 			streetViewControl: false,
-			rotateControl: true,		// control for changing Tilt (0Â° or 45Â°) and for map rotation
+			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
 			scaleControl: true		//shows maps scale in the bottom right
 	});
 	
-	//deactivate the automatic 45Â° Tilt View on closest zoom steps
+	//deactivate the automatic 45° Tilt View on closest zoom steps
 	map.setTilt(0);
 	
 	zoom_level = aRefPoint[_TrackID]["Zoom"];   //get initial zoom for zoom_settings
@@ -1454,16 +1454,6 @@ function init_map(_TrackID , aRefPoint, gjdata){
 
 	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de
 	//Todo: init Polyline with standard coordinates, in changeMapSettings() push now varibales to Polyline
-<<<<<<< HEAD
-	
-	var InitialCoordinates = [
-    		{lat: 37.772, lng: -122.214},
-    		{lat: 21.291, lng: -157.821},
-    		{lat: -18.142, lng: 178.431},
-    		{lat: -27.467, lng: 153.027}
-  	];
-=======
->>>>>>> c1ba58e3c42bf6f6d08f30baa9cec6280feb2fa7
 	
 	//init inner line PolyLine object
 	PolyLineMid	= new google.maps.Polyline({});
