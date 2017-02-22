@@ -1536,16 +1536,11 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	map.setZoom(newTrackObj["Zoom"]);
 	StopTransitionDelay = "true";
 	StopTransitionDelay_StartTime = Date.now();
-
 		
-	//delete old polyline instances each time a map change is triggert, not matter if new ones will created
-	http://stackoverflow.com/questions/14853084/how-to-remove-all-the-polylines-from-a-map
+	//delete old polyline instances each time a map change is triggert, not matter if new ones will created	
 	PolyLineMid.setMap(null);	
-	PolyLineMid.remove();
 	PolyLineOuter.setMap(null);
-	PolyLineOuter.remove();
 	PolyLineInner.setMap(null);
-	PolyLineInner.remove();
 	
 	if ( gjdata ){				
 		//create new instance MidLine if available
