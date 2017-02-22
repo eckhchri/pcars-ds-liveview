@@ -1532,13 +1532,13 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	StopTransitionDelay = "true";
 	StopTransitionDelay_StartTime = Date.now();
 
-	if ( gjdata ){
-		//trackmaps updates with polyline
-		//delete old instance
-		PolyLineMid.setMap(null);	
-		PolyLineOuter.setMap(null);
-		PolyLineInner.setMap(null);
 		
+	//delete old polyline instances each time a map change is triggert, not matter if new ones will created
+	PolyLineMid.setMap(null);	
+	PolyLineOuter.setMap(null);
+	PolyLineInner.setMap(null);
+	
+	if ( gjdata ){				
 		//create new instance MidLine if available
 		if ( gjdata['line_mid'] ){		
 			PolyLineMid = new google.maps.Polyline({
@@ -2039,9 +2039,9 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initDemoData(aNewData, SetApiModeTo ){
-
+	
 	//overwrite global array with new data
-	demo = aNewData;	
+	demo = aNewData;			
 			
 	//reset values to default
 	setParamDemoStartPos( 0 , true );
