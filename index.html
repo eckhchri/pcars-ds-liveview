@@ -1377,11 +1377,11 @@ function init_map(_TrackID , aRefPoint, gjdata){
 			mapTypeId: google.maps.MapTypeId.SATELLITE,
 		    //deactivate google streetview
 			streetViewControl: false,
-			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
+			rotateControl: true,		// control for changing Tilt (0Â° or 45Â°) and for map rotation
 			scaleControl: true		//shows maps scale in the bottom right
 	});
 	
-	//deactivate the automatic 45° Tilt View on closest zoom steps
+	//deactivate the automatic 45Â° Tilt View on closest zoom steps
 	map.setTilt(0);
 	
 	zoom_level = aRefPoint[_TrackID]["Zoom"];   //get initial zoom for zoom_settings
@@ -1393,7 +1393,7 @@ function init_map(_TrackID , aRefPoint, gjdata){
 	map.addListener('zoom_changed', function() {
 		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
 		StopTransitionDelay = "true";
-        //StopTransitionDelay_StartTime = Date.now();
+        	//StopTransitionDelay_StartTime = Date.now();
 		sensorLayer.interruptTransition();
 		sensorLayer.update(aSensorData);
 		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
@@ -1401,47 +1401,10 @@ function init_map(_TrackID , aRefPoint, gjdata){
 		zoom_level = map.getZoom();	//get new changed zoom level
 		if(log >= 3){console.log("zoom:", zoom_level, " ,lineWeight:", zoom_settings[zoom_level].lineWeight);}
 		
-		// reset Polylines on zoom change with changing lineWeight 
-
-                PolyLineMid.setMap(null);
-                PolyLineOuter.setMap(null);
-                PolyLineInner.setMap(null);
-
-                //create new instance MidLine if available
-                if ( tmGPS['line_mid'] ){
-                        PolyLineMid = new google.maps.Polyline({
-                            path: tmGPS['line_mid'],
-                            strokeColor: '#E0E0E0',
-                            strokeOpacity: 0.5,
-                            strokeWeight: zoom_settings[zoom_level].lineWeightMid
-                          });
-
-                        PolyLineMid.setMap(map);
-                }
-
-                //create new instance innerLine if available
-                if ( tmGPS['line_inner'] ){
-                        PolyLineInner = new google.maps.Polyline({
-                            path: tmGPS['line_inner'],
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 1.0,
-                            strokeWeight: zoom_settings[zoom_level].lineWeight
-                          });
-
-                        PolyLineInner.setMap(map);
-                }
-
-                //create new instance OuterLine if available
-                if ( tmGPS['line_outer'] ){
-                        PolyLineOuter = new google.maps.Polyline({
-                            path: tmGPS['line_outer'],
-                            strokeColor: '#FF0000',
-                            strokeOpacity: 1.0,
-                            strokeWeight: zoom_settings[zoom_level].lineWeight
-                          });
-
-                        PolyLineOuter.setMap(map);
-                }
+		// Polylines on zoom change with changing lineWeight 
+		PolyLineMid.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeightMid});
+		PolyLineOuter.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
+		PolyLineInner.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
   	});
 
 		
