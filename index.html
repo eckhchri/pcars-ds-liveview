@@ -705,6 +705,10 @@
 		
 		//reset array		
 		aInClass = {};
+		
+		//clean global variable to prevent ghosts entries while sitch map/rac if the previous driverfield was bigger then the current one issue #85
+		// us this variant because it should be faster then aSensorData = new Array();
+		aSensorData.length = 0;
 
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
@@ -1239,7 +1243,7 @@
 			
 				var marker;
 				var padding = 10;
-						
+
 				//update internal data which drive redrawing on zoom_changed
 				_data = data.slice();
 				   
@@ -1345,8 +1349,7 @@
 function init_map_with_geojson(_TrackID, aRefPoint){
 	      	  
 	//load trackmaps if available
-	//var trackmapFilePath	= "/pcars/data/trackmaps/16951829712.json";   //used to force a special file
-    var trackmapFilePath	= "/pcars/data/trackmaps/"+ _TrackID +".json";		
+    var trackmapFilePath	= "./data/trackmaps/"+ _TrackID +".json";
 	d3.json(trackmapFilePath, function( gjdata ) {
 		
 		if (typeof gjdata === 'undefined' || !gjdata){								
