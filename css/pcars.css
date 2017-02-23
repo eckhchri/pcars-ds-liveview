@@ -159,6 +159,7 @@
 		
 		.stations, .stations svg {
 			position: absolute;
+			z-index:  50;
 		}
 
 		.stations svg {

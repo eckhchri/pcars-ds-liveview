@@ -1239,8 +1239,10 @@
 
                // todo: known issue: Beim Wechsel der Position, bleibt eine "Leiche" auf der Karte uebrig, weil Key "Pos - Name" zusammensetzt
                // easyt solution:  deleting leading position number 
-               this.update = function (data) {     
-			
+               this.update = function (data) {  
+            	   
+			    if (!_div){	return 1;} // prevent situation where _div is undefined 
+			    
 				var marker;
 				var padding = 10;
 
@@ -1486,7 +1488,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeightMid
 			  });
 			
-			PolyLineMid.setMap(map);
+			PolyLineMid.setMap(map);			
 		}
 		
 		//create new instance innerLine if available
