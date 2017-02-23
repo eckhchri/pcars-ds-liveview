@@ -1326,13 +1326,13 @@
 		  			aTmp[data[i].Key] = "";
 		  		}
 		  		
-		  		var svgs = 	d3.selectAll("svg, .driverlabel")
-		  					.filter(".driverlabel")			// needed to prevent action to other svg in this project like LapChart
-		  					.each(function( d ) {
-		  							if ( aTmp[d.Key] == undefined ) {		  								
-		  								this.remove(); 	// delete svg object / ghots cars
-		  							}	
-		  					});
+		  		d3.selectAll("svg, .driverlabel")
+		  			.filter(".driverlabel")			// needed to prevent action to other svg in this project like LapChart
+		  			.each(function( d ) {
+		  					if ( aTmp[d.Key] == undefined ) {		  								
+		  						this.remove(); 	// delete svg object / ghots cars
+		  					}	
+		  			});
 		  	}; // end CleanupDriverObjects()
 
 			this.interruptTransition = function (){
