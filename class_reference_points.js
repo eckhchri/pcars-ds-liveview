@@ -52,12 +52,12 @@ function Refpoint(circuit_id)
         aRefPoints[1695182971] = CopyObjectWithModifications(aRefPoints[9999999999],
         	{
                 "refLat":	 49.329747	//49.329738
-                ,"refLong":      8.574270
-                ,"rotation":     0.35	//0.573
-                ,"cor_r_Long":   30000000	//45000000
+                ,"refLong":      8.574295
+                ,"rotation":     0.3	//0.35
+                ,"cor_r_Long":   0	//30000000
 		,"cor_r_Lat":	 0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 0.9965
+		,"cor_PosY_mul": 1.001
                 ,"Name":         "Hockenheim GP"
                 ,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
                 ,"Zoom":         16
