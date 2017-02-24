@@ -600,7 +600,7 @@
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
-		if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
+		//if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
 		SessionState = e.data.globals.attributes.SessionState;
 		SessionStage = e.data.globals.attributes.SessionStage;
@@ -834,7 +834,6 @@
 		//if(log >= 2){console.log("+++++++++Sensor Update Delta:",sensorLayer_UpdateDelta);}
                 
 		//Calculation of dynamic DisplayDuration
-		if(log >= 3){console.log("+++++++++ e.data.globals.datasource: ", e.data.globals.datasource);}	//check if datasource is correct
 		if ((e.data.globals.datasource == "DSPCARS1" || e.data.globals.datasource == "DSPCARS2") && sensorLayer_UpdateDelta < UpdateRateDS) {
 				DisplayDuration = UpdateRateDS + DisplayDurationCorrector       //If the worker runs more often than the data is updated in the DS API, then the duration is set to the DS update rate
 		}else{
@@ -1013,11 +1012,9 @@
                                 ,"CSSCircleClasses":    ''
                 }
 	}
-	
-	
-	// init google map
-	//init_map(cuircitID , aRefPointTMP);
-	init_map_with_geojson(cuircitID , aRefPointTMP);
+		
+	// init google map		
+	changeMapSettings_with_geojson(aRefPointTMP[cuircitID], map, cuircitID);
 
 	// create Table with list of all tracks
 	// checkbox Event handling
@@ -1241,83 +1238,83 @@
                // easyt solution:  deleting leading position number 
                this.update = function (data) {  
             	   
-			    if (!_div){	return 1;} // prevent situation where _div is undefined 
-			    
-				var marker;
-				var padding = 10;
-
-				//update internal data which drive redrawing on zoom_changed
-				_data = data.slice();
-				   
-				//Detect time between StopTransitionDelay set to "true" and now
-				var CurrentTime = Date.now();
-				var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
-				
-				if( StopTransitionDelay == "true" ){
-												
-						marker = _div.selectAll(".stations, svg")
-							.data(_data, function (d) { return d.Key; })
-							.each(transform) // update existing markers
-							.enter().append("svg:svg")
-							.each(transform)
-							.attr("class", function (d){ return d.CSSTextClasses });
-		
-						//reset to default after zoom event finished. 
-						//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
-						if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
-				
-				}else{
-								
-						marker = _div.selectAll(".stations, svg")
-							.data(_data, function (d) { return d.Key; })
-							.each(transformWithEase) // update existing markers
-							.enter().append("svg:svg")
-							.each(transform)
-							.attr("class", function (d){ return d.CSSTextClasses });
-		
-						//reset to default after zoom event finished
-						//StopTransitionDelay = "false";
-				}
-			
-				// Add a circle.
-				marker.append("svg:circle")
-					.attr("r", 4.5)
-					.attr("cx", padding)
-					.attr("cy", padding)
-					.attr("class", function (d){ return d.CSSCircleClasses } );
+				    if (!_div){	return 1;} // prevent situation where _div is undefined 
+				    
+					var marker;
+					var padding = 10;
 	
-				// Add a label.
-				marker.append("svg:text")
-					.attr("x", padding + 7)
-					.attr("y", padding)
-					.attr("dy", ".31em")
-					//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
-					//      it seem that the function within .text(...) will called only once at the beginning
-					//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
-					.text(function (d) {
-						//if(log >= 4){console.log("+++++ d: " , d );}
-	
-						for (var i = 0; i < aSensorData.length; i++){
-							if (aSensorData[i].Key == d.Key){
-								//if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
-								return  aSensorData[i].MarkerLabel;
-							}
-						}
-						return d.MarkerLabel;
-					})
+					//update internal data which drive redrawing on zoom_changed
+					_data = data.slice();
+					   
+					//Detect time between StopTransitionDelay set to "true" and now
+					var CurrentTime = Date.now();
+					var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
 					
-				// Update CSS classes new
-				var svgs = _div.selectAll("circle")
-							.data(_data, function (d){ return d.Key; })
-							.attr("class" ,(function(d){ return d.CSSCircleClasses; }));
+					if( StopTransitionDelay == "true" ){
+													
+							marker = _div.selectAll(".stations, svg")
+								.data(_data, function (d) { return d.Key; })
+								.each(transform) // update existing markers
+								.enter().append("svg:svg")
+								.each(transform)
+								.attr("class", function (d){ return d.CSSTextClasses });
+			
+							//reset to default after zoom event finished. 
+							//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
+							if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
+					
+					}else{
+									
+							marker = _div.selectAll(".stations, svg")
+								.data(_data, function (d) { return d.Key; })
+								.each(transformWithEase) // update existing markers
+								.enter().append("svg:svg")
+								.each(transform)
+								.attr("class", function (d){ return d.CSSTextClasses });
+			
+							//reset to default after zoom event finished
+							//StopTransitionDelay = "false";
+					}
 				
-				// Update labels new
-				var svgs = _div.selectAll("text")
-							.data(_data, function (d){ return d.Key; })							
-							.text(function(d){ return d.MarkerLabel; });
-	
-				// delete unneeded svg objects from dom tree
-				this.CleanupDriverObjects(_data);			
+					// Add a circle.
+					marker.append("svg:circle")
+						.attr("r", 4.5)
+						.attr("cx", padding)
+						.attr("cy", padding)
+						.attr("class", function (d){ return d.CSSCircleClasses } );
+		
+					// Add a label.
+					marker.append("svg:text")
+						.attr("x", padding + 7)
+						.attr("y", padding)
+						.attr("dy", ".31em")
+						//todo !!!!!!!!!!!!!!!!!!!!   very uggly implementation !!! only temporary workaround
+						//      it seem that the function within .text(...) will called only once at the beginning
+						//      question: is it possible to call _div.selectAll("svg") and set text style direct in loop() ??
+						.text(function (d) {
+							//if(log >= 4){console.log("+++++ d: " , d );}
+		
+							for (var i = 0; i < aSensorData.length; i++){
+								if (aSensorData[i].Key == d.Key){
+									//if(log >= 3){console.log("Match found ---- Update MarkerLabel: " , aSensorData[i].MarkerLabel);}
+									return  aSensorData[i].MarkerLabel;
+								}
+							}
+							return d.MarkerLabel;
+						})
+						
+					// Update CSS classes new
+					var svgs = _div.selectAll("circle")
+								.data(_data, function (d){ return d.Key; })
+								.attr("class" ,(function(d){ return d.CSSCircleClasses; }));
+					
+					// Update labels new
+					var svgs = _div.selectAll("text")
+								.data(_data, function (d){ return d.Key; })							
+								.text(function(d){ return d.MarkerLabel; });
+		
+					// delete unneeded svg objects from dom tree
+					this.CleanupDriverObjects(_data);			
 			
 		  	}; //end update()
             
@@ -1346,48 +1343,29 @@
             
           } // end GPSSensor(initData)
 
-
-//////////////////////////////////////////////////////////////////////////
-function init_map_with_geojson(_TrackID, aRefPoint){
-	      	  
-	//load trackmaps if available
-    var trackmapFilePath	= "./data/trackmaps/"+ _TrackID +".json";
-	d3.json(trackmapFilePath, function( gjdata ) {
-		
-		if (typeof gjdata === 'undefined' || !gjdata){								
-			if(log >= 3){console.log("init_map_with_geojson() gjdata is empty or null:  ", gjdata );}
-		}	
-		
-		init_map(_TrackID , aRefPoint, gjdata);
-	});         	  
-}          
-          
+   
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
-function init_map(_TrackID , aRefPoint, gjdata){
-
-	if(log >= 3){console.log("init_map() gjdata: ", gjdata );}
-	
+function init_map( newTrackObj ){
+	 
 	//subclassing			
-	if(log >= 3){console.log("INFO: typeof google map object: ", typeof google);}
+	if(log >= 3){console.log("INFO: init google map instance.");}
 	GPSSensor.prototype = new google.maps.OverlayView();
 						
 	map = new google.maps.Map(d3.select("#map").node(), {        	 
-			zoom: aRefPoint[_TrackID]["Zoom"],                
-		    center: new google.maps.LatLng( aRefPoint[_TrackID]["MapInitLat"] , aRefPoint[_TrackID]["MapInitLong"] ),
-			mapTypeId: google.maps.MapTypeId.SATELLITE,
-		    //deactivate google streetview
-			streetViewControl: false,
+			zoom: newTrackObj["Zoom"],                
+		    center: new google.maps.LatLng( newTrackObj["MapInitLat"] , newTrackObj["MapInitLong"] ),
+			mapTypeId: google.maps.MapTypeId.SATELLITE,		    
+			streetViewControl: false,	//deactivate google streetview
 			rotateControl: true,		// control for changing Tilt (0° or 45°) and for map rotation
-			scaleControl: true		//shows maps scale in the bottom right
+			scaleControl: true			//shows maps scale in the bottom right
 	});
 	
-	//deactivate the automatic 45° Tilt View on closest zoom steps
+	//deactivate the automatic 45 Angel Tilt View on closest zoom steps
 	map.setTilt(0);
 	
-	zoom_level = aRefPoint[_TrackID]["Zoom"];   //get initial zoom for zoom_settings
-		
+	zoom_level	= newTrackObj["Zoom"];   //get initial zoom for zoom_settings		
 	sensorLayer = new GPSSensor(aSensorData);
 	sensorLayer.setMap(map); 
 	
@@ -1410,7 +1388,6 @@ function init_map(_TrackID , aRefPoint, gjdata){
   	});
 
 		
-	//todo: maybe change from static to dynamic binding of HTML elements
 	// deactivate because of problems with table height of div blocks
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
@@ -1420,11 +1397,9 @@ function init_map(_TrackID , aRefPoint, gjdata){
 	//map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
 
-	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de
-	//Todo: init Polyline with standard coordinates, in changeMapSettings() push now varibales to Polyline
-	
+	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de		
 	//init inner line PolyLine object
-	PolyLineMid	= new google.maps.Polyline({});
+	PolyLineMid		= new google.maps.Polyline({});
 	PolyLineInner	= new google.maps.Polyline({});
 	PolyLineOuter	= new google.maps.Polyline({});
 	
@@ -1435,9 +1410,13 @@ function init_map(_TrackID , aRefPoint, gjdata){
 /// change map settings
 function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	
-	var trackmapFilePath	= "./data/trackmaps/"+ trackid +".json";
-	
-	d3.json(trackmapFilePath, function( gjdata ) {
+	//call if map was not init before
+	if (!mapobj){		// use local variable instead of global map		
+		init_map( newTrackObj );		
+	}
+		
+	//load json file for a specific trackmap	
+	d3.json( "./data/trackmaps/"+ trackid +".json" , function( gjdata ) {
 		
 		if (typeof gjdata === 'undefined' || !gjdata){								
 			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
@@ -1466,10 +1445,10 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 }
 
 function changeMapSettings(newTrackObj, mapobj, gjdata){
-	//todo: replace map (global variable) with mapobj(if this is not a copy) intead of usage of the global variable
+	//use local variable mapobj instead of global var map
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
-	map.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
-	map.setZoom(newTrackObj["Zoom"]);
+	mapobj.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
+	mapobj.setZoom(newTrackObj["Zoom"]);
 	StopTransitionDelay = "true";
 	StopTransitionDelay_StartTime = Date.now();
 		
@@ -1518,7 +1497,6 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	}// end map track polyline
 	
 	
-	//todo: change also picture Overlay prevered mapsourc(google,openstreetmap) in needed
 	return 1;
 }
 
@@ -1539,13 +1517,13 @@ function refreshTrackList(a){
 	
 	for (var key in a ){		
 		_data = {
-                                        id:             gridcnt
-                                        ,trackid:       a[key]["trackid"]
-                                        ,trackname:     a[key]["trackname"]
-                                        ,gridsize:      a[key]["gridsize"]
-                                        ,refpoint:      a[key]["refpoint"]
-                                        ,comment:       a[key]["comment"]
-                                };		
+					id:             gridcnt
+					,trackid:       a[key]["trackid"]
+					,trackname:     a[key]["trackname"]
+					,gridsize:      a[key]["gridsize"]
+					,refpoint:      a[key]["refpoint"]
+					,comment:       a[key]["comment"]
+		};		
 		jQuery("#tracklisttable").jqGrid('addRowData',gridcnt, _data);
 
 		gridcnt++
