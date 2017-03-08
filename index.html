@@ -276,6 +276,7 @@
 	var PolyLineMid		=	null;
 	var PolyLineOuter	=	null;
 	var PolyLineInner	=	null;
+	var PolyLineSF		=	null;
 	
 	var zoom_level;         //Google Maps zoom level
 	
@@ -1385,6 +1386,7 @@ function init_map( newTrackObj ){
 		PolyLineMid.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeightMid});
 		PolyLineOuter.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
 		PolyLineInner.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
+		PolyLineSF.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
   	});
 
 		
@@ -1399,9 +1401,10 @@ function init_map( newTrackObj ){
 
 	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de		
 	//init inner line PolyLine object
-	PolyLineMid		= new google.maps.Polyline({});
+	PolyLineMid	= new google.maps.Polyline({});
 	PolyLineInner	= new google.maps.Polyline({});
 	PolyLineOuter	= new google.maps.Polyline({});
+	PolyLineSF	= new google.maps.Polyline({});
 	
 	return 1;		       				
 }
@@ -1456,6 +1459,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	PolyLineMid.setMap(null);	
 	PolyLineOuter.setMap(null);
 	PolyLineInner.setMap(null);
+	PolyLineSF.setMap(null);
 	
 	if ( gjdata ){				
 		//create new instance MidLine if available
@@ -1492,6 +1496,18 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 			  });
 			
 			PolyLineOuter.setMap(map);
+		}
+		
+		//create new instance Start/Finish Line if available
+		if ( gjdata['line_SF'] ){		
+			PolyLineSF = new google.maps.Polyline({
+			    path: gjdata['line_SF'],
+			    strokeColor: '#FF0000',
+			    strokeOpacity: 1.0,
+			    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
+			  });
+			
+			PolyLineSF.setMap(map);
 		}
 	
 	}// end map track polyline
