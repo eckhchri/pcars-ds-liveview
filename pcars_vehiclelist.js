@@ -477,7 +477,7 @@ this.aVehicleInfo = [
  },
  {
    "id" : -1748676965,
-   "name" : "McLaren P1�",
+   "name" : "McLaren P1",
    "class" : "Road A"
  },
  {
@@ -716,6 +716,868 @@ this.aVehicleInfo = [
    "class" : "Trans-Am"
  }
 ];
+	
+// data from pcars2 DS	
+/*
+this.aVehicleInfo2 = [
+      {
+        "id" : 9503224,
+        "name" : "BMW 320 TC (Alpha)",
+        "class" : "TCR"
+      },
+      {
+        "id" : 65306143,
+        "name" : "Sauber C9 Mercedes-Benz (Alpha)",
+        "class" : "Group C1"
+      },
+      {
+        "id" : 85063219,
+        "name" : "Nissan GT-R Nismo (R35) (placeholder)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 143364290,
+        "name" : "BMW 2002 Turbo (Alpha)",
+        "class" : "Historic Road"
+      },
+      {
+        "id" : 152867459,
+        "name" : "Radical SR8-RX (Alpha)",
+        "class" : "Sports Racer"
+      },
+      {
+        "id" : 161704608,
+        "name" : "Ford Mustang RTR GT4 (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : 178583869,
+        "name" : "Chevrolet Camaro ZL-1 (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 185812116,
+        "name" : "Ferrari 488 GT3 (placeholder)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 262982797,
+        "name" : "Mercedes-Benz 190E 2.5-16 Evolution2 DTM (Alpha)",
+        "class" : "Group A"
+      },
+      {
+        "id" : 266758367,
+        "name" : "Lamborghini Sesto Elemento (Alpha)",
+        "class" : "Track Day"
+      },
+      {
+        "id" : 274862187,
+        "name" : "Mercedes-Benz SLS AMG GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 307010432,
+        "name" : "McLaren F1 (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 310900789,
+        "name" : "Ginetta G40 Junior (Alpha 2)",
+        "class" : "G40 Junior"
+      },
+      {
+        "id" : 366881611,
+        "name" : "Ford GT (placeholder)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 460478144,
+        "name" : "Mitsubishi Lancer Evolution VI TME (Alpha)",
+        "class" : "Road C2"
+      },
+      {
+        "id" : 556202917,
+        "name" : "Renault Megane R.S. Rallycross (Alpha)",
+        "class" : "WRX"
+      },
+      {
+        "id" : 574354493,
+        "name" : "Mercedes-AMG A45 Rallycross (Alpha)",
+        "class" : "WRX"
+      },
+      {
+        "id" : 578969971,
+        "name" : "Lotus Type 49 Cosworth (Alpha)",
+        "class" : "Vintage F1 A"
+      },
+      {
+        "id" : 611996165,
+        "name" : "Ginetta G40 GT5 (Alpha)",
+        "class" : "GT5"
+      },
+      {
+        "id" : 647968520,
+        "name" : "Ford Focus GRC (Alpha)",
+        "class" : "WRX"
+      },
+      {
+        "id" : 675194619,
+        "name" : "Caterham SP/300.R (Alpha)",
+        "class" : "Sports Racer"
+      },
+      {
+        "id" : 696555869,
+        "name" : "Ferrari 365 GTB4 Competizione (Alpha)",
+        "class" : "Historic Touring 2"
+      },
+      {
+        "id" : 728095309,
+        "name" : "Chevrolet Camaro '69 TransAm (Alpha)"
+      },
+      {
+        "id" : 728234598,
+        "name" : "Acura NSX (Pre-Alpha 2)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 761457895,
+        "name" : "KTM X-Bow R (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 779111340,
+        "name" : "BMW 320 Turbo Group 5 (Alpha)",
+        "class" : "Group 5"
+      },
+      {
+        "id" : 809291220,
+        "name" : "Porsche 911 GT3 R (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 820529698,
+        "name" : "Ligier JS P2 Nissan (Alpha)",
+        "class" : "LMP2"
+      },
+      {
+        "id" : 844159614,
+        "name" : "Kart (Pre-Alpha 2)",
+        "class" : "Kart1"
+      },
+      {
+        "id" : 951815226,
+        "name" : "Honda Civic GRC (Pre-Alpha 2)",
+        "class" : "WRX"
+      },
+      {
+        "id" : 957632269,
+        "name" : "Porsche 962C (placeholder)",
+        "class" : "Group C1"
+      },
+      {
+        "id" : 975104023,
+        "name" : "BMW V12 LMR (Alpha)",
+        "class" : "LMP900"
+      },
+      {
+        "id" : 980572679,
+        "name" : "McLaren 570S (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 987814806,
+        "name" : "Bentley Continental GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 998947753,
+        "name" : "Mitsubishi Lancer Evolution X FQ400 (Alpha)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : 1015579264,
+        "name" : "Ferrari F40 LM (Alpha)",
+        "class" : "GTO"
+      },
+      {
+        "id" : 1061494025,
+        "name" : "Lotus Type 49C Cosworth (Alpha)",
+        "class" : "Vintage F1 A"
+      },
+      {
+        "id" : 1076438091,
+        "name" : "Porsche 911 GT1-98 (placeholder)",
+        "class" : "GT1"
+      },
+      {
+        "id" : 1111049682,
+        "name" : "Ford Mustang Boss 302R1 (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : 1137321511,
+        "name" : "RWD P30 LMP1 (Alpha)",
+        "class" : "LMP1"
+      },
+      {
+        "id" : 1141733552,
+        "name" : "Chevrolet Corvette Z06 (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1153746660,
+        "name" : "McLaren 650S GT3 (Alpha)",
+        "class" : "GT3X"
+      },
+      {
+        "id" : 1161219858,
+        "name" : "BMW Z4 GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 1162971218,
+        "name" : "Lotus Type 38 Ford (Alpha)",
+        "class" : "Vintage Indycar"
+      },
+      {
+        "id" : 1187826685,
+        "name" : "Jaguar F-Type SVR (placeholder)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1213801406,
+        "name" : "Porsche 935 (Alpha)",
+        "class" : "Group 5"
+      },
+      {
+        "id" : 1219511257,
+        "name" : "Audi R18 e-tron quattro (Alpha)",
+        "class" : "LMP1"
+      },
+      {
+        "id" : 1230061845,
+        "name" : "Ford Mustang GT (Alpha)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : 1231996358,
+        "name" : "Radical SR3-RS (Alpha)",
+        "class" : "Sports Racer"
+      },
+      {
+        "id" : 1268015922,
+        "name" : "Aston Martin Vantage GT12 (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1278633095,
+        "name" : "Toyota GT-86 Rocket Bunny Street (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1352236476,
+        "name" : "RWD P20 LMP2 (Alpha)",
+        "class" : "LMP2"
+      },
+      {
+        "id" : 1353949246,
+        "name" : "Mercedes-AMG GT3 (Alpha)",
+        "class" : "GT3X"
+      },
+      {
+        "id" : 1356687088,
+        "name" : "Pagani Huayra BC (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 1357515789,
+        "name" : "Ford Falcon FG V8 Supercar (Alpha)",
+        "class" : "V8 Supercars"
+      },
+      {
+        "id" : 1368036017,
+        "name" : "BMW M1 Procar (Alpha)",
+        "class" : "Group 4"
+      },
+      {
+        "id" : 1397255601,
+        "name" : "Ford Mustang 2+2 Fastback (Alpha)",
+        "class" : "Historic Road"
+      },
+      {
+        "id" : 1400443574,
+        "name" : "BAC Mono (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1401308680,
+        "name" : "Mercedes-Benz 300SL (W194) (Alpha)",
+        "class" : "Vintage GT3"
+      },
+      {
+        "id" : 1401532035,
+        "name" : "Aston Martin Vantage GTE (Alpha)",
+        "class" : "GTE"
+      },
+      {
+        "id" : 1406411897,
+        "name" : "Lamborghini Huracan LP620-2 Super Trofeo (Alpha)",
+        "class" : "Super Trofeo"
+      },
+      {
+        "id" : 1433352906,
+        "name" : "Ginetta G57 (Alpha)",
+        "class" : "Track Day"
+      },
+      {
+        "id" : 1452261378,
+        "name" : "Aston Martin Vantage GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 1464988033,
+        "name" : "Porsche Cayman GT4 Clubsport (placeholder)",
+        "class" : "GT4"
+      },
+      {
+        "id" : 1468371103,
+        "name" : "Ligier JS P2 Honda (Alpha)"
+      },
+      {
+        "id" : 1469658023,
+        "name" : "Audi R8 V10 plus 5.2 FSI quattro (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1470929381,
+        "name" : "Audi 90 quattro IMSA GTO (Alpha)",
+        "class" : "GTO"
+      },
+      {
+        "id" : 1481115672,
+        "name" : "Nissan Fairlady 240ZG GTS-II (Alpha)",
+        "class" : "Historic Touring 2"
+      },
+      {
+        "id" : 1564669712,
+        "name" : "Lamborghini Veneno LP750-4 (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 1574251638,
+        "name" : "KTM X-Bow GT4 (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : 1626504761,
+        "name" : "Formula Renault 3.5 (Alpha)",
+        "class" : "Formula Renault"
+      },
+      {
+        "id" : 1639105598,
+        "name" : "Ford Escort Mk1 RS1600 (Alpha)",
+        "class" : "Historic Road"
+      },
+      {
+        "id" : 1682144078,
+        "name" : "Aston Martin Vulcan (Alpha)",
+        "class" : "Track Day"
+      },
+      {
+        "id" : 1716535504,
+        "name" : "Jaguar XJR-9 (Alpha)",
+        "class" : "Group C1"
+      },
+      {
+        "id" : 1764851930,
+        "name" : "Toyota GT-86 Rocket Bunny GT (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : 1810453820,
+        "name" : "Toyota TS040 Hybrid (Alpha)",
+        "class" : "LMP1"
+      },
+      {
+        "id" : 1817703058,
+        "name" : "Ford Zakspeed Capri Group 5 (Alpha)",
+        "class" : "Group 5"
+      },
+      {
+        "id" : 1818067169,
+        "name" : "Dallara DW12 Chevrolet (Speedway) (Alpha)",
+        "class" : "Indycar"
+      },
+      {
+        "id" : 1850232477,
+        "name" : "Lamborghini Huracan LP610-4 (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 1864701845,
+        "name" : "Caterham Seven 620 R (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1891730007,
+        "name" : "Nissan R89C (Alpha)",
+        "class" : "Group C1"
+      },
+      {
+        "id" : 1898954187,
+        "name" : "Marek RP 339H LMP1 (Alpha)",
+        "class" : "LMP1"
+      },
+      {
+        "id" : 1934199723,
+        "name" : "Audi R8 LMS (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : 1959097924,
+        "name" : "Lotus Type 98T Renault Turbo (Alpha)",
+        "class" : "Vintage F1 C"
+      },
+      {
+        "id" : 1965567405,
+        "name" : "Ferrari LaFerrari (placeholder)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 1977120176,
+        "name" : "Lamborghini Aventador LP700-4 (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : 1979398129,
+        "name" : "Mercedes-Benz CLK-LM (Alpha)",
+        "class" : "GT1"
+      },
+      {
+        "id" : 2037619631,
+        "name" : "Volkswagen Polo RX Supercar (Pre-Alpha 2)",
+        "class" : "WRX"
+      },
+      {
+        "id" : 2082176226,
+        "name" : "Audi A1 quattro (Alpha)",
+        "class" : "Road C2"
+      },
+      {
+        "id" : 2086246081,
+        "name" : "Aston Martin Vantage GT4 (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : 2091910841,
+        "name" : "Ginetta G55 GT4 (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : -2133597590,
+        "name" : "Porsche 911 GT3 RS (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -2075284877,
+        "name" : "Formula Rookie (Alpha)",
+        "class" : "F5"
+      },
+      {
+        "id" : -2064669470,
+        "name" : "Dallara DW12 Honda (Speedway) (Alpha)",
+        "class" : "Indycar"
+      },
+      {
+        "id" : -2059595338,
+        "name" : "Mercedes-AMG GT R (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -2025231366,
+        "name" : "Cadillac ATS-V.R GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : -1951461577,
+        "name" : "Ligier JS P3 (Alpha)",
+        "class" : "LMP3"
+      },
+      {
+        "id" : -1902340407,
+        "name" : "Ferrari 288 GTO (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : -1856998124,
+        "name" : "Renault Sport R.S. 01 (Pre-Alpha 2)",
+        "class" : "RS01 Trophy"
+      },
+      {
+        "id" : -1856752594,
+        "name" : "Ford GT LM GTE (Alpha)",
+        "class" : "GTE"
+      },
+      {
+        "id" : -1835861548,
+        "name" : "Lotus Type 78 Cosworth (Alpha)",
+        "class" : "Vintage F1 B"
+      },
+      {
+        "id" : -1796949190,
+        "name" : "Ford Escort Mk1 Rallycross (Alpha)",
+        "class" : "Vintage RX"
+      },
+      {
+        "id" : -1796028503,
+        "name" : "Dallara DW12 Honda (Road Course) (Alpha)",
+        "class" : "Indycar"
+      },
+      {
+        "id" : -1774335742,
+        "name" : "Ford MkIV (Alpha)",
+        "class" : "Vintage GT"
+      },
+      {
+        "id" : -1761671051,
+        "name" : "Audi R8 (LMP900) (Alpha)",
+        "class" : "LMP900"
+      },
+      {
+        "id" : -1748676965,
+        "name" : "McLaren P1™ (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -1728824001,
+        "name" : "Ferrari F50 GT (Alpha)",
+        "class" : "GT1"
+      },
+      {
+        "id" : -1617916111,
+        "name" : "Pagani Zonda Cinque Roadster (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -1548941295,
+        "name" : "Ford F-150 RTR Funhaver (Alpha)",
+        "class" : "Road D"
+      },
+      {
+        "id" : -1545450182,
+        "name" : "BMW M3 GT4 (Alpha)",
+        "class" : "GT4"
+      },
+      {
+        "id" : -1522922538,
+        "name" : "Mercedes-AMG A45 4MATIC (Alpha)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : -1488131398,
+        "name" : "Jaguar XJR-9 LM (Alpha)",
+        "class" : "Group C1"
+      },
+      {
+        "id" : -1459535564,
+        "name" : "Ferrari Enzo (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -1444632268,
+        "name" : "Renault Megane R.S. Touring Car (Alpha)",
+        "class" : "TCR"
+      },
+      {
+        "id" : -1443190363,
+        "name" : "Agajanian Watson Roadster (Alpha)",
+        "class" : "Vintage Indycar"
+      },
+      {
+        "id" : -1435057179,
+        "name" : "Lotus Type 51 (Alpha)",
+        "class" : "Vintage F3 A"
+      },
+      {
+        "id" : -1416203489,
+        "name" : "Nissan GT-R Nismo GT3 (R35) (Alpha)",
+        "class" : "GT3X"
+      },
+      {
+        "id" : -1411323812,
+        "name" : "BMW 1-Series M Coupe StanceWorks Edition (Pre-Alpha 2)",
+        "class" : "Road B"
+      },
+      {
+        "id" : -1339322144,
+        "name" : "McLaren P1™ GTR (Alpha)",
+        "class" : "Track Day"
+      },
+      {
+        "id" : -1320616846,
+        "name" : "Lotus Type 72D Cosworth (Alpha)",
+        "class" : "Vintage F1 A"
+      },
+      {
+        "id" : -1303813490,
+        "name" : "Aston Martin DB11 (Pre-Alpha 2)",
+        "class" : "Road B"
+      },
+      {
+        "id" : -1275144817,
+        "name" : "Mercedes-AMG A45 Touring Car (Alpha)",
+        "class" : "TCR"
+      },
+      {
+        "id" : -1273964900,
+        "name" : "Ferrari 333 SP (Alpha)",
+        "class" : "LMP900"
+      },
+      {
+        "id" : -1253474718,
+        "name" : "Ford Sierra RS500 Cosworth Group A (Alpha)",
+        "class" : "Group A"
+      },
+      {
+        "id" : -1226176940,
+        "name" : "BMW 1-Series M Coupe (Pre-Alpha 2)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : -1204688299,
+        "name" : "Lotus Type 40 Ford (Alpha)",
+        "class" : "Vintage GT"
+      },
+      {
+        "id" : -1197419789,
+        "name" : "Lamborghini Diablo GTR (Alpha)",
+        "class" : "GTO"
+      },
+      {
+        "id" : -1187748261,
+        "name" : "BMW 2002 StanceWorks Edition (Pre-Alpha 2)",
+        "class" : "Historic Touring 2"
+      },
+      {
+        "id" : -1170674276,
+        "name" : "Ginetta G55 GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : -1159965983,
+        "name" : "Mitsubishi Lancer Evolution VI SVA (Alpha)",
+        "class" : "Time Attack"
+      },
+      {
+        "id" : -1068716209,
+        "name" : "Ligier JS P2 Judd (Alpha)"
+      },
+      {
+        "id" : -1048050877,
+        "name" : "Radical RXC Turbo (Alpha)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -1041674971,
+        "name" : "Formula C (Alpha)",
+        "class" : "Formula C"
+      },
+      {
+        "id" : -1001569309,
+        "name" : "McLaren F1 GTR Long Tail (Alpha)",
+        "class" : "GT1"
+      },
+      {
+        "id" : -980019072,
+        "name" : "Marek RP 219D LMP2 (Alpha)",
+        "class" : "LMP2"
+      },
+      {
+        "id" : -956881226,
+        "name" : "Renault Megane R.S. 275 Trophy-R (Alpha)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : -934098507,
+        "name" : "BMW M3 E30 Group A (Alpha)",
+        "class" : "Group A"
+      },
+      {
+        "id" : -931590477,
+        "name" : "Renault Megane Trophy V6 (Alpha)",
+        "class" : "Megane Trophy"
+      },
+      {
+        "id" : -878083866,
+        "name" : "Acura NSX GT3 (Alpha)",
+        "class" : "GT3X"
+      },
+      {
+        "id" : -713284494,
+        "name" : "Lotus Type 25 Climax (Alpha)",
+        "class" : "Vintage F1 A1"
+      },
+      {
+        "id" : -704151830,
+        "name" : "Nissan 300ZX IMSA GTS (Alpha)",
+        "class" : "GTO"
+      },
+      {
+        "id" : -699643670,
+        "name" : "Renault Alpine A442B (Alpha)",
+        "class" : "Group 6"
+      },
+      {
+        "id" : -698401632,
+        "name" : "Porsche 918 Spyder Weissach (placeholder)",
+        "class" : "Road A"
+      },
+      {
+        "id" : -665433661,
+        "name" : ""
+      },
+      {
+        "id" : -648709823,
+        "name" : "Renault Clio Cup (Alpha)",
+        "class" : "TC1"
+      },
+      {
+        "id" : -623946728,
+        "name" : "Ginetta LMP3 (Alpha)",
+        "class" : "LMP3"
+      },
+      {
+        "id" : -579256927,
+        "name" : "Olsbergs MSE RX Supercar Lite (Alpha)",
+        "class" : "WRX"
+      },
+      {
+        "id" : -506272602,
+        "name" : "Porsche 936 (Alpha)",
+        "class" : "Group 6"
+      },
+      {
+        "id" : -494100071,
+        "name" : "Bentley Speed 8 (Alpha)",
+        "class" : "LMP900"
+      },
+      {
+        "id" : -486674040,
+        "name" : "Pagani Zonda Revolucion (Alpha)",
+        "class" : "Track Day"
+      },
+      {
+        "id" : -439539835,
+        "name" : "Formula X (placeholder)",
+        "class" : "Formula_X"
+      },
+      {
+        "id" : -387045855,
+        "name" : "Jaguar XJ220 S TWR (Alpha)",
+        "class" : "Road B"
+      },
+      {
+        "id" : -384044277,
+        "name" : "Chevrolet Corvette C7.R (Alpha)",
+        "class" : "GTE"
+      },
+      {
+        "id" : -382513194,
+        "name" : "Dallara DW12 Chevrolet (Road Course) (Alpha)",
+        "class" : "Indycar"
+      },
+      {
+        "id" : -370668051,
+        "name" : "Toyota GT-One (placeholder)",
+        "class" : "GT1"
+      },
+      {
+        "id" : -343023508,
+        "name" : "Nissan R390 GT1 (Alpha)",
+        "class" : "GT1"
+      },
+      {
+        "id" : -335104961,
+        "name" : "Ferrari 330 P4 (Alpha)",
+        "class" : "Vintage GT"
+      },
+      {
+        "id" : -303591806,
+        "name" : "Nissan Skyline GT-R (R34) SMS-R (Alpha)",
+        "class" : "Time Attack"
+      },
+      {
+        "id" : -294770034,
+        "name" : "Lotus Type 56 (Alpha)",
+        "class" : "Vintage Indycar"
+      },
+      {
+        "id" : -278306106,
+        "name" : "Nissan Skyline Silhouette Formula (R30) (Alpha)",
+        "class" : "Group 5"
+      },
+      {
+        "id" : -241187148,
+        "name" : "BMW M6 GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : -235751604,
+        "name" : "Toyota GT-86 (Alpha)",
+        "class" : "Road D"
+      },
+      {
+        "id" : -149617068,
+        "name" : "Mitsubishi Lancer Evolution IX FQ360 (Alpha)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : -98064499,
+        "name" : "Oreca 03 Nissan (Alpha)",
+        "class" : "LMP2"
+      },
+      {
+        "id" : -93033971,
+        "name" : "Lamborghini Huracan GT3 (Alpha)",
+        "class" : "GT3"
+      },
+      {
+        "id" : -91815086,
+        "name" : "Aston Martin DBR1/300 (Alpha)",
+        "class" : "Vintage GT2"
+      },
+      {
+        "id" : -85660500,
+        "name" : "Mercedes-Benz 300SEL 6.8 AMG (Alpha)",
+        "class" : "Historic Touring 2"
+      },
+      {
+        "id" : -78832007,
+        "name" : "Mercedes-AMG C63 Coupe S (Alpha)",
+        "class" : "Road C1"
+      },
+      {
+        "id" : -69155277,
+        "name" : "Mini Countryman RX (Alpha)",
+        "class" : "WRX"
+      },
+      {
+        "id" : -41807622,
+        "name" : "Toyota 86 (Alpha)",
+        "class" : "Road D"
+      },
+      {
+        "id" : -19222976,
+        "name" : "Nissan GTP ZX-Turbo (Alpha)",
+        "class" : "Group C1"
+      },
+      {
+        "id" : -11335215,
+        "name" : "Ford Mustang Cobra TransAm (Alpha)",
+        "class" : "Trans-Am"
+      }
+];
+*/
 
 }// end load vehicle data
 
