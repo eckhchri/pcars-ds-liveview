@@ -278,6 +278,16 @@
 	var PolyLineInner	=	null;
 	var PolyLineSF		=	null;
 	
+	// white background variables for fictional tracks
+	var Polygon             =       null;
+	var PolygonWorldCoords = [
+		{lat: -90       ,lng: -180},
+		{lat: 90        ,lng: -180},
+		{lat: 90        ,lng: 180},
+		{lat: -90       ,lng: 180},
+		{lat: -90       ,lng: 0}
+	];
+	
 	var zoom_level;         //Google Maps zoom level
 	
 	// race statistics powered by lapChart library
@@ -1400,11 +1410,14 @@ function init_map( newTrackObj ){
 	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
 
 	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de		
-	//init inner line PolyLine object
+	//init line PolyLine objects
 	PolyLineMid	= new google.maps.Polyline({});
 	PolyLineInner	= new google.maps.Polyline({});
 	PolyLineOuter	= new google.maps.Polyline({});
 	PolyLineSF	= new google.maps.Polyline({});
+	
+	// init Polygon object for fictional tracks background
+	Polygon         = new google.maps.Polygon({});
 	
 	return 1;		       				
 }
@@ -1460,6 +1473,19 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	PolyLineOuter.setMap(null);
 	PolyLineInner.setMap(null);
 	PolyLineSF.setMap(null);
+	Polygon.setMap(null);
+	
+	if (newTrackObj["fictional"]){
+		Polygon = new google.maps.Polygon({
+			paths: PolygonWorldCoords,
+			strokeColor: '#FFFFFF',
+			strokeOpacity: 1,
+			strokeWeight: 2,
+			fillColor: '#FFFFFF',
+			fillOpacity: 1
+		});
+		Polygon.setMap(map);
+	}
 	
 	if ( gjdata ){				
 		//create new instance MidLine if available
