@@ -1475,6 +1475,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	PolyLineSF.setMap(null);
 	Polygon.setMap(null);
 	
+	//set white background polygon for fictional tracks
 	if (newTrackObj["fictional"]){
 		Polygon = new google.maps.Polygon({
 			paths: PolygonWorldCoords,
@@ -1487,6 +1488,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 		Polygon.setMap(map);
 	}
 	
+	//set trackmap polylines
 	if ( gjdata ){				
 		//create new instance MidLine if available
 		if ( gjdata['line_mid'] ){		
