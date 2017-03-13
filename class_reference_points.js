@@ -940,19 +940,19 @@ function Refpoint(circuit_id)
 	//Red Bull Ring GP
 	aRefPoints[-1933253531] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        47.222579
-		,"refLong":      14.763244
-		,"rotation":     0
+		"refLat":        47.223062
+		,"refLong":      14.762440
+		,"rotation":     0.07
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
+		,"cor_PosX_mul": 0.997
 		,"cor_PosY_mul": 1
 		,"Name":         "Red Bull Ring GP"
 		,"Name2":	 "Red_Bull_Ring Grand Prix"	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
+		,"Zoom":         16
 		,"MapInitLat":   47.222579
 		,"MapInitLong":  14.763244
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 	//Red Bull Ring Club
 	aRefPoints[-73186614] = CopyObjectWithModifications(aRefPoints[-1933253531], {"Name": "Red Bull Ring Club","Name2": "Red_Bull_Ring Club"});	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"Club"
