@@ -1432,7 +1432,7 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	}
 		
 	//load json file for a specific trackmap	
-	d3.json( "./data/trackmaps/"+ trackid +".json" , function( gjdata ) {
+	d3.json( "./data/trackmaps/trackmap"+ trackid +".json" , function( gjdata ) {
 		
 		if (typeof gjdata === 'undefined' || !gjdata){								
 			if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
