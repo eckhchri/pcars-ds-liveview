@@ -30,6 +30,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         19				// wanted zoom level for initial google map
                 ,"MapInitLat":   51.500681			// google map initialization coords
                 ,"MapInitLong":  -0.071795
+		,"fictional":	 false
                 ,"Comment": "Default"
                 };
         
@@ -45,6 +46,7 @@ function Refpoint(circuit_id)
                 ,"Zoom":         15
                 ,"MapInitLat":   40.997664
                 ,"MapInitLong":  -113.566253
+		,"fictional":	 true
                 ,"Comment": "Default for fictional tracks"
                 });
 	
