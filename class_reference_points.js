@@ -962,19 +962,19 @@ function Refpoint(circuit_id)
 	//Sugo
 	aRefPoints[-1024221192] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        38.140897
-		,"refLong":      140.776549
+		"refLat":        38.140381
+		,"refLong":      140.776663
 		,"rotation":     0
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
+		,"cor_PosX_mul": 0.9985
 		,"cor_PosY_mul": 1
 		,"Name":         "Sugo"
 		,"Name2":	 "Sugo Grand Prix"	//"mTrackLocation":"Sugo","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
-		,"MapInitLat":   38.140897
+		,"Zoom":         17
+		,"MapInitLat":   38.140497
 		,"MapInitLong":  140.776549
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 
 	//Texas Motor Speedway
