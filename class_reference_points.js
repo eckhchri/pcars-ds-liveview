@@ -782,19 +782,19 @@ function Refpoint(circuit_id)
 	//Fuji
 	aRefPoints[-1695214357] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        35.373886
-		,"refLong":      138.929636
-		,"rotation":     1.35
+		"refLat":        35.373892
+		,"refLong":      138.929643
+		,"rotation":     1.3
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 0.9985
+		,"cor_PosY_mul": 1.0005
 		,"Name":         "Fuji"
 		,"Name2":	 "Fuji Grand Prix"	//"mTrackLocation":"Fuji","mTrackVariation":"Grand Prix"
 		,"Zoom":         16
 		,"MapInitLat":   35.370554
 		,"MapInitLong":  138.927871
-		,"Comment": "last check"
+		,"Comment": "finished"
 		});
 		
 	//Indianapolis Road Course
