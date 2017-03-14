@@ -4,7 +4,7 @@
 var SCRIPTVERSION	= "0.3.1";
 
 //Activate URL parameter interpretation
-var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
+var AllowUrlParams	= true;		//[true|false]	to igrnore URL parameters for security reasons
 
 //Please your specific settings
 var DsServerURL 		= "MY-URL.com";

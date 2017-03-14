@@ -553,7 +553,18 @@
 			onHeaderClick: function(gridstate){ 			        	
 				//dynamic update of height of the div block        		       
 				jQuery('#TrackList').height(0);
-    		},  
+    		},
+    		onSelectRow: function (rowId, status, e) {
+				//change map location 
+    			if(log >= 3){console.log("INFO: #tracklisttable->onSelectRow() event called.");}
+				var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
+				changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , map , celltrackid);    		      
+			},
+			ondblClickRow:	function (rowid, iRow, iCol, e) {
+				//back to normal trackid
+				if(log >= 3){console.log("INFO: #tracklisttable->ondblClickRow() event called.");}
+				changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , map , cuircitID);				
+			},
 			caption: "List of available Tracks",
 			rowNum: 200,
 			//rowList:[10,20,30],
@@ -701,12 +712,7 @@
 		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		
 		//keep cuircitID in mind for next run
-		var tmpcuircitID = e.data.globals.attributes.TrackId;	
-		
-		//center map on another circuit if a row in the tracklisttable is selected
-		var selRowTracklist = jQuery("#tracklisttable").jqGrid('getGridParam', 'selrow');
-		var cellValueTracklist = jQuery("#tracklisttable").jqGrid('getCell', selRowTracklist, 1);
-		if (cellValueTracklist){tmpcuircitID = cellValueTracklist;}
+		var tmpcuircitID = e.data.globals.attributes.TrackId;
 
 		//if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
 		//if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
@@ -1559,7 +1565,7 @@ function refreshTrackList(a){
 		if(log >= 4){console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );}
 		return 1;
 	}
-
+	
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#tracklisttable").jqGrid("clearGridData");
 
