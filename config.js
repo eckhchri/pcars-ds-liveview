@@ -34,17 +34,18 @@ var aAPIMODEMAPPING =
 
 
 //default API mode, possible values: DS, CREST, CREST2 or DEMO
-var APIMODE   =   "DEMO";		// Default API Mode
+var APIMODE   		=   "DEMO";	// Default API Mode
 
 //hide or unhide elements
-var	SHOWTRACKLIST 	=	false;	// [true|false]
-var SHOWCARLIST 	=	false 	// [true|false]
-var	SHOWDSDATA 		=	false;	// [true|false]
-var	SHOWDRIVERDATA 	=	false;	// [true|false]
-var SHOWSETTINGS	=	false;	// [true|false]
-var SHOWDSSTATISTIC =	false;	// [true|false]
-var SHOWDSRELAY		=	false;	// [true|false]
-var SHOWRECSTATISTIC=	true;	// [true|false]
+var	SHOWTRACKLIST 		=	false;	// [true|false]
+var SHOWCARLIST 		=	false 	// [true|false]
+var	SHOWDSDATA 			=	false;	// [true|false]
+var	SHOWDRIVERDATA 		=	false;	// [true|false]
+var SHOWSETTINGS		=	false;	// [true|false]
+var SHOWDSSTATISTIC 	=	false;	// [true|false]
+var SHOWDSRELAY			=	false;	// [true|false]
+var SHOWRECSTATISTIC	=	true;	// [true|false]
+var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
 
 //defines a delay for each worker to reduce CPU load
 var WORKERDELAY_TRACKLIST	=	5000; 	// in ms
@@ -73,7 +74,7 @@ aRecConfig['DataVersion']	=	1;			//in the case if data format will changed and r
 //demo initial data, currently that must not be empty
 var demo = [
                 {//0
-                    globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"ViperDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, "datasource":"CRESTv1", attributes:{TrackId:9999999999, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0}},
+                	globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"ViperDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, "datasource":"CRESTv1", attributes:{TrackId:9999999999, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0}},
                     participants:[
                             {RefId:9234567, Name:"Slightly Mad Studios Ltd", IsPlayer:0, GridPosition:3, VehicleId:"-886212684", RacePosition:0, CurrentLap:99, CurrentSector:0, LastLapTime:9999, FastestLapTime:9000, State:"StateTest", Speed:100, PosX:271, PosY:277, PosZ:288, Orientation:0}
                     ]
