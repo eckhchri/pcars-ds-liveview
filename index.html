@@ -1025,7 +1025,7 @@
 	}
 		
 	// init google map		
-	changeMapSettings_with_geojson(aRefPointTMP[cuircitID], map, cuircitID);
+	map = changeMapSettings_with_geojson(aRefPointTMP[cuircitID], map, cuircitID);
 
 	// create Table with list of all tracks
 	// checkbox Event handling
@@ -1361,7 +1361,7 @@
 function init_map( newTrackObj ){
 	 
 	//subclassing			
-	if(log >= 3){console.log("INFO: init google map instance.");}
+	if(log >= 3){console.log("INFO: init google map instance.");}	
 	GPSSensor.prototype = new google.maps.OverlayView();
 						
 	map = new google.maps.Map(d3.select("#map").node(), {        	 
@@ -1411,24 +1411,25 @@ function init_map( newTrackObj ){
 
 	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de		
 	//init line PolyLine objects
-	PolyLineMid	= new google.maps.Polyline({});
+	PolyLineMid		= new google.maps.Polyline({});
 	PolyLineInner	= new google.maps.Polyline({});
 	PolyLineOuter	= new google.maps.Polyline({});
-	PolyLineSF	= new google.maps.Polyline({});
+	PolyLineSF		= new google.maps.Polyline({});
 	
 	// init Polygon object for fictional tracks background
 	Polygon         = new google.maps.Polygon({});
 	
-	return 1;		       				
+	return map;		       				
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /// change map settings
 function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	
-	//call if map was not init before
-	if (!mapobj){		// use local variable instead of global map		
-		init_map( newTrackObj );		
+	//call if map was not init before	
+	if (!mapobj){		
+		// use local variable instead of global map		
+		mapobj = init_map( newTrackObj );		
 	}
 		
 	//load json file for a specific trackmap	
@@ -1458,6 +1459,7 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 		changeMapSettings(newTrackObj, mapobj, tmGPS);
 	});         	  
 	
+	return mapobj;
 }
 
 function changeMapSettings(newTrackObj, mapobj, gjdata){
