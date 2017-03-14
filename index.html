@@ -701,7 +701,12 @@
 		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		
 		//keep cuircitID in mind for next run
-		var tmpcuircitID = e.data.globals.attributes.TrackId;		
+		var tmpcuircitID = e.data.globals.attributes.TrackId;	
+		
+		//center map on another circuit if a row in the tracklisttable is selected
+		var selRowTracklist = jQuery("#tracklisttable").jqGrid('getGridParam', 'selrow');
+		var cellValueTracklist = jQuery("#tracklisttable").jqGrid('getCell', selRowTracklist, 1);
+		if (cellValueTracklist){tmpcuircitID = cellValueTracklist;}
 
 		//if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //Hide markers on Loading / before calculation, unhide is after calculation.
 		//if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
