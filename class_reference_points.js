@@ -800,19 +800,19 @@ function Refpoint(circuit_id)
 	//Indianapolis Road Course
 	aRefPoints[211444010] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        39.794972
-		,"refLong":      -86.234559
+		"refLat":        39.793345
+		,"refLong":      -86.238876
 		,"rotation":     0
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 0.9965
+		,"cor_PosY_mul": 1.001
 		,"Name":         "Indianapolis Road Course"
 		,"Name2":	 "Indianapolis Road_Course"	//"mTrackLocation":"Indianapolis","mTrackVariation":"Road_Course"
 		,"Zoom":         15
 		,"MapInitLat":   39.794972
 		,"MapInitLong":  -86.234559
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 	//Indianapolis Speedway Oval
 	aRefPoints[62242453] = CopyObjectWithModifications(aRefPoints[211444010], {"Name": "Indianapolis Speedway Oval","Name2": "Indianapolis Oval"});	//"mTrackLocation":"Indianapolis","mTrackVariation":"Oval"
