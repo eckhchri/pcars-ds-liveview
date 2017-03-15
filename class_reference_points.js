@@ -697,7 +697,7 @@ function Refpoint(circuit_id)
 		});
 	
 	//Autodromo Nazionale Monza Short
-	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": ""});
+	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": "","Zoom": 16,"MapInitLat": 45.616804,"MapInitLong": 9.282907});
 	
 	//Autodromo Internacional do Algarve
 	aRefPoints[-416617300] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -1186,9 +1186,9 @@ function Refpoint(circuit_id)
 	//Monza Historic GP
 	aRefPoints[1184596327] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic GP","Name2": "Autodromo Nazionale Monza Historic_GP","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_GP"
 	//Monza Historic Oval
-	aRefPoints[-163046637] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval","Name2": "Autodromo Nazionale Monza Historic_Oval","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Oval"
+	aRefPoints[-163046637] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval","Name2": "Autodromo Nazionale Monza Historic_Oval","MapInitLat": 45.617946,"MapInitLong": 9.285518,"Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Oval"
 	//Monza Historic Oval + GP Mix
-	aRefPoints[1327182267] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval + GP Mix","Name2": "Autodromo Nazionale Monza Historic_Mix","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Mix"
+	aRefPoints[1327182267] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval + GP Mix","Name2": "Autodromo Nazionale Monza Historic_Mix","MapInitLat": 45.620700,"Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Mix"
 	
 
 ///////////////////////////////////////////////////////////////////////////	
