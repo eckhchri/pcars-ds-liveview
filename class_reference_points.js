@@ -697,7 +697,7 @@ function Refpoint(circuit_id)
 		});
 	
 	//Autodromo Nazionale Monza Short
-	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": ""});
+	aRefPoints[368740158] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Short","Name2": "","Zoom": 16,"MapInitLat": 45.616804,"MapInitLong": 9.282907});
 	
 	//Autodromo Internacional do Algarve
 	aRefPoints[-416617300] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -884,19 +884,19 @@ function Refpoint(circuit_id)
 	//Long Beach
 	aRefPoints[1731699995] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        33.764420
-		,"refLong":      -118.190968
-		,"rotation":     0
+		"refLat":        33.763800
+		,"refLong":      -118.191507
+		,"rotation":     0.7
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosY_mul": 1.002
 		,"Name":         "Long Beach"
 		,"Name2":	 "Long Beach Long Beach"	//"mTrackLocation":"Long Beach","mTrackVariation":"Long Beach"
-		,"Zoom":         15
-		,"MapInitLat":   33.764420
-		,"MapInitLong":  -118.190968
-		,"Comment": "initially added"
+		,"Zoom":         17
+		,"MapInitLat":   33.764020
+		,"MapInitLong":  -118.190768
+		,"Comment": "refPoint set, Screenshots needed as reference for fine tuning"
 		});
 
 	//Lydden Hill GP
@@ -1186,9 +1186,9 @@ function Refpoint(circuit_id)
 	//Monza Historic GP
 	aRefPoints[1184596327] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic GP","Name2": "Autodromo Nazionale Monza Historic_GP","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_GP"
 	//Monza Historic Oval
-	aRefPoints[-163046637] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval","Name2": "Autodromo Nazionale Monza Historic_Oval","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Oval"
+	aRefPoints[-163046637] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval","Name2": "Autodromo Nazionale Monza Historic_Oval","MapInitLat": 45.617946,"MapInitLong": 9.285518,"Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Oval"
 	//Monza Historic Oval + GP Mix
-	aRefPoints[1327182267] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval + GP Mix","Name2": "Autodromo Nazionale Monza Historic_Mix","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Mix"
+	aRefPoints[1327182267] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval + GP Mix","Name2": "Autodromo Nazionale Monza Historic_Mix","MapInitLat": 45.620700,"Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_Mix"
 	
 
 ///////////////////////////////////////////////////////////////////////////	
