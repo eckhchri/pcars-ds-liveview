@@ -555,15 +555,18 @@
 				jQuery('#TrackList').height(0);
     		},
     		onSelectRow: function (rowId, status, e) {
-				//change map location 
-    			if(log >= 3){console.log("INFO: #tracklisttable->onSelectRow() event called.");}
-				var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
-				changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , map , celltrackid);    		      
+				//change map location				
+				if (!e || e.which === 1) {  // left click                  
+					//Todo:  change fixed row id to name of the row
+					var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
+					changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , map , celltrackid);
+                  
+				}else if( !e || e.which === 3 ){	//right click				
+              		changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , map , cuircitID);
+				}
 			},
 			ondblClickRow:	function (rowid, iRow, iCol, e) {
-				//back to normal trackid
-				if(log >= 3){console.log("INFO: #tracklisttable->ondblClickRow() event called.");}
-				changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , map , cuircitID);				
+				//double clikc not used because overlapping event with onSelectRow				
 			},
 			caption: "List of available Tracks",
 			rowNum: 200,
@@ -574,7 +577,10 @@
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 	//add StopRefresh table button within jqgrid header - Method with Button
 	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>');
-
+	//disbale browser context menu on right click
+	$('#tracklisttable').bind('contextmenu', function(e) {
+	    return false;
+	}); 
 
 	// car list overview
 	jQuery("#carlisttable").jqGrid({	
