@@ -841,9 +841,9 @@ function Refpoint(circuit_id)
 	//Knockhill National Reverse
 	aRefPoints[458589160] = CopyObjectWithModifications(aRefPoints[-2126387783], {"Name": "Knockhill National Reverse","Name2": "Knockhill National_Reverse"});	//"mTrackLocation":"Knockhill","mTrackVariation":"National_Reverse"
 	//Knockhill Rallycross
-	aRefPoints[977699253] = CopyObjectWithModifications(aRefPoints[-2126387783], {"Name": "Knockhill Rallycross","Name2": "Knockhill Rallycross"});	//"mTrackLocation":"Knockhill","mTrackVariation":"Rallycross"
+	aRefPoints[977699253] = CopyObjectWithModifications(aRefPoints[-2126387783], {"Name": "Knockhill Rallycross","Name2": "Knockhill Rallycross","MapInitLat": 56.130122,"MapInitLong": -3.506652});	//"mTrackLocation":"Knockhill","mTrackVariation":"Rallycross"
 	//Knockhill Tri-Oval
-	aRefPoints[-941106232] = CopyObjectWithModifications(aRefPoints[-2126387783], {"Name": "Knockhill Tri-Oval","Name2": "Knockhill Tri_Oval"});	//"mTrackLocation":"Knockhill","mTrackVariation":"Tri_Oval"
+	aRefPoints[-941106232] = CopyObjectWithModifications(aRefPoints[-2126387783], {"Name": "Knockhill Tri-Oval","Name2": "Knockhill Tri_Oval","Zoom": 18,"MapInitLat": 56.130850,"MapInitLong": -3.511185});	//"mTrackLocation":"Knockhill","mTrackVariation":"Tri_Oval"
 	
 	//Lånkebanen Rallycross
 	aRefPoints[2087662703] = CopyObjectWithModifications(aRefPoints[9999999999],
