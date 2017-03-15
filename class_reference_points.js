@@ -72,7 +72,6 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Hockenheim Short"
 		,"Name2":	""
-		,"Zoom":	17
 		,"MapInitLat":	49.328991
 		,"MapInitLong":	8.568469
 		});
@@ -89,8 +88,9 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Hockenheim Rallycross"
 		,"Name2":	""			//"mTrackLocation":"Hockenheim","mTrackVariation":"Short"
-		,"MapInitLat":	49.329796
-		,"MapInitLong":	8.571180
+		,"Zoom":        17
+		,"MapInitLat":	49.327088
+		,"MapInitLong":	8.569002
 		,"Comment": "initially added"
 		});
 
@@ -115,11 +115,11 @@ function Refpoint(circuit_id)
 	///Dubai Autodrome International
 	aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International","Name2": ""});
 	//Dubai Kartdrome
-	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": ""});
+	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": "","Zoom": 18,"MapInitLat": 25.044820,"MapInitLong": 55.239235});
 	//Dubai Autodrome National
-	aRefPoints[-31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": ""});
+	aRefPoints[-31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": "","MapInitLat": 25.049904,"MapInitLong": 55.236955});
 	//Dubai Autodrome Club
-	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": ""});
+	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": "","MapInitLat": 25.049058,"MapInitLong": 55.236882});
 
 	//Nuerburgring GP
         aRefPoints[-945967394] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -242,7 +242,7 @@ function Refpoint(circuit_id)
         //Le Circuit Bugatti
 	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Circuit Bugatti","Name2": "Le Mans Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});	//"mTrackLocation":"Le Mans","mTrackVariation":"Le Circuit Bugatti"
 	//Le Mans Karting International
-	aRefPoints[1457129528] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Karting International","Name2": "Le Mans Karting International Le Mans Karting International","Comment": "initially added"});	//"mTrackLocation":"Le Mans Karting International","mTrackVariation":"Le Mans Karting International"
+	aRefPoints[1457129528] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Karting International","Name2": "Le Mans Karting International Le Mans Karting International","Zoom": 17,"MapInitLat": 47.942512,"MapInitLong": 0.212322,"Comment": "initially added"});	//"mTrackLocation":"Le Mans Karting International","mTrackVariation":"Le Mans Karting International"
 	
         //Ruapuna Park GP
         aRefPoints[1277693448] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -505,7 +505,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Donington Park GP"
 		,"Name2":	 "Donington Park Grand Prix"	//"mTrackLocation":"Donington Park","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
+		,"Zoom":         16
 		,"MapInitLat":   52.830756
 		,"MapInitLong":  -1.375103
 		,"Comment": "live check"
@@ -588,7 +588,7 @@ function Refpoint(circuit_id)
 		,"Comment": "live check"
 		});
 	//Greenwood Karting Circuit - Kart track of Spa-Franchorchamps
-	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit","Name2": ""});
+	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit","Name2": "","Zoom": 18,"MapInitLat": 50.432285,"MapInitLong": 5.962968});
 		
 	//Circuit de Barcelona-Catalunya GP
 	aRefPoints[521933422] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -624,7 +624,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Imola"
 		,"Name2":	 "Imola Grand Prix"	//"mTrackLocation":"Imola","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
+		,"Zoom":         16
 		,"MapInitLat":   44.341112
 		,"MapInitLong":  11.712506
 		,"Comment": "live check"
@@ -1175,7 +1175,7 @@ function Refpoint(circuit_id)
 	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short"});
 	
 	//Hockenheim Classic - copy of Hockenheim GP
-	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": ""});
+	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": "","Zoom": 15,"MapInitLat": 49.332596,"MapInitLong": 8.579739});
 	
 	//Silverstone Classic - copy of Silverstone GP
 	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"rotation": 0.2,"Name": "Silverstone Classic","Name2": "","Comment": "finished"});
