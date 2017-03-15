@@ -902,19 +902,19 @@ function Refpoint(circuit_id)
 	//Lydden Hill GP
 	aRefPoints[953639515] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        51.177736
-		,"refLong":      1.199318
-		,"rotation":     0
+		"refLat":        51.178506
+		,"refLong":      1.199065
+		,"rotation":     1.6
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 1.003
+		,"cor_PosY_mul": 1.005
 		,"Name":         "Lydden Hill GP"
 		,"Name2":	 "Lydden Hill Circuit"	//"mTrackLocation":"Lydden Hill","mTrackVariation":"Circuit"
-		,"Zoom":         15
-		,"MapInitLat":   51.177736
+		,"Zoom":         17
+		,"MapInitLat":   51.178036
 		,"MapInitLong":  1.199318
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 	//Lydden Hill Rallycross
 	aRefPoints[673609283] = CopyObjectWithModifications(aRefPoints[953639515], {"Name": "Lydden Hill Rallycross","Name2": "Lydden Hill RX"});	//"mTrackLocation":"Lydden Hill","mTrackVariation":"RX"
