@@ -21,6 +21,9 @@
 	<link rel="stylesheet" type="text/css" href="./lib/w2ui/w2ui-1.4.3.min.css" />
     <script type="text/javascript" src="./lib/w2ui/w2ui-1.4.3.min.js"></script>
  
+ 	<link rel="stylesheet" type="text/css" href="./lib/jquery.qtip.custom/jquery.qtip.min.css" />
+    <script type="text/javascript" src="./lib/jquery.qtip.custom/jquery.qtip.min.js"></script>
+ 
  	<!-- CSS definitions moved to folder ./css/ --> 
 	<link rel="stylesheet" href="./css/pcars.css">
 	<link rel="stylesheet" href="./css/w2ui.css">
@@ -363,6 +366,9 @@
 		//set dropdown menu APIMODE	
 		HTMLCTRL.APIMODE_SetSelection( APIMODE );
 		
+		//creat all tooltips
+		initToolTips();
+		
 		//make elements dragable/resizable
 		$(function() {
 			$( "#DSdata" ).draggable();
@@ -576,7 +582,7 @@
 	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 	//add StopRefresh table button within jqgrid header - Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input> <i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i>');
 	//disbale browser context menu on right click
 	$('#tracklisttable').bind('contextmenu', function(e) {
 	    return false;
@@ -2204,7 +2210,10 @@ function initW2UI(){
 				{ type: 'break', id: 'break4' },
                 { type: 'spacer' },
 				{ type: 'html', id: 'item9',
-                	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION + '</div>'
+                	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION +
+                			' | ' +
+            				'<i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-toolbar-main"></i>' +
+                			'</div>'                	
                 }				                
             ],              		
         });
@@ -2286,6 +2295,43 @@ function initW2UI(){
 	
 }; // end of initW2UI()
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+function initToolTips(){ 
+
+	///////// tooltip for the tracklist panel
+	$('#tt-tracklist-main').qtip({		
+		id: 	 'tracklistMaintooltip',
+        content: '<b>Tooltip:<br>'
+        		+'<b>left click on row:</b> switch map to new loacation.<br>' 
+        		+'<b>rigth click on row:</b> switch back to original map location.<br>',
+        position: {        
+            target: 	'mouse', // Use the mouse position as the position origin
+            at: 		'top left',
+            adjust: {
+                // Don't adjust continuously the mouse, just use initial position
+                mouse: false
+            } 
+        }
+    });
+	///////// tooltip for toolbar
+	$('#tt-toolbar-main').qtip({		
+		id: 	 'tracklistMaintooltip',
+        content: '<b>Tooltip:<br>'
+        		+'<b><br>' 
+        		+'<b>',
+        position: {        
+            target: 	'mouse', // Use the mouse position as the position origin
+            at: 		'left',
+            adjust: {
+                // Don't adjust continuously the mouse, just use initial position
+                mouse: false
+            } 
+        }
+    });
+		
+	return 1;
+}
 
        </script>
    </body>
