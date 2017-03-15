@@ -282,15 +282,15 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Cadwell GP"
                 ,"Name2":	 "Cadwell Grand Prix"	//"mTrackLocation":"Cadwell","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
-                ,"MapInitLat":   53.308465 
-                ,"MapInitLong":  -0.063734
+                ,"Zoom":         16
+                ,"MapInitLat":   53.308865 
+                ,"MapInitLong":  -0.063534
                 ,"Comment": "live check"
                 });
         //Cadwell Club Circuit
-	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit","Name2": ""});
+	aRefPoints[328972919] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Club Circuit","Name2": "","MapInitLat": 53.307580,"MapInitLong": -0.064940});
 	//Cadwell Woodland
-	aRefPoints[-1408189041] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Woodland","Name2": ""});
+	aRefPoints[-1408189041] = CopyObjectWithModifications(aRefPoints[1876749797], {"Name": "Cadwell Woodland","Name2": "","MapInitLat": 53.310549,"MapInitLong": -0.059425});
         
         //Oulton Park International
         aRefPoints[545979690] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -410,7 +410,7 @@ function Refpoint(circuit_id)
                 ,"Name":         "Brands Hatch GP"
                 ,"Name2":	 "Brands Hatch Grand Prix"	//"mTrackLocation":"Brands Hatch","mTrackVariation":"Grand Prix"
                 ,"Zoom":         16
-                ,"MapInitLat":   51.357186 
+                ,"MapInitLat":   51.356786 
                 ,"MapInitLong":  0.262930
                 ,"Comment": "finished"
                 });
@@ -452,7 +452,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Brno"
-                ,"Zoom":         15
+                ,"Zoom":         16
                 ,"MapInitLat":   49.205370 
                 ,"MapInitLong":  16.452067
                 ,"Comment": "live check"
@@ -548,7 +548,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 0.985
 		,"Name":         "Azure Circuit"
 		,"Name2":	 "Azure Circuit Grand Prix"	//"mTrackLocation":"Azure Circuit","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
+		,"Zoom":         16
 		,"MapInitLat":   43.737186
 		,"MapInitLong":  7.425732
 		,"Comment": "live check"
@@ -565,7 +565,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Bathurst"
-		,"Zoom":         14
+		,"Zoom":         15
 		,"MapInitLat":   -33.448809
 		,"MapInitLong":  149.555024
 		,"Comment": "live check"
@@ -583,7 +583,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Spa-Francorchamps"
 		,"Zoom":         15
-		,"MapInitLat":   50.437254
+		,"MapInitLat":   50.436800
 		,"MapInitLong":  5.970570
 		,"Comment": "live check"
 		});
@@ -602,15 +602,15 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Circuit de Barcelona-Catalunya GP"
 		,"Name2":	 "Circuit de Barcelona-Catalunya Grand Prix"	//"mTrackLocation":"Circuit de Barcelona-Catalunya","mTrackVariation":"Grand Prix"
-		,"Zoom":         15
-		,"MapInitLat":   41.569612
+		,"Zoom":         16
+		,"MapInitLat":   41.569512
 		,"MapInitLong":  2.257745
 		,"Comment": "live check"
 		});
 	//Circuit de Barcelona-Catalunya Club
-	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club","Name2": ""});
+	aRefPoints[-1042928898] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya Club","Name2": "","Zoom": 17,"MapInitLat": 41.566327,"MapInitLong": 2.254218});
 	//Circuit de Barcelona-Catalunya National
-	aRefPoints[-998191994] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya National","Name2": ""});
+	aRefPoints[-998191994] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya National","Name2": "","MapInitLat": 41.570355,"MapInitLong": 2.259433});
 
 	//Imola
 	aRefPoints[920145926] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -1181,7 +1181,7 @@ function Refpoint(circuit_id)
 	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"rotation": 0.2,"Name": "Silverstone Classic","Name2": "","Comment": "finished"});
 	
 	//Circuit de Spa Francorchamps Historic
-	aRefPoints[-1804962581] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Circuit de Spa Francorchamps Historic","Name2": "Circuit de Spa-Francorchamps Historic","Comment": "initially added"});	//"mTrackLocation":"Circuit de Spa-Francorchamps","mTrackVariation":"Historic"
+	aRefPoints[-1804962581] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Circuit de Spa Francorchamps Historic","Name2": "Circuit de Spa-Francorchamps Historic","Zoom": 13,"MapInitLat": 50.423329,"MapInitLong": 5.970941,"Comment": "initially added"});	//"mTrackLocation":"Circuit de Spa-Francorchamps","mTrackVariation":"Historic"
 
 	//Monza Historic GP
 	aRefPoints[1184596327] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic GP","Name2": "Autodromo Nazionale Monza Historic_GP","Comment": "initially added"});	//"mTrackLocation":"Autodromo Nazionale Monza","mTrackVariation":"Historic_GP"
