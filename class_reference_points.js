@@ -820,19 +820,19 @@ function Refpoint(circuit_id)
 	//Knockhill Racing Circuit
 	aRefPoints[-2126387783] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        56.129532
-		,"refLong":      -3.504984
-		,"rotation":     0
+		"refLat":        56.126987
+		,"refLong":      -3.502699
+		,"rotation":     0.1
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosY_mul": 0.9997
 		,"Name":         "Knockhill Racing Circuit"
 		,"Name2":	 "Knockhill Racing"	//"mTrackLocation":"Knockhill","mTrackVariation":"Racing"
-		,"Zoom":         15
-		,"MapInitLat":   56.129532
-		,"MapInitLong":  -3.504984
-		,"Comment": "initially added"
+		,"Zoom":         17
+		,"MapInitLat":   56.129232
+		,"MapInitLong":  -3.505984
+		,"Comment": "finished, small discrepancies"
 		});	
 	//Knockhill International Reverse
 	aRefPoints[-1088073214] = CopyObjectWithModifications(aRefPoints[-2126387783], {"Name": "Knockhill International Reverse","Name2": "Knockhill International_Reverse"});	//"mTrackLocation":"Knockhill","mTrackVariation":"International_Reverse"
