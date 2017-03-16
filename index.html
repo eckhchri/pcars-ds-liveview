@@ -291,6 +291,9 @@
 		{lat: -90       ,lng: 0}
 	];
 	
+	// trackmap debug markers for refPoint tuning
+        var tm_debug_markers = [];
+	
 	var zoom_level;         //Google Maps zoom level
 	
 	// race statistics powered by lapChart library
@@ -1500,6 +1503,14 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	PolyLineSF.setMap(null);
 	Polygon.setMap(null);
 	
+	//remove old tm_debug_markers from map
+	if(log >= 3){console.log("+++++++++ tm_debug_markers for deletion: ", tm_debug_markers);}
+	for (var i = 0; i < tm_debug_markers.length; i++ ){
+		tm_debug_markers[i].setMap(null);
+	}
+	//reset marker array
+	tm_debug_markers = [];
+	
 	//set white background polygon for fictional tracks
 	if (newTrackObj["fictional"]){
 		Polygon = new google.maps.Polygon({
@@ -1561,6 +1572,21 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 			  });
 			
 			PolyLineSF.setMap(map);
+		}
+		
+		// create markers from debug array for refPoint tuning
+		if ( gjdata['debug'] ){
+			if(log >= 3){console.log("+++++++++ trackmap debug array: ", gjdata['debug']);}
+			var title;
+			for (var i = 0; i < gjdata['debug'].length; i++ ){
+				title = gjdata['debug'][i].lat.toFixed(6) + ", " + gjdata['debug'][i].lng.toFixed(6);
+				var marker = new google.maps.Marker({
+					position: gjdata['debug'][i],
+					map:map,
+					title: title
+				});
+				tm_debug_markers.push(marker);
+			}
 		}
 	
 	}// end map track polyline
