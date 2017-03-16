@@ -115,7 +115,7 @@ function Refpoint(circuit_id)
 	///Dubai Autodrome International
 	aRefPoints[-710712693] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome International","Name2": ""});
 	//Dubai Kartdrome
-	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": "","Zoom": 18,"MapInitLat": 25.044820,"MapInitLong": 55.239235});
+	aRefPoints[-232513374] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Kartdrome","Name2": "Dubai Autodrome Kartdrome","Zoom": 18,"MapInitLat": 25.044820,"MapInitLong": 55.239235});
 	//Dubai Autodrome National
 	aRefPoints[-31727447] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome National","Name2": "","MapInitLat": 25.049904,"MapInitLong": 55.236955});
 	//Dubai Autodrome Club
