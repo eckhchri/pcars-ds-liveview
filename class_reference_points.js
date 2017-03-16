@@ -884,19 +884,19 @@ function Refpoint(circuit_id)
 	//Long Beach
 	aRefPoints[1731699995] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        33.763800
+		"refLat":        33.763798
 		,"refLong":      -118.191507
-		,"rotation":     0.7
+		,"rotation":     0.6
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
+		,"cor_PosX_mul": 0.998
 		,"cor_PosY_mul": 1.002
 		,"Name":         "Long Beach"
 		,"Name2":	 "Long Beach Long Beach"	//"mTrackLocation":"Long Beach","mTrackVariation":"Long Beach"
 		,"Zoom":         17
 		,"MapInitLat":   33.764020
 		,"MapInitLong":  -118.190768
-		,"Comment": "refPoint set, Screenshots needed as reference for fine tuning"
+		,"Comment": "finished"
 		});
 
 	//Lydden Hill GP
