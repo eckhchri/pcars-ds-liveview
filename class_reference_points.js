@@ -215,7 +215,7 @@ function Refpoint(circuit_id)
 		{
 		"Name": "Sonoma Raceway National"
 		,"Name2": ""
-		,"Zoom":         17
+		,"Zoom":         16
 		,"MapInitLat":   38.163366
 		,"MapInitLong":  -122.457876
 		});
@@ -325,7 +325,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Snetterton 300"
                 ,"Name2":	 "Snetterton 300 Circuit"	//"mTrackLocation":"Snetterton","mTrackVariation":"300 Circuit"
-                ,"Zoom":         15
+                ,"Zoom":         16
                 ,"MapInitLat":   52.465021 
                 ,"MapInitLong":  0.947079
                 ,"Comment": "live check"
@@ -333,7 +333,7 @@ function Refpoint(circuit_id)
         //Snetterton 200
 	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200","Name2": "Snetterton 200 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"200 Circuit"
 	//Snetterton 100
-	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100","Name2": "Snetterton 100 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"100 Circuit"
+	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100","Name2": "Snetterton 100 Circuit","Zoom": 17,"MapInitLat": 52.464866,"MapInitLong": 0.942489});	//"mTrackLocation":"Snetterton","mTrackVariation":"100 Circuit"
         
         //Zhuhai International Circuit
         aRefPoints[1836888499] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -346,8 +346,8 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Zhuhai International Circuit"
-                ,"Zoom":         15
-                ,"MapInitLat":   22.367988 
+                ,"Zoom":         16
+                ,"MapInitLat":   22.367588 
                 ,"MapInitLong":  113.556162
                 ,"Comment": "live check"
                 });
@@ -641,7 +641,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 0.97
 		,"cor_PosY_mul": 0.97
 		,"Name":         "Willow Springs International Raceway"
-		,"Zoom":         15
+		,"Zoom":         16
 		,"MapInitLat":   34.872929
 		,"MapInitLong":  -118.264394
 		,"Comment": "live check, small discrepancies"
@@ -653,7 +653,8 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 0.97
 		,"cor_PosY_mul": 0.985
 		,"Name": "Willow Springs Horse Thief Mile"
-		,"MapInitLat":   34.878537
+		,"Zoom":         18
+		,"MapInitLat":   34.878337
 		,"MapInitLong":  -118.264290
 		,"Comment": "live check"
 		});
