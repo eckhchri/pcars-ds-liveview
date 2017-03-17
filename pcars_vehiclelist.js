@@ -7,8 +7,9 @@ function PCARSVEHICLELIST() {
         this.idToClassMappingNormalized		=	{};			//mapping between vehicleid and class normalized
         this.NameToClassMapping				=	{};			//mapping between VehicleName and VehicleName
         this.NameToClassMappingNormalized	=	{};			//mapping between VehicleName and VehicleNameNormalized        
-        this.aVehicleList					=	[]; 		//array of pcars_vehicle objects       
+        this.aVehicleList					=	[]; 		//array of pcars_vehicle objects
         this.aVehicleInfo					=	{};			//array of all relevant vehicle info, name, class, wiki links
+        this.aVehicleInfoExt				=	{};			//extended array of vehicle info which includes game name membership (PCARS2,PCARS2)
         
         
         this.loadVehicleDate();
@@ -81,9 +82,37 @@ function getVehicleClassByName(){
 
 function getVehicleList(){
 	//return an array of PCARSVehicle objects
+	//TODO: merge PCARS1 and PCARS2 vehicle lists to displaying in the GUI jqgrid
+	//conditions:
+	//		If all vehicle attributes are the same => GameName = "PCARS1 | PCars2"
+	//		if not: split into two lines
+	
+	var lpc1	=	this.aVehicleInfoExt['pcars1'];		//list  of pc1 vehicles
+	var lpc2	=	this.aVehicleInfoExt['pcars2'];		//list  of pc1 vehicles			
+	
+	// merge both lists of each game
+	for (var i = 0;i < lpc1.length;i++){		
+		//
+		//lpc1[i].vehicleid;		
+		//if id exists in the other list
+		var cmpstr = lpc1[i].vehicleid + '||' + lpc1[i].name	+ '||' + lpc1[i].cls;	
+		
+		if(log >= 3){console.log("+++++++++ getVehicleList() lpc1[i]: ", lpc1[i]);}				
+	}
+	
+	// TODO: currently the old return value	
 	return this.aVehicleList;
 }
 
+function getNameToClassMapping(){
+		
+	return this.NameToClassMapping;
+}
+
+function getIdToNameMapping(){
+	
+	return this.idToNameMapping;
+}
 
 /////////////////////////////// static mapping ////////////////////
 
@@ -717,9 +746,20 @@ this.aVehicleInfo = [
  }
 ];
 	
-// data from pcars2 DS	
-/*
-this.aVehicleInfo2 = [
+/////////////// pcars1 demo data
+this.aVehicleInfoExt['pcars1']	=	[];
+this.aVehicleInfoExt['pcars1']	=	[
+	{
+	   "id" : 9503224,
+	   "name" : "BMW 320 TC",
+	   "class" : "TC2"
+	 }
+	];
+
+
+///////////////  data from pcars2 DS	
+this.aVehicleInfoExt['pcars2']	=	[];
+this.aVehicleInfoExt['pcars2']	= 	[
       {
         "id" : 9503224,
         "name" : "BMW 320 TC (Alpha)",
@@ -1577,7 +1617,10 @@ this.aVehicleInfo2 = [
         "class" : "Trans-Am"
       }
 ];
-*/
+
+
+if(log >= 3){console.log("+++++++++++ VehicleList aVehicleInfoExt: ", this.aVehicleInfoExt );}
+
 
 }// end load vehicle data
 
@@ -1589,6 +1632,8 @@ PCARSVEHICLELIST.prototype.getVehicleClassByName=getVehicleClassByName;
 PCARSVEHICLELIST.prototype.getClassNormalizedByString=getClassNormalizedByString;
 PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
 PCARSVEHICLELIST.prototype.loadVehicleDate=loadVehicleDate;
+PCARSVEHICLELIST.prototype.getNameToClassMapping=getNameToClassMapping;
+PCARSVEHICLELIST.prototype.getIdToNameMapping=getIdToNameMapping;
 
 
 

@@ -243,8 +243,7 @@
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;
-	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks	
-	var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects
+	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks		
 	
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
@@ -253,8 +252,9 @@
 	var SessionStage			=	"";
 	var SessionStage_old		=	"";
 	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
+	//var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects    // commented out on 17.03.2017
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
-	var aVehicleIdToName		=	PCARSVehicleList.idToNameMapping;			// hash to translate vehicleID to VehicleName
+	var aVehicleIdToName		=	PCARSVehicleList.getIdToNameMapping();		// hash to translate vehicleID to VehicleName
 	var	aCurrentVehicleClasses	=	{};	// all vehicle classes within the current race
 	var	aCurrentVehicleNames	=	{};	// all vehicle names within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
@@ -761,7 +761,7 @@
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 
 				//set vehicle class full name
-				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.NameToClassMapping );
+				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getNameToClassMapping() );
 				
 				//collect all vehicle classes of the current race
 				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId ) ] = 1; 
