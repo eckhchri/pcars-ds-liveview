@@ -184,14 +184,14 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check, big discrepancies on some parts of track"
                 });
 	//Nordschleife Stage 3
-	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 3","Name2": ""});
+	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 3","Name2": "","Zoom": 14,"MapInitLat": 50.358962,"MapInitLong": 6.980983});
 	//Nordschleife Stage 1
-	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 1","Name2": ""});
+	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 1","Name2": "","Zoom": 14,"MapInitLat": 50.354770,"MapInitLong": 6.944798});
 	//Nordschleife Stage 2
-	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 2","Name2": ""});
+	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nordschleife Stage 2","Name2": "","Zoom": 15,"MapInitLat": 50.372702,"MapInitLong": 6.959640});
 	
 	//Nürburgring Combined
-	aRefPoints[-891514248] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Combined","Name2": ""});
+	aRefPoints[-891514248] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Combined","Name2": "","MapInitLat": 50.355101});
 	
 	//Sonoma Raceway
         aRefPoints[-1454279631] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -256,19 +256,19 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Ruapuna Park GP"
                 ,"Name2":	 "Ruapuna Park Grand Prix"	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
-                ,"MapInitLat":   -43.531123 
+                ,"Zoom":         17
+                ,"MapInitLat":   -43.530723 
                 ,"MapInitLong":  172.479408
                 ,"Comment": "live check"
                 });
         //Ruapuna Park A Circuit
-	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "Ruapuna Park A_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
+	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "Ruapuna Park A_Circuit","Zoom": 18,"MapInitLat": -43.531735,"MapInitLong": 172.482294});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
         //Ruapuna Park Club
 	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club","Name2": ""});
 	//Ruapuna Park Outer Loop
 	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "Ruapuna Park Outer_Loop"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Outer_Loop"
 	//Ruapuna Park B Circuit
-	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "Ruapuna Park B_Circuit"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"B_Circuit"
+	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "Ruapuna Park B_Circuit","MapInitLat": -43.530846,"MapInitLong": 172.477963});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"B_Circuit"
         
         //Cadwell GP
         aRefPoints[1876749797] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -309,7 +309,7 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check"
                 });
         //Oulton Park Fosters
-	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters"});
+	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters","Zoom": 16,"MapInitLat": 53.179448,"MapInitLong": -2.616137});
 	//Oulton Park Island
 	aRefPoints[-1877699523] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Island"});
         
@@ -392,7 +392,7 @@ function Refpoint(circuit_id)
 		{
 		"Name": "Silverstone National"
 		,"Name2": ""
-		,"Zoom":         17
+		,"Zoom":         16
 		,"MapInitLat":   52.075955
 		,"MapInitLong":  -1.014935
 		});
@@ -435,7 +435,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Mazda Raceway Laguna Seca"
-                ,"Zoom":         15
+                ,"Zoom":         16
                 ,"MapInitLat":   36.584275 
                 ,"MapInitLong":  -121.753345
                 ,"Comment": "live check"
@@ -469,7 +469,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 0.99	//1
                 ,"Name":         "Road America"
-                ,"Zoom":         16	//15
+                ,"Zoom":         15
                 ,"MapInitLat":   43.798710 
                 ,"MapInitLong":  -87.995182
                 ,"Comment": "finished, but some discrepencies which are not solvable"
@@ -532,9 +532,9 @@ function Refpoint(circuit_id)
 		,"Comment": "live check"
 		});
 	//Oschersleben National
-	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National","Name2": ""});
+	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben National","Name2": "","Zoom": 17,"MapInitLat": 52.028035,"MapInitLong": 11.278875});
 	//Oschersleben C Circuit
-	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Circuit","Name2": ""});
+	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Circuit","Name2": "","Zoom": 17,"MapInitLat": 52.029260,"MapInitLong": 11.271525});
 
 	//Azure Circuit
 	aRefPoints[832629329] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -1172,7 +1172,7 @@ function Refpoint(circuit_id)
 		,"Comment": "live check"
 		});
 	//Rouen Les Essarts Short
-	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short"});
+	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short","Zoom": 15,"MapInitLat": 49.330981});
 	
 	//Hockenheim Classic - copy of Hockenheim GP
 	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic","Name2": "","Zoom": 15,"MapInitLat": 49.332596,"MapInitLong": 8.579739});
