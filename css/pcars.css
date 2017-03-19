@@ -197,6 +197,11 @@
 		 .cvteste {
             background-color: green;
         }
+        
+        .pcars_jqgrid_caption_additionalinfo{
+        	color: grey;
+        	text-decoration: none;
+        }
 		
 		
 		

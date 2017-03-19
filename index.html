@@ -597,12 +597,13 @@
 	        datatype: "local",
 	        height: 'auto',
 	        hiddengrid: true,
-	        colNames:['ID','Name','class', 'Availability', 'link', 'Comment'],
+	        width:	800,
+	        colNames:['ID','Name','class', 'Game Scope', 'link', 'Comment'],
 	        colModel:[
 					{name:'vehicleid', 		width:100, 	sorttype:"float",align:"left", index:'id', formatter: 'float'},
 					{name:'name', 			width:260, 	sorttype:"text"},
 					{name:'cls',  			width:120, 	sorttype:"text"},
-					{name:'availability', 	width:70, 	sorttype:"text", align:"center"},
+					{name:'gamescope', 		width:105, 	sorttype:"text", align:"center"},
 					{name:'link', 			width:40, 	sorttype:"text", align:"right"},					
 					{name:'comment', 		width:160, 	sorttype:"text", align:"left"},
 	        ],
@@ -610,11 +611,20 @@
     			//dynamic update of height of the div block
     			jQuery('#CarList').height( 0 );        		       
     		},
-	        caption: "List of available Cars with properties.",
+	        caption: 'List of available Cars with properties. <div id="pcars-carlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>',
 			rowNum: 200,		
 	});
 	// add filter option bar
-	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });	
+	// register event handler for calcualting current displayed rows after a Filter is set
+	jQuery("#carlisttable").bind("jqGridToolbarAfterSearch", function (e, rowid, orgClickEvent) {	    
+	    var currec = jQuery("#carlisttable").jqGrid('getGridParam', 'records');	    
+	    var allrec = jQuery("#carlisttable").jqGrid('getGridParam','data');	    
+	    ChangeHtmlContentByID( '#pcars-carlist-records-displayed' 		, "# of records: " + currec + " / " + allrec.length);
+	    
+	    return e.result === undefined ? true : e.result;
+	});
+	
 	
 	//set vehicleListtable data	
 	refreshVehicleList( PCARSVehicleList.getVehicleList() );	
@@ -1646,7 +1656,7 @@ function refreshVehicleList(a){
    					vehicleid:		a[i].vehicleid,
 					name:			a[i].name,
 					cls:			a[i].cls,
-					availability:	a[i].availability,
+					gamescope:		a[i].gamescope,
 					link:			a[i].link,					
 					comment:		a[i].comment
 				};		
