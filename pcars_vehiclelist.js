@@ -1,6 +1,6 @@
 // CLASS of an pCars vehicle
 function PCARSVEHICLELIST() {
-        // vars
+
         //this.name							=	"";
         this.idToNameMapping				=	{};			//mapping between vehicleid and name
         this.idToClassMapping				=	{};			//mapping between vehicleid and class
@@ -11,9 +11,9 @@ function PCARSVEHICLELIST() {
         this.aVehicleInfo					=	{};			//array of all relevant vehicle info, name, class, wiki links
         this.aVehicleInfoExt				=	{};			//extended array of vehicle info which includes game name membership (PCARS2,PCARS2)
         
-        
-        this.loadVehicleDate();
-        this.setVehicleData(this.aVehicleInfo);			//init array of this object
+        //init data
+        this.loadVehicleData();     										//get varaibale   this.aVehicleInfo
+        this.setVehicleData(_convertExtVehicleList(this.aVehicleInfoExt));	//init array of this object
         
         return this;
 }
@@ -21,13 +21,16 @@ function PCARSVEHICLELIST() {
 //fill the object with data
 function setVehicleData(aVL){
 		
-	for (i = 0; i < aVL.length; i++) {					
+	if(log >= 3){console.log("+++++++++ setVehicleData(): aVL ", aVL);}
+	
+	//build up PCARSVEHICLE objects
+	for (i = 0; i < aVL.length; i++) {				
 		this.aVehicleList[i] =  new  PCARSVEHICLE(
 										aVL[i].id, 
 										aVL[i].name, 
 										aVL[i].class,
 										'',
-										'PCARS1',
+										aVL[i].gamescope,
 										'-'
 										); 
 								
@@ -55,13 +58,12 @@ function getClassNormalizedByString(VId){
 	}
 }
 
-function _ClassNormalization(str){
-	return str.replace(/ /g, '_');
-}
-
-
-function compareAPIListwithCSV(){
-	
+function _ClassNormalization(str){	
+	if (str){ //check if its defined string
+		return str.replace(/ /g, '_');
+	}else{
+		return "NO_CLASS_DEFINED";
+	}
 }
 
 //return a hash of vehicle classes with CSS Formatstrings
@@ -81,27 +83,44 @@ function getVehicleClassByName(){
 }
 
 function getVehicleList(){
-	//return an array of PCARSVehicle objects
-	//TODO: merge PCARS1 and PCARS2 vehicle lists to displaying in the GUI jqgrid
-	//conditions:
-	//		If all vehicle attributes are the same => GameName = "PCARS1 | PCars2"
-	//		if not: split into two lines
 	
-	var lpc1	=	this.aVehicleInfoExt['pcars1'];		//list  of pc1 vehicles
-	var lpc2	=	this.aVehicleInfoExt['pcars2'];		//list  of pc1 vehicles			
-	
-	// merge both lists of each game
-	for (var i = 0;i < lpc1.length;i++){		
-		//
-		//lpc1[i].vehicleid;		
-		//if id exists in the other list
-		var cmpstr = lpc1[i].vehicleid + '||' + lpc1[i].name	+ '||' + lpc1[i].cls;	
-		
-		if(log >= 3){console.log("+++++++++ getVehicleList() lpc1[i]: ", lpc1[i]);}				
-	}
-	
-	// TODO: currently the old return value	
 	return this.aVehicleList;
+}
+
+function _convertExtVehicleList(aVL){
+	//return an array of PCARSVehicle objects
+	//task: merge PCARS1 and PCARS2 vehicle lists to displaying in the GUI jqgrid only uniqure entires
+	//conditions:
+	//		If all vehicle attributes are the same => GameName = "PCARS1 | PCARS2"
+	//		if not: split into two lines		
+	var aMergedVL	= 	{};						//merged vehicle list
+	var aNewVL		=	[];	
+	
+	for (var gn in aVL){	//gn=GameName	
+	
+		for (var i = 0;i < aVL[gn].length;i++){
+			
+			//build a compare string with relevant attributes
+			var cmpstr	= '||'+ aVL[gn][i].id +'||'+ aVL[gn][i].name +'||'+ aVL[gn][i].class +'||';
+						
+			if (aMergedVL[cmpstr]){ 
+				//if exists comparestring allready exists, add new gamescope				
+				data['gamescope'] = aMergedVL[cmpstr]['gamescope'] +'+'+ gn;
+			}else{ 
+				//first occurence of this comparestring
+				data['gamescope'] = gn;
+			}
+			//in both cases add the original data
+			aMergedVL[cmpstr]	= data;									
+		}				
+	}	
+	
+	//after merging via comparestring bring it back to a normal flat array for each unique entry
+	for (var data in aMergedVL ){		
+		aNewVL.push(aMergedVL[data]);
+	}
+					
+	return aNewVL;
 }
 
 function getNameToClassMapping(){
@@ -116,9 +135,11 @@ function getIdToNameMapping(){
 
 /////////////////////////////// static mapping ////////////////////
 
-function loadVehicleDate(){
+function loadVehicleData(){
 
-this.aVehicleInfo = [
+/////////////// pcars1 dataset
+this.aVehicleInfoExt['PCARS1']	=	[];		
+this.aVehicleInfoExt['PCARS1'] = [
  {
    "id" : 9503224,
    "name" : "BMW 320 TC",
@@ -746,20 +767,9 @@ this.aVehicleInfo = [
  }
 ];
 	
-/////////////// pcars1 demo data
-this.aVehicleInfoExt['pcars1']	=	[];
-this.aVehicleInfoExt['pcars1']	=	[
-	{
-	   "id" : 9503224,
-	   "name" : "BMW 320 TC",
-	   "class" : "TC2"
-	 }
-	];
-
-
-///////////////  data from pcars2 DS	
-this.aVehicleInfoExt['pcars2']	=	[];
-this.aVehicleInfoExt['pcars2']	= 	[
+/////////////// pcars2 dataset
+this.aVehicleInfoExt['PCARS2']	=	[];
+this.aVehicleInfoExt['PCARS2']	= 	[
       {
         "id" : 9503224,
         "name" : "BMW 320 TC (Alpha)",
@@ -872,7 +882,8 @@ this.aVehicleInfoExt['pcars2']	= 	[
       },
       {
         "id" : 728095309,
-        "name" : "Chevrolet Camaro '69 TransAm (Alpha)"
+        "name" : "Chevrolet Camaro '69 TransAm (Alpha)",
+        "class" : "Road B"
       },
       {
         "id" : 728234598,
@@ -941,7 +952,7 @@ this.aVehicleInfoExt['pcars2']	= 	[
       },
       {
         "id" : 1061494025,
-        "name" : "Lotus Type 49C Cosworth (Alpha)",
+        "name" : "Lotus Type 49C Cosworth",
         "class" : "Vintage F1 A"
       },
       {
@@ -1081,7 +1092,8 @@ this.aVehicleInfoExt['pcars2']	= 	[
       },
       {
         "id" : 1468371103,
-        "name" : "Ligier JS P2 Honda (Alpha)"
+        "name" : "Ligier JS P2 Honda (Alpha)",
+        "class": ""
       },
       {
         "id" : 1469658023,
@@ -1618,10 +1630,6 @@ this.aVehicleInfoExt['pcars2']	= 	[
       }
 ];
 
-
-if(log >= 3){console.log("+++++++++++ VehicleList aVehicleInfoExt: ", this.aVehicleInfoExt );}
-
-
 }// end load vehicle data
 
 ////////////////////
@@ -1631,9 +1639,10 @@ PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
 PCARSVEHICLELIST.prototype.getVehicleClassByName=getVehicleClassByName;
 PCARSVEHICLELIST.prototype.getClassNormalizedByString=getClassNormalizedByString;
 PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
-PCARSVEHICLELIST.prototype.loadVehicleDate=loadVehicleDate;
+PCARSVEHICLELIST.prototype.loadVehicleData=loadVehicleData;
 PCARSVEHICLELIST.prototype.getNameToClassMapping=getNameToClassMapping;
 PCARSVEHICLELIST.prototype.getIdToNameMapping=getIdToNameMapping;
+
 
 
 
