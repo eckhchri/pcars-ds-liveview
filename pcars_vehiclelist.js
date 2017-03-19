@@ -105,13 +105,13 @@ function _convertExtVehicleList(aVL){
 						
 			if (aMergedVL[cmpstr]){ 
 				//if exists comparestring allready exists, add new gamescope				
-				data['gamescope'] = aMergedVL[cmpstr]['gamescope'] +'+'+ gn;
+				aVL[gn][i]['gamescope'] = aMergedVL[cmpstr]['gamescope'] +'+'+ gn;
 			}else{ 
 				//first occurence of this comparestring
-				data['gamescope'] = gn;
+				aVL[gn][i]['gamescope'] = gn;
 			}
 			//in both cases add the original data
-			aMergedVL[cmpstr]	= data;									
+			aMergedVL[cmpstr]	= aVL[gn][i];									
 		}				
 	}	
 	
