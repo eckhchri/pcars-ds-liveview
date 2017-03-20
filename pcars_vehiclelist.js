@@ -13,6 +13,7 @@ function PCARSVEHICLELIST() {
         
         //init data
         this.loadVehicleData();     										//get varaibale   this.aVehicleInfo
+        _validateVehicleData(this.aVehicleInfoExt);							//validate data
         this.setVehicleData(_convertExtVehicleList(this.aVehicleInfoExt));	//init array of this object
         
         return this;
@@ -131,6 +132,37 @@ function getNameToClassMapping(){
 function getIdToNameMapping(){
 	
 	return this.idToNameMapping;
+}
+
+function _validateVehicleData(aVL){
+	
+	//validate for
+	// duplicate vehicleids
+	var aVehilceIDs		=	[];
+	// missing attribtes like class
+		
+	for (var gn in aVL){	//gn=GameName like PCARS1|PCARS2|...			
+		for (var i = 0;i < aVL[gn].length;i++){
+			// A) check if attribute is available
+			if (!aVL[gn][i]['class']){
+				if(log >= 3){console.log("WARNING: Vehicle attribute missing (class). Class in object: ", aVL[gn][i] );}
+			}
+			// B) check if attribute is available
+			if (aVL[gn][i]['name'] == ""){
+				if(log >= 3){console.log("WARNING: Vehicle attribute missing (name). Class in object: ", aVL[gn][i] );}
+			}			
+			// C) dupplicate IDs
+			if ( aVL[gn][i]['id'] ){				
+				//dupplicate IDs
+				if( aVehilceIDs[ aVL[gn]['id'] ] ){
+					if(log >= 3){console.log("WARNING: Vehicle id exists multiple times. ID: ", aVL[gn][i]['id'] );}					
+				}else{
+					aVehilceIDs[ aVL[gn]['id'] ] = "exists";				
+				}				
+			}									
+		}
+	}
+	
 }
 
 /////////////////////////////// static mapping ////////////////////
