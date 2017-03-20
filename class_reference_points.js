@@ -871,19 +871,19 @@ function Refpoint(circuit_id)
 	//Loheac
 	aRefPoints[-598879227] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        47.863467
-		,"refLong":      -1.894058
-		,"rotation":     0
+		"refLat":        47.863952
+		,"refLong":      -1.893773
+		,"rotation":     -0.1
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 1.02
+		,"cor_PosY_mul": 1.023
 		,"Name":         "Loheac"
 		,"Name2":	 "Loheac Grand Prix"	//"mTrackLocation":"Loheac","mTrackVariation":"Grand Prix"
 		,"Zoom":         17
 		,"MapInitLat":   47.864160
 		,"MapInitLong":  -1.894058
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 
 	//Long Beach
