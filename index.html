@@ -1550,7 +1550,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 		}
 		
 		//create new instance innerLine if available
-		if ( gjdata['line_inner'] ){		
+		if ( gjdata['line_inner'] && (newTrackObj["fictional"] || devmode_tm) ){		
 			PolyLineInner = new google.maps.Polyline({
 			    path: gjdata['line_inner'],
 			    strokeColor: '#FF0000',
@@ -1562,7 +1562,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 		}
 		
 		//create new instance OuterLine if available
-		if ( gjdata['line_outer'] ){		
+		if ( gjdata['line_outer'] && (newTrackObj["fictional"] || devmode_tm) ){		
 			PolyLineOuter = new google.maps.Polyline({
 			    path: gjdata['line_outer'],
 			    strokeColor: '#FF0000',
@@ -1574,7 +1574,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 		}
 		
 		//create new instance Start/Finish Line if available
-		if ( gjdata['line_SF'] ){		
+		if ( gjdata['line_SF'] && (newTrackObj["fictional"] || devmode_tm) ){		
 			PolyLineSF = new google.maps.Polyline({
 			    path: gjdata['line_SF'],
 			    strokeColor: '#FF0000',
@@ -1586,7 +1586,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 		}
 		
 		// create markers from debug array for refPoint tuning
-		if ( gjdata['debug'] ){
+		if ( gjdata['debug'] && devmode_tm ){
 			if(log >= 3){console.log("+++++++++ trackmap debug array: ", gjdata['debug']);}
 			var title;
 			for (var i = 0; i < gjdata['debug'].length; i++ ){
