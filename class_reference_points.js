@@ -736,9 +736,9 @@ function Refpoint(circuit_id)
 		,"Comment":		"refPoint set"
 		});
 	//Circuit of the Americas Club Circuit
-	aRefPoints[9999990045] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas Club Circuit","Name2": "Circuit_of_the_Americas Club Circuit"});
+	aRefPoints[9999990045] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas Club Circuit","Name2": "Circuit_of_the_Americas Club Circuit","Zoom": 17,"MapInitLat": 30.137552,"MapInitLong": -97.628475});
 	//Circuit of the Americas National Circuit
-	aRefPoints[9999990046] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas National Circuit","Name2": "Circuit_of_the_Americas National_Circuit"});
+	aRefPoints[9999990046] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas National Circuit","Name2": "Circuit_of_the_Americas National_Circuit","MapInitLat": 30.133822,"MapInitLong": -97.638199});
 
 	//Daytona Tri-Oval
 	aRefPoints[2054003546] = CopyObjectWithModifications(aRefPoints[9999999999],
