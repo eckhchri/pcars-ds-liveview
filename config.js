@@ -4,10 +4,10 @@
 var SCRIPTVERSION	= "0.3.1";
 
 //Activate URL parameter interpretation
-var AllowUrlParams	= true;		//[true|false]	to igrnore URL parameters for security reasons
+var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
 
 //Please your specific settings
-var DsServerURL 		= "MY-URL.com";
+var DsServerURL 		= "eckhchri.de";
 var DsPort				= 9000;
 var CRESTServerURL 		= "localhost";
 var CRESTPort			= 8080;
