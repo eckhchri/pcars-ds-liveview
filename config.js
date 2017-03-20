@@ -172,3 +172,5 @@ var zoom_settings = [
         {"lineWeight": 3,	"lineWeightMid": 11.5,    "markerRadius": 4.5},   //zoom 20
         {"lineWeight": 4,	"lineWeightMid": 14,      "markerRadius": 4.5}    //zoom 21
 ];
+
+var devmode_tm = false;  // [true | false] developer mode for trackmaps

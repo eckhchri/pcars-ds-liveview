@@ -735,6 +735,10 @@ function Refpoint(circuit_id)
 		,"MapInitLong":	-97.634090
 		,"Comment":		"refPoint set"
 		});
+	//Circuit of the Americas Club Circuit
+	aRefPoints[9999990045] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas Club Circuit","Name2": "Circuit_of_the_Americas Club Circuit","Zoom": 17,"MapInitLat": 30.137552,"MapInitLong": -97.628475});
+	//Circuit of the Americas National Circuit
+	aRefPoints[9999990046] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas National Circuit","Name2": "Circuit_of_the_Americas National_Circuit","MapInitLat": 30.133822,"MapInitLong": -97.638199});
 
 	//Daytona Tri-Oval
 	aRefPoints[2054003546] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -849,37 +853,37 @@ function Refpoint(circuit_id)
 	//Lånkebanen Rallycross
 	aRefPoints[2087662703] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        63.405690
-		,"refLong":      10.919449
-		,"rotation":     0
+		"refLat":        63.405920
+		,"refLong":      10.919460
+		,"rotation":     0.1
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 1.03
+		,"cor_PosY_mul": 1.027
 		,"Name":         "Lånkebanen Rallycross"
 		,"Name2":	 "Hell Rallycross"	//"mTrackLocation":"Hell","mTrackVariation":"Rallycross"
 		,"Zoom":         17
 		,"MapInitLat":   63.405890
 		,"MapInitLong":  10.919449
-		,"Comment": "initially added"
+		,"Comment": "finished, discrepancy in Turn 2"
 		});
 		
 	//Loheac
 	aRefPoints[-598879227] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        47.863467
-		,"refLong":      -118.190968
-		,"rotation":     0
+		"refLat":        47.863952
+		,"refLong":      -1.893773
+		,"rotation":     -0.1
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 1.02
+		,"cor_PosY_mul": 1.023
 		,"Name":         "Loheac"
 		,"Name2":	 "Loheac Grand Prix"	//"mTrackLocation":"Loheac","mTrackVariation":"Grand Prix"
 		,"Zoom":         17
 		,"MapInitLat":   47.864160
 		,"MapInitLong":  -1.894058
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 
 	//Long Beach
