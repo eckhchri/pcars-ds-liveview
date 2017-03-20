@@ -985,19 +985,19 @@ function Refpoint(circuit_id)
 	//Texas Motor Speedway
 	aRefPoints[1185954707] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        33.036859
-		,"refLong":      -97.281377
-		,"rotation":     0
+		"refLat":        33.036309
+		,"refLong":      -97.280925
+		,"rotation":     -16.3
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
-		,"cor_PosY_mul": 1
+		,"cor_PosX_mul": 0.985
+		,"cor_PosY_mul": 0.987
 		,"Name":         "Texas Motor Speedway"
 		,"Name2":	 "Texas Motor Speedway Tri_Oval"	//"mTrackLocation":"Texas Motor Speedway","mTrackVariation":"Tri_Oval"
 		,"Zoom":         16
 		,"MapInitLat":   33.036859
 		,"MapInitLong":  -97.281377
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 	//Texas Motor Speedway Infield Course
 	aRefPoints[1719717729] = CopyObjectWithModifications(aRefPoints[1185954707], {"Name": "Texas Motor Speedway Infield Course","Name2": "Texas Motor Speedway Infield_RC","Zoom": 17,"MapInitLat": 33.036749,"MapInitLong": -97.280247});	//"mTrackLocation":"Texas Motor Speedway","mTrackVariation":"Infield_RC"
