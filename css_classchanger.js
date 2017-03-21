@@ -80,12 +80,16 @@ function CSSClassChanger(aCSSDefinition){
 	}	
 
 	// hide svg objects during change of race session
-	function HideAllSvg() {		
+	function HideAllSvg() {
+		/*
 		//clear all other individual CSS definitions
-		this.ClearAllCssClases();
-		
+		this.ClearAllCssClases();		
 		//remember object handle
 		this.aCSSClasses['hideallsvgs']	= setStyle(   'svg.driverlabel{ display: none; } \n');	
+		*/
+		
+		//20170321 - use this instead of CSS classes because "delete this.aCSSClasses['hideallsvgs'];" did not work. Marker are still hidden
+		$(".stations").hide();
 		
 		return 1;
 	}
@@ -93,16 +97,18 @@ function CSSClassChanger(aCSSDefinition){
 	//unhide svg ojects
 	function UnHideAllSvg(){				
 		//set an empty style to unhide markers
-		//this.aCSSClasses['hideallsvgs']	= setStyle(   'svg.driverlabel{display: block;} \n');		
-		//delete this.aCSSClasses['hideallsvgs'];
-		//TODO: because unhide not working correctly as workaround we use ClearAllCssClases()
-		//this.ClearAllCssClases();
-		
-		//20170321 - use instead of this.ClearAllCssClases(); because of an issue with a case in Line 900 | if (SessionState_old != "Race" && SessionState == "Race") ...
+		/*
 		if ( this.aCSSClasses['hideallsvgs'] ){  // only call it if a hide class exists			
+			this.aCSSClasses['hideallsvgs']	= setStyle(   'svg.driverlabel{ display: block; } \n');
 			delete this.aCSSClasses['hideallsvgs'];
 		}
-				
+		*/
+		//Workaround: because unhide not working correctly as workaround we use ClearAllCssClases()
+		//this.ClearAllCssClases();		
+		
+		//20170321 - use this instead of CSS classes because "delete this.aCSSClasses['hideallsvgs'];" did not work. Marker are still hidden
+		$(".stations").show();
+		
 		return 1;
 	}
 	
