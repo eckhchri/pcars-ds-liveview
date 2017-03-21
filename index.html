@@ -906,7 +906,7 @@
                 }
                 if (UnHide == "true"){
                         UnHide_Timer = UnHide_Timer + sensorLayer_UpdateDelta;
-                        if (UnHide_Timer > 1000){
+                        if (UnHide_Timer > 2000){
                         	StopTransitionDelay = "true";
                                 sensorLayer.interruptTransition();
                                 sensorLayer.update(aSensorData);
