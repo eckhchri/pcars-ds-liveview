@@ -911,6 +911,7 @@
                                 sensorLayer.interruptTransition();
                                 sensorLayer.update(aSensorData);
                                 CSSClsChg.UnHideAllSvg();
+                                HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );		// es workaround for the Problem with the UnHideAllSvg() call
                                 UnHide_Timer = 0;
                                 UnHide = "false";
                                 if(log >= 2){console.log("+++++++++UnHide StopTransitionDelay:    ",StopTransitionDelay);}
