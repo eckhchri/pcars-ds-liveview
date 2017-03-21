@@ -11,7 +11,6 @@ function DRIVERCOLOR_SetActiveElement( value ){
 	
 	$("#DRIVERCOLOR").val( value ).change();
 	return 1;
-
 }
 
 function DRIVERCOLOR_AddSelElement( new_val, display_text ){
@@ -19,7 +18,7 @@ function DRIVERCOLOR_AddSelElement( new_val, display_text ){
 // deactivate becaus of special charaters in driver name cause error, like  
 // https://github.com/eckhchri/pcars-ds-liveview/issues/73	
 //	if (  $("#DRIVERCOLOR option[value='" + new_val + "']").length == 0 ){
-	if (  $("#DRIVERCOLOR option[value=\"" + new_val + "\"]").length == 0 ){ 
+	if ( $("#DRIVERCOLOR option[value=\"" + new_val + "\"]").length == 0 ){ 
 		
 		$('#DRIVERCOLOR').append($('<option>', {
 			value: new_val,
