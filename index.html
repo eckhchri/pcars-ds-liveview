@@ -236,6 +236,7 @@
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
 	var map;				// google map object
+	var CurGameRunning		=	"PCARS1";   // PCARS1|PCARS2|PCARS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
 	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
@@ -254,7 +255,7 @@
 	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
 	//var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects    // commented out on 17.03.2017
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
-	var aVehicleIdToName		=	PCARSVehicleList.getIdToNameMapping();		// hash to translate vehicleID to VehicleName
+	//var aVehicleIdToName		=	PCARSVehicleList.getIdToNameMapping();		// hash to translate vehicleID to VehicleName
 	var	aCurrentVehicleClasses	=	{};	// all vehicle classes within the current race
 	var	aCurrentVehicleNames	=	{};	// all vehicle names within the current race
 	var PCARSd					=	new PCARSdriver(); 	// only use the object to get functions of it
@@ -762,7 +763,7 @@
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
 				//convert vehicleID to VehicleName
-				e.data.driverlist[i].VehicleId			=  VehicleIdToName(e.data.driverlist[i].VehicleId , aVehicleIdToName);				
+				e.data.driverlist[i].VehicleId			=  VehicleIdToName(e.data.driverlist[i].VehicleId , PCARSVehicleList.getIdToNameMapping() );				
 				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
