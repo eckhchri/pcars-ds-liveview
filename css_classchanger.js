@@ -96,8 +96,13 @@ function CSSClassChanger(aCSSDefinition){
 		//this.aCSSClasses['hideallsvgs']	= setStyle(   'svg.driverlabel{display: block;} \n');		
 		//delete this.aCSSClasses['hideallsvgs'];
 		//TODO: because unhide not working correctly as workaround we use ClearAllCssClases()
-		this.ClearAllCssClases();
+		//this.ClearAllCssClases();
 		
+		//20170321 - use instead of this.ClearAllCssClases(); because of an issue with a case in Line 900 | if (SessionState_old != "Race" && SessionState == "Race") ...
+		if ( this.aCSSClasses['hideallsvgs'] ){  // only call it if a hide class exists			
+			delete this.aCSSClasses['hideallsvgs'];
+		}
+				
 		return 1;
 	}
 	
