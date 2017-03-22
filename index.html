@@ -996,6 +996,12 @@
 	                        if(WORKERDELAY_DEMODATA < 0){WORKERDELAY_DEMODATA = 0;} //catch negative values. If the playback machine is to slow and is not able to hold the playback speed of the recording machine, then the delay is calculated negative, but the delay must be positive
 	                  		//if(log >= 4){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
 	
+	                        
+	                        //TODO: 20170322 workaround for files without have recorded with
+	                        if (! demo[record_pos]['globals']['curgamerunning']){
+	                        	demo[record_pos]['globals']['curgamerunning'] = "PCARS1";
+	                        }
+	                        
 	                        workerDSDATA.postMessage({
 	                                workerdelay:            	WORKERDELAY_DEMODATA
 	                                ,dsurl:                 	""
@@ -2084,7 +2090,8 @@ function initDemoData(aNewData, SetApiModeTo ){
 		CurGameRunning	= aNewData[0]['globals']['curgamerunning'];
 	}else{		
 		if(log >= 3){console.log("WARNING: initDemoData() - variable CurGameRunning not in DemoFile! aNewData   ", aNewData);}
-		alert("WARNING: initDemoData() - Variable CurGameRunning not included in DemoFile! Could result in data mapping problems.")
+		alert("WARNING: initDemoData() - Variable CurGameRunning not included in DemoFile! Could result in data mapping problems. Set default to'PCARS1' !")
+		CurGameRunning = "PCARS1";		
 	}	
 				
 	//reset values to default
