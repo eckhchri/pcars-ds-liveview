@@ -551,6 +551,7 @@
 	        height: 'auto',
 	        width:	830,
 	        hiddengrid: true,
+		ignoreCase:true,
 	        colNames:['ID','TrackID','TrackName','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
 					{name:'id', index:'id', formatter: 'integer', width:45, sorttype:"int"},
@@ -599,6 +600,7 @@
 	        height: 'auto',
 	        hiddengrid: true,
 	        width:	800,
+		ignoreCase:true,
 	        colNames:['ID','Name','class', 'Game Scope', 'link', 'Comment'],
 	        colModel:[
 					{name:'vehicleid', 		width:100, 	sorttype:"float",align:"left", index:'id', formatter: 'float'},
@@ -1138,6 +1140,7 @@
 		hiddengrid: true,
 		rowNum: 200,
 		caption: "List of available drivers",
+		ignoreCase:true,
 		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
