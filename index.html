@@ -1860,7 +1860,7 @@ function CalcGaps(bestLaptime,bestLaptimeFirst,bestLaptimeAhead){
 	var gap2ahead = 0;
 	var gap2first = 0;
 
-	if (bestLaptime != 0){
+	if (bestLaptime != 0 && SessionStage != "Race1" && SessionStage != "Race2"){
 		if (bestLaptimeAhead != 0){gap2ahead = bestLaptime - bestLaptimeAhead;}
 		if (bestLaptimeFirst != 0){gap2first = bestLaptime - bestLaptimeFirst;}
 	}
