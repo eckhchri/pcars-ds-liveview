@@ -84,6 +84,7 @@
 		<div id="pcars-dssessionstate"></div>
 		<br>----- Settings ----<br>
 		<div id="pcars-apimode"></div>
+		<div id="pcars-curgamerunning"></div>
 		<div id="pcars-displayduration"></div>
 		<div id="pcars-record_pos"></div>
 		
@@ -236,7 +237,7 @@
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
 	var map;				// google map object
-	var CurGameRunning		=	"PCARS1";   // PCARS1|PCARS2|PCARS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
+	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|PCARS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
 	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
@@ -653,8 +654,10 @@
 		
 		//if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
                 
-		SessionState = e.data.globals.attributes.SessionState;
-		SessionStage = e.data.globals.attributes.SessionStage;
+		SessionState 	= e.data.globals.attributes.SessionState;
+		SessionStage 	= e.data.globals.attributes.SessionStage;
+		CurGameRunning 	= e.data.globals.curgamerunning;
+		
                 
 		// write in HTML page for DS status		 
 		ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
@@ -662,16 +665,18 @@
 		ChangeHtmlContentByID( '#pcars-dsjoinable' 	, "DS Joinable: " 	+ e.data.globals.joinable );		
 		ChangeHtmlContentByID( '#pcars-dslobbyid' 	, "DS Lobby ID:	" 	+ e.data.globals.lobbyid );		
 		ChangeHtmlContentByID( '#pcars-dsnow' 		, "DS now: "		+ e.data.globals.now );				
-		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );		
+		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );
+		ChangeHtmlContentByID( '#pcars-curgamerunning', "CurGameRunning:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos + " / "  + demo.length);		
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
 		ChangeHtmlContentByID( '#demo_start_pos' 	, "demo_start_pos:   " + demo_start_pos );
-		ChangeHtmlContentByID( '#demo_end_pos' 	, "demo_end_pos:   " + demo_end_pos );
+		ChangeHtmlContentByID( '#demo_end_pos' 	, "demo_end_pos:   " + demo_end_pos );		
 		
-				
+		
+						
 		if(StopRefreshDriverlist == "false"){
 			var resttime = ConvertLaptimeInReadbaleFormat((e.data.globals.attributes.SessionTimeDuration-e.data.globals.attributes.SessionTimeElapsed)*1000);       //Times in seconds, but function need it in milliseconds, multiplied by 1000
 			if(resttime != "-"){
@@ -992,13 +997,14 @@
 	                  		//if(log >= 4){console.log("Record Pos: ", record_pos, ", Demo Delta: ",demo[record_pos].globals.sensorLayer_UpdateDelta,", cur Delta: ",sensorLayer_UpdateDelta, "diff: ", sensorLayer_UpdateDelta_DEMOdiff, "Delay: ", WORKERDELAY_DEMODATA);}
 	
 	                        workerDSDATA.postMessage({
-	                                workerdelay:            WORKERDELAY_DEMODATA
-	                                ,dsurl:                 ""
-	                                ,dsport:                0
-	                                ,timeout:               demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
-	                                ,receivemode:   		"GETDEMODATA"
-	                                ,originaldatasource:	demo[record_pos]['globals']['datasource']	//keep original datasource 
-	                                ,arefpoint:             e.data.arefpoint});
+	                                workerdelay:            	WORKERDELAY_DEMODATA
+	                                ,dsurl:                 	""
+	                                ,dsport:                	0
+	                                ,timeout:               	demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
+	                                ,receivemode:   			"GETDEMODATA"
+	                                ,originaldatasource:		demo[record_pos]['globals']['datasource']	//keep original datasource
+	                                ,originalcurgamerunning:	demo[record_pos]['globals']['curgamerunning']
+	                                ,arefpoint:             	e.data.arefpoint});
 	                        
 	                      //prepare next step size for e.g. fast forward scenarios 
 	                        record_pos = record_pos + replay_step_size;				
@@ -1046,8 +1052,8 @@
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'], arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP, {originaldatasource : demo[record_pos]['globals']['datasource']});
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'],originalcurgamerunning : demo[record_pos]['globals']['curgamerunning'], arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP, {originaldatasource : demo[record_pos]['globals']['datasource'], originalcurgamerunning : demo[record_pos]['globals']['curgamerunning']});
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			break;
 		default:
@@ -2070,8 +2076,17 @@ function initRecFileReader( HTMLCONTROLLHANDLE ){
 function initDemoData(aNewData, SetApiModeTo ){
 	
 	//overwrite global array with new data
-	demo = aNewData;			
-			
+	demo 			= aNewData;
+	if (	aNewData[0] &&
+			aNewData[0]['globals'] &&
+			aNewData[0]['globals']['curgamerunning']
+	){				
+		CurGameRunning	= aNewData[0]['globals']['curgamerunning'];
+	}else{		
+		if(log >= 3){console.log("WARNING: initDemoData() - variable CurGameRunning not in DemoFile! aNewData   ", aNewData);}
+		alert("WARNING: initDemoData() - Variable CurGameRunning not included in DemoFile! Could result in data mapping problems.")
+	}	
+				
 	//reset values to default
 	setParamDemoStartPos( 0 , true );
 	setParamDemoEndPos( demo.length-1 , true );	

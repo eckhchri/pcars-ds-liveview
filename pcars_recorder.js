@@ -55,7 +55,7 @@ function exportDataCompressed(filename){
 		zip.file( this.FileNameInArchive , JSON.stringify( this.data ) 	);
 		
 		//add version information in extra file
-		zip.file("version.txt" , "CompressionVersion_ZIP_v1");
+		zip.file("version.txt" , "CompressionVersion_ZIP_v2");
 		
 		//generate zip archive
 		zip.generateAsync({type:"blob", compression: "DEFLATE", compressionOptions : {level:9} })

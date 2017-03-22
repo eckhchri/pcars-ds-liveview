@@ -128,6 +128,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			,"state":				demo_el.globals.state
 			,"name":				demo_el.globals.name
 			,"datasource":			confParam['originaldatasource']
+			,"curgamerunning":		confParam['originalcurgamerunning']
 			,"attributes":{
 				"TrackId":			demo_el.globals.attributes.TrackId
 				,"GridSize":		demo_el.globals.attributes.GridSize
@@ -238,6 +239,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
 		                                        ,"datasource":			"DSPCARS1"
+	                                        	,"curgamerunning":		"PCARS1"			//used for correct data mapping of Vehiclelist and tracklist. Do not change because its used to access an hash directly
 		                                        ,"attributes":		{
 								"TrackId":		9999999999
 								,"GridSize":		0
@@ -257,6 +259,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
 		                                        ,"datasource":			"DSPCARS1"
+	                                        	,"curgamerunning":		"PCARS1"
 		                                        ,"name":                myArr.response.name
 		                                        ,"attributes":		{
 								"TrackId":		myArr.response.attributes.TrackId
@@ -270,13 +273,14 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	        	                                }
 				}else{
 					// in case of othe stati return a defined value
-					aDrivers.globals = {
-	                        "joinable":            "unknown mode"
+						aDrivers.globals = {
+							"joinable":            "unknown mode"
 	                       ,"lobbyid":             "unknown mode"
 	                       ,"max_member_count":    "unknown mode"
 	                       ,"now":                 "unknown mode"
 	                       ,"state":               "unknown mode"
 	                       ,"datasource":		   "DSPCARS1"
+	                       ,"curgamerunning":		"PCARS1"
 	                       ,"name":                "unknown mode"
 	                       ,"attributes":		{
 					"TrackId":		9999999999
@@ -287,7 +291,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"SessionTimeDuration":	0
 					,"SessionTimeElapsed":	0
 					}
-	                       }
+	              }
 				}
 				
 				/* attributes now single mapped above in the "Running" state, because there are 63 attributes and they need a lot of space during recording
@@ -407,6 +411,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"now":					"CREST Mode"
 					,"state":				"CREST Mode"
 					,"datasource":			"CRESTv1"
+					,"curgamerunning":		"PCARS1"
 					,"attributes":{
 						"TrackId":			TrackID
 						,"SessionStage":	myArr.gameStates.mSessionState
@@ -472,6 +477,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"now":					"CREST Mode"
 					,"state":				"CREST Mode"
 					,"datasource":			"CRESTv2"
+					,"curgamerunning":		"PCARS2"
 					,"attributes":{
 						"TrackId":			TrackID
 						,"SessionStage":	myArr.gameStates.mSessionState
