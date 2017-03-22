@@ -99,6 +99,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		,"now":			"default parameters"
 		,"state":		"default parameters"
 		,"datasource":	"default parameters"
+		,"curgamerunning": "default parameters"
 		,"attributes":{
 			"TrackId":      9999999999
 			,"SessionStage":""
