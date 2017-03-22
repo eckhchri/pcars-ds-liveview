@@ -738,6 +738,16 @@
 		}
 		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		
+		//Hide drivertable columns diff and gap during SessionStage Race1 and Race2
+		if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
+			//if(log >= 3){console.log("Hide Gaps");}
+			jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
+		}
+		if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
+			//if(log >= 3){console.log("Show Gaps");}
+			jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
+		}
+		
 		//keep cuircitID in mind for next run
 		var tmpcuircitID = e.data.globals.attributes.TrackId;
 
@@ -1726,16 +1736,6 @@ function refreshDriverList(a){
 		//_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};		
 	}
 
-	//Hide columns diff and gap during SessionStage Race1 and Race2
-	if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
-		//if(log >= 3){console.log("Hide Gaps");}
-		jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
-	}
-	if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
-		//if(log >= 3){console.log("Show Gaps");}
-		jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
-	}
-	
 	// hide inclassposition drivertable column, if there is only one vehicle class active
 	if (Object.keys(aInClass).length <= 1){
 		jQuery("#DriverDataTable").hideCol(["inclassposition"]);
