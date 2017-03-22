@@ -773,7 +773,7 @@
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
 				//convert vehicleID to VehicleName
-				e.data.driverlist[i].VehicleId			=  VehicleIdToName(e.data.driverlist[i].VehicleId , PCARSVehicleList.getIdToNameMapping() );				
+				e.data.driverlist[i].VehicleId			=  VehicleIdToName(e.data.driverlist[i].VehicleId , PCARSVehicleList.getIdToNameMapping( CurGameRunning ) );				
 				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
@@ -782,10 +782,10 @@
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 
 				//set vehicle class full name
-				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getNameToClassMapping() );
+				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getNameToClassMapping( CurGameRunning ) );
 				
 				//collect all vehicle classes of the current race
-				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId ) ] = 1; 
+				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId, CurGameRunning  ) ] = 1; 
 				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized() ] = 1;
 								
 				//calculate "in class race position"

@@ -1,29 +1,27 @@
 // CLASS of an pCars vehicle
 function PCARSVEHICLELIST() {
 
-        //this.name							=	"";
-        this.idToNameMapping				=	{};			//mapping between vehicleid and name
-        this.idToClassMapping				=	{};			//mapping between vehicleid and class
-        this.idToClassMappingNormalized		=	{};			//mapping between vehicleid and class normalized
-        this.NameToClassMapping				=	{};			//mapping between VehicleName and VehicleName
-        this.NameToClassMappingNormalized	=	{};			//mapping between VehicleName and VehicleNameNormalized        
-        this.aVehicleList					=	[]; 		//array of pcars_vehicle objects
-        this.aVehicleInfo					=	{};			//array of all relevant vehicle info, name, class, wiki links
+        this.name							=	"";
+        this.idToNameMappingExt				=	[];			//extended mapping between vehicleid and name
+        this.idToClassMappingExt			=	[];			//extended mapping between vehicleid and class
+        this.idToClassMappingExtNormalized	=	[];			//extended mapping between vehicleid and class normalized
+        this.NameToClassMappingExt			=	[];			//extended mapping between VehicleName and VehicleName
+        this.NameToClassMappingExtNormalized=	[];			//extended mapping between VehicleName and VehicleNameNormalized
+        this.aVehicleList					=	[]; 		//merged array of pcars_vehicle objects from all game versions        
         this.aVehicleInfoExt				=	{};			//extended array of vehicle info which includes game name membership (PCARS2,PCARS2)
         
         //init data
-        this.loadVehicleData();     										//get varaibale   this.aVehicleInfo
-        _validateVehicleData(this.aVehicleInfoExt);							//validate data
-        this.setVehicleData(_convertExtVehicleList(this.aVehicleInfoExt));	//init array of this object
+        this.loadVehicleData();     												//get varaibale   this.aVehicleInfo
+        this._validateVehicleData(this.aVehicleInfoExt);							//validate data
+        this._generateVehicleData(_convertExtVehicleList(this.aVehicleInfoExt)); 	//init array of this object	        
+        this._generateDataMapping(this.aVehicleInfoExt);							//generate Mappings
         
         return this;
 }
 
 //fill the object with data
-function setVehicleData(aVL){
-		
-	if(log >= 3){console.log("+++++++++ setVehicleData(): aVL ", aVL);}
-	
+function _generateVehicleData(aVL){
+				
 	//build up PCARSVEHICLE objects
 	for (i = 0; i < aVL.length; i++) {				
 		this.aVehicleList[i] =  new  PCARSVEHICLE(
@@ -33,29 +31,33 @@ function setVehicleData(aVL){
 										'',
 										aVL[i].gamescope,
 										'-'
-										); 
-								
-		//create mappings for faster access in futher scenarios
-		this.idToNameMapping[aVL[i].id] 					=	aVL[i].name;
-		this.idToClassMapping[aVL[i].id] 					=	aVL[i].class;
-		this.idToClassMappingNormalized[aVL[i].id]			=	_ClassNormalization( aVL[i].class );
-		this.NameToClassMapping[aVL[i].name]				=	aVL[i].class
-		this.NameToClassMappingNormalized[aVL[i].name]		=	_ClassNormalization( aVL[i].class );						
-	}	
-			
+										); 																
+	}
+				
 	return 1;
 }
 
-
-function getClassNormalizedByString(VId){	
-
-	//decision if mapping via VehicleID or Name	
-	if (this.NameToClassMappingNormalized[VId]){
-			
-		return  this.NameToClassMappingNormalized[VId];
-	}else{
+function _generateDataMapping(aVL){
 		
-		this.idToClassMapping[VId]
+	for (var gn in aVL){	//gn=GameName	
+		
+		for (var i = 0;i < aVL[gn].length;i++){
+			
+			//build up mapping hashes
+			//first run initialisation
+			if (! this.idToNameMappingExt[gn] ) {  this.idToNameMappingExt[gn] = []; }
+			if (! this.NameToClassMappingExtNormalized[gn] ) {  this.NameToClassMappingExtNormalized[gn] = []; }
+			if (! this.NameToClassMappingExt[gn] ) {  this.NameToClassMappingExt[gn] = []; }
+			if (! this.idToClassMappingExtNormalized[gn] ) {  this.idToClassMappingExtNormalized[gn] = []; }
+			if (! this.idToClassMappingExt[gn] ) {  this.idToClassMappingExt[gn] = []; }
+			
+			this.idToNameMappingExt[gn][aVL[gn][i].id] 					=	aVL[gn][i].name;			
+			this.idToClassMappingExt[gn][aVL[gn][i].id]					=	aVL[gn][i].class;			
+			this.idToClassMappingExtNormalized[gn][aVL[gn][i].id]		=	_ClassNormalization( aVL[gn][i].class );
+			this.NameToClassMappingExt[gn][aVL[gn][i].name]				=	aVL[gn][i].class;			
+			this.NameToClassMappingExtNormalized[gn][aVL[gn][i].name]	=	_ClassNormalization( aVL[gn][i].class );
+																	
+		}
 	}
 }
 
@@ -67,28 +69,7 @@ function _ClassNormalization(str){
 	}
 }
 
-//return a hash of vehicle classes with CSS Formatstrings
-function getVehicleClasses(){
-	
-	for(var i=0;i < this.aVehicleList.length; i++){	
-		aVehicleList[i].cls		
-	}
-}
-
-function getVehicleClassByName(){
-	
-	for(var i=0;i < this.aVehicleList.length; i++){	
-		aVehicleList[i].cls		
-	}
- 
-}
-
-function getVehicleList(){
-	
-	return this.aVehicleList;
-}
-
-function _convertExtVehicleList(aVL){
+function _convertExtVehicleList(aVL, aVIE){
 	//return an array of PCARSVehicle objects
 	//task: merge PCARS1 and PCARS2 vehicle lists to displaying in the GUI jqgrid only uniqure entires
 	//conditions:
@@ -112,9 +93,10 @@ function _convertExtVehicleList(aVL){
 				aVL[gn][i]['gamescope'] = gn;
 			}
 			//in both cases add the original data
-			aMergedVL[cmpstr]	= aVL[gn][i];									
+			aMergedVL[cmpstr]	= aVL[gn][i];	
+															
 		}				
-	}	
+	}			
 	
 	//after merging via comparestring bring it back to a normal flat array for each unique entry
 	for (var data in aMergedVL ){		
@@ -122,16 +104,6 @@ function _convertExtVehicleList(aVL){
 	}
 					
 	return aNewVL;
-}
-
-function getNameToClassMapping(){
-		
-	return this.NameToClassMapping;
-}
-
-function getIdToNameMapping(){
-	
-	return this.idToNameMapping;
 }
 
 function _validateVehicleData(aVL){
@@ -163,6 +135,49 @@ function _validateVehicleData(aVL){
 		}
 	}
 	
+}
+
+
+//return a hash of vehicle classes with CSS Formatstrings
+function getVehicleClasses(){
+	
+	for(var i=0;i < this.aVehicleList.length; i++){	
+		aVehicleList[i].cls		
+	}
+}
+
+function getVehicleClassByName(){
+	
+	for(var i=0;i < this.aVehicleList.length; i++){	
+		aVehicleList[i].cls		
+	}
+ 
+}
+
+function getVehicleList(){
+	
+	return this.aVehicleList;
+}
+
+function getClassNormalizedByString(VId, gn){	
+	//gn=gamename   PCARS1|PCARS2
+	//decision if mapping via VehicleID or Name	
+	if (this.NameToClassMappingExtNormalized[gn][VId]){
+			
+		return  this.NameToClassMappingExtNormalized[gn][VId];
+	}else{
+		
+		this.idToClassMappingExt[gn][VId]
+	}
+}
+
+function getNameToClassMapping(gn){
+	//gn=gamename   PCARS1|PCARS2	
+	return this.NameToClassMappingExt[gn];
+}
+function getIdToNameMapping(gn){
+	//gn=gamename   PCARS1|PCARS2
+	return this.idToNameMappingExt[gn];
 }
 
 /////////////////////////////// static mapping ////////////////////
@@ -559,7 +574,7 @@ this.aVehicleInfoExt['PCARS1'] = [
  },
  {
    "id" : -1748676965,
-   "name" : "McLaren P1",
+   "name" : "McLaren P1Â™",
    "class" : "Road A"
  },
  {
@@ -1329,7 +1344,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1748676965,
-        "name" : "McLaren P1™ (Alpha)",
+        "name" : "McLaren P1â„¢ (Alpha)",
         "class" : "Road A"
       },
       {
@@ -1394,7 +1409,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1339322144,
-        "name" : "McLaren P1™ GTR (Alpha)",
+        "name" : "McLaren P1â„¢ GTR (Alpha)",
         "class" : "Track Day"
       },
       {
@@ -1665,7 +1680,9 @@ this.aVehicleInfoExt['PCARS2']	= 	[
 }// end load vehicle data
 
 ////////////////////
-PCARSVEHICLELIST.prototype.setVehicleData=setVehicleData;
+PCARSVEHICLELIST.prototype._generateVehicleData=_generateVehicleData;
+PCARSVEHICLELIST.prototype._generateDataMapping=_generateDataMapping;
+PCARSVEHICLELIST.prototype._validateVehicleData=_validateVehicleData;
 PCARSVEHICLELIST.prototype.getVehicleClasses=getVehicleClasses;
 PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
 PCARSVEHICLELIST.prototype.getVehicleClassByName=getVehicleClassByName;
