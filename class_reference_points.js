@@ -721,19 +721,19 @@ function Refpoint(circuit_id)
 	//Circuit of the Americas GP
 	aRefPoints[2050315946] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":		30.131930
-		,"refLong":		-97.639797
-		,"rotation":		-0.6
+		"refLat":		30.131935
+		,"refLong":		-97.639792
+		,"rotation":		-0.7
 		,"cor_r_Long":		0
 		,"cor_r_Lat":		0
-		,"cor_PosX_mul":	1
-		,"cor_PosY_mul":	1
+		,"cor_PosX_mul":	0.9983
+		,"cor_PosY_mul":	1.0035
 		,"Name":		"Circuit of the Americas GP"
 		,"Name2":		"Circuit_of_the_Americas Grand Prix"	//mTrackLocation:"Circuit_of_the_Americas",mTrackVariation:"Grand Prix"
 		,"Zoom":		16
 		,"MapInitLat":	30.134614
 		,"MapInitLong":	-97.634090
-		,"Comment":		"refPoint set"
+		,"Comment":		"finished"
 		});
 	//Circuit of the Americas Club Circuit
 	aRefPoints[9999990045] = CopyObjectWithModifications(aRefPoints[2050315946], {"Name": "Circuit of the Americas Club Circuit","Name2": "Circuit_of_the_Americas Club Circuit","Zoom": 17,"MapInitLat": 30.137552,"MapInitLong": -97.628475});
