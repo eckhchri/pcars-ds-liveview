@@ -74,6 +74,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	// todo: Mapping HASH fuer receivevariant festlegen
 	var aReceiveModes = {
 				"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
+				"GETDS2ANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
 				"GETTRACKLIST"  		: "/api/list/tracks",
 				"GETVEHICLELIST"  		: "/api/list/vehicles",
 				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true",
@@ -344,8 +345,130 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				}
 				
 				return aDrivers;
+		
+				
+
+			case "GETDS2ANDDRIVERDATA":
+				
+				// collect DS2 common data
+				//Todo: adjust to DS2 values
+				if ( myArr.response.state == "Idle" ){
 	
-								
+						//	Todo: put all values into Array?
+						aDrivers.globals = {
+	                                         	"joinable":				myArr.response.joinable
+		                                        ,"lobbyid":             myArr.response.lobbyid
+		                                        ,"max_member_count":    myArr.response.max_member_count
+		                                        ,"now":                 myArr.response.now
+		                                        ,"state":               myArr.response.state
+		                                        ,"datasource":			"DSPCARS1"
+	                                        	,"curgamerunning":		"PCARS1"			//used for correct data mapping of Vehiclelist and tracklist. Do not change because its used to access an hash directly
+		                                        ,"attributes":		{
+								"TrackId":		9999999999
+								,"GridSize":		0
+								,"MaxPlayers":		0
+								,"SessionStage":	""
+								,"SessionState":	""
+								,"SessionTimeDuration":	0
+								,"SessionTimeElapsed":	0
+								}
+						}
+				}else if ( myArr.response.state == "Running" ){
+	
+						aDrivers.globals = {
+		                                         "joinable":            myArr.response.joinable
+		                                        ,"lobbyid":             myArr.response.lobbyid
+		                                        ,"max_member_count":    myArr.response.max_member_count
+		                                        ,"now":                 myArr.response.now
+		                                        ,"state":               myArr.response.state
+		                                        ,"datasource":			"DSPCARS1"
+	                                        	,"curgamerunning":		"PCARS1"
+		                                        ,"name":                myArr.response.name
+		                                        ,"attributes":		{
+								"TrackId":		myArr.response.attributes.TrackId
+								,"GridSize":		myArr.response.attributes.GridSize
+								,"MaxPlayers":		myArr.response.attributes.MaxPlayers
+								,"SessionStage":	myArr.response.attributes.SessionStage
+								,"SessionState":	myArr.response.attributes.SessionState
+								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
+								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed								
+								}
+	        	                                }
+				}else{
+					// in case of othe stati return a defined value
+						aDrivers.globals = {
+							"joinable":            "unknown mode"
+	                       ,"lobbyid":             "unknown mode"
+	                       ,"max_member_count":    "unknown mode"
+	                       ,"now":                 "unknown mode"
+	                       ,"state":               "unknown mode"
+	                       ,"datasource":		   "DSPCARS1"
+	                       ,"curgamerunning":		"PCARS1"
+	                       ,"name":                "unknown mode"
+	                       ,"attributes":		{
+					"TrackId":		9999999999
+					,"GridSize":		0
+					,"MaxPlayers":		0
+					,"SessionStage":	""
+					,"SessionState":	""
+					,"SessionTimeDuration":	0
+					,"SessionTimeElapsed":	0
+					}
+	              }
+				}
+				
+				/* attributes now single mapped above in the "Running" state, because there are 63 attributes and they need a lot of space during recording
+				//cath all attributes
+				for (var key in myArr.response.attributes) {
+					aDrivers.globals.attributes[key] =  myArr.response.attributes[key];
+				}*/
+									
+				// collect Driverdata
+				if ( myArr.response.participants.length == 0 ){
+	
+					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
+					// put empty dummy object into array
+					aDrivers.driverlist.push( DriverDummy );
+	
+				}else{
+	
+					for (var i = 0;i<myArr.response.participants.length;i++){
+						
+							//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+							// read data of all participants and put it in an array of PCARSdriver objects						
+							index = CalculateIndexDriverArray (myArr.response.participants[i].attributes.RacePosition, loopcnt);
+							loopcnt++;
+
+							aDrivers.driverlist[index] =
+		                                        new PCARSdriver(
+		                                                myArr.response.participants[i].attributes.RefId,
+		                                                myArr.response.participants[i].attributes.Name,
+		                                                myArr.response.participants[i].attributes.IsPlayer,
+		                                                myArr.response.participants[i].attributes.GridPosition,
+		                                                myArr.response.participants[i].attributes.PositionX,
+		                                                myArr.response.participants[i].attributes.PositionY,
+		                                                myArr.response.participants[i].attributes.PositionZ,
+		                                                myArr.response.participants[i].attributes.State,
+		                                                this.aSectormapping[ myArr.response.participants[i].attributes.CurrentSector ],		                                                
+		                                                myArr.response.participants[i].attributes.RacePosition,
+		                                                myArr.response.participants[i].attributes.FastestLapTime,
+		                                                myArr.response.participants[i].attributes.LastLapTime,
+		                                                myArr.response.participants[i].attributes.Orientation,
+		                                                myArr.response.participants[i].attributes.Speed,
+		                                                myArr.response.participants[i].attributes.CurrentLap,
+		                                                myArr.response.participants[i].attributes.VehicleId
+		                                         	);
+					}
+	
+					//if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
+					// return information
+					return aDrivers;
+				}
+				
+				return aDrivers;
+				
+				
+				
 			case "GETTRACKLIST":
 
 				// if no users joined return example Data

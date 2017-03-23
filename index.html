@@ -182,8 +182,9 @@
 			<label for="APIMODE">Select API Type</label>
 	    	<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      		<option>DS</option>
+	      		<option>DS2</option>
 	      		<option>CREST</option>
-			<option>CREST2</option>
+				<option>CREST2</option>
 	      		<option>DEMO</option>
 			</select>
 		</fieldset>
@@ -779,8 +780,6 @@
 		var tmpVeName ="";
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
-			
-if(log >= 3){console.log("+++++++++ DEBUG  e.data.driverlist[i]: ", e.data.driverlist[i]);}
 			
 				//convert vehicleID to VehicleName
 				e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );				
