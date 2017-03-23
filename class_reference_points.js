@@ -603,7 +603,22 @@ function Refpoint(circuit_id)
 		,"Comment": "live check"
 		});
 	//Greenwood Karting Circuit - Kart track of Spa-Franchorchamps
-	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Greenwood Karting Circuit","Name2": "","Zoom": 18,"MapInitLat": 50.432285,"MapInitLong": 5.962968});
+	aRefPoints[-1160443077] = CopyObjectWithModifications(aRefPoints[904625875],
+		{
+		"refLat":        50.430342
+		,"refLong":      5.976448
+		,"rotation":     -2.45
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 0.99
+		,"cor_PosY_mul": 1.01
+		,"Name": "Greenwood Karting Circuit"
+		,"Name2": ""
+		,"Zoom": 18
+		,"MapInitLat": 50.432285
+		,"MapInitLong": 5.962968
+		,"Comment": "finished, discrepancies"
+		});
 		
 	//Circuit de Barcelona-Catalunya GP
 	aRefPoints[521933422] = CopyObjectWithModifications(aRefPoints[9999999999],
