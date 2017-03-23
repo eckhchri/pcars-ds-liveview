@@ -361,8 +361,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
-		                                        ,"datasource":			"DSPCARS1"
-	                                        	,"curgamerunning":		"PCARS1"			//used for correct data mapping of Vehiclelist and tracklist. Do not change because its used to access an hash directly
+		                                        ,"datasource":			"DSPCARS2"
+	                                        	,"curgamerunning":		"PCARS2"			//used for correct data mapping of Vehiclelist and tracklist. Do not change because its used to access an hash directly
 		                                        ,"attributes":		{
 								"TrackId":		9999999999
 								,"GridSize":		0
@@ -381,8 +381,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
-		                                        ,"datasource":			"DSPCARS1"
-	                                        	,"curgamerunning":		"PCARS1"
+		                                        ,"datasource":			"DSPCARS2"
+	                                        	,"curgamerunning":		"PCARS2"
 		                                        ,"name":                myArr.response.name
 		                                        ,"attributes":		{
 								"TrackId":		myArr.response.attributes.TrackId
@@ -402,8 +402,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	                       ,"max_member_count":    "unknown mode"
 	                       ,"now":                 "unknown mode"
 	                       ,"state":               "unknown mode"
-	                       ,"datasource":		   "DSPCARS1"
-	                       ,"curgamerunning":		"PCARS1"
+	                       ,"datasource":		   "DSPCARS2"
+	                       ,"curgamerunning":		"PCARS2"
 	                       ,"name":                "unknown mode"
 	                       ,"attributes":		{
 					"TrackId":		9999999999
