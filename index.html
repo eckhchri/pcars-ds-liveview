@@ -776,11 +776,14 @@
 		// us this variant because it should be faster then aSensorData = new Array();
 		aSensorData.length = 0;
 
+		var tmpVeName ="";
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
+if(log >= 3){console.log("+++++++++ DEBUG  e.data.driverlist[i]: ", e.data.driverlist[i]);}
+			
 				//convert vehicleID to VehicleName
-				e.data.driverlist[i].VehicleId			=  VehicleIdToName(e.data.driverlist[i].VehicleId , PCARSVehicleList.getIdToNameMapping( CurGameRunning ) );				
+				e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );				
 				
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
@@ -789,10 +792,11 @@
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 
 				//set vehicle class full name
-				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getNameToClassMapping( CurGameRunning ) );
-				
+			//ToDo: delete second arry in function setVehicleClassNameByMapping() its only to keep backwards compatibility Demo Files
+				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getIdToClassMapping( CurGameRunning ), PCARSVehicleList.getNameToClassMapping( CurGameRunning ) );
+					
 				//collect all vehicle classes of the current race
-				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId, CurGameRunning  ) ] = 1; 
+				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId, CurGameRunning  ) ] = 1; 				
 				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized() ] = 1;
 								
 				//calculate "in class race position"
@@ -824,7 +828,7 @@
 				
 				//TODO: check if it it possible to merge aSensorData + e.data.driverlist to prevent data redundancy refreshDriverList() + sensorLayer.update()
 				e.data.driverlist[i].CSSGridClasses = e.data.driverlist[i].GetCSSGridClass();
-				
+
 				
 				//////////////////////////////////////////////////////////////////////////////////////
 				//save race statistics
@@ -1680,7 +1684,7 @@ function refreshVehicleList(a){
 	// Using data and localReader ???
 	for (i=0; i < a.length; i++) {
 		_data = {
-   					vehicleid:		a[i].vehicleid,
+   					vehicleid:		a[i].id,
 					name:			a[i].name,
 					cls:			a[i].cls,
 					gamescope:		a[i].gamescope,
@@ -1731,7 +1735,7 @@ function refreshDriverList(a){
 					,driverstate:			a[i].State
 					,driversector:			a[i].CurrentSector
 					,lapnumber:				a[i].CurrentLap
-					,vehiclename:			a[i].VehicleId
+					,vehiclename:			a[i].VehicleName
 					,vehicleclass:			a[i].VehicleClassName
 					,lastlap:				ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
 					,fastestlap:			ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
@@ -1777,17 +1781,6 @@ function transformVehicleObjectToHash(a){
 	}
 				
 	return hash;
-}
-
-function VehicleIdToName(id, array){
-	
-	if (array[id]){
-		return array[id];	
-	} else {
-		// in the case vehilce IDs not in hash		
-	}
-	//if ID not found return id
-	return id;
 }
 
 function ConvertIsPlayer(bool){

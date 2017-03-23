@@ -16,6 +16,9 @@ function PCARSVEHICLELIST() {
         this._generateVehicleData(_convertExtVehicleList(this.aVehicleInfoExt)); 	//init array of this object	        
         this._generateDataMapping(this.aVehicleInfoExt);							//generate Mappings
         
+        
+        if(log >= 3){console.log("INFO: PCARSVEHICLELIST. this ", this);}
+        
         return this;
 }
 
@@ -63,7 +66,7 @@ function _generateDataMapping(aVL){
 
 function _ClassNormalization(str){	
 	if (str){ //check if its defined string
-		return str.replace(/ /g, '_');
+		return str.replace(/ |\.|\(|\)/g, '_');
 	}else{
 		return "NO_CLASS_DEFINED";
 	}
@@ -164,10 +167,11 @@ function getClassNormalizedByString(VId, gn){
 	//decision if mapping via VehicleID or Name	
 	if (this.NameToClassMappingExtNormalized[gn][VId]){
 			
-		return  this.NameToClassMappingExtNormalized[gn][VId];
+		return this.NameToClassMappingExtNormalized[gn][VId];
 	}else{
 		
-		this.idToClassMappingExt[gn][VId]
+		//if name does not match, tray IDtoClass mapping
+		return this.idToClassMappingExt[gn][VId]
 	}
 }
 
@@ -178,6 +182,23 @@ function getNameToClassMapping(gn){
 function getIdToNameMapping(gn){
 	//gn=gamename   PCARS1|PCARS2
 	return this.idToNameMappingExt[gn];
+}
+
+function getIdToClassMapping(gn){
+	//gn=gamename   PCARS1|PCARS2
+	return this.idToClassMappingExt[gn];
+}
+
+
+function VehicleIdToName(id, gn){
+		
+	if (this.idToNameMappingExt[gn][id]){
+		return this.idToNameMappingExt[gn][id];	
+	} else {
+		// in the case vehilce IDs not in hash		
+	}
+	//if ID not found return id
+	return id;
 }
 
 /////////////////////////////// static mapping ////////////////////
@@ -1691,6 +1712,8 @@ PCARSVEHICLELIST.prototype.getVehicleList=getVehicleList;
 PCARSVEHICLELIST.prototype.loadVehicleData=loadVehicleData;
 PCARSVEHICLELIST.prototype.getNameToClassMapping=getNameToClassMapping;
 PCARSVEHICLELIST.prototype.getIdToNameMapping=getIdToNameMapping;
+PCARSVEHICLELIST.prototype.VehicleIdToName=VehicleIdToName;
+PCARSVEHICLELIST.prototype.getIdToClassMapping=getIdToClassMapping;
 
 
 

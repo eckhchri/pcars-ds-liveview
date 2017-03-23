@@ -17,7 +17,8 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.Orientation   		=   Orient;
         this.Speed	   			=   Spd;
         this.CurrentLap			=	CurrentLap;
-        this.VehicleId			=	VehicleId;	
+        this.VehicleId			=	VehicleId;
+        this.VehicleName		=	"";				// will filled by IDtoName mapping
         this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
 
         //private vars
@@ -108,16 +109,20 @@ function SetExampleData() {
 	return 1;
 }
 
-function setVehicleClassNameByMapping(mapping){
+function setVehicleClassNameByMapping(mappingID, mappingName){
+	
+if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  this ", this);}	
+if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  mappingID: ", mappingID);}
+if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()   mappingName: ",  mappingName);}	
 	//set VehicleClass by mapping information; if no math it is undefined
-	if (mapping['' + this.VehicleId]){
-		
-		return this.VehicleClassName = mapping['' + this.VehicleId];
+	if (mappingID['' + this.VehicleId]){		
+		this.VehicleClassName = mappingID['' + this.VehicleId];		
+	}else if (mappingName['' + this.VehicleName]){
+		this.VehicleClassName = mappingName['' + this.VehicleName];		
 	}else{
 		//if this.VehicleId was not converted to VehicleName
-		return this.VehicleClassName = "not defined";
-	}
-		
+		this.VehicleClassName = "not defined";
+	}		
 }
 
 function GetCSSTextClass() {
@@ -155,14 +160,14 @@ function GetCSSCircleClass(){
 
 function getVehicleNameNormalized(){	
 	//TODO: If this.VehicleId is an negativeID it should be also converted to a valid string
-	if (typeof this.VehicleId === 'string'){
-		return this.VehicleId.replace(/ /g, '_');		
+	if (typeof this.VehicleName === 'string'){
+		return this.VehicleName.replace(/ |\.|\(|\)/g, '_');		
 	}	
 	return this.VehicleId;	
 }
 
 function getVehicleClassNormalized(){		
-	return this.VehicleClassName.replace(/ /g, '_');
+	return this.VehicleClassName.replace(/ |\.|\(|\)/g, '_');
 }
 
 function getVehicleClassName(){	
