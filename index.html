@@ -796,6 +796,12 @@
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
+				//regarding issue #91 -> issue https://github.com/eckhchri/pcars-ds-liveview/issues/91
+				if (! e.data.driverlist[i] ){					
+					if(log >= 3){console.log("ERROR:Object missing in Array. e.data ", e.data );}
+					continue; // next element
+				}
+						
 				//convert vehicleID to VehicleName
 				e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );				
 				
