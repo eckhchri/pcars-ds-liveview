@@ -115,10 +115,7 @@
 				<div><i class="fa fa-fast-backward fa-2x"></i></div>				
 			</div>
 			<div class="box">
-				<div><i class="fa fa-pause fa-2x"></i></div>
-			</div>
-			<div class="box">				
-				<div><i class="fa fa-play fa-2x"></i></div>				
+				<div><i id="btn_fa_play-pause" class="fa fa-pause fa-2x"></i></div>
 			</div>			
 			<div class="box">
 				<div><i class="fa fa-fast-forward fa-2x"></i></div>
@@ -545,6 +542,24 @@
     		});
     		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
+	
+	//fa buttons
+	$(function() {
+	 $('#btn_fa_play-pause').click(function() {
+		 
+		 	if (replay_step_size == 0){
+		 		replay_step_size = 1;	
+		 	}else{
+				replay_step_size = 0;
+		 	}
+			
+			var wasPlay = $(this).hasClass('fa-play');
+		    $(this).removeClass('fa-play fa-pause');
+		    var klass = wasPlay ? 'fa-pause' : 'fa-play';
+		    $(this).addClass(klass)
+		});
+	});
+	
 				
 	// initiate jqGrid for DriverData
 	// todo: add subgrid information like: Long,Lat,RefPoint,...
