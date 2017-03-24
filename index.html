@@ -1741,7 +1741,7 @@ function refreshDriverList(a){
 	for (i=0; i < a.length; i++) {
 		
 		//regarding issue #91 -> issue https://github.com/eckhchri/pcars-ds-liveview/issues/91
-		if (! [i] ){					
+		if (! a[i] ){					
 			if(log >= 3){console.log("ERROR:Object missing in Array. a ", a );}
 			continue; // next element
 		}
