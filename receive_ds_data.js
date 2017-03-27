@@ -103,8 +103,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		,"curgamerunning": "default parameters"
 		,"attributes":{
 			"TrackId":      9999999999
-			,"SessionStage":""
-			,"SessionState":""
+			,"GridSize":            0
+			,"MaxPlayers":          0
+			,"SessionStage":	""
+			,"SessionState":	""
+			,"RaceLength":          0
 		}
 	}
 	aDrivers.driverlist	=	new Array();
@@ -250,6 +253,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionState":	""
 								,"SessionTimeDuration":	0
 								,"SessionTimeElapsed":	0
+								,"RaceLength":		0
 								}
 						}
 				}else if ( myArr.response.state == "Running" ){
@@ -270,7 +274,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionStage":	myArr.response.attributes.SessionStage
 								,"SessionState":	myArr.response.attributes.SessionState
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
-								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed								
+								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed
+								,"RaceLength":		myArr.response.attributes.Race1Length
 								}
 	        	                                }
 				}else{
@@ -292,6 +297,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"SessionState":	""
 					,"SessionTimeDuration":	0
 					,"SessionTimeElapsed":	0
+					,"RaceLength":		0
 					}
 	              }
 				}
@@ -371,6 +377,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionState":	""
 								,"SessionTimeDuration":	0
 								,"SessionTimeElapsed":	0
+								,"RaceLength":		0
 								}
 						}
 				}else if ( myArr.response.state == "Running" ){
@@ -391,7 +398,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionStage":	myArr.response.attributes.SessionStage
 								,"SessionState":	myArr.response.attributes.SessionState
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
-								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed								
+								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed	
+								,"RaceLength":		myArr.response.attributes.Race1Length
 								}
 	        	                                }
 				}else{
@@ -413,6 +421,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"SessionState":	""
 					,"SessionTimeDuration":	0
 					,"SessionTimeElapsed":	0
+					,"RaceLength":		0
 					}
 	              }
 				}
