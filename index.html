@@ -798,7 +798,7 @@
 			
 				//regarding issue #91 -> issue https://github.com/eckhchri/pcars-ds-liveview/issues/91
 				if (! e.data.driverlist[i] ){					
-					if(log >= 3){console.log("ERROR:Object missing in Array. e.data ", e.data );}
+					if(log >= 2){console.log("ERROR:Object missing in Array. e.data ", e.data );}
 					continue; // next element
 				}
 						
@@ -1741,8 +1741,9 @@ function refreshDriverList(a){
 	for (i=0; i < a.length; i++) {
 		
 		//regarding issue #91 -> issue https://github.com/eckhchri/pcars-ds-liveview/issues/91
-		if (! a[i] ){					
-			if(log >= 3){console.log("ERROR:Object missing in Array. a ", a );}
+		// a[0], because CalcGaps accesses a[0] in every loop, Alternative: catch !a[0] before CalcGaps
+		if (! a[i] || ! a[0]){					
+			if(log >= 2){console.log("ERROR:Object missing in Array. a ", a );}
 			continue; // next element
 		}
 				
