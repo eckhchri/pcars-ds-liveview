@@ -142,6 +142,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				,"SessionState":	demo_el.globals.attributes.SessionState
 				,"SessionTimeDuration":	demo_el.globals.attributes.SessionTimeDuration
 				,"SessionTimeElapsed":	demo_el.globals.attributes.SessionTimeElapsed
+				,"RaceLength":          demo_el.globals.attributes.RaceLength
 			}
 		}
                                                 
@@ -551,6 +552,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
+						,"RaceLength":          0
 					}
 				}
 				
@@ -617,6 +619,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
+						,"RaceLength":          0
 					}
 				}
 				
