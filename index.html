@@ -851,8 +851,8 @@
 					//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
 					if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
 						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits++;
-						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 					}
+					aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 				}
 												
 				//fill data array
