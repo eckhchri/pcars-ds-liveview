@@ -774,12 +774,14 @@
 		if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
 			//if(log >= 3){console.log("Hide Gaps");}
 			jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
+			jQuery("#DriverDataTable").showCol(["pits"]);
 			//reset pitstop array on new race
 			aPitStops = {};
 		}
 		if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
 			//if(log >= 3){console.log("Show Gaps");}
 			jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
+			jQuery("#DriverDataTable").hideCol(["pits"]);
 		}
 		
 		//keep cuircitID in mind for next run
@@ -1215,7 +1217,7 @@
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
 			{name:'gap2first',width:30, align:"center",sorttype:"text"},
-			{name:'pits',width:18, align:"center",sorttype:"int"},
+			{name:'pits',hidden: true,width:18, align:"center",sorttype:"int"},
                         {name:'isplayer',width:20, align:"center",sorttype:"text"},
                         {name:'posx',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
                         {name:'posy',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
