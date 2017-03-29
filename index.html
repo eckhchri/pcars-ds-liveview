@@ -315,6 +315,9 @@
 	//init array for calculate InClassRacePosition		
 	var aInClass;
 
+	//array for saving number of pit stops during race
+	var aPitStops = {};
+	
 	//preset HTML elemets
 	setParamDemoStartPos(demo_start_pos , true);
 	setParamDemoEndPos(demo_end_pos, true);
@@ -771,6 +774,8 @@
 		if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
 			//if(log >= 3){console.log("Hide Gaps");}
 			jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
+			//reset pitstop array on new race
+			aPitStops = {};
 		}
 		if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
 			//if(log >= 3){console.log("Show Gaps");}
@@ -837,6 +842,18 @@
 				// set the InClassRaceposition value
 				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
 				
+				// pit stop counting logic
+				if(SessionStage == "Race1" || SessionStage == "Race2"){
+					//init array with driver hashes if they are undefined
+					if (!aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
+						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {numPits: 0,State: ""};
+					}
+					//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
+					if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
+						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits++;
+						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
+					}
+				}
 												
 				//fill data array
 				aSensorData[i] = {
@@ -2125,7 +2142,11 @@ function initDemoData(aNewData, SetApiModeTo ){
 	setParamDemoStartPos( 0 , true );
 	setParamDemoEndPos( demo.length-1 , true );	
 	record_pos 			= 0;
-	record_pos_helper 	= 0;	
+	record_pos_helper 	= 0;
+	aPitStops = {};
+	for (var key in CSVExport) {
+		CSVExport[key] = "";
+	}
 		
 	return 1;
 }
