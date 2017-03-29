@@ -848,7 +848,7 @@
 				if(SessionStage == "Race1" || SessionStage == "Race2"){
 					//init array with driver hashes if they are undefined
 					if (!aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
-						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {numPits: 0,State: ""};
+						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {numPits: 0,State: e.data.driverlist[i].State};
 					}
 					//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
 					if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
