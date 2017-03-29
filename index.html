@@ -1200,7 +1200,7 @@
 		rowNum: 200,
 		caption: "List of available drivers",
 		ignoreCase:true,
-		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
                         {name:'driverposition', width:18, align:"center", sorttype:"int", search:true},
@@ -1215,6 +1215,7 @@
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
 			{name:'gap2first',width:30, align:"center",sorttype:"text"},
+			{name:'pits',width:18, align:"center",sorttype:"int"},
                         {name:'isplayer',width:20, align:"center",sorttype:"text"},
                         {name:'posx',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
                         {name:'posy',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
@@ -1763,6 +1764,8 @@ function refreshDriverList(a){
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
 	for (i=0; i < a.length; i++) {
 		
+		var tmpPits = "-";
+		
 		//regarding issue #91 -> issue https://github.com/eckhchri/pcars-ds-liveview/issues/91
 		// a[0], because CalcGaps accesses a[0] in every loop, Alternative: catch !a[0] before CalcGaps
 		if (! a[i] || ! a[0]){					
@@ -1778,6 +1781,10 @@ function refreshDriverList(a){
 		}
 		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
+		if(aPitStops[a[i].Name+a[i].VehicleId]){
+			tmpPits = aPitStops[a[i].Name+a[i].VehicleId].numPits;
+		}
+		
 		_data = {   
 					refid:					a[i].RefID
 					,driverposition:		a[i].RacePosition
@@ -1792,6 +1799,7 @@ function refreshDriverList(a){
 					,fastestlap:			ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
 					,gap2ahead:				Gaps.gap2ahead
 					,gap2first:				Gaps.gap2first
+					,pits:                          tmpPits
 					,isplayer:				ConvertIsPlayer(a[i].IsPlayer)
 					,posx:					a[i].PosX
 					,posy:					a[i].PosY
