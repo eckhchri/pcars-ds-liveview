@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId){
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, NumPits){
 	
         // vars
         this.RefID				=	RefID;
@@ -18,6 +18,8 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.Speed	   			=   Spd;
         this.CurrentLap			=	CurrentLap;
         this.VehicleId			=	VehicleId;
+        this.NumPits			=	(typeof(NumPits) !== 'undefined') ? NumPits : undefined;	//number of the current pits, only used within demo mode to keep consitency while a fast forward etc
+        
         this.VehicleName		=	"";				// will filled by IDtoName mapping
         this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
 
@@ -104,7 +106,8 @@ function SetExampleData() {
         this.Speed			=   100;
         this.VehicleId		=	-886212684;
         this.CurrentLap		=	99;
-        this.VehicleClassName 	=   'undefined';        
+        this.VehicleClassName 	=   'undefined';
+        this.NumPits		=	undefined;
         
 	return 1;
 }
@@ -175,6 +178,19 @@ function getVehicleClassName(){
 }
 
 
+function getNumPits(numberpitstops){
+	
+	//in each case return the current value
+	//if parameter is given, it works as a set-function
+	if(numberpitstops){
+		//set new value
+		this.NumPits	=	numberpitstops;	
+	}
+	
+	return this.NumPits;
+}
+
+
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
 PCARSdriver.prototype.GetRefID=GetRefID;
 PCARSdriver.prototype.GetName=GetName;
@@ -196,5 +212,5 @@ PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
 PCARSdriver.prototype.getVehicleNameNormalized=getVehicleNameNormalized;
 PCARSdriver.prototype.getVehicleClassNormalized=getVehicleClassNormalized;
 PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
-
+PCARSdriver.prototype.getNumPits=getNumPits;
 
