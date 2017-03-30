@@ -47,7 +47,7 @@ If the race is already running and you open the website of this application the 
 - What is the function of the export buttons in the driver table header?
 "Export" initiates a CSV download of the currrent table view. 
 "Export All" sorts the table after driver position and initiates a download of all past session results of the race weekend. There must be at least one session change during the application is running, for example from Practice to Qualifying or Qualifying to Race. If this is not the case there is nothing to download, because there is no session result.
-What ist he function of the "Pause" buttons in the table headers?
+-What is the function of the "Pause" buttons in the table headers?
 ......
 - How works the result auto export?
 If the autoExport is set to true in the config.js the application automatically triggers a CSV download of all session and race results of the current race weekend. The trigger is the SessionState change from "Race" to "PostRace". The application has to run all the time over the race weekend to save all the data.
