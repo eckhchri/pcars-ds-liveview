@@ -170,7 +170,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								demo_el.participants[i].Orientation,
 								demo_el.participants[i].Speed,
 								demo_el.participants[i].CurrentLap,
-								demo_el.participants[i].VehicleId
+								demo_el.participants[i].VehicleId,
+								demo_el.participants[i].NumPits
 							);
 		}
                 
