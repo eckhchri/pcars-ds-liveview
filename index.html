@@ -854,6 +854,7 @@
 					if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
 						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits++;
 					}
+					e.data.driverlist[i].numPits = aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits;
 					aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 				}
 												
@@ -1783,9 +1784,9 @@ function refreshDriverList(a){
 		}
 		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
-		if(aPitStops[a[i].Name+a[i].VehicleId]){
-			tmpPits = aPitStops[a[i].Name+a[i].VehicleId].numPits;
-		}
+		if(a[i].numPits != undefined){
+                        tmpPits = a[i].numPits;
+                }
 		
 		_data = {   
 					refid:					a[i].RefID
