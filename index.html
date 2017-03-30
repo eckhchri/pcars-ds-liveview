@@ -844,20 +844,22 @@
 				// set the InClassRaceposition value
 				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
 				
-				// pit stop counting logic
-				if(SessionStage == "Race1" || SessionStage == "Race2"){
-					//init array with driver hashes if they are undefined
-					if (!aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
-						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {numPits: 0,State: e.data.driverlist[i].State};
+				if(APIMODE != "DEMO"){
+					// pit stop counting logic
+					if(SessionStage == "Race1" || SessionStage == "Race2"){
+						//init array with driver hashes if they are undefined
+						if (!aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
+							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {numPits: 0,State: e.data.driverlist[i].State};
+						}
+						//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
+						if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
+							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits++;
+						}
+						e.data.driverlist[i].numPits = aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits;
+						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 					}
-					//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
-					if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
-						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits++;
-					}
-					e.data.driverlist[i].numPits = aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits;
-					aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 				}
-												
+				
 				//fill data array
 				aSensorData[i] = {
 						"Key": 					e.data.driverlist[i].Name
@@ -1059,7 +1061,7 @@
 	                                ,timeout:               	demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
 	                                ,receivemode:   			"GETDEMODATA"
 	                                ,originaldatasource:		demo[record_pos]['globals']['datasource']	//keep original datasource
-	                                ,originalcurgamerunning:	demo[record_pos]['globals']['curgamerunning']
+	                                ,originalcurgamerunning:	demo[record_pos]['globals']['curgamerunning']	                        		
 	                                ,arefpoint:             	e.data.arefpoint});
 	                        
 	                      //prepare next step size for e.g. fast forward scenarios 
