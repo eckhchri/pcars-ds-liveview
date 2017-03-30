@@ -872,13 +872,13 @@
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
 						//init array with driver hashes if they are undefined
 						if (!aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
-							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {numPits: 0,State: e.data.driverlist[i].State};
+							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {NumPits: 0,State: e.data.driverlist[i].State};
 						}
 						//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
 						if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
-							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits++;
+							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits++;
 						}
-						e.data.driverlist[i].numPits = aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].numPits;
+						e.data.driverlist[i].NumPits = aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits;
 						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 					}
 				}
@@ -1809,8 +1809,8 @@ function refreshDriverList(a){
 		}
 		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
-		if(a[i].numPits != undefined){
-                        tmpPits = a[i].numPits;
+		if(a[i].NumPits != undefined){
+                        tmpPits = a[i].NumPits;
                 }
 		
 		_data = {   
