@@ -132,6 +132,13 @@
 				<div id="pcars-record_pos"></div>
 				<div id="pcars-record_max"></div>
 			</div>
+		</div>
+		<div class="replay_row">
+		
+				<label for="amount">Pos:</label>
+				<input type="text" id="replaybar_curpos_infobox" readonly style="border:0;">
+				<div id="slider-replaybar"></div>
+		
 		</div>	
 		<div class="replay_row">
 			<div class="box replay_cell">
@@ -544,6 +551,22 @@
       			}
     		});
     		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
+  	});
+	
+	$(function() {
+		$( "#slider-replaybar" ).slider({
+			range: "max",
+			min:	demo_start_pos,
+			max:	demo_start_pos+1,
+      		value:	demo_start_pos, 
+			step:	1,
+			stop:	function( event, ui ) {
+						$( "#replaybar_curpos_infobox" ).val( ui.value );
+						//set new values if needed
+						record_pos = ui.value;
+      			}
+    		});
+    		$( "#replaybar_curpos_infobox" ).val( demo_start_pos );
   	});
 	
 	//fa buttons
@@ -2242,6 +2265,25 @@ function open_popup_load_demofile(){
 	});		
 }
 
+
+function setSliderReplaybarOptions( settings ){
+	
+	
+	 if(log >= 3){console.log('+++++++++++ setSliderReplaybarOptions $( "#slider-replaybar" ): ', $( "#slider-replaybar" ) );}
+	
+
+		//$("#slider-replaybar").slider('option',{min: demo_start_pos, max: demo_end_pos});
+		$( "#slider-replaybar" ).slider({
+			min: demo_start_pos,
+			max: demo_end_pos,
+			value: record_pos
+		});
+		$("#replaybar_curpos").val( 555 );	
+	
+	
+}
+
+
 function setParamDemoStartPos(new_val, isHtmlChange){	
 	//convert each time to a number
 	new_val 	=	Number(new_val);
@@ -2267,6 +2309,7 @@ function setParamDemoStartPos(new_val, isHtmlChange){
 		$("#loop_start_pos").val( 0 ).change();		
 	}
 	
+	setSliderReplaybarOptions();
 	return 1;
 }
 
@@ -2295,6 +2338,8 @@ function setParamDemoEndPos(new_val, isHtmlChange){
 		// set to maximum possible value
 		$("#loop_end_pos").val( demo.length-1 ).change();		
 	}
+	
+	setSliderReplaybarOptions();
 	
 	return 1;
 }
