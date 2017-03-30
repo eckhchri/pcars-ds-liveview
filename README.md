@@ -42,7 +42,6 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 
 **FAQ**
 - Why are the pits not correct counted?
-
 The number of pits comes not directly through the API. It is counted by the application and a pit is detected if a driver enters the pit. In result the application have to run in these cases.
 If the race is already running and you open the website of this application the counting begins at this moment, all prevoius pit stops are not counted. Further if you reload the website during a race the counting begins from zero again.
 
