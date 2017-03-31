@@ -1291,8 +1291,27 @@
 		}
 	});
 	
+	var DrivernamesBeforeSearch;
+        var DrivernamesAfterSearch;
+
 	// add filter option bar
-	jQuery("#DriverDataTable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	jQuery("#DriverDataTable").jqGrid('filterToolbar', {
+		stringResult: true,
+		searchOnEnter: false,
+		defaultSearch: "cn",
+		beforeSearch: function () {
+			DrivernamesBeforeSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+		},
+		afterSearch: function () {
+			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
+			var AllRowData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
+			DrivernamesAfterSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+			var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
+			
+			if(log >= 2){console.log("+++DrivernamesAfterSearch: ",DrivernamesAfterSearch);}
+			if(log >= 2){console.log("+++DrivernamesToHide: ", DrivernamesToHide);}
+		}
+	});
 	// sort driver table on startup
 	jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 	// add StopRefresh Table button in jqgrid header
