@@ -1307,9 +1307,11 @@
 			var AllRowData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
 			DrivernamesAfterSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
 			var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
+			var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
 			
 			if(log >= 2){console.log("+++DrivernamesAfterSearch: ",DrivernamesAfterSearch);}
 			if(log >= 2){console.log("+++DrivernamesToHide: ", DrivernamesToHide);}
+			if(log >= 2){console.log("+++DrivernamesToShow: ", DrivernamesToUnhide);}
 		}
 	});
 	// sort driver table on startup
