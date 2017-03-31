@@ -1292,7 +1292,6 @@
 	});
 	
 	var DrivernamesBeforeSearch;
-        var DrivernamesAfterSearch;
 
 	// add filter option bar
 	jQuery("#DriverDataTable").jqGrid('filterToolbar', {
@@ -1305,7 +1304,7 @@
 		afterSearch: function () {
 			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
 			var AllRowData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
-			DrivernamesAfterSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+			var DrivernamesAfterSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
 			var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
 			var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
 			
