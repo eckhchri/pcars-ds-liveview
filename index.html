@@ -1308,9 +1308,11 @@
 			var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
 			var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
 			
-			if(log >= 2){console.log("+++DrivernamesAfterSearch: ",DrivernamesAfterSearch);}
-			if(log >= 2){console.log("+++DrivernamesToHide: ", DrivernamesToHide);}
-			if(log >= 2){console.log("+++DrivernamesToShow: ", DrivernamesToUnhide);}
+			if(log >= 2){console.log("+++ complete driver table data: ",AllRowData);}
+			if(log >= 2){console.log("+++ filtered driver table data: ",FilteredRowData);}
+			if(log >= 2){console.log("+++ filtered driver names: ",DrivernamesAfterSearch);}
+			if(log >= 2){console.log("+++ drivernames to hide: ", DrivernamesToHide);}
+			if(log >= 2){console.log("+++ drivernames to show: ", DrivernamesToUnhide);}
 		}
 	});
 	// sort driver table on startup
