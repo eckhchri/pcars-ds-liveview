@@ -112,6 +112,27 @@ function CSSClassChanger(aCSSDefinition){
 		return 1;
 	}
 	
+	//set opacity level for filtered out driver objects from drivers table
+	function HideSpecificDrivers( ObjectsRemainDisplayed ){
+		
+		//TODO: maybe find a better way to map key and value. array.map() function??
+		var assarray	= [];
+		for (var i = 0; i < ObjectsRemainDisplayed.length; i++){		
+			assarray[""+ ObjectsRemainDisplayed[i]] = i;
+		}
+			
+		d3.selectAll(".driverlabel")
+		.each(function(d, i) {
+			//decision if hide or unhide an object
+			if ( assarray[""+ d.Key] != undefined ){
+				d3.select(this).attr('opacity', 1);
+			}else{
+				d3.select(this).attr('opacity', HIDEDRIVERSOPACITY/100 );		// /100 because HTML attr need value in this format 0.23	
+			}									
+		});
+		
+	}
+	
 	//color the first tree vehicles
 	function ColorTop3vehicles(){
 		
@@ -168,6 +189,7 @@ function CSSClassChanger(aCSSDefinition){
 CSSClassChanger.prototype.setStyle=setStyle;
 CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
 CSSClassChanger.prototype.UnHideAllSvg=UnHideAllSvg;
+CSSClassChanger.prototype.HideSpecificDrivers=HideSpecificDrivers;
 CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
 CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;

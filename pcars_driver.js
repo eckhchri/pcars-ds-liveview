@@ -25,7 +25,9 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
 
         //private vars
         var privateLat;
-        var privateLong;      
+        var privateLong;
+//TODO: extend Regex for each special character that could accour in driver/vehicle names        
+        this._normalizeRegEx	=	"/\s|\.|\(|\)/g";
 }
 
 function CalcGPSCoordinates(){
@@ -150,6 +152,9 @@ function GetCSSCircleClass(){
 	//color same vehicle names
 	css +=	" CSS_VehicleName_" + this.getVehicleNameNormalized();
 	
+	//color same vehicle names
+	css +=	" CSS_DriverName_" + this.getDriverNameNormalized();
+	
 	//decision if real player or ai
 	if (this.IsPlayer == 1) {
 		css += " CSS_IsRealPlayer";
@@ -161,16 +166,25 @@ function GetCSSCircleClass(){
 	return css;
 }
 
+function _normalizeString( str ){
+	
+	return str.replace( /\s|\.|\(|\)/g, "_" );
+}
+
+function getDriverNameNormalized(){	
+	return _normalizeString(this.Name);
+}
+
 function getVehicleNameNormalized(){	
 	//TODO: If this.VehicleId is an negativeID it should be also converted to a valid string
 	if (typeof this.VehicleName === 'string'){
-		return this.VehicleName.replace(/ |\.|\(|\)/g, '_');		
+		return _normalizeString(this.VehicleName);
 	}	
 	return this.VehicleId;	
 }
 
 function getVehicleClassNormalized(){		
-	return this.VehicleClassName.replace(/ |\.|\(|\)/g, '_');
+	return _normalizeString(this.VehicleClassName);
 }
 
 function getVehicleClassName(){	
@@ -209,8 +223,10 @@ PCARSdriver.prototype.setVehicleClassNameByMapping=setVehicleClassNameByMapping;
 PCARSdriver.prototype.GetCSSTextClass=GetCSSTextClass;
 PCARSdriver.prototype.GetCSSGridClass=GetCSSGridClass;
 PCARSdriver.prototype.GetCSSCircleClass=GetCSSCircleClass;
+PCARSdriver.prototype.getDriverNameNormalized=getDriverNameNormalized;
 PCARSdriver.prototype.getVehicleNameNormalized=getVehicleNameNormalized;
 PCARSdriver.prototype.getVehicleClassNormalized=getVehicleClassNormalized;
 PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
 PCARSdriver.prototype.getNumPits=getNumPits;
+PCARSdriver.prototype._normalizeString=_normalizeString;
 

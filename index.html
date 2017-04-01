@@ -213,7 +213,11 @@
 	    	<option value="cutdriverlabel">Cut Labels</option>	    	
 		</select>
 		
-	
+		<p>
+  			<label for="amount">"Hidden"Driver Opacity:</label>
+			<input type="text" id="filtered_driver_opacity" readonly style="border:0;">
+			<div id="slider-filtered_driver_opacity"></div>
+		</p>	
 		<br>----<br>
   			<label for="amount">WORKERDELAY_DSDATA:</label>
 			<input type="text" id="workerdelay_dsdata" readonly style="border:0;">
@@ -230,6 +234,7 @@
 			<input type="text" id="gui_update_interval" readonly style="border:0;">
 			<div id="slider-gui_update_interval"></div>
 		</p>
+	
 
 	</div>
 <script type="text/javascript" charset="utf-8">
@@ -534,8 +539,25 @@
 						WORKERDELAY_DSDATA = ui.value;
       			}
     		});
-    		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
+    	$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
+	
+	$(function() {
+		$( "#slider-filtered_driver_opacity" ).slider({
+			range: "max",
+			min:	0,
+			max:	100,		
+      		value:	HIDEDRIVERSOPACITY, 
+			step:	1,
+			slide:	function( event, ui ) {
+						$( "#filtered_driver_opacity" ).val( ui.value );
+						//set new value
+						HIDEDRIVERSOPACITY = ui.value;
+      			}
+    		});
+    	$( "#filtered_driver_opacity" ).val( $( "#slider-filtered_driver_opacity" ).slider( "value" ) );
+  	});
+		
 	
 	$(function() {
 		$( "#slider-gui_update_interval" ).slider({
@@ -848,7 +870,7 @@
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
 
 				//set vehicle class full name
-			//ToDo: delete second arry in function setVehicleClassNameByMapping() its only to keep backwards compatibility Demo Files
+			//ToDo: delete second array in function setVehicleClassNameByMapping() its only to keep backwards compatibility Demo Files
 				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getIdToClassMapping( CurGameRunning ), PCARSVehicleList.getNameToClassMapping( CurGameRunning ) );
 					
 				//collect all vehicle classes of the current race
@@ -1234,8 +1256,8 @@
 		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
-                        {name:'driverposition', width:18, align:"center", sorttype:"int", search:true},
-			{name:'inclassposition', width:18, align:"center", sorttype:"int", search:true},
+						{name:'driverposition', width:18, align:"center", sorttype:"int", search:true},
+						{name:'inclassposition', width:18, align:"center", sorttype:"int", search:true},
                         {name:'drivername', width:110,sorttype:"text", search:true},
                         {name:'driverstate',width:40, align:"center",sorttype:"text"},
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
@@ -1245,8 +1267,8 @@
                         {name:'lastlap',width:35, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:35, align:"center",sorttype:"text"},
                         {name:'gap2ahead',width:30, align:"center",sorttype:"text"},
-			{name:'gap2first',width:30, align:"center",sorttype:"text"},
-			{name:'pits',hidden: true,width:18, align:"center",sorttype:"int"},
+                        {name:'gap2first',width:30, align:"center",sorttype:"text"},
+                        {name:'pits',hidden: true,width:18, align:"center",sorttype:"int"},
                         {name:'isplayer',width:20, align:"center",sorttype:"text"},
                         {name:'posx',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
                         {name:'posy',hidden: JQGridIsDriversPOSHidden, width:40, align:"center",sorttype:"float"},
@@ -1291,7 +1313,7 @@
 		}
 	});
 	
-	var DrivernamesBeforeSearch;
+	//var DrivernamesBeforeSearch;
 
 	// add filter option bar
 	jQuery("#DriverDataTable").jqGrid('filterToolbar', {
@@ -1301,18 +1323,22 @@
 		beforeSearch: function () {
 			DrivernamesBeforeSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
 		},
-		afterSearch: function () {
-			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
-			var AllRowData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
+		afterSearch: function (e, rowid, orgClickEvent) {
+			//var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
+			//var AllRowData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
 			var DrivernamesAfterSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
-			var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
-			var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
+			//var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
+			//var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
 			
+			/*
 			if(log >= 2){console.log("+++ complete driver table data: ",AllRowData);}
 			if(log >= 2){console.log("+++ filtered driver table data: ",FilteredRowData);}
 			if(log >= 2){console.log("+++ filtered driver names: ",DrivernamesAfterSearch);}
 			if(log >= 2){console.log("+++ drivernames to hide: ", DrivernamesToHide);}
 			if(log >= 2){console.log("+++ drivernames to show: ", DrivernamesToUnhide);}
+			*/
+			
+			CSSClsChg.HideSpecificDrivers( DrivernamesAfterSearch );
 		}
 	});
 	// sort driver table on startup
