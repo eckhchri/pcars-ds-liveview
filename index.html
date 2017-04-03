@@ -1849,16 +1849,20 @@ function refreshDriverList(a){
 		
 		//regarding issue #91 -> issue https://github.com/eckhchri/pcars-ds-liveview/issues/91
 		// a[0], because CalcGaps accesses a[0] in every loop, Alternative: catch !a[0] before CalcGaps
-		if (! a[i] || ! a[0]){					
+		if (! a[i]){					
 			if(log >= 2){console.log("ERROR:Object missing in Array. a ", a );}
 			continue; // next element
 		}
 				
 				
 		if (i == 0){
-			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i].FastestLapTime);
+			Gaps = CalcGaps(0,0,0);
 		}else{
-			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
+			if(a[0] && a[i-1]){
+				Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
+			}else{
+				Gaps = CalcGaps(0,0,0);
+			}
 		}
 		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
                 
