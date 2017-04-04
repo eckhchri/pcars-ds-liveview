@@ -120,16 +120,64 @@ function CSSClassChanger(aCSSDefinition){
 		for (var i = 0; i < ObjectsRemainDisplayed.length; i++){		
 			assarray[""+ ObjectsRemainDisplayed[i]] = i;
 		}
-			
+		
+		
+
+
+/*	
+		//Jquery variant
+		var regex 		= /^(\d\W-\W)(.*)/;
+		
+		$( ".driverlabel" ).each(function( index ){
+							
+				if(log >= 3){console.log('------- HideSpecificDrivers: TEXT: ', $(this).children("text")[0].innerHTML );}
+				
+				//extract player name to match with array from drivertable
+				var driverlabel = $(this).children("text")[0].innerHTML;
+												
+				if( new RegExp(regex).test(driverlabel) ){
+					
+					if( assarray[ ""+ driverlabel.match(regex)[2] ] != undefined ){
+						
+						$(this).removeClass('CSS_OPACITY_DRIVER');
+						if(log >= 3){console.log('------- HideSpecificDrivers: Remove Class to this: ', $(this) );}
+						
+					}else{
+
+						if(log >= 3){console.log('------- HideSpecificDrivers: ADD Class ', $(this) );}
+						if(log >= 3){console.log('------- HideSpecificDrivers: ADD Class current CLASSES: ', $(this).attr('class') );}
+						
+						$(this).addClass('CSS_OPACITY_DRIVER');
+						
+						if(log >= 3){console.log('------- HideSpecificDrivers: ADD Class AFTER ERROR: ', $(this).error() );}
+						if(log >= 3){console.log('------- HideSpecificDrivers: ADD Class AFTER current CLASSES: ', $(this).attr('class') );}
+						
+					}
+					//alert( driverlabel.match(regex)[2] );				
+				}
+
+								
+		});
+*/								
+
+
+ 		//D3 variant => has Problems while add/remove classes
 		d3.selectAll(".driverlabel")
 		.each(function(d, i) {
+		
+			if(log >= 3){console.log('------- HideSpecificDrivers: this D3: ', d );}
 			//decision if hide or unhide an object
-			if ( assarray[""+ d.Key] != undefined ){
-				d3.select(this).attr('opacity', 1);
-			}else{
-				d3.select(this).attr('opacity', HIDEDRIVERSOPACITY/100 );		// /100 because HTML attr need value in this format 0.23	
+			if ( assarray[""+ d.Key] != undefined ){																				
+				d3.select(this)		
+				//.classed("CSS_OPACITY_DRIVER", false)
+				.classed("driverlabel", true);		//override with original class 										
+				
+			}else{			
+				d3.select(this)
+				.classed("driverlabel CSS_OPACITY_DRIVER", true);  // add bot classes is mandatory				
 			}									
 		});
+		
 		
 	}
 	

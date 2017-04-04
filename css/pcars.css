@@ -202,7 +202,59 @@
         	color: grey;
         	text-decoration: none;
         }
-		
+        
+        /* Opacity default level for drivers that were filtered out in driver table */
+        .CSS_OPACITY_DRIVER{
+        	opacity:	0.4;
+        }
+
+/* CSS GRid layout for recorder and replay elments */		
+.pcars_grid_recorder_replay	{
+  display: grid;
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-columns: 5% 5% 5% 5% 5% 5% 30% 45%;
+  grid-auto-flow: row;
+}
+
+empty1 {
+	background:white;
+	grid-column-start:1;
+	grid-column-end:1;
+	grid-row-start:1;
+	grid-row-end:1;
+}
+
+fastbackward {
+	background:grey;
+	grid-column-start:2;
+	grid-column-end:2;
+	grid-row-start:1;
+	grid-row-end:1;
+}
+
+stopplay {
+	background:grey;
+	grid-column-start:3;
+	grid-column-end:3;
+	grid-row-start:1;
+	grid-row-end:1;
+}	
+
+fastforward {
+	background:grey;
+	grid-column-start:4;
+	grid-column-end:4;
+	grid-row-start:1;
+	grid-row-end:1;	
+}
+
+pcars_progressbar {
+	background:grey;
+	grid-column-start:1;
+	grid-column-end:6;
+	grid-row-start:2;
+	grid-row-end:2;
+}		
 		
 		
 /* The switch - the box around the slider */
