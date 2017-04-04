@@ -112,6 +112,12 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	}
 	aDrivers.driverlist	=	new Array();
 	
+	// DriverDummy object for API error, if the API don't returns the data for all drivers
+	//PosX = 100km, in result you don't see the marker on the map
+	var DriverDummyAPIerror = new PCARSdriver();
+	DriverDummyAPIerror.SetExampleData();
+	DriverDummyAPIerror.UpdateObjectData({Name: "API Error", State: "Error", FastestLapTime: 0, LastLapTime: 0, CurrentLap: 0, PosX: 100000000});
+	
 	var aEmptyArray		=	new Array();
 	var TrackName;
 	var TrackID;
@@ -175,6 +181,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							);
 		}
                 
+		// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+		for (var i = 0;i<aDrivers.driverlist.length;i++){
+			if(!aDrivers.driverlist[i]){
+				DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+				aDrivers.driverlist[i] = DriverDummyAPIerror;
+				if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+			}
+		}
+		
 		return aDrivers;
                 
 	}else{
@@ -347,6 +362,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                         	);
 					}
 	
+					// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+					for (var i = 0;i<aDrivers.driverlist.length;i++){
+						if(!aDrivers.driverlist[i]){
+							DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+							aDrivers.driverlist[i] = DriverDummyAPIerror;
+							if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+						}
+					}
+					
 					//if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
 					// return information
 					return aDrivers;
@@ -471,6 +495,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                         	);
 					}
 	
+					// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+					for (var i = 0;i<aDrivers.driverlist.length;i++){
+						if(!aDrivers.driverlist[i]){
+							DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+							aDrivers.driverlist[i] = DriverDummyAPIerror;
+							if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+						}
+					}
+					
 					//if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
 					// return information
 					return aDrivers;
@@ -596,7 +629,16 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								2091910841
 							);
 				}
-	
+				
+				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+				for (var i = 0;i<aDrivers.driverlist.length;i++){
+					if(!aDrivers.driverlist[i]){
+						DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+						aDrivers.driverlist[i] = DriverDummyAPIerror;
+						if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+					}
+				}
+				   
 				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
 				return aDrivers;
 				   
@@ -663,6 +705,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							);
 				}
 	
+				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+				for (var i = 0;i<aDrivers.driverlist.length;i++){
+					if(!aDrivers.driverlist[i]){
+						DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+						aDrivers.driverlist[i] = DriverDummyAPIerror;
+						if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+					}
+				}
+				   
 				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
 				return aDrivers;
 	
