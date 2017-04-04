@@ -114,6 +114,19 @@ function SetExampleData() {
 	return 1;
 }
 
+
+// obj.UpdateObjectData({Name: "NewName", GridPosition: "4", ...})
+function UpdateObjectData( options ){
+	
+	for ( var elem in options ){
+		if(log >= 3){console.log('------- TEST PCARSd: insert element: ', elem  );}
+		this[elem] = options[elem];
+		
+	}
+	
+	return 1;
+}
+
 function setVehicleClassNameByMapping(mappingID, mappingName){
 	
 if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  this ", this);}	
@@ -229,4 +242,5 @@ PCARSdriver.prototype.getVehicleClassNormalized=getVehicleClassNormalized;
 PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
 PCARSdriver.prototype.getNumPits=getNumPits;
 PCARSdriver.prototype._normalizeString=_normalizeString;
+PCARSdriver.prototype.UpdateObjectData=UpdateObjectData;
 
