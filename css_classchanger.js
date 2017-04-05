@@ -186,16 +186,14 @@ function CSSClassChanger(aCSSDefinition){
 		d3.selectAll(".driverlabel")
 		.each(function(d, i) {
 		
-			if(log >= 3){console.log('------- HideSpecificDrivers: this D3: ', d );}
+			//if(log >= 3){console.log('------- HideSpecificDrivers: this D3: ', d );}
 			//decision if hide or unhide an object
 			if ( assarray[""+ d.Key] != undefined ){																				
 				d3.select(this)		
-				.classed("CSS_OPACITY_DRIVER", false)
-				.classed("driverlabel", true);		//override with original class 										
-				
+				.classed("CSS_OPACITY_DRIVER", false);	// this D3 function works like an RemoveClass()							 												
 			}else{			
 				d3.select(this)
-				.classed("driverlabel CSS_OPACITY_DRIVER", true);  // add bot classes is mandatory				
+				.classed("CSS_OPACITY_DRIVER", true);	// this D3 function works like an addClass()				
 			}									
 		});
 		
