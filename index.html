@@ -542,7 +542,7 @@
     	$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
   	});
 	
-	$(function() {				
+	$(function() {
 		$( "#slider-filtered_driver_opacity" ).slider({
 			range: "max",
 			min:	0,
@@ -553,7 +553,7 @@
 						//set new value to text box above slider
 						$( "#filtered_driver_opacity" ).val( ui.value );
 						//set new value to css class
-						$('.CSS_OPACITY_DRIVER').css('opacity', ui.value );
+						CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: ui.value} );												
       			}
 		});
 		// INFO: use fixed value instead of $('.CSS_OPACITY_DRIVER').css("opacity"), because css class is not initialized a appication start

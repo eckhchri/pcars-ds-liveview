@@ -203,10 +203,6 @@
         	text-decoration: none;
         }
         
-        /* Opacity default level for drivers that were filtered out in driver table */
-        .CSS_OPACITY_DRIVER{
-        	opacity:	0.4;
-        }
 
 /* CSS GRid layout for recorder and replay elments */		
 .pcars_grid_recorder_replay	{

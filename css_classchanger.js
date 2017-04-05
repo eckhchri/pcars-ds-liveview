@@ -50,7 +50,7 @@ function CSSClassChanger(aCSSDefinition){
 	}
 	
 	//cut driverlabe to display only race position
-	function setDriverLabelStyle(mode){
+	function setDriverLabelStyle(mode, options){
 		
 		switch (mode){
 		
@@ -75,7 +75,28 @@ function CSSClassChanger(aCSSDefinition){
 			setStyle( '', this.aCSSClasses['styledriverlabel'] );
 			
 			delete this.aCSSClasses['styledriverlabel'];
-			break;		
+			break;
+		
+		case "update_opacity_drivers":
+			
+			//delete style before create a new one
+			if ( this.aCSSClasses['opacity_drivers'] ){
+				setStyle( '', this.aCSSClasses['opacity_drivers'] );
+				delete this.aCSSClasses['opacity_drivers'];
+			}
+			
+			//set new style
+			var CSSStyleHandle = setStyle(
+					'.CSS_OPACITY_DRIVER{\n'		+
+			        '	opacity:	'+ 		options['opacity_driver']		+';\n'			+		
+			        '}\n',					
+				    CSSStyleHandle );
+		
+			//remember object handle
+			this.aCSSClasses['opacity_drivers']	=	(CSSStyleHandle);
+					
+			break;
+		
 		}		
 	}	
 
@@ -169,7 +190,7 @@ function CSSClassChanger(aCSSDefinition){
 			//decision if hide or unhide an object
 			if ( assarray[""+ d.Key] != undefined ){																				
 				d3.select(this)		
-				//.classed("CSS_OPACITY_DRIVER", false)
+				.classed("CSS_OPACITY_DRIVER", false)
 				.classed("driverlabel", true);		//override with original class 										
 				
 			}else{			
