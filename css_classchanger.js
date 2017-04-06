@@ -78,7 +78,7 @@ function CSSClassChanger(aCSSDefinition){
 			break;
 		
 		case "update_opacity_drivers":
-			
+						
 			//delete style before create a new one
 			if ( this.aCSSClasses['opacity_drivers'] ){
 				setStyle( '', this.aCSSClasses['opacity_drivers'] );

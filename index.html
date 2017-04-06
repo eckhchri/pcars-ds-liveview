@@ -559,7 +559,7 @@
 		// INFO: use fixed value instead of $('.CSS_OPACITY_DRIVER').css("opacity"), because css class is not initialized a appication start
     	$( "#filtered_driver_opacity" ).val(  0.3 );  
 		//initial set a CSS class
-    	CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: 0.3} );
+    	CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: $( "#filtered_driver_opacity" ).val()} );
   	});
 		
 	
@@ -1337,8 +1337,12 @@
 			if(log >= 2){console.log("+++ drivernames to show: ", DrivernamesToUnhide);}
 			*/
 			
-			ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DrivernamesAfterSearch.length + " / " + AllRowData.length);
-			CSSClsChg.HideSpecificDrivers( DrivernamesAfterSearch );
+			HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DrivernamesAfterSearch.length + " / " + AllRowData.length);
+			//add/remove assignment of CSS class
+			CSSClsChg.HideSpecificDrivers( DrivernamesAfterSearch );			
+			//Workaround: every filter event a new OPACITY css styles has to be set to change driver properties
+			CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: $( "#filtered_driver_opacity" ).val()} );
+			
 		}
 	});
 	// sort driver table on startup
