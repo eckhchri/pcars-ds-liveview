@@ -759,7 +759,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul":	0.9983
 		,"cor_PosY_mul":	1.0035
 		,"Name":		"Circuit of the Americas GP"
-		,"Name2":		"Circuit_of_the_Americas Grand Prix"	//mTrackLocation:"Circuit_of_the_Americas",mTrackVariation:"Grand Prix"
+		,"Name2":		"Circuit of the Americas Grand Prix"	//mTrackLocation:"Circuit_of_the_Americas",mTrackVariation:"Grand Prix"
 		,"Zoom":		16
 		,"MapInitLat":	30.134614
 		,"MapInitLong":	-97.634090
