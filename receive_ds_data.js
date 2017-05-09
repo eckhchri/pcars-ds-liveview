@@ -77,8 +77,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				"GETDS2ANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
 				"GETTRACKLIST"  		: "/api/list/tracks",
 				"GETVEHICLELIST"  		: "/api/list/vehicles",
-				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true",
-				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true",
+				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
+				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETDEMODATA"    		: ""
 			};	
 
@@ -108,6 +108,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			,"SessionStage":	""
 			,"SessionState":	""
 			,"RaceLength":          0
+			,"TemperatureAmbient":	20
+			,"TemperatureTrack":	30
 		}
 	}
 	aDrivers.driverlist	=	new Array();
@@ -271,6 +273,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionTimeDuration":	0
 								,"SessionTimeElapsed":	0
 								,"RaceLength":		0
+								,"TemperatureAmbient":	20
+								,"TemperatureTrack":	30
 								}
 						}
 				}else if ( myArr.response.state == "Running" ){
@@ -293,6 +297,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
 								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed
 								,"RaceLength":		myArr.response.attributes.Race1Length
+								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient
+								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack
 								}
 	        	                                }
 				}else{
@@ -315,6 +321,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"SessionTimeDuration":	0
 					,"SessionTimeElapsed":	0
 					,"RaceLength":		0
+					,"TemperatureAmbient":	20
+					,"TemperatureTrack":	30
 					}
 	              }
 				}
@@ -404,6 +412,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionTimeDuration":	0
 								,"SessionTimeElapsed":	0
 								,"RaceLength":		0
+								,"TemperatureAmbient":	20
+								,"TemperatureTrack":	30
 								}
 						}
 				}else if ( myArr.response.state == "Running" ){
@@ -426,6 +436,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
 								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed	
 								,"RaceLength":		myArr.response.attributes.Race1Length
+								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient
+								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack
 								}
 	        	                                }
 				}else{
@@ -448,6 +460,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"SessionTimeDuration":	0
 					,"SessionTimeElapsed":	0
 					,"RaceLength":		0
+					,"TemperatureAmbient":	20
+					,"TemperatureTrack":	30
 					}
 	              }
 				}
@@ -587,6 +601,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
 						,"RaceLength":          0
+						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
+						,"TemperatureTrack":	myArr.weather.mTrackTemperature
 					}
 				}
 				
@@ -663,6 +679,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
 						,"RaceLength":          0
+						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
+						,"TemperatureTrack":	myArr.weather.mTrackTemperature
 					}
 				}
 				
