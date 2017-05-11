@@ -151,6 +151,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				,"SessionTimeDuration":	demo_el.globals.attributes.SessionTimeDuration
 				,"SessionTimeElapsed":	demo_el.globals.attributes.SessionTimeElapsed
 				,"RaceLength":          demo_el.globals.attributes.RaceLength
+				,"TemperatureAmbient":  demo_el.globals.attributes.TemperatureAmbient
+				,"TemperatureTrack":    demo_el.globals.attributes.TemperatureTrack
 			}
 		}
                                                 
@@ -297,8 +299,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
 								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed
 								,"RaceLength":		myArr.response.attributes.Race1Length
-								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient
-								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack
+								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient/1000
+								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack/1000
 								}
 	        	                                }
 				}else{
@@ -436,8 +438,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
 								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed	
 								,"RaceLength":		myArr.response.attributes.Race1Length
-								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient
-								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack
+								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient/1000
+								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack/1000
 								}
 	        	                                }
 				}else{
