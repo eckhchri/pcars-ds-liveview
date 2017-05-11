@@ -82,6 +82,8 @@
 		<div id="pcars-trackname"></div>
 		<div id="pcars-dssessionstage"></div>
 		<div id="pcars-dssessionstate"></div>
+		<div id="pcars-ambienttemp"></div>
+		<div id="pcars-tracktemp"></div>
 		<br>----- Settings ----<br>
 		<div id="pcars-apimode"></div>
 		<div id="pcars-curgamerunning"></div>
@@ -740,6 +742,8 @@
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
+		ChangeHtmlContentByID( '#pcars-ambienttemp'     , "°C Air:     " + e.data.globals.attributes.TemperatureAmbient );
+		ChangeHtmlContentByID( '#pcars-tracktemp'       , "°C Track:   " + e.data.globals.attributes.TemperatureTrack );
 		ChangeHtmlContentByID( '#demo_start_pos' 	, "demo_start_pos:   " + demo_start_pos );
 		ChangeHtmlContentByID( '#demo_end_pos' 	, "demo_end_pos:   " + demo_end_pos );		
 		
