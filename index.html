@@ -414,6 +414,14 @@
 				//overwrite dropdown menu selection
 				HTMLCTRL.APIMODE_SetSelection( APIMODE );
 		}
+		// check if url params overwrite the default ds2 info
+		if (get_url_param('ds2url') && get_url_param('ds2port'))	{
+				Ds2ServerURL     =       get_url_param('ds2url');
+				Ds2Port          =       get_url_param('ds2port');
+				APIMODE         =       "DS2";
+				//overwrite dropdown menu selection
+				HTMLCTRL.APIMODE_SetSelection( APIMODE );
+		}
 		// check if url params overwrite the default CREST info
 		if (get_url_param('cresturl') && get_url_param('crestport'))	{
 			CRESTServerURL		=	get_url_param('cresturl');
@@ -1059,6 +1067,15 @@
                                         ,receivemode:   		"GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
+			case "DS2": //DS2 receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 Ds2ServerURL
+                                        ,dsport:                Ds2Port
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   		"GETDS2ANDDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
                         case "CREST": //CREST receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
@@ -1068,7 +1085,7 @@
                                         ,receivemode:   		"GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-						case "CREST2":  //CREST2 receive mode
+			case "CREST2":  //CREST2 receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CREST2ServerURL
@@ -1149,6 +1166,10 @@
 		case "DS":
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
 			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+			break;
+		case "DS2":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: Ds2ServerURL, dsport: Ds2Port, timeout: XMLHTTPTimeout, receivemode: "GETDS2ANDDRIVERDATA", arefpoint: aRefPointTMP});
+			aDrivers = Receive_DS_data(Ds2ServerURL, Ds2Port, 2000, "GETDS2ANDDRIVERDATA", aRefPointTMP);
 			break;
 		case "CREST":
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTMP});
