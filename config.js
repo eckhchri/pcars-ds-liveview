@@ -8,7 +8,9 @@ var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for securi
 
 //Please your specific settings
 var DsServerURL 		= "eckhchri.de";
-var DsPort				= 9000;
+var DsPort			= 9000;
+var Ds2ServerURL 		= "eckhchri.de";
+var Ds2Port			= 9000;
 var CRESTServerURL 		= "localhost";
 var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
