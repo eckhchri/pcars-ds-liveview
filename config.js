@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////
 //global varibales definitions
 ///////////////////////////////////////////////
-var SCRIPTVERSION	= "0.3.2";
+var SCRIPTVERSION	= "0.3.3";
 
 //Activate URL parameter interpretation
 var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
@@ -16,6 +16,7 @@ var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
 
+/*
 var aAPIMODEMAPPING = 
 	{
 		'DS' : {
@@ -32,7 +33,7 @@ var aAPIMODEMAPPING =
 			'driverdate' :  'GETCRESTDRIVERDATA'
 	}
 }
-
+*/
 
 
 //default API mode, possible values: DS, CREST, CREST2 or DEMO
