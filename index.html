@@ -736,6 +736,13 @@
 		SessionStage 	= e.data.globals.attributes.SessionStage;
 		CurGameRunning 	= e.data.globals.curgamerunning;
 		
+		//keep cuircitID in mind for next run
+		var tmpcuircitID = e.data.globals.attributes.TrackId;
+
+		// Switch to default refpoint for fictional tracks, if the API replys a TrackID which is unknown in the reference points
+		if(!e.data.arefpoint[tmpcuircitID]){
+			tmpcuircitID = 8888888888;
+		}
                 
 		// write in HTML page for DS status		 
 		ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
@@ -747,7 +754,7 @@
 		ChangeHtmlContentByID( '#pcars-curgamerunning', "CurGameRunning:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos + " / "  + demo.length);		
-		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[e.data.globals.attributes.TrackId]["Name"] );
+		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[tmpcuircitID]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
 		ChangeHtmlContentByID( '#pcars-ambienttemp'     , "°C Air:     " + e.data.globals.attributes.TemperatureAmbient );
@@ -844,9 +851,6 @@
 			jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
 			jQuery("#DriverDataTable").hideCol(["pits"]);
 		}
-		
-		//keep cuircitID in mind for next run
-		var tmpcuircitID = e.data.globals.attributes.TrackId;
 
 		//if (SessionState_old != "Loading" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}  //20170321 disabled for troubleshooting to see what happens if the markers are normally hidden //Hide markers on Loading / before calculation, unhide is after calculation. 
 		//if (SessionState_old == "Lobby" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}    //Hide markers before calculation, unhide is after calculation.
