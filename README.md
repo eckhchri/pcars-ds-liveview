@@ -11,6 +11,11 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 						http://[your Webserver url]/index.html?dsurl=[DS HTTP API url]&dsport=[DS HTTP API Port]
 						
 						example: http://www.xyz.com/index.html?dsurl=www.xyzDS.com&dsport=9000
+				
+- Overwriting default pcars2 DS parameters:  
+						http://[your Webserver url]/index.html?ds2url=[DS HTTP API url]&ds2port=[DS HTTP API Port]
+						
+						example: http://www.xyz.com/index.html?ds2url=www.xyzDS.com&ds2port=9000
 - Overwriting default CREST parameters:   
 						http://[your Webserver url]/index.html?cresturl=[IP address of gaming PC]&crestport=[CREST Port]
 						
@@ -28,6 +33,8 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 **Default parameter**:
 - dedicated server url:   MY-URL.com
 - dedicated server port:  9000
+- pcars2 dedicated server url:   MY-URL.com
+- pcars2 dedicated server port:  9000
 - CREST server url:       localhost
 - CREST server port:      8080
 - CREST2 server url:      localhost
