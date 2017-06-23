@@ -629,7 +629,7 @@
 	        datatype: "local",
 	        height: 'auto',
 	        width:	830,
-	        hiddengrid: true,
+	        hiddengrid: JQGridTracktableCollapsed,
 		ignoreCase:true,
 	        colNames:['ID','TrackID','TrackName','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
@@ -677,7 +677,7 @@
 	jQuery("#carlisttable").jqGrid({	
 	        datatype: "local",
 	        height: 'auto',
-	        hiddengrid: true,
+	        hiddengrid: JQGridCartableCollapsed,
 	        width:	800,
 		ignoreCase:true,
 	        colNames:['ID','Name','class', 'Game Scope', 'link', 'Comment'],
@@ -1276,7 +1276,7 @@
 		datatype: "local",
 		height: 'auto',
 		width: 1000,
-		hiddengrid: true,
+		hiddengrid: JQGridDrivertableCollapsed,
 		rowNum: 200,
 		caption: "List of available drivers",
 		ignoreCase:true,
