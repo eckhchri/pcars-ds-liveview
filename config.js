@@ -40,15 +40,15 @@ var aAPIMODEMAPPING =
 var APIMODE   		=   "DEMO";	// Default API Mode
 
 //hide or unhide elements
-var	SHOWTRACKLIST 		=	false;	// [true|false]
+var SHOWTRACKLIST 		=	false;	// [true|false]
 var SHOWCARLIST 		=	false 	// [true|false]
-var	SHOWDSDATA 			=	false;	// [true|false]
-var	SHOWDRIVERDATA 		=	false;	// [true|false]
+var SHOWDSDATA 			=	false;	// [true|false]
+var SHOWDRIVERDATA 		=	false;	// [true|false]
 var SHOWSETTINGS		=	false;	// [true|false]
-var SHOWDSSTATISTIC 	=	false;	// [true|false]
-var SHOWDSRELAY			=	false;	// [true|false]
-var SHOWRECSTATISTIC	=	true;	// [true|false]
-var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
+var SHOWDSSTATISTIC 		=	false;	// [true|false]
+var SHOWDSREPLAY		=	false;	// [true|false]
+var SHOWRECSTATISTIC		=	true;	// [true|false]
+var SHOWPOPUPLOADDEMO		=	false;	// [true|false]
 
 ////////////JQgrid design ///////
 var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
