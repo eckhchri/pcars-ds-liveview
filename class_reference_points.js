@@ -18,8 +18,8 @@ function Refpoint(circuit_id)
 	aRefPoints[9999999999] = new Array();
         aRefPoints[9999999999] =
                 {
-                "refLat":        51.500681			// GPS coords of the zero point, where X=0 and Z=0
-                ,"refLong":      -0.071795			
+                "refLat":        51.500657			// GPS coords of the zero point, where X=0 and Z=0
+                ,"refLong":      -0.071587			
                 ,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
                 ,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
 		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
@@ -28,8 +28,8 @@ function Refpoint(circuit_id)
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
                 ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
                 ,"Zoom":         19				// wanted zoom level for initial google map
-                ,"MapInitLat":   51.500681			// google map initialization coords
-                ,"MapInitLong":  -0.071795
+                ,"MapInitLat":   51.500657			// google map initialization coords
+                ,"MapInitLong":  -0.071587
 		,"fictional":	 false
                 ,"Comment": "Default"
                 };
