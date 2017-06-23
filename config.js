@@ -50,6 +50,12 @@ var SHOWDSRELAY			=	false;	// [true|false]
 var SHOWRECSTATISTIC	=	true;	// [true|false]
 var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
 
+////////////JQgrid design ///////
+var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
+var JQGridDrivertableCollapsed	=	true;   // [true | false] table default collapsed or unfolded
+var JQGridTracktableCollapsed	= 	true;   // [true | false] table default collapsed or unfolded
+var JQGridCartableCollapsed	=	true;   // [true | false] table default collapsed or unfolded
+
 //defines a delay for each worker to reduce CPU load
 var WORKERDELAY_TRACKLIST	=	5000; 	// in ms
 var WORKERDELAY_DSDATA  	=	100;    // in ms
@@ -145,9 +151,6 @@ var CSSDEFINITIONS = {
 //Automatic CSV Export of all session results after a race weekend, a download dialog will pop up
 //The Export is called if the SessionState changes to "PostRace"
 var autoExport = "false";
-
-////////////JQgrid design ///////
-var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
 
 //settings for trackmap and markers depending on zoom level of Google Maps
 // lineWeight = trackmap borders and mabe marker border, lineWeightMid = trackmap mid line, markerRadius = radius of marker point
