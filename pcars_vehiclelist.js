@@ -171,7 +171,7 @@ function getClassNormalizedByString(VId, gn){
 	}else{
 		
 		//if name does not match, tray IDtoClass mapping
-		return this.idToClassMappingExt[gn][VId]
+		return this.idToClassMappingExtNormalized[gn][VId]
 	}
 }
 
