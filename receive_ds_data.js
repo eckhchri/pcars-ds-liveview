@@ -437,7 +437,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								,"SessionState":	myArr.response.attributes.SessionState
 								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
 								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed	
-								,"RaceLength":		myArr.response.attributes.Race1Length
+								,"RaceLength":		myArr.response.attributes.RaceLength
 								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient/1000
 								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack/1000
 								}
