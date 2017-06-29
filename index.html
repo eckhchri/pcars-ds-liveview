@@ -802,7 +802,8 @@
 			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
 		}
 		//after Qualifying
-		if (SessionStage_old == "Qualifying" && SessionStage != "Qualifying"){
+		// SessionStage Qualifying1 check is for pcars2 DS
+		if ((SessionStage_old == "Qualifying" && SessionStage != "Qualifying") || (SessionStage_old == "Qualifying1" && SessionStage != "Qualifying1")){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","posx","posy","posz",]);
 		}
@@ -817,7 +818,8 @@
 			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
 		}
 		//after Race Weekend finished
-		if (SessionState_old == "Race" && SessionState == "PostRace"){
+		//SessionStage_old Race1 check is for pcars2 DS, because there is the State PostRace between every Stage
+		if (SessionState_old == "Race" && SessionState == "PostRace" && SessionStage_old == "Race1"){
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
 				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz",]);
