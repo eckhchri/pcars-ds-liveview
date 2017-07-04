@@ -399,7 +399,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						//	Todo: put all values into Array?
 						aDrivers.globals = {
 	                                         	"joinable":				myArr.response.joinable
-		                                        ,"lobbyid":             myArr.response.lobbyid
+		                                        ,"lobbyid":             0
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
@@ -422,7 +422,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	
 						aDrivers.globals = {
 		                                         "joinable":            myArr.response.joinable
-		                                        ,"lobbyid":             myArr.response.lobbyid
+		                                        ,"lobbyid":             0
 		                                        ,"max_member_count":    myArr.response.max_member_count
 		                                        ,"now":                 myArr.response.now
 		                                        ,"state":               myArr.response.state
