@@ -1076,7 +1076,9 @@
 						CSVall += CSVExport[key] + '\r\n\n';
 					}
 				}
-				ExportCSV(CSVall,"Results");
+				if (ExportType === "CSV" || ExportType === "BOTH") {
+					ExportCSV(CSVall,"Results");
+				}
 			}
 		}
 		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
@@ -1531,7 +1533,7 @@
                                         }, style: 'table'}
                                 ],
 				styles: PDFstyles
-			}
+			};
 
 			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
 
@@ -1548,7 +1550,9 @@
 				CSVall += CSVExport[key] + '\r\n\n';
 			}
 		}
-		ExportCSV(CSVall,"Results");
+		if (ExportType === "CSV" || ExportType === "BOTH") {
+			ExportCSV(CSVall,"Results");
+		}
 	});
 	
 	
