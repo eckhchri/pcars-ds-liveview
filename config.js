@@ -148,9 +148,28 @@ var CSSDEFINITIONS = {
 
 
 
-//Automatic CSV Export of all session results after a race weekend, a download dialog will pop up
+//Automatic CSV/PDF Export of all session results after a race weekend, a download dialog will pop up
 //The Export is called if the SessionState changes to "PostRace"
 var autoExport = "false";
+var ExportType = "PDF"; //[CSV|PDF|BOTH]
+var PDFstyles = {
+	header: {
+		fontSize: 18,
+		bold: true,
+		background: '#ffffff',
+		margin : [ 0, 0, 0, 10 ]
+	},
+	table: {
+		fontSize: 10,
+		bold: false,
+		background: '#ffffff'
+	},
+	tableHeader: {
+		fontSize: 10,
+		bold: true,
+		background: '#ffffff'
+	}
+}
 
 //settings for trackmap and markers depending on zoom level of Google Maps
 // lineWeight = trackmap borders and mabe marker border, lineWeightMid = trackmap mid line, markerRadius = radius of marker point
