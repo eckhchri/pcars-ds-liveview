@@ -162,7 +162,7 @@ var PDFstyles = {
 		fontSize: 12,
 		bold: true,
 		background: '#ffffff',
-		margin : [ 0, 0, 0, 10 ]
+		margin : [ 0, 20, 0, 10 ]
 	},
 	table: {
 		fontSize: 8,
