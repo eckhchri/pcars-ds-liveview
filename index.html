@@ -327,6 +327,16 @@
 		Race2:		""
 	}
 	
+	 var PDFdocDefinition = {
+		pageSize: 'A4',
+		pageOrientation: 'portrait',
+		info: {title: 'Complete Results'},
+		content: [
+			{text: 'Complete Results', style: 'header' }
+		],
+		styles: PDFstyles
+	};
+	
 	//Trackmap Google GPS coordinates
 	var tmGPS = {};
 	
@@ -1016,12 +1026,21 @@
 		*/
 		
 		
-		////////////////////////// CSV Export START ///////////////////////////////////////
-		//Reset CSVs on a new Race Weekend
+		////////////////////////// CSV/PDF Export START ///////////////////////////////////////
+		//Reset CSVs/PDFs on a new Race Weekend
 		if (SessionState_old != "Loading" && SessionState == "Loading"){
 			for (var key in CSVExport) {
 				CSVExport[key] = "";
 			}
+			PDFdocDefinition = {
+				pageSize: 'A4',
+				pageOrientation: 'portrait',
+				info: {title: 'Complete Results'},
+				content: [
+					{text: 'Complete Results', style: 'header' }
+				],
+				styles: PDFstyles
+			};
 		}
 
 		// Build CSVs - must be done before refreshDriverList updates the table, because we need the data of the last worker run of a SessionStage and the if statements match on the first worker run of the following SessionStage
@@ -1031,12 +1050,16 @@
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");	//sort grid for the case that the user changed the sorting
 			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			PDFdocDefinition.content.push({text: 'Practice 1 Results', style: 'header' });
+			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
 		//after Practice2
 		if (SessionStage_old == "Practice2" && SessionStage != "Practice2"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			PDFdocDefinition.content.push({text: 'Practice 2 Results', style: 'header' });
+			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
 		//after Qualifying
 		// SessionStage Qualifying1 check is for pcars2 DS
@@ -1044,18 +1067,24 @@
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			PDFdocDefinition.content.push({text: 'Qualifying Results', style: 'header' });
+			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
 		//after Warmup
 		if (SessionStage_old == "Warmup" && SessionStage != "Warmup"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			PDFdocDefinition.content.push({text: 'Warmup Results', style: 'header' });
+			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
 		//after Race1 if there is a Race2
 		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz","cssclasses"]);
+			PDFdocDefinition.content.push({text: 'Race 1 Results', style: 'header' });
+			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 		}
 		//after Race Weekend finished
 		//SessionStage_old Race1 check is for pcars2 DS, because there is the State PostRace between every Stage
@@ -1064,9 +1093,13 @@
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
 				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz","cssclasses"]);
+				PDFdocDefinition.content.push({text: 'Race Results', style: 'header' });
+				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
 			if (SessionStage_old == "Race2"){
 				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","gap2ahead","gap2first","posx","posy","posz","cssclasses"]);
+				PDFdocDefinition.content.push({text: 'Race 2 Results', style: 'header' });
+				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
 			//Auto Export
 			if (autoExport == "true"){
@@ -1078,6 +1111,9 @@
 				}
 				if (ExportType === "CSV" || ExportType === "BOTH") {
 					ExportCSV(CSVall,"Results");
+				}
+				if (ExportType === "PDF" || ExportType === "BOTH") {
+					pdfMake.createPdf(PDFdocDefinition).open();
 				}
 			}
 		}
@@ -1552,6 +1588,9 @@
 		}
 		if (ExportType === "CSV" || ExportType === "BOTH") {
 			ExportCSV(CSVall,"Results");
+		}
+		if (ExportType === "PDF" || ExportType === "BOTH") {
+			pdfMake.createPdf(PDFdocDefinition).open();
 		}
 	});
 	
@@ -2578,6 +2617,63 @@ function PDFbuildTableBody(data, columns, header_titles) {
 	});
 	return body;
 }
+	
+function PDFgenerateTable(tableData, isRaceSession){
+	var PDFtable;
+	if(isRaceSession) {
+		PDFtable = {
+			table: {
+				headerRows: 1,
+				body: PDFbuildTableBody(tableData, [
+						'driverposition',
+						'inclassposition',
+						'drivername',
+						'lapnumber',
+						'vehiclename',
+						'vehicleclass',
+						'fastestlap',
+					],[
+						{text: 'Pos', style: 'tableHeader'},
+						{text: 'InClass', style: 'tableHeader'},
+						{text: 'Driver', style: 'tableHeader'},
+						{text: 'Laps', style: 'tableHeader'},
+						{text: 'Vehicle', style: 'tableHeader'},
+						{text: 'Class', style: 'tableHeader'},
+						{text: 'Fastest Lap', style: 'tableHeader'},
+					])
+			}, style: 'table'
+		}
+	}else{
+		PDFtable = {
+			table: {
+				headerRows: 1,
+				body: PDFbuildTableBody(jQuery("#DriverDataTable").getRowData(), [
+						'driverposition',
+						'inclassposition',
+						'drivername',
+						'lapnumber',
+						'vehiclename',
+						'vehicleclass',
+						'fastestlap',
+						'gap2ahead',
+						'gap2first'
+					],[
+						{text: 'Pos', style: 'tableHeader'},
+						{text: 'InClass', style: 'tableHeader'},
+						{text: 'Driver', style: 'tableHeader'},
+						{text: 'Laps', style: 'tableHeader'},
+						{text: 'Vehicle', style: 'tableHeader'},
+						{text: 'Class', style: 'tableHeader'},
+						{text: 'Fastest Lap', style: 'tableHeader'},
+						{text: 'Diff', style: 'tableHeader'},
+						{text: 'Gap', style: 'tableHeader'}
+					])
+			}, style: 'table'
+		}
+	}
+	return PDFtable;
+}
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
