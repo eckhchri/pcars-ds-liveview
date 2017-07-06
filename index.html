@@ -52,6 +52,10 @@
 	<script src="./css_classchanger.js" charset="utf-8"></script>
 	<script src="./pcars_recorder.js" charset="utf-8"></script>	
 		
+	<!-- pdfmake lib -->
+	<script src='lib/pdfmake/pdfmake.min.js'></script>
+	<script src='lib/pdfmake/vfs_fonts.js'></script>
+
    </head>
   <body>
    
@@ -1490,7 +1494,29 @@
 	}
 
 	$('#cbDriverlistExport').click(function () {		
-		ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),"Report_DriverTable");
+		if (ExportType === "CSV" || ExportType === "BOTH") {
+			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),"Report_DriverTable");
+		}
+
+		if (ExportType === "PDF" || ExportType === "BOTH") {
+			var PDFdocDefinition = {
+				info: {title: 'Current Driver Table'},
+				content: [
+					{text: 'Current Driver Table', style: 'header' } ,
+					{table: {
+						headerRows: 1,
+						body: PDFbuildTableBody(jQuery("#DriverDataTable").getRowData(), ['driverposition','drivername', 'vehiclename', 'vehicleclass', 'fastestlap'],[{text: 'Pos', style: 'tableHeader'},{text: 'Driver', style: 'tableHeader'}, {text: 'Vehicle', style: 'tableHeader'}, {text: 'Class', style: 'tableHeader'}, {text: 'Fastest Lap', style: 'tableHeader'}])
+					}, style: 'table'}
+				],
+				styles: PDFstyles
+			}
+
+			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
+
+			if (jQuery("#DriverDataTable").getGridParam("records") > 0){
+				pdfMake.createPdf(PDFdocDefinition).open();
+			}
+		}
 	});
 	
 	$('#cbDriverlistExportAll').click(function () {
@@ -2508,7 +2534,24 @@ function GetURLPath(){
 	var str1 = document.location.origin + document.location.pathname;		
 	//get the path without any filename at the end. Static variant: return str1.replace("index.html","");  			
 	return	str1.substr(0, str1.lastIndexOf("/") + 1 );
-}		
+}	
+	
+function PDFbuildTableBody(data, columns, header_titles) {
+	var body = [];
+        
+	body.push(header_titles);
+
+	data.forEach(function(row) {
+		var dataRow = [];
+
+		columns.forEach(function(column) {
+			dataRow.push(row[column].toString());
+		})
+
+		body.push(dataRow);
+	});
+	return body;
+}
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 function initW2UI(){
