@@ -154,18 +154,18 @@ var autoExport = "false";
 var ExportType = "PDF"; //[CSV|PDF|BOTH]
 var PDFstyles = {
 	header: {
-		fontSize: 18,
+		fontSize: 14,
 		bold: true,
 		background: '#ffffff',
 		margin : [ 0, 0, 0, 10 ]
 	},
 	table: {
-		fontSize: 10,
+		fontSize: 8,
 		bold: false,
 		background: '#ffffff'
 	},
 	tableHeader: {
-		fontSize: 10,
+		fontSize: 8,
 		bold: true,
 		background: '#ffffff'
 	}
