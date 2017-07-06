@@ -153,8 +153,13 @@ var CSSDEFINITIONS = {
 var autoExport = "false";
 var ExportType = "PDF"; //[CSV|PDF|BOTH]
 var PDFstyles = {
+	globalHeader: {
+		fontSize: 18,
+		bold: true,
+		background: '#ffffff',
+	},
 	header: {
-		fontSize: 14,
+		fontSize: 12,
 		bold: true,
 		background: '#ffffff',
 		margin : [ 0, 0, 0, 10 ]
