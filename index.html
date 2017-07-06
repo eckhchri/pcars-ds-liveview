@@ -1500,14 +1500,34 @@
 
 		if (ExportType === "PDF" || ExportType === "BOTH") {
 			var PDFdocDefinition = {
+				pageSize: 'A4',
+                                pageOrientation: 'portrait',
 				info: {title: 'Current Driver Table'},
 				content: [
 					{text: 'Current Driver Table', style: 'header' } ,
 					{table: {
 						headerRows: 1,
-						body: PDFbuildTableBody(jQuery("#DriverDataTable").getRowData(), ['driverposition','drivername', 'vehiclename', 'vehicleclass', 'fastestlap'],[{text: 'Pos', style: 'tableHeader'},{text: 'Driver', style: 'tableHeader'}, {text: 'Vehicle', style: 'tableHeader'}, {text: 'Class', style: 'tableHeader'}, {text: 'Fastest Lap', style: 'tableHeader'}])
-					}, style: 'table'}
-				],
+						body: PDFbuildTableBody(jQuery("#DriverDataTable").getRowData(), [
+								'driverposition',
+								'inclassposition',
+								'drivername',
+								'vehiclename',
+								'vehicleclass',
+								'fastestlap',
+								'gap2ahead',
+								'gap2first'
+							],[
+								{text: 'Pos', style: 'tableHeader'},
+								{text: 'InClass', style: 'tableHeader'},
+								{text: 'Driver', style: 'tableHeader'},
+								{text: 'Vehicle', style: 'tableHeader'},
+								{text: 'Class', style: 'tableHeader'},
+								{text: 'Fastest Lap', style: 'tableHeader'},
+								{text: 'Diff', style: 'tableHeader'},
+								{text: 'Gap', style: 'tableHeader'}
+							])
+                                        }, style: 'table'}
+                                ],
 				styles: PDFstyles
 			}
 
