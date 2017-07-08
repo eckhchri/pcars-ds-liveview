@@ -50,7 +50,11 @@
 	<script src="./calc_coordinates.js" charset="utf-8"></script>
 	<script src="./class_reference_points.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
-	<script src="./pcars_recorder.js" charset="utf-8"></script>	
+	<script src="./pcars_recorder.js" charset="utf-8"></script>
+	
+	<!-- new pcarslv classes -->
+	<script src="./PCARSLV_BASIC.js" charset="utf-8"></script>
+	<script src="./PCARSLV_SETTINGS.js" charset="utf-8"></script>		
 		
 	<!-- pdfmake lib -->
 	<script src='lib/pdfmake/pdfmake.min.js'></script>
@@ -244,6 +248,10 @@
 
 	</div>
 <script type="text/javascript" charset="utf-8">
+
+	// init PCARS Live View classes
+	var PLV_S				=	new PCARSLV_SETTINGS();		
+	PLV_S.switchAPIMODE( "DS" );
 
 	// initialize vars
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects
