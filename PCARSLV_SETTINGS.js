@@ -52,7 +52,7 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 		
 		switch (apimode) {
 		
-			// DEMO Mode validations
+			// validations
 			case "DS":
 				if (this.curDsServerURL && this.curDsPort !== undefined){					
 					if (this._isApiModeValid(apimode)){
@@ -63,9 +63,29 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 					}										
 				}else{
 					this.displayErrorMsg("Switch canceled, not all variables defined. \nDSSERVERURL: "+ this.curDsServerURL +"\nDSPORT: "+ this.curDsPort +" !");
-				}
+				}			
+				break;
+				
+			case "DEMO":
+									
+				if (this._isApiModeValid(apimode)){
+					this.curAPIMODE = apimode;	// set new API mode
+					this.displayMsg("INFO", "API Mode switched to: " + apimode);
+				} else {
+					this.displayMsg("WARN", "API Mode NOT switched. \nInvalid APIMODE: " + apimode);
+				}										
+					
+				break;
 			
-				break;		
+			default:
+				if (this._isApiModeValid(apimode)){
+					this.curAPIMODE = apimode;	// set new API mode
+					this.displayMsg("INFO", "API Mode switched to: " + apimode);
+				} else {
+					this.displayMsg("ERROR", "API Mode NOT switched. \nInvalid APIMODE: " + apimode);
+				}									
+				break;
+				
 		} 
 		
 		

@@ -16,6 +16,8 @@
 	<script src="./lib/jszip/jszip.min.js"></script>
 	<link rel="stylesheet" href="./lib/LapChart/lap-chart.css">
 	<script src="./lib/LapChart/lap-chart.js"></script>
+	<link rel="stylesheet" href="./lib/jBox/jBox.css">
+	<script src="./lib/jBox/jBox.min.js"></script>
 	
 		
 	<link rel="stylesheet" type="text/css" href="./lib/w2ui/w2ui-1.4.3.min.css" />
@@ -251,7 +253,7 @@
 
 	// init PCARS Live View classes
 	var PLV_S				=	new PCARSLV_SETTINGS();		
-	PLV_S.switchAPIMODE( "DS" );
+	PLV_S.switchAPIMODE( APIMODE+"3" ); // only test call
 
 	// initialize vars
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects

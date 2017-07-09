@@ -30,7 +30,26 @@ class PCARSLV_BASIC{
 	 * param {string} msg - string to display as error
 	 */	
 	displayMsg(prefix , msg){
-		alert( prefix +" | "+ msg);			
+		var myNotice = new jBox('Notice', {			
+			 fade: 500,
+			 autoClose: 7000,
+			 title: 'New feature',
+			 close: 'flip',
+			 color: 'black',
+			 target: '#map',
+			 content: prefix +" | "+ msg,			 
+			 attributes: {
+			      x: 'right',
+			      y: 'top'
+			    },
+			 position: {
+				 x: 20,
+				 y: 50
+			 	}
+			});
+		
+		myNotice.open();
+						
 	}
 			
 	/* displayErrorMsg()
@@ -56,6 +75,8 @@ class PCARSLV_BASIC{
 		alert("INFO: "+ msg);			
 		return true;
 	}
+	
+	
 	
 	
 	
