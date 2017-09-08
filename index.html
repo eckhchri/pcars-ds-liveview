@@ -25,12 +25,6 @@
  
  	<link rel="stylesheet" type="text/css" href="./lib/jquery.qtip.custom/jquery.qtip.min.css" />
     <script type="text/javascript" src="./lib/jquery.qtip.custom/jquery.qtip.min.js"></script>
- 
- 	<!-- CSS definitions moved to folder ./css/ --> 
-	<link rel="stylesheet" href="./css/pcars.css">
-	<link rel="stylesheet" href="./css/w2ui.css">
-	<link rel="stylesheet" href="./css/font-awesome.min.css">
-	
  		
 	<!-- Jquery UI needed for jTable and the function dragable/resize-->
 	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -41,6 +35,11 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/i18n/grid.locale-de.js"></script>
 	<!-- The atual jqGrid code -->
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqgrid/4.6.0/js/jquery.jqGrid.src.js"></script>
+
+    <!-- CSS definitions moved to folder ./css/  --> 
+	<link rel="stylesheet" href="./css/pcars.css">   <!-- Should be loaded after ui.jqgrid.css, to overwirte some setting #80 -->
+	<link rel="stylesheet" href="./css/w2ui.css">
+	<link rel="stylesheet" href="./css/font-awesome.min.css">
 
 	<script src="./config.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
