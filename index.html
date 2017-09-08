@@ -1104,7 +1104,10 @@
 		}
 		//after Race Weekend finished
 		//SessionStage_old Race1 check is for pcars2 DS, because there is the State PostRace between every Stage
-		if (SessionState_old == "Race" && SessionState == "PostRace" && SessionStage_old == "Race1"){
+		//SessionState Returning is needed if not all drivers finished their race in the deadline time. 
+		//  State PostRace only happens if all drivers reach the S/F line after the race is over before the deadline time ticks down. 
+		//  If only one doesn't make it, the state directly changes to Returning if the deadline time is reached.
+		if (SessionState_old == "Race" && (SessionState == "PostRace" || SessionState == "Returning") && SessionStage_old == "Race1"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race

@@ -891,7 +891,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       {
         "id" : 266758367,
         "name" : "Lamborghini Sesto Elemento",
-        "class" : "Track Day BL"
+        "class" : "Track Day B"
       },
       {
         "id" : 274862187,
@@ -925,7 +925,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 556202917,
-        "name" : "Renault Megane R.S. SMS-R Rallycross",
+        "name" : "Renault Mégane R.S. SMS-R Rallycross",
         "class" : "WRX"
       },
       {
@@ -940,7 +940,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 647968520,
-        "name" : "Ford Focus RS Rallycross",
+        "name" : "Ford Focus RS RX",
         "class" : "WRX"
       },
       {
@@ -955,7 +955,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 728095309,
-        "name" : "Chevrolet Camaro '69 TransAm",
+        "name" : "Chevrolet Camaro Z/28 '69 TransAm",
         "class" : "Vintage Touring-GT A"
       },
       {
@@ -985,7 +985,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 844159614,
-        "name" : "Kart (Alpha)",
+        "name" : "Kart",
         "class" : "Kart1"
       },
       {
@@ -995,7 +995,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 951815226,
-        "name" : "Honda Civic Coupe GRX",
+        "name" : "Honda Civic Coupé GRC",
         "class" : "WRX"
       },
       {
@@ -1050,7 +1050,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1111049682,
-        "name" : "Ford Mustang Boss 302R1",
+        "name" : "Ford Mustang Boss 302R",
         "class" : "GT4"
       },
       {
@@ -1080,7 +1080,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1187826685,
-        "name" : "Jaguar F-Type SVR",
+        "name" : "Jaguar F-Type SVR Coupé",
         "class" : "Road D"
       },
       {
@@ -1090,7 +1090,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1219511257,
-        "name" : "Audi R18 e-tron quattro",
+        "name" : "Audi R18 e-tron quattro (2014)",
         "class" : "LMP1"
       },
       {
@@ -1170,12 +1170,12 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1406411897,
-        "name" : "Lamborghini Huracan LP620-2 Super Trofeo",
+        "name" : "Lamborghini Huracán LP620-2 Super Trofeo",
         "class" : "Super Trofeo"
       },
       {
         "id" : 1433352906,
-        "name" : "Ginetta G57-P2",
+        "name" : "Ginetta G57",
         "class" : "Track Day A"
       },
       {
@@ -1211,7 +1211,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       {
         "id" : 1564669712,
         "name" : "Lamborghini Veneno LP750-4",
-        "class" : "Road BL"
+        "class" : "Road B"
       },
       {
         "id" : 1574251638,
@@ -1230,7 +1230,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1639105598,
-        "name" : "Ford Escort Mk1 RS1600",
+        "name" : "Ford Escort RS1600",
         "class" : "Road G"
       },
       {
@@ -1245,7 +1245,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1747257697,
-        "name" : "Nissan 300ZX LM",
+        "name" : "Nissan 300ZX Turbo LM",
         "class" : "GTO"
       },
       {
@@ -1260,7 +1260,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1817703058,
-        "name" : "Ford Capri Zakspeed Group 5",
+        "name" : "Zakspeed Ford Capri Group 5",
         "class" : "Group 5"
       },
       {
@@ -1270,8 +1270,8 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : 1850232477,
-        "name" : "Lamborghini Huracan LP610-4",
-        "class" : "Road CL"
+        "name" : "Lamborghini Huracán LP610-4",
+        "class" : "Road C"
       },
       {
         "id" : 1864701845,
@@ -1316,7 +1316,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       {
         "id" : 1977120176,
         "name" : "Lamborghini Aventador LP700-4",
-        "class" : "Road BL"
+        "class" : "Road B"
       },
       {
         "id" : 1979398129,
@@ -1342,11 +1342,6 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "id" : 2091910841,
         "name" : "Ginetta G55 GT4",
         "class" : "GT4"
-      },
-      {
-        "id" : 2136103830,
-        "name" : "Nissan Skyline GT-R (BNR32) Group A (DLC2 Alpha)",
-        "class" : "Group A"
       },
       {
         "id" : -2133597590,
@@ -1410,7 +1405,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1796949190,
-        "name" : "Ford Escort Mk1 Rallycross",
+        "name" : "Ford Escort RS1600 (Rallycross)",
         "class" : "Vintage RX"
       },
       {
@@ -1480,7 +1475,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1444632268,
-        "name" : "Renault Megane R.S. SMS-R Touring",
+        "name" : "Renault Mégane R.S. SMS-R Touring",
         "class" : "Touring Car"
       },
       {
@@ -1500,7 +1495,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1411323812,
-        "name" : "BMW 1-Series M Coupe StanceWorks Edition",
+        "name" : "BMW 1 Series M Coupé StanceWorks Edition",
         "class" : "Road D"
       },
       {
@@ -1530,12 +1525,12 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1253474718,
-        "name" : "Ford Sierra RS500 Cosworth Group A",
+        "name" : "Ford Sierra Cosworth RS500 Group A",
         "class" : "Group A"
       },
       {
         "id" : -1226176940,
-        "name" : "BMW 1-Series M Coupe",
+        "name" : "BMW 1 Series M Coupé",
         "class" : "Road E"
       },
       {
@@ -1546,7 +1541,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       {
         "id" : -1197419789,
         "name" : "Lamborghini Diablo GTR",
-        "class" : "GTOL"
+        "class" : "GTO"
       },
       {
         "id" : -1187748261,
@@ -1595,17 +1590,17 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -956881226,
-        "name" : "Renault Megane R.S. 275 Trophy-R",
+        "name" : "Renault Mégane R.S. 275 Trophy-R",
         "class" : "Road F"
       },
       {
         "id" : -934098507,
-        "name" : "BMW M3 (E30) Group A",
+        "name" : "BMW M3 Sport Evo Group A",
         "class" : "Group A"
       },
       {
         "id" : -931590477,
-        "name" : "Renault Megane Trophy V6",
+        "name" : "Renault Mégane Trophy V6",
         "class" : "Megane Trophy"
       },
       {
@@ -1625,7 +1620,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -704151830,
-        "name" : "Nissan 300ZX IMSA GTS",
+        "name" : "Nissan 300ZX Turbo IMSA GTS",
         "class" : "GTO"
       },
       {
@@ -1650,7 +1645,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -615186701,
-        "name" : "Ford Escort Mk1 Racing",
+        "name" : "Ford Escort RS1600 (Racing)",
         "class" : "Vintage Touring-GT B"
       },
       {
@@ -1680,7 +1675,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -387045855,
-        "name" : "Jaguar XJ220 S TWR",
+        "name" : "Jaguar XJ220 S",
         "class" : "Road B"
       },
       {
@@ -1720,7 +1715,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -278306106,
-        "name" : "Nissan Skyline Silhouette Formula (R30)",
+        "name" : "Nissan KDR30 Super Silhouette",
         "class" : "Group 5"
       },
       {
@@ -1745,8 +1740,8 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -93033971,
-        "name" : "Lamborghini Huracan GT3",
-        "class" : "GT3L"
+        "name" : "Lamborghini Huracán GT3",
+        "class" : "GT3"
       },
       {
         "id" : -91815086,
@@ -1760,7 +1755,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -78832007,
-        "name" : "Mercedes-AMG C 63 Coupe S",
+        "name" : "Mercedes-AMG C 63 Coupé S",
         "class" : "Road E"
       },
       {
