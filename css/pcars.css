@@ -60,6 +60,10 @@
                 left:           55%;
 				top:			250px;
 	     }
+	     /*
+	     .ui-jqgrid-bdiv{
+	     	max-height: 500px;
+	     }*/
 	     #DriverData .ui-jqgrid-bdiv{
 				max-height: 400px;
 				overflow-x: hidden;
@@ -311,4 +315,18 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 /* The switch END */	
-		
+
+
+.JBOXPCARSLV {
+	fill: black;
+	background:green;
+}
+
+.ui-jqgrid .ui-jqgrid-bdiv { overflow-x: hidden; }
+
+.ui-jqgrid-bdiv{
+    max-height: 80vh; /*defines value relativ to browser window size*/
+/*    overflow-y: scroll;*/
+    overflow-x: hidden;
+
+}
