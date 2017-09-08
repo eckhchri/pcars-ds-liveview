@@ -251,10 +251,6 @@
 	</div>
 <script type="text/javascript" charset="utf-8">
 
-	// init PCARS Live View classes
-	var PLV_S				=	new PCARSLV_SETTINGS();		
-	PLV_S.switchAPIMODE( APIMODE+"3" ); // only test call
-
 	// initialize vars
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects
 	var aSensorData 		=	new Array();		// array of Hashes, each hash includes parameters of a driver
@@ -302,6 +298,14 @@
 	var DsTrackName		=	"Slightly Mad Studios Ltd";		//aTrackList[aDsData.TrackId];
 	var DsMaxMemberCnt	=	"-+-"; //aDsData.max_member_count;
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
+	var sCurUrl			= "";  //in each time this var should be the current DS URL independent of the APIMODE
+	var sCurPort		= "";  //in each time this var should be the current DS PORT independent of the APIMODE
+	
+	// init PCARS Live View classes
+	var PLV_S				=	new PCARSLV_SETTINGS();
+	PLV_S.switchAPIMODE( APIMODE+"3" ); // only test call
+	PLV_S.switchAPIMODE( APIMODE ); // only test call
+	PLV_S.setCurrentSettings( APIMODE ); // initial force copy of vars to common vars
 	
 	//PolyLine global vars for trackmaps
 	var PolyLineMid		=	null;
@@ -477,6 +481,8 @@
 	$("#APIMODE").change(function() {
 			$("#APIMODE option:selected").each(function() {
 					APIMODE = $( this ).text();
+					// change common vars to current API Mode
+					PLV_S.setCurrentSettings(APIMODE);
 					if(log >= 4){console.log('------- Switch API Mode to: ', APIMODE );}										
 			});			
 	}); // end #APIMODE change event
@@ -1379,17 +1385,18 @@
 	w_tracklist.addEventListener('message', function(e) {
 
 			if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste Event: ", e );}
-			
+			console.log("+++++++++++ GETTRACKLIST Worker Trackliste URL/Port: " + sCurUrl +" / "+ sCurPort );
 			if ( e.data.aTrack.length > 0 ){
 				// in case DS return a result refresh track table
 				refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
 
 			}else{
 				refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
+				
 				w_tracklist.postMessage({
 					workerdelay: 	WORKERDELAY_TRACKLIST
-					,dsurl: 		DsServerURL
-					,dsport: 		DsPort
+					,dsurl: 		sCurUrl
+					,dsport: 		sCurPort
 					,timeout: 		2000
 					,receivemode: 	"GETTRACKLIST" 
 					,aRefpoint:		e.data.aRefpoint});
@@ -1398,8 +1405,9 @@
 			
 	}, false);
 	//initial call of the tracklist worker. initiate endless loop
-	w_tracklist.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTMP });
-
+	console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );
+	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTMP });
+		
 
 	//todo: add subgrid for more drivers information
 	jQuery("#DriverDataTable").jqGrid({
@@ -2836,6 +2844,7 @@ function initToolTips(){
 		
 	return 1;
 }
+
 
        </script>
    </body>

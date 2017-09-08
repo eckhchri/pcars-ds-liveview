@@ -135,5 +135,44 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 		}				
 	}
 	
+	/*
+	* Description: In case of APIMODE switch, copy specific variables to the common one
+	* Usage: setCurrentSettings("CREST2");
+	* 
+	* param {string}  string of APIMODE
+	* return {bolean} true if all is fine, false if something went wrong
+	*/
+	setCurrentSettings(sApiMode){
+		
+		switch(sApiMode){
+			case "DS":
+				sCurUrl = DsServerURL;
+				sCurPort = DsPort;
+				break;
+
+			case "DS2":
+				sCurUrl = Ds2ServerURL;
+				sCurPort = Ds2Port;
+				break;
+			
+			case "CREST":
+				sCurUrl = CRESTServerURL;
+				sCurPort = CRESTPort;
+				break;
+			
+			case "CREST2":
+				sCurUrl = CREST2ServerURL;
+				sCurPort = CREST2Port;
+				break;
+				
+			default:  // fall back to DS1 settings
+				sCurUrl = DsServerURL;
+				sCurPort = DsPort;
+		}
+		
+		if(log >= 3){console.log ("called setCurrentSettings() changed to: " +"|" + sCurUrl +' | '+ sCurPort);}
+		
+		return 1;
+	}
 	
 }
