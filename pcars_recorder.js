@@ -46,6 +46,24 @@ function clearDataSet() {
 	return 1;
 }
 
+function resetRacestats(aStats){
+
+/*
+	for (var value in aStats) {
+		if (aStats.hasOwnProperty(value)) {
+			delete aStats[value];
+		}
+	}
+*/
+	
+	aStats = {};
+	aStats['drivers']	= {};
+	
+	console.log("Reset Race Statistik ! Size after Deletion: ", aStats);
+	
+	return aStats;
+}
+
 function exportDataCompressed(filename){
 
 	// do not export an empty array
@@ -165,3 +183,4 @@ PCARSRECORDER.prototype.importData		=	importData;
 PCARSRECORDER.prototype.addDataset		=	addDataset;
 PCARSRECORDER.prototype.memorySizeOf	=	memorySizeOf;
 PCARSRECORDER.prototype.exportDataCompressed	=	exportDataCompressed;
+PCARSRECORDER.prototype.resetRacestats = resetRacestats;

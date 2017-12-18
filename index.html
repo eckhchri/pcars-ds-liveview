@@ -328,8 +328,8 @@
 	var zoom_level;         //Google Maps zoom level
 	
 	// race statistics powered by lapChart library
-	var aRacestats			= {};
-	aRacestats['drivers']	= {};
+	var aRacestats;			
+	aRacestats = PCARS_Rec.resetRacestats(aRacestats);
 	
 	var CSVExport = {	//CSV Export Data
 		Practice1:	"",
@@ -2455,7 +2455,11 @@ function initDemoData(aNewData, SetApiModeTo ){
 			
 	//reset filter of drivertable toolbar
 	$("#DriverDataTable")[0].clearToolbar();
-		
+	
+	
+	//also reset Race Statistics
+	aRacestats = PCARS_Rec.resetRacestats(aRacestats);
+	console.log("Reset Race Statistik 3! Size: ", aRacestats);
 		
 	return 1;
 }
