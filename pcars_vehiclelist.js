@@ -1782,7 +1782,50 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "id" : -11335215,
         "name" : "Ford Mustang Cobra TransAm",
         "class" : "GTO"
-      }
+      },
+      
+      //////// FUN DLC cars  12/2017 /////////////////////////////
+      {
+         "id" : 375801487,
+         "name" : "Ford RS200 Evolution Group B",
+         "class" : "Group B"
+      },
+      {
+         "id" : -667842301,
+         "name" : "Renault 5 Maxi Turbo",
+         "class" : "Group B"
+      },      
+      {
+         "id" : -1592901367,
+         "name" : "Audi Sport quattro S1",
+         "class" : "Group B"
+      },
+      {
+         "id" : -2139807191,
+         "name" : "Audi S1 EKS RX quattro",
+         "class" : "WRX"
+      },
+      {
+         "id" : -983006067,
+         "name" : "Citroen DS3 RX Supercar",
+         "class" : "WRX"
+      },
+      {
+          "id" : 1830085946,
+          "name" : "Ford Bronco Brocky",
+          "class" : "Trophy Truck"
+      },
+      {
+         "id" : -353748333,
+         "name" : "Ford Mustang RTR Spec - 5D",
+         "class" : "Drift"
+      },
+      {
+         "id" : -373393516,
+         "name" : "Ford Mustang '66 RTR TransAm",
+         "class" : "Vintage Touring-GT A"
+      },
+      
 ];
 
 }// end load vehicle data
