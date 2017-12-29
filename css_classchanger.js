@@ -252,6 +252,50 @@ function CSSClassChanger(aCSSDefinition){
 			
 		return 1;
 	}
+	
+	//all cars for human drivers
+	function ColorHumanDrivers(){	
+		
+		//clear all other individual CSS definitions
+		this.ClearAllCssClases();
+		
+		// style Human
+		var cnt = 0;
+		this.aCSSClasses['CSClass'+cnt]	=	setStyle('circle.CSS_IsHumanPlayer' + CSSDEFINITIONS['CSSCOLORSELECTION'][cnt] ); 
+		
+		// style AI
+		cnt++;
+		this.aCSSClasses['CSClass'+cnt]			= setStyle(
+				'circle.CSS_IsAiPlayer{\n'		+
+		        '	opacity:	0.35;\n'	+		
+		        '}\n',					
+			    );		
+							
+		return 1;
+	}
+	
+	//all cars for AI drivers
+	function ColorAiDrivers(){	
+		
+		//clear all other individual CSS definitions
+		this.ClearAllCssClases();
+				
+		// style AI
+		var cnt = 0;
+		this.aCSSClasses['CSClass'+cnt]	=	setStyle('circle.CSS_IsAiPlayer' + CSSDEFINITIONS['CSSCOLORSELECTION'][cnt] );	
+				
+		// style Humans
+		cnt++;
+		this.aCSSClasses['CSClass'+cnt]			= setStyle(
+				'circle.CSS_IsHumanPlayer{\n'		+
+		        '	opacity:	0.35;\n'	+		
+		        '}\n',					
+			    );		
+		
+		
+		return 1;
+	}
+	
 
 CSSClassChanger.prototype.setStyle=setStyle;
 CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
@@ -263,3 +307,5 @@ CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
 CSSClassChanger.prototype.ColorDynClasses=ColorDynClasses;
 CSSClassChanger.prototype.ColorSameVName=ColorSameVName;
 CSSClassChanger.prototype.ColorSameClass=ColorSameClass;
+CSSClassChanger.prototype.ColorHumanDrivers=ColorHumanDrivers;
+CSSClassChanger.prototype.ColorAiDrivers=ColorAiDrivers;

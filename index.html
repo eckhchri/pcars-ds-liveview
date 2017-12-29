@@ -213,7 +213,9 @@
 	    	<option value="unhidedrivers">unhide-drivers</option>
 	    	<option value="colortop3">Top 3 vehicles</option>
 	    	<option value="colorsamename">same vehicles</option>
-	    	<option value="colorsameclass">same classes</option>
+	    	<option value="colorsameclass">same classes</option>	    	
+	    	<option value="ishuman">Is Human</option>
+	    	<option value="isai">Is AI</option>
 	    	<option value="deletecssclasses">reset CSS Classes</option>
 		</select>
 		
@@ -529,6 +531,15 @@
 	        	case "deletecssclasses":
 	        		CSSClsChg.ClearAllCssClases();
 	        		break;
+	        		
+	        	case "ishuman":
+	        		CSSClsChg.ColorHumanDrivers();
+	        		break;
+	        		
+	        	case "isai":
+	        		CSSClsChg.ColorAiDrivers();
+	        		break;
+	        		
 	        	
 	        	// for all dynamic generated selections
 	    	    default:

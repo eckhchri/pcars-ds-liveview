@@ -170,7 +170,7 @@ function GetCSSCircleClass(){
 	
 	//decision if real player or ai
 	if (this.IsPlayer == 1) {
-		css += " CSS_IsRealPlayer";
+		css += " CSS_IsHumanPlayer";
 	}else{
 		css += " CSS_IsAiPlayer";
 	}
