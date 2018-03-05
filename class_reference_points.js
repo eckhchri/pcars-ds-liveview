@@ -445,8 +445,8 @@ function Refpoint(circuit_id)
 		"Name":         "Classic Brands Hatch Rallycross"
 		,"Name2":       ""
 		,"Zoom":        17
-		,"MapInitLat":   51.359090
-		,"MapInitLong":  0.260612
+		,"MapInitLat":   51.359384
+		,"MapInitLong":  0.261653
 		,"Comment": "live check, new from FUN DLC 12/2017"
 	});
 	
@@ -654,7 +654,7 @@ function Refpoint(circuit_id)
 	//Circuit de Barcelona-Catalunya National
 	aRefPoints[-998191994] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Circuit de Barcelona-Catalunya National","Name2": "","MapInitLat": 41.570355,"MapInitLong": 2.259433});	
 	//Barcelona Rallycross
-	aRefPoints[1828877100] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Barcelona Rallycross","Name2": "Barcelona Rallycross","MapInitLat": 41.570355,"MapInitLong": 2.259433,"Comment": "live check, new from FUN DLC"});
+	aRefPoints[1828877100] = CopyObjectWithModifications(aRefPoints[521933422], {"Name": "Barcelona Rallycross","Name2": "Barcelona Rallycross","Zoom": 18,"MapInitLat": 41.573692,"MapInitLong": 2.261047,"Comment": "live check, new from FUN DLC 12/2017"});
 	
 
 	//Imola
