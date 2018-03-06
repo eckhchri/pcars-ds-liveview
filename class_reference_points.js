@@ -969,8 +969,8 @@ function Refpoint(circuit_id)
 	//Lydden Hill Rallycross
 	aRefPoints[673609283] = CopyObjectWithModifications(aRefPoints[953639515], {"Name": "Lydden Hill Rallycross","Name2": "Lydden Hill RX"});	//"mTrackLocation":"Lydden Hill","mTrackVariation":"RX"
 
-	//Porsche Leipzig Test Track, not in game at the moment
-	aRefPoints[9999990023] = CopyObjectWithModifications(aRefPoints[9999999999],
+	//Porsche Experience Centre Leipzig
+	aRefPoints[-158843644] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        51.405441
 		,"refLong":      12.298670
@@ -979,12 +979,12 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-		,"Name":         "Porsche Leipzig Test Track"
-		,"Name2":	 "Porsche Leipzig Test Track"	//"mTrackLocation":"?","mTrackVariation":"?"
+		,"Name":         "Porsche Experience Centre Leipzig"
+		,"Name2":	 "Porsche Experience Centre Leipzig"	//"mTrackLocation":"?","mTrackVariation":"?"
 		,"Zoom":         15
 		,"MapInitLat":   51.405441
 		,"MapInitLong":  12.298670
-		,"Comment": "initially added, Dummy Track ID, Dummy DS name"
+		,"Comment": "initially added"
 		});
 
 	//Red Bull Ring GP
