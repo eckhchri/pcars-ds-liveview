@@ -972,19 +972,19 @@ function Refpoint(circuit_id)
 	//Porsche Experience Centre Leipzig
 	aRefPoints[-158843644] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        51.405441
-		,"refLong":      12.298670
-		,"rotation":     0
+		"refLat":        51.402149
+		,"refLong":      12.296042
+		,"rotation":     -0.25
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
 		,"Name":         "Porsche Experience Centre Leipzig"
-		,"Name2":	 "Porsche Experience Centre Leipzig"	//"mTrackLocation":"?","mTrackVariation":"?"
+		,"Name2":	 "Porsche Leipzig on-road circuit Leipzig"	//"mTrackLocation":"Porsche Leipzig on-road circuit","mTrackVariation":"Leipzig"
 		,"Zoom":         15
 		,"MapInitLat":   51.405441
 		,"MapInitLong":  12.298670
-		,"Comment": "initially added"
+		,"Comment": "finished"
 		});
 
 	//Red Bull Ring GP
