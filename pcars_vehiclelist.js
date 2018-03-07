@@ -1784,7 +1784,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "class" : "GTO"
       },
       
-      //////// FUN DLC cars  12/2017 /////////////////////////////
+      //////// Fun Pack DLC cars  12/2017 /////////////////////////////
       {
          "id" : 375801487,
          "name" : "Ford RS200 Evolution Group B",
@@ -1825,7 +1825,53 @@ this.aVehicleInfoExt['PCARS2']	= 	[
          "name" : "Ford Mustang '66 RTR TransAm",
          "class" : "Vintage Touring-GT A"
       },
-      
+	
+      //////// Porsche Legends Pack DLC cars  03/2018 ////////////////////////
+      {
+         "id" : 1218201782,
+         "name" : "Porsche 908/03 Spyder",
+         "class" : "Vintage Prototype B"
+      },
+      {
+         "id" : -1835136516,
+         "name" : "Porsche 917K",
+         "class" : "Vintage Prototype A"
+      },
+      {
+         "id" : -1523189681,
+         "name" : "Porsche 917/10",
+         "class" : "CanAm"
+      },
+      {
+         "id" : -807187208,
+         "name" : "Porsche 911 Carrera RSR 2.8",
+         "class" : "Vintage Touring-GT A"
+      },
+      {
+         "id" : -1270234648,
+         "name" : "Porsche 935/78",
+         "class" : "Group 5"
+      },
+      {
+         "id" : -424432241,
+         "name" : "Porsche 935/78-81",
+         "class" : "Group 5"
+      },
+      {
+         "id" : -1268030897,
+         "name" : "Porsche 959 S",
+         "class" : "Road E"
+      },
+      {
+         "id" : -1470867259,
+         "name" : "Porsche Carrera GT",
+         "class" : "Road C"
+      },
+      {
+         "id" : -1295853198,
+         "name" : "Porsche 911 RSR",
+         "class" : "GTE"
+      }
 ];
 
 }// end load vehicle data
