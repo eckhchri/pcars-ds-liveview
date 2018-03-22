@@ -706,23 +706,26 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 
 					aDrivers.driverlist[index] =
 						new PCARSdriver(
-								0,												//RefId - NA
-								myArr.participants.mParticipantInfo[i].mName,	//Name
-								1,												//NA
-								0,												//GridPosition - NA
-								PosX,											//PositionX in meters
-								PosY,											//PositionY in meters
-								PosZ,											//PositionZ in meters
-								"NA",											//State - NA
-								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
-								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
-								0,												//FastestLapTime - NA
-								0,												//LastLapTime - NA
-								0,												//Orientation - NA
-								0,												//Speed - NA
-								myArr.participants.mParticipantInfo[i].mCurrentLap,						//CurrentLap
-								2091910841
-							);
+							0,								//RefId - NA
+							myArr.participants.mParticipantInfo[i].mName,			//Name
+							1,								//IsPlayer - NA
+							0,								//GridPosition - NA
+							PosX,								//PositionX in meters
+							PosY,								//PositionY in meters
+							PosZ,								//PositionZ in meters
+							myArr.participants.mParticipantInfo[i].mRaceStates,		//RaceState
+							myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
+							myArr.participants.mParticipantInfo[i].mFastestLapTimes,	//FastestLapTime
+							myArr.participants.mParticipantInfo[i].mLastLapTimes,		//LastLapTime
+							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
+							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
+							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
+							2091910841							//should be not used, because VehicleName is available
+							//numPits,							//numPits must not be filled
+							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
+							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
+						);
 				}
 	
 				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
