@@ -744,7 +744,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
-							2091910841							//should be not used, because VehicleName is available
+							myArr.participants.mParticipantInfo[i].mCarNames		//VehicleID is not available, use the VehicleName instead
 							//numPits,							//numPits must not be filled
 							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
 							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
