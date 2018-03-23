@@ -3,6 +3,9 @@
 ///////////////////////////////////////////////
 var SCRIPTVERSION	= "0.3.4";
 
+//put in your custom google map key or user url parameter api_key=
+var GOOGLE_MAP_KEY = "";
+
 //Activate URL parameter interpretation
 var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
 
