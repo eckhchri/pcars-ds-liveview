@@ -595,7 +595,7 @@ this.aVehicleInfoExt['PCARS1'] = [
  },
  {
    "id" : -1748676965,
-   "name" : "McLaren P1Â™",
+   "name" : "McLaren P1™",
    "class" : "Road A"
  },
  {
