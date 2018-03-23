@@ -128,6 +128,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	var PosZ;
 	var index;			// index of driver objects
 	var loopcnt = 0;	// use as index if RacePosition is 0 during several session states
+	var IsPlayer = 0;
+	var FastestLapTime;
+	var LastLapTime;
 	
 	if(this.receivemode == "GETDEMODATA"){
 		/*var recording_position = timeout;
@@ -701,6 +704,26 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
 					PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
 					
+					// check if the Laptimes are negative, because SharedMemory returns "-123" if there is no time set yet
+					// Checking only one of both times should be enough, because if the first time is set, then both times have a valid number
+					if (myArr.participants.mParticipantInfo[i].mFastestLapTimes < 0){
+						FastestLapTime = 0;
+						LastLapTime = 0;
+					}else{
+						//Convert times from seconds to milliseconds, because SharedMemory returns the laptimes in seconds with 4 places after decimal point
+						//After conversation you still have 1 place after the decimal point (0.7 milliseconds for example) and the drivertable cuts it and then 0.7 milliseconds = 0, but should be 1.
+						// the round functions fixes the problem
+						FastestLapTime = Math.round(myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000);
+						LastLapTime = Math.round(myArr.participants.mParticipantInfo[i].mLastLapTimes * 1000);
+					}
+					
+					// The first participant in the array should be always the human player - check again
+					if (i == 0){
+						IsPlayer = 1;
+					}else{
+						IsPlayer = 0;
+					}
+					
 					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
 					loopcnt++;
 
@@ -708,7 +731,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						new PCARSdriver(
 							0,								//RefId - NA
 							myArr.participants.mParticipantInfo[i].mName,			//Name
-							1,								//IsPlayer - NA
+							IsPlayer,							//IsPlayer
 							0,								//GridPosition - NA
 							PosX,								//PositionX in meters
 							PosY,								//PositionY in meters
@@ -716,8 +739,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							myArr.participants.mParticipantInfo[i].mRaceStates,		//RaceState
 							myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
 							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
-							myArr.participants.mParticipantInfo[i].mFastestLapTimes,	//FastestLapTime
-							myArr.participants.mParticipantInfo[i].mLastLapTimes,		//LastLapTime
+							FastestLapTime,							//FastestLapTime
+							LastLapTime,							//LastLapTime
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
