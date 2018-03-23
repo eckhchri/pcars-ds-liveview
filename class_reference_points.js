@@ -756,7 +756,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul":	1.003
 		,"cor_PosY_mul":	1
 		,"Name":		"Autodromo Internacional do Algarve"
-		,"Name2":		"Autodromo_Algarve Autodromo_Algarve"	//mTrackLocation:"Autodromo_Algarve",mTrackVariation:"Autodromo_Algarve"
+		,"Name2":		"Algarve"	//mTrackLocation:"Algarve",mTrackVariation:""
 		,"Zoom":		16
 		,"MapInitLat":	37.231121
 		,"MapInitLong":	-8.628299
@@ -998,7 +998,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 0.997
 		,"cor_PosY_mul": 1
 		,"Name":         "Red Bull Ring GP"
-		,"Name2":	 "Red_Bull_Ring Grand Prix"	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"Grand Prix"
+		,"Name2":	 "Red_Bull_Ring GP"	//"mTrackLocation":"Red_Bull_Ring","mTrackVariation":"GP"
 		,"Zoom":         16
 		,"MapInitLat":   47.222579
 		,"MapInitLong":  14.763244
