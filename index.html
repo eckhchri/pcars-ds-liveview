@@ -263,7 +263,7 @@
 		var GOOGLE_MAP_KEY_QUERY = get_url_param('api_key');
 
 		// if parameter exists overwrite configuration
-		if( GOOGLE_MAP_KEY != null ){
+		if( GOOGLE_MAP_KEY_QUERY != null ){
 			GOOGLE_MAP_KEY =  GOOGLE_MAP_KEY_QUERY;
 			if(log >= 3){console.log("+++++++++ GOOGLE_MAP_KEY found in a URL paremeter. Overwrite config.js and using this google map key: " , GOOGLE_MAP_KEY );}			
 		}else {
