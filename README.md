@@ -26,6 +26,11 @@ Project CARS Dedicated Server live view (pcars-ds-liveview)
 						
 						example: http://www.xyz.com/index.html?crest2url=192.168.0.1&crest2port=8180
 
+- Overwriting Google Map API Key from configuration:  
+						http://[your Webserver url]/index.html?api_key=[YOUR_CUSTOM_API_KEY]
+						
+						example: http://www.xyz.com/index.html?api_key=1234567890ABCDEF
+
 **Features**
 - Dedicated Server API - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
 - CREST API - http://cars-rest-api.com/
