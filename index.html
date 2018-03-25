@@ -2275,9 +2275,9 @@ function CalcGaps(bestLaptime,bestLaptimeFirst,bestLaptimeAhead){
 	var gap2ahead = 0;
 	var gap2first = 0;
 
-	if (bestLaptime != 0 && SessionStage_old != "Race1" && SessionStage_old != "Race2"){
-		if (bestLaptimeAhead != 0){gap2ahead = bestLaptime - bestLaptimeAhead;}
-		if (bestLaptimeFirst != 0){gap2first = bestLaptime - bestLaptimeFirst;}
+	if (bestLaptime > 0 && SessionStage_old != "Race1" && SessionStage_old != "Race2"){
+		if (bestLaptimeAhead > 0){gap2ahead = bestLaptime - bestLaptimeAhead;}
+		if (bestLaptimeFirst > 0){gap2first = bestLaptime - bestLaptimeFirst;}
 	}
 
 	var Gaps = {
@@ -2292,7 +2292,7 @@ function ConvertLaptimeInReadbaleFormat(milliseconds){
 	//todo: implemet date format with leading zeros for seconds and milliseconds
 	//var date = new Date(milliseconds);
 	
-	if (milliseconds == 0){
+	if (milliseconds <= 0){
 		return "-";
 	}
 	
