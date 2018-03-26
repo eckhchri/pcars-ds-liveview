@@ -588,6 +588,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			case  "GETCRESTDRIVERDATA":
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+				if(log >= 3){console.log("---CREST1 Trackname: ", TrackName);}
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
 				
 				//overwrite default values with CRESt specific ones
@@ -666,6 +667,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			case  "GETCREST2DRIVERDATA":
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+				if(log >= 3){console.log("---CREST2 Trackname: ", TrackName);}
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
 				
 				//overwrite default values with CRESt specific ones
