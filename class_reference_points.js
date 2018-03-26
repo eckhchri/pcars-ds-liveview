@@ -27,6 +27,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
                 ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
                 ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
+		,"AlternativeNames":"GP,Grand Prix,Name3422"	// a csv list of additonal names in several APIs CREST1/CREST2/shared memory ...
                 ,"Zoom":         19				// wanted zoom level for initial google map
                 ,"MapInitLat":   51.500657			// google map initialization coords
                 ,"MapInitLong":  -0.071587
