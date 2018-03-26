@@ -1432,7 +1432,7 @@ function initialize_app(){
 	w_tracklist.addEventListener('message', function(e) {
 
 			if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste Event: ", e );}
-			console.log("+++++++++++ GETTRACKLIST Worker Trackliste URL/Port: " + sCurUrl +" / "+ sCurPort );
+			if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste URL/Port: " + sCurUrl +" / "+ sCurPort );}
 			if ( e.data.aTrack.length > 0 ){
 				// in case DS return a result refresh track table
 				refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
