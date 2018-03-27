@@ -26,9 +26,9 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
 		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
-                ,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
-                ,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
-		,"AlternativeNames":""	// a csv list of additonal names in several APIs CREST1/CREST2/shared memory ...
+		,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
+			,"Name2":	 ""				// real name of the circuit in Game API, if it differs from DS API Name
+		,"AltNames":""	// a csv list of additonal names in several APIs CREST1/CREST2/shared memory ...
                 ,"Zoom":         19				// wanted zoom level for initial google map
                 ,"MapInitLat":   51.500657			// google map initialization coords
                 ,"MapInitLong":  -0.071587
@@ -64,7 +64,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1.001
                 ,"Name":         "Hockenheim GP"
                 ,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
-                ,"AlternativeNames":""	// a csv list of additonal names in several APIs CREST1/CREST2/shared memory ...
+                ,"AlternativeNames":""	// a csv list of additonal/alternative names from several APIs CREST1/CREST2/shared memory ...
                 ,"Zoom":         16
                 ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
@@ -75,7 +75,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Hockenheim Short"
 		,"Name2":	""
-		,"AlternativeNames": ""
+		,"AltNames": ""
 		,"MapInitLat":	49.328991
 		,"MapInitLong":	8.568469
 		});
@@ -84,7 +84,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Hockenheim National"
 		,"Name2":	""
-		,"AlternativeNames": ""
+		,"AltNames": ""
 		,"MapInitLat":	49.329796
 		,"MapInitLong":	8.571180
 		});
@@ -93,7 +93,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Hockenheim Rallycross"
 		,"Name2":	""			//"mTrackLocation":"Hockenheim","mTrackVariation":"Short"
-		,"AlternativeNames": ""
+		,"AltNames": ""
 		,"Zoom":        17
 		,"MapInitLat":	49.327088
 		,"MapInitLong":	8.569002
@@ -1355,10 +1355,10 @@ function GetMappingTrackname2Trackid(){
 		aTrackname2ID[this.aRPs[key+'']['Name']] = key+'';
 		aTrackname2ID[this.aRPs[key+'']['Name2']] = key+'';
 				
-		// add 'AlternativeNames' to mapping
-		if (this.aRPs[key]['AlternativeNames'] && this.aRPs[key]['AlternativeNames'] != '' ){			
+		// add 'AltNames' to mapping
+		if (this.aRPs[key]['AltNames'] && this.aRPs[key]['AltNames'] != '' ){			
 			// split into array and add each name to mapping
-			aNamesTmp = this.aRPs[key]['AlternativeNames'].split(',');			
+			aNamesTmp = this.aRPs[key]['AltNames'].split(',');			
 			for (i = 0; i < aNamesTmp.length; i++) {				
 				aTrackname2ID[aNamesTmp[i]+''] = key;
 			}			            
