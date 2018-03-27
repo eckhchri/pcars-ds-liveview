@@ -299,7 +299,9 @@
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;
-	var aRefPointTMP			= 	new Refpoint("-1");		// hash of all RefPoints for available tracks		
+	var oRPs					=	new Refpoint("-1");  // object of track RefPoints
+	var aRefPointTMP			= 	oRPs.GetRefPointHash();		// hash of all RefPoints for available tracks
+	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
 	
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
@@ -814,7 +816,7 @@ function initialize_app(){
 		var tmpcuircitID = e.data.globals.attributes.TrackId;
 
 		// Switch to default refpoint for fictional tracks, if the API replys a TrackID which is unknown in the reference points
-		if(!e.data.arefpoint[tmpcuircitID]){
+		if(!aRefPointTMP[tmpcuircitID]){
 			tmpcuircitID = 8888888888;
 		}
                 
@@ -828,7 +830,7 @@ function initialize_app(){
 		ChangeHtmlContentByID( '#pcars-curgamerunning', "CurGameRunning:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos + " / "  + demo.length);		
-		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + e.data.arefpoint[tmpcuircitID]["Name"] );
+		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + aRefPointTMP[tmpcuircitID]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
 		ChangeHtmlContentByID( '#pcars-ambienttemp'     , "°C Air:     " + e.data.globals.attributes.TemperatureAmbient );
@@ -962,7 +964,7 @@ function initialize_app(){
 				e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );				
 				
 				//calculate GPS coordinates
-				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , e.data.arefpoint);
+				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
 
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;
@@ -1202,14 +1204,14 @@ function initialize_app(){
 		if (DisplayDuration < 0) { DisplayDuration = 0 }        //catch a negative value
 		if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration		
 		
+		//update marker
 		sensorLayer.update(aSensorData);
 
+		
 		// in case track changes on DS adjust the map settings for new possition
         if ( cuircitID != tmpcuircitID ){			
 			if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
-			//map.setCenter({lat: 50.332733, lng: 6.943355});			
-			changeMapSettings_with_geojson(e.data.arefpoint[tmpcuircitID] , map , tmpcuircitID);
-
+			changeMapSettings_with_geojson(aRefPointTMP[tmpcuircitID]  , map , tmpcuircitID);
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
 		}
 		
@@ -1351,30 +1353,30 @@ function initialize_app(){
 
 	switch(APIMODE) {
 		case "DS":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "DS2":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: Ds2ServerURL, dsport: Ds2Port, timeout: XMLHTTPTimeout, receivemode: "GETDS2ANDDRIVERDATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data(Ds2ServerURL, Ds2Port, 2000, "GETDS2ANDDRIVERDATA", aRefPointTMP);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: Ds2ServerURL, dsport: Ds2Port, timeout: XMLHTTPTimeout, receivemode: "GETDS2ANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(Ds2ServerURL, Ds2Port, 2000, "GETDS2ANDDRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "CREST":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTMP);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "CREST2":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, 2000, "GETCREST2DRIVERDATA", aRefPointTMP);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, 2000, "GETCREST2DRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'],originalcurgamerunning : demo[record_pos]['globals']['curgamerunning'], arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTMP, {originaldatasource : demo[record_pos]['globals']['datasource'], originalcurgamerunning : demo[record_pos]['globals']['curgamerunning']});
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'],originalcurgamerunning : demo[record_pos]['globals']['curgamerunning'], arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTrackname2ID, {originaldatasource : demo[record_pos]['globals']['datasource'], originalcurgamerunning : demo[record_pos]['globals']['curgamerunning']});
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			break;
 		default:
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTMP});
-			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTMP);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTrackname2ID);
 	}
 
 	//only used for the first input
@@ -1435,10 +1437,10 @@ function initialize_app(){
 			if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste URL/Port: " + sCurUrl +" / "+ sCurPort );}
 			if ( e.data.aTrack.length > 0 ){
 				// in case DS return a result refresh track table
-				refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
+				refreshTrackList(buildTracklist(e.data.aTrack , aRefPointTMP ));
 
 			}else{
-				refreshTrackList(buildTracklist(e.data.aTrack , e.data.aRefpoint ));
+				refreshTrackList(buildTracklist(e.data.aTrack , aRefPointTMP ));
 				
 				w_tracklist.postMessage({
 					workerdelay: 	WORKERDELAY_TRACKLIST
@@ -1453,7 +1455,7 @@ function initialize_app(){
 	}, false);
 	//initial call of the tracklist worker. initiate endless loop
 	console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );
-	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTMP });
+	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTrackname2ID });
 		
 
 	//todo: add subgrid for more drivers information
@@ -1516,7 +1518,7 @@ function initialize_app(){
 			$("#DriverDataTable").jqGrid('setCell', rowid, 'vehicleclass', '', rowdata['cssclasses']);
 			
 //TODO:		
-			if(log >= 3){console.log("--- jqGrid rowdata[]: ", rowdata );}			
+	//if(log >= 3){console.log("--- jqGrid rowdata[]: ", rowdata );}			
 			//http://stackoverflow.com/questions/3244909/how-can-i-change-the-background-color-of-a-cell-in-a-jqgrid-custom-formatter
 			//			$("#DriverDataTable").setCell(rowId, 'vehicleclass', '', {'background-color':'#' + 'silver'});
 			//$("tr.jqgrow#"+rowid).addClass( "CSS_VehicleClass_" + rowdata['vehicleclass'] );
@@ -2597,9 +2599,7 @@ function open_popup_load_demofile(){
 function updateSliderReplaybarOptions( settings ){
 	
 	
-	 if(log >= 3){console.log('+++++++++++ updateSliderReplaybarOptions $( "#slider-replaybar" ): ', $( "#slider-replaybar" ) );}
-	
-
+	 //if(log >= 3){console.log('+++++++++++ updateSliderReplaybarOptions $( "#slider-replaybar" ): ', $( "#slider-replaybar" ) );}	
 		//$("#slider-replaybar").slider('option',{min: demo_start_pos, max: demo_end_pos});
 		$( "#slider-replaybar" ).slider({
 			min: demo_start_pos,
@@ -2607,8 +2607,6 @@ function updateSliderReplaybarOptions( settings ){
 			value: record_pos
 		});
 		$( "#replaybar_curpos_infobox" ).val( record_pos );	
-	
-	
 }
 
 

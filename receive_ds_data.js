@@ -10,7 +10,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	this.fullurl			=	'http://' +  url + ':' + port;
 	this.timeout			=	timeout;
 	this.receivemode		=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
-	this.aRefPointTMP		=	aRefPointTMP;		// hash off all available RefPoints
+	this.aRefPointName2ID	=	aRefPointTMP;		// mapping off all available Tracknames to track ID	
 	this.confParam			=	confParam;	
 	
 	
@@ -589,7 +589,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 				if(log >= 3){console.log("---CREST1 Trackname: ", TrackName);}
-				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
+				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
 				
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
@@ -668,7 +668,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 				if(log >= 3){console.log("---CREST2 Trackname: ", TrackName);}
-				TrackID = GetTrackIDbyName(TrackName , this.aRefPointTMP);
+				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
 				
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
@@ -784,6 +784,19 @@ function BuildTrackNameFromGameAPI(TrackLocation,TrackVariation){
         return TrackName;
 }
 
+
+
+function GetTrackIDbyName(TrackName , aRefPointMapping){
+	
+	if (aRefPointMapping[TrackName]){		
+		return aRefPointMapping[TrackName];	
+	}else{
+		
+		return "Trackname2ID Mapping missing for: " + TrackName;
+	}
+			
+}
+/* old version, obsolete by new mapping TrackNames to TrackID
 function GetTrackIDbyName(TrackName , TMP_RefPoint){
        //returns the TrackID for the Game API Name
         var TMP_TrackID = 9999999999;   //Default TrackID
@@ -801,7 +814,7 @@ function GetTrackIDbyName(TrackName , TMP_RefPoint){
                 }
         }
         return TMP_TrackID;
-}
+}*/
 
 function CalculateIndexDriverArray (RacePostion, LoopCnt){	
 	//decide if Racepsotion or Gridpostion is used as index for drivers array
