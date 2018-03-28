@@ -1346,14 +1346,13 @@ function GetMappingTrackname2Trackid(){
 	var aTrackname2ID	= new Array();
 	var sAltNames		= '';   // tmp alternative name string
 	var aNamesTmp		= new Array();
-	
-	
+		
 	// travers trough all Refpoints
 	for (var key in this.aRPs){
-		
-		// add 'Name' and 'Name2' to mapping
-		aTrackname2ID[this.aRPs[key+'']['Name']] = key+'';
-		aTrackname2ID[this.aRPs[key+'']['Name2']] = key+'';
+				
+		// add 'Name' and 'Name2' to mapping if the attribute is NOT empty
+		if (this.aRPs[key+'']['Name'] != '') { aTrackname2ID[this.aRPs[key+'']['Name']] = key+''; }
+		if (this.aRPs[key+'']['Name2']!= '') { aTrackname2ID[this.aRPs[key+'']['Name2']] = key+''; }
 				
 		// add 'AltNames' to mapping
 		if (this.aRPs[key]['AltNames'] && this.aRPs[key]['AltNames'] != '' ){			
