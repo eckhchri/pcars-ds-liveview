@@ -704,14 +704,16 @@ function initialize_app(){
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
 	        height: 'auto',
-	        width:	830,
+	        width:	1270,
 	        hiddengrid: JQGridTracktableCollapsed,
 		ignoreCase:true,
-	        colNames:['ID','TrackID','TrackName','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
+	        colNames:['ID','TrackID','TrackName','Name2','AltNames','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
-					{name:'id', index:'id', formatter: 'integer', width:45, sorttype:"int"},
+					{name:'id', index:'id', formatter: 'integer', width:35, sorttype:"int"},
 					{name:'trackid', index:'trackid', width:80, sorttype:"int"},
 					{name:'trackname', index: 'trackname', width:240, sorttype:"text"},
+					{name:'name2', index: 'name2', width:240, sorttype:"text"},
+					{name:'altnames', index: 'altnames', width:240, sorttype:"text"},
 					{name:'gamename', index: 'gamename', width:65, sorttype:"text"},
 					{name:'gridsize', width:50, align:"center", sorttype:"text"},
 					{name:'refpoint', width:70, align:"center", sorttype:"text"},
@@ -2058,6 +2060,8 @@ function refreshTrackList(a){
 					id:             gridcnt
 					,trackid:       a[key]["trackid"]
 					,trackname:     a[key]["trackname"]
+					,name2:         a[key]["name2"]
+					,altnames:      a[key]["altnames"]
 					,gridsize:      a[key]["gridsize"]
 					,refpoint:      a[key]["refpoint"]
 					,comment:       a[key]["comment"]
