@@ -64,7 +64,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1.001
                 ,"Name":         "Hockenheim GP"
                 ,"Name2":	 "Hockenheim Grand Prix"	//"mTrackLocation":"Hockenheim","mTrackVariation":"Grand Prix"
-                ,"AlternativeNames":""	// a csv list of additonal/alternative names from several APIs CREST1/CREST2/shared memory ...
+                ,"AltNames":""	// a csv list of additonal/alternative names from several APIs CREST1/CREST2/shared memory ...
                 ,"Zoom":         16
                 ,"MapInitLat":   49.329718
                 ,"MapInitLong":  8.574300
