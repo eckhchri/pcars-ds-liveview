@@ -2226,6 +2226,8 @@ function buildTracklist( aTrackList , aRefPoint ){
 			aNewTrackList[tmpObject.trackid.toString()] = { 	
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
+				,name2:         aRefPointInt[tmpObject.trackid]["Name2"]
+				,altnames:      aRefPointInt[tmpObject.trackid]["AltNames"]
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"yes"
 				,comment:	aRefPointInt[tmpObject.trackid]["Comment"]
@@ -2237,6 +2239,8 @@ function buildTracklist( aTrackList , aRefPoint ){
 			aNewTrackList[tmpObject.trackid.toString()] = {
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
+				,name2:         "-"
+				,altnames:      "-"
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"no"
 				,comment:	"no comment because no refpoint"
@@ -2254,19 +2258,15 @@ function buildTracklist( aTrackList , aRefPoint ){
 		if ( aSkipList['' + key] ){
 			continue;		
 		};
-				
-		tmpObject = aRefPointInt['' + key];
-
-		// check if comment field exists in the RefPoint array
-		commenttmp = '';
-		if ( 'Comment' in tmpObject ) {  commenttmp = tmpObject["Comment"];  };
 
 		aNewTrackList['' + key] = {
 				trackid:	key
 				,trackname:	aRefPointInt[key]["Name"]
+				,name2:         aRefPointInt[key]["Name2"]
+				,altnames:      aRefPointInt[key]["AltNames"]
 				,gridsize:	"no info"
 				,refpoint:	"yes"
-				,comment:	commenttmp 
+				,comment:       aRefPointInt[key]["Comment"] 
 		};
 	}
 
