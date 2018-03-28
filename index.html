@@ -704,14 +704,16 @@ function initialize_app(){
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
 	        height: 'auto',
-	        width:	830,
+	        width:	1270,
 	        hiddengrid: JQGridTracktableCollapsed,
 		ignoreCase:true,
-	        colNames:['ID','TrackID','TrackName','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
+	        colNames:['ID','TrackID','TrackName','Name2','AltNames','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
-					{name:'id', index:'id', formatter: 'integer', width:45, sorttype:"int"},
+					{name:'id', index:'id', formatter: 'integer', width:35, sorttype:"int"},
 					{name:'trackid', index:'trackid', width:80, sorttype:"int"},
 					{name:'trackname', index: 'trackname', width:240, sorttype:"text"},
+					{name:'name2', index: 'name2', width:240, sorttype:"text"},
+					{name:'altnames', index: 'altnames', width:240, sorttype:"text"},
 					{name:'gamename', index: 'gamename', width:65, sorttype:"text"},
 					{name:'gridsize', width:50, align:"center", sorttype:"text"},
 					{name:'refpoint', width:70, align:"center", sorttype:"text"},
@@ -743,7 +745,7 @@ function initialize_app(){
 	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
 	//add StopRefresh table button within jqgrid header - Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input> <i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbTracklistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i>');
 	//disbale browser context menu on right click
 	$('#tracklisttable').bind('contextmenu', function(e) {
 	    return false;
@@ -1663,7 +1665,49 @@ function initialize_app(){
 			pdfMake.createPdf(PDFdocDefinition).open();
 		}
 	});
-
+	
+	$('#cbTracklistExport').click(function () {
+		if (ExportType === "CSV" || ExportType === "BOTH") {
+			ExportCSV(JSONToCSVConvertor(jQuery("#tracklisttable").jqGrid("getRowData"), "Track Table",true,jQuery("#tracklisttable").jqGrid("getGridParam", "colNames"),["id"]),"Report_TrackTable");
+		}
+		if (ExportType === "PDF" || ExportType === "BOTH") {
+			var PDFdocDefinition = {
+				pageSize: 'A4',
+				pageOrientation: 'landscape',
+				info: {title: 'Track Table'},
+				content: [
+					{text: 'Track Table', style: 'header' } ,
+					{table: {
+						headerRows: 1,
+						body: PDFbuildTableBody(jQuery("#tracklisttable").getRowData(), [
+								'trackid',
+								'trackname',
+								'name2',
+								'altnames',
+								'gamename',
+								'gridsize',
+								'refpoint',
+								'comment'
+							],[
+								{text: 'TrackID', style: 'tableHeader'},
+								{text: 'TrackName', style: 'tableHeader'},
+								{text: 'Name2', style: 'tableHeader'},
+								{text: 'AltNames', style: 'tableHeader'},
+								{text: 'GameName', style: 'tableHeader'},
+								{text: 'Max Gridsize', style: 'tableHeader'},
+								{text: 'RefPoints exists', style: 'tableHeader'},
+								{text: 'Comment', style: 'tableHeader'}
+							])
+					}, style: 'table'}
+				],
+				styles: PDFstyles
+			};
+			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
+			if (jQuery("#tracklisttable").getGridParam("records") > 0){
+				pdfMake.createPdf(PDFdocDefinition).open();
+			}
+		}
+	});
 	
 }
 /////////////////////////////////////////////////end of application function
@@ -2058,6 +2102,8 @@ function refreshTrackList(a){
 					id:             gridcnt
 					,trackid:       a[key]["trackid"]
 					,trackname:     a[key]["trackname"]
+					,name2:         a[key]["name2"]
+					,altnames:      a[key]["altnames"]
 					,gridsize:      a[key]["gridsize"]
 					,refpoint:      a[key]["refpoint"]
 					,comment:       a[key]["comment"]
@@ -2226,6 +2272,8 @@ function buildTracklist( aTrackList , aRefPoint ){
 			aNewTrackList[tmpObject.trackid.toString()] = { 	
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
+				,name2:         aRefPointInt[tmpObject.trackid]["Name2"]
+				,altnames:      aRefPointInt[tmpObject.trackid]["AltNames"]
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"yes"
 				,comment:	aRefPointInt[tmpObject.trackid]["Comment"]
@@ -2237,6 +2285,8 @@ function buildTracklist( aTrackList , aRefPoint ){
 			aNewTrackList[tmpObject.trackid.toString()] = {
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
+				,name2:         "-"
+				,altnames:      "-"
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"no"
 				,comment:	"no comment because no refpoint"
@@ -2254,19 +2304,15 @@ function buildTracklist( aTrackList , aRefPoint ){
 		if ( aSkipList['' + key] ){
 			continue;		
 		};
-				
-		tmpObject = aRefPointInt['' + key];
-
-		// check if comment field exists in the RefPoint array
-		commenttmp = '';
-		if ( 'Comment' in tmpObject ) {  commenttmp = tmpObject["Comment"];  };
 
 		aNewTrackList['' + key] = {
 				trackid:	key
 				,trackname:	aRefPointInt[key]["Name"]
+				,name2:         aRefPointInt[key]["Name2"]
+				,altnames:      aRefPointInt[key]["AltNames"]
 				,gridsize:	"no info"
 				,refpoint:	"yes"
-				,comment:	commenttmp 
+				,comment:       aRefPointInt[key]["Comment"] 
 		};
 	}
 
