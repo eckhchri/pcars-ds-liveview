@@ -7,6 +7,7 @@ function PCARSVEHICLELIST() {
         this.idToClassMappingExtNormalized	=	[];			//extended mapping between vehicleid and class normalized
         this.NameToClassMappingExt			=	[];			//extended mapping between VehicleName and VehicleName
         this.NameToClassMappingExtNormalized=	[];			//extended mapping between VehicleName and VehicleNameNormalized
+        this.NametoIDExt					=	[];			//extended mapping between VehicleName and VehilceID depending on game
         this.aVehicleList					=	[]; 		//merged array of pcars_vehicle objects from all game versions        
         this.aVehicleInfoExt				=	{};			//extended array of vehicle info which includes game name membership (PCARS2,PCARS2)
         
@@ -51,6 +52,7 @@ function _generateDataMapping(aVL){
 			if (! this.idToNameMappingExt[gn] ) {  this.idToNameMappingExt[gn] = []; }
 			if (! this.NameToClassMappingExtNormalized[gn] ) {  this.NameToClassMappingExtNormalized[gn] = []; }
 			if (! this.NameToClassMappingExt[gn] ) {  this.NameToClassMappingExt[gn] = []; }
+			if (! this.NametoIDExt[gn] ){ this.NametoIDExt[gn] = []; }
 			if (! this.idToClassMappingExtNormalized[gn] ) {  this.idToClassMappingExtNormalized[gn] = []; }
 			if (! this.idToClassMappingExt[gn] ) {  this.idToClassMappingExt[gn] = []; }
 			
@@ -59,6 +61,9 @@ function _generateDataMapping(aVL){
 			this.idToClassMappingExtNormalized[gn][aVL[gn][i].id]		=	_ClassNormalization( aVL[gn][i].class );
 			this.NameToClassMappingExt[gn][aVL[gn][i].name]				=	aVL[gn][i].class;			
 			this.NameToClassMappingExtNormalized[gn][aVL[gn][i].name]	=	_ClassNormalization( aVL[gn][i].class );
+			this.NametoIDExt[gn][aVL[gn][i].name]						=	aVL[gn][i].id;
+			
+			this.NametoIDExt
 																	
 		}
 	}
