@@ -10,10 +10,10 @@ var GOOGLE_MAP_KEY = "";
 var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
 
 //Please your specific settings
-var DsServerURL 		= "eckhchri.de";
-var DsPort			= 9000;
-var Ds2ServerURL 		= "eckhchri.de";
-var Ds2Port			= 9000;
+var DsServerURL 		= "mydomain.com";
+var DsPort				= 9000;
+var Ds2ServerURL 		= "mydomain2.com";
+var Ds2Port				= 9000;
 var CRESTServerURL 		= "localhost";
 var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
@@ -23,7 +23,7 @@ var CREST2Port          = 8180;
 var aAPIMODEMAPPING = 
 	{
 		'DS' : {
-			'url'	     		:	'www.eckhchri.de',
+			'url'	     		:	'mydomain.com',
 			'port'	     		:	80,
 			'delay'	     		:	2000,
 			'firstdelay' 		:	100,
@@ -48,10 +48,10 @@ var SHOWCARLIST 		=	false 	// [true|false]
 var SHOWDSDATA 			=	false;	// [true|false]
 var SHOWDRIVERDATA 		=	false;	// [true|false]
 var SHOWSETTINGS		=	false;	// [true|false]
-var SHOWDSSTATISTIC 		=	false;	// [true|false]
+var SHOWDSSTATISTIC 	=	false;	// [true|false]
 var SHOWDSREPLAY		=	false;	// [true|false]
-var SHOWRECSTATISTIC		=	true;	// [true|false]
-var SHOWPOPUPLOADDEMO		=	false;	// [true|false]
+var SHOWRECSTATISTIC	=	true;	// [true|false]
+var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
 
 ////////////JQgrid design ///////
 var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
@@ -86,7 +86,7 @@ aRecConfig['DataVersion']	=	1;			//in the case if data format will changed and r
 //demo initial data, currently that must not be empty
 var demo = [
                 {//0
-                	globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"ViperDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, "datasource":"CRESTv1", "curgamerunning":"PCARS1", attributes:{TrackId:9999999999, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0, RaceLength: 0, TemperatureAmbient: 20, TemperatureTrack: 30}},
+                	globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"MyDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, "datasource":"CRESTv1", "curgamerunning":"PCARS1", attributes:{TrackId:9999999999, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0, RaceLength: 0, TemperatureAmbient: 20, TemperatureTrack: 30}},
                     participants:[
                             {RefId:9234567, Name:"Slightly Mad Studios Ltd", IsPlayer:0, GridPosition:3, VehicleId:"-886212684", RacePosition:0, CurrentLap:99, CurrentSector:0, LastLapTime:9999, FastestLapTime:9000, State:"StateTest", Speed:100, PosX:271, PosY:277, PosZ:288, Orientation:0}
                     ]
@@ -197,7 +197,7 @@ var zoom_settings = [
         {"lineWeight": 0.1,	"lineWeightMid": 0.1,     "markerRadius": 4.5},   //zoom 12
         {"lineWeight": 0.1,	"lineWeightMid": 0.1,     "markerRadius": 4.5},   //zoom 13
         {"lineWeight": 0.1,	"lineWeightMid": 0.1,     "markerRadius": 4.5},   //zoom 14
-        {"lineWeight": 0.3,	"lineWeightMid": 2,	  "markerRadius": 4.5},   //zoom 15
+        {"lineWeight": 0.3,	"lineWeightMid": 2,	  	  "markerRadius": 4.5},   //zoom 15
         {"lineWeight": 0.5,	"lineWeightMid": 3.5,     "markerRadius": 4.5},   //zoom 16
         {"lineWeight": 0.5,	"lineWeightMid": 5,       "markerRadius": 4.5},   //zoom 17
         {"lineWeight": 1,	"lineWeightMid": 6.5,     "markerRadius": 4.5},   //zoom 18
