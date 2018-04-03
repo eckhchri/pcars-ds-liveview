@@ -119,9 +119,8 @@ function SetExampleData() {
 function UpdateObjectData( options ){
 	
 	for ( var elem in options ){
-		if(log >= 3){console.log('------- TEST PCARSd: insert element: ', elem  );}
-		this[elem] = options[elem];
-		
+		//if(log >= 3){console.log('------- TEST PCARSd: insert element: ', elem  );}
+		this[elem] = options[elem];		
 	}
 	
 	return 1;
@@ -129,9 +128,10 @@ function UpdateObjectData( options ){
 
 function setVehicleClassNameByMapping(mappingID, mappingName){
 	
-if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  this ", this);}	
-if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  mappingID: ", mappingID);}
-if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()   mappingName: ",  mappingName);}	
+	//if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  this ", this);}	
+	//if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  mappingID: ", mappingID);}
+	//if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()   mappingName: ",  mappingName);}
+	
 	//set VehicleClass by mapping information; if no math it is undefined
 	if (mappingID['' + this.VehicleId]){		
 		this.VehicleClassName = mappingID['' + this.VehicleId];		
@@ -204,7 +204,10 @@ function getVehicleClassName(){
 	return this.VehicleClassName;
 }
 
-
+/*
+ * @param {number} optional, 
+ * @return {number} returns current number of pitstops
+ */
 function getNumPits(numberpitstops){
 	
 	//in each case return the current value
@@ -243,4 +246,3 @@ PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
 PCARSdriver.prototype.getNumPits=getNumPits;
 PCARSdriver.prototype._normalizeString=_normalizeString;
 PCARSdriver.prototype.UpdateObjectData=UpdateObjectData;
-
