@@ -18,11 +18,11 @@ function Refpoint(circuit_id)
 	//Default
 	aRefPoints[9999999999] = new Array();
         aRefPoints[9999999999] =
-                {
-                "refLat":        51.500657			// GPS coords of the zero point, where X=0 and Z=0
-                ,"refLong":      -0.071587			
-                ,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
-                ,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
+    		{
+        		"refLat":        51.500657			// GPS coords of the zero point, where X=0 and Z=0
+        		,"refLong":      -0.071587			
+        		,"rotation":     0				// rotation correction angle in degree anticlockwise, negative value means clockwise
+        		,"cor_r_Long":   0				// earth radius correction value for east/west calculation in millimeter
 		,"cor_r_Lat":    0				// earth radius correction value for north/south calculation in millimeter
 		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
@@ -1300,11 +1300,7 @@ function Refpoint(circuit_id)
 	aRefPoints[1327182267] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Autodromo Nazionale Monza Historic Oval + GP Mix","Name2": "","AltNames":"Monza_Classic Historic_Mix,Monza Classic Historic_Mix","MapInitLat": 45.620700,"Comment": "initially added"});	//"mTrackLocation":"Monza Classic","mTrackVariation":"Historic_Mix"
 	
 
-///////////////////////////////////////////////////////////////////////////	
-	//console.log("Refpoints: "  , aRefPoints);	
-	
-	if (circuit_id == undefined)
-	{
+	if (circuit_id == undefined){
 		// no paramter given -> set to an default value to prevent empty return value
 		console.log ("Circuit_id NOT set, change to default!");
 		this.circuit_id = 9999999999;
@@ -1317,67 +1313,56 @@ function Refpoint(circuit_id)
 	// set values for the object	
 	this.Lat 	= aRefPoints[this.circuit_id]["refLat"];
 	this.Long 	= aRefPoints[this.circuit_id]["refLong"];
-	this.Rot     	= aRefPoints[this.circuit_id]["rotation"];
+	this.Rot 	= aRefPoints[this.circuit_id]["rotation"];
 
-	// todo: can you not also call the function GetCuircitnameByTrackID here?
-/*
-	return {
-			 "refLat": 	aRefPoints[this.circuit_id]["refLat"]
-			,"refLong":	aRefPoints[this.circuit_id]["refLong"]
-			,"rotation":    aRefPoints[this.circuit_id]["rotation"]
-			,"cor_r":	aRefPoints[this.circuit_id]["cor_r"] 
-			,"Name":        aRefPoints[this.circuit_id]["Name"]
-			,"Zoom":	aRefPoints[this.circuit_id]["Zoom"]
-			,"MapInitLat":	aRefPoints[this.circuit_id]["MapInitLat"]
-        		,"MapInitLong":	aRefPoints[this.circuit_id]["MapInitLong"]	
-		};
-*/
 
-	// copy local object to class variable as workaround
+	// copy local object to class variable
 	this.aRPs = aRefPoints;  
 	
-	// todo: normal we have to return "this" as the object, not the array
-	//return aRefPoints;
+	//return the object
 	return this;
-
-
 }
 
-function GetRefPointHash(){
 
+/*
+ * 	@return {hash} returns the complete RefPoint hash	
+ */
+function GetRefPointHash(){
 	return this.aRPs;
 }
 
 
+/*
+ * 	@param {string}	id of the circuit	
+ *	@return {array} array of Lat, Long, Rotation
+ */
 function GetRefPoint(circuit_id){
-
 	return ( this.Lat, this.Long, this.Rot );
 }
 
-//function GetAllRefPoints()
-//{
-//
-//	console.log("++ call function GetAllRefPoints");
-//	return aRefPoints; 
-//}
 
-function GetCircuitnameByTrackID (circuit_id)
-{
+/*	GetCircuitnameByTrackID (circuit_id)
+ *		@param {string}	id of the circuit	+{
+ *		@return {string} Name of specific track	
+ */
+function GetCircuitnameByTrackID (circuit_id){
 	if ( aRefPoints[circuit_id] ){
 		return aRefPoints[circuit_id]["Name"];
-	}
-	else{
+	}else{
 		return "not defined";
 	}
 }
 
-// todo: use a function to copy cuircit variantions from one object to another
-function CopyObjectWithModifications(source, changes )
-{
+
+/*	to copy cuircit variantions from one object to another
+ *
+ *	@param {object} a hash of a specific RefPoint Element	
+ *	@param {object} a hash of changes, to overwrite	
+ */
+function CopyObjectWithModifications(source, changes ){
 	var dest = {};
         dest =  JSON.parse( JSON.stringify( source  ) );
 
-//	console.log("CopyObject(): ", changes)
 	for (var key in changes)
 	{
 		//console.log("Object Dest: " , dest["Name"]);
@@ -1424,9 +1409,12 @@ function GetMappingTrackname2Trackid(){
 	return aTrackname2ID;
 }
 
+
+/*	
+* register function to class	
+*/
 Refpoint.prototype.GetRefPointHash=GetRefPointHash;
 Refpoint.prototype.GetRefPoint=GetRefPoint;
 Refpoint.prototype.GetCircuitnameByTrackID=GetCircuitnameByTrackID;
 Refpoint.prototype.CopyObjectWithModifications=CopyObjectWithModifications;
 Refpoint.prototype.GetMappingTrackname2Trackid=GetMappingTrackname2Trackid;
-///Refpoint.prototype.GetAllRefPoints=GetAllRefPoints;
