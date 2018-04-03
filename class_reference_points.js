@@ -1193,15 +1193,15 @@ function Refpoint(circuit_id)
 		,"Comment": "initially added"
 		});
 	//Mercedes Ice Training Track: East Circuit
-	aRefPoints[1365171965] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: East Circuit","Name2": "Mercedes Ice Training Track East","AltNames":""});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"East"
+	aRefPoints[1365171965] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: East Circuit","Name2": "","AltNames":"Mercedes Ice Training Track East"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"East"
 	//Mercedes Ice Training Track: North Circuit
-	aRefPoints[480123345] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: North Circuit","Name2": "Mercedes Ice Training Track North","AltNames":""});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"North"
+	aRefPoints[480123345] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: North Circuit","Name2": "","AltNames":"Mercedes Ice Training Track North"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"North"
 	//Mercedes Ice Training Track: North East Circuit
-	aRefPoints[-2086764920] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: North East Circuit","Name2": "Mercedes Ice Training Track NorthEast","AltNames":""});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"NorthEast"
+	aRefPoints[-2086764920] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: North East Circuit","Name2": "","AltNames":"Mercedes Ice Training Track NorthEast"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"NorthEast"
 	//Mercedes Ice Training Track: South Circuit
-	aRefPoints[-907469052] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: South Circuit","Name2": "Mercedes Ice Training Track South","AltNames":""});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"South"
+	aRefPoints[-907469052] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: South Circuit","Name2": "","AltNames":"Mercedes Ice Training Track South"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"South"
 	//Mercedes Ice Training Track: West Circuit
-	aRefPoints[-725608647] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: West Circuit","Name2": "Mercedes Ice Training Track West","AltNames":""});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"West"
+	aRefPoints[-725608647] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: West Circuit","Name2": "","AltNames":"Mercedes Ice Training Track West"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"West"
 
 	//Sampala Ice Circuit
 	aRefPoints[-823048021] = CopyObjectWithModifications(aRefPoints[8888888888],
