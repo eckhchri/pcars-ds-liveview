@@ -1263,87 +1263,72 @@ function Refpoint(circuit_id)
 	//Monza Historic Oval + GP Mix
 	aRefPoints[1327182267] = CopyObjectWithModifications(aRefPoints[-52972612], {"Name": "Monza Historic Oval + GP Mix","Name2": "Monza_Classic Historic_Mix","AltNames":"Monza Classic Historic_Mix","MapInitLat": 45.620700,"Comment": "initially added"});	//"mTrackLocation":"Monza Classic","mTrackVariation":"Historic_Mix"
 	
-
-///////////////////////////////////////////////////////////////////////////	
-	//console.log("Refpoints: "  , aRefPoints);	
 	
-	if (circuit_id == undefined)
-	{
+	
+	if (circuit_id == undefined)	{
 		// no paramter given -> set to an default value to prevent empty return value
 		console.log ("Circuit_id NOT set, change to default!");
 		this.circuit_id = 9999999999;
 
 	}
 	
-	//console.log ("+++ RefPoints: " , aRefPoints);
-	//console.log ("++ used  CuircitID: " + this.circuit_id );
 
 	// set values for the object	
 	this.Lat 	= aRefPoints[this.circuit_id]["refLat"];
 	this.Long 	= aRefPoints[this.circuit_id]["refLong"];
 	this.Rot     	= aRefPoints[this.circuit_id]["rotation"];
 
-	// todo: can you not also call the function GetCuircitnameByTrackID here?
-/*
-	return {
-			 "refLat": 	aRefPoints[this.circuit_id]["refLat"]
-			,"refLong":	aRefPoints[this.circuit_id]["refLong"]
-			,"rotation":    aRefPoints[this.circuit_id]["rotation"]
-			,"cor_r":	aRefPoints[this.circuit_id]["cor_r"] 
-			,"Name":        aRefPoints[this.circuit_id]["Name"]
-			,"Zoom":	aRefPoints[this.circuit_id]["Zoom"]
-			,"MapInitLat":	aRefPoints[this.circuit_id]["MapInitLat"]
-        		,"MapInitLong":	aRefPoints[this.circuit_id]["MapInitLong"]	
-		};
-*/
+	// copy local object to class variable
+	this.aRPs = aRefPoints;  	
 
-	// copy local object to class variable as workaround
-	this.aRPs = aRefPoints;  
-	
-	// todo: normal we have to return "this" as the object, not the array
-	//return aRefPoints;
+	//return the object
 	return this;
-
-
 }
 
+/*	GetRefPointHash()
+ * 
+ * 	@return {hash} returns the complete RefPoint hash	
+ */
 function GetRefPointHash(){
 
 	return this.aRPs;
 }
 
 
+/*	
+ * 	@param {string}	id of the circuit
+ *	@return {array} array of Lat, Long, Rotation
+ */
 function GetRefPoint(circuit_id){
 
 	return ( this.Lat, this.Long, this.Rot );
 }
 
-//function GetAllRefPoints()
-//{
-//
-//	console.log("++ call function GetAllRefPoints");
-//	return aRefPoints; 
-//}
 
-function GetCircuitnameByTrackID (circuit_id)
-{
+/*
+ *		@param {string}	id of the circuit
+ *		@return {string} Name of specific track
+ */
+function GetCircuitnameByTrackID (circuit_id){
 	if ( aRefPoints[circuit_id] ){
 		return aRefPoints[circuit_id]["Name"];
-	}
-	else{
+	}else{
 		return "not defined";
 	}
 }
 
-// todo: use a function to copy cuircit variantions from one object to another
-function CopyObjectWithModifications(source, changes )
-{
+
+/*	to copy cuircit variantions from one object to another
+ * 
+ * @param {object} a hash of a specific RefPoint Element
+ * @param {object} a hash of changes, to overwrite
+ */
+function CopyObjectWithModifications(source, changes ){
+	
 	var dest = {};
         dest =  JSON.parse( JSON.stringify( source  ) );
 
-//	console.log("CopyObject(): ", changes)
-	for (var key in changes)
-	{
+	for (var key in changes){
 		//console.log("Object Dest: " , dest["Name"]);
 		//console.log("key: " + key + "   value: " + changes[key]);
 		dest[key] = changes[key];
@@ -1388,9 +1373,12 @@ function GetMappingTrackname2Trackid(){
 	return aTrackname2ID;
 }
 
+
+/*
+ * register function to class
+ */
 Refpoint.prototype.GetRefPointHash=GetRefPointHash;
 Refpoint.prototype.GetRefPoint=GetRefPoint;
 Refpoint.prototype.GetCircuitnameByTrackID=GetCircuitnameByTrackID;
 Refpoint.prototype.CopyObjectWithModifications=CopyObjectWithModifications;
 Refpoint.prototype.GetMappingTrackname2Trackid=GetMappingTrackname2Trackid;
-///Refpoint.prototype.GetAllRefPoints=GetAllRefPoints;
