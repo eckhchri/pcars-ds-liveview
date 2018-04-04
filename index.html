@@ -259,12 +259,10 @@
 	// 1. check url parameters for api key
 	// 2. check config.js if api key defined		
 	function loadGoogleMapAPI() {
-		//get url parameter
-		var GOOGLE_MAP_KEY_QUERY = get_url_param('api_key');
-
+		
 		// if parameter exists overwrite configuration
-		if( GOOGLE_MAP_KEY_QUERY != null ){
-			GOOGLE_MAP_KEY =  GOOGLE_MAP_KEY_QUERY;
+		if(get_url_param('api_key')){
+			GOOGLE_MAP_KEY = get_url_param('api_key');
 			if(log >= 3){console.log("+++++++++ GOOGLE_MAP_KEY found in a URL paremeter. Overwrite config.js and using this google map key: " , GOOGLE_MAP_KEY );}			
 		}else {
 			if(log >= 3){console.log("+++++++++ GOOGLE_MAP_KEY use key from config.js: ", GOOGLE_MAP_KEY);}				
