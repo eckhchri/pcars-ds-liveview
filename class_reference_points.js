@@ -1405,6 +1405,9 @@ function GetMappingTrackname2Trackid(){
 		sAltNames = "";	
 		aNamesTmp = new Array();			
 	}
+	
+	//Crest Mode provide empty string in Lobby
+	aTrackname2ID[''] = "9999999999";
 			
 	return aTrackname2ID;
 }
