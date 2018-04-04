@@ -264,7 +264,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "24 Hours of Le Mans Circuit"
                 ,"Name2":	 ""
-		,"AltNames":	 "Le Mans Circuit des 24 Heures du Mans"	//"mTrackLocation":"Le Mans","mTrackVariation":"Circuit des 24 Heures du Mans"
+		,"AltNames":	 "Le Mans Circuit des 24 Heures du Mans,Le_Mans 24_Hours_of_Le_Mans_Circuit,Le Mans 24 Hours of Le Mans Circuit"	//"mTrackLocation":"Le Mans","mTrackVariation":"Circuit des 24 Heures du Mans"
                 ,"Zoom":         13
                 ,"MapInitLat":   47.936818 
                 ,"MapInitLong":  0.223960
