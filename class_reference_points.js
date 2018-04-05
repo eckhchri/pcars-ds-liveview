@@ -1017,7 +1017,7 @@ function Refpoint(circuit_id)
 	//Lydden Hill Rallycross
 	aRefPoints[673609283] = CopyObjectWithModifications(aRefPoints[953639515], {"Name": "Lydden Hill Rallycross","Name2": "","AltNames":"Lydden_Hill RX,Lydden Hill RX"});	//"mTrackLocation":"Lydden Hill","mTrackVariation":"RX"
 
-	//Porsche Experience Centre Leipzig
+	//Porsche Leipzig Full Circuit
 	aRefPoints[-158843644] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        51.402149
@@ -1027,14 +1027,18 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-		,"Name":         "Porsche Experience Centre Leipzig"
+		,"Name":         "Porsche Leipzig Full Circuit"
 		,"Name2":	 ""	
-		,"AltNames":	 "Porsche_Experience_Centre Leipzig,Porsche Leipzig on-road circuit Leipzig"	//"mTrackLocation":"Porsche Leipzig on-road circuit","mTrackVariation":"Leipzig"
+		,"AltNames":	 "Porsche_Leipzig_on_road_circuit Full_Circuit,Porsche Leipzig On-road Circuit Full Circuit"	//"mTrackLocation":"Porsche_Leipzig_on_road_circuit","mTrackVariation":"Full_Circuit"
 		,"Zoom":         15
 		,"MapInitLat":   51.405441
 		,"MapInitLong":  12.298670
 		,"Comment": "finished"
 		});
+	//Porsche Leipzig Dynamic Circuit
+        aRefPoints[-105902772] = CopyObjectWithModifications(aRefPoints[-158843644], {"Name": "Porsche Leipzig Dynamic Circuit","Name2": "","AltNames":"Porsche_Leipzig_on_road_circuit Dynamic_Circuit,Porsche Leipzig On-road Circuit Dynamic Circuit"});
+	//Porsche Leipzig Short Circuit
+        aRefPoints[169281142] = CopyObjectWithModifications(aRefPoints[-158843644], {"Name": "Porsche Leipzig Short Circuit","Name2": "","AltNames":"Porsche_Leipzig_on_road_circuit Short_Circuit,Porsche Leipzig On-road Circuit Short Circuit"});
 
 	//Red Bull Ring GP
 	aRefPoints[-1933253531] = CopyObjectWithModifications(aRefPoints[9999999999],
