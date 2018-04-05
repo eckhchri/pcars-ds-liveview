@@ -702,16 +702,15 @@ function initialize_app(){
 	jQuery("#tracklisttable").jqGrid({	
 	        datatype: "local",
 	        height: 'auto',
-	        width:	1270,
+	        width:	1130,
 	        hiddengrid: JQGridTracktableCollapsed,
 		ignoreCase:true,
-	        colNames:['ID','TrackID','TrackName','Name2','AltNames','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
+	        colNames:['ID','TrackID','TrackName','AltNames','GameName', 'Max Gridsize', 'RefPoints exists?','Comment'],
 	        colModel:[
 					{name:'id', index:'id', formatter: 'integer', width:35, sorttype:"int"},
 					{name:'trackid', index:'trackid', width:80, sorttype:"int"},
 					{name:'trackname', index: 'trackname', width:240, sorttype:"text"},
-					{name:'name2', index: 'name2', width:240, sorttype:"text"},
-					{name:'altnames', index: 'altnames', width:240, sorttype:"text"},
+					{name:'altnames', index: 'altnames', width:340, sorttype:"text"},
 					{name:'gamename', index: 'gamename', width:65, sorttype:"text"},
 					{name:'gridsize', width:50, align:"center", sorttype:"text"},
 					{name:'refpoint', width:70, align:"center", sorttype:"text"},
@@ -2100,7 +2099,6 @@ function refreshTrackList(a){
 					id:             gridcnt
 					,trackid:       a[key]["trackid"]
 					,trackname:     a[key]["trackname"]
-					,name2:         a[key]["name2"]
 					,altnames:      a[key]["altnames"]
 					,gridsize:      a[key]["gridsize"]
 					,refpoint:      a[key]["refpoint"]
@@ -2270,7 +2268,6 @@ function buildTracklist( aTrackList , aRefPoint ){
 			aNewTrackList[tmpObject.trackid.toString()] = { 	
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
-				,name2:         aRefPointInt[tmpObject.trackid]["Name2"]
 				,altnames:      aRefPointInt[tmpObject.trackid]["AltNames"]
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"yes"
@@ -2283,7 +2280,6 @@ function buildTracklist( aTrackList , aRefPoint ){
 			aNewTrackList[tmpObject.trackid.toString()] = {
 				trackid:	tmpObject.trackid
 				,trackname:	tmpObject.name
-				,name2:         "-"
 				,altnames:      "-"
 				,gridsize:	tmpObject.gridsize
 				,refpoint:	"no"
@@ -2306,7 +2302,6 @@ function buildTracklist( aTrackList , aRefPoint ){
 		aNewTrackList['' + key] = {
 				trackid:	key
 				,trackname:	aRefPointInt[key]["Name"]
-				,name2:         aRefPointInt[key]["Name2"]
 				,altnames:      aRefPointInt[key]["AltNames"]
 				,gridsize:	"no info"
 				,refpoint:	"yes"
