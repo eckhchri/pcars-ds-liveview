@@ -704,7 +704,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Autodromo Internazionale Enzo E Dino Ferrari Imola"
 		,"Name2":	 ""
-		,"AltNames":	 "Imola Grand Prix"	//"mTrackLocation":"Imola","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Imola Grand Prix,Imola GP"	//"mTrackLocation":"Imola","mTrackVariation":"Grand Prix"
 		,"Zoom":         16
 		,"MapInitLat":   44.341112
 		,"MapInitLong":  11.712506
