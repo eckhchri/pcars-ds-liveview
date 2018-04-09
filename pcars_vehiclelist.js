@@ -1876,6 +1876,18 @@ this.aVehicleInfoExt['PCARS2']	= 	[
          "id" : -1295853198,
          "name" : "Porsche 911 RSR",
          "class" : "GTE"
+      },
+	
+      //////// Patch 5 - Ferrari Challenge ////////////////////////
+      {
+        "id" : 754463374,
+        "name" : "Ferrari 488 Challenge (APAC)",
+        "class" : "Ferrari Series"
+      },
+      {
+        "id" : 1471547500,
+        "name" : "Ferrari 488 Challenge (EU)",
+        "class" : "Ferrari Series"
       }
 ];
 
