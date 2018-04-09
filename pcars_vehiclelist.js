@@ -1880,13 +1880,18 @@ this.aVehicleInfoExt['PCARS2']	= 	[
 	
       //////// Patch 5 - Ferrari Challenge ////////////////////////
       {
-        "id" : 754463374,
-        "name" : "Ferrari 488 Challenge (APAC)",
+        "id" : 1471547500,
+        "name" : "Ferrari 488 Challenge (EU)",
         "class" : "Ferrari Series"
       },
       {
-        "id" : 1471547500,
-        "name" : "Ferrari 488 Challenge (EU)",
+        "id" : 345014385,
+        "name" : "Ferrari 488 Challenge (NA)",
+        "class" : "Ferrari Series"
+      },
+      {
+        "id" : 754463374,
+        "name" : "Ferrari 488 Challenge (APAC)",
         "class" : "Ferrari Series"
       }
 ];
