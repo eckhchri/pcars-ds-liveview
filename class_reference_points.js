@@ -1165,15 +1165,15 @@ function Refpoint(circuit_id)
 		,"Comment": 	"fictional track"
         });
         //Mojave Boa Ascent - TrackID pcars1 [850003838]
-	aRefPoints[-984009759] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent"});
+	aRefPoints[-984009759] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent"});
 	//Mojave Gila Crest - TrackID pcars1 [2089801285]
-	aRefPoints[-60500434] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Gila Crest","AltNames":"Mojave Gila_Crest"});
+	aRefPoints[-60500434] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Gila Crest","AltNames":"Mojave Gila_Crest"});
 	//Mojave Coyote Noose - TrackID pcars1 [-2125682335]
-	aRefPoints[369271528] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Coyote Noose","AltNames":"Mojave Coyote_Noose"});
+	aRefPoints[369271528] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Coyote Noose","AltNames":"Mojave Coyote_Noose"});
 	//Mojave Sidewinder - TrackID pcars1 [-1463443929]
-	aRefPoints[2015693491] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Sidewinder","AltNames":""});
+	aRefPoints[2015693491] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Sidewinder","AltNames":""});
 	//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
-	aRefPoints[-1] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track","AltNames":""});
+	aRefPoints[-1] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Test Track","AltNames":""});
 	
 	//Bannochbrae Road Circuit 
 	aRefPoints[-602684269] = CopyObjectWithModifications(aRefPoints[8888888888],
