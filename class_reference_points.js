@@ -156,7 +156,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 0.9985	//1
                 ,"Name":         "Nürburgring GP"
                 ,"Name2":	 ""
-		,"AltNames":	 "Nürburgring Grand Prix"	//"mTrackLocation":"Nürburgring","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Nürburgring Grand Prix,Nurburgring GP"	//"mTrackLocation":"Nürburgring","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   50.332154
                 ,"MapInitLong":  6.940467
@@ -167,7 +167,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Nürburgring Sprint Short"
 		,"Name2":	""
-		,"AltNames":	""
+		,"AltNames":	"Nurburgring Sprint_Short"
 		,"Zoom":	16
 		,"MapInitLat":	50.333628
 		,"MapInitLong":	6.943330
@@ -177,7 +177,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Nürburgring Sprint"
 		,"Name2":	""
-		,"AltNames":	""
+		,"AltNames":	"Nurburgring Sprint"
 		,"Zoom":	16
 		,"MapInitLat":	50.333628
 		,"MapInitLong":	6.943330
@@ -187,7 +187,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Nürburgring Müllenbach"
 		,"Name2":	""
-		,"AltNames":	"Nürburgring MuellenBach"     //"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
+		,"AltNames":	"Nürburgring MuellenBach,Nurburgring MuellenBach"     //"mTrackLocation":"Nürburgring","mTrackVariation":"MuellenBach"
 		,"Zoom":	17
 		,"MapInitLat":	50.326304
 		,"MapInitLong":	6.937391
@@ -205,21 +205,21 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Nürburgring Nordschleife"
                 ,"Name2":	 ""
-		,"AltNames":	 "Nordschleife Full"	//"mTrackLocation":"Nordschleife","mTrackVariation":"Full"
+		,"AltNames":	 "Nordschleife Full,Nurburgring Nordschleife"	//"mTrackLocation":"Nordschleife","mTrackVariation":"Full"
                 ,"Zoom":         13
                 ,"MapInitLat":   50.359101
                 ,"MapInitLong":  6.962529
                 ,"Comment": "live check, big discrepancies on some parts of track"
                 });
 	//Nürburgring Nordschleife Stage 3
-	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Nordschleife Stage 3","Name2": "","AltNames":"Nordschleife Stage 3","Zoom": 14,"MapInitLat": 50.358962,"MapInitLong": 6.980983});
+	aRefPoints[1128950148] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Nordschleife Stage 3","Name2": "","AltNames":"Nordschleife Stage 3,Nurburgring Nordschleife_Stage3","Zoom": 14,"MapInitLat": 50.358962,"MapInitLong": 6.980983});
 	//Nürburgring Nordschleife Stage 1
-	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Nordschleife Stage 1","Name2": "","AltNames":"Nordschleife Stage 1","Zoom": 14,"MapInitLat": 50.354770,"MapInitLong": 6.944798});
+	aRefPoints[1459212514] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Nordschleife Stage 1","Name2": "","AltNames":"Nordschleife Stage 1,Nurburgring Nordschleife_Stage1","Zoom": 14,"MapInitLat": 50.354770,"MapInitLong": 6.944798});
 	//Nürburgring Nordschleife Stage 2
-	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Nordschleife Stage 2","Name2": "","AltNames":"Nordschleife Stage 2","Zoom": 15,"MapInitLat": 50.372702,"MapInitLong": 6.959640});
+	aRefPoints[-300387291] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Nordschleife Stage 2","Name2": "","AltNames":"Nordschleife Stage 2,Nurburgring Nordschleife_Stage2","Zoom": 15,"MapInitLat": 50.372702,"MapInitLong": 6.959640});
 	
 	//Nürburgring Combined
-	aRefPoints[-891514248] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Combined","Name2": "","AltNames":"","MapInitLat": 50.355101});
+	aRefPoints[-891514248] = CopyObjectWithModifications(aRefPoints[697498609], {"Name": "Nürburgring Combined","Name2": "","AltNames":"Nurburgring Combined","MapInitLat": 50.355101});
 	
 	//Sonoma Raceway
         aRefPoints[-1454279631] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -271,7 +271,7 @@ function Refpoint(circuit_id)
                 ,"Comment": "live check"
                 });
         //Le Mans Bugatti Circuit
-	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Bugatti Circuit","Name2": "","AltNames":"Le Mans Le Circuit Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});	//"mTrackLocation":"Le Mans","mTrackVariation":"Le Circuit Bugatti"
+	aRefPoints[-1027934689] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Bugatti Circuit","Name2": "","AltNames":"Le Mans Le Circuit Bugatti,Le_Mans Le_Mans_Bugatti_Circuit,Le Mans Le Mans Bugatti Circuit","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});	//"mTrackLocation":"Le Mans","mTrackVariation":"Le Circuit Bugatti"
 	//Le Mans International Karting Circuit
 	aRefPoints[1457129528] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans International Karting Circuit","Name2": "","AltNames":"Le_Mans_Kart_Int Le_Mans_International_Karting_Circuit,Le Mans Karting International Le Mans International Karting Circuit","Zoom": 17,"MapInitLat": 47.942512,"MapInitLong": 0.212322,"Comment": "initially added"});	//"mTrackLocation":"Le Mans Karting International","mTrackVariation":"Le Mans International Karting Circuit"
 	
@@ -336,15 +336,16 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Oulton Park International"
+		,"AltNames":	 "Oulton_Park International"
                 ,"Zoom":         15
                 ,"MapInitLat":   53.176808 
                 ,"MapInitLong":  -2.616589
                 ,"Comment": "live check"
                 });
         //Oulton Park Fosters
-	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters","Zoom": 16,"MapInitLat": 53.179448,"MapInitLong": -2.616137});
+	aRefPoints[-2021024495] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Fosters","AltNames":"Oulton_Park Fosters","Zoom": 16,"MapInitLat": 53.179448,"MapInitLong": -2.616137});
 	//Oulton Park Island
-	aRefPoints[-1877699523] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Island"});
+	aRefPoints[-1877699523] = CopyObjectWithModifications(aRefPoints[545979690], {"Name": "Oulton Park Island","AltNames":"Oulton_Park Island"});
         
         //Snetterton 300
         aRefPoints[1508903068] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -488,6 +489,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Mazda Raceway Laguna Seca"
+		,"AltNames":	 "Laguna_Seca,Laguna Seca"
                 ,"Zoom":         16
                 ,"MapInitLat":   36.584275 
                 ,"MapInitLong":  -121.753345
@@ -582,16 +584,16 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Oschersleben A Course"
 		,"Name2":	 ""
-		,"AltNames":	 "Oschersleben Grand Prix"	//"mTrackLocation":"Oschersleben","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Oschersleben Grand Prix,Oschersleben A_Course"	//"mTrackLocation":"Oschersleben","mTrackVariation":"Grand Prix"
 		,"Zoom":         16
 		,"MapInitLat":   52.028843
 		,"MapInitLong":  11.276850
 		,"Comment": "live check"
 		});
 	//Oschersleben B Course
-	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben B Course","Name2": "","AltNames":"Oschersleben National","Zoom": 17,"MapInitLat": 52.028035,"MapInitLong": 11.278875});
+	aRefPoints[816601966] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben B Course","Name2": "","AltNames":"Oschersleben National,Oschersleben B_Course","Zoom": 17,"MapInitLat": 52.028035,"MapInitLong": 11.278875});
 	//Oschersleben C Course
-	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Course","Name2": "","AltNames":"Oschersleben C Circuit","Zoom": 17,"MapInitLat": 52.029260,"MapInitLong": 11.271525});
+	aRefPoints[-1359299594] = CopyObjectWithModifications(aRefPoints[-1194185720], {"Name": "Oschersleben C Course","Name2": "","AltNames":"Oschersleben C Circuit,Oschersleben C_Course","Zoom": 17,"MapInitLat": 52.029260,"MapInitLong": 11.271525});
 
 	//Azure Circuit
 	aRefPoints[832629329] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -1155,22 +1157,23 @@ function Refpoint(circuit_id)
 	//Sakitto Sprint
 	aRefPoints[-879282119] = CopyObjectWithModifications(aRefPoints[-1759743046], {"Name": "Sakitto Sprint","Name2": "","AltNames":""});
 	
-	//Mojave Cougar Ridge 
-	aRefPoints[-688586697] = CopyObjectWithModifications(aRefPoints[8888888888],
+	//Mojave Cougar Ridge - TrackID pcars1 [-688586697]
+	aRefPoints[31280808] = CopyObjectWithModifications(aRefPoints[8888888888],
 		{
 		"Name":         "Mojave Cougar Ridge"
+		,"AltNames":	"Mojave Cougar_Ridge"
 		,"Comment": 	"fictional track"
         });
-        //Mojave Boa Ascent
-	aRefPoints[850003838] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Boa Ascent"});
-	//Mojave Gila Crest
-	aRefPoints[2089801285] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Gila Crest"});
-	//Mojave Coyote Noose
-	aRefPoints[-2125682335] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Coyote Noose"});
-	//Mojave Sidewinder
-	aRefPoints[-1463443929] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Sidewinder"});
+        //Mojave Boa Ascent - TrackID pcars1 [850003838]
+	aRefPoints[-984009759] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent"});
+	//Mojave Gila Crest - TrackID pcars1 [2089801285]
+	aRefPoints[-60500434] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Gila Crest","AltNames":"Mojave Gila_Crest"});
+	//Mojave Coyote Noose - TrackID pcars1 [-2125682335]
+	aRefPoints[369271528] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Coyote Noose","AltNames":"Mojave Coyote_Noose"});
+	//Mojave Sidewinder - TrackID pcars1 [-1463443929]
+	aRefPoints[2015693491] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Sidewinder","AltNames":""});
 	//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
-	aRefPoints[-1] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track"});
+	aRefPoints[-1] = CopyObjectWithModifications(aRefPoints[-688586697], {"Name": "Mojave Test Track","AltNames":""});
 	
 	//Bannochbrae Road Circuit 
 	aRefPoints[-602684269] = CopyObjectWithModifications(aRefPoints[8888888888],
