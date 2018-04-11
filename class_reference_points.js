@@ -287,20 +287,20 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Ruapuna Park GP"
                 ,"Name2":	 ""
-		,"AltNames":	 "Ruapuna Park Grand Prix"	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Ruapuna Park Grand Prix,Ruapuna_Park GP"	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Grand Prix"
                 ,"Zoom":         17
                 ,"MapInitLat":   -43.530723 
                 ,"MapInitLong":  172.479408
                 ,"Comment": "live check"
                 });
         //Ruapuna Park A Circuit
-	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "","AltNames":"Ruapuna Park A_Circuit","Zoom": 18,"MapInitLat": -43.531735,"MapInitLong": 172.482294});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
+	aRefPoints[619694160] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "","AltNames":"Ruapuna Park A_Circuit,Ruapuna_Park A_Circuit","Zoom": 18,"MapInitLat": -43.531735,"MapInitLong": 172.482294});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"A_Circuit"
         //Ruapuna Park Club
-	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club","Name2": "","AltNames":""});
+	aRefPoints[1446378877] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Club","Name2": "","AltNames":"Ruapuna_Park Club"});
 	//Ruapuna Park Outer Loop
-	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "","AltNames":"Ruapuna Park Outer_Loop"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Outer_Loop"
+	aRefPoints[1940584155] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "","AltNames":"Ruapuna Park Outer_Loop,Ruapuna_Park Outer_Loop"});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"Outer_Loop"
 	//Ruapuna Park B Circuit
-	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "","AltNames":"Ruapuna Park B_Circuit","MapInitLat": -43.530846,"MapInitLong": 172.477963});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"B_Circuit"
+	aRefPoints[-2046633090] = CopyObjectWithModifications(aRefPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "","AltNames":"Ruapuna Park B_Circuit,Ruapuna_Park B_Circuit","MapInitLat": -43.530846,"MapInitLong": 172.477963});	//"mTrackLocation":"Ruapuna Park","mTrackVariation":"B_Circuit"
         
         //Cadwell Park GP
         aRefPoints[1876749797] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -410,7 +410,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Silverstone International"
 		,"Name2":	""
-		,"AltNames":	""
+		,"AltNames":	"Silverstone Int"
 		,"Zoom":         16
 		,"MapInitLat":   52.068110
 		,"MapInitLong":  -1.016541
@@ -420,7 +420,7 @@ function Refpoint(circuit_id)
 		{
 		"Name":		"Silverstone Stowe"
 		,"Name2":	""
-		,"AltNames":	""
+		,"AltNames":	"Silverstone Nat"
 		,"Zoom":         17
 		,"MapInitLat":   52.068230
 		,"MapInitLong":  -1.018023
@@ -525,6 +525,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 0.99	//1
                 ,"Name":         "Road America"
+		,"AltNames":	 "Road_America"
                 ,"Zoom":         15
                 ,"MapInitLat":   43.798710 
                 ,"MapInitLong":  -87.995182
@@ -1193,24 +1194,24 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-		,"Name":         "Mercedes Ice Training Track: Full Track"
+		,"Name":         "Mercedes-Benz Ice Track Full"
 		,"Name2":	 ""	
-		,"AltNames":	 "Mercedes-Benz Ice Track Full"		//"mTrackLocation":"Mercedes-Benz Ice Track","mTrackVariation":"Full"
+		,"AltNames":	 "Mercedes_Benz_Ice_Track Full"		//"mTrackLocation":"Mercedes_Benz_Ice_Track","mTrackVariation":"Full"
 		,"Zoom":         15
 		,"MapInitLat":   65.549746
 		,"MapInitLong":  17.578392
 		,"Comment": "initially added"
 		});
 	//Mercedes Ice Training Track: East Circuit
-	aRefPoints[1365171965] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: East Circuit","Name2": "","AltNames":"Mercedes Ice Training Track East"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"East"
+	aRefPoints[1365171965] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes-Benz Ice Track 1","Name2": "","AltNames":"Mercedes_Benz_Ice_Track 1"});	//"mTrackLocation":"Mercedes_Benz_Ice_Track","mTrackVariation":"1"
 	//Mercedes Ice Training Track: North Circuit
-	aRefPoints[480123345] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: North Circuit","Name2": "","AltNames":"Mercedes Ice Training Track North"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"North"
+	aRefPoints[480123345] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes-Benz Ice Track 2","Name2": "","AltNames":"Mercedes_Benz_Ice_Track 2"});	//"mTrackLocation":"Mercedes_Benz_Ice_Track","mTrackVariation":"2"
 	//Mercedes Ice Training Track: North East Circuit
-	aRefPoints[-2086764920] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: North East Circuit","Name2": "","AltNames":"Mercedes Ice Training Track NorthEast"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"NorthEast"
+	aRefPoints[-2086764920] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes-Benz Ice Track 3","Name2": "","AltNames":"Mercedes_Benz_Ice_Track 3"});	//"mTrackLocation":"Mercedes_Benz_Ice_Track","mTrackVariation":"3"
 	//Mercedes Ice Training Track: South Circuit
-	aRefPoints[-907469052] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: South Circuit","Name2": "","AltNames":"Mercedes Ice Training Track South"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"South"
+	aRefPoints[-907469052] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes-Benz Ice Track 4","Name2": "","AltNames":"Mercedes_Benz_Ice_Track 4"});	//"mTrackLocation":"Mercedes_Benz_Ice_Track","mTrackVariation":"4"
 	//Mercedes Ice Training Track: West Circuit
-	aRefPoints[-725608647] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes Ice Training Track: West Circuit","Name2": "","AltNames":"Mercedes Ice Training Track West"});	//"mTrackLocation":"Mercedes Ice Training Track","mTrackVariation":"West"
+	aRefPoints[-725608647] = CopyObjectWithModifications(aRefPoints[-3216853], {"Name": "Mercedes-Benz Ice Track 5","Name2": "","AltNames":"Mercedes_Benz_Ice_Track 5"});	//"mTrackLocation":"Mercedes_Benz_Ice_Track","mTrackVariation":"5"
 
 	//Sampala Ice Circuit
 	aRefPoints[-823048021] = CopyObjectWithModifications(aRefPoints[8888888888],
@@ -1284,19 +1285,20 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1.04
 		,"Name":         "Rouen Les Essarts"
+		,"AltNames":	 "Rouen"
 		,"Zoom":         14
 		,"MapInitLat":   49.333581
 		,"MapInitLong":  1.004589
 		,"Comment": "live check"
 		});
 	//Rouen Les Essarts Short
-	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short","Zoom": 15,"MapInitLat": 49.330981});
+	aRefPoints[-1515473908] = CopyObjectWithModifications(aRefPoints[-1031249929], {"Name": "Rouen Les Essarts Short","AltNames":"Rouen Short","Zoom": 15,"MapInitLat": 49.330981});
 	
 	//Hockenheim Classic GP - copy of Hockenheim GP
 	aRefPoints[1552853772] = CopyObjectWithModifications(aRefPoints[1695182971], {"Name": "Hockenheim Classic GP","Name2": "","AltNames":"Hockenheim Classic,Hockenheim_Classic GP,Hockenheim Classic Grand Prix","Zoom": 15,"MapInitLat": 49.332596,"MapInitLong": 8.579739});
 	
 	//Silverstone Classic GP - copy of Silverstone GP
-	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"rotation": 0.2,"Name": "Silverstone Classic GP","Name2": "","AltNames":"Silverstone Classic","Comment": "finished"});
+	aRefPoints[-1194290828] = CopyObjectWithModifications(aRefPoints[1641471184], {"rotation": 0.2,"Name": "Silverstone Classic GP","Name2": "","AltNames":"Silverstone Classic,Silverstone_Classic GP,Silverstone Classic Grand Prix","Comment": "finished"});
 	
 	//Circuit de Spa-Francorchamps Historic
 	aRefPoints[-1804962581] = CopyObjectWithModifications(aRefPoints[904625875], {"Name": "Circuit de Spa-Francorchamps Historic","Name2": "","AltNames":"Spa_Francorchamps_Historic GP,Spa-Francorchamps Historic Grand Prix","Zoom": 13,"MapInitLat": 50.423329,"MapInitLong": 5.970941,"Comment": "initially added"});	//"mTrackLocation":"Spa-Francorchamps","mTrackVariation":"Historic Grand Prix"
