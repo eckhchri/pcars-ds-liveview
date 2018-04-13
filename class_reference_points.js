@@ -233,7 +233,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 0.99	//0.97
                 ,"Name":         "Sonoma Raceway GP"
                 ,"Name2":	 ""
-		,"AltNames":	 "Sonoma Raceway Grand Prix"	//"mTrackLocation":"Sonoma Raceway","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Sonoma Raceway Grand Prix,Sonoma_Raceway GP"	//"mTrackLocation":"Sonoma Raceway","mTrackVariation":"Grand Prix"
                 ,"Zoom":         16
 		,"MapInitLat":   38.162600
 		,"MapInitLong":  -122.457415
@@ -244,13 +244,13 @@ function Refpoint(circuit_id)
 		{
 		"Name":		 "Sonoma Raceway National"
 		,"Name2":	 ""
-		,"AltNames":	 ""
+		,"AltNames":	 "Sonoma_Raceway National"
 		,"Zoom":         16
 		,"MapInitLat":   38.163366
 		,"MapInitLong":  -122.457876
 		});
 	//Sonoma Sonoma Raceway Short
-	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short","Name2": "","AltNames":""});
+	aRefPoints[1035110721] = CopyObjectWithModifications(aRefPoints[-1454279631], {"Name": "Sonoma Raceway Short","Name2": "","AltNames":"Sonoma_Raceway Short"});
 
 	//24 Hours of Le Mans Circuit
         aRefPoints[1740968730] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -359,16 +359,16 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
                 ,"Name":         "Snetterton 300"
                 ,"Name2":	 ""
-		,"AltNames":	 "Snetterton 300 Circuit"	//"mTrackLocation":"Snetterton","mTrackVariation":"300 Circuit"
+		,"AltNames":	 "Snetterton 300 Circuit,Snetterton 300_Circuit"	//"mTrackLocation":"Snetterton","mTrackVariation":"300 Circuit"
                 ,"Zoom":         16
                 ,"MapInitLat":   52.465021 
                 ,"MapInitLong":  0.947079
                 ,"Comment": "live check"
                 });
         //Snetterton 200
-	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200","Name2": "","AltNames":"Snetterton 200 Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"200 Circuit"
+	aRefPoints[1058872832] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 200","Name2": "","AltNames":"Snetterton 200 Circuit,Snetterton 200_Circuit"});	//"mTrackLocation":"Snetterton","mTrackVariation":"200 Circuit"
 	//Snetterton 100
-	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100","Name2": "","AltNames":"Snetterton 100 Circuit","Zoom": 17,"MapInitLat": 52.464866,"MapInitLong": 0.942489});	//"mTrackLocation":"Snetterton","mTrackVariation":"100 Circuit"
+	aRefPoints[-867340010] = CopyObjectWithModifications(aRefPoints[1508903068], {"Name": "Snetterton 100","Name2": "","AltNames":"Snetterton 100 Circuit,Snetterton 100_Circuit","Zoom": 17,"MapInitLat": 52.464866,"MapInitLong": 0.942489});	//"mTrackLocation":"Snetterton","mTrackVariation":"100 Circuit"
         
         //Zhuhai International Circuit
         aRefPoints[1836888499] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -381,6 +381,7 @@ function Refpoint(circuit_id)
                 ,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
                 ,"Name":         "Zhuhai International Circuit"
+		,"AltNames":	 "Zhuhai International_Circuit"
                 ,"Zoom":         16
                 ,"MapInitLat":   22.367588 
                 ,"MapInitLong":  113.556162
@@ -544,7 +545,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 0.96
                 ,"Name":         "Zolder"
                 ,"Name2":	 ""
-		,"AltNames":	 "Zolder Grand Prix"	//"mTrackLocation":"Zolder","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Zolder Grand Prix,Zolder GP"	//"mTrackLocation":"Zolder","mTrackVariation":"Grand Prix"
                 ,"Zoom":         15
                 ,"MapInitLat":   50.990644 
                 ,"MapInitLong":  5.257656
@@ -725,6 +726,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 0.97
 		,"cor_PosY_mul": 0.97
 		,"Name":         "Willow Springs International Raceway"
+		,"AltNames":	 "Willow_Springs International_Raceway,Willow Springs International_Raceway"
 		,"Zoom":         16
 		,"MapInitLat":   34.872929
 		,"MapInitLong":  -118.264394
@@ -736,7 +738,8 @@ function Refpoint(circuit_id)
 		"rotation":     -33.3
 		,"cor_PosX_mul": 0.97
 		,"cor_PosY_mul": 0.985
-		,"Name": "Willow Springs Horse Thief Mile"
+		,"Name": 	 "Willow Springs Horse Thief Mile"
+		,"AltNames":	 "Willow_Springs Horse_Thief_Mile"
 		,"Zoom":         18
 		,"MapInitLat":   34.878337
 		,"MapInitLong":  -118.264290
@@ -755,14 +758,14 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1.065
 		,"Name":         "Watkins Glen International GP"
 		,"Name2":	 ""
-		,"AltNames":	 "Watkins Glen International Grand Prix"	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Grand Prix"
+		,"AltNames":	 "Watkins Glen International Grand Prix,Watkins_Glen_International GP"	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Grand Prix"
 		,"Zoom":         15
 		,"MapInitLat":   42.336564
 		,"MapInitLong":  -76.924519
 		,"Comment": "live check"
 		});
 	//Watkins Glen International Short
-	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen International Short","Name2": "","AltNames":"Watkins Glen International Short Circuit"});	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Short Circuit"
+	aRefPoints[1590386668] = CopyObjectWithModifications(aRefPoints[-1785781495], {"Name": "Watkins Glen International Short","Name2": "","AltNames":"Watkins Glen International Short Circuit,Watkins_Glen_International Short"});	//"mTrackLocation":"Watkins Glen International","mTrackVariation":"Short Circuit"
 
 	//Autodromo Nazionale Monza GP
 	aRefPoints[-52972612] = CopyObjectWithModifications(aRefPoints[9999999999],
@@ -1237,12 +1240,13 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "Summerton International"	//"mTrackLocation":"Summerton","mTrackVariation":"International"
 		,"Name2":	""
+		,"AltNames":	"Summerton_Karting_Circuit International,Summerton Karting Circuit International"
 		,"Comment":	"Kart Track?"
         });
 	//Summerton National
-	aRefPoints[1408845203] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton National","Name2": ""});
+	aRefPoints[1408845203] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton National","Name2": "","AltNames":"Summerton_Karting_Circuit National,Summerton Karting Circuit National"});
 	//Summerton Sprint
-	aRefPoints[-1605913568] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton Sprint","Name2": ""});
+	aRefPoints[-1605913568] = CopyObjectWithModifications(aRefPoints[-44748320], {"Name": "Summerton Sprint","Name2": "","AltNames":"Summerton_Karting_Circuit Sprint,Summerton Karting Circuit Sprint"});
 		
 	//Chesterfield Karting Circuit
 	aRefPoints[-1735912413] = CopyObjectWithModifications(aRefPoints[8888888888],
