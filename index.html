@@ -44,6 +44,7 @@
 	<link rel="stylesheet" href="./css/font-awesome.min.css">
 
 	<script src="./config.js" charset="utf-8"></script>
+	<script src="./pcars_map.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
 	<script src="./pcars_track.js" charset="utf-8"></script>
 	<script src="./pcars_vehicle.js" charset="utf-8"></script>
@@ -206,6 +207,15 @@
 			</select>
 		</fieldset>
 		</form>
+		
+		<!-- API dropdown -->
+		<form action="#">
+		  <fieldset id="fieldset">
+			<label for="MAPTYPE">Select Map Type</label>
+	    	<select class="MAPTYPE" name="MAPTYPE" id="MAPTYPE">
+			</select>
+		</fieldset>
+		</form>
 
 
 		<label for="DRIVERCOLOR">color driver objects</label>
@@ -282,6 +292,7 @@
 
 
 	// initialize vars
+	var oPcarsMap 			=	new pcars_map();
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects
 	var aSensorData 		=	new Array();		// array of Hashes, each hash includes parameters of a driver
 	var XMLHTTPTimeout		=	2000;
@@ -338,6 +349,7 @@
 	PLV_S.switchAPIMODE( APIMODE+"3" ); // only test call
 	PLV_S.switchAPIMODE( APIMODE ); // only test call
 	PLV_S.setCurrentSettings( APIMODE ); // initial force copy of vars to common vars
+
 	
 	//PolyLine global vars for trackmaps
 	var PolyLineMid		=	null;
@@ -447,7 +459,7 @@ function initialize_app(){
 		HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );
 		
 		//set dropdown menu APIMODE	
-		HTMLCTRL.APIMODE_SetSelection( APIMODE );
+		HTMLCTRL.APIMODE_SetSelection( APIMODE );						
 		
 		//creat all tooltips
 		initToolTips();
@@ -521,6 +533,17 @@ function initialize_app(){
 					if(log >= 4){console.log('------- Switch API Mode to: ', APIMODE );}										
 			});			
 	}); // end #APIMODE change event
+	
+	$("#MAPTYPE").change(function() {		
+		$("#MAPTYPE option:selected").each(function() {
+				ChangeHtmlContentByID( '#pcars-maptype-info' 	, "Map Type: "			+ $( this ).text() );
+		});			
+	}); // end #MAPTYPE change event
+	
+	// init MapType Selection		
+	var aMapTypes = oPcarsMap.getMapTypes();
+	HTMLCTRL.addMaptypeOption("#MAPTYPE", aMapTypes );
+	HTMLCTRL.MAPTYPE_SetSelection( DEFAULT_MAP_TYPE );	
 	
 	// Recording button
 	$("#btn-start-rec-data").change(function() {			
@@ -2817,6 +2840,12 @@ function initW2UI(){
                           '</div>' 
 				},
 				{ type: 'break', id: 'break4' },
+				{ type: 'html',  id: 'common_stats_maptype',
+                    html: '<div id="pcars-maptype-info" style="padding: 3px 10px;">' +
+                          'Map Type:' +
+                          '</div>' 
+				},		        
+				{ type: 'break', id: 'break5' },
                 { type: 'spacer' },
 				{ type: 'html', id: 'item9',
                 	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION +

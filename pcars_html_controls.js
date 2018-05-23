@@ -40,10 +40,37 @@ function DRIVERCOLOR_DelSelElement( val2delete ){
 //HTML DRIVERCOLOR selection functions
 function APIMODE_SetSelection( value ){
 	
-	$("#APIMODE").val( value ).change();
+	$("#APIMODE").val( value ).change();	
+	
 	return 1;
 }
 
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//HTML MAPTYPE selection functions
+function MAPTYPE_SetSelection( value ){
+
+	$("#MAPTYPE").val( value ).change();	
+	return 1;
+}
+
+
+/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////
+//HTML MAPTYPE selection functions
+function addMaptypeOption( id , aData){
+	
+	for (var key in aData){
+	
+		$('#MAPTYPE').append($('<option/>', { 
+	        value: aData[key]['value'],
+	        text : aData[key]['display_value'], 
+	    }));
+	}
+		
+	return 1;
+}
+	
 /////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////
 //HTML content changer by object id
@@ -65,4 +92,6 @@ HTMLCONTROL.prototype.DRIVERCOLOR_SetActiveElement=DRIVERCOLOR_SetActiveElement;
 HTMLCONTROL.prototype.DRIVERCOLOR_AddSelElement=DRIVERCOLOR_AddSelElement;
 HTMLCONTROL.prototype.DRIVERCOLOR_DelSelElement=DRIVERCOLOR_DelSelElement;
 HTMLCONTROL.prototype.APIMODE_SetSelection=APIMODE_SetSelection;
+HTMLCONTROL.prototype.MAPTYPE_SetSelection=MAPTYPE_SetSelection;
+HTMLCONTROL.prototype.addMaptypeOption=addMaptypeOption;
 HTMLCONTROL.prototype.ChangeHtmlContentByID=ChangeHtmlContentByID;

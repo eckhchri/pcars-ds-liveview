@@ -3,6 +3,8 @@
 ///////////////////////////////////////////////
 var SCRIPTVERSION	= "0.3.4";
 
+// Defines the default MAP Type
+var DEFAULT_MAP_TYPE = "google"; // [google|bing|osm]
 //put in your custom google map key or user url parameter api_key=
 var GOOGLE_MAP_KEY = "";
 
