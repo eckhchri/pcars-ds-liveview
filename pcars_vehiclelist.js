@@ -1894,6 +1894,54 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "name" : "Ferrari 488 Challenge (APAC)",
         "class" : "Ferrari Series"
       }
+      ////////Patch 6 - Spirit of Le Mans ////////////////////////
+      {
+        "id" : -1218483247,
+        "name" : "Porsche 919 Hybrid",
+        "class" : "LMP1 2016"
+      },
+      {
+          "id" : 1083119012,
+          "name" : "Toyota TS050 Hybrid",
+          "class" : "LMP1 2016"
+      },
+      {
+          "id" : -1206681923,
+          "name" : "Audi R18 (Fuji 2016)",
+          "class" : "LMP1 2016"
+      },
+      {
+          "id" : -240743205,
+          "name" : "Audi R18 (Le Mans 2016)",
+          "class" : "LMP1 2016"
+      },
+      {
+          "id" : -640190447,
+          "name" : "Ferrari 512 S",
+          "class" : "Vintage Prototype A"
+      },
+      {
+          "id" : -1831147854,
+          "name" : "Ferrari 512 M",
+          "class" : "Vintage Prototype A"
+      },
+      {
+          "id" : -1529264129,
+          "name" : "Porsche 917 LH",
+          "class" : "Vintage Prototype A"
+      },
+      {
+          "id" : -211582477,
+          "name" : "Porsche 924 Carrera GTP",
+          "class" : "Group 4"
+      },
+      {
+          "id" : -327947155,
+          "name" : "Porsche 961",
+          "class" : "GTO"
+      },
+     
+      
 ];
 
 }// end load vehicle data
