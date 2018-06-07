@@ -1893,7 +1893,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "id" : 754463374,
         "name" : "Ferrari 488 Challenge (APAC)",
         "class" : "Ferrari Series"
-      }
+      },
       ////////Patch 6 - Spirit of Le Mans ////////////////////////
       {
         "id" : -1218483247,
