@@ -43,8 +43,16 @@
 	<link rel="stylesheet" href="./css/w2ui.css">
 	<link rel="stylesheet" href="./css/font-awesome.min.css">
 
+	<!-- new pcarslv classes -->
+	<script src="./PCARSLV_BASIC.js" charset="utf-8"></script>
+	<script src="./PCARSLV_SETTINGS.js" charset="utf-8"></script>
+	
 	<script src="./config.js" charset="utf-8"></script>
+	<script src="./pcars_map_controller.js" charset="utf-8"></script>
 	<script src="./pcars_map.js" charset="utf-8"></script>
+	<script src="./pcars_map_google.js" charset="utf-8"></script>
+	<script src="./pcars_map_bing.js" charset="utf-8"></script>
+	<script src="./pcars_map_osm.js" charset="utf-8"></script>
 	<script src="./pcars_driver.js" charset="utf-8"></script>
 	<script src="./pcars_track.js" charset="utf-8"></script>
 	<script src="./pcars_vehicle.js" charset="utf-8"></script>
@@ -56,9 +64,7 @@
 	<script src="./css_classchanger.js" charset="utf-8"></script>
 	<script src="./pcars_recorder.js" charset="utf-8"></script>
 	
-	<!-- new pcarslv classes -->
-	<script src="./PCARSLV_BASIC.js" charset="utf-8"></script>
-	<script src="./PCARSLV_SETTINGS.js" charset="utf-8"></script>		
+			
 		
 	<!-- pdfmake lib -->
 	<script src='lib/pdfmake/pdfmake.min.js'></script>
@@ -292,7 +298,7 @@
 
 
 	// initialize vars
-	var oPcarsMap 			=	new pcars_map();
+	var oPcarsMapCtrl 		=	new pcars_map_controller();  // controller object of all map types
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects
 	var aSensorData 		=	new Array();		// array of Hashes, each hash includes parameters of a driver
 	var XMLHTTPTimeout		=	2000;
@@ -541,7 +547,7 @@ function initialize_app(){
 	}); // end #MAPTYPE change event
 	
 	// init MapType Selection		
-	var aMapTypes = oPcarsMap.getMapTypes();
+	var aMapTypes = oPcarsMapCtrl.getMapTypes();
 	HTMLCTRL.addMaptypeOption("#MAPTYPE", aMapTypes );
 	HTMLCTRL.MAPTYPE_SetSelection( DEFAULT_MAP_TYPE );	
 	

@@ -1,5 +1,4 @@
-//class pcars_map extends PCARSLV_BASIC {
-class pcars_map {
+class pcars_map extends PCARSLV_BASIC {
 	
 	
 	// example function header
@@ -20,85 +19,26 @@ class pcars_map {
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */	
 	constructor(sMaptype, sMapHtmlId, aMapSettings) {
-		//super();	// get functions from basic class
+		super();	// get functions from basic class
 		
 		this._sMapType = sMaptype;
 		this._sMapHtmlID = sMaptype;
 		this.oCurMap = undefined;
 		
-		switch (sMaptype) {
-			//
-			case "GOOGLE":
-				
-				this.oCurMap = new pcars_map_google(sMaptype, sMapHtmlId, aMapSettings);
-				break;
-				
-			//
-			case "BING":
-				
-				break;
-				
-			//
-			case "BING":
-				
-				break;
-				
-			// returns the initialized object
-			return this.oCurMap;
-			
-		}
-	}	
+		this._isImplemented = false;
 		
-	/* Implementation todos
-	* changeMapType()
-	* */	
-	getMapTypes(){
-		 
-		var aMapTaypes = 
-			{  'google':
-			                 {
-			                        'value': 'google',
-			                        'display_value': 'Google Maps',
-			                 },
-			   'bing':
-			                 {
-			                         'value': 'bing',
-			                         'display_value': 'Bing Maps (placebo)'
-			                  },
-			 
-			   'osm1': 
-			                  {
-			                            'value': 'osm_bikemap',
-			                            'display_value': 'OSM Bike Map (placebo)'
-			                   }
-			};
-	
-		return aMapTaypes;
+		this.printConsoleMsg("WARNING", "Function updateMarker() should be overwritten by specific map class like pcars_map_google");
+			
 	}
 	
-	/* Implementation todos
-	* changeMapType()
-	* updateMarker()
-	* deleteAllMarker()
-	* pauseMarker()
-	* changeMapSettings()
-	* 
-	* 
-	* _destroyCurrentMap()
-	* 
-	*/
-	
-	/* changeMapType()
+	/*  place holder function
 	 * 
-	 * param {string}
-	 * param {array}
+	 * param {array} 
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */	
-	changeMapType( sNewMapType, aMapSettings){
-		
-		return true;
+	isImplemented(){
+		return this._isImplemented;		
 	}
-	
 		
 	/* updateMarker() - place holder function
 	 * 
