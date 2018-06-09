@@ -305,7 +305,7 @@
 	var StopTransitionDelay =	"true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
-	var map;				// google map object
+	var oMap;				// google map object, aka map
 	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|PCARS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
@@ -754,10 +754,10 @@ function initialize_app(){
 				if (!e || e.which === 1) {  // left click                  
 					//Todo:  change fixed row id to name of the row
 					var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
-					changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , map , celltrackid);
+					changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , oMap , celltrackid);
                   
 				}else if( !e || e.which === 3 ){	//right click				
-              		changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , map , cuircitID);
+              		changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , oMap , cuircitID);
 				}
 			},
 			ondblClickRow:	function (rowid, iRow, iCol, e) {
@@ -1239,7 +1239,7 @@ function initialize_app(){
 		// in case track changes on DS adjust the map settings for new possition
         if ( cuircitID != tmpcuircitID ){			
 			if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
-			changeMapSettings_with_geojson(aRefPointTMP[tmpcuircitID]  , map , tmpcuircitID);
+			changeMapSettings_with_geojson(aRefPointTMP[tmpcuircitID]  , oMap , tmpcuircitID);
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
 		}
 		
@@ -1428,7 +1428,7 @@ function initialize_app(){
 	}
 		
 	// init google map		
-	map = changeMapSettings_with_geojson(aRefPointTMP[cuircitID], map, cuircitID);
+	oMap = changeMapSettings_with_geojson(aRefPointTMP[cuircitID], oMap, cuircitID);
 
 	// create Table with list of all tracks
 	// checkbox Event handling
@@ -1903,7 +1903,7 @@ function init_map( newTrackObj ){
 	if(log >= 3){console.log("INFO: init google map instance.");}	
 	GPSSensor.prototype = new google.maps.OverlayView();
 						
-	map = new google.maps.Map(d3.select("#map").node(), {        	 
+	oMapLocal = new google.maps.Map(d3.select("#map").node(), {        	 
 			zoom: newTrackObj["Zoom"],                
 		    center: new google.maps.LatLng( newTrackObj["MapInitLat"] , newTrackObj["MapInitLong"] ),
 			mapTypeId: google.maps.MapTypeId.SATELLITE,		    
@@ -1913,14 +1913,14 @@ function init_map( newTrackObj ){
 	});
 	
 	//deactivate the automatic 45 Angel Tilt View on closest zoom steps
-	map.setTilt(0);
+	oMapLocal.setTilt(0);
 	
 	zoom_level	= newTrackObj["Zoom"];   //get initial zoom for zoom_settings		
 	sensorLayer = new GPSSensor(aSensorData);
-	sensorLayer.setMap(map); 
+	sensorLayer.setMap(oMapLocal); 
 	
 	// add map Listener
-	map.addListener('zoom_changed', function() {
+	oMapLocal.addListener('zoom_changed', function() {
 		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
 		StopTransitionDelay = "true";
         	//StopTransitionDelay_StartTime = Date.now();
@@ -1928,7 +1928,7 @@ function init_map( newTrackObj ){
 		sensorLayer.update(aSensorData);
 		//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
 		
-		zoom_level = map.getZoom();	//get new changed zoom level
+		zoom_level = oMapLocal.getZoom();	//get new changed zoom level
 		if(log >= 3){console.log("zoom:", zoom_level, " ,lineWeight:", zoom_settings[zoom_level].lineWeight);}
 		
 		// Polylines on zoom change with changing lineWeight 
@@ -1940,13 +1940,13 @@ function init_map( newTrackObj ){
 
 		
 	// deactivate because of problems with table height of div blocks
-	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
-	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
-	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
-	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
-	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
-	//map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
-	//map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
+	//oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
+	//oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('TrackList'));
+	//oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSdata'));
+	//oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DriverDataArea'));
+	//oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('Settings'));
+	//oMapLocal.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(document.getElementById('DSRecStatistics'));
+	//oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('DSstatistic'));       	
 
 	//https://developers.google.com/maps/documentation/javascript/examples/polyline-simple?hl=de		
 	//init line PolyLine objects
@@ -1958,7 +1958,7 @@ function init_map( newTrackObj ){
 	// init Polygon object for fictional tracks background
 	Polygon         = new google.maps.Polygon({});
 	
-	return map;		       				
+	return oMapLocal;		       				
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
