@@ -47,7 +47,8 @@
 	<script src="./PCARSLV_BASIC.js" charset="utf-8"></script>
 	<script src="./PCARSLV_SETTINGS.js" charset="utf-8"></script>
 	
-	<script src="./config.js" charset="utf-8"></script>
+	<script src="./config.js" charset="utf-8"></script>	
+	<script src="./pcars_map_gpssensor.js" charset="utf-8"></script>
 	<script src="./pcars_map_controller.js" charset="utf-8"></script>
 	<script src="./pcars_map.js" charset="utf-8"></script>
 	<script src="./pcars_map_google.js" charset="utf-8"></script>
@@ -298,14 +299,18 @@
 
 
 	// initialize vars
-	var oPcarsMapCtrl 		=	new pcars_map_controller();  // controller object of all map types
+	var oPcarsMapCtrl 		=	null; // TODO_SENSORLAYER controller object of all map types
+	
+	var oMap;				// google map object, aka map
+	
+	
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects
 	var aSensorData 		=	new Array();		// array of Hashes, each hash includes parameters of a driver
 	var XMLHTTPTimeout		=	2000;
 	var StopTransitionDelay =	"true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
-	var oMap;				// google map object, aka map
+	
 	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|PCARS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
@@ -412,6 +417,7 @@
 
 ////////////////////////////////////////////// start application after loading google map api 
 function initialize_app(){
+		
 	
 	//preset HTML elemets
 	setParamDemoStartPos(demo_start_pos , true);
@@ -546,10 +552,19 @@ function initialize_app(){
 		});			
 	}); // end #MAPTYPE change event
 	
+	
+	//init map
+console.log("TODO new pcars_map_controller 1! ");	
+	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMP[cuircitID]);
+	oPcarsMapCtrl.init_map(aRefPointTMP[cuircitID], aSensorData);
+console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
+	
 	// init MapType Selection		
 	var aMapTypes = oPcarsMapCtrl.getMapTypes();
 	HTMLCTRL.addMaptypeOption("#MAPTYPE", aMapTypes );
-	HTMLCTRL.MAPTYPE_SetSelection( DEFAULT_MAP_TYPE );	
+	HTMLCTRL.MAPTYPE_SetSelection( DEFAULT_MAP_TYPE );		
+	
+	
 	
 	// Recording button
 	$("#btn-start-rec-data").change(function() {			
@@ -754,10 +769,13 @@ function initialize_app(){
 				if (!e || e.which === 1) {  // left click                  
 					//Todo:  change fixed row id to name of the row
 					var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
-					changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , oMap , celltrackid);
+					//changeMapSettings_with_geojson(aRefPointTMP[celltrackid] , oMap , celltrackid);
+					oPcarsMapCtrl.changeMapSettings(aRefPointTMP[celltrackid] , oMap , celltrackid);
+					
                   
 				}else if( !e || e.which === 3 ){	//right click				
-              		changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , oMap , cuircitID);
+              		//changeMapSettings_with_geojson(aRefPointTMP[cuircitID] , oMap , cuircitID);
+              		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
 				}
 			},
 			ondblClickRow:	function (rowid, iRow, iCol, e) {
@@ -974,7 +992,9 @@ function initialize_app(){
 		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
 			StopTransitionDelay = "true";
 			StopTransitionDelay_StartTime = Date.now();
-			sensorLayer.interruptTransition();
+//			sensorLayer.interruptTransition();
+			oPcarsMapCtrl.interruptTransition(); //TODO_SENSORLAYER
+
 		}
 		
 		//reset array		
@@ -1233,13 +1253,16 @@ function initialize_app(){
 		if (DisplayDuration > 2000) { DisplayDuration = 2000 }	// set a max DisplayDuration		
 		
 		//update marker
-		sensorLayer.update(aSensorData);
-
+//		sensorLayer.update(aSensorData);  // TODO_SENSORLAYER
+console.log("TODO aSensorData: " , aSensorData);
+		oPcarsMapCtrl.updateMarker(aSensorData);
 		
 		// in case track changes on DS adjust the map settings for new possition
         if ( cuircitID != tmpcuircitID ){			
 			if (typeof tmpcuircitID == 'undefined'){tmpcuircitID = 9999999999;}	//tmpcuircitID is undefined if you switch to an APIMODE where the data source is not available, for example the pcars DS is not running
-			changeMapSettings_with_geojson(aRefPointTMP[tmpcuircitID]  , oMap , tmpcuircitID);
+			//changeMapSettings_with_geojson(aRefPointTMP[tmpcuircitID]  , oMap , tmpcuircitID);
+			oPcarsMapCtrl.changeMapSettings(aRefPointTMP[tmpcuircitID]  , oMap , tmpcuircitID);
+			
             cuircitID = tmpcuircitID;  // give the global var the new TrackId
 		}
 		
@@ -1250,8 +1273,11 @@ function initialize_app(){
                         UnHide_Timer = UnHide_Timer + sensorLayer_UpdateDelta;
                         if (UnHide_Timer > 2000){
                         	StopTransitionDelay = "true";
-                                sensorLayer.interruptTransition();
-                                sensorLayer.update(aSensorData);
+//                                sensorLayer.interruptTransition(); //TODO_SENSORLAYER
+//                                sensorLayer.update(aSensorData); //TODO_SENSORLAYER
+                                oPcarsMapCtrl.interruptTransition();
+                                oPcarsMapCtrl.updateMarker(aSensorData);
+                                
                                 CSSClsChg.UnHideAllSvg();
                                 HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );		// es workaround for the Problem with the UnHideAllSvg() call
                                 UnHide_Timer = 0;
@@ -1428,7 +1454,14 @@ function initialize_app(){
 	}
 		
 	// init google map		
-	oMap = changeMapSettings_with_geojson(aRefPointTMP[cuircitID], oMap, cuircitID);
+	//oMap = changeMapSettings_with_geojson(aRefPointTMP[cuircitID], oMap, cuircitID);
+
+console.log("TODO init_map aRefPointTMP[cuircitID]: " , aRefPointTMP[cuircitID]);
+console.log("TODO init_map oMap: " , oMap);
+console.log("TODO init_map cuircitID: " , cuircitID);
+	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID], oMap, cuircitID);
+	
+	
 
 	// create Table with list of all tracks
 	// checkbox Event handling
@@ -1740,7 +1773,7 @@ function initialize_app(){
 
 
 
-	
+/*  	TODO_SENSORLAYER
 // setting up google maps overlays
 function GPSSensor(initData) {
                //state information
@@ -1892,11 +1925,13 @@ function GPSSensor(initData) {
             }; // end interruptTransition()
             
 } // end GPSSensor(initData)
+*/
 
    
 //////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////				
 //////////////////////////////////////////////////////////////////////////
+/*
 function init_map( newTrackObj ){
 	 
 	//subclassing			
@@ -1960,9 +1995,11 @@ function init_map( newTrackObj ){
 	
 	return oMapLocal;		       				
 }
+*/
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 /// change map settings
+/*
 function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	
 	//call if map was not init before	
@@ -1999,8 +2036,11 @@ function changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 	});         	  
 	
 	return mapobj;
+	
 }
+*/
 
+/*
 function changeMapSettings(newTrackObj, mapobj, gjdata){
 	//use local variable mapobj instead of global var map
 	//example: map.setCenter({lat: 50.332733, lng: 6.943355});
@@ -2107,6 +2147,7 @@ function changeMapSettings(newTrackObj, mapobj, gjdata){
 	
 	return 1;
 }
+*/
 
 ///////////////////
 function refreshTrackList(a){

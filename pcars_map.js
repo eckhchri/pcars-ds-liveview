@@ -25,7 +25,8 @@ class pcars_map extends PCARSLV_BASIC {
 		this._sMapHtmlID = sMaptype;
 		this.oCurMap = undefined;
 		
-		this._isImplemented = false;
+		this._isImplemented = false;	// flag if this map type is implemented and available for use
+		this._isReady = false;   		// flag if map/modules etc. were loaded and can be used [true|false]
 		
 		this.printConsoleMsg("WARNING", "Function updateMarker() should be overwritten by specific map class like pcars_map_google");
 			
@@ -39,6 +40,33 @@ class pcars_map extends PCARSLV_BASIC {
 	isImplemented(){
 		return this._isImplemented;		
 	}
+	
+	/* get info if map can be used
+	 * 
+	 * return {boolean} true if map can be used, false if not
+	 */		
+	isReady(){
+		
+		return  this._isReady;
+	}
+	
+	/* -> should be overwritten by child class
+	 * initialize map object, load modules etc 
+	 *  
+	 * return {boolean} always false in parent class
+	 */	
+	init_map( newTrackObj ){		
+		return false;  
+	}
+	
+	/* -> should be overwritten by child class
+	 * change map object settings
+	 * 
+	 * return {boolean} always false in parent class
+	 */
+	changeMapSettings(newTrackObj, mapobj, trackid){		
+		return false;
+	}
 		
 	/* updateMarker() - place holder function
 	 * 
@@ -50,6 +78,18 @@ class pcars_map extends PCARSLV_BASIC {
 		this.printConsoleMsg("WARNING", "Function updateMarker() should be overwritten by specific map class like pcars_map_google");
 		
 		return false;		
+	}
+	
+	
+	/* interruptTransition() - place holder function
+	 * 
+	 * param {array} 
+	 * return {boolean} true if all is fine, false if something went wrong
+	 */	
+	interruptTransition(){
+		this.printConsoleMsg("WARNING", "Function interruptTransition() should be overwritten by specific map class like pcars_map_google");
+		
+		return false;	
 	}
 	
 	

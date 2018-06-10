@@ -31,24 +31,31 @@ class pcars_map_controller extends PCARSLV_BASIC {
 		
 		this._sMapType = sMaptype;
 		this._sMapHtmlID = sMaptype;
-		this.oCurMap = undefined;
+		this.oCurMapObj = undefined;
+
+console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
 		
 		switch (sMaptype) {
-			//
-			case "GOOGLE":
+			// GOOGLE
+			case "google":
+					
+				this.oCurMapObj = new pcars_map_google(sMaptype, sMapHtmlId, aMapSettings);
+				if (typeof this.oCurMapObj == 'object'){
+					
+				}
 				
-				this.oCurMap = new pcars_map_google(sMaptype, sMapHtmlId, aMapSettings);
+				console.log("TODO pcars_map_controller constructor 2", this.oCurMapObj);
+				console.log("TODO pcars_map_controller constructor 2.1", typeof (this.oCurMapObj) );
+				break;
+				
+			//BING
+			case "bing":				
 				break;
 				
 			//
-			case "BING":
-				
+			case "osm":				
 				break;
 				
-			//
-			case "BING":
-				
-				break;
 				
 			// returns the initialized object
 			return this.oCurMap;
@@ -95,6 +102,19 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	* 
 	*/
 	
+	
+	/* changeMapType()
+	 * 
+	 * param {object} newTrackObj  with map settings
+	 * return {boolean} true if all is fine, false if something went wrong
+	 */
+	init_map(newTrackObj ){
+		
+		this.oCurMapObj.init_map(newTrackObj);
+		
+		return true;
+	}
+	
 	/* changeMapType()
 	 * 
 	 * param {string}
@@ -114,11 +134,44 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	 */	
 	updateMarker(aMarkerObject){
 		
-		this.printConsoleMsg("WARNING", "Function updateMarker() should be overwritten by specific map class like pcars_map_google");
+		//this.printConsoleMsg("WARNING", "Function updateMarker() should be overwritten by specific map class like pcars_map_google");
+		
+		
+		this.oCurMapObj.updateMarker(aMarkerObject);
 		
 		return false;		
 	}
 	
+	
+	
+//////////////////////////////////////////////////////////////////////////////////////////////
+	/* TODO
+	 * changeMapSettings() - 
+	 * 
+	 * param {array} 
+	 * return {boolean} true if all is fine, false if something went wrong
+	 */	
+	changeMapSettings(newTrackObj, mapobj, trackid){
+		
+console.log("TODO pcars_map_controller.changeMapSettings() called");		
+//		if (this.oCurMapObj && this.oCurMapObj.isReady()){		
+			return this.oCurMapObj.changeMapSettings(newTrackObj, mapobj, trackid);
+	//	}
+		
+		
+		
+	}
+	
+	/* TODO
+	 * changeMapSettings() - 
+	 * 
+	 * param {array} 
+	 * return {boolean} true if all is fine, false if something went wrong
+	 */	
+	interruptTransition(){	
+		this.oCurMapObj.interruptTransition();
+		return true;
+	}
 	
 	
 };
