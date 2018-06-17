@@ -36,6 +36,7 @@ class pcars_map extends PCARSLV_BASIC {
 			
 	}
 	
+	
 	/* returns status of implementation 
 	 *  
 	 * return {boolean} true if all is fine, false if something went wrong
@@ -44,6 +45,7 @@ class pcars_map extends PCARSLV_BASIC {
 		return this._isImplemented;		
 	}
 	
+	
 	/* returns info if map can be used
 	 * 
 	 * return {boolean} true if map can be used, false if not
@@ -51,6 +53,7 @@ class pcars_map extends PCARSLV_BASIC {
 	isReady(){		
 		return  this._isReady;
 	}
+	
 	
 	/* -> should be overwritten by child class
 	 * initialize map object, load modules etc 
@@ -62,6 +65,18 @@ class pcars_map extends PCARSLV_BASIC {
 		return false;  
 	}
 	
+	
+	/* -> should be overwritten by child class
+	 * destroy map object 
+	 *  
+	 * return {boolean} 
+	 */	
+	destroyMap( ){
+		this.printConsoleMsg("WARNING", "Function destroyMap() should be overwritten by specific map class like pcars_map_google");
+		return false;  
+	}
+	
+	
 	/* -> should be overwritten by child class
 	 * change map object settings
 	 * 
@@ -72,6 +87,7 @@ class pcars_map extends PCARSLV_BASIC {
 		return false;
 	}
 		
+	
 	/* updateMarker() - place holder function
 	 * 
 	 * param {array} 

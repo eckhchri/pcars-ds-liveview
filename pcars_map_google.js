@@ -7,8 +7,6 @@
  * 
  */
 
-
-
 class pcars_map_google extends pcars_map {
 	
 	
@@ -44,20 +42,18 @@ class pcars_map_google extends pcars_map {
 	 */		
 	init_map( newTrackObj, aSensorDataLOCAL  ){
 		
-		//subclassing			
-		if(log >= 3){console.log("INFO: init google map instance.");}
+		//subclassing					
+		this.printConsoleMsg("INFO", "init google map instance.");
 		
 
-	console.log("TODO pcars_map_google init_map() BEFORE GPSSensor.prototype : " , new google.maps.OverlayView());
+		if(log >= 4){console.log("TODO pcars_map_google init_map() BEFORE GPSSensor.prototype : " , new google.maps.OverlayView());}
 		GPSSensor.prototype = new google.maps.OverlayView();
-	console.log("TODO pcars_map_google init_map() AFTER GPSSensor.prototype : " , typeof( GPSSensor ));
+		if(log >= 4){console.log("TODO pcars_map_google init_map() AFTER GPSSensor.prototype : " , typeof( GPSSensor ));}
 		
 		
 		//this.sensorLayer.prototype = new google.maps.OverlayView();
 		this.sensorLayer = new GPSSensor(aSensorDataLOCAL );
-
-	console.log("TODO pcars_map_google init_map() AFTER this.sensorLayer: " , this.sensorLayer );
-
+	
 
 		this.oMapLocal = new google.maps.Map(d3.select("#map").node(), {        	 
 				zoom: newTrackObj["Zoom"],                
@@ -84,7 +80,7 @@ class pcars_map_google extends pcars_map {
 			//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
 			StopTransitionDelay = "true";
 	        	//StopTransitionDelay_StartTime = Date.now();
-console.log("TODO pcars_map_google oMapLocal.addListener, this.sensorLayer: ", this);
+		console.log("TODO pcars_map_google oMapLocal.addListener, this.sensorLayer: ", this);
 //console.log("TODO pcars_map_google oMapLocal.addListener, e: ", e);
 // TODO:  muss wieder aktiviert werden, aber ich weis nicht wie man zugriff auf
 /*
@@ -128,7 +124,7 @@ console.log("TODO pcars_map_google oMapLocal.addListener, this.sensorLayer: ", t
 		if ( typeof(this.oMapLocal) == 'object'){
 		
 			this._isReady = true;
-	console.log("TODO pcars_map_google; set this._isReady to : ", this._isReady)
+			if(log >= 3){console.log("TODO pcars_map_google; set this._isReady to : ", this._isReady);}
 		}
 		
 		
@@ -136,8 +132,17 @@ console.log("TODO pcars_map_google oMapLocal.addListener, this.sensorLayer: ", t
 	}
 	
 	
+	/*
+	 * destroy/clean/reset
+	 * 
+	 * {boolean} true if was reset/cleaned, false if something went wrong
+	 */
+	destroyMap(){
+				
+		return false;
+	}
 	
-	
+		
 	
 	/* overwrites function with google specific call
 	 * 
@@ -157,7 +162,7 @@ console.log("TODO pcars_map_google oMapLocal.addListener, this.sensorLayer: ", t
 	changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
 
 		
-console.log("TODO changeMapSettings_with_geojson() called! newTrackObj: " , newTrackObj );		
+		if(log >= 4){console.log("TODO changeMapSettings_with_geojson() called! newTrackObj: " , newTrackObj );}		
 		//call if map was not init before	
 		if (!this._isReady){
 			// use local variable instead of global map		
@@ -179,12 +184,10 @@ console.log("TODO changeMapSettings_with_geojson() called! newTrackObj: " , newT
 						//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
 						for (var i = 0; i < gjdata[key].length; i++ ){
 							gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
-							//gjdata[key][i][0] = gpsCoTmp.Long;      //if numbers to long you can shorten it with gpsCoTmp.Long.toFixed(6)
-							//gjdata[key][i][1] = gpsCoTmp.Lat;
+
 							tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 						}
-						//if(log >= 3){console.log("gjdata ", key, ": ", gjdata[key]);}
-						if(log >= 3){console.log("Google GPS ", key, ": ", tmGPS[key]);}
+						if(log >= 4){console.log("Google GPS ", key, ": ", tmGPS[key]);}
 					}
 				}
 			}
@@ -200,14 +203,12 @@ console.log("TODO changeMapSettings_with_geojson() called! newTrackObj: " , newT
 	changeMapSettings(newTrackObj, mapobj, gjdata){
 		
 		
-console.log("TODO hangeMapSettings() called! newTrackObj: ", newTrackObj );
-console.log("TODO hangeMapSettings() called! newTrackObj: ", mapobj);
-console.log("TODO hangeMapSettings() called! newTrackObj: ", gjdata);
+		//console.log("TODO hangeMapSettings() called! newTrackObj: ", newTrackObj );
+		//console.log("TODO hangeMapSettings() called! newTrackObj: ", mapobj);
+		//console.log("TODO hangeMapSettings() called! newTrackObj: ", gjdata);
 
 		//use local variable mapobj instead of global var map
 		//example: map.setCenter({lat: 50.332733, lng: 6.943355});
-//		mapobj.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
-//		mapobj.setZoom(newTrackObj["Zoom"]);
 		this.oMapLocal.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
 		this.oMapLocal.setZoom(newTrackObj["Zoom"]);
 
@@ -222,7 +223,6 @@ console.log("TODO hangeMapSettings() called! newTrackObj: ", gjdata);
 		Polygon.setMap(null);
 		
 		//remove old tm_debug_markers from map
-		if(log >= 3){console.log("+++++++++ tm_debug_markers for deletion: ", tm_debug_markers);}
 		for (var i = 0; i < tm_debug_markers.length; i++ ){
 			tm_debug_markers[i].setMap(null);
 		}
