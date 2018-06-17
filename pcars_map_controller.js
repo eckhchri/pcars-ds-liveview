@@ -32,8 +32,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 		this._sMapType = sMaptype;
 		this._sMapHtmlID = sMaptype;
 		this.oCurMapObj = undefined;
-
-console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
+		
 		
 		switch (sMaptype) {
 			// GOOGLE
@@ -42,30 +41,32 @@ console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
 				this.oCurMapObj = new pcars_map_google(sMaptype, sMapHtmlId, aMapSettings);
 				if (typeof this.oCurMapObj == 'object'){
 					
-				}
-				
-				console.log("TODO pcars_map_controller constructor 2", this.oCurMapObj);
-				console.log("TODO pcars_map_controller constructor 2.1", typeof (this.oCurMapObj) );
+				}			
 				break;
+				
+			//Text
+			case "text":				
+				break;
+				
 				
 			//BING
 			case "bing":				
 				break;
 				
-			//
+			//OSM
 			case "osm":				
 				break;
-				
-				
+								
 			// returns the initialized object
-			return this.oCurMap;
-			
+			return this.oCurMap;			
 		}
 	}	
 		
-	/* Implementation todos
-	* changeMapType()
-	* */	
+		
+	/* returns all available map types
+	 * 
+	 * return {array} array of map types
+	 */		
 	getMapTypes(){
 		 
 		var aMapTaypes = 
@@ -74,6 +75,12 @@ console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
 			                        'value': 'google',
 			                        'display_value': 'Google Maps',
 			                 },
+			   'text':
+			                 {
+			                        'value': 'text',
+			                        'display_value': 'Text (placebo)',
+			                 },
+			                 
 			   'bing':
 			                 {
 			                         'value': 'bing',
@@ -110,12 +117,11 @@ console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
 	 */
 	init_map(newTrackObj ){
 		
-		this.oCurMapObj.init_map(newTrackObj);
-		
-		return true;
+		return this.oCurMapObj.init_map(newTrackObj);
 	}
 	
-	/* changeMapType()
+	/* TODO
+	 * changeMapType()
 	 * 
 	 * param {string}
 	 * param {array}
@@ -134,17 +140,10 @@ console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
 	 */	
 	updateMarker(aMarkerObject){
 		
-		//this.printConsoleMsg("WARNING", "Function updateMarker() should be overwritten by specific map class like pcars_map_google");
-		
-		
-		this.oCurMapObj.updateMarker(aMarkerObject);
-		
-		return false;		
+		return this.oCurMapObj.updateMarker(aMarkerObject);				
 	}
 	
-	
-	
-//////////////////////////////////////////////////////////////////////////////////////////////
+		
 	/* TODO
 	 * changeMapSettings() - 
 	 * 
@@ -153,13 +152,11 @@ console.log("TODO pcars_map_controller constructor 0 with maptype: ", sMaptype);
 	 */	
 	changeMapSettings(newTrackObj, mapobj, trackid){
 		
-console.log("TODO pcars_map_controller.changeMapSettings() called");		
-//		if (this.oCurMapObj && this.oCurMapObj.isReady()){		
+		console.log("TODO pcars_map_controller.changeMapSettings() called");		
+	//	if (this.oCurMapObj && this.oCurMapObj.isReady()){		
 			return this.oCurMapObj.changeMapSettings(newTrackObj, mapobj, trackid);
 	//	}
-		
-		
-		
+						
 	}
 	
 	/* TODO

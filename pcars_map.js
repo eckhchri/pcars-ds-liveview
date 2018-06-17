@@ -1,3 +1,7 @@
+/* basic calss object for different map type to define main function
+ * an provide a standard api for controller object
+ *
+ */
 class pcars_map extends PCARSLV_BASIC {
 	
 	
@@ -32,21 +36,19 @@ class pcars_map extends PCARSLV_BASIC {
 			
 	}
 	
-	/*  place holder function
-	 * 
-	 * param {array} 
+	/* returns status of implementation 
+	 *  
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */	
-	isImplemented(){
+	isImplemented(){		
 		return this._isImplemented;		
 	}
 	
-	/* get info if map can be used
+	/* returns info if map can be used
 	 * 
 	 * return {boolean} true if map can be used, false if not
 	 */		
-	isReady(){
-		
+	isReady(){		
 		return  this._isReady;
 	}
 	
@@ -55,7 +57,8 @@ class pcars_map extends PCARSLV_BASIC {
 	 *  
 	 * return {boolean} always false in parent class
 	 */	
-	init_map( newTrackObj ){		
+	init_map( newTrackObj ){
+		this.printConsoleMsg("WARNING", "Function init_map() should be overwritten by specific map class like pcars_map_google");
 		return false;  
 	}
 	
@@ -64,7 +67,8 @@ class pcars_map extends PCARSLV_BASIC {
 	 * 
 	 * return {boolean} always false in parent class
 	 */
-	changeMapSettings(newTrackObj, mapobj, trackid){		
+	changeMapSettings(newTrackObj, mapobj, trackid){
+		this.printConsoleMsg("WARNING", "Function changeMapSettings() should be overwritten by specific map class like pcars_map_google");
 		return false;
 	}
 		
@@ -91,7 +95,6 @@ class pcars_map extends PCARSLV_BASIC {
 		
 		return false;	
 	}
-	
 	
 	
 };
