@@ -29,15 +29,18 @@ class PCARSLV_BASIC{
 	 * param {string} prefix - prefix of a message. for example INFO, WARN, ERROR
 	 * param {string} msg - string to display as error
 	 */	
-	displayMsg(prefix , msg){
+	displayMsg(title , msg, style, ){
 		var myNotice = new jBox('Notice', {			
 			 fade: 500,
 			 autoClose: 7000,
-			 title: 'New feature',
+			 stack: true,
+			 stackSpacing: 10,			 
 			 close: 'flip',
 			 color: 'black',
+			 //addClass: 'JBOXPCARSLV',
 			 target: '#map',
-			 content: prefix +" | "+ msg,			 
+			 title: title,
+			 content: msg,			 
 			 attributes: {
 			      x: 'right',
 			      y: 'top'
@@ -48,7 +51,7 @@ class PCARSLV_BASIC{
 			 	}
 			});
 		
-		myNotice.open();
+		//myNotice.open();
 						
 	}
 			
@@ -76,8 +79,16 @@ class PCARSLV_BASIC{
 		return true;
 	}
 	
-	
-	
+	/* printConsoleMsg()
+	 * param {string} sType - prefix/type of Message: WARNING, ERROR, INFO
+	 * param {string} sMsg - string of message
+	 * return {string} true if all is fine, false if something went wrong
+	 */
+	printConsoleMsg(sType , sMsg){
+		
+		console.log(sType + " : " + sMsg);
+		
+	}
 	
 	
 }
