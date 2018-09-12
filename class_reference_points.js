@@ -1113,6 +1113,44 @@ function Refpoint(circuit_id)
 	//Texas Motor Speedway Road Course
 	aRefPoints[533066470] = CopyObjectWithModifications(aRefPoints[1185954707], {"Name": "Texas Motor Speedway Road Course","Name2": "","AltNames":"Texas_Motor_Speedway RC,Texas Motor Speedway RC"});	//"mTrackLocation":"Texas Motor Speedway","mTrackVariation":"RC"
 	
+	//Mugello GP
+	aRefPoints[1730519219] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        43.997633
+		,"refLong":      11.371350
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Mugello GP"
+		,"Name2":	 ""	
+		,"AltNames":	 ""	//"mTrackLocation":"","mTrackVariation":""
+		,"Zoom":         16
+		,"MapInitLat":   43.997633
+		,"MapInitLong":  11.371350
+		,"Comment": "init values"
+		});
+	
+	//Pista di Fiorano
+	aRefPoints[1371913179] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        44.534489
+		,"refLong":      10.858318
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
+		,"Name":         "Pista di Fiorano"
+		,"Name2":	 ""	
+		,"AltNames":	 ""	//"mTrackLocation":"","mTrackVariation":""
+		,"Zoom":         16
+		,"MapInitLat":   44.534489
+		,"MapInitLong":  10.858318
+		,"Comment": "init values"
+		});
+	
 	//// fictional tracks
 	//Azure Coast
 	aRefPoints[560711985] = CopyObjectWithModifications(aRefPoints[8888888888],
