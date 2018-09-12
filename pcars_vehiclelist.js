@@ -1940,8 +1940,47 @@ this.aVehicleInfoExt['PCARS2']	= 	[
           "name" : "Porsche 961",
           "class" : "GTO"
       },
-     
-      
+      ////////Patch 7 - Ferrari Essentials Pack ///////////
+      {
+        "id" : -405013350,
+        "name" : "Ferrari 250 GT Berlinetta",
+        "class" : "Vintage Touring-GT C"
+      },
+      {
+        "id" : -752781428,
+        "name" : "Ferrari 250 Testa Rossa",
+        "class" : "Vintage Touring-GT C"
+      },
+	        {
+        "id" : 2006190056,
+        "name" : "Ferrari 458 Speciale A",
+        "class" : "Road B"
+      },
+      {
+        "id" : 1317086096,
+        "name" : "Ferrari 512 BB LM",
+        "class" : "Group 4"
+      },
+      {
+        "id" : -505616410,
+        "name" : "Ferrari F12tdf",
+        "class" : "Road A"
+      },
+      {
+        "id" : -1720596633,
+        "name" : "Ferrari F355 Challenge",
+        "class" : "Ferrari F355 Series"
+      },
+      {
+        "id" : -1967832633,
+        "name" : "Ferrari F40",
+        "class" : "Road D"
+      },
+      {
+        "id" : 220908396,
+        "name" : "Ferrari FXX K",
+        "class" : "Track Day A"
+      }, 
 ];
 
 }// end load vehicle data

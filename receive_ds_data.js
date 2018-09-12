@@ -669,7 +669,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
 				if(log >= 2){console.log("---CREST2 Trackname: ", TrackName);}
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
-				
+			
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
 					"joinable":				"CREST Mode"
