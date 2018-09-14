@@ -1131,6 +1131,8 @@ function Refpoint(circuit_id)
 		,"MapInitLong":  11.371350
 		,"Comment": "init values"
 		});
+	//Mugello  Short
+	aRefPoints[-2110554879] = CopyObjectWithModifications(aRefPoints[1730519219], {"Name": "Mugello  Short","Name2": "","AltNames":""});
 	
 	//Pista di Fiorano
 	aRefPoints[1371913179] = CopyObjectWithModifications(aRefPoints[9999999999],
