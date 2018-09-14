@@ -552,9 +552,8 @@ function initialize_app(){
 	}); // end #MAPTYPE change event
 	
 	
-	//init map
-console.log("TODO new pcars_map_controller 1! ");	
-	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMP[cuircitID]);
+	//init map	
+	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMP[cuircitID]);	
 	oPcarsMapCtrl.init_map(aRefPointTMP[cuircitID], aSensorData);
 console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	
@@ -1448,9 +1447,9 @@ console.log("TODO aSensorData: " , aSensorData);
 	}
 		
 
-console.log("TODO init_map aRefPointTMP[cuircitID]: " , aRefPointTMP[cuircitID]);
-console.log("TODO init_map oMap: " , oMap);
-console.log("TODO init_map cuircitID: " , cuircitID);
+//console.log("TODO init_map aRefPointTMP[cuircitID]: " , aRefPointTMP[cuircitID]);
+//console.log("TODO init_map oMap: " , oMap);
+//console.log("TODO init_map cuircitID: " , cuircitID);
 	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID], oMap, cuircitID);
 	
 	

@@ -31,14 +31,14 @@ class pcars_map_controller extends PCARSLV_BASIC {
 		
 		this._sMapType = sMaptype;
 		this._sMapHtmlID = sMaptype;
-		this.oCurMapObj = undefined;
-		
+		this.oCurMapObj = undefined;		
 		
 		switch (sMaptype) {
 			// GOOGLE
 			case "google":
-					
+							
 				this.oCurMapObj = new pcars_map_google(sMaptype, sMapHtmlId, aMapSettings);
+				console.log("TODO pcars_map_controller.constructor() call for google!" , this);
 				if (typeof this.oCurMapObj == 'object'){
 					
 				}			
@@ -58,7 +58,8 @@ class pcars_map_controller extends PCARSLV_BASIC {
 				break;
 								
 			// returns the initialized object
-			return this.oCurMap;			
+			//return this.oCurMap;
+			return this.oCurMapObj;
 		}
 	}	
 		
@@ -152,7 +153,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	 */	
 	changeMapSettings(newTrackObj, mapobj, trackid){
 		
-		console.log("TODO pcars_map_controller.changeMapSettings() called");		
+		console.log("TODO pcars_map_controller.changeMapSettings() called", this);		
 	//	if (this.oCurMapObj && this.oCurMapObj.isReady()){		
 			return this.oCurMapObj.changeMapSettings(newTrackObj, mapobj, trackid);
 	//	}

@@ -43,7 +43,7 @@ class pcars_map_google extends pcars_map {
 	init_map( newTrackObj, aSensorDataLOCAL  ){
 		
 		//subclassing					
-		this.printConsoleMsg("INFO", "init google map instance.");
+		this.printConsoleMsg("INFO", "init google map instance.", aSensorDataLOCAL );
 		
 
 		if(log >= 4){console.log("TODO pcars_map_google init_map() BEFORE GPSSensor.prototype : " , new google.maps.OverlayView());}
@@ -152,7 +152,7 @@ class pcars_map_google extends pcars_map {
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */		
 	changeMapSettings(newTrackObj, mapobj, trackid){
-		
+				
 		return this.changeMapSettings_with_geojson(newTrackObj, mapobj, trackid);
 	}
 	
@@ -160,16 +160,13 @@ class pcars_map_google extends pcars_map {
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	/// change map settings
 	changeMapSettings_with_geojson(newTrackObj, mapobj, trackid){
-
-		
-		if(log >= 4){console.log("TODO changeMapSettings_with_geojson() called! newTrackObj: " , newTrackObj );}		
+				
 		//call if map was not init before	
 		if (!this._isReady){
 			// use local variable instead of global map		
-			mapobj = this.init_map( newTrackObj );		
+			mapobj = this.init_map( newTrackObj );			
 		}
-
-
+	
 		//load json file for a specific trackmap	
 		d3.json( "./data/trackmaps/trackmap"+ trackid +".json" , function( gjdata ) {
 			
@@ -187,26 +184,34 @@ class pcars_map_google extends pcars_map {
 
 							tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 						}
-						if(log >= 4){console.log("Google GPS ", key, ": ", tmGPS[key]);}
+						//if(log >= 4){console.log("Google GPS ", key, ": ", tmGPS[key]);}
 					}
 				}
 			}
-					
-			this.changeMapSettings(newTrackObj, mapobj, tmGPS);  // TODO???
+			
+			// Use explicit global Variable oPcarsMapCtrl 
+			oPcarsMapCtrl.oCurMapObj.changeMapSettingsGJ(newTrackObj, mapobj, tmGPS);  
+	
 		});         	  
-						
+	
+		
+		
+			
+		
 		return mapobj;
 	}
 	
 
 	//////////////////////////////////////////////////////////////////////////
-	changeMapSettings(newTrackObj, mapobj, gjdata){
+	changeMapSettingsGJ(newTrackObj, mapobj, gjdata){
 		
 		
 		//console.log("TODO hangeMapSettings() called! newTrackObj: ", newTrackObj );
 		//console.log("TODO hangeMapSettings() called! newTrackObj: ", mapobj);
 		//console.log("TODO hangeMapSettings() called! newTrackObj: ", gjdata);
 
+if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
+		
 		//use local variable mapobj instead of global var map
 		//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 		this.oMapLocal.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
