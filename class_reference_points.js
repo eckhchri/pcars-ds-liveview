@@ -1146,7 +1146,7 @@ function Refpoint(circuit_id)
 		,"cor_PosY_mul": 1
 		,"Name":         "Pista di Fiorano"
 		,"Name2":	 ""	
-		,"AltNames":	 ""	//"mTrackLocation":"","mTrackVariation":""
+		,"AltNames":	 "Pista_di_Fiorano"	//"mTrackLocation":"Pista_di_Fiorano","mTrackVariation":""
 		,"Zoom":         16
 		,"MapInitLat":   44.534489
 		,"MapInitLong":  10.858318
