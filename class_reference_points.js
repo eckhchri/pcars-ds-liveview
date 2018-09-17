@@ -1116,30 +1116,30 @@ function Refpoint(circuit_id)
 	//Mugello GP
 	aRefPoints[1730519219] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        43.997633
-		,"refLong":      11.371350
-		,"rotation":     0
+		"refLat":        43.997614
+		,"refLong":      11.371401
+		,"rotation":     -1.595
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
-		,"cor_PosX_mul": 1
+		,"cor_PosX_mul": 0.9983
 		,"cor_PosY_mul": 1
 		,"Name":         "Mugello GP"
 		,"Name2":	 ""	
 		,"AltNames":	 ""	//"mTrackLocation":"","mTrackVariation":""
-		,"Zoom":         16
+		,"Zoom":         15
 		,"MapInitLat":   43.997633
 		,"MapInitLong":  11.371350
-		,"Comment": "init values"
+		,"Comment": "finished"
 		});
 	//Mugello  Short
-	aRefPoints[-2110554879] = CopyObjectWithModifications(aRefPoints[1730519219], {"Name": "Mugello  Short","Name2": "","AltNames":""});
+	aRefPoints[-2110554879] = CopyObjectWithModifications(aRefPoints[1730519219], {"Name": "Mugello  Short","Name2": "","AltNames":"","Zoom": 16,"MapInitLat": 43.998674,"MapInitLong": 11.373907});
 	
 	//Pista di Fiorano
 	aRefPoints[1371913179] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        44.534489
-		,"refLong":      10.858318
-		,"rotation":     0
+		"refLat":        44.534380
+		,"refLong":      10.857596
+		,"rotation":     -1.2
 		,"cor_r_Long":   0
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
@@ -1150,7 +1150,7 @@ function Refpoint(circuit_id)
 		,"Zoom":         16
 		,"MapInitLat":   44.534489
 		,"MapInitLong":  10.858318
-		,"Comment": "init values"
+		,"Comment": "finished"
 		});
 	
 	//// fictional tracks
