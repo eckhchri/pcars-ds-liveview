@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, NumPits){
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits){
 	
         // vars
         this.RefID				=	RefID;
@@ -18,6 +18,7 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.Speed	   			=   Spd;
         this.CurrentLap			=	CurrentLap;
         this.VehicleId			=	VehicleId;
+	this.LiveryId			=	LiveryId;
         this.NumPits			=	(typeof(NumPits) !== 'undefined') ? NumPits : undefined;	//number of the current pits, only used within demo mode to keep consitency while a fast forward etc
         
         this.VehicleName		=	"";				// will filled by IDtoName mapping
@@ -79,6 +80,10 @@ function GetOrientation(){
 function GetSpeed(){
 	//todo: convert in km/h
 	return this.Speed;
+}
+
+function GetLiveryId(){
+        return this.LiveryId;
 }
 
 function GetPosColor(){
@@ -246,3 +251,4 @@ PCARSdriver.prototype.getVehicleClassName=getVehicleClassName;
 PCARSdriver.prototype.getNumPits=getNumPits;
 PCARSdriver.prototype._normalizeString=_normalizeString;
 PCARSdriver.prototype.UpdateObjectData=UpdateObjectData;
+PCARSdriver.prototype.GetLiveryId=GetLiveryId;
