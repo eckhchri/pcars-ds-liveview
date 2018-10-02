@@ -73,6 +73,7 @@ class pcars_map_google extends pcars_map {
 		this.oMapLocal.addListener('zoom_changed', function() {
 			//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
 			StopTransitionDelay = "true";
+			StopTransitionDelay_StartTime = Date.now();
 							
 			// interrupt and update markers		
 			oPcarsMapCtrl.interruptTransition();
