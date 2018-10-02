@@ -50,7 +50,11 @@ function GPSSensor(initData) {
              this.draw = function () {
 //            	draw(){
                    var padding = 10;
-                   _projection = this.getProjection();		  
+                   _projection = this.getProjection();		 
+
+		   // the draw function is triggered by Google Maps events like zoom_changed, dragend, etc
+		   // in this case marker must be updated extra, independent from the normal worker run
+		   if(aSensorData) {this.update(aSensorData);}
                }
 
               this.onRemove = function () {

@@ -77,7 +77,7 @@ class pcars_map_google extends pcars_map {
 							
 			// interrupt and update markers		
 			oPcarsMapCtrl.interruptTransition();
-			oPcarsMapCtrl.updateMarker(aSensorDataLOCAL);
+			//oPcarsMapCtrl.updateMarker(aSensorDataLOCAL);  // not needed anymore, because the draw funktion is automatically triggered and in the draw function the update function is executed
 			zoom_level = oPcarsMapCtrl.oCurMapObj.oMapLocal.getZoom(); //get new changed zoom level					
 					
 			// Polylines on zoom change with changing lineWeight
@@ -86,7 +86,18 @@ class pcars_map_google extends pcars_map {
 			PolyLineInner.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
 			PolyLineSF.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});			
 		
-	  	});		
+	  	});
+
+		// add listener to cover drag effects
+                this.oMapLocal.addListener('dragend', function() {
+                        //if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
+                        StopTransitionDelay = "true";
+                        StopTransitionDelay_StartTime = Date.now();
+
+                        // interrupt and update markers
+                        oPcarsMapCtrl.interruptTransition();
+
+                });
 			
 		// deactivate because of problems with table height of div blocks
 		//this.oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
