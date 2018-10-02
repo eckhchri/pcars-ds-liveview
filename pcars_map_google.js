@@ -43,18 +43,13 @@ class pcars_map_google extends pcars_map {
 	init_map( newTrackObj, aSensorDataLOCAL  ){
 		
 		//subclassing					
-		this.printConsoleMsg("INFO", "init google map instance.", aSensorDataLOCAL );
-		
-
-		if(log >= 4){console.log("TODO pcars_map_google init_map() BEFORE GPSSensor.prototype : " , new google.maps.OverlayView());}
-		GPSSensor.prototype = new google.maps.OverlayView();
-		if(log >= 4){console.log("TODO pcars_map_google init_map() AFTER GPSSensor.prototype : " , typeof( GPSSensor ));}
-		
-		
-		//this.sensorLayer.prototype = new google.maps.OverlayView();
+		this.printConsoleMsg("INFO", "init google map instance.", aSensorDataLOCAL );		
+		GPSSensor.prototype = new google.maps.OverlayView();		
+				
+		// initialise GPSSensor
 		this.sensorLayer = new GPSSensor(aSensorDataLOCAL );
 	
-
+		// create map object
 		this.oMapLocal = new google.maps.Map(d3.select("#map").node(), {        	 
 				zoom: newTrackObj["Zoom"],                
 			    center: new google.maps.LatLng( newTrackObj["MapInitLat"] , newTrackObj["MapInitLong"] ),
@@ -69,38 +64,28 @@ class pcars_map_google extends pcars_map {
 		this.oMapLocal.setTilt(0);
 		
 		zoom_level	= newTrackObj["Zoom"];   //get initial zoom for zoom_settings		
-//		sensorLayer = new GPSSensor(aSensorData);
-//		sensorLayer.setMap(oMapLocal);
 		this.sensorLayer.setMap(this.oMapLocal); 
 		
 		// add map Listener
 		var tmp = this.sensorLayer;
 		
+		// add listener to cover zoom side effects
 		this.oMapLocal.addListener('zoom_changed', function() {
 			//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
 			StopTransitionDelay = "true";
-	        	//StopTransitionDelay_StartTime = Date.now();
-		console.log("TODO pcars_map_google oMapLocal.addListener, this.sensorLayer: ", this);
-//console.log("TODO pcars_map_google oMapLocal.addListener, e: ", e);
-// TODO:  muss wieder aktiviert werden, aber ich weis nicht wie man zugriff auf
-/*
-			this.sensorLayer.interruptTransition();
-			this.sensorLayer.update(aSensorDataLOCAL);
-			//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ set StopTransitionDelay to: " + StopTransitionDelay + ", StopTransitionDelay_StartTime:" + StopTransitionDelay_StartTime);}
-			
-			zoom_level = this.oMapLocal.getZoom();	//get new changed zoom level
-			if(log >= 3){console.log("zoom:", zoom_level, " ,lineWeight:", zoom_settings[zoom_level].lineWeight);}
-			
-			// Polylines on zoom change with changing lineWeight 
+							
+			// interrupt and update markers		
+			oPcarsMapCtrl.interruptTransition();
+			oPcarsMapCtrl.updateMarker(aSensorDataLOCAL);
+			zoom_level = oPcarsMapCtrl.oCurMapObj.oMapLocal.getZoom(); //get new changed zoom level					
+					
+			// Polylines on zoom change with changing lineWeight
 			PolyLineMid.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeightMid});
 			PolyLineOuter.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
 			PolyLineInner.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
-			PolyLineSF.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
-*/			
-	  	});
-
+			PolyLineSF.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});			
 		
-
+	  	});		
 			
 		// deactivate because of problems with table height of div blocks
 		//this.oMapLocal.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('CarList'));
@@ -121,8 +106,7 @@ class pcars_map_google extends pcars_map {
 		// init Polygon object for fictional tracks background
 		Polygon         = new google.maps.Polygon({});
 		
-		if ( typeof(this.oMapLocal) == 'object'){
-		
+		if ( typeof(this.oMapLocal) == 'object'){		
 			this._isReady = true;
 			if(log >= 3){console.log("TODO pcars_map_google; set this._isReady to : ", this._isReady);}
 		}
@@ -184,7 +168,6 @@ class pcars_map_google extends pcars_map {
 
 							tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 						}
-						//if(log >= 4){console.log("Google GPS ", key, ": ", tmGPS[key]);}
 					}
 				}
 			}
@@ -194,23 +177,20 @@ class pcars_map_google extends pcars_map {
 	
 		});         	  
 	
-		
-		
-			
-		
 		return mapobj;
 	}
 	
 
 	//////////////////////////////////////////////////////////////////////////
+	// change map seeting inlcuding geojson data
 	changeMapSettingsGJ(newTrackObj, mapobj, gjdata){
-		
-		
-		//console.log("TODO hangeMapSettings() called! newTrackObj: ", newTrackObj );
-		//console.log("TODO hangeMapSettings() called! newTrackObj: ", mapobj);
-		//console.log("TODO hangeMapSettings() called! newTrackObj: ", gjdata);
 
-if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
+		//   this.oMapLocal.data.loadGeoJson(
+	    //'https://storage.googleapis.com/mapsdevsite/json/google.json');
+				
+		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", newTrackObj );
+		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", mapobj);
+		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", gjdata);
 		
 		//use local variable mapobj instead of global var map
 		//example: map.setCenter({lat: 50.332733, lng: 6.943355});
@@ -244,21 +224,22 @@ if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
 				fillColor: '#FFFFFF',
 				fillOpacity: 1
 			});
-			Polygon.setMap(map);
+			Polygon.setMap(this.oMapLocal);
 		}
 		
 		//set trackmap polylines
-		if ( gjdata ){				
+		if ( gjdata ){
+			
 			//create new instance MidLine if available
 			if ( gjdata['line_mid'] ){		
 				PolyLineMid = new google.maps.Polyline({
 				    path: gjdata['line_mid'],
 				    strokeColor: '#E0E0E0',
-				    strokeOpacity: 0.5,
+				    strokeOpacity: 1,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeightMid
 				  });
 				
-				PolyLineMid.setMap(map);			
+				PolyLineMid.setMap(this.oMapLocal);
 			}
 			
 			//create new instance innerLine if available
@@ -270,7 +251,8 @@ if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
 				
-				PolyLineInner.setMap(map);
+								
+				PolyLineInner.setMap(this.oMapLocal);											
 			}
 			
 			//create new instance OuterLine if available
@@ -282,7 +264,7 @@ if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
 				
-				PolyLineOuter.setMap(map);
+				PolyLineOuter.setMap(this.oMapLocal);
 			}
 			
 			//create new instance Start/Finish Line if available
@@ -294,7 +276,7 @@ if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
 				
-				PolyLineSF.setMap(map);
+				PolyLineSF.setMap(this.oMapLocal);
 			}
 			
 			// create markers from debug array for refPoint tuning
@@ -325,8 +307,8 @@ if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */	
 	updateMarker(aMarkerObject){
-
-		if (this.sensorLayer){
+				
+		if (this.sensorLayer && aMarkerObject != undefined){
 			this.sensorLayer.update(aMarkerObject);
 		}	
 		return true;		
@@ -338,7 +320,9 @@ if(log >= 4){console.log("TODO changeMapSettingsGJ() called! this", this );}
 	 */	
 	interruptTransition(){
 		
-		this.sensorLayer.interruptTransition();		
+		if (this.sensorLayer ){
+			this.sensorLayer.interruptTransition();	
+		}				
 		return true;		
 	}
 	
