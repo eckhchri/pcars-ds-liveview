@@ -1103,6 +1103,11 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
                                                                         aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = "+" + LapDiff + "L";
                                                                 }
 							}
+							//if the driver on position 2 overtakes the first, the gaps for the leader must be reset to -
+							if(e.data.driverlist[i].RacePosition == 1){
+								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = "-";
+								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = "-";
+							}
 
 						}//end calculate race gaps
 						//write the Gap data in the driverlist  array
@@ -1343,7 +1348,8 @@ console.log("TODO aSensorData: " , aSensorData);
                 }
                 SessionState_old = SessionState;
                 SessionStage_old = SessionStage;
-
+		
+		if(log >= 4){console.log("driverlist: ",e.data.driverlist)};
 		// start recording data if option is enabled
 		if (isRecEnabled){		
 						// insert additional info before put into data record 
