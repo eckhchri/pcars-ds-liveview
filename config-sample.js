@@ -71,8 +71,12 @@ var DisplayDurationCREST 	=	100;		// initial duration for displaying marker upda
 var UpdateRateDS 			=	500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
 var GuiUpdateIntervall		=	3;	 //intervall fo updating GUI element,values etc. in seconds
 
-//StopTransitionDelay_minTimeRun - Time of disabled tranformWithEase function and using the transform function instead on SessionState and SessionStage changes. 
-//In this case the markers jump to a new init position on map, but this takes sometimes circa 1 second after the switch. For this jump the normal transform function is needed.
+//StopTransitionDelay_minTimeRun - Time of disabled tranformWithEase function and using the transform function instead (markers jumping instead of smooth moving) on SessionState and SessionStage changes, and on zooming and dragging the map. 
+//To understand this you first have to know that the marker positions are in relation to your display in pixel coordinates and not in relation to the map. 
+//If the map is now dragged or zoomed for example and this happens during a smooth move of a marker from the old to the new position, then the marker will finish the move first in relation to your display, but it has to jump directly and follow the map to another position.
+//In this case the smooth move is interrupted and the marker jumps to the new position.
+//lower value means a higher chance that markers will hang on wrong positions on dragging ands zooming the map
+//higher value means that markers longer jumping instead of smooth moving as needed
 var StopTransitionDelay_minTimeRun = 1100; //milliseconds - 
 
 // Logging
