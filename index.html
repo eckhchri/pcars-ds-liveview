@@ -1854,7 +1854,7 @@ function refreshDriverList(a, ForceRefresh){
 		
 		var tmpPits = "-";
 		
-		if (i == 0){
+		if (i == 0 || SessionStage == "Race1" || SessionStage == "Race2"){
 			Gaps = CalcGaps(0,0,0);
 		}else{
 			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
@@ -2005,7 +2005,7 @@ function CalcGaps(bestLaptime,bestLaptimeFirst,bestLaptimeAhead){
 	var gap2ahead = 0;
 	var gap2first = 0;
 
-	if (bestLaptime > 0 && SessionStage_old != "Race1" && SessionStage_old != "Race2"){
+	if (bestLaptime > 0){
 		if (bestLaptimeAhead > 0){gap2ahead = bestLaptime - bestLaptimeAhead;}
 		if (bestLaptimeFirst > 0){gap2first = bestLaptime - bestLaptimeFirst;}
 	}
