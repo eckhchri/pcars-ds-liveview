@@ -1009,7 +1009,6 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 
 		var tmpVeName ="";
 		//update map
-		console.log("aPosDriver: ",aPosDriver);
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
 				//convert vehicleID to VehicleName
@@ -1058,7 +1057,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 								Gap2First: "-"
 							};
 						}
-						console.log("aRaceData: ", aRaceData);
+
 						//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
 						if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
 							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits++;
@@ -1095,7 +1094,6 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 								//if the gap is more than one lap, show the lap diff instead
 								//LapDiff to driver on Pos 1
 								var LapDiff = aRaceData[DriverFirst].NumLaps - aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps;
-								console.log("DriverFirst Laps: ",aRaceData[DriverFirst].NumLaps, "Driver Laps: ", aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps,  ", LapDiff: ",LapDiff);
 								if(LapDiff != 0){
 									aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = "+" + LapDiff + "L";
 								}
@@ -1869,7 +1867,6 @@ function refreshTrackList(a){
 function refreshVehicleList(a){
 	
 	var _data;
-	console.log("aRac: ", a);					
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#carlisttable").jqGrid("clearGridData");	
 	
@@ -1898,7 +1895,6 @@ function refreshDriverList(a, ForceRefresh){
                 //if(log >= 4){console.log("--- INFO stop refresh driverlist because StopRefreshDriverlist or grid is in status hidden!"  );}
                 return 1;
 	}
- 	console.log("aRac: ", a);	
 	var _data;
 	//var _allDrivers = new Array();
 	var Gaps = [];
