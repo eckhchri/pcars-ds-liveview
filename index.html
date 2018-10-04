@@ -1040,7 +1040,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				// set the InClassRaceposition value
 				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
 			
-				if(APIMODE == "DEMO"){
+				if(APIMODE != "DEMO"){
 					// pit stop counting logic
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
 						//Fill PosDriver array
