@@ -414,8 +414,11 @@
 	//init array for calculate InClassRacePosition		
 	var aInClass;
 
-	//array for saving number of pit stops during race
-	var aPitStops = {};
+	//array for saving number of pit stops and time gaps during race
+	var aRaceData = {};
+	
+	//array for saving driver position to drivername
+	var aPosDriver = [];
 
 ////////////////////////////////////////////// start application after loading google map api 
 function initialize_app(){
@@ -971,14 +974,16 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		//Hide drivertable columns diff and gap during SessionStage Race1 and Race2
 		if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
 			//if(log >= 3){console.log("Hide Gaps");}
-			jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);
+			//jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);	//not needed anymore, because gaps will be calculated for race, too
 			jQuery("#DriverDataTable").showCol(["pits"]);
-			//reset pitstop array on new race
-			aPitStops = {};
+			//reset RaceData array on new race
+			aRaceData = {};
+			//reset PosDriver array on new race
+			aPosDriver =[];
 		}
 		if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
 			//if(log >= 3){console.log("Show Gaps");}
-			jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);
+			//jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);	//not needed anymore, because gaps will be calculated for race, too
 			jQuery("#DriverDataTable").hideCol(["pits"]);
 		}
 
@@ -1004,6 +1009,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 
 		var tmpVeName ="";
 		//update map
+		console.log("aPosDriver: ",aPosDriver);
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
 			
 				//convert vehicleID to VehicleName
@@ -1034,20 +1040,76 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				}
 				// set the InClassRaceposition value
 				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
-				
-				if(APIMODE != "DEMO"){
+			
+				if(APIMODE == "DEMO"){
 					// pit stop counting logic
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
+						//Fill PosDriver array
+		                                aPosDriver[e.data.driverlist[i].RacePosition] = e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId;
+
 						//init array with driver hashes if they are undefined
-						if (!aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
-							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {NumPits: 0,State: e.data.driverlist[i].State};
+						if (!aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
+							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {
+								NumPits: 0,
+								State: e.data.driverlist[i].State,
+								NumLaps: 0,
+								SumLapTimes: 0,
+								Gap2Ahead: "-",
+								Gap2First: "-"
+							};
 						}
+						console.log("aRaceData: ", aRaceData);
 						//count pit stops, trigger is the driver state change from not EnteringPits to EnteringPits
-						if(aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
-							aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits++;
+						if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State != "EnteringPits" && e.data.driverlist[i].State == "EnteringPits"){
+							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits++;
 						}
-						e.data.driverlist[i].NumPits = aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits;
-						aPitStops[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
+						e.data.driverlist[i].NumPits = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumPits;
+						aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
+
+						//calculate gaps between drivers during race
+						//if the number of laps increases by one sum up the last laptime and calculate the gaps
+						if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps + 1 == e.data.driverlist[i].CurrentLap){
+							var DriverAhead = "-";
+							var DriverFirst = "-";
+							var Gaps;
+
+							//Update number of laps info
+							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps = e.data.driverlist[i].CurrentLap;
+
+							//sum up laptimes
+							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimes += e.data.driverlist[i].LastLapTime;
+
+							//calculate gaps
+							//Find driver ahead, first check is to exclude the driver on position 1, second check if the data is already available
+							if (e.data.driverlist[i].RacePosition > 1 && e.data.driverlist[i].RacePosition - 1){DriverAhead = aPosDriver[e.data.driverlist[i].RacePosition - 1];}
+
+							//Find driver on pos 1, and check if the data is already available
+							if(aPosDriver[1]){DriverFirst = aPosDriver[1];}
+							
+							//calculation, only if the drivers are available
+							if(DriverFirst != "-" && DriverAhead != "-"){
+								Gaps = CalcGaps(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimes,aRaceData[DriverFirst].SumLapTimes,aRaceData[DriverAhead].SumLapTimes);
+								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = Gaps.gap2ahead;
+								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = Gaps.gap2first;
+
+								//if the gap is more than one lap, show the lap diff instead
+								//LapDiff to driver on Pos 1
+								var LapDiff = aRaceData[DriverFirst].NumLaps - aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps;
+								console.log("DriverFirst Laps: ",aRaceData[DriverFirst].NumLaps, "Driver Laps: ", aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps,  ", LapDiff: ",LapDiff);
+								if(LapDiff != 0){
+									aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = "+" + LapDiff + "L";
+								}
+								//LapDiff to driver ahead
+								LapDiff = aRaceData[DriverAhead].NumLaps - aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps;
+								if(LapDiff != 0){
+                                                                        aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = "+" + LapDiff + "L";
+                                                                }
+							}
+
+						}//end calculate race gaps
+						//write the Gap data in the driverlist  array
+						e.data.driverlist[i].Gap2Ahead = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead;
+						e.data.driverlist[i].Gap2First = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First;
 					}
 				}
 				
@@ -1807,7 +1869,7 @@ function refreshTrackList(a){
 function refreshVehicleList(a){
 	
 	var _data;
-					
+	console.log("aRac: ", a);					
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#carlisttable").jqGrid("clearGridData");	
 	
@@ -1836,7 +1898,7 @@ function refreshDriverList(a, ForceRefresh){
                 //if(log >= 4){console.log("--- INFO stop refresh driverlist because StopRefreshDriverlist or grid is in status hidden!"  );}
                 return 1;
 	}
-	
+ 	console.log("aRac: ", a);	
 	var _data;
 	//var _allDrivers = new Array();
 	var Gaps = [];
@@ -1854,8 +1916,11 @@ function refreshDriverList(a, ForceRefresh){
 		
 		var tmpPits = "-";
 		
-		if (i == 0 || SessionStage == "Race1" || SessionStage == "Race2"){
+		if (i == 0){
 			Gaps = CalcGaps(0,0,0);
+		}else if (SessionStage == "Race1" || SessionStage == "Race2"){
+			if(a[i].Gap2Ahead){Gaps.gap2ahead = a[i].Gap2Ahead;}
+			if(a[i].Gap2First){Gaps.gap2first = a[i].Gap2First;}
 		}else{
 			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
 		}
@@ -2229,7 +2294,8 @@ function initDemoData(aNewData, SetApiModeTo ){
 	setParamDemoEndPos( demo.length-1 , true );	
 	record_pos 			= 0;
 	record_pos_helper 	= 0;
-	aPitStops = {};
+	aRaceData = {};
+	aPosDriver =[];
 	for (var key in CSVExport) {
 		CSVExport[key] = "";
 	}
