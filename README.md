@@ -1,6 +1,6 @@
 # Project CARS Dedicated Server live view (pcars-ds-liveview)
 
-## What is it
+## What is it?
 
 The main goal of this project was to show information about races like you have it in TV broadcasts.\
 This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is the main focus. But it can also poll the CREST1/CREST2 API, which provides the Shared Memory data of Project CARS 1 and 2 via HTTP.\
