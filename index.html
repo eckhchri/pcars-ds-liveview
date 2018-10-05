@@ -971,17 +971,19 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		//if(log >= 4){console.log("SessionState: ", SessionState, " , CSV Oject", CSVExport)};
 		*/
 		
-		//Hide drivertable columns diff and gap during SessionStage Race1 and Race2
-		if((SessionStage_old != "Race1" && SessionStage_old != "Race2") && (SessionStage == "Race1" || SessionStage == "Race2")){
+		//Hide drivertable columns diff and gap during SessionStage Race1 and Race2 and empty RaceData, check for SessionStage "", because if we receive temporarily no data from DS API the arrays must not be cleared
+		if((SessionStage_old != "Race1" && SessionStage_old != "Race2"&& SessionStage_old != "") && (SessionStage == "Race1" || SessionStage == "Race2")){
 			//if(log >= 3){console.log("Hide Gaps");}
 			//jQuery("#DriverDataTable").hideCol(["gap2first","gap2ahead"]);	//not needed anymore, because gaps will be calculated for race, too
 			jQuery("#DriverDataTable").showCol(["pits"]);
 			//reset RaceData array on new race
+			if(log >= 2){console.log("Empty saved Race Data on new Race start, Race Gaps and number of Pits");}
 			aRaceData = {};
 			//reset PosDriver array on new race
 			aPosDriver =[];
 		}
-		if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2")){
+		//check for SessionStage "", because if we receive temporarily no data from DS API the pits column must not be hidden
+		if((SessionStage_old == "Race1" || SessionStage_old == "Race2") && (SessionStage != "Race1" && SessionStage != "Race2" && SessionStage != "")){
 			//if(log >= 3){console.log("Show Gaps");}
 			//jQuery("#DriverDataTable").showCol(["gap2first","gap2ahead"]);	//not needed anymore, because gaps will be calculated for race, too
 			jQuery("#DriverDataTable").hideCol(["pits"]);
@@ -1202,6 +1204,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		////////////////////////// CSV/PDF Export START ///////////////////////////////////////
 		//Reset CSVs/PDFs on a new Race Weekend
 		if (SessionState_old != "Loading" && SessionState == "Loading"){
+			if(log >= 2){console.log("Empty automated generated Session Results for CSV Export");}
 			for (var key in CSVExport) {
 				CSVExport[key] = "";
 			}
