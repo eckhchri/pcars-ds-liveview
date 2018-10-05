@@ -1,5 +1,18 @@
 # Project CARS Dedicated Server live view (pcars-ds-liveview)
 
+## What is it
+
+The main goal of this project was to show information about races like you have it in TV broadcasts.\
+This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is the main focus. But it can also poll the CREST1/CREST2 API, which provides the Shared Memory data of Project CARS 1 and 2 via HTTP.\
+If you open this website it has Google Maps in background, which shows the current race track and markers of all drivers where they are.
+As overlay you have some tables:
+- Driver Table - shows all driver names with their position, which car they drive and timings.
+- Car Table - a list of all cars, which are available in Project CARS
+- Track Table - a list of all tracks, which are available in Project CARS
+
+Further there is a recording/playback panel and some other stuff. You can find more info about the features in the "Nice to know" section at the end.\
+It's also important to know that javascript is executed on client side. That means your PC/Tablet/... where you start a browser and open this website is polling the Dedicated Server or CREST API via HTTP requests.
+
 ## Usage:
 - default URL after extracting/cloning to your Webserver: http://[your Webserver url]/index.html
 - rename config-sample.js to config.js change settings with an editor
