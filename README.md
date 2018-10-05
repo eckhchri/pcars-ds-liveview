@@ -10,7 +10,7 @@ As overlay you have some tables:
 - Car Table - a list of all cars, which are available in Project CARS
 - Track Table - a list of all tracks, which are available in Project CARS
 
-Further there is a recording/playback panel and some other stuff. You can find more info about the features in the "Nice to know" section at the end.\
+Further there is a recording/playback panel and some other great stuff. You can find more info about the features in the "Nice to know" section at the end.\
 It's also important to know that javascript is executed on client side. That means your PC/Tablet/... where you start a browser and open this website is polling the Dedicated Server or CREST API via HTTP requests.
 
 ## Usage:
