@@ -15,7 +15,7 @@ It's also important to know that javascript is executed on client side. That mea
 
 ## Usage:
 - default URL after extracting/cloning to your Webserver: http://[your Webserver url]/index.html
-- rename config-sample.js to config.js change settings with an editor
+- rename config-sample.js to config.js and change settings with an editor
 - put the google API key into the file "config_googleapikey.txt" in root directory of the project if available. It also works without the key, but then you have watermarks on map.
 
 **URL paramters**
