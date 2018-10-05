@@ -1923,7 +1923,7 @@ function refreshDriverList(a, ForceRefresh){
 		
 		if (i == 0){
 			Gaps = CalcGaps(0,0,0);
-		}else if (SessionStage == "Race1" || SessionStage == "Race2"){
+		}else if (SessionStage_old == "Race1" || SessionStage_old == "Race2"){	//SessionStage_old, because of Issue 116 - the auto export needs one worker run more after the Quali is over, where the laptime gaps must be calculated. If SessionStage is used, Race Gaps are calculated at the moment of the Export and that is wrong for a Quali result
 			if(a[i].Gap2Ahead){Gaps.gap2ahead = a[i].Gap2Ahead;}
 			if(a[i].Gap2First){Gaps.gap2first = a[i].Gap2First;}
 		}else{
