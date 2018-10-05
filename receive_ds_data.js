@@ -158,13 +158,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				,"TemperatureTrack":    demo_el.globals.attributes.TemperatureTrack
 			}
 		}
-                                                
 		for (var i = 0;i<demo_el.participants.length;i++){
                 	
 			//read data of all participants and put it in an array of PCARSdriver objects                	
 			index = CalculateIndexDriverArray (demo_el.participants[i].RacePosition, loopcnt);
 			loopcnt++;
-
 			aDrivers.driverlist[index] =
 							new PCARSdriver(
 								demo_el.participants[i].RefId,
@@ -185,10 +183,11 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								demo_el.participants[i].CurrentLap,
 								demo_el.participants[i].VehicleId,
 								demo_el.participants[i].LiveryId,
-								demo_el.participants[i].NumPits
+								demo_el.participants[i].NumPits,
+								demo_el.participants[i].Gap2Ahead,
+								demo_el.participants[i].Gap2First
 							);
 		}
-                
 		// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
 		for (var i = 0;i<aDrivers.driverlist.length;i++){
 			if(!aDrivers.driverlist[i]){

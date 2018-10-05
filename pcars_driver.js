@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits){
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First){
 	
         // vars
         this.RefID				=	RefID;
@@ -20,6 +20,8 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.VehicleId			=	VehicleId;
 	this.LiveryId			=	LiveryId;
         this.NumPits			=	(typeof(NumPits) !== 'undefined') ? NumPits : undefined;	//number of the current pits, only used within demo mode to keep consitency while a fast forward etc
+	this.Gap2Ahead			=	(typeof(Gap2Ahead) !== 'undefined') ? Gap2Ahead : undefined;
+	this.Gap2First                  =       (typeof(Gap2First) !== 'undefined') ? Gap2First : undefined;
         
         this.VehicleName		=	"";				// will filled by IDtoName mapping
         this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
@@ -112,9 +114,12 @@ function SetExampleData() {
         this.Orientation	=   0;
         this.Speed			=   100;
         this.VehicleId		=	-886212684;
+	this.LiveryId		=	0;
         this.CurrentLap		=	99;
         this.VehicleClassName 	=   'undefined';
         this.NumPits		=	undefined;
+	this.Gap2Ahead		=	undefined;
+	this.Gap2First          =       undefined;
         
 	return 1;
 }
@@ -225,6 +230,14 @@ function getNumPits(numberpitstops){
 	return this.NumPits;
 }
 
+function getGap2Ahead(){
+        return this.Gap2Ahead;
+}
+
+function getGap2First(){
+        return this.Gap2First;
+}
+
 
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
 PCARSdriver.prototype.GetRefID=GetRefID;
@@ -252,3 +265,5 @@ PCARSdriver.prototype.getNumPits=getNumPits;
 PCARSdriver.prototype._normalizeString=_normalizeString;
 PCARSdriver.prototype.UpdateObjectData=UpdateObjectData;
 PCARSdriver.prototype.GetLiveryId=GetLiveryId;
+PCARSdriver.prototype.getGap2Ahead=getGap2Ahead;
+PCARSdriver.prototype.getGap2First=getGap2First;
