@@ -44,7 +44,7 @@ It's also important to know that javascript is executed on client side. That mea
 						
 						example: http://www.xyz.com/index.html?api_key=1234567890ABCDEF
 
-**Supports the following Sources**
+**Supports the following Data Sources**
 - Dedicated Server API from Project CARS 1 and 2 - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
 - CREST/CREST2 API - CREST1: http://cars-rest-api.com/, CREST2: http://forum.projectcarsgame.com/showthread.php?62359-CREST2-a-k-a-CARS2-REST-API&p=1494976#post1494976
 
