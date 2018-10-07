@@ -102,7 +102,7 @@ http://DS_domain_name/api/session/status?attributes&members&participants. If thi
 relevant settings in DS config:
 ```
 enableHttpApi : true
-httpApiPort : 9009
+httpApiPort : 9000
 httpApiInterface : ""
 ```
 Another problem could be if you open the liveview via HTTPS on your webserver, because the DS is polled via HTTP. In this case your Chrome prevents this and shows an icon on the right side of the address field.\
