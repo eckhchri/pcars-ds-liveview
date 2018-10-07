@@ -2,7 +2,7 @@
 
 ## What is it?
 
-The main goal of this project was to show information about races like you have it in TV broadcasts.\
+The main goal of this project was to show information about races like you need it for TV broadcasts or for race engineers.\
 This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is also the main focus. But it can also poll the CREST1/CREST2 API, which provides the Shared Memory data of Project CARS 1 and 2 via HTTP.\
 If you open this website it has Google Maps in background, which shows the current race track and markers of all drivers where they are.
 As overlay you have some tables:
