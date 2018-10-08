@@ -1790,6 +1790,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
 	
       // Added Missing Cars - Issue #118
+      //////////// Motorsport Car Pack ////////////
       {
         "id" : -344750627,
         "name" : "Opel Astra TCR",
@@ -1800,6 +1801,18 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "name" : "Audi V8 quattro DTM",
         "class" : "Group A"
       },
+      {
+        "id" : -1005942571,
+        "name" : "Jaguar E-Type V12 Group44",
+        "class" : "Vintage Touring-GT A"
+      },
+      {
+        "id" : -871253931,
+        "name" : "Panoz Esperante GTR1",
+        "class" : "GT1"
+      },
+
+      ///////////// Japanese Cars Bonus Pack ////////////
       {
         "id" : -888134359,
         "name" : "Datsun 280ZX IMSA GTX",
@@ -1816,19 +1829,9 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "class" : "Road F"
       },
       {
-        "id" : -1005942571,
-        "name" : "Jaguar E-Type V12 Group44",
-        "class" : "Vintage Touring-GT A"
-      },
-      {
         "id" : 2136103830,
         "name" : "Nissan Skyline GT-R (BNR32) Group A",
         "class" : "Group A"
-      },
-      {
-        "id" : -871253931,
-        "name" : "Panoz Esperante GTR1",
-        "class" : "GT1"
       },
       
       //////// Fun Pack DLC cars  12/2017 /////////////////////////////
