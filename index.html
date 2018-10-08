@@ -788,9 +788,24 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 			//pager: 'pager_tracklisttable',
 	});			
 	//add filter option bar
-	jQuery("#tracklisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });
+	jQuery("#tracklisttable").jqGrid('filterToolbar', { 
+		stringResult: true, 
+		searchOnEnter: false, 
+		defaultSearch: "cn", 
+		
+		afterSearch: function (e, rowid, orgClickEvent) {
+			var currec = jQuery("#tracklisttable").jqGrid('getGridParam', 'records');
+			var allrec = jQuery("#tracklisttable").jqGrid('getGridParam','data');
+		        if(currec != allrec.length){
+				ChangeHtmlContentByID( '#pcars-tracklist-records-displayed'               , "# of records: " + currec + " / " + allrec.length);
+			}else{
+				ChangeHtmlContentByID( '#pcars-tracklist-records-displayed'               , "");
+			}
+		}
+	});
+
 	//add StopRefresh table button within jqgrid header - Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbTracklistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbTracklistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i><div id="pcars-tracklist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>');
 	//disbale browser context menu on right click
 	$('#tracklisttable').bind('contextmenu', function(e) {
 	    return false;
@@ -825,7 +840,11 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	jQuery("#carlisttable").bind("jqGridToolbarAfterSearch", function (e, rowid, orgClickEvent) {	    
 	    var currec = jQuery("#carlisttable").jqGrid('getGridParam', 'records');	    
 	    var allrec = jQuery("#carlisttable").jqGrid('getGridParam','data');	    
-	    ChangeHtmlContentByID( '#pcars-carlist-records-displayed' 		, "# of records: " + currec + " / " + allrec.length);
+	    if(currec != allrec.length){
+		ChangeHtmlContentByID( '#pcars-carlist-records-displayed' 		, "# of records: " + currec + " / " + allrec.length);
+	    }else{
+		ChangeHtmlContentByID( '#pcars-carlist-records-displayed'               , "");
+	    }
 	    
 	    return e.result === undefined ? true : e.result;
 	});
@@ -1680,7 +1699,12 @@ console.log("TODO aSensorData: " , aSensorData);
 			if(log >= 2){console.log("+++ drivernames to show: ", DrivernamesToUnhide);}
 			*/
 			
-			HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DrivernamesAfterSearch.length + " / " + AllRowData.length);
+			if(DrivernamesAfterSearch.length != AllRowData.length){
+				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DrivernamesAfterSearch.length + " / " + AllRowData.length);
+			}else{
+				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed'           , "");
+			}
+
 			//add/remove assignment of CSS class
 			CSSClsChg.HideSpecificDrivers( DrivernamesAfterSearch );			
 			//Workaround: every filter event a new OPACITY css styles has to be set to change driver properties
