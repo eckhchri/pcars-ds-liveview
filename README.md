@@ -83,7 +83,7 @@ If the autoExport is set to true in the config.js the application automatically 
 ## Troubleshooting
 
 Javascript is executed on client side. That means your browser is polling the DS HTTP API.\
-If you get no data from DS or CREST check your firewall settings on client side outgoing and maybe on DS/CREST side incoming. The tool uses normal HTTP requests, which means your DS can run on another machine. For CREST2 the same, CREST2 must run on the same system where the game runs, but you can open the liveview on another system with browser. But here the CREST2 TCP port must be open in the firewall of your game system.
+If you get no data from DS or CREST check your firewall settings on client side outgoing and maybe on DS/CREST side incoming. The tool uses normal HTTP requests, which means your DS can run on another machine. For CREST2 the same, CREST2 must run on the same system where the game runs, but you can open the liveview on another system with a browser. But here the CREST2 TCP port must be open in the firewall of your game system.
 
 liveview polls the following paths on the DS:\
 /api/session/status?attributes&members&participants\
@@ -99,7 +99,7 @@ httpApiAccessLevels : {
 You should be able to open the URL without authentication:\
 http://DS_domain_name/api/session/status?attributes&members&participants. If this works, liveview should work,too.
 
-relevant settings in DS config:
+Other relevant settings in DS config:
 ```
 enableHttpApi : true
 httpApiPort : 9000
