@@ -1853,6 +1853,45 @@ console.log("TODO aSensorData: " , aSensorData);
 			}
 		}
 	});
+
+	$('#cbCarlistExport').click(function () {
+		if (ExportType === "CSV" || ExportType === "BOTH") {
+			ExportCSV(JSONToCSVConvertor(jQuery("#carlisttable").jqGrid("getRowData"), "Car Table",true,jQuery("#carlisttable").jqGrid("getGridParam", "colNames"),["id"]),"Report_CarTable");
+		}
+		if (ExportType === "PDF" || ExportType === "BOTH") {
+			var PDFdocDefinition = {
+				pageSize: 'A4',
+				pageOrientation: 'portrait',
+				info: {title: 'Car Table'},
+				content: [
+					{text: 'Car Table', style: 'header' } ,
+					{table: {
+						headerRows: 1,
+						body: PDFbuildTableBody(jQuery("#carlisttable").getRowData(), [
+								'vehicleid',
+								'name',
+								'cls',
+								'gamescope',
+								'link',
+								'comment'
+							],[
+								{text: 'ID', style: 'tableHeader'},
+								{text: 'Name', style: 'tableHeader'},
+								{text: 'Class', style: 'tableHeader'},
+								{text: 'Scope', style: 'tableHeader'},
+								{text: 'Link', style: 'tableHeader'},
+								{text: 'Comment', style: 'tableHeader'}
+							])
+					}, style: 'table'}
+				],
+				styles: PDFstyles
+			};
+			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
+			if (jQuery("#carlisttable").getGridParam("records") > 0){
+				pdfMake.createPdf(PDFdocDefinition).open();
+			}
+		}
+	});
 	
 }
 /////////////////////////////////////////////////end of application function
