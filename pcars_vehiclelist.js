@@ -1720,7 +1720,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -278306106,
-        "name" : "Nissan KDR30 Super Silhouette",
+        "name" : "Nissan Skyline Super Silhouette",
         "class" : "Group 5"
       },
       {
@@ -1787,6 +1787,48 @@ this.aVehicleInfoExt['PCARS2']	= 	[
         "id" : -11335215,
         "name" : "Ford Mustang Cobra TransAm",
         "class" : "GTO"
+      },
+	
+      // Added Missing Cars - Issue #118
+      {
+        "id" : -344750627,
+        "name" : "Opel Astra TCR",
+        "class" : "Touring Car"
+      },
+      {
+        "id" : -340376700,
+        "name" : "Audi V8 quattro DTM",
+        "class" : "Group A"
+      },
+      {
+        "id" : -888134359,
+        "name" : "Datsun 280ZX IMSA GTX",
+        "class" : "Group 5"
+      },
+      {
+        "id" : -448429240,
+        "name" : "Honda 2&4 Concept",
+        "class" : "Track Day B"
+      },
+      {
+        "id" : 373960596,
+        "name" : "Honda Civic Type-R",
+        "class" : "Road F"
+      },
+      {
+        "id" : -1005942571,
+        "name" : "Jaguar E-Type V12 Group44",
+        "class" : "Vintage Touring-GT A"
+      },
+      {
+        "id" : 2136103830,
+        "name" : "Nissan Skyline GT-R (BNR32) Group A",
+        "class" : "Group A"
+      },
+      {
+        "id" : -871253931,
+        "name" : "Panoz Esperante GTR1",
+        "class" : "GT1"
       },
       
       //////// Fun Pack DLC cars  12/2017 /////////////////////////////
