@@ -831,7 +831,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
     			//dynamic update of height of the div block
     			jQuery('#CarList').height( 0 );        		       
     		},
-	        caption: 'List of available Cars with properties. <div id="pcars-carlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>',
+	        caption: 'List of available Cars&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbCarlistExport" value="Export" style="background-color:#dddddd"></input><div id="pcars-carlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>',
 			rowNum: 400,		
 	});
 	// add filter option bar
@@ -1817,6 +1817,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			ExportCSV(JSONToCSVConvertor(jQuery("#tracklisttable").jqGrid("getRowData"), "Track Table",true,jQuery("#tracklisttable").jqGrid("getGridParam", "colNames"),["id"]),"Report_TrackTable");
 		}
 		if (ExportType === "PDF" || ExportType === "BOTH") {
+			console.log("tracklisttable",jQuery("#tracklisttable").getRowData());
 			var PDFdocDefinition = {
 				pageSize: 'A4',
 				pageOrientation: 'landscape',
@@ -1828,7 +1829,6 @@ console.log("TODO aSensorData: " , aSensorData);
 						body: PDFbuildTableBody(jQuery("#tracklisttable").getRowData(), [
 								'trackid',
 								'trackname',
-								'name2',
 								'altnames',
 								'gamename',
 								'gridsize',
@@ -1837,7 +1837,6 @@ console.log("TODO aSensorData: " , aSensorData);
 							],[
 								{text: 'TrackID', style: 'tableHeader'},
 								{text: 'TrackName', style: 'tableHeader'},
-								{text: 'Name2', style: 'tableHeader'},
 								{text: 'AltNames', style: 'tableHeader'},
 								{text: 'GameName', style: 'tableHeader'},
 								{text: 'Max Gridsize', style: 'tableHeader'},
