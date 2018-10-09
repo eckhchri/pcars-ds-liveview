@@ -178,6 +178,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								demo_el.participants[i].RacePosition,
 								demo_el.participants[i].FastestLapTime,
 								demo_el.participants[i].LastLapTime,
+								demo_el.participants[i].S1Time,
+								demo_el.participants[i].S2Time,
+								demo_el.participants[i].S3Time,
 								demo_el.participants[i].Orientation,
 								demo_el.participants[i].Speed,
 								demo_el.participants[i].CurrentLap,
@@ -196,7 +199,6 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
 			}
 		}
-		
 		return aDrivers;
                 
 	}else{
@@ -368,6 +370,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                                myArr.response.participants[i].attributes.RacePosition,
 		                                                myArr.response.participants[i].attributes.FastestLapTime,
 		                                                myArr.response.participants[i].attributes.LastLapTime,
+								myArr.response.participants[i].attributes.Sector1Time,
+								myArr.response.participants[i].attributes.Sector2Time,
+								myArr.response.participants[i].attributes.Sector3Time,
 		                                                myArr.response.participants[i].attributes.Orientation,
 		                                                myArr.response.participants[i].attributes.Speed,
 		                                                myArr.response.participants[i].attributes.CurrentLap,
@@ -508,6 +513,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                                myArr.response.participants[i].attributes.RacePosition,
 		                                                myArr.response.participants[i].attributes.FastestLapTime,
 		                                                myArr.response.participants[i].attributes.LastLapTime,
+								myArr.response.participants[i].attributes.Sector1Time,
+                                                                myArr.response.participants[i].attributes.Sector2Time,
+                                                                myArr.response.participants[i].attributes.Sector3Time,
 		                                                myArr.response.participants[i].attributes.Orientation,
 		                                                myArr.response.participants[i].attributes.Speed,
 		                                                myArr.response.participants[i].attributes.CurrentLap,
@@ -635,21 +643,24 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 
 					aDrivers.driverlist[index] =
 						new PCARSdriver(
-								0,												//RefId - NA
-								myArr.participants.mParticipantInfo[i].mName,	//Name
-								1,												//NA
-								0,												//GridPosition - NA
-								PosX,											//PositionX in meters
-								PosY,											//PositionY in meters
-								PosZ,											//PositionZ in meters
-								"NA",											//State - NA
+								0,								//RefId - NA
+								myArr.participants.mParticipantInfo[i].mName,			//Name
+								1,								//NA
+								0,								//GridPosition - NA
+								PosX,								//PositionX in meters
+								PosY,								//PositionY in meters
+								PosZ,								//PositionZ in meters
+								"NA",								//State - NA
 								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
 								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
-								0,												//FastestLapTime - NA
-								0,												//LastLapTime - NA
-								0,												//Orientation - NA
-								0,												//Speed - NA
-								myArr.participants.mParticipantInfo[i].mCurrentLap,						//CurrentLap
+								0,								//FastestLapTime - NA
+								0,								//LastLapTime - NA
+								0,								//S1Time - NA
+								0,								//S2Time - NA
+								0,								//S3Time - NA
+								0,								//Orientation - NA
+								0,								//Speed - NA
+								myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
 								2091910841,							//VehicleId
 								0								//LiveryId - NA
 							);
@@ -739,6 +750,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 							FastestLapTime,							//FastestLapTime
 							LastLapTime,							//LastLapTime
+							myArr.participants.mParticipantInfo[i].mCurrentSector1Times,	//S1Time
+							myArr.participants.mParticipantInfo[i].mCurrentSector2Times,    //S2Time
+							myArr.participants.mParticipantInfo[i].mCurrentSector3Times,    //S3Time
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap

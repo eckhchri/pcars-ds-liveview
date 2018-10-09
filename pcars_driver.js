@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First){
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, S1Time, S2Time, S3Time, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First){
 	
         // vars
         this.RefID				=	RefID;
@@ -14,6 +14,9 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.RacePosition  		=   RacePosition;
         this.FastestLapTime		=   FLapTime;
         this.LastLapTime   		=   LLapTime;
+	this.S1Time			=   S1Time;
+	this.S2Time                     =   S2Time;
+	this.S3Time                     =   S3Time;
         this.Orientation   		=   Orient;
         this.Speed	   			=   Spd;
         this.CurrentLap			=	CurrentLap;
@@ -75,6 +78,26 @@ function GetRacePosition(){
         return this.RacePosition;
 }
 
+function GetFastestLapTime(){
+        return this.FastestLapTime;
+}
+
+function GetLastLapTime(){
+        return this.LastLapTime;
+}
+
+function GetS1Time(){
+        return this.S1Time;
+}
+
+function GetS2Time(){
+        return this.S2Time;
+}
+
+function GetS3Time(){
+        return this.S3Time;
+}
+
 function GetOrientation(){
         return this.Orientation;
 }
@@ -111,6 +134,9 @@ function SetExampleData() {
         this.RacePosition	=   0;
         this.FastestLapTime	=   9000;
         this.LastLapTime	=   9999;
+	this.S1Time		=   10;
+	this.S2Time             =   20;
+	this.S3Time             =   30;
         this.Orientation	=   0;
         this.Speed			=   100;
         this.VehicleId		=	-886212684;
@@ -249,6 +275,11 @@ PCARSdriver.prototype.GetPosZ=GetPosZ;
 PCARSdriver.prototype.GetState=GetState;
 PCARSdriver.prototype.GetCurrentSector=GetCurrentSector;
 PCARSdriver.prototype.GetRacePosition=GetRacePosition;
+PCARSdriver.prototype.GetFastestLapTime=GetFastestLapTime;
+PCARSdriver.prototype.GetLastLapTime=GetLastLapTime;
+PCARSdriver.prototype.GetS1Time=GetS1Time;
+PCARSdriver.prototype.GetS2Time=GetS2Time;
+PCARSdriver.prototype.GetS3Time=GetS3Time;
 PCARSdriver.prototype.GetOrientation=GetOrientation;
 PCARSdriver.prototype.GetSpeed=GetSpeed;
 PCARSdriver.prototype.GetPosColor=GetPosColor;
