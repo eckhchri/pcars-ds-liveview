@@ -2374,7 +2374,10 @@ function initDemoData(aNewData, SetApiModeTo ){
 	//also reset Race Statistics
 	aRacestats = PCARS_Rec.resetRacestats(aRacestats);
 	console.log("Reset Race Statistik 3! Size: ", aRacestats);
-		
+
+	//switch to demo mode
+	HTMLCTRL.APIMODE_SetSelection( "DEMO" );
+	
 	return 1;
 }
 
