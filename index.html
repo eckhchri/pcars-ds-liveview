@@ -1061,7 +1061,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				// set the InClassRaceposition value
 				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
 			
-				if(APIMODE != "DEMO"){
+				if(APIMODE == "DEMO"){
 					// pit stop counting logic
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
 						//Fill PosDriver array
@@ -1109,23 +1109,26 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 							//calculation, only if the drivers are available
 							if(DriverFirst != "-" && DriverAhead != "-"){
 								Gaps = CalcGaps(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimes,aRaceData[DriverFirst].SumLapTimes,aRaceData[DriverAhead].SumLapTimes);
-								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = Gaps.gap2ahead;
-								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = Gaps.gap2first;
 
 								//if the gap is more than one lap, show the lap diff instead
 								//LapDiff to driver on Pos 1
 								var LapDiff = aRaceData[DriverFirst].NumLaps - aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps;
-								if(LapDiff != 0){
+								if(LapDiff > 0){	// Negative values can happen if the first positioned driver is disqualified if he crosses the start/finish line - Issue #124
 									aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = "+" + LapDiff + "L";
+								}else{
+									aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = Gaps.gap2first;
 								}
+
 								//LapDiff to driver ahead
 								LapDiff = aRaceData[DriverAhead].NumLaps - aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps;
-								if(LapDiff != 0){
+								if(LapDiff > 0){	// Negative values can happen if a driver is disqualified if he crosses the start/finish line - Issue #124
                                                                         aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = "+" + LapDiff + "L";
-                                                                }
+								}else{
+									aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = Gaps.gap2ahead;
+								}
 							}
-							//if the driver on position 2 overtakes the first, the gaps for the leader must be reset to -
-							if(e.data.driverlist[i].RacePosition == 1){
+							//if the driver on position 2 overtakes the first or a driver is disqualified (Issue #124), the gaps must be reset to "-"
+							if(e.data.driverlist[i].RacePosition == 1 || e.data.driverlist[i].State == "Disqualified"){
 								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead = "-";
 								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = "-";
 							}
@@ -1204,7 +1207,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		if(log >= 3 && e.data.driverlist[0]){console.log("+,[" + e.data.driverlist[0].PosX.toFixed(0) + "," + e.data.driverlist[0].PosZ.toFixed(0) + "]");}
 		
 		if(log >= 3){console.log("+++++++++ aRacestats: ", aRacestats);}
-		
+		if(log >= 3){console.log("Record Pos: ",record_pos, ":  aRaceData",aRaceData);}		
 		
 		//todo: dynamically fill up selection box with vehicle classes
 		//Todo: Only update if Vehicle clasess changes ?!?
