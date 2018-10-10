@@ -1061,7 +1061,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				// set the InClassRaceposition value
 				e.data.driverlist[i].InClassPos = aInClass[ e.data.driverlist[i].VehicleClassName ];
 			
-				if(APIMODE != "DEMO"){
+				if(APIMODE == "DEMO"){
 					// pit stop counting logic
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
 						//Fill PosDriver array
@@ -1069,11 +1069,15 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 
 						//init array with driver hashes if they are undefined
 						if (!aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId]){
+							console.log("init aRaceData array");
 							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId] = {
 								NumPits: 0,
 								State: e.data.driverlist[i].State,
 								NumLaps: 0,
+								curSector: e.data.driverlist[i].CurrentSector,
 								SumLapTimes: 0,
+								SumLapTimeS1: 0,
+								SumLapTimeS2: 0,
 								Gap2Ahead: "-",
 								Gap2First: "-"
 							};
@@ -1087,11 +1091,11 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 						aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].State = e.data.driverlist[i].State;
 
 						//calculate gaps between drivers during race
+						var DriverAhead = "-";
+						var DriverFirst = "-";
+						var Gaps;
 						//if the number of laps increases by one sum up the last laptime and calculate the gaps
 						if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps + 1 == e.data.driverlist[i].CurrentLap){
-							var DriverAhead = "-";
-							var DriverFirst = "-";
-							var Gaps;
 
 							//Update number of laps info
 							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps = e.data.driverlist[i].CurrentLap;
@@ -1106,7 +1110,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 							//Find driver on pos 1, and check if the data is already available
 							if(aPosDriver[1]){DriverFirst = aPosDriver[1];}
 							
-							//calculation, only if the drivers are available
+							//calculation, only if the drivers are available int the initialized array
 							if(DriverFirst != "-" && DriverAhead != "-"){
 								Gaps = CalcGaps(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimes,aRaceData[DriverFirst].SumLapTimes,aRaceData[DriverAhead].SumLapTimes);
 
@@ -1133,7 +1137,91 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First = "-";
 							}
 
-						}//end calculate race gaps
+						} //end calculate race gaps on lap increase
+				
+						/* Calculation from Sector to Sector independantly
+						// calculate Race Gaps on change from Sector 1 to Sector 2
+						if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector == 1 && e.data.driverlist[i].CurrentSector == 2)
+							// Update curSector
+							aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector = e.data.driverlist[i].CurrentSector;
+						} // end calculation on change from Sector 1 to Sector 2
+
+						// calculate Race Gaps on change from Sector 2 to Sector 3
+                                                if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector == 2 && e.data.driverlist[i].CurrentSector == 3)
+							// Update curSector
+                                                        aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector = e.data.driverlist[i].CurrentSector;
+                                                } // end calculation on change from Sector 2 to Sector 3
+
+						// change from Sector 3 to Sector 1, only curSector must be updated, calculation not needed, because it is done by the lap change trigger
+                                                if(aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector == 3 && e.data.driverlist[i].CurrentSector == 1)
+							// Update curSector
+                                                        aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector = e.data.driverlist[i].CurrentSector;
+                                                } // end change from Sector 3 to Sector 1
+						*/
+
+						// calculate Race Gaps on Sector Change
+						var curSector_old = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector;
+						var curSector = e.data.driverlist[i].CurrentSector;
+
+						if(curSector_old != curSector){
+                                                        // Update curSector
+                                                        aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].curSector = curSector;
+
+							//Find driver ahead, first check is to exclude the driver on position 1, second check if the data is already available
+                                                        if (e.data.driverlist[i].RacePosition > 1 && e.data.driverlist[i].RacePosition - 1){DriverAhead = aPosDriver[e.data.driverlist[i].RacePosition - 1];}
+
+                                                        //Find driver on pos 1, and check if the data is already available
+                                                        if(aPosDriver[1]){DriverFirst = aPosDriver[1];}
+
+							// Sector Change 1->2
+							if(curSector == 2){
+								// Sum up Sector 1 Time to SumLapTimes
+								aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimeS1 = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimes + e.data.driverlist[i].S1Time
+								// only if Driver are available in the Array
+								if(DriverFirst != "-" && DriverAhead != "-"){
+									// check if the Lap diff is >= 1, car on first pos must have a different lap counter and must be in Sector 2 or 3
+									if(aRaceData[DriverFirst].NumLaps != aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps && aRaceData[DriverFirst].curSector > 1){
+										//calculate Lap diff
+									}else{
+										//calculate Time gap
+									}
+
+									// check if the Lap diff is >= 1, car ahead must have a different lap counter and must be in Sector 2 or 3
+                                                                        if(aRaceData[DriverAhead].NumLaps != aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps && aRaceData[DriverAhead].curSector > 1){
+                                                                                //calculate Lap diff
+                                                                        }else{
+                                                                                //calculate Time gap
+                                                                        }
+								}
+							}
+
+							// Sector Change 2->3
+                                                        if(curSector == 3){
+								// Sum up Sector 1 and Sector 2 Times to SumLapTimes
+                                                                aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimeS2 = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].SumLapTimes + e.data.driverlist[i].S1Time + e.data.driverlist[i].S2Time
+								// only if Driver are available in the Array
+                                                                if(DriverFirst != "-" && DriverAhead != "-"){
+                                                                        // check if the Lap diff is >= 1, car on first pos must have a different lap counter and must be in Sector 3
+                                                                        if(aRaceData[DriverFirst].NumLaps != aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps && aRaceData[DriverFirst].curSector == 3){
+                                                                                //calculate Lap diff
+                                                                        }else{
+                                                                                //calculate Time gap
+                                                                        }
+
+                                                                        // check if the Lap diff is >= 1, car ahead must have a different lap counter and must be in Sector 3
+                                                                        if(aRaceData[DriverAhead].NumLaps != aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].NumLaps && aRaceData[DriverAhead].curSector == 3){
+                                                                                //calculate Lap diff
+                                                                        }else{
+                                                                                //calculate Time gap
+                                                                        }
+                                                                }
+                                                        }
+
+							
+                                                } // end calculation on Sector Change
+
+						//end calculate race gaps
+
 						//write the Gap data in the driverlist  array
 						e.data.driverlist[i].Gap2Ahead = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2Ahead;
 						e.data.driverlist[i].Gap2First = aRaceData[e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId].Gap2First;
