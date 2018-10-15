@@ -14,10 +14,10 @@ if(is_dir($dir)){
             } else {
             	array_push($a, $file);	
                 //echo $file."<br />";
-                //echo json_encode($file);
+		//echo json_encode($file);
+		sort($a);
             }
         }
-        
         echo json_encode($a);
     }
 }
