@@ -132,72 +132,73 @@
 	</div>
 	
 
-	<div id="DSRecStatistics" class="box">
+	<table id="DSRecStatistics">
 	<!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
-		<div class="replay_row">
-			<div class="box">				
-				<div><i class="fa fa-fast-backward fa-2x"></i></div>				
-			</div>
-			<div class="box">
+		<tr class="replay_row">
+			<td class="box">				
+				<div><i class="fa fa-fast-backward fa-2x"></i></div>	
+			</td>
+			<td class="box">
 				<div><i id="btn_fa_play-pause" class="fa fa-pause fa-2x"></i></div>
-			</div>			
-			<div class="box">
+			</td>		
+			<td class="box">
 				<div><i class="fa fa-fast-forward fa-2x"></i></div>
-			</div>
-			<div class="box">				
+			</td>
+			<td class="box">				
 				<div>loop start pos:</div>
 				<div><input name="field_textarea" id="loop_start_pos" type="number" size="4" maxlength="4" style="width: 45px;"/></div>
-			</div>			
-			<div class="box">
+			</td>			
+			<td class="box">
 				<div>loop end pos:</div>
 				<div><input name="field_textarea" id="loop_end_pos" type="number" size="4" maxlength="4" style="width: 45px;"/></div>
-			</div>
-			<div class="box">
-				<div id="pcars-record_pos"></div>
-				<div id="pcars-record_max"></div>
-			</div>
-		</div>
-		<div class="replay_row">
-		
+			</td>
+			<td class="box replay_cell">
+                                <div>Start/Stop Recording:</div>
+                        </td>
+                        <td class="box">
+                                <label class="switch">
+                                        <input type="checkbox" id="btn-start-rec-data">
+                                        <div class="slider round"></div>
+                                </label>
+                        </td>
+		</tr>
+		<tr class="replay_row">
+			<td class="box" colspan="4">
 				<label for="amount">Pos:</label>
 				<input type="text" id="replaybar_curpos_infobox" readonly style="border:0;">
 				<div id="slider-replaybar"></div>
+			</td>
+			<td class="box" colspan="1">
+                                <div id="pcars-record_pos"></div>
+                                <div id="pcars-record_max"></div>
+                        </td>
+			<td class="box">
+                                <div>Export Data:</div>
+                        </td>
+                        <td class="box">
+                                <button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_DEMO_FILE.pcars')">export</button>
+                        </td>
 		
-		</div>	
-		<div class="replay_row">
-			<div class="box replay_cell">
-				<div>Start Recording:</div>
-			</div>
-			<div class="box">
-				<label class="switch">
-					<input type="checkbox" id="btn-start-rec-data">
-					<div class="slider round"></div>
-				</label>				
-			</div>
-			<div class="box">
-				<div>Export Data:</div>
-			</div>			
-			<div class="box">
-				<button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_DEMO_FILE.pcars')">export</button>
-			</div>
-			<div class="box">
+		</tr>	
+		<tr class="replay_row">
+			<td class="box" colspan="2">
 				<div>load from local File:</div>
-			</div>	
-			<div class="box">
+			</td>	
+			<td class="box" colspan="3">
 				<input id="RecFileUploader" type="file" name="Select PCARS File">				
-			</div>
-			<div class="box">
+			</td>
+			<td class="box">
 				<button id="btn-load-demo-file" class="btn" onclick="open_popup_load_demofile();">Load from URL</button>
-			</div>
-			<div class="box">
+			</td>
+			<!--<td class="box">
 				<div>Rec Stats:</div>
-			</div>	
-			<div class="box">
+			</td>	
+			<td class="box">
 				<div id="pcars-rec-elemnr" ></div>
 				<div id="pcars-rec-elemsize" ></div>		
-			</div>				
-		</div>
-	</div>
+			</td>-->				
+		</tr>
+	</table>
 	
 
 	<!-- definition of option panel-->	
