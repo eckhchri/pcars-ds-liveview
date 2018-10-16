@@ -131,9 +131,9 @@
 		<table id="DriverDataTable"></table>
 	</div>
 	
-
-	<table id="DSRecStatistics">
-	<!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
+	<div id="DSRecStatistics" style="width: 660px;" >
+	   <table>
+	   <!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
 		<tr class="replay_row">
 			<td class="box">				
 				<div><i class="fa fa-fast-backward fa-2x"></i></div>	
@@ -151,7 +151,7 @@
 			<td class="box">
 				<div>loop end pos:</div>
 				<div><input name="field_textarea" id="loop_end_pos" type="number" size="4" maxlength="4" style="width: 45px;"/></div>
-			</td>
+			</td><!--<td></td>-->
 			<td class="box replay_cell">
                                 <div>Start/Stop Recording:</div>
                         </td>
@@ -168,7 +168,7 @@
 				<input type="text" id="replaybar_curpos_infobox" readonly style="border:0;">
 				<div id="slider-replaybar"></div>
 			</td>
-			<td class="box" colspan="1">
+			<td class="box" width="140px">
                                 <div id="pcars-record_pos"></div>
                                 <div id="pcars-record_max"></div>
                         </td>
@@ -182,7 +182,7 @@
 		</tr>	
 		<tr class="replay_row">
 			<td class="box" colspan="2">
-				<div>load from local File:</div>
+				<div>load local File:</div>
 			</td>	
 			<td class="box" colspan="3">
 				<input id="RecFileUploader" type="file" name="Select PCARS File">				
@@ -198,7 +198,8 @@
 				<div id="pcars-rec-elemsize" ></div>		
 			</td>-->				
 		</tr>
-	</table>
+	   </table>
+	</div>
 	
 
 	<!-- definition of option panel-->	
@@ -493,7 +494,8 @@ function initialize_app(){
 			$( "#DSdata" ).resizable({
 				//animate: true
 				ghost: true
-       		});
+       			});
+			$( "#DSRecStatistics" ).draggable();
 		});			
 		
 	});
@@ -896,7 +898,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );
 		ChangeHtmlContentByID( '#pcars-curgamerunning', "CurGameRunning:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
-		ChangeHtmlContentByID( '#pcars-record_pos' 	, "record_pos: " + record_pos + " / "  + demo.length);		
+		ChangeHtmlContentByID( '#pcars-record_pos' 	, "Pos: " + record_pos + " / "  + demo.length);		
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + aRefPointTMP[tmpcuircitID]["Name"] );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );

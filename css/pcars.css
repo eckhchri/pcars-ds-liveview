@@ -114,7 +114,7 @@
 				display: 			table;
 				background-color:	grey;
 				opacity: 			0.95;
-				margin: 			auto;
+				/*margin: 			auto;*/
 				position:       absolute;
 				bottom:           10px;
                 left:           10px;
