@@ -73,7 +73,6 @@ If the race is already running and you open the website of this application the 
 - What is the function of the export buttons in the driver table header?
 "Export" initiates a CSV download of the currrent table view. 
 "Export All" sorts the table after driver position and initiates a download of all past session results of the race weekend. There must be at least one session change during the application is running, for example from Practice to Qualifying or Qualifying to Race. If this is not the case there is nothing to download, because there is no session result.
-- What is the function of the "Pause" buttons in the table headers?
 ......
 - Why are the markers jerky moving?
 .......
@@ -110,8 +109,6 @@ Then you can click on it and "Load unsafe scripts".
 
 
 ## Nice to know
-
-- If you want to scroll a table, use the Pause Button. The table is reloaded every poll interval and then it jumps automatically to the beginning.
 
 - You can record a session. Use the "Start Recording" switch for starting and stopping the record. After stopping click the "Export" button. For long sessions this takes some time, because the record is saved in RAM of the Browser process. With clicking on export a zip file is generated. This zip file can be loaded with the Button "Datei auswählen"/"Select File" (in my bowser it is german). You maybe have to switch to DEMO API Type, if it is not switched automatically.
 
