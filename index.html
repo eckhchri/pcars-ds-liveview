@@ -361,6 +361,8 @@
 
 	var scrollPositionDriverTable = 0;	// used for saving the current scollbar position
 	var scrollPositionTrackTable = 0;	// used for saving the current scollbar position
+	var cellDataDrivername;
+	var cellDataVehiclename;
 
 	// init PCARS Live View classes
 	var PLV_S				=	new PCARSLV_SETTINGS();
@@ -1786,6 +1788,9 @@ console.log("TODO aSensorData: " , aSensorData);
 			if (rowdata.driverposition == 2){jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'drivername', '', { background: 'silver' });}
 			if (rowdata.driverposition == 3){jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'drivername', '', { background: '#CD7F32' });}
 			
+			// reselect the original selected row on grid reload
+			if (rowdata.drivername == cellDataDrivername && rowdata.vehiclename == cellDataVehiclename){jQuery(this).jqGrid('setSelection',rowid);}
+			
 			// set CSS Styles -			
 //1			jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'vehicleclass', '', { background: '#CD1E32' });
 			//http://stackoverflow.com/questions/2874906/jqgrid-setcell-method-how-to-set-class-of-the-fourth-parameter
@@ -2111,6 +2116,14 @@ function refreshDriverList(a, ForceRefresh){
 
 	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
 	scrollPositionDriverTable = jQuery("#DriverDataTable").closest(".ui-jqgrid-bdiv").scrollTop();
+
+	// retrieve Drivername and Vehiclename of the current selected row, because the automatic reload of the grid deletes the selection. 
+	//On grid reload the event afterInsertRow is fired and the original selected row is reselected based on Driver and Vehiclename. 
+	// This is not working correct if the Race Weekend is in the "Loading" SessionState, because all Drivernames are empty in this case and Vehiclenames can occur multiple times. Then the last founded with the same Vehiclename keeps selected.
+	var selRowId = jQuery("#DriverDataTable").jqGrid("getGridParam", "selrow");
+	cellDataDrivername = jQuery("#DriverDataTable").jqGrid("getCell", selRowId, "drivername");
+	cellDataVehiclename = jQuery("#DriverDataTable").jqGrid("getCell", selRowId, "vehiclename");
+	console.log("cellDataDrivername",cellDataDrivername, " / cellDataVehiclename: ", cellDataVehiclename);
 
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
