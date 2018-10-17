@@ -816,7 +816,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	});
 
 	//add StopRefresh table button within jqgrid header - Method with Button
-	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Stop automatic refresh of table" id="cbTracklistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbTracklistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i><div id="pcars-tracklist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>');
+	jQuery('#tracklisttable').setCaption('List of available Tracks&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbTracklistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;' + '<i class="fa fa-question pcarstooltip" aria-hidden="true" id="tt-tracklist-main"></i><div id="pcars-tracklist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>');
 	//disbale browser context menu on right click
 	$('#tracklisttable').bind('contextmenu', function(e) {
 	    return false;
@@ -1680,6 +1680,7 @@ console.log("TODO aSensorData: " , aSensorData);
 
 	// create Table with list of all tracks
 	// checkbox Event handling
+	/* Removed Tracklist Pause button and now disabling handling of it, because the scrollbar is not jumping back to top anymore
 	$('#cbTracklistRefresh').click(function () {
 	
 		//Method with button
@@ -1701,7 +1702,7 @@ console.log("TODO aSensorData: " , aSensorData);
                         data.title = "Pause automatic refresh of table";
                         data.style="background-color:#dddddd";
                 }
-	}
+	}*/
 
 
 	// create worker for Tracklist updates //////////////////////////////////////////////////////////////////////
@@ -2043,10 +2044,11 @@ console.log("TODO aSensorData: " , aSensorData);
 function refreshTrackList(a){
 
 	// if set to true, no refresh of table wanted
+	/* Removed Tracklist Pause button and now disabling handling of it, because the scrollbar is not jumping back to top anymore
 	if (StopRefreshTracklist == "true") {
 		if(log >= 4){console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );}
 		return 1;
-	}
+	}*/
 
 	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
         scrollPositionTrackTable = jQuery("#tracklisttable").closest(".ui-jqgrid-bdiv").scrollTop();
