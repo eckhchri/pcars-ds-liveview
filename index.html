@@ -358,7 +358,10 @@
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
 	var sCurUrl			= "";  //in each time this var should be the current DS URL independent of the APIMODE
 	var sCurPort		= "";  //in each time this var should be the current DS PORT independent of the APIMODE
-	
+
+	var scrollPositionDriverTable = 0;	// used for saving the current scollbar position
+	var scrollPositionTrackTable = 0;	// used for saving the current scollbar position
+
 	// init PCARS Live View classes
 	var PLV_S				=	new PCARSLV_SETTINGS();
 	PLV_S.switchAPIMODE( APIMODE+"3" ); // only test call
@@ -789,6 +792,9 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 			rowNum: 300,
 			//rowList:[10,20,30],
 			//pager: 'pager_tracklisttable',
+                	loadComplete: function(){
+                        	jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionTrackTable);
+	                }
 	});			
 	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { 
@@ -1795,6 +1801,10 @@ console.log("TODO aSensorData: " , aSensorData);
 			//TODO: set color of CLASS/Vehiclename
 			//jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });
 					
+		},
+
+		loadComplete: function(){
+			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
 		}
 	});
 	
@@ -2032,6 +2042,9 @@ function refreshTrackList(a){
 		if(log >= 4){console.log("--- INFO stop refresh tracklist because StopRefreshTracklist set to:", StopRefreshTracklist );}
 		return 1;
 	}
+
+	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
+        scrollPositionTrackTable = jQuery("#tracklisttable").closest(".ui-jqgrid-bdiv").scrollTop();
 	
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#tracklisttable").jqGrid("clearGridData");
@@ -2084,6 +2097,7 @@ function refreshVehicleList(a){
 	return 1;	
 }
 
+
 //////////////////
 function refreshDriverList(a, ForceRefresh){
 	// stop refreshing jqgrid in several cases
@@ -2094,6 +2108,9 @@ function refreshDriverList(a, ForceRefresh){
 	var _data;
 	//var _allDrivers = new Array();
 	var Gaps = [];
+
+	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
+	scrollPositionDriverTable = jQuery("#DriverDataTable").closest(".ui-jqgrid-bdiv").scrollTop();
 
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
