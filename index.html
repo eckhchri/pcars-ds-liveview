@@ -1892,7 +1892,7 @@ console.log("TODO aSensorData: " , aSensorData);
 
 	$('#cbDriverlistExport').click(function () {		
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),"Report_DriverTable");
+			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),"Report_DriverTable");
 		}
 
 		if (ExportType === "PDF" || ExportType === "BOTH") {
@@ -1908,6 +1908,7 @@ console.log("TODO aSensorData: " , aSensorData);
 								'driverposition',
 								'inclassposition',
 								'drivername',
+								'driverstate',
 								'lapnumber',
 								'vehiclename',
 								'vehicleclass',
@@ -1918,6 +1919,7 @@ console.log("TODO aSensorData: " , aSensorData);
 								{text: 'Pos', style: 'tableHeader'},
 								{text: 'InClass', style: 'tableHeader'},
 								{text: 'Driver', style: 'tableHeader'},
+								{text: 'State', style: 'tableHeader'},
 								{text: 'Laps', style: 'tableHeader'},
 								{text: 'Vehicle', style: 'tableHeader'},
 								{text: 'Class', style: 'tableHeader'},
