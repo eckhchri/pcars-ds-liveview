@@ -909,8 +909,8 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		ChangeHtmlContentByID( '#pcars-curgamerunning', "CurGameRunning:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "Pos: " + record_pos + " / "  + demo.length);		
-		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + aRefPointTMP[tmpcuircitID]["Name"] );
-		ChangeHtmlContentByID( '#pcars-trackname'       , 'Race Length:           ' + e.data.globals.attributes.RaceLength + ' Laps' );
+		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName: ' + aRefPointTMP[tmpcuircitID]["Name"] );
+		ChangeHtmlContentByID( '#pcars-racelength'      , 'Race Length: ' + e.data.globals.attributes.RaceLength + ' Laps' );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
 		ChangeHtmlContentByID( '#pcars-ambienttemp'     , "°C Air:     " + e.data.globals.attributes.TemperatureAmbient );
@@ -1440,16 +1440,22 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 			//Auto Export
 			if (autoExport == "true"){
 				var CSVall = "";
+				var curDate = new Date();
+                		var trackname = $("#pcars-trackname").text();
+		                var racelength = $("#pcars-racelength").text();
+
+		                var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__Results for " + (trackname.slice(trackname.indexOf(":")+2)) + "__" + (racelength.slice(racelength.indexOf(":")+2)) + " Race";
+
 				for (var key in CSVExport) {
 					if(CSVExport[key] != ""){
 						CSVall += CSVExport[key] + '\r\n\n';
 					}
 				}
 				if (ExportType === "CSV" || ExportType === "BOTH") {
-					ExportCSV(CSVall,"Results");
+					ExportCSV(CSVall,filename);
 				}
 				if (ExportType === "PDF" || ExportType === "BOTH") {
-					pdfMake.createPdf(PDFdocDefinition).open();
+					pdfMake.createPdf(PDFdocDefinition).download(filename+'.pdf');
 				}
 			}
 		}
@@ -1896,8 +1902,13 @@ console.log("TODO aSensorData: " , aSensorData);
 	}
 
 	$('#cbDriverlistExport').click(function () {		
+		var curDate = new Date();
+		var trackname = $("#pcars-trackname").text();
+
+		var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__" + (trackname.slice(trackname.indexOf(":")+2)) + "__Current_Drivertable";
+		
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),"Report_DriverTable");
+			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),filename);
 		}
 
 		if (ExportType === "PDF" || ExportType === "BOTH") {
@@ -1940,23 +1951,29 @@ console.log("TODO aSensorData: " , aSensorData);
 			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
 
 			if (jQuery("#DriverDataTable").getGridParam("records") > 0){
-				pdfMake.createPdf(PDFdocDefinition).open();
+				pdfMake.createPdf(PDFdocDefinition).download(filename+'.pdf');
 			}
 		}
 	});
 	
 	$('#cbDriverlistExportAll').click(function () {
 		var CSVall = "";
+		var curDate = new Date();
+		var trackname = $("#pcars-trackname").text();
+		var racelength = $("#pcars-racelength").text();
+
+		var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__Results for " + (trackname.slice(trackname.indexOf(":")+2)) + "__" + (racelength.slice(racelength.indexOf(":")+2)) + " Race";
+
 		for (var key in CSVExport) {
 			if(CSVExport[key] != ""){
 				CSVall += CSVExport[key] + '\r\n\n';
 			}
 		}
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(CSVall,"Results");
+			ExportCSV(CSVall,filename);
 		}
 		if (ExportType === "PDF" || ExportType === "BOTH") {
-			pdfMake.createPdf(PDFdocDefinition).open();
+			pdfMake.createPdf(PDFdocDefinition).download(filename+'.pdf');
 		}
 	});
 	
@@ -1997,7 +2014,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			};
 			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
 			if (jQuery("#tracklisttable").getGridParam("records") > 0){
-				pdfMake.createPdf(PDFdocDefinition).open();
+				pdfMake.createPdf(PDFdocDefinition).download('Report_TrackTable.pdf');
 			}
 		}
 	});
@@ -2036,7 +2053,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			};
 			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
 			if (jQuery("#carlisttable").getGridParam("records") > 0){
-				pdfMake.createPdf(PDFdocDefinition).open();
+				pdfMake.createPdf(PDFdocDefinition).download('Report_CarTable.pdf');
 			}
 		}
 	});
