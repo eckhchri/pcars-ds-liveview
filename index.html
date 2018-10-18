@@ -102,8 +102,10 @@
 		<div id="pcars-dslobbyid"></div>
 		<div id="pcars-dsnow"></div>
 		<div id="pcars-trackname"></div>
-		<div id="pcars-dssessionstage"></div>
+		<div id="pcars-racelength"></div>
 		<div id="pcars-dssessionstate"></div>
+		<div id="pcars-dssessionstage"></div>
+		<div id="pcars-dssessionlength"></div>
 		<div id="pcars-ambienttemp"></div>
 		<div id="pcars-tracktemp"></div>
 		<br>----- Settings ----<br>
@@ -908,14 +910,14 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "Pos: " + record_pos + " / "  + demo.length);		
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName:     	' + aRefPointTMP[tmpcuircitID]["Name"] );
+		ChangeHtmlContentByID( '#pcars-trackname'       , 'Race Length:           ' + e.data.globals.attributes.RaceLength + ' Laps' );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
 		ChangeHtmlContentByID( '#pcars-ambienttemp'     , "°C Air:     " + e.data.globals.attributes.TemperatureAmbient );
 		ChangeHtmlContentByID( '#pcars-tracktemp'       , "°C Track:   " + e.data.globals.attributes.TemperatureTrack );
 		ChangeHtmlContentByID( '#demo_start_pos' 	, "demo_start_pos:   " + demo_start_pos );
 		ChangeHtmlContentByID( '#demo_end_pos' 	, "demo_end_pos:   " + demo_end_pos );		
-		
-		
+	
 		//show SessionStage and Session resttime or lap counter						
 		if(StopRefreshDriverlist == "false"){
 			var resttime = ConvertLaptimeInReadbaleFormat((e.data.globals.attributes.SessionTimeDuration-e.data.globals.attributes.SessionTimeElapsed)*1000);       //Times in seconds, but function need it in milliseconds, multiplied by 1000
@@ -925,13 +927,16 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 			if (SessionState == "Race" || SessionState == 2 || SessionState == 3){	//SessionState 2 and 3 is for CREST mode, enum for GAME_INGAME_PLAYING and GAME_INGAME_PAUSED
 				if(SessionStage != "Race1" && SessionStage != "Race2"){
 					document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + resttime.slice(0,-4);     //slice for deleting the milliseconds part of the time
+					ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:   " + e.data.globals.attributes.SessionTimeDuration/60 + " min");
 				}else{
 					if (e.data.driverlist[0] ){
 						document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + '   Lap: ' + e.data.driverlist[0].CurrentLap + '/' + e.data.globals.attributes.RaceLength
 					}
+					ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:    -" );
 				}
 			}else{
 				document.getElementById("txtSessionStage").value = '';
+				ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:    -" );
 			}
 		}
 		
@@ -2127,7 +2132,6 @@ function refreshDriverList(a, ForceRefresh){
 	var selRowId = jQuery("#DriverDataTable").jqGrid("getGridParam", "selrow");
 	cellDataDrivername = jQuery("#DriverDataTable").jqGrid("getCell", selRowId, "drivername");
 	cellDataVehiclename = jQuery("#DriverDataTable").jqGrid("getCell", selRowId, "vehiclename");
-	console.log("cellDataDrivername",cellDataDrivername, " / cellDataVehiclename: ", cellDataVehiclename);
 
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#DriverDataTable").jqGrid("clearGridData");	
