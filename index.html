@@ -1808,7 +1808,12 @@ console.log("TODO aSensorData: " , aSensorData);
 			if (rowdata.driverposition == 3){jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'drivername', '', { background: '#CD7F32' });}
 			
 			// reselect the original selected row on grid reload
-			if (rowdata.drivername == cellDataDrivername && rowdata.vehiclename == cellDataVehiclename){jQuery(this).jqGrid('setSelection',rowid);}
+			if (rowdata.drivername == cellDataDrivername && rowdata.vehiclename == cellDataVehiclename){
+				jQuery(this).jqGrid('setSelection',rowid);
+				//console.log("Drivername norm.: ",cellDataDrivername.replace( /\s|\.|\(|\)/g, "_" ), " / Vehiclename norm.", cellDataVehiclename.replace( /\s|\.|\(|\)/g, "_" ));
+				//CSSClsChg.ColorSelectedVehicle(cellDataDrivername, cellDataVehiclename);
+				//console.log("CSSClsChg",CSSClsChg);
+			}
 			
 			// set CSS Styles -			
 //1			jQuery("#DriverDataTable").jqGrid('setCell', rowid, 'vehicleclass', '', { background: '#CD1E32' });
