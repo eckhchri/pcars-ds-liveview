@@ -1829,6 +1829,13 @@ console.log("TODO aSensorData: " , aSensorData);
 
 		loadComplete: function(){
 			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
+		},
+		beforeSelectRow: function(rowid){
+			if($(this).jqGrid("getGridParam", "selrow") === rowid){
+				$(this).jqGrid("resetSelection");
+			}else{
+				return true;
+			}
 		}
 	});
 	
