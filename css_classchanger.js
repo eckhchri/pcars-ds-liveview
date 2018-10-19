@@ -296,6 +296,34 @@ function CSSClassChanger(aCSSDefinition){
 		return 1;
 	}
 	
+	/* color the selected row/driver from driver table
+	 * param {int}
+	 * 
+	 * return {string} returns true if all is fine, null in case of errors/missing parameters
+	 */			
+	function ColorSelectedVehicle(oRowData, bCancleColoration ){
+		
+		// set default value if parameter is missing
+		if (!bCancleColoration){
+			bCancleColoration = false; 
+		}
+		
+		var sCssClassRegistrationName = 'CSSDRIVERSELECTION';
+		var sDriverName = oRowData.drivername.toString();
+		
+		// remove CSS class attributes and decolorized marker
+		if (bCancleColoration){
+			delete this.aCSSClasses[sCssClassRegistrationName];
+		}
+		//build CSS class name of a specific driver
+		var sClassName = "circle.CSS_DriverName_" + new PCARSdriver()._normalizeString(sDriverName);
+
+		//injection of css attributes
+		this.aCSSClasses[sCssClassRegistrationName]	=	setStyle( sClassName + CSSDRIVERSELECTION );
+		
+		return true;
+	}
+	
 
 CSSClassChanger.prototype.setStyle=setStyle;
 CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
@@ -309,3 +337,4 @@ CSSClassChanger.prototype.ColorSameVName=ColorSameVName;
 CSSClassChanger.prototype.ColorSameClass=ColorSameClass;
 CSSClassChanger.prototype.ColorHumanDrivers=ColorHumanDrivers;
 CSSClassChanger.prototype.ColorAiDrivers=ColorAiDrivers;
+CSSClassChanger.prototype.ColorSelectedVehicle=ColorSelectedVehicle;

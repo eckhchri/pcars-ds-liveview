@@ -1791,13 +1791,23 @@ console.log("TODO aSensorData: " , aSensorData);
         			//dynamic update of height of the div block
         			//jQuery('#DriverDataArea').height( jQuery('#DriverDataTable').height());        		       
 					jQuery('#DriverDataArea').height(0);
-        		},         
+		},         
 //TODO:
 /*
 		cellattr: function(rowId, val, rawObject) {                    
                         return " class='CSS_VehicleClass_GT_4'";                    
                 },
 */
+		onSelectRow: function (rowId, status, e) {
+
+			// deselection of row e=false
+			/*
+			if (e != true){				
+				CSSClsChg.ColorSelectedVehicle(rowdata, true);
+			}
+			*/
+		},
+		
 		afterInsertRow: function (rowid, rowdata, rowelem) {
 			//Set data for row
 			//if (rowdata.driverposition == 1){jQuery("#DriverDataTable").jqGrid('setRowData', rowid, false, { background: 'gold' });}
@@ -1811,7 +1821,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			if (rowdata.drivername == cellDataDrivername && rowdata.vehiclename == cellDataVehiclename){
 				jQuery(this).jqGrid('setSelection',rowid);
 				//console.log("Drivername norm.: ",cellDataDrivername.replace( /\s|\.|\(|\)/g, "_" ), " / Vehiclename norm.", cellDataVehiclename.replace( /\s|\.|\(|\)/g, "_" ));
-				//CSSClsChg.ColorSelectedVehicle(cellDataDrivername, cellDataVehiclename);
+				CSSClsChg.ColorSelectedVehicle(rowdata, false); //cellDataDrivername, cellDataVehiclename);
 				//console.log("CSSClsChg",CSSClsChg);
 			}
 			
