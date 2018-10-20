@@ -314,6 +314,8 @@ function CSSClassChanger(aCSSDefinition){
 		// remove CSS class attributes and decolorized marker
 		if (bCancleColoration){
 			delete this.aCSSClasses[sCssClassRegistrationName];
+			
+			return true;
 		}
 		//build CSS class name of a specific driver
 		var sClassName = "circle.CSS_DriverName_" + new PCARSdriver()._normalizeString(sDriverName);
