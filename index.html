@@ -1799,13 +1799,13 @@ console.log("TODO aSensorData: " , aSensorData);
                 },
 */
 		onSelectRow: function (rowId, status, e) {
-
-			// deselection of row e=false
-			/*
-			if (e != true){				
-				CSSClsChg.ColorSelectedVehicle(rowdata, true);
+			
+			// create deselectRow event
+			if (this.lastSel && rowId && rowId !== this.lastSel) {				
+		            $(this).trigger('deselectRow', [this, this.lastSel]);
 			}
-			*/
+			this.lastSel = rowId;
+			
 		},
 		
 		afterInsertRow: function (rowid, rowdata, rowelem) {
@@ -1819,10 +1819,8 @@ console.log("TODO aSensorData: " , aSensorData);
 			
 			// reselect the original selected row on grid reload
 			if (rowdata.drivername == cellDataDrivername && rowdata.vehiclename == cellDataVehiclename){
-				jQuery(this).jqGrid('setSelection',rowid);
-				//console.log("Drivername norm.: ",cellDataDrivername.replace( /\s|\.|\(|\)/g, "_" ), " / Vehiclename norm.", cellDataVehiclename.replace( /\s|\.|\(|\)/g, "_" ));
-				CSSClsChg.ColorSelectedVehicle(rowdata, false); //cellDataDrivername, cellDataVehiclename);
-				//console.log("CSSClsChg",CSSClsChg);
+				jQuery(this).jqGrid('setSelection',rowid);				
+				CSSClsChg.ColorSelectedVehicle(rowdata, false);				
 			}
 			
 			// set CSS Styles -			
@@ -1852,6 +1850,11 @@ console.log("TODO aSensorData: " , aSensorData);
 				return true;
 			}
 		}
+	});
+	
+	// register new event to #DriverDataTable table
+	$("#DriverDataTable").on('deselectRow', function(e, table, rowId){	    
+	    CSSClsChg.ColorSelectedVehicle('', true); // clear css attributes while deselction a row
 	});
 	
 	//var DrivernamesBeforeSearch;
