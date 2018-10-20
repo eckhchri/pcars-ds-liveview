@@ -1848,6 +1848,9 @@ console.log("TODO aSensorData: " , aSensorData);
 		beforeSelectRow: function(rowid){
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
+				var rowdata = $(this).jqGrid('getRowData', rowid);
+				if(log >= 3){console.log("rowdata of deselected row: ",rowdata);}
+				CSSClsChg.ColorSelectedVehicle(rowdata, true);
 			}else{
 				return true;
 			}
