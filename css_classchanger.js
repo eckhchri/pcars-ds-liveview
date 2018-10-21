@@ -3,6 +3,7 @@ function CSSClassChanger(aCSSDefinition){
 	
 	this.CurrentState	= "";
 	this.aCSSClasses 	= new Array(); 	//Array of all handled CSS classes
+	this.sLastDriverSelectionClass = 'initial_value'; 
 	// structure:
 	//		aCSSClasses['hideallsvgs']
 	//		aCSSClasses['CSSTOP3VEHICLES']
@@ -36,7 +37,7 @@ function CSSClassChanger(aCSSDefinition){
 		})(cssText);
 	};
 	
-	// a function to clear all css clases that were managed by this object
+	// a function to clear all css classes that were managed by this object
 	function ClearAllCssClases(){
 		
 		for (var key in this.aCSSClasses){
@@ -48,6 +49,20 @@ function CSSClassChanger(aCSSDefinition){
 		
 		return 1;
 	}
+	
+	// a function to a specifc css class
+	function ClearSpecificCssClases( sCssRegisterationKey ){
+		
+		if ( this.aCSSClasses[sCssRegisterationKey]){
+			//delete css class from html DOM structure
+			if(this.aCSSClasses[sCssRegisterationKey]) setStyle( '', this.aCSSClasses[sCssRegisterationKey] );			
+			//delete from internale list
+			delete this.aCSSClasses[sCssRegisterationKey];
+		}
+		
+		return 1;
+	}
+	
 	
 	//cut driverlabe to display only race position
 	function setDriverLabelStyle(mode, options){
@@ -303,26 +318,41 @@ function CSSClassChanger(aCSSDefinition){
 	 */			
 	function ColorSelectedVehicle(oRowData, bCancleColoration ){
 		
+		var sCssClassRegistrationName = 'CSSDRIVERSELECTION';
+		
 		// set default value if parameter is missing
 		if (!bCancleColoration){
 			bCancleColoration = false; 
 		}
 		
-		var sCssClassRegistrationName = 'CSSDRIVERSELECTION';
-				
 		// remove CSS class attributes and decolorized marker
-		if (bCancleColoration){
-			delete this.aCSSClasses[sCssClassRegistrationName];		
+		if (bCancleColoration && this.aCSSClasses[sCssClassRegistrationName]){
+			this.ClearSpecificCssClases(sCssClassRegistrationName);
 			return true;
 		}
 		
-		
+		// check if driver name is defined
+		if (oRowData.drivername === undefined){
+			return null;
+		}
 		var sDriverName = oRowData.drivername+'';
+		
+		
 		//build CSS class name of a specific driver
-		var sClassName = "circle.CSS_DriverName_" + new PCARSdriver()._normalizeString(sDriverName);
-
-		//injection of css attributes
-		this.aCSSClasses[sCssClassRegistrationName]	=	setStyle( sClassName + CSSDRIVERSELECTION );
+		var sClassName = "circle.CSS_DriverName_" + new PCARSdriver()._normalizeString(sDriverName);		
+		
+		// set new css class attributes
+		if ( this.sLastDriverSelectionClass != sClassName ){
+			//injection of css attributes
+			this.aCSSClasses[sCssClassRegistrationName]	=	setStyle( sClassName + CSSDRIVERSELECTION );
+			this.sLastDriverSelectionClass = sClassName;
+		}
+		
+		/*
+			//console.log("SICECKHA ColorSelectedVehicle getelement():", 			document.querySelectorAll(sClassName) );
+			//console.log("SICECKHA ColorSelectedVehicle getelement():", 			document.getElementsByClassName(sClassName); );		
+		*/
+			
 		
 		return true;
 	}
@@ -333,6 +363,7 @@ CSSClassChanger.prototype.HideAllSvg=HideAllSvg;
 CSSClassChanger.prototype.UnHideAllSvg=UnHideAllSvg;
 CSSClassChanger.prototype.HideSpecificDrivers=HideSpecificDrivers;
 CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
+CSSClassChanger.prototype.ClearSpecificCssClases=ClearSpecificCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
 CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
 CSSClassChanger.prototype.ColorDynClasses=ColorDynClasses;
