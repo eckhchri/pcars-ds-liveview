@@ -112,7 +112,7 @@ var CSSTOP3VEHICLESstr ='';
 CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_1 {fill: gold; stroke-width: 3px }\n';
 CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_2 {fill: silver; stroke-width: 3px }\n';
 CSSTOP3VEHICLESstr += 'circle.CSS_RacePos_3 {fill: #CD7F32; stroke-width: 3px }\n';
-CSSDRIVERSELECTION = '{ fill: green; } \n';
+CSSDRIVERSELECTION = '{ fill: black; stroke: yellow; stroke-width: 4px; } \n';
 var CSSSAMEVEHICLECLASSESstr ='';
 CSSSAMEVEHICLECLASSESstr = '.CSS_GT3 {fill: darkblue;}\n';
 'circle.CSS_Vehicle_GT4 {fill: white;}\n';
