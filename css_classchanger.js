@@ -328,6 +328,7 @@ function CSSClassChanger(aCSSDefinition){
 		// remove CSS class attributes and decolorized marker
 		if (bCancleColoration && this.aCSSClasses[sCssClassRegistrationName]){
 			this.ClearSpecificCssClases(sCssClassRegistrationName);
+			this.sLastDriverSelectionClass = 'initial_value';
 			return true;
 		}
 		
