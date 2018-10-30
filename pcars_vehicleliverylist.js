@@ -4,8 +4,9 @@ function PCARSVEHICLELIVERYLIST() {
 	this.aVehicleLiveryInfoExt	=	{};	//extended array of vehicle livery info
         
 	//init data
-	this.loadVehicleLiveryData();     												//get varaibale   this.aVehicleInfo
-        
+	this.loadVehicleLiveryData();     
+
+	if(log >= 3){console.log("INFO: PCARSVEHICLELIVERYLIST. this ", this);}
 	return this;
 }
 
@@ -19089,3 +19090,5 @@ this.aVehicleLiveryInfoExt['PCARS2'] = [
       }
 ];
 }
+
+PCARSVEHICLELIVERYLIST.prototype.loadVehicleLiveryData=loadVehicleLiveryData;
