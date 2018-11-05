@@ -1160,6 +1160,7 @@ function Refpoint(circuit_id)
 		"Name":         "Azure Coast"
 		,"Name2":	""
 		,"AltNames":	 "Azure Coast Eastbound,Azure_Coast Eastbound"
+		,"Zoom":         13
 		,"Comment": 	"fictional track"
         });
 	//Azure Coast Westbound
