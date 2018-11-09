@@ -1178,6 +1178,9 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "California Highway Full"
 		,"AltNames":	"California_Highway Full"
+		,"Zoom":	13
+		,"MapInitLat": 	41.032
+                ,"MapInitLong":	-113.58
 		,"Comment": 	"fictional track"
         });
 	//California Highway Reverse
