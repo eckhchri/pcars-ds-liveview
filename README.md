@@ -13,6 +13,8 @@ As overlay you have some tables:
 Further there is a recording/playback panel and some other great stuff. You can find more info about the features in the "Nice to know" section at the end.\
 It's also important to know that javascript is executed on client side. That means your PC/Tablet/... where you start a browser and open this website is polling the Dedicated Server or CREST API via HTTP requests.
 
+![Screenshot](docs/ds-liveview_main_view.jpg)
+
 ## Usage:
 - default URL after extracting/cloning to your Webserver: http://[your Webserver url]/index.html
 - rename config-sample.js to config.js and change settings with an editor
@@ -107,6 +109,9 @@ httpApiInterface : ""
 Another problem could be if you open the liveview via HTTPS on your webserver, because the DS is polled via HTTP. In this case your Chrome prevents this and shows an icon on the right side of the address field.\
 Then you can click on it and "Load unsafe scripts".
 
+## Communication Schemes
+![Screenshot](docs/ds-liveview_Communication_Scheme_DS-Mode.jpg)
+![Screenshot](docs/ds-liveview_Communication_Scheme_CREST.jpg)
 
 ## Nice to know
 
