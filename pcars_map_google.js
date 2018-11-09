@@ -299,7 +299,7 @@ class pcars_map_google extends pcars_map {
 					title = gjdata['debug'][i].lat.toFixed(6) + ", " + gjdata['debug'][i].lng.toFixed(6);
 					var marker = new google.maps.Marker({
 						position: gjdata['debug'][i],
-						map:map,
+						map:this.oMapLocal,
 						title: title
 					});
 					tm_debug_markers.push(marker);
