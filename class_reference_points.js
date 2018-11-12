@@ -1166,11 +1166,11 @@ function Refpoint(circuit_id)
 	//Azure Coast Westbound
 	aRefPoints[-1936790504] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Westbound","Name2": "","AltNames":"Azure_Coast Westbound"});
 	//Azure Coast Stage 1
-	aRefPoints[550129415] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 1","Name2": "","AltNames":"Azure_Coast Stage_1","Zoom": 15,"MapInitLat":40.979});
+	aRefPoints[550129415] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 1","Name2": "","AltNames":"Azure_Coast Stage_1","Zoom":15,"MapInitLat":40.979});
 	//Azure Coast Stage 2
-	aRefPoints[-780879576] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 2","Name2": "","AltNames":"Azure_Coast Stage_2","Zoom": 14,"MapInitLong":-113.56});
+	aRefPoints[-780879576] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 2","Name2": "","AltNames":"Azure_Coast Stage_2","Zoom":14,"MapInitLong":-113.56});
 	//Azure Coast Stage 3
-	aRefPoints[-1737261125] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 3","Name2": "","AltNames":"Azure_Coast Stage_3","Zoom": 15,"MapInitLat":41.018,"MapInitLong":-113.59});
+	aRefPoints[-1737261125] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 3","Name2": "","AltNames":"Azure_Coast Stage_3","Zoom":15,"MapInitLat":41.018,"MapInitLong":-113.59});
 	
 							
 	//California Highway Full
@@ -1186,7 +1186,7 @@ function Refpoint(circuit_id)
 	//California Highway Reverse
 	aRefPoints[928006536] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Reverse","AltNames":"California_Highway Reverse"});
 	//California Highway Stage 1
-	aRefPoints[1676943041] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 1","AltNames":"California_Highway Stage1"});
+	aRefPoints[1676943041] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 1","AltNames":"California_Highway Stage1","Zoom":15,"MapInitLat":41.005,"MapInitLong":-113.563});
 	//California Highway Stage 2
 	aRefPoints[940391868] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 2","AltNames":"California_Highway Stage2"});
 	//California Highway Stage 3
