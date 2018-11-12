@@ -15,6 +15,9 @@ It's also important to know that javascript is executed on client side. That mea
 
 ![Screenshot](docs/ds-liveview_main_view.jpg)
 
+## [DEMO Website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/)
+Open the website to see a demonstration, click on "Load from URL" and choose a DEMO file.
+
 ## Usage:
 - default URL after extracting/cloning to your Webserver: http://[your Webserver url]/index.html
 - rename config-sample.js to config.js and change settings with an editor
