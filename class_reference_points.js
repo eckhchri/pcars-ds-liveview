@@ -1190,7 +1190,7 @@ function Refpoint(circuit_id)
 	//California Highway Stage 2
 	aRefPoints[940391868] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 2","AltNames":"California_Highway Stage2","MapInitLat":41.038,"MapInitLong":-113.55});
 	//California Highway Stage 3
-	aRefPoints[-331502851] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 3","AltNames":"California_Highway Stage3"});
+	aRefPoints[-331502851] = CopyObjectWithModifications(aRefPoints[-1593944167], {"Name": "California Highway Stage 3","AltNames":"California_Highway Stage3","Zoom":15,"MapInitLat":41.06,"MapInitLong":-113.593});
 		
 	//Sakitto GP
 	aRefPoints[-1759743046] = CopyObjectWithModifications(aRefPoints[8888888888],
