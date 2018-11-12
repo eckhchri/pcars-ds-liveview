@@ -54,6 +54,7 @@ var SHOWDSSTATISTIC 	=	false;	// [true|false]
 var SHOWDSREPLAY		=	false;	// [true|false]
 var SHOWRECSTATISTIC	=	true;	// [true|false]
 var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
+var SHOWREFPOINTFIDDLING=	false;	// [true|false]
 
 ////////////JQgrid design ///////
 var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ

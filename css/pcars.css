@@ -207,6 +207,17 @@
         	color: grey;
         	text-decoration: none;
         }
+        
+        #RefpointFiddling{
+				position: 	absolute; 
+				left: 		40%; 
+				top: 		90px; 
+				width: 		250px; 
+				height: 	260px;
+				border:		1;
+				background:	green;
+				color:		darkgrey;
+        }
 
 /* CSS GRid layout for recorder and replay elments */		
 .pcars_grid_recorder_replay	{

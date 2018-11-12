@@ -89,6 +89,15 @@
 	<div id="toolbar" style="padding: 4px; border: 1px solid silver; border-radius: 3px"></div>
 	
 	<div id="map">Google Maps.</div>
+	
+	<!--  refpoint fiddling window -->		   
+	<div id="RefpointFiddling" class="mapoverlay">
+		<h3>Todo: Fiddling</h3><br>
+		Input 1: <input type="text" name="fiddling_input1_name" id="fiddling_input1"><br>
+  		Input 2: <input type="text" name="fiddling_input2_name" id="fiddling_input2"><br>
+  		
+		<p>	
+	</div>
 		
 	<!--  -->		   
 	<div id="DSstatistic" class="mapoverlay">
@@ -472,6 +481,9 @@ function initialize_app(){
 	if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
 	if ( SHOWDSREPLAY	== false ) { 	$( "#DSreplay" ).hide();		}
 	if ( SHOWRECSTATISTIC== false ) { 	$( "#DSRecStatistics" ).hide();		}
+	if ( SHOWREFPOINTFIDDLING== false ) { 	$( "#RefpointFiddling" ).hide();		}
+	
+	
 	
 	//Set toggles to correct
 	$("#btn-start-rec-data").prop( "checked", isRecEnabled);  // set state to button configure in config.js
@@ -506,6 +518,11 @@ function initialize_app(){
 			$( "#CarList" ).draggable();
 			$( "#DriverDataArea" ).draggable();
 			$( "#Settings" ).draggable();
+			$( "#RefpointFiddling" ).draggable();
+			$( "#RefpointFiddling" ).resizable({
+				//animate: true
+				ghost: true
+       			});
 			
 			$( "#DSdata" ).resizable({
 				//animate: true
@@ -587,6 +604,13 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	HTMLCTRL.addMaptypeOption("#MAPTYPE", aMapTypes );
 	HTMLCTRL.MAPTYPE_SetSelection( DEFAULT_MAP_TYPE );		
 	
+	// change fiddling input
+	$("#fiddling_input1").change(function(e){
+			alert("Fiddling Input1 changed to:" + $("#fiddling_input1").val());			
+	});
+	$("#fiddling_input2").change(function(e){
+			alert("Fiddling Input2 changed to:" + $("#fiddling_input2").val());			
+	});
 	
 	
 	// Recording button
