@@ -1166,7 +1166,7 @@ function Refpoint(circuit_id)
 	//Azure Coast Westbound
 	aRefPoints[-1936790504] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Westbound","Name2": "","AltNames":"Azure_Coast Westbound"});
 	//Azure Coast Stage 1
-	aRefPoints[550129415] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 1","Name2": "","AltNames":"Azure_Coast Stage_1"});
+	aRefPoints[550129415] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 1","Name2": "","AltNames":"Azure_Coast Stage_1", "Zoom": 15, "MapInitLat":  40.979});
 	//Azure Coast Stage 2
 	aRefPoints[-780879576] = CopyObjectWithModifications(aRefPoints[560711985], {"Name": "Azure Coast Stage 2","Name2": "","AltNames":"Azure_Coast Stage_2"});
 	//Azure Coast Stage 3
