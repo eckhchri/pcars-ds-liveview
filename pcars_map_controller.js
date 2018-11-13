@@ -32,6 +32,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 		this._sMapType = sMaptype;
 		this._sMapHtmlID = sMaptype;
 		this.oCurMapObj = undefined;		
+		this.circuitID	= -1;	//used for refpoint fiddling window, if you click on a circuit in the tracklist table. In this case the circuit ID of the selected table row is set
 		
 		switch (sMaptype) {
 			// GOOGLE

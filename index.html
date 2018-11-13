@@ -610,48 +610,76 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	var aMapTypes = oPcarsMapCtrl.getMapTypes();
 	HTMLCTRL.addMaptypeOption("#MAPTYPE", aMapTypes );
 	HTMLCTRL.MAPTYPE_SetSelection( DEFAULT_MAP_TYPE );		
-	
-	
-	// change fiddling input
+
 	$("#fiddling_reflat").change(function(e){
-		aRefPointTMP[cuircitID]["refLat"] = parseFloat($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["refLat"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});		
 	$("#fiddling_reflong").change(function(e){
-		aRefPointTMP[cuircitID]["refLong"] = parseFloat($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["refLong"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});
 	$("#fiddling_rotation").change(function(e){
-		aRefPointTMP[cuircitID]["rotation"] = parseFloat($(this).val());
-		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+			oPcarsMapCtrl.circuitID = cuircitID;
+		}
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["rotation"] = parseFloat($(this).val());
+		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});
 	$("#fiddling_cor_r_long").change(function(e){
-		aRefPointTMP[cuircitID]["cor_r_Long"] = parseInt($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["cor_r_Long"] = parseInt($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});
 	$("#fiddling_cor_r_lat").change(function(e){
-		aRefPointTMP[cuircitID]["cor_r_Lat"] = parseInt($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["cor_r_Lat"] = parseInt($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});
 	$("#fiddling_cor_posx_mul").change(function(e){
-		aRefPointTMP[cuircitID]["cor_PosX_mul"] = parseFloat($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["cor_PosX_mul"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});
 	$("#fiddling_cor_posy_mul").change(function(e){
-		aRefPointTMP[cuircitID]["cor_PosY_mul"] = parseFloat($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["cor_PosY_mul"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
 	});
 	 $("#fiddling_zoom").change(function(e){
-		aRefPointTMP[cuircitID]["Zoom"] = parseInt($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["Zoom"] = parseInt($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
         });
 	 $("#fiddling_mapinitlat").change(function(e){
-		aRefPointTMP[cuircitID]["MapInitLat"] = parseFloat($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["MapInitLat"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
         });
 	 $("#fiddling_mapinitlong").change(function(e){
-		aRefPointTMP[cuircitID]["MapInitLong"] = parseFloat($(this).val());
-                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
+		if(oPcarsMapCtrl.circuitID == -1){
+                        oPcarsMapCtrl.circuitID = cuircitID;
+                }
+		aRefPointTMP[oPcarsMapCtrl.circuitID]["MapInitLong"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);
         });
 	
 	
@@ -864,10 +892,12 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				if (!e || e.which === 1) {  // left click                  
 					//Todo:  change fixed row id to name of the row
 					var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
+					oPcarsMapCtrl.circuitID = celltrackid;	//oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
 					oPcarsMapCtrl.changeMapSettings(aRefPointTMP[celltrackid] , oMap , celltrackid);
 					                  
 				}else if( !e || e.which === 3 ){	//right click				              		
-              		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
+		              		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
+					oPcarsMapCtrl.circuitID = -1;	// reset value to default
 				}
 			},
 			ondblClickRow:	function (rowid, iRow, iCol, e) {
