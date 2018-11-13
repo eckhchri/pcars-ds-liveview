@@ -93,7 +93,6 @@
 	<!--  refpoint fiddling window -->		   
 	<div id="RefpointFiddling" class="mapoverlay">
 		<h3>Todo: Fiddling</h3><br>
-		refpoint: <input type="text" name="fiddling_refpoint_name" id="fiddling_refpoint"><br>
   		refLat: <input type="text" name="fiddling_reflat_name" id="fiddling_reflat"><br>
   		refLong: <input type="text" name="fiddling_reflong_name" id="fiddling_reflong"><br>  		
   		rotation: <input type="text" name="fiddling_rotation_name" id="fiddling_rotation"><br>
@@ -101,6 +100,9 @@
   		cor_r_Lat: <input type="text" name="fiddling_cor_r_lat_name" id="fiddling_cor_r_lat"><br>
   		cor_PosX_mul: <input type="text" name="fiddling_cor_posx_mul" id="fiddling_cor_posx_mul"><br>
   		cor_PosY_mul: <input type="text" name="fiddling_cor_posy_mul" id="fiddling_cor_posy_mul"><br>  		
+		Zoom: <input type="text" name="fiddling_zoom" id="fiddling_zoom"><br>
+		MapInitLat: <input type="text" name="fiddling_mapinitlat" id="fiddling_mapinitlat"><br>
+		MapInitLong: <input type="text" name="fiddling_mapinitlong" id="fiddling_mapinitlong"><br>
 		<p>	
 	</div>
 		
@@ -611,9 +613,6 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	
 	
 	// change fiddling input
-	$("#fiddling_refpoint").change(function(e){
-			//alert("Fiddling fiddling_refpoint changed to:" + $( this ).val());			
-	});
 	$("#fiddling_reflat").change(function(e){
 			//alert("Fiddling fiddling_reflat changed to:" + $( this ).val());			
 	});		
@@ -638,7 +637,15 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	$("#fiddling_cor_posy_mul").change(function(e){
 			//alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());			
 	});
-	
+	 $("#fiddling_zoom").change(function(e){
+                        //alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());
+        });
+	 $("#fiddling_mapinitlat").change(function(e){
+                        //alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());
+        });
+	 $("#fiddling_mapinitlong").change(function(e){
+                        //alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());
+        });
 	
 	
 	
@@ -1553,9 +1560,8 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 console.log("TODO aSensorData: " , aSensorData);
 
 		// fiddling
-		if(devmode_tm == true){			
+		/*if(devmode_tm == true){			
 			// set current values to HTML inpout fields
-			$("#fiddling_refpoint").val("1");
 			$("#fiddling_reflat").val("1");
 			$("#fiddling_reflong").val("1");
 			$("#fiddling_rotation").val("1");
@@ -1564,7 +1570,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			$("#fiddling_cor_posx_mul").val("1");
 			$("#fiddling_cor_posy_mul").val("1");																					
 			
-		}
+		}*/
 
 		oPcarsMapCtrl.updateMarker(aSensorData);
 		

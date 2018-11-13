@@ -203,7 +203,7 @@ class pcars_map_google extends pcars_map {
 		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", newTrackObj );
 		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", mapobj);
 		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", gjdata);
-		
+		console.log("Devmode: ",devmode_tm);
 		//use local variable mapobj instead of global var map
 		//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 		this.oMapLocal.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
@@ -307,8 +307,23 @@ class pcars_map_google extends pcars_map {
 			}
 		
 		}// end map track polyline
-		
-		
+
+		if(devmode_tm == true){			
+			// set current values to HTML inpout fields
+			$("#fiddling_refpoint").val("1");
+			$("#fiddling_reflat").val(newTrackObj["refLat"]);
+			$("#fiddling_reflong").val(newTrackObj["refLong"]);
+			$("#fiddling_rotation").val(newTrackObj["rotation"]);
+			$("#fiddling_cor_r_long").val(newTrackObj["cor_r_Long"]);
+			$("#fiddling_cor_r_lat").val(newTrackObj["cor_r_Lat"]);
+			$("#fiddling_cor_posx_mul").val(newTrackObj["cor_PosX_mul"]);
+			$("#fiddling_cor_posy_mul").val(newTrackObj["cor_PosY_mul"]);
+			$("#fiddling_zoom").val(newTrackObj["Zoom"]);
+			$("#fiddling_mapinitlat").val(newTrackObj["MapInitLat"]);
+			$("#fiddling_mapinitlong").val(newTrackObj["MapInitLong"]);
+			
+		}
+
 		return 1;
 	}
 	
