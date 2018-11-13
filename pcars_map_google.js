@@ -203,7 +203,7 @@ class pcars_map_google extends pcars_map {
 		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", newTrackObj );
 		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", mapobj);
 		//console.log("TODO ChangeMapSettings() called! newTrackObj: ", gjdata);
-		console.log("Devmode: ",devmode_tm);
+		
 		//use local variable mapobj instead of global var map
 		//example: map.setCenter({lat: 50.332733, lng: 6.943355});
 		this.oMapLocal.setCenter({lat: newTrackObj["MapInitLat"], lng: newTrackObj["MapInitLong"]});
@@ -308,7 +308,7 @@ class pcars_map_google extends pcars_map {
 		
 		}// end map track polyline
 
-		if(devmode_tm == true){			
+		if(devmode_tm == true && SHOWREFPOINTFIDDLING == true){			
 			// set current values to HTML inpout fields
 			$("#fiddling_refpoint").val("1");
 			$("#fiddling_reflat").val(newTrackObj["refLat"]);
