@@ -614,37 +614,44 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	
 	// change fiddling input
 	$("#fiddling_reflat").change(function(e){
-			//alert("Fiddling fiddling_reflat changed to:" + $( this ).val());			
+		aRefPointTMP[cuircitID]["refLat"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});		
 	$("#fiddling_reflong").change(function(e){
-			//alert("Fiddling fiddling_reflong changed to:" + $(this).val());			
+		aRefPointTMP[cuircitID]["refLong"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});
 	$("#fiddling_rotation").change(function(e){
-			//alert("Fiddling fiddling_rotation changed to:" + $(this).val());			
+		aRefPointTMP[cuircitID]["rotation"] = parseFloat($(this).val());
+		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});
 	$("#fiddling_cor_r_long").change(function(e){
-			//alert("Fiddling fiddling_cor_r_long changed to:" + $(this).val());			
+		aRefPointTMP[cuircitID]["cor_r_Long"] = parseInt($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});
 	$("#fiddling_cor_r_lat").change(function(e){
-			//alert("Fiddling fiddling_cor_r_lat changed to:" + $(this).val());			
-	});
-	$("#fiddling_cor_r_lat").change(function(e){
-			//alert("Fiddling fiddling_cor_r_lat changed to:" + $(this).val());			
+		aRefPointTMP[cuircitID]["cor_r_Lat"] = parseInt($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});
 	$("#fiddling_cor_posx_mul").change(function(e){
-			//alert("Fiddling fiddling_cor_posx_mul changed to:" + $(this).val());			
+		aRefPointTMP[cuircitID]["cor_PosX_mul"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});
 	$("#fiddling_cor_posy_mul").change(function(e){
-			//alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());			
+		aRefPointTMP[cuircitID]["cor_PosY_mul"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
 	});
 	 $("#fiddling_zoom").change(function(e){
-                        //alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());
+		aRefPointTMP[cuircitID]["Zoom"] = parseInt($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
         });
 	 $("#fiddling_mapinitlat").change(function(e){
-                        //alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());
+		aRefPointTMP[cuircitID]["MapInitLat"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
         });
 	 $("#fiddling_mapinitlong").change(function(e){
-                        //alert("Fiddling fiddling_cor_posy_mul changed to:" + $(this).val());
+		aRefPointTMP[cuircitID]["MapInitLong"] = parseFloat($(this).val());
+                oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID]  , oMap , cuircitID);
         });
 	
 	
@@ -1571,6 +1578,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			$("#fiddling_cor_posy_mul").val("1");																					
 			
 		}*/
+
 
 		oPcarsMapCtrl.updateMarker(aSensorData);
 		
