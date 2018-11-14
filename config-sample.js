@@ -57,7 +57,7 @@ var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
 var SHOWREFPOINTFIDDLING=	false;	// [true|false]
 
 ////////////JQgrid design ///////
-var JQGridIsDriversPOSHidden	=	false;   // [true | false] used for PosX,PosY,PosZ
+var JQGridIsDriversPOSHidden	=	true;   // [true | false] used for PosX,PosY,PosZ
 var JQGridDrivertableCollapsed	=	true;   // [true | false] table default collapsed or unfolded
 var JQGridTracktableCollapsed	= 	true;   // [true | false] table default collapsed or unfolded
 var JQGridCartableCollapsed	=	true;   // [true | false] table default collapsed or unfolded
