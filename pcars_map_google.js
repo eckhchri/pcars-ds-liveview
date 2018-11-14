@@ -85,7 +85,7 @@ class pcars_map_google extends pcars_map {
 			PolyLineOuter.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
 			PolyLineInner.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
 			PolyLineSF.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});			
-		
+			
 	  	});
 
 		// add listener to cover drag effects
@@ -114,6 +114,10 @@ class pcars_map_google extends pcars_map {
 		PolyLineInner	= new google.maps.Polyline({});
 		PolyLineOuter	= new google.maps.Polyline({});
 		PolyLineSF		= new google.maps.Polyline({});
+		PolyLineXneg	= new google.maps.Polyline({});
+		PolyLineXpos	= new google.maps.Polyline({});
+		PolyLineYneg	= new google.maps.Polyline({});
+		PolyLineYpos	= new google.maps.Polyline({});
 		
 		// init Polygon object for fictional tracks background
 		Polygon         = new google.maps.Polygon({});
@@ -176,13 +180,23 @@ class pcars_map_google extends pcars_map {
 					if (key != "comment"){
 						//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
 						for (var i = 0; i < gjdata[key].length; i++ ){
-							gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
+							var gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
 
 							tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 						}
 					}
 				}
 			}
+
+			 // show coordinate system
+	                if(devmode_tm == true){
+	                        //calculate GPS coodinates for CoordSystem
+				var LineEnd = calc_coordinates (trackid , 0, 0, aRefPointTMP);
+                        	for (var key in CoordSystem) {
+                	                var LineStart = calc_coordinates (trackid , CoordSystem[key][0], CoordSystem[key][1], aRefPointTMP);
+					CoordSystemGPS[key] = [{lat: LineStart.Lat, lng: LineStart.Long},{lat: LineEnd.Lat, lng: LineEnd.Long}];
+        	                }
+	                }
 			
 			// Use explicit global Variable oPcarsMapCtrl 
 			oPcarsMapCtrl.oCurMapObj.changeMapSettingsGJ(newTrackObj, mapobj, tmGPS);  
@@ -217,6 +231,10 @@ class pcars_map_google extends pcars_map {
 		PolyLineOuter.setMap(null);
 		PolyLineInner.setMap(null);
 		PolyLineSF.setMap(null);
+		PolyLineXneg.setMap(null);
+		PolyLineXpos.setMap(null);
+		PolyLineYneg.setMap(null);
+		PolyLineYpos.setMap(null);
 		Polygon.setMap(null);
 		
 		//remove old tm_debug_markers from map
@@ -322,6 +340,41 @@ class pcars_map_google extends pcars_map {
 			$("#fiddling_mapinitlat").val(newTrackObj["MapInitLat"]);
 			$("#fiddling_mapinitlong").val(newTrackObj["MapInitLong"]);
 			
+		}
+
+		// show coordinate system
+		if(devmode_tm == true){
+			PolyLineXneg = new google.maps.Polyline({
+				path: CoordSystemGPS["Xneg"],
+				strokeColor: '#dbff87',
+				strokeOpacity: 1.0,
+				strokeWeight: 2.5 
+			});
+			PolyLineXneg.setMap(this.oMapLocal);
+
+			PolyLineXpos = new google.maps.Polyline({
+                                path: CoordSystemGPS["Xpos"],
+                                strokeColor: '#66ff72',
+                                strokeOpacity: 1.0,
+                                strokeWeight: 2.5
+                        });
+                        PolyLineXpos.setMap(this.oMapLocal);
+
+			PolyLineYneg = new google.maps.Polyline({
+                                path: CoordSystemGPS["Yneg"],
+                                strokeColor: '#66f7ff',
+                                strokeOpacity: 1.0,
+                                strokeWeight: 2.5
+                        });
+                        PolyLineYneg.setMap(this.oMapLocal);
+
+                        PolyLineYpos = new google.maps.Polyline({
+                                path: CoordSystemGPS["Ypos"],
+                                strokeColor: '#0f7fff',
+                                strokeOpacity: 1.0,
+                                strokeWeight: 2.5
+                        });
+                        PolyLineYpos.setMap(this.oMapLocal);
 		}
 
 		return 1;

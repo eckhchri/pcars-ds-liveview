@@ -413,7 +413,23 @@
 		{lat: -90       ,lng: 180},
 		{lat: -90       ,lng: 0}
 	];
-	
+
+	//PolyLine global vars for CoordSystem
+	var PolyLineXneg	=	null;
+	var PolyLineXpos       =       null;
+	var PolyLineYneg       =       null;
+	var PolyLineYpos       =       null;
+
+	//coordinate system for devmode, 2km length in all 4 directions
+	var CoordSystem = {
+		"Xneg": [-2000000,0],
+		"Xpos": [2000000,0],		
+		"Yneg": [0,-2000000],
+		"Ypos": [0,2000000]
+	};
+
+	 var CoordSystemGPS = {};
+
 	// trackmap debug markers for refPoint tuning
         var tm_debug_markers = [];
 	
@@ -430,7 +446,7 @@
 		Warmup:		"",
 		Race1:		"",
 		Race2:		""
-	}
+	};
 	
 	 var PDFdocDefinition = {
 		pageSize: 'A4',
@@ -1747,7 +1763,7 @@ console.log("TODO aSensorData: " , aSensorData);
 	for (var i = 0; i < aDrivers.driverlist.length; i++ ){
 
                // calculate GPS coordinates
-                gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
+                var gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
 
                 // fill data array
                 aSensorData[i] = {
