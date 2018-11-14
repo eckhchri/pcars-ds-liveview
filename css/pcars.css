@@ -16,9 +16,10 @@
 				left: 		60%; 
 				top: 		35px; 
 				width: 		250px; 
-				height: 	260px;
+				height:i 	270px;
 				border:		1;
 				background:	lightgreen;
+				padding:	5px;
 	     }
 	     
 	     .ui-jqgrid .ui-jqgrid-bdiv { 
@@ -100,9 +101,9 @@
                 right:			10px;                
                 border-width: 			1px;
                 border-style:			dashed;
-                -webkit-border-radius: 	30px;
-				-moz-border-radius: 	30px;
-				border-radius: 			30px;
+                -webkit-border-radius: 	15px;
+				-moz-border-radius: 	15px;
+				border-radius: 			15px;
                 width:			95%;
 				height:			85%;
 			                    
@@ -210,13 +211,14 @@
         
         #RefpointFiddling{
 				position: 	absolute; 
-				left: 		40%; 
-				top: 		90px; 
+				left: 		70%; 
+				top: 		100px; 
 				width: 		300px; 
-				height: 	350px;
+				height: 	370px;
 				border:		1;
 				background:	green;
 				color:		darkgrey;
+				padding:	5px;
         }
 
 /* CSS GRid layout for recorder and replay elments */		
