@@ -1230,6 +1230,8 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "Bannochbrae Road Circuit"
 		,"AltNames":	"Bannochbrae Road_Circuit"
+		,"MapInitLat":   40.993664
+                ,"MapInitLong":  -113.562253
 		,"Comment": 	"fictional track"
         });
 	
