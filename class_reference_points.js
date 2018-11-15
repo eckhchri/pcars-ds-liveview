@@ -602,7 +602,7 @@ function Refpoint(circuit_id)
 	//Azure Circuit
 	aRefPoints[832629329] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        43.737030
+		"refLat":        43.73705
 		,"refLong":      7.427395
 		,"rotation":     126
 		,"cor_r_Long":   0
