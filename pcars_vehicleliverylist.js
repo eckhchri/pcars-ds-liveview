@@ -2,14 +2,106 @@
 function PCARSVEHICLELIVERYLIST() {
 
 	this.aVehicleLiveryInfoExt	=	{};	//extended array of vehicle livery info
-        
+	this.oLiveryDataStructured	=	{}; //restructed data array
+	this.sGameMode = 'PCARS2';
+	
 	//init data
-	this.loadVehicleLiveryData();     
+	this.loadVehicleLiveryData();
 
+	// restructure data to oLiveryDataStructured
+	this._RestructureLiveryData(this.sGameMode);
+
+
+	
 	if(log >= 3){console.log("INFO: PCARSVEHICLELIVERYLIST. this ", this);}
 	return this;
 }
 
+
+
+/* returns name of a car livery
+ * 
+ * @param {string} vehicle id 
+ * @param {string} livery id
+ * @return {string} livery name
+ */
+function getNameById(sVehicleID, sLiveryId){
+	
+	var sResult = "LiveryID not found";
+	
+	if (!sVehicleID || !sLiveryId){
+		return sResult;
+	}
+			
+	if (this.oLiveryDataStructured[this.sGameMode][sVehicleID][sLiveryId]){
+		return this.oLiveryDataStructured[this.sGameMode][sVehicleID][sLiveryId];
+	}
+		
+	return sResult;	
+}
+
+/* returns normalized name of a car livery
+ * 
+ * @param {string} vehicle id 
+ * @param {string} livery id
+ * @return {string} normalized livery name
+ */
+function getNameByIdNormalized(iVehicleID, iLiveryId){
+	
+	return this._NameNormalization( this.getNameById(iVehicleID, iLiveryId) );	
+}
+
+
+/* (internal funtion) string normalization
+ * 
+ */
+function _NameNormalization (sName){	
+	if (sName){ //check if its defined string
+		return sName.replace(/ |\.|\(|\)/g, '_');
+	}else{
+		return "NO_NAME_DEFINED";
+	}
+}
+
+
+/* (internal funtion) string normalization
+ * 
+ */
+function _RestructureLiveryData (sGameMode){	
+	
+		
+	if (!this.oLiveryDataStructured[sGameMode]){
+		this.oLiveryDataStructured[sGameMode] = {};
+	}
+			
+	// travers vehicle ids
+	var aVehicles = this.aVehicleLiveryInfoExt[sGameMode];
+	for (var i=0; i < aVehicles.length; i++ ){
+				
+		var oV = aVehicles[i];				
+		if(! this.oLiveryDataStructured[sGameMode][oV.id]){
+			this.oLiveryDataStructured[sGameMode][oV.id] = {};
+		}
+						
+		// tranvers different liveries
+		var aLiveries = oV['liveries'];		
+		for (var j=0; j < aLiveries.length; j++){
+			
+			var iLivID = aLiveries[j].id;
+			var sLivName = aLiveries[j].name;
+			
+			this.oLiveryDataStructured[sGameMode][oV.id][iLivID] = sLivName;												
+		}				
+		
+	}
+			
+	return true;	
+}
+
+
+/* DATA
+ *  
+ */
 function loadVehicleLiveryData(){
 
 this.aVehicleLiveryInfoExt['PCARS2']	=	[];		
@@ -19091,4 +19183,10 @@ this.aVehicleLiveryInfoExt['PCARS2'] = [
 ];
 }
 
+
+PCARSVEHICLELIVERYLIST.prototype.getNameById=getNameById;
+PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
+PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
+PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;
 PCARSVEHICLELIVERYLIST.prototype.loadVehicleLiveryData=loadVehicleLiveryData;
+
