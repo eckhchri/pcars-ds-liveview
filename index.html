@@ -1899,7 +1899,7 @@ console.log("TODO aSensorData: " , aSensorData);
                 },
 */
 		onSelectRow: function (rowid, status, e) {
-			
+			//this event is triggered every worker run as long as a row is selected
 			// create deselectRow event
 			if (this.lastSel && rowid && rowid !== this.lastSel) {				
 		            $(this).trigger('deselectRow', [this, this.lastSel]);
@@ -1945,21 +1945,23 @@ console.log("TODO aSensorData: " , aSensorData);
 			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
 		},
 		beforeSelectRow: function(rowid){
+			//this event is triggered only once shortly before the row is selected
+			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				CSSClsChg.ColorSelectedVehicle('', true);
 				var elLiveryImage = document.getElementById("LiveryImage");
 	                        elLiveryImage.setAttribute("src", "");
 			}else{
+				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
 
 				var elLiveryImage = document.getElementById("LiveryImage");
-				console.log("rowData.drivername",rowData.drivername);
 				var filename = "";
 
 				for (var i = 0; i < aDrivers.length; i++ ){
 					if(aDrivers[i].Name == rowData.drivername){
-						filename = "data/liveries/" + aDrivers[i].VehicleId + "/" + aDrivers[i].LiveryId + ".png";
+						filename = "data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png";
 						curDriver = aDrivers[i]; //needed for the URL check, because in the following get function the index of the for loop is not working
 						$.get(filename)
 							.done(function(){
@@ -1968,11 +1970,9 @@ console.log("TODO aSensorData: " , aSensorData);
 								filename = "data/liveries/" + curDriver.VehicleId + "/" + PCARSVehicleLiveryList.getVehicleNumberById(curDriver.VehicleId, curDriver.LiveryId) + ".png";
 								elLiveryImage.setAttribute("src", filename);
 							})
+							if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));}
 					}
 				}
-				//TODO: check, if filename available, if not search VehicleNumber, PCARSVehicleLiveryList.getVehicleNumberById(sVehicleID, sLiveryId)
-				//elLiveryImage.setAttribute("src", "data/liveries/1972396515/143.png");
-				console.log("filename",filename);
 
 				return true;
 			}
@@ -1981,8 +1981,9 @@ console.log("TODO aSensorData: " , aSensorData);
 	});
 	
 	// register new event to #DriverDataTable table
-	$("#DriverDataTable").on('deselectRow', function(e, table, rowid){	    
-	    CSSClsChg.ColorSelectedVehicle('', true); // clear css attributes while deselction a row
+	$("#DriverDataTable").on('deselectRow', function(e, table, rowid){
+		//this event is triggered, if you have a selected row and select another row. In this case this trigger is for the deselection of the old selected row
+		CSSClsChg.ColorSelectedVehicle('', true); // clear css attributes while deselction a row
 	});
 	
 	//var DrivernamesBeforeSearch;
