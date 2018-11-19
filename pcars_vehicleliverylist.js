@@ -40,6 +40,24 @@ function getNameById(sVehicleID, sLiveryId){
 	return sResult;	
 }
 
+/* returns name of a car livery
+ *
+ * @param {string} vehicle id
+ * @param {string} livery id
+ * @return {string} vehicle number - can bee 911b for example, what is the cause for string
+ */
+function getVehicleNumberById(sVehicleID, sLiveryId){
+
+	var sResult;
+	var LiveryName = this.getNameById(sVehicleID, sLiveryId);
+
+	sResult = LiveryName.slice(LiveryName.indexOf("#")+1);
+
+	if(sResult == "" || sResult == "LiveryID not found"){sResult = "Vehicle Number not found";}
+
+	return sResult;
+}
+
 /* returns normalized name of a car livery
  * 
  * @param {string} vehicle id 
@@ -19185,6 +19203,7 @@ this.aVehicleLiveryInfoExt['PCARS2'] = [
 
 
 PCARSVEHICLELIVERYLIST.prototype.getNameById=getNameById;
+PCARSVEHICLELIVERYLIST.prototype.getVehicleNumberById=getVehicleNumberById;
 PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
 PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
 PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;
