@@ -335,3 +335,12 @@ input:checked + .slider:before {
 	fill: black;
 	background:green;
 }
+
+.LiveryImageWrapper {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  z-index: 80;
+}
+.overlayLiveryImage {
+}

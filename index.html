@@ -107,6 +107,10 @@
 		</table>
 		<p>	
 	</div>
+
+	<div class="LiveryImageWrapper">
+		<img class="overlayLiveryImage" id="LiveryImage" src="">
+	</div>
 		
 	<!--  -->		   
 	<div id="DSstatistic" class="mapoverlay">
@@ -1899,6 +1903,10 @@ console.log("TODO aSensorData: " , aSensorData);
 			}
 			this.lastSel = rowid;
 			CSSClsChg.ColorSelectedVehicle(($(this).jqGrid('getRowData', rowid)), false);
+
+			var elLiveryImage = document.getElementById("LiveryImage");
+			elLiveryImage.setAttribute("src", "data/liveries/1972396515/143.png");
+			console.log("aDrivers in DriverTable",aDrivers);
 			
 		},
 		
@@ -1940,6 +1948,8 @@ console.log("TODO aSensorData: " , aSensorData);
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				CSSClsChg.ColorSelectedVehicle('', true);
+				var elLiveryImage = document.getElementById("LiveryImage");
+	                        elLiveryImage.setAttribute("src", "");
 			}else{
 				return true;
 			}
