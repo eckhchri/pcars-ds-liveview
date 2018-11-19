@@ -1970,7 +1970,11 @@ console.log("TODO aSensorData: " , aSensorData);
 								filename = "data/liveries/" + curDriver.VehicleId + "/" + PCARSVehicleLiveryList.getVehicleNumberById(curDriver.VehicleId, curDriver.LiveryId) + ".png";
 								elLiveryImage.setAttribute("src", filename);
 							})
-							if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));}
+							if(log >= 3){
+								if(curDriver.LiveryId != "1"){	// the dummy Slightly Mad Studios has no element in the VehicleLiveryList and must be exluded here for the function getNameById
+									console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));
+								}
+							}
 					}
 				}
 
