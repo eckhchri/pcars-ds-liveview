@@ -139,7 +139,7 @@ function SetExampleData() {
 	this.S3Time             =   30;
         this.Orientation	=   0;
         this.Speed			=   100;
-        this.VehicleId		=	-886212684;
+        this.VehicleId		=	9999999999;
 	this.LiveryId		=	0;
         this.CurrentLap		=	99;
         this.VehicleClassName 	=   'undefined';

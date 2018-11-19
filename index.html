@@ -979,6 +979,9 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		SessionState 	= e.data.globals.attributes.SessionState;
 		SessionStage 	= e.data.globals.attributes.SessionStage;
 		CurGameRunning 	= e.data.globals.curgamerunning;
+
+		// Fill global object with current driver data. Used to get access to the data from outside the worker, for example in jqgrid event listeners of the driver table
+		aDrivers = e.data.driverlist;
 		
 		//keep cuircitID in mind for next run
 		var tmpcuircitID = e.data.globals.attributes.TrackId;
@@ -1902,12 +1905,9 @@ console.log("TODO aSensorData: " , aSensorData);
 		            $(this).trigger('deselectRow', [this, this.lastSel]);
 			}
 			this.lastSel = rowid;
+
 			CSSClsChg.ColorSelectedVehicle(($(this).jqGrid('getRowData', rowid)), false);
 
-			var elLiveryImage = document.getElementById("LiveryImage");
-			elLiveryImage.setAttribute("src", "data/liveries/1972396515/143.png");
-			console.log("aDrivers in DriverTable",aDrivers);
-			
 		},
 		
 		afterInsertRow: function (rowid, rowdata, rowelem) {
@@ -1951,8 +1951,32 @@ console.log("TODO aSensorData: " , aSensorData);
 				var elLiveryImage = document.getElementById("LiveryImage");
 	                        elLiveryImage.setAttribute("src", "");
 			}else{
+				var rowData = $(this).jqGrid('getRowData', rowid);
+
+				var elLiveryImage = document.getElementById("LiveryImage");
+				console.log("rowData.drivername",rowData.drivername);
+				var filename = "";
+
+				for (var i = 0; i < aDrivers.length; i++ ){
+					if(aDrivers[i].Name == rowData.drivername){
+						filename = "data/liveries/" + aDrivers[i].VehicleId + "/" + aDrivers[i].LiveryId + ".png";
+						curDriver = aDrivers[i]; //needed for the URL check, because in the following get function the index of the for loop is not working
+						$.get(filename)
+							.done(function(){
+								elLiveryImage.setAttribute("src", filename);
+							}).fail(function(){
+								filename = "data/liveries/" + curDriver.VehicleId + "/" + PCARSVehicleLiveryList.getVehicleNumberById(curDriver.VehicleId, curDriver.LiveryId) + ".png";
+								elLiveryImage.setAttribute("src", filename);
+							})
+					}
+				}
+				//TODO: check, if filename available, if not search VehicleNumber, PCARSVehicleLiveryList.getVehicleNumberById(sVehicleID, sLiveryId)
+				//elLiveryImage.setAttribute("src", "data/liveries/1972396515/143.png");
+				console.log("filename",filename);
+
 				return true;
 			}
+
 		}
 	});
 	
