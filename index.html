@@ -108,7 +108,7 @@
 		<p>	
 	</div>
 
-	<div class="LiveryImageWrapper">
+	<div class="LiveryImageWrapper" id="LiveryImageWrapper">
 		<img class="overlayLiveryImage" id="LiveryImage" src="">
 	</div>
 		
@@ -558,6 +558,7 @@ function initialize_app(){
 				ghost: true
        			});
 			$( "#DSRecStatistics" ).draggable();
+			$( "#LiveryImageWrapper" ).draggable();
 		});			
 		
 	});
@@ -1950,14 +1951,22 @@ console.log("TODO aSensorData: " , aSensorData);
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				CSSClsChg.ColorSelectedVehicle('', true);
+
+				//clear img src on deselecting a selected row
 				var elLiveryImage = document.getElementById("LiveryImage");
 	                        elLiveryImage.setAttribute("src", "");
+
+				//bring Image Overlay into background, because the empty image has still an invisible draggable square if it stays in foreground
+				document.getElementById("LiveryImageWrapper").style.zIndex = "-1";
 			}else{
 				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
 
 				var elLiveryImage = document.getElementById("LiveryImage");
 				var filename = "";
+
+				//bring Image Overlay into foreground
+				document.getElementById("LiveryImageWrapper").style.zIndex = "80";
 
 				for (var i = 0; i < aDrivers.length; i++ ){
 					if(aDrivers[i].Name == rowData.drivername){
