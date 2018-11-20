@@ -1953,8 +1953,7 @@ console.log("TODO aSensorData: " , aSensorData);
 				CSSClsChg.ColorSelectedVehicle('', true);
 
 				//clear img src on deselecting a selected row
-				var elLiveryImage = document.getElementById("LiveryImage");
-	                        elLiveryImage.setAttribute("src", "");
+				document.getElementById("LiveryImage").setAttribute("src", "");
 
 				//bring Image Overlay into background, because the empty image has still an invisible draggable square if it stays in foreground
 				document.getElementById("LiveryImageWrapper").style.zIndex = "-1";
@@ -1962,7 +1961,6 @@ console.log("TODO aSensorData: " , aSensorData);
 				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
 
-				var elLiveryImage = document.getElementById("LiveryImage");
 				var filename = "";
 
 				//bring Image Overlay into foreground
@@ -1974,10 +1972,10 @@ console.log("TODO aSensorData: " , aSensorData);
 						curDriver = aDrivers[i]; //needed for the URL check, because in the following get function the index of the for loop is not working
 						$.get(filename)
 							.done(function(){
-								elLiveryImage.setAttribute("src", filename);
+								document.getElementById("LiveryImage").setAttribute("src", filename);
 							}).fail(function(){
 								filename = "data/liveries/" + curDriver.VehicleId + "/" + PCARSVehicleLiveryList.getVehicleNumberById(curDriver.VehicleId, curDriver.LiveryId) + ".png";
-								elLiveryImage.setAttribute("src", filename);
+								document.getElementById("LiveryImage").setAttribute("src", filename);
 							})
 							if(log >= 3){
 								if(curDriver.LiveryId != "1"){	// the dummy Slightly Mad Studios has no element in the VehicleLiveryList and must be exluded here for the function getNameById
