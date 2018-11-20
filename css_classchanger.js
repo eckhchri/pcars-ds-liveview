@@ -283,7 +283,7 @@ function CSSClassChanger(aCSSDefinition){
 		this.aCSSClasses['CSClass'+cnt]			= setStyle(
 				'circle.CSS_IsAiPlayer{\n'		+
 		        '	opacity:	0.35;\n'	+		
-		        '}\n',					
+		        '}\n'					
 			    );		
 							
 		return 1;
@@ -304,7 +304,7 @@ function CSSClassChanger(aCSSDefinition){
 		this.aCSSClasses['CSClass'+cnt]			= setStyle(
 				'circle.CSS_IsHumanPlayer{\n'		+
 		        '	opacity:	0.35;\n'	+		
-		        '}\n',					
+		        '}\n'					
 			    );		
 		
 		

@@ -29,7 +29,7 @@ class PCARSLV_BASIC{
 	 * param {string} prefix - prefix of a message. for example INFO, WARN, ERROR
 	 * param {string} msg - string to display as error
 	 */	
-	displayMsg(title , msg, style, ){
+	displayMsg(title , msg, style ){
 		var myNotice = new jBox('Notice', {			
 			 fade: 500,
 			 autoClose: 7000,
