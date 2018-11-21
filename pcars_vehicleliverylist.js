@@ -32,7 +32,7 @@ function getNameById(sVehicleID, sLiveryId){
 	if (!sVehicleID || !sLiveryId){
 		return sResult;
 	}
-			
+
 	if (this.oLiveryDataStructured[this.sGameMode][sVehicleID][sLiveryId]){
 		return this.oLiveryDataStructured[this.sGameMode][sVehicleID][sLiveryId];
 	}
@@ -124,6 +124,19 @@ function loadVehicleLiveryData(){
 
 this.aVehicleLiveryInfoExt['PCARS2']	=	[];		
 this.aVehicleLiveryInfoExt['PCARS2'] = [
+      {
+        "id" : 9999999999,
+        "name" : "Slightly Mad Studios",
+        "liveries" : [
+          {
+            "id" : 1,
+            "name" : "Slightly Mad Studios"
+          }
+	],
+	"class" : "SMS"
+      },
+
+      ////// Data from DS API - api/list/liveries /////////
       {
         "id" : 9503224,
         "name" : "BMW 320 TC (E90)",
@@ -19198,6 +19211,7 @@ this.aVehicleLiveryInfoExt['PCARS2'] = [
         ],
         "class" : "GTO"
       }
+      ////// End Data from DS API
 ];
 }
 

@@ -341,9 +341,17 @@ input:checked + .slider:before {
   top: 10%;
   right: 10%;
   z-index: -1;
+  text-align: center;
 }
 .overlayLiveryImage {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
   width: 300px;
+}
+.overlayLiveryImageText{
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  background: white;
+  padding: 2px 3px;
 }

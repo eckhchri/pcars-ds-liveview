@@ -110,6 +110,7 @@
 
 	<div class="LiveryImageWrapper" id="LiveryImageWrapper">
 		<img class="overlayLiveryImage" id="LiveryImage" src="">
+		<br><span class="overlayLiveryImageText" id="overlayLiveryImageText"></span>
 	</div>
 		
 	<!--  -->		   
@@ -512,7 +513,11 @@ function initialize_app(){
 	if ( SHOWRECSTATISTIC== false ) { 	$( "#DSRecStatistics" ).hide();		}
 	if ( SHOWREFPOINTFIDDLING== false || devmode_tm == false ) { 	$( "#RefpointFiddling" ).hide();		}
 	
-	
+	if ( SHOWLIVERYNAMES == false ) {
+		document.getElementById("overlayLiveryImageText").style.visibility="hidden";
+	}else{
+		document.getElementById("overlayLiveryImageText").style.visibility="visible";
+	}
 	
 	//Set toggles to correct
 	$("#btn-start-rec-data").prop( "checked", isRecEnabled);  // set state to button configure in config.js
@@ -1946,14 +1951,20 @@ console.log("TODO aSensorData: " , aSensorData);
 			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
 		},
 		beforeSelectRow: function(rowid){
-			//this event is triggered only once shortly before the row is selected
+			//this event is triggered only once shortly before the row is selectedi
+
+			var elLiveryImage = document.getElementById("LiveryImage");
+
 			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				CSSClsChg.ColorSelectedVehicle('', true);
 
-				//clear img src on deselecting a selected row
-				document.getElementById("LiveryImage").setAttribute("src", "");
+				//var elLiveryImage = document.getElementById("LiveryImage");
+				//clear img src/title and the text below on deselecting a selected row
+				elLiveryImage.setAttribute("src", "");
+				elLiveryImage.removeAttribute("title");
+				document.getElementById("overlayLiveryImageText").innerHTML = "";
 
 				//bring Image Overlay into background, because the empty image has still an invisible draggable square if it stays in foreground
 				document.getElementById("LiveryImageWrapper").style.zIndex = "-1";
@@ -1962,25 +1973,42 @@ console.log("TODO aSensorData: " , aSensorData);
 				var rowData = $(this).jqGrid('getRowData', rowid);
 
 				var filename = "";
+				var LiveryName = "";
 
 				//bring Image Overlay into foreground
 				document.getElementById("LiveryImageWrapper").style.zIndex = "80";
 
 				for (var i = 0; i < aDrivers.length; i++ ){
 					if(aDrivers[i].Name == rowData.drivername){
-						filename = "data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png";
-						curDriver = aDrivers[i]; //needed for the URL check, because in the following get function the index of the for loop is not working
+						curDriver = aDrivers[i]; //needed for the URL check, because in the later get(filenmae) function the index of the for loop is not working
+						LiveryName = PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId);
+						elLiveryImage.setAttribute("title", LiveryName);
+						document.getElementById("overlayLiveryImageText").innerHTML = LiveryName;
+
+						//filename generated with livery ID
+						filename = "data/liveries/" + curDriver.VehicleId + "/id" + curDriver.LiveryId + ".png";
+
 						$.get(filename)
 							.done(function(){
-								document.getElementById("LiveryImage").setAttribute("src", filename);
+								//if livery ID png file is available use it
+								elLiveryImage.setAttribute("src", filename);
 							}).fail(function(){
+								//no livery ID png file found, generate filename with vehicle number
 								filename = "data/liveries/" + curDriver.VehicleId + "/" + PCARSVehicleLiveryList.getVehicleNumberById(curDriver.VehicleId, curDriver.LiveryId) + ".png";
-								document.getElementById("LiveryImage").setAttribute("src", filename);
+								$.get(filename)
+									.done(function(){
+										//if vehicle number png file is available use it
+										elLiveryImage.setAttribute("src", filename);
+									}).fail(function(){
+										//no vehicle name png file found. In this case use the "not available"  file
+										filename = "data/liveries/na.png"
+										elLiveryImage.setAttribute("src", filename);
+									})
 							})
 							if(log >= 3){
-								if(curDriver.LiveryId != "1"){	// the dummy Slightly Mad Studios has no element in the VehicleLiveryList and must be exluded here for the function getNameById
+								//if(curDriver.LiveryId != "1"){	// the dummy Slightly Mad Studios has no element in the VehicleLiveryList and must be exluded here for the function getNameById
 									console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));
-								}
+								//}
 							}
 					}
 				}

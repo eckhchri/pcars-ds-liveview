@@ -55,6 +55,7 @@ var SHOWDSREPLAY		=	false;	// [true|false]
 var SHOWRECSTATISTIC	=	true;	// [true|false]
 var SHOWPOPUPLOADDEMO	=	false;	// [true|false]
 var SHOWREFPOINTFIDDLING=	false;	// [true|false]
+var SHOWLIVERYNAMES     =       true;   // [true|false] Show Livery/Team Name below Livery Image if a row in the driver table is selected. The names are ever shown as mousover title, independant from this setting.
 
 ////////////JQgrid design ///////
 var JQGridIsDriversPOSHidden	=	true;   // [true | false] used for PosX,PosY,PosZ
