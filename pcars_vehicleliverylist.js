@@ -169,9 +169,12 @@ function checkfiles (sGameMode){
                                         }
 
 				}
-				sOutput = "Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",id" + iLivID + "," + vehicleNumber + "," + sLivName + "," + fileAvailable;
-				aOutput.push(sOutput);
-				if(log >= 3){console.log("Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",id" + iLivID + "," + vehicleNumber + "," + sLivName + "," + fileAvailable);}
+				// output all available and not available liveries. If you want to see the not available Liveries only, enable the if statement
+				//if(fileAvailable == "NA"){
+					sOutput = "Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",id" + iLivID + "," + vehicleNumber + "," + sLivName + "," + fileAvailable;
+					aOutput.push(sOutput);
+					if(log >= 3){console.log("Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",id" + iLivID + "," + vehicleNumber + "," + sLivName + "," + fileAvailable);}
+				//}
 			}
 		}else{
 			// there are no liveries for the current vehicle available
