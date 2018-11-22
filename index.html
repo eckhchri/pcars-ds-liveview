@@ -369,7 +369,8 @@
 	var HTMLCTRL				=	new HTMLCONTROL(); 	//provide help functions
 	//var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects    // commented out on 17.03.2017
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
-	var PCARSVehicleLiveryList	=	new PCARSVEHICLELIVERYLIST(); // creates an empty object		
+	var PCARSVehicleLiveryList	=	new PCARSVEHICLELIVERYLIST(); // creates an empty object
+	
 	//var aVehicleIdToName		=	PCARSVehicleList.getIdToNameMapping();		// hash to translate vehicleID to VehicleName
 	var	aCurrentVehicleClasses	=	{};	// all vehicle classes within the current race
 	var	aCurrentVehicleNames	=	{};	// all vehicle names within the current race
@@ -476,6 +477,10 @@
 	
 	//array for saving driver position to drivername
 	var aPosDriver = [];
+
+	//// FOR DEVELOPER PURPOSES ONLY
+	//// checks for missing Livery Files, enable it only if you want to check these, result in browser developer console
+	//PCARSVehicleLiveryList.checkfiles('PCARS2');
 
 ////////////////////////////////////////////// start application after loading google map api 
 function initialize_app(){

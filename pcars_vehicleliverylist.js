@@ -117,6 +117,77 @@ function _RestructureLiveryData (sGameMode){
 }
 
 
+/// FOR DEVELOPER PURPOSES ONLY
+/// Checks which Livery files are available and which not, and prints the result to the browser developer console
+function checkfiles (sGameMode){
+	var aVehicles = this.aVehicleLiveryInfoExt[sGameMode];
+	var NumberLiveries = 0;
+	var aOutput = [];
+	var sOutput= "";
+
+	var oFiles =
+	{
+		///// Fill in Data here //////
+		///// Example:
+		/////	"-1001664988":["17.png","78.png","87.png","8.png","id54.png","id63.png"],
+		/////	"1083119012":["5.png","6.png"],
+		/////	"-1206681923":["7.png","8.png"]
+		///// and then check the Browser developer console with filter "Livery:"
+
+	}
+	//console.log("oFiles: ",oFiles);
+
+
+	for (var i=0; i < aVehicles.length; i++ ){
+
+		var oV = aVehicles[i];
+		var filenameID = "";
+		var filenameNumber = "";
+		var oFilesCurVehicle = oFiles[oV.id];
+		//if(log >= 3){console.log("oV.name: ",oV.name," / oV.id: ",oV.id," / oFilesCurVehicle: ",oFilesCurVehicle);}
+
+
+		// go through different liveries
+		var aLiveries = oV['liveries'];
+		if(oFilesCurVehicle){	// only if there are liveries for a vehicle available
+			for (var j=0; j < aLiveries.length; j++){
+
+				var iLivID = aLiveries[j].id;
+				var sLivName = aLiveries[j].name;
+				var vehicleNumber= this.getVehicleNumberById(oV.id, iLivID);
+				var fileAvailable = "NA";
+				//filename generated with livery ID
+				filenameID = "id" + iLivID + ".png";
+				filenameNumber = vehicleNumber + ".png";
+
+				for (var k=0; k < oFilesCurVehicle.length; k++){
+					if(oFilesCurVehicle[k] == filenameID){
+						fileAvailable = "ID";
+					}
+					if(oFilesCurVehicle[k] == filenameNumber){
+                                                fileAvailable = "Number";
+                                        }
+
+				}
+				sOutput = "Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",id" + iLivID + "," + vehicleNumber + "," + sLivName + "," + fileAvailable;
+				aOutput.push(sOutput);
+				if(log >= 3){console.log("Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",id" + iLivID + "," + vehicleNumber + "," + sLivName + "," + fileAvailable);}
+			}
+		}else{
+			// there are no liveries for the current vehicle available
+			sOutput = "Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",,,,NA - complete car";
+			aOutput.push(sOutput);
+			if(log >= 3){console.log("Livery: ," + oV.name + "," + oV.class + "," + oV.id + ",,,,NA - complete car");}
+		}
+		NumberLiveries += aLiveries.length;
+	}
+	if(log >= 3){console.log("Total Number of Liveries: ",NumberLiveries);}
+	if(log >= 3){console.log("Livery Output Array",aOutput);}
+
+	return true;
+}
+
+
 /* DATA
  *  
  */
@@ -19222,4 +19293,4 @@ PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
 PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
 PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;
 PCARSVEHICLELIVERYLIST.prototype.loadVehicleLiveryData=loadVehicleLiveryData;
-
+PCARSVEHICLELIVERYLIST.prototype.checkfiles=checkfiles;
