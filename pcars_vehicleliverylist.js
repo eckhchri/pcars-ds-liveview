@@ -51,7 +51,11 @@ function getVehicleNumberById(sVehicleID, sLiveryId){
 	var sResult;
 	var LiveryName = this.getNameById(sVehicleID, sLiveryId);
 
+	//extract the Vehicle Number from Livery Name, the number is always after the "#"
 	sResult = LiveryName.slice(LiveryName.indexOf("#")+1);
+
+	//remove blanks from string, because there are some cases where the Livery Name has a blank after the Vehicle Number
+	sResult = sResult.replace(/ /g, '');
 
 	if(sResult == "" || sResult == "LiveryID not found"){sResult = "Vehicle Number not found";}
 
