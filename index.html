@@ -1971,8 +1971,9 @@ console.log("TODO aSensorData: " , aSensorData);
 				elLiveryImage.removeAttribute("title");
 				document.getElementById("overlayLiveryImageText").innerHTML = "";
 
-				//bring Image Overlay into background, because the empty image has still an invisible draggable square if it stays in foreground
-				document.getElementById("LiveryImageWrapper").style.zIndex = "-1";
+				//make Livery Image and Text invisible. For the Text it is needed, because there is also a global config switch for the visibility.
+				document.getElementById("LiveryImageWrapper").style.visibility="hidden";
+				document.getElementById("overlayLiveryImageText").style.visibility="hidden";
 			}else{
 				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
@@ -1980,8 +1981,11 @@ console.log("TODO aSensorData: " , aSensorData);
 				var filename = "";
 				var LiveryName = "";
 
-				//bring Image Overlay into foreground
-				document.getElementById("LiveryImageWrapper").style.zIndex = "80";
+				//make Image Overlay visible
+				document.getElementById("LiveryImageWrapper").style.visibility="visible";
+				if(SHOWLIVERYNAMES){
+					document.getElementById("overlayLiveryImageText").style.visibility="visible";
+				}
 
 				for (var i = 0; i < aDrivers.length; i++ ){
 					if(aDrivers[i].Name == rowData.drivername){
@@ -1998,17 +2002,9 @@ console.log("TODO aSensorData: " , aSensorData);
 								//if livery ID png file is available use it
 								elLiveryImage.setAttribute("src", filename);
 							}).fail(function(){
-								//no livery ID png file found, generate filename with vehicle number
-								filename = "data/liveries/" + curDriver.VehicleId + "/" + PCARSVehicleLiveryList.getVehicleNumberById(curDriver.VehicleId, curDriver.LiveryId) + ".png";
-								$.get(filename)
-									.done(function(){
-										//if vehicle number png file is available use it
-										elLiveryImage.setAttribute("src", filename);
-									}).fail(function(){
-										//no vehicle name png file found. In this case use the "not available"  file
-										filename = "data/liveries/na.png"
-										elLiveryImage.setAttribute("src", filename);
-									})
+								//no vehicle png file found. In this case use the "not available"  file
+								filename = "data/liveries/na.png"
+								elLiveryImage.setAttribute("src", filename);
 							})
 						if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));}
 					}

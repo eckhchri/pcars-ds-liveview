@@ -340,7 +340,7 @@ input:checked + .slider:before {
   position: absolute;
   top: 10%;
   right: 10%;
-  z-index: -1;
+  visibility: hidden;
   text-align: center;
 }
 .overlayLiveryImage {
