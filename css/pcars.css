@@ -29,7 +29,7 @@
 
 	     #TrackList{
 				position:       absolute;
-                left:           6%;
+                left:           1%;
                 top:            63px;
                 border:         1;
 				text-align: 	center;
@@ -46,7 +46,7 @@
 	     
 	     #CarList{
 				position:       absolute;
-                left:           7%;
+                left:           1%;
                 top:            92px;
                 border:         1;
 				text-align: 	center;
@@ -78,7 +78,7 @@
 		
 	     #DriverDataArea{
 				position:       absolute;
-				left:           5%;
+				left:           1%;
 				top:            32px;
 				background:	lightgrey
 	     }
@@ -220,6 +220,22 @@
 				color:		darkgrey;
 				padding:	5px;
         }
+	.LiveryOverview{
+                                position:       absolute;
+                                left:           19%;
+                                top:            30px;
+                                width:          78%;
+                                height:         90%;
+                                border:         1;
+                                background:     white;
+                                color:          black;
+                                padding:        5px;
+				overflow-y:	auto;
+				z-index:	70;
+        }
+	#LiveryOverviewVehicle{
+				display: none;
+	}
 
 /* CSS GRid layout for recorder and replay elments */		
 .pcars_grid_recorder_replay	{
@@ -340,7 +356,8 @@ input:checked + .slider:before {
   position: absolute;
   top: 10%;
   right: 10%;
-  visibility: hidden;
+  display: none;
+  z-index: 80;
   text-align: center;
 }
 .overlayLiveryImage {
@@ -354,4 +371,22 @@ input:checked + .slider:before {
   border-color: black;
   background: white;
   padding: 2px 3px;
+}
+
+.LiveryGrid {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  /*background-color: #2196F3;*/
+  padding: 10px;
+}
+.LiveryGridItem {
+  /*background-color: rgba(255, 255, 255, 0.8);*/
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding-bottom: 5px;
+  text-align: center;
+}
+.LiveryGridImage {
+  -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222);
+  width: 270px;
 }

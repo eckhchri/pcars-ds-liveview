@@ -108,9 +108,13 @@
 		<p>	
 	</div>
 
-	<div class="LiveryImageWrapper" id="LiveryImageWrapper">
-		<img class="overlayLiveryImage" id="LiveryImage" src="">
-		<br><span class="overlayLiveryImageText" id="overlayLiveryImageText"></span>
+	<div id="LiveryOverviewVehicle" class="mapoverlay LiveryOverview">
+		<div id="LiveryOverviewVehicleHead"> All Liveries  </div>
+	</div>
+
+	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
+		<img id="LiveryImageDriverTable"  class="overlayLiveryImage" src="">
+		<br><span id="overlayLiveryImageTextDriverTable" class="overlayLiveryImageText"></span>
 	</div>
 		
 	<!--  -->		   
@@ -370,7 +374,7 @@
 	//var aVehicleList			=	new Array();			// array of pcars_vehicle.js objects    // commented out on 17.03.2017
 	var	PCARSVehicleList		=	new PCARSVEHICLELIST(); // creates an empty object
 	var PCARSVehicleLiveryList	=	new PCARSVEHICLELIVERYLIST(); // creates an empty object
-	
+
 	//var aVehicleIdToName		=	PCARSVehicleList.getIdToNameMapping();		// hash to translate vehicleID to VehicleName
 	var	aCurrentVehicleClasses	=	{};	// all vehicle classes within the current race
 	var	aCurrentVehicleNames	=	{};	// all vehicle names within the current race
@@ -518,12 +522,6 @@ function initialize_app(){
 	if ( SHOWRECSTATISTIC== false ) { 	$( "#DSRecStatistics" ).hide();		}
 	if ( SHOWREFPOINTFIDDLING== false || devmode_tm == false ) { 	$( "#RefpointFiddling" ).hide();		}
 	
-	if ( SHOWLIVERYNAMES == false ) {
-		document.getElementById("overlayLiveryImageText").style.visibility="hidden";
-	}else{
-		document.getElementById("overlayLiveryImageText").style.visibility="visible";
-	}
-	
 	//Set toggles to correct
 	$("#btn-start-rec-data").prop( "checked", isRecEnabled);  // set state to button configure in config.js
 			
@@ -558,17 +556,13 @@ function initialize_app(){
 			$( "#DriverDataArea" ).draggable();
 			$( "#Settings" ).draggable();
 			$( "#RefpointFiddling" ).draggable();
-			$( "#RefpointFiddling" ).resizable({
-				//animate: true
-				ghost: true
-       			});
-			
 			$( "#DSdata" ).resizable({
 				//animate: true
 				ghost: true
        			});
 			$( "#DSRecStatistics" ).draggable();
-			$( "#LiveryImageWrapper" ).draggable();
+			$( "#LiveryImageWrapperDriverTable" ).draggable();
+			$( "#LiveryOverviewVehicle" ).draggable();
 		});			
 		
 	});
@@ -945,7 +939,50 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
     			jQuery('#CarList').height( 0 );        		       
     		},
 	        caption: 'List of available Cars&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbCarlistExport" value="Export" style="background-color:#dddddd"></input><div id="pcars-carlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>',
-			rowNum: 400,		
+		rowNum: 400,	
+		beforeSelectRow: function(rowid){
+			//this event is triggered only once shortly before the row is selectedi
+
+			// if you select an already selected row, deselect it
+			if($(this).jqGrid("getGridParam", "selrow") === rowid){
+				$(this).jqGrid("resetSelection");
+				$("#LiveryOverviewVehicle").hide();
+				$("#LiveryGridDriverTable").remove();
+			}else{
+				//else a row is selected
+
+				var rowData = $(this).jqGrid('getRowData', rowid);
+				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+				console.log("File Liveries",oLiveries);
+				var filename = "";
+			
+				//remove old grid
+				$("#LiveryGridDriverTable").remove();
+				//built Grid
+				var HTMLcode = "<div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+				if(oLiveries[rowData.vehicleid]){
+					for (var key in oLiveries[rowData.vehicleid] ){
+						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
+						filename = "data/liveries/" + rowData.vehicleid + "/id" + key;
+						console.log("filename: ",filename);
+						HTMLcode = HTMLcode + "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
+							"<br><span class='overlayLiveryImageText'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
+					}
+				}else{
+					//ToDo: Vehicle Liveries not available
+				}
+
+				HTMLcode += "</div>";			
+
+				//add Grid to HTML
+				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
+				
+				$("#LiveryOverviewVehicle").show();
+				
+				return true;
+			}
+			//return true;
+		}
 	});
 	// add filter option bar
 	jQuery("#carlisttable").jqGrid('filterToolbar', { stringResult: true, searchOnEnter: false, defaultSearch: "cn" });	
@@ -1956,24 +1993,23 @@ console.log("TODO aSensorData: " , aSensorData);
 			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
 		},
 		beforeSelectRow: function(rowid){
-			//this event is triggered only once shortly before the row is selectedi
+			//this event is triggered only once shortly before the row is selected
 
-			var elLiveryImage = document.getElementById("LiveryImage");
+			var elLiveryImage = document.getElementById("LiveryImageDriverTable");
 
 			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				CSSClsChg.ColorSelectedVehicle('', true);
 
-				//var elLiveryImage = document.getElementById("LiveryImage");
 				//clear img src/title and the text below on deselecting a selected row
 				elLiveryImage.setAttribute("src", "");
 				elLiveryImage.removeAttribute("title");
-				document.getElementById("overlayLiveryImageText").innerHTML = "";
+				document.getElementById("overlayLiveryImageTextDriverTable").innerHTML = "";
 
 				//make Livery Image and Text invisible. For the Text it is needed, because there is also a global config switch for the visibility.
-				document.getElementById("LiveryImageWrapper").style.visibility="hidden";
-				document.getElementById("overlayLiveryImageText").style.visibility="hidden";
+				$("#LiveryImageWrapperDriverTable").hide();
+				$("#overlayLiveryImageTextDriverTable").hide();
 			}else{
 				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
@@ -1981,18 +2017,12 @@ console.log("TODO aSensorData: " , aSensorData);
 				var filename = "";
 				var LiveryName = "";
 
-				//make Image Overlay visible
-				document.getElementById("LiveryImageWrapper").style.visibility="visible";
-				if(SHOWLIVERYNAMES){
-					document.getElementById("overlayLiveryImageText").style.visibility="visible";
-				}
-
 				for (var i = 0; i < aDrivers.length; i++ ){
 					if(aDrivers[i].Name == rowData.drivername){
 						curDriver = aDrivers[i]; //needed for the URL check, because in the later get(filenmae) function the index of the for loop is not working
 						LiveryName = PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId);
 						elLiveryImage.setAttribute("title", LiveryName);
-						document.getElementById("overlayLiveryImageText").innerHTML = LiveryName;
+						document.getElementById("overlayLiveryImageTextDriverTable").innerHTML = LiveryName;
 
 						//filename generated with livery ID
 						filename = "data/liveries/" + curDriver.VehicleId + "/id" + curDriver.LiveryId + ".png";
@@ -2008,6 +2038,12 @@ console.log("TODO aSensorData: " , aSensorData);
 							})
 						if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));}
 					}
+				}
+				
+				//make Image Overlay visible
+				$("#LiveryImageWrapperDriverTable").show();
+				if(SHOWLIVERYNAMES){
+					$("#overlayLiveryImageTextDriverTable").show();
 				}
 
 				return true;
