@@ -109,7 +109,7 @@
 	</div>
 
 	<div id="LiveryOverviewVehicle" class="mapoverlay LiveryOverview">
-		<div id="LiveryOverviewVehicleHead"> All Liveries  </div>
+			<div id="LiveryOverviewVehicleHead"> All Liveries  </div>
 	</div>
 
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
@@ -959,7 +959,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				//remove old grid
 				$("#LiveryGridDriverTable").remove();
 				//built Grid
-				var HTMLcode = "<div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+				var HTMLcode = "<div class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
 				if(oLiveries[rowData.vehicleid]){
 					for (var key in oLiveries[rowData.vehicleid] ){
 						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
@@ -972,7 +972,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 					//ToDo: Vehicle Liveries not available
 				}
 
-				HTMLcode += "</div>";			
+				HTMLcode += "</div></div>";			
 
 				//add Grid to HTML
 				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
