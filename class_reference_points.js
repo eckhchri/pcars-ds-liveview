@@ -275,7 +275,7 @@ function Refpoint(circuit_id)
 	//Le Mans International Karting Circuit
 	aRefPoints[1457129528] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans International Karting Circuit","Name2": "","AltNames":"Le_Mans_Kart_Int Le_Mans_International_Karting_Circuit,Le Mans Karting International Le Mans International Karting Circuit","Zoom": 17,"MapInitLat": 47.942512,"MapInitLong": 0.212322,"Comment": "initially added"});	//"mTrackLocation":"Le Mans Karting International","mTrackVariation":"Le Mans International Karting Circuit"
 	//Le Mans Vintage Track
-	aRefPoints[167552033] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Vintage Track","Name2": "","AltNames":"","Zoom": 17,"MapInitLat": 47.942512,"MapInitLong": 0.212322,"Comment": "initially added"});	
+	aRefPoints[167552033] = CopyObjectWithModifications(aRefPoints[1740968730], {"Name": "Le Mans Vintage Track","Name2": "","AltNames":"","Comment": "initially added"});	
 	
         //Ruapuna Park GP
         aRefPoints[1277693448] = CopyObjectWithModifications(aRefPoints[9999999999],
