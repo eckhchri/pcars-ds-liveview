@@ -402,6 +402,7 @@
 	var scrollPositionTrackTable = 0;	// used for saving the current scollbar position
 	var cellDataDrivername;
 	var cellDataVehiclename;
+	var cellDataTrackID;
 
 	// init PCARS Live View classes
 	var PLV_S				=	new PCARSLV_SETTINGS();
@@ -871,8 +872,9 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				jQuery('#TrackList').height(0);
     		},
     		onSelectRow: function (rowId, status, e) {
+				//disabled: handling moved to beforeSelectRow, select and deselect now with left mouse button
 				//change map location				
-				if (!e || e.which === 1) {  // left click                  
+				/*if (!e || e.which === 1) {  // left click                  
 					//Todo:  change fixed row id to name of the row
 					var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
 					oPcarsMapCtrl.circuitID = celltrackid;	//oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
@@ -881,18 +883,42 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				}else if( !e || e.which === 3 ){	//right click				              		
 		              		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
 					oPcarsMapCtrl.circuitID = -1;	// reset value to default
-				}
-			},
-			ondblClickRow:	function (rowid, iRow, iCol, e) {
-				//double clikc not used because overlapping event with onSelectRow				
-			},
-			caption: "List of available Tracks",
-			rowNum: 300,
-			//rowList:[10,20,30],
-			//pager: 'pager_tracklisttable',
-                	loadComplete: function(){
-                        	jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionTrackTable);
-	                }
+				}*/
+
+		},
+		afterInsertRow: function (rowid, rowdata, rowelem) {
+			// reselect the original selected row on grid reload
+			if (rowdata.trackid == cellDataTrackID){
+				jQuery(this).jqGrid('setSelection',rowid);				
+			}
+		},
+		ondblClickRow:	function (rowid, iRow, iCol, e) {
+			//double clikc not used because overlapping event with onSelectRow				
+		},
+		caption: "List of available Tracks",
+		rowNum: 300,
+		//rowList:[10,20,30],
+		//pager: 'pager_tracklisttable',
+                loadComplete: function(){
+                       	jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionTrackTable);
+		},
+		beforeSelectRow: function(rowid){
+			//this event is triggered only once shortly before the row is selected
+
+			// if you select an already selected row, deselect it
+			if($(this).jqGrid("getGridParam", "selrow") === rowid){
+				$(this).jqGrid("resetSelection");
+				oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
+				oPcarsMapCtrl.circuitID = -1;   // reset value to default
+			}else{
+				//else a row is selected
+				var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowid, 1);
+				oPcarsMapCtrl.circuitID = celltrackid;  //oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
+				oPcarsMapCtrl.changeMapSettings(aRefPointTMP[celltrackid] , oMap , celltrackid);
+
+				return true;
+			}
+		}
 	});			
 	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { 
@@ -941,7 +967,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	        caption: 'List of available Cars&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbCarlistExport" value="Export" style="background-color:#dddddd"></input><div id="pcars-carlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>',
 		rowNum: 400,	
 		beforeSelectRow: function(rowid){
-			//this event is triggered only once shortly before the row is selectedi
+			//this event is triggered only once shortly before the row is selected
 
 			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
@@ -2314,6 +2340,12 @@ function refreshTrackList(a){
 
 	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
         scrollPositionTrackTable = jQuery("#tracklisttable").closest(".ui-jqgrid-bdiv").scrollTop();
+
+	// retrieve TrackID of the current selected row, because the automatic reload of the grid deletes the selection.
+        //On grid reload the event afterInsertRow is fired and the original selected row is reselected based on TrackID.
+        var selRowId = jQuery("#tracklisttable").jqGrid("getGridParam", "selrow");
+        cellDataTrackID = jQuery("#tracklisttable").jqGrid("getCell", selRowId, "trackid");
+
 	
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#tracklisttable").jqGrid("clearGridData");

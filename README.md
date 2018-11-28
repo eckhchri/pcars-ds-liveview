@@ -126,7 +126,7 @@ Then you can click on it and "Load unsafe scripts".
 
 - Same for the "Export All" Button in the Driver Table. liveview collects all session results for the complete race weekend and if you click on the button you get a csv and/or pdf (configurable via config.js) with all finished sessions till this moment. But liveview have to run from beginning of the first session. I hope this still works, I haven't test it for a long time and there were already some DS changes in the past. Further this feature only works in DS mode.
 
-- If you open the track table, you can use the left mouse button to select a track, the map then jumps to it, right mouse button jumps back again. Fictional tracks have only a white background. For Sakitto GP are border lines available for example (there is also a recording for Sakitto GP), but for the most others not. These lines must be recorded with a car on track, which needs a lot of time and time is short - sorry.
+- If you open the track table, you can use the left mouse button to select a track, the map then jumps to it, left mouse button on the selected row jumps back again. Fictional tracks have only a white background. For Sakitto GP are border lines available for example (there is also a recording for Sakitto GP), but for the most others not. These lines must be recorded with a car on track, which needs a lot of time and time is short - sorry.
 
 - The main focus of liveview is the DS mode, which means that some features are not working in CREST mode, like mentioned above with the Export All, but also the the Pit counting or the Session States in the Driver Table Header etc.
 
