@@ -109,7 +109,7 @@
 	</div>
 
 	<div id="LiveryOverviewVehicle" class="mapoverlay LiveryOverview">
-			<div id="LiveryOverviewVehicleHead"> All Liveries  </div>
+			<div id="LiveryOverviewVehicleHead" class="LiveryOverviewHead">All Liveries</div>
 	</div>
 
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
@@ -948,6 +948,8 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				$(this).jqGrid("resetSelection");
 				$("#LiveryOverviewVehicle").hide();
 				$("#LiveryGridDriverTable").remove();
+
+				document.getElementById("LiveryOverviewVehicleHead").innerHTML = "All Liveries";
 			}else{
 				//else a row is selected
 
@@ -973,6 +975,9 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				}
 
 				HTMLcode += "</div></div>";			
+
+				// set Headline
+				document.getElementById("LiveryOverviewVehicleHead").innerHTML = "All Liveries of \"" + rowData.name + "\"";
 
 				//add Grid to HTML
 				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );

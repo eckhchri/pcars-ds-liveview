@@ -232,7 +232,14 @@
                                 padding:        5px;
 				/*overflow-y:	auto;*/
 				z-index:	70;
+	}
+
+	.LiveryOverviewHead{
+		font-size: 15px;
+		font-weight: bold;
+		padding: 3px;
         }
+
 	#LiveryOverviewVehicle{
 				display: none;
 	}
@@ -375,7 +382,7 @@ input:checked + .slider:before {
 
 .LiveryGridContainer {
 	overflow-y: auto;
-	height: 95%;
+	height: 93%;
 	margin-top: 5px;
 }
 
