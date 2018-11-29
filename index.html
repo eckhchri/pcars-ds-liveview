@@ -981,7 +981,15 @@ function initialize_app(){
 
 				var rowData = $(this).jqGrid('getRowData', rowid);
 				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+				var gamescope = rowData.gamescope;
 				var filename = "";
+
+				// Liveries for PCARS2 cars are shown only, even if there is the same Vehicle ID in PCARS1 and 2
+				if(gamescope.includes("PCARS2")){
+					oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+				}else{
+					oLiveries = {};
+				}
 			
 				//remove old grid
 				$("#LiveryGridDriverTable").remove();
@@ -991,11 +999,12 @@ function initialize_app(){
 					for (var key in oLiveries[rowData.vehicleid] ){
 						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
 						filename = "data/liveries/" + rowData.vehicleid + "/id" + key;
-						HTMLcode = HTMLcode + "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
+						HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
 							"<br><span class='overlayLiveryImageText'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
 					}
 				}else{
 					//ToDo: Vehicle Liveries not available
+					HTMLcode += "<div>No Data for this car available</div>";
 				}
 
 				HTMLcode += "</div></div>";			
