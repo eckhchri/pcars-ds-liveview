@@ -86,7 +86,7 @@ class PCARSLV_BASIC{
 	 */
 	printConsoleMsg(sType , sMsg){
 		
-		console.log(sType + " : " + sMsg);
+		if(log >= 3){console.log(sType + " : " + sMsg);}
 		
 	}
 	

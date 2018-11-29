@@ -1654,7 +1654,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		
 		//update marker
 //		sensorLayer.update(aSensorData);  // TODO_SENSORLAYER
-console.log("TODO aSensorData: " , aSensorData);
+		if(log >= 3){console.log("TODO aSensorData: " , aSensorData);}
 
 		// fiddling
 		/*if(devmode_tm == true){			
@@ -1928,7 +1928,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			
 	}, false);
 	//initial call of the tracklist worker. initiate endless loop
-	console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );
+	if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );}
 	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTrackname2ID });
 		
 
@@ -2823,7 +2823,7 @@ function initDemoData(aNewData, SetApiModeTo ){
 	
 	//also reset Race Statistics
 	aRacestats = PCARS_Rec.resetRacestats(aRacestats);
-	console.log("Reset Race Statistik 3! Size: ", aRacestats);
+	if(log >= 3){console.log("Reset Race Statistik 3! Size: ", aRacestats);}
 
 	//switch to demo mode
 	HTMLCTRL.APIMODE_SetSelection( "DEMO" );

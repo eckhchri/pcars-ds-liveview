@@ -83,7 +83,7 @@ var StopTransitionDelay_minTimeRun = 1100; //milliseconds -
 
 // Logging
 //Log Levels for console.log commands: 0 = off or special use, 1 = error, 2 = warning, 3 = info, 4 = extended info (output of variables for example)
-var log = 3;
+var log = 1;
 
 // Recording
 var isRecEnabled			=	false;		//enables recording of data
