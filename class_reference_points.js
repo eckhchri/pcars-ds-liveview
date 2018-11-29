@@ -1365,7 +1365,7 @@ function Refpoint(circuit_id)
 
 	if (circuit_id == undefined){
 		// no paramter given -> set to an default value to prevent empty return value
-		console.log ("Circuit_id NOT set, change to default!");
+		if(log >= 3){console.log ("Circuit_id NOT set, change to default!");}
 		this.circuit_id = 9999999999;
 
 	}

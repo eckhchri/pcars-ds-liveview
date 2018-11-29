@@ -328,7 +328,7 @@
 		}
 
 		if (GOOGLE_MAP_KEY.length <= 0 ){
-			console.log("+++++++++ GOOGLE_MAP_KEY seems empty: " , GOOGLE_MAP_KEY );
+			if(log >= 2){console.log("+++++++++ GOOGLE_MAP_KEY seems empty: " , GOOGLE_MAP_KEY );}
 		}
 				
 		var script = document.createElement('script');
@@ -632,7 +632,7 @@ function initialize_app(){
 	//init map	
 	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMP[cuircitID]);	
 	oPcarsMapCtrl.init_map(aRefPointTMP[cuircitID], aSensorData);
-console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
+	if(log >= 3){console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);}
 	
 	// init MapType Selection		
 	var aMapTypes = oPcarsMapCtrl.getMapTypes();
@@ -981,7 +981,6 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 
 				var rowData = $(this).jqGrid('getRowData', rowid);
 				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
-				console.log("File Liveries",oLiveries);
 				var filename = "";
 			
 				//remove old grid
@@ -992,7 +991,6 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 					for (var key in oLiveries[rowData.vehicleid] ){
 						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
 						filename = "data/liveries/" + rowData.vehicleid + "/id" + key;
-						console.log("filename: ",filename);
 						HTMLcode = HTMLcode + "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
 							"<br><span class='overlayLiveryImageText'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
 					}
@@ -1258,7 +1256,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 
 						//init array with driver hashes if they are undefined
 						if (!aRaceData[curDriverHash]){
-							console.log("init aRaceData array");
+						if(log >= 3){console.log("init aRaceData array");}
 							aRaceData[curDriverHash] = {
 								NumPits: 0,
 								State: e.data.driverlist[i].State,
@@ -2246,7 +2244,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 			ExportCSV(JSONToCSVConvertor(jQuery("#tracklisttable").jqGrid("getRowData"), "Track Table",true,jQuery("#tracklisttable").jqGrid("getGridParam", "colNames"),["id"]),"Report_TrackTable");
 		}
 		if (ExportType === "PDF" || ExportType === "BOTH") {
-			console.log("tracklisttable",jQuery("#tracklisttable").getRowData());
+			if(log >= 3){console.log("tracklisttable",jQuery("#tracklisttable").getRowData());}
 			var PDFdocDefinition = {
 				pageSize: 'A4',
 				pageOrientation: 'landscape',
