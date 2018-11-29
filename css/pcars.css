@@ -155,6 +155,7 @@
 				background-size:	contain;			
 				opacity: 			1;
 				margin: 			auto; 
+				display: none;
 	     }
 	     
 	     #DSreplay{
@@ -166,6 +167,7 @@
 				background-size:	contain;                                
 				opacity: 			0.5;
 				margin: 			auto;
+				display: none;
 	     }
 	     
 		
@@ -243,6 +245,10 @@
 	#LiveryOverviewVehicle{
 				display: none;
 	}
+
+	#SpotterGuide{
+                                display: none;
+        }
 
 /* CSS GRid layout for recorder and replay elments */		
 .pcars_grid_recorder_replay	{

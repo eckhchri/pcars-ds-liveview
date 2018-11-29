@@ -112,6 +112,10 @@
 			<div id="LiveryOverviewVehicleHead" class="LiveryOverviewHead">All Liveries</div>
 	</div>
 
+	<div id="SpotterGuide" class="mapoverlay LiveryOverview">
+                        <div id="SpotterGuideHead" class="LiveryOverviewHead">All Liveries</div>
+        </div>
+
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
 		<img id="LiveryImageDriverTable"  class="overlayLiveryImage" src="">
 		<br><span id="overlayLiveryImageTextDriverTable" class="overlayLiveryImageText"></span>
@@ -518,8 +522,8 @@ function initialize_app(){
 	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
 	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}
-	if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
-	if ( SHOWDSREPLAY	== false ) { 	$( "#DSreplay" ).hide();		}
+	//if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
+	//if ( SHOWDSREPLAY	== false ) { 	$( "#DSreplay" ).hide();		}
 	if ( SHOWRECSTATISTIC== false ) { 	$( "#DSRecStatistics" ).hide();		}
 	if ( SHOWREFPOINTFIDDLING== false || devmode_tm == false ) { 	$( "#RefpointFiddling" ).hide();		}
 	
@@ -951,7 +955,7 @@ function initialize_app(){
 	        hiddengrid: JQGridCartableCollapsed,
 	        width:	800,
 		ignoreCase:true,
-	        colNames:['ID','Name','class', 'Game Scope', 'link', 'Comment'],
+	        colNames:['ID','Name','Class', 'Game Scope', 'Link', 'Comment'],
 	        colModel:[
 					{name:'vehicleid', 		width:100, 	sorttype:"int", index:'vehicleid'},
 					{name:'name', 			width:260, 	sorttype:"text"},
