@@ -113,7 +113,7 @@
 	</div>
 
 	<div id="SpotterGuide" class="mapoverlay LiveryOverview">
-                        <div id="SpotterGuideHead" class="LiveryOverviewHead">All Liveries</div>
+		<div id="SpotterGuideHead" class="LiveryOverviewHead">Spotter Guide  <input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
         </div>
 
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
@@ -568,6 +568,7 @@ function initialize_app(){
 			$( "#DSRecStatistics" ).draggable();
 			$( "#LiveryImageWrapperDriverTable" ).draggable();
 			$( "#LiveryOverviewVehicle" ).draggable();
+			$( "#SpotterGuide" ).draggable();
 		});			
 		
 	});
@@ -977,7 +978,7 @@ function initialize_app(){
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				$("#LiveryOverviewVehicle").hide();
-				$("#LiveryGridDriverTable").remove();
+				$("#LiveryGridContainerCarTable").remove();
 
 				document.getElementById("LiveryOverviewVehicleHead").innerHTML = "All Liveries";
 			}else{
@@ -986,23 +987,19 @@ function initialize_app(){
 				var rowData = $(this).jqGrid('getRowData', rowid);
 				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
 				var gamescope = rowData.gamescope;
-				var filename = "";
 
 				// Liveries for PCARS2 cars are shown only, even if there is the same Vehicle ID in PCARS1 and 2
-				if(gamescope.includes("PCARS2")){
-					oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
-				}else{
+				if(!gamescope.includes("PCARS2")){
 					oLiveries = {};
 				}
 			
 				//remove old grid
-				$("#LiveryGridDriverTable").remove();
+				$("#LiveryGridContainerCarTable").remove();
 				//built Grid
-				var HTMLcode = "<div class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+				var HTMLcode = "<div id='LiveryGridContainerCarTable' class='LiveryGridContainer'><div id= 'LiveryGridCarTable' class='LiveryGrid'>";
 				if(oLiveries[rowData.vehicleid]){
 					for (var key in oLiveries[rowData.vehicleid] ){
 						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
-						filename = "data/liveries/" + rowData.vehicleid + "/id" + key;
 						HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
 							"<br><span class='overlayLiveryImageText'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
 					}
@@ -2146,7 +2143,7 @@ function initialize_app(){
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
 	//TODO: tune Layout
-	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Pause automatic refresh of table" id="cbDriverlistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;"><div id="pcars-driverlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo">');
+	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Pause automatic refresh of table" id="cbDriverlistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Open a Spotter Guide" id="cbDriverlistSpotterGuide" value="Spotter Guide" style="background-color:#dddddd; width:95px"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;"><div id="pcars-driverlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo">');
 			
 	// checkbox Event handling
 	$('#cbDriverlistRefresh').click(function () {
@@ -2160,6 +2157,38 @@ function initialize_app(){
 		//Method with Button
 		var self = this;
 		changeRefreshDriverlist(self);                                                
+	});
+
+	$('#cbDriverlistSpotterGuide').click(function () {
+		//console.log("aDrivers",aDrivers);
+
+		var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+
+		//remove old grid
+		$("#LiveryGridContainerDriverTable").remove();
+
+		//built Grid
+		var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+		for (var i = 0; i < aDrivers.length; i++ ){
+			//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
+			HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
+				"<br><span class='overlayLiveryImageText'>" + aDrivers[i].RacePosition + ". " + aDrivers[i].Name + "</span></div>";
+			}
+		HTMLcode += "</div></div>";
+
+		// set Headline
+		//document.getElementById("SpotterGuideHead").innerHTML = "Spotter Guide for  " + SessionStage + " <input type='button' title='Close Spotter Guide' id='cbSpotterGuideClose' value='Close' style='background-color:#dddddd; width:50px'></input>";
+		//add Grid to HTML
+		$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
+
+		$("#SpotterGuide").show();
+	});
+
+	$('#cbSpotterGuideClose').click(function () {
+		$("#SpotterGuide").hide();
+
+		//remove old grid
+		$("#LiveryGridContainerDriverTable").remove();
 	});
         
 	function changeRefreshDriverlist(data){

@@ -406,5 +406,6 @@ input:checked + .slider:before {
 .LiveryGridImage {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
-  width: 285px;
+  max-width: 285px;
+  max-height: 125px;
 }
