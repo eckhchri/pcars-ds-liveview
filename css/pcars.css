@@ -426,6 +426,9 @@ input:checked + .slider:before {
 }
 
 .LiveryGridText{
+  height: 14px;
+  display: flex;
+  align-items: center;
   border-style: solid;
   border-width: 1px;
   border-color: black;
@@ -443,16 +446,23 @@ input:checked + .slider:before {
   position: absolute;
   top: -0.5px;
   right: 0px;
+  font-size: 10px;
 }
 
 .LiveryGridTextBottomLeft{
   position: absolute;
   bottom: -0.5px;
   left: -0.5px;
+  color: white;
+  background-color: black;
+  font-weight: bold;
 }
 
 .LiveryGridTextBottomRight{
   position: absolute;
   bottom: -0.5px;
   right: 0px;
+  font-size: 10px;
+  color: white;
+  background-color: black;
 }
