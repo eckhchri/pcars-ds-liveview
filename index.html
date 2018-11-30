@@ -2162,7 +2162,11 @@ function initialize_app(){
 	$('#cbDriverlistSpotterGuide').click(function () {
 		console.log("aDrivers",aDrivers);
 
-		var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+		var oLiveries = {};
+
+		if(CurGameRunning == "PCARS2"){
+			oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+		}
 
 		//remove old grid
 		$("#LiveryGridContainerDriverTable").remove();
@@ -2170,7 +2174,7 @@ function initialize_app(){
 		//built Grid
 		var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
 		for (var i = 0; i < aDrivers.length; i++ ){
-			var LiveryName = ""
+			var LiveryName = "NA";
 			if(oLiveries[aDrivers[i].VehicleId]){
 				LiveryName = oLiveries[aDrivers[i].VehicleId][aDrivers[i].LiveryId];
 			}
