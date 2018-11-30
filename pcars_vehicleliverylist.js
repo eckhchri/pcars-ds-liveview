@@ -3,6 +3,7 @@ function PCARSVEHICLELIVERYLIST() {
 
 	this.aVehicleLiveryInfoExt	=	{};	//extended array of vehicle livery info
 	this.oLiveryDataStructured	=	{}; //restructed data array
+	this.oLiveryDataStructuredName  =       {}; //restructed data array
 	this.sGameMode = 'PCARS2';
 	
 	//init data
@@ -10,6 +11,7 @@ function PCARSVEHICLELIVERYLIST() {
 
 	// restructure data to oLiveryDataStructured
 	this._RestructureLiveryData(this.sGameMode);
+	this._RestructureLiveryDataName(this.sGameMode);
 
 
 	
@@ -86,7 +88,7 @@ function _NameNormalization (sName){
 }
 
 
-/* (internal funtion) string normalization
+/* (internal funtion) _RestructureLiveryData
  * 
  */
 function _RestructureLiveryData (sGameMode){	
@@ -120,6 +122,39 @@ function _RestructureLiveryData (sGameMode){
 	return true;	
 }
 
+/* (internal funtion) _RestructureLiveryDataName
+ *
+ */
+function _RestructureLiveryDataName (sGameMode){
+
+
+        if (!this.oLiveryDataStructuredName[sGameMode]){
+                this.oLiveryDataStructuredName[sGameMode] = {};
+        }
+
+        // travers vehicle ids
+        var aVehicles = this.aVehicleLiveryInfoExt[sGameMode];
+        for (var i=0; i < aVehicles.length; i++ ){
+
+                var oV = aVehicles[i];
+                if(! this.oLiveryDataStructuredName[sGameMode][oV.name]){
+                        this.oLiveryDataStructuredName[sGameMode][oV.name] = {};
+                }
+
+                // tranvers different liveries
+                var aLiveries = oV['liveries'];
+                for (var j=0; j < aLiveries.length; j++){
+
+                        var iLivID = aLiveries[j].id;
+                        var sLivName = aLiveries[j].name;
+
+                        this.oLiveryDataStructuredName[sGameMode][oV.name][iLivID] = sLivName;
+                }
+
+        }
+
+        return true;
+}
 
 /// FOR DEVELOPER PURPOSES ONLY
 /// Checks which Livery files are available and which not, and prints the result to the browser developer console
@@ -19299,5 +19334,6 @@ PCARSVEHICLELIVERYLIST.prototype.getVehicleNumberById=getVehicleNumberById;
 PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
 PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
 PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;
+PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryDataName=_RestructureLiveryDataName;
 PCARSVEHICLELIVERYLIST.prototype.loadVehicleLiveryData=loadVehicleLiveryData;
 PCARSVEHICLELIVERYLIST.prototype.checkfiles=checkfiles;

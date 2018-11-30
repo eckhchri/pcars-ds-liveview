@@ -1435,7 +1435,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1748676965,
-        "name" : "McLaren P1™",
+        "name" : "McLaren P1 ™",
         "class" : "Road A"
       },
       {
@@ -1505,7 +1505,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1339322144,
-        "name" : "McLaren P1™ GTR",
+        "name" : "McLaren P1 ™ GTR",
         "class" : "Track Day A"
       },
       {
