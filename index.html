@@ -2161,16 +2161,17 @@ function initialize_app(){
 	});
 
 	$('#cbDriverlistSpotterGuide').click(function () {
-		console.log("aDrivers",aDrivers);
 
 		var oLiveries = {};
 
-		if(CurGameRunning == "PCARS2"){
-			oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
-		}
+		var TableData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
 
 		//remove old grid
 		$("#LiveryGridContainerDriverTable").remove();
+		
+		if(CurGameRunning == "PCARS2"){
+			oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+		}
 
 		//built Grid
 		var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
@@ -2183,11 +2184,36 @@ function initialize_app(){
 			HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
 				"<span class='LiveryGridText LiveryGridTextTopLeft'><strong>" + aDrivers[i].RacePosition + ".</strong>&nbsp;" + aDrivers[i].Name + "</span>" +
 				"<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
-				"<span class='LiveryGridText LiveryGridTextBottomLeft'>" + aDrivers[i]. VehicleClassName + "</span>" +
+				"<span class='LiveryGridText LiveryGridTextBottomLeft'>" + aDrivers[i].VehicleClassName + "</span>" +
 				"<span class='LiveryGridText LiveryGridTextBottomRight'>" + aDrivers[i].VehicleName + "</span>" +
 				"</div>";
 			}
 		HTMLcode += "</div></div>";
+
+		/// alternative new way building Grid by Driver Table data, because you can sort and filter the table and the Spotter Guide is hwoing it in the same way then
+		/*console.log("TableData: ",TableData);
+		if(CurGameRunning == "PCARS2"){
+                        oLiveries = PCARSVehicleLiveryList.oLiveryDataStructuredName.PCARS2;
+                }
+
+                //built Grid
+                var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+                for (var i = 0; i < TableData.length; i++ ){
+                        var LiveryName = "NA";
+                        if(oLiveries[TableData[i].liveryname]){
+                                LiveryName = oLiveries[TableData[i].liveryname][TableData[i].LiveryId];
+                        }
+
+			//ToDo: Vehicle ID and Livery ID are still needed for the filename generation, we need a function VehicleNametoID function in the vehicle list and a LiveryNametoID function in the vehicle livery list
+                        HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + TableData[i].VehicleId + "/id" + TableData[i].LiveryId + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
+                                "<span class='LiveryGridText LiveryGridTextTopLeft'><strong>" + TableData[i].driverposition + ".</strong>&nbsp;" + TableData[i].drivername + "</span>" +
+                                "<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
+                                "<span class='LiveryGridText LiveryGridTextBottomLeft'>" + TableData[i].vehicleclass + "</span>" +
+                                "<span class='LiveryGridText LiveryGridTextBottomRight'>" + TableData[i].vehiclename + "</span>" +
+                                "</div>";
+                        }
+                HTMLcode += "</div></div>";*/
+		/// end of alternative way for building Grid by Driver Table data
 
 		// set Headline
 		//document.getElementById("SpotterGuideHead").innerHTML = "Spotter Guide for  " + SessionStage + " <input type='button' title='Close Spotter Guide' id='cbSpotterGuideClose' value='Close' style='background-color:#dddddd; width:50px'></input>";
