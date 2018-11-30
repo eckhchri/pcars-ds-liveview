@@ -11,7 +11,6 @@ function PCARSVEHICLELIVERYLIST() {
 
 	// restructure data to oLiveryDataStructured
 	this._RestructureLiveryData(this.sGameMode);
-	this._RestructureLiveryDataName(this.sGameMode);
 
 
 	
@@ -97,6 +96,9 @@ function _RestructureLiveryData (sGameMode){
 	if (!this.oLiveryDataStructured[sGameMode]){
 		this.oLiveryDataStructured[sGameMode] = {};
 	}
+	if (!this.oLiveryDataStructuredName[sGameMode]){
+                this.oLiveryDataStructuredName[sGameMode] = {};
+        }
 			
 	// travers vehicle ids
 	var aVehicles = this.aVehicleLiveryInfoExt[sGameMode];
@@ -106,6 +108,9 @@ function _RestructureLiveryData (sGameMode){
 		if(! this.oLiveryDataStructured[sGameMode][oV.id]){
 			this.oLiveryDataStructured[sGameMode][oV.id] = {};
 		}
+		if(! this.oLiveryDataStructuredName[sGameMode][oV.id]){
+                        this.oLiveryDataStructuredName[sGameMode][oV.id] = {};
+                }
 						
 		// tranvers different liveries
 		var aLiveries = oV['liveries'];		
@@ -114,7 +119,8 @@ function _RestructureLiveryData (sGameMode){
 			var iLivID = aLiveries[j].id;
 			var sLivName = aLiveries[j].name;
 			
-			this.oLiveryDataStructured[sGameMode][oV.id][iLivID] = sLivName;												
+			this.oLiveryDataStructured[sGameMode][oV.id][iLivID] = sLivName;
+			this.oLiveryDataStructuredName[sGameMode][oV.id][sLivName] = iLivID;
 		}				
 		
 	}
@@ -122,39 +128,6 @@ function _RestructureLiveryData (sGameMode){
 	return true;	
 }
 
-/* (internal funtion) _RestructureLiveryDataName
- *
- */
-function _RestructureLiveryDataName (sGameMode){
-
-
-        if (!this.oLiveryDataStructuredName[sGameMode]){
-                this.oLiveryDataStructuredName[sGameMode] = {};
-        }
-
-        // travers vehicle ids
-        var aVehicles = this.aVehicleLiveryInfoExt[sGameMode];
-        for (var i=0; i < aVehicles.length; i++ ){
-
-                var oV = aVehicles[i];
-                if(! this.oLiveryDataStructuredName[sGameMode][oV.name]){
-                        this.oLiveryDataStructuredName[sGameMode][oV.name] = {};
-                }
-
-                // tranvers different liveries
-                var aLiveries = oV['liveries'];
-                for (var j=0; j < aLiveries.length; j++){
-
-                        var iLivID = aLiveries[j].id;
-                        var sLivName = aLiveries[j].name;
-
-                        this.oLiveryDataStructuredName[sGameMode][oV.name][iLivID] = sLivName;
-                }
-
-        }
-
-        return true;
-}
 
 /// FOR DEVELOPER PURPOSES ONLY
 /// Checks which Livery files are available and which not, and prints the result to the browser developer console
@@ -19334,6 +19307,5 @@ PCARSVEHICLELIVERYLIST.prototype.getVehicleNumberById=getVehicleNumberById;
 PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
 PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
 PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;
-PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryDataName=_RestructureLiveryDataName;
 PCARSVEHICLELIVERYLIST.prototype.loadVehicleLiveryData=loadVehicleLiveryData;
 PCARSVEHICLELIVERYLIST.prototype.checkfiles=checkfiles;
