@@ -1670,7 +1670,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -486674040,
-        "name" : "Pagani Zonda Revolucion",
+        "name" : "Pagani Zonda Revolución",
         "class" : "Track Day A"
       },
       {
