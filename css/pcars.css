@@ -224,9 +224,9 @@
         }
 	.LiveryOverview{
                                 position:       absolute;
-                                left:           18%;
+                                left:           17%;
                                 top:            30px;
-                                width:          81%;
+                                width:          82%;
                                 height:         90%;
                                 border:         1;
                                 background:     white;
@@ -396,16 +396,63 @@ input:checked + .slider:before {
   display: grid;
   grid-auto-flow: dense;
   grid-template-columns: repeat(auto-fill, 300px);
+  grid-gap: 4px;
   padding: 10px;
 }
+
 .LiveryGridItem {
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(0, 0, 0, 0.8);
   height: 145px;
-  text-align: center;
+  position:relative
 }
+
 .LiveryGridImage {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.LiveryGridImageCarTable {
   max-width: 285px;
   max-height: 125px;
+}
+
+.LiveryGridImageSpotterGuide {
+  max-width: 275px;
+  max-height: 115px;
+}
+
+.LiveryGridText{
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  background: white;
+  padding: 2px 3px;
+}
+
+.LiveryGridTextTopLeft{
+  position: absolute;
+  top: -0.5px;
+  left: -0.5px;
+}
+
+.LiveryGridTextTopRight{
+  position: absolute;
+  top: -0.5px;
+  right: 0px;
+}
+
+.LiveryGridTextBottomLeft{
+  position: absolute;
+  bottom: -0.5px;
+  left: -0.5px;
+}
+
+.LiveryGridTextBottomRight{
+  position: absolute;
+  bottom: -0.5px;
+  right: 0px;
 }

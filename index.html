@@ -1000,8 +1000,8 @@ function initialize_app(){
 				if(oLiveries[rowData.vehicleid]){
 					for (var key in oLiveries[rowData.vehicleid] ){
 						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
-						HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
-							"<br><span class='overlayLiveryImageText'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
+						HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageCarTable' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
+							"<span class='LiveryGridText LiveryGridTextBottomRight'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
 					}
 				}else{
 					//ToDo: Vehicle Liveries not available
@@ -2160,7 +2160,7 @@ function initialize_app(){
 	});
 
 	$('#cbDriverlistSpotterGuide').click(function () {
-		//console.log("aDrivers",aDrivers);
+		console.log("aDrivers",aDrivers);
 
 		var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
 
@@ -2170,9 +2170,17 @@ function initialize_app(){
 		//built Grid
 		var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
 		for (var i = 0; i < aDrivers.length; i++ ){
-			//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
-			HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
-				"<br><span class='overlayLiveryImageText'>" + aDrivers[i].RacePosition + ". " + aDrivers[i].Name + "</span></div>";
+			var LiveryName = ""
+			if(oLiveries[aDrivers[i].VehicleId]){
+				LiveryName = oLiveries[aDrivers[i].VehicleId][aDrivers[i].LiveryId];
+			}
+
+			HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
+				"<span class='LiveryGridText LiveryGridTextTopLeft'>" + aDrivers[i].RacePosition + ". " + aDrivers[i].Name + "</span>" +
+				"<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
+				 "<span class='LiveryGridText LiveryGridTextBottomLeft'>" + aDrivers[i]. VehicleClassName + "</span>" +
+				"<span class='LiveryGridText LiveryGridTextBottomRight'>" + aDrivers[i].VehicleName + "</span>" +
+				"</div>";
 			}
 		HTMLcode += "</div></div>";
 
