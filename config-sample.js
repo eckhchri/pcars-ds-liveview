@@ -94,7 +94,7 @@ aRecConfig['DataVersion']	=	1;			//in the case if data format will changed and r
 //demo initial data, currently that must not be empty
 var demo = [
                 {//0
-                	globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"MyDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, "datasource":"CRESTv1", "curgamerunning":"PCARS1", attributes:{TrackId:9999999999, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0, RaceLength: 0, TemperatureAmbient: 20, TemperatureTrack: 30}},
+                	globals:{sensorLayer_UpdateDelta:886, state:"Running", name:"MyDS", lobbyid:109775242963699993, joinable:"true", max_member_count:3, now:1459966148, "datasource":"CRESTv2", "curgamerunning":"PCARS2", attributes:{TrackId:9999999999, SessionState:"Lobby", SessionStage:"Practice1", GridSize:10, MaxPlayers:3, SessionTimeDuration:0, SessionTimeElapsed:0, RaceLength: 0, TemperatureAmbient: 20, TemperatureTrack: 30}},
                     participants:[
 			    {RefId:9234567, Name:"Slightly Mad Studios Ltd", IsPlayer:0, GridPosition:3, VehicleId:"9999999999", LiveryId: 1, RacePosition:0, CurrentLap:99, CurrentSector:0, LastLapTime:9999, FastestLapTime:9000, S1Time: 0, S2Time: 0, S3Time: 0, State:"StateTest", Speed:100, PosX:0, PosY:0, PosZ:0, Orientation:0, NumPits: "-", Gap2Ahead: "-", Gap2First: "-"}
                     ]

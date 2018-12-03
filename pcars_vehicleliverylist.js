@@ -41,7 +41,7 @@ function getNameById(sVehicleID, sLiveryId){
 	return sResult;	
 }
 
-/* returns name of a car livery
+/* returns vehivle number of a car livery
  *
  * @param {string} vehicle id
  * @param {string} livery id
@@ -61,6 +61,28 @@ function getVehicleNumberById(sVehicleID, sLiveryId){
 	if(sResult == "" || sResult == "LiveryID not found"){sResult = "Vehicle Number not found";}
 
 	return sResult;
+}
+
+/* returns ID of a car livery
+ *
+ * @param {string} vehicle id
+ * @param {string} livery name
+ * @return {string} livery id
+ */
+function getIdByName(sVehicleID, sLiveryName){
+
+        var sResult = "Livery Name not found";
+
+        if (!sVehicleID || !sLiveryName){
+                return sResult;
+        }
+	if(this.oLiveryDataStructuredName[this.sGameMode][sVehicleID]){
+        	if (this.oLiveryDataStructuredName[this.sGameMode][sVehicleID][sLiveryName]){
+                	return this.oLiveryDataStructuredName[this.sGameMode][sVehicleID][sLiveryName];
+	        }
+	}
+
+        return sResult;
 }
 
 /* returns normalized name of a car livery
@@ -19304,6 +19326,7 @@ this.aVehicleLiveryInfoExt['PCARS2'] = [
 
 PCARSVEHICLELIVERYLIST.prototype.getNameById=getNameById;
 PCARSVEHICLELIVERYLIST.prototype.getVehicleNumberById=getVehicleNumberById;
+PCARSVEHICLELIVERYLIST.prototype.getIdByName=getIdByName;
 PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
 PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
 PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;

@@ -844,6 +844,12 @@ this.aVehicleInfoExt['PCARS1'] = [
 this.aVehicleInfoExt['PCARS2']	=	[];
 this.aVehicleInfoExt['PCARS2']	= 	[
       {
+	"id" : 9999999999,
+	"name" : "Slightly Mad Studios Ltd",
+	"class" : "NA"
+      },
+//////pcars2 data begins here
+      {
         "id" : 9503224,
         "name" : "BMW 320 TC (E90)",
         "class" : "Touring Car"

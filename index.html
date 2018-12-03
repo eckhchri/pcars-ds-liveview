@@ -2053,33 +2053,29 @@ function initialize_app(){
 			}else{
 				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
+				var VehicleID = PCARSVehicleList.NametoIDExt[CurGameRunning][rowData.vehiclename];
+				var LiveryName = rowData.liveryname;
+				var LiveryID = PCARSVehicleLiveryList.getIdByName(VehicleID,LiveryName);
 
 				var filename = "";
-				var LiveryName = "";
 
-				for (var i = 0; i < aDrivers.length; i++ ){
-					if(aDrivers[i].Name == rowData.drivername){
-						curDriver = aDrivers[i]; //needed for the URL check, because in the later get(filenmae) function the index of the for loop is not working
-						LiveryName = PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId);
-						elLiveryImage.setAttribute("title", LiveryName);
-						document.getElementById("overlayLiveryImageTextDriverTable").innerHTML = LiveryName;
+				elLiveryImage.setAttribute("title", LiveryName);
+				document.getElementById("overlayLiveryImageTextDriverTable").innerHTML = LiveryName;
 
-						//filename generated with livery ID
-						filename = "data/liveries/" + curDriver.VehicleId + "/id" + curDriver.LiveryId + ".png";
+				//filename generated with livery ID
+				filename = "data/liveries/" + VehicleID + "/id" + LiveryID + ".png";
 
-						$.get(filename)
-							.done(function(){
-								//if livery ID png file is available use it
-								elLiveryImage.setAttribute("src", filename);
-							}).fail(function(){
-								//no vehicle png file found. In this case use the "not available"  file
-								filename = "data/liveries/na.png"
-								elLiveryImage.setAttribute("src", filename);
-							})
-						if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));}
-					}
-				}
-				
+				$.get(filename)
+					.done(function(){
+						//if livery ID png file is available use it
+						elLiveryImage.setAttribute("src", filename);
+					}).fail(function(){
+						//no vehicle png file found. In this case use the "not available"  file
+						filename = "data/liveries/na.png"
+						elLiveryImage.setAttribute("src", filename);
+					})
+				if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", LiveryID, " / Livery Name: ", LiveryName);}
+
 				//make Image Overlay visible
 				$("#LiveryImageWrapperDriverTable").show();
 				if(SHOWLIVERYNAMES){
@@ -2162,18 +2158,15 @@ function initialize_app(){
 
 	$('#cbDriverlistSpotterGuide').click(function () {
 
-		var oLiveries = {};
-
-		var TableData = jQuery("#DriverDataTable").jqGrid('getGridParam','data');
-
+		// Built Grid with global aDrivers array. In this case sorting and filtering via table is ignored
+		/*
 		//remove old grid
 		$("#LiveryGridContainerDriverTable").remove();
-		
+
 		if(CurGameRunning == "PCARS2"){
 			oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
 		}
 
-		//built Grid
 		var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
 		for (var i = 0; i < aDrivers.length; i++ ){
 			var LiveryName = "NA";
@@ -2188,39 +2181,49 @@ function initialize_app(){
 				"<span class='LiveryGridText LiveryGridTextBottomRight'>" + aDrivers[i].VehicleName + "</span>" +
 				"</div>";
 			}
-		HTMLcode += "</div></div>";
+		HTMLcode += "</div></div>";*/
+		// END built Grid with global aDrivers array
 
-		/// alternative new way building Grid by Driver Table data, because you can sort and filter the table and the Spotter Guide is hwoing it in the same way then
-		//console.log("TableData: ",TableData);
-		/*if(CurGameRunning == "PCARS2"){
-                        oLiveries = PCARSVehicleLiveryList.oLiveryDataStructuredName.PCARS2;
-                }
+		// Built Grid with table data. In this case you can filter and sort the table and you can see the result in the Spotter Guide, too.
+		var gridstate = jQuery("#DriverDataTable").jqGrid("getGridParam", "gridstate");
+		var HTMLcode;
 
-                //built Grid
-                var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
-                for (var i = 0; i < TableData.length; i++ ){
-                        var LiveryName = TableData[i].liveryname;
+		//remove old grid
+		$("#LiveryGridContainerDriverTable").remove();
 
-			var VehicleID = PCARSVEHICLELIST.NametoIDExt[CurGameRunning][TableData[i].vehiclename];
-			var LiveryID = 1;  // which default?
-			if(oLiveries[VehicleID]){
-                                LiveryID = oLiveries[VehicleID][LiveryName];
-                        }
+		if(gridstate == "visible"){
+			var TableData = jQuery("#DriverDataTable").jqGrid("getRowData");
 
-			HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + VehicleID + "/id" + LiveryID + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
-                                "<span class='LiveryGridText LiveryGridTextTopLeft'><strong>" + TableData[i].driverposition + ".</strong>&nbsp;" + TableData[i].drivername + "</span>" +
-                                "<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
-                                "<span class='LiveryGridText LiveryGridTextBottomLeft'>" + TableData[i].vehicleclass + "</span>" +
-                                "<span class='LiveryGridText LiveryGridTextBottomRight'>" + TableData[i].vehiclename + "</span>" +
-                                "</div>";
-                        }
-                HTMLcode += "</div></div>";*/
-		/// end of alternative way for building Grid by Driver Table data
+			if(CurGameRunning == "PCARS2"){
+				oLiveries = PCARSVehicleLiveryList.oLiveryDataStructuredName.PCARS2;
+			}
 
-		// set Headline
-		//document.getElementById("SpotterGuideHead").innerHTML = "Spotter Guide for  " + SessionStage + " <input type='button' title='Close Spotter Guide' id='cbSpotterGuideClose' value='Close' style='background-color:#dddddd; width:50px'></input>";
-		//add Grid to HTML
-		$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
+			HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+			for (var i = 0; i < TableData.length; i++ ){
+				var LiveryName = TableData[i].liveryname;
+
+				var VehicleID = PCARSVehicleList.NametoIDExt[CurGameRunning][TableData[i].vehiclename];
+				var LiveryID = PCARSVehicleLiveryList.getIdByName(VehicleID,LiveryName);
+
+				HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + VehicleID + "/id" + LiveryID + ".png' onerror='this.src=\"data/liveries/na.png\";'>"+
+					"<span class='LiveryGridText LiveryGridTextTopLeft'><strong>" + TableData[i].driverposition + ".</strong>&nbsp;" + TableData[i].drivername + "</span>" +
+					"<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
+					"<span class='LiveryGridText LiveryGridTextBottomLeft'>" + TableData[i].vehicleclass + "</span>" +
+					"<span class='LiveryGridText LiveryGridTextBottomRight'>" + TableData[i].vehiclename + "</span>" +
+					"</div>";
+			}
+			HTMLcode += "</div></div>";
+			// END Built Grid with table data.
+
+			// set Headline
+			//document.getElementById("SpotterGuideHead").innerHTML = "Spotter Guide for  " + SessionStage + " <input type='button' title='Close Spotter Guide' id='cbSpotterGuideClose' value='Close' style='background-color:#dddddd; width:50px'></input>";
+			//add Grid to HTML
+			$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
+		 }else{
+			HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>Please unfold the Driver Table first.</div></div>";
+			//add Grid to HTML
+			$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
+		}
 
 		$("#SpotterGuide").show();
 	});
