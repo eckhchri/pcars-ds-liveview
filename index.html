@@ -109,11 +109,11 @@
 	</div>
 
 	<div id="LiveryOverviewVehicle" class="mapoverlay LiveryOverview">
-			<div id="LiveryOverviewVehicleHead" class="LiveryOverviewHead">All Liveries</div>
+			<div id="LiveryOverviewVehicleHead" class="LiveryOverviewHead"><span id="txtLiveryOverview">All Liveries<&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Livery Overview" id="cbLiveryOverviewClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
 	</div>
 
 	<div id="SpotterGuide" class="mapoverlay LiveryOverview">
-		<div id="SpotterGuideHead" class="LiveryOverviewHead">Spotter Guide  <input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
+		<div id="SpotterGuideHead" class="LiveryOverviewHead"><span id="txtSpotterGuide">Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
         </div>
 
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
@@ -980,7 +980,7 @@ function initialize_app(){
 				$("#LiveryOverviewVehicle").hide();
 				$("#LiveryGridContainerCarTable").remove();
 
-				document.getElementById("LiveryOverviewVehicleHead").innerHTML = "All Liveries";
+				document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
 			}else{
 				//else a row is selected
 
@@ -1011,7 +1011,7 @@ function initialize_app(){
 				HTMLcode += "</div></div>";			
 
 				// set Headline
-				document.getElementById("LiveryOverviewVehicleHead").innerHTML = "All Liveries of \"" + rowData.name + "\"";
+				document.getElementById("txtLiveryOverview").innerHTML = "All Liveries of \"" + rowData.name + "\"&nbsp;&nbsp;&nbsp;&nbsp;";
 
 				//add Grid to HTML
 				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
@@ -1037,7 +1037,7 @@ function initialize_app(){
 	    
 	    return e.result === undefined ? true : e.result;
 	});
-	
+
 	
 	//set vehicleListtable data	
 	refreshVehicleList( PCARSVehicleList.getVehicleList() );	
@@ -2216,11 +2216,12 @@ function initialize_app(){
 			// END Built Grid with table data.
 
 			// set Headline
-			//document.getElementById("SpotterGuideHead").innerHTML = "Spotter Guide for  " + SessionStage + " <input type='button' title='Close Spotter Guide' id='cbSpotterGuideClose' value='Close' style='background-color:#dddddd; width:50px'></input>";
+			document.getElementById("txtSpotterGuide").innerHTML = "Spotter Guide for \"" + SessionStage + "\"&nbsp;&nbsp;&nbsp;&nbsp;";
 			//add Grid to HTML
 			$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
 		 }else{
 			HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>Please unfold the Driver Table first.</div></div>";
+			document.getElementById("txtSpotterGuide").innerHTML = "Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;";
 			//add Grid to HTML
 			$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
 		}
@@ -2230,6 +2231,9 @@ function initialize_app(){
 
 	$('#cbSpotterGuideClose').click(function () {
 		$("#SpotterGuide").hide();
+
+		// reset headline text
+		document.getElementById("txtSpotterGuide").innerHTML = "Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;";
 
 		//remove old grid
 		$("#LiveryGridContainerDriverTable").remove();
@@ -2405,6 +2409,19 @@ function initialize_app(){
 			}
 		}
 	});
+
+	$('#cbLiveryOverviewClose').click(function () {
+                $("#LiveryOverviewVehicle").hide();
+
+		// deselect table row
+		jQuery("#carlisttable").jqGrid("resetSelection");
+
+		// reset headline text
+		document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                //remove old grid
+                $("#LiveryGridContainerCarTable").remove();
+        });
 	
 }
 /////////////////////////////////////////////////end of application function
