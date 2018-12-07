@@ -113,7 +113,7 @@
 	</div>
 
 	<div id="SpotterGuide" class="mapoverlay LiveryOverview">
-		<div id="SpotterGuideHead" class="LiveryOverviewHead"><span id="txtSpotterGuide">Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
+		<div id="SpotterGuideHead" class="LiveryOverviewHead"><span id="txtSpotterGuide">Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" title="Open New Window" id="cbSpotterGuideNewWindow" value="Print" style="background-color:#dddddd; width:50px"></input></div>
         </div>
 
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
@@ -2422,6 +2422,38 @@ function initialize_app(){
                 //remove old grid
                 $("#LiveryGridContainerCarTable").remove();
         });
+
+	$('#cbSpotterGuideNewWindow').click(function () {
+		// set data for new window
+		var html = $("#SpotterGuide").html();
+		//set data for head tag, CSS file is needed at least
+		var head = "<link rel='stylesheet' href='./css/pcars.css'>";
+
+		//var x=window.open();    // new Tab
+		//var x=window.open('','','width=600, height=600'); // new Window
+		var x=window.open('','','');
+
+		x.document.open();
+
+		// write HTML data, generates a complete site with head, body
+		x.document.write(html);
+
+		// write HTML head data
+		x.document.head.innerHTML = head;
+
+		// remove the Close button
+		var element = x.document.getElementById("cbSpotterGuideClose");
+		element.parentNode.removeChild(element);
+
+		// remove the Print button
+		element = x.document.getElementById("cbSpotterGuideNewWindow");
+		element.parentNode.removeChild(element);
+
+		// remove overflow, because with overflow enabled a print job only prints the current viewable part and not the complete grid
+		element = x.document.getElementById("LiveryGridContainerDriverTable");
+		element.style = "overflow-y: unset";
+
+	});
 	
 }
 /////////////////////////////////////////////////end of application function
@@ -3350,7 +3382,6 @@ function OverrideRefpointValue(RefpointVar, value){
 	aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
 	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
 }
-
 
        </script>
    </body>
