@@ -1212,16 +1212,19 @@ function Refpoint(circuit_id)
 		{
 		"Name":         "Mojave Cougar Ridge"
 		,"AltNames":	"Mojave Cougar_Ridge"
+		,"Zoom":	16
+		,"MapInitLat":	40.9966
+		,"MapInitLong":	-113.565
 		,"Comment": 	"fictional track"
         });
         //Mojave Boa Ascent - TrackID pcars1 [850003838]
-	aRefPoints[-984009759] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent"});
+	aRefPoints[-984009759] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent","Zoom":17,"MapInitLat":41.0033,"MapInitLong":-113.569});
 	//Mojave Gila Crest - TrackID pcars1 [2089801285]
-	aRefPoints[-60500434] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Gila Crest","AltNames":"Mojave Gila_Crest"});
+	aRefPoints[-60500434] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Gila Crest","AltNames":"Mojave Gila_Crest","MapInitLat":40.9955,"MapInitLong":-113.559});
 	//Mojave Coyote Noose - TrackID pcars1 [-2125682335]
-	aRefPoints[369271528] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Coyote Noose","AltNames":"Mojave Coyote_Noose"});
+	aRefPoints[369271528] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Coyote Noose","AltNames":"Mojave Coyote_Noose","MapInitLong":-113.5675});
 	//Mojave Sidewinder - TrackID pcars1 [-1463443929]
-	aRefPoints[2015693491] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Sidewinder","AltNames":""});
+	aRefPoints[2015693491] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Sidewinder","AltNames":"","Zoom":17,"MapInitLat":40.9968,"MapInitLong":-113.5605});
 	//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
 	aRefPoints[-1] = CopyObjectWithModifications(aRefPoints[31280808], {"Name": "Mojave Test Track","AltNames":""});
 	
