@@ -240,7 +240,6 @@
                                 color:          black;
                                 padding:        5px;
 				/*overflow-y:	auto;*/
-				z-index:	70;
 	}
 
 	.LiveryOverviewHead{
@@ -251,10 +250,12 @@
 
 	#LiveryOverviewVehicle{
 				display: none;
+				z-index: 17;
 	}
 
 	#SpotterGuide{
                                 display: none;
+				z-index: 18;
         }
 
 /* CSS GRid layout for recorder and replay elments */		
@@ -377,7 +378,7 @@ input:checked + .slider:before {
   top: 10%;
   right: 10%;
   display: none;
-  z-index: 80;
+  z-index: 19;
   text-align: center;
 }
 .overlayLiveryImage {
