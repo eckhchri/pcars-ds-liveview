@@ -91,7 +91,7 @@
 	<div id="map">Google Maps.</div>
 	
 	<!--  refpoint fiddling window -->		   
-	<div id="RefpointFiddling" class="mapoverlay">
+	<div id="RefpointFiddling" class="mapoverlay focus">
 		<h3>Refpoint Fiddling</h3><br>
 		<table>
 			<tr><td>refLat:</td><td><input type="text" name="fiddling_reflat_name" id="fiddling_reflat"></td></tr>
@@ -134,7 +134,7 @@
 		Todo: Replay
 	</div>
 	
-   	<div id="DSdata" class="pcarswindowgrp2">
+   	<div id="DSdata" class="pcarswindowgrp2 focus">
 		<div id="pcars-dsurl"></div>
 		<div id="pcars-dsstate"></div>
 		<div id="pcars-dsjoinable"></div>
@@ -161,18 +161,18 @@
 	</div>
 	
    	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
-	<div id="TrackList" class="pcarswindowgrp2">
+	<div id="TrackList" class="pcarswindowgrp2 focus">
 		<table id="tracklisttable"></table>
 		<div id="pager_tracklisttable"></div>
 	</div>
-	<div id="CarList" class="pcarswindowgrp2">
+	<div id="CarList" class="pcarswindowgrp2 focus">
 		<table id="carlisttable"></table>
 	</div>
-	<div id="DriverDataArea" class="pcarswindowgrp2">
+	<div id="DriverDataArea" class="pcarswindowgrp2 focus">
 		<table id="DriverDataTable"></table>
 	</div>
 	
-	<div id="DSRecStatistics">
+	<div id="DSRecStatistics" class="focus">
 	   <table>
 	   <!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
 		<tr class="replay_row">
@@ -244,7 +244,7 @@
 	
 
 	<!-- definition of option panel-->	
-	<div id="Settings" class="pcarswindowgrp2">
+	<div id="Settings" class="pcarswindowgrp2 focus">
 		Settings: <br>
 
 		<!-- API dropdown -->
@@ -2463,7 +2463,18 @@ function initialize_app(){
 		element.style = "overflow-y: unset; font-family: sans-serif; font-size: 12px;";
 
 	});
-	
+
+	// change z-index for windows with CSS class focus
+	$('.focus').mousedown(function() {
+		var focusWindows = $('.focus');
+		var focusedWindow = $(this);
+
+		// give all windows from class "focus" z-index 10
+		$(this).siblings('.focus').css('z-index', 10);
+		// give the focused window the z-index 11
+		$(this).css('z-index', 11);
+	});
+
 }
 /////////////////////////////////////////////////end of application function
 
