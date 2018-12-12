@@ -1,7 +1,7 @@
 ///////////////////////////////////////////////
 //global varibales definitions
 ///////////////////////////////////////////////
-var SCRIPTVERSION	= "0.3.8";
+var SCRIPTVERSION	= "0.4.0";
 
 // Defines the default MAP Type
 var DEFAULT_MAP_TYPE = "google"; // [google|bing|osm]
