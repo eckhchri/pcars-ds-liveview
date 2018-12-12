@@ -3,6 +3,7 @@ function PCARSVEHICLELIVERYLIST() {
 
 	this.aVehicleLiveryInfoExt	=	{};	//extended array of vehicle livery info
 	this.oLiveryDataStructured	=	{}; //restructed data array
+	this.oLiveryDataStructuredName  =       {}; //restructed data array
 	this.sGameMode = 'PCARS2';
 	
 	//init data
@@ -40,7 +41,7 @@ function getNameById(sVehicleID, sLiveryId){
 	return sResult;	
 }
 
-/* returns name of a car livery
+/* returns vehivle number of a car livery
  *
  * @param {string} vehicle id
  * @param {string} livery id
@@ -60,6 +61,28 @@ function getVehicleNumberById(sVehicleID, sLiveryId){
 	if(sResult == "" || sResult == "LiveryID not found"){sResult = "Vehicle Number not found";}
 
 	return sResult;
+}
+
+/* returns ID of a car livery
+ *
+ * @param {string} vehicle id
+ * @param {string} livery name
+ * @return {string} livery id
+ */
+function getIdByName(sVehicleID, sLiveryName){
+
+        var sResult = "Livery Name not found";
+
+        if (!sVehicleID || !sLiveryName){
+                return sResult;
+        }
+	if(this.oLiveryDataStructuredName[this.sGameMode][sVehicleID]){
+        	if (this.oLiveryDataStructuredName[this.sGameMode][sVehicleID][sLiveryName]){
+                	return this.oLiveryDataStructuredName[this.sGameMode][sVehicleID][sLiveryName];
+	        }
+	}
+
+        return sResult;
 }
 
 /* returns normalized name of a car livery
@@ -86,7 +109,7 @@ function _NameNormalization (sName){
 }
 
 
-/* (internal funtion) string normalization
+/* (internal funtion) _RestructureLiveryData
  * 
  */
 function _RestructureLiveryData (sGameMode){	
@@ -95,6 +118,9 @@ function _RestructureLiveryData (sGameMode){
 	if (!this.oLiveryDataStructured[sGameMode]){
 		this.oLiveryDataStructured[sGameMode] = {};
 	}
+	if (!this.oLiveryDataStructuredName[sGameMode]){
+                this.oLiveryDataStructuredName[sGameMode] = {};
+        }
 			
 	// travers vehicle ids
 	var aVehicles = this.aVehicleLiveryInfoExt[sGameMode];
@@ -104,6 +130,9 @@ function _RestructureLiveryData (sGameMode){
 		if(! this.oLiveryDataStructured[sGameMode][oV.id]){
 			this.oLiveryDataStructured[sGameMode][oV.id] = {};
 		}
+		if(! this.oLiveryDataStructuredName[sGameMode][oV.id]){
+                        this.oLiveryDataStructuredName[sGameMode][oV.id] = {};
+                }
 						
 		// tranvers different liveries
 		var aLiveries = oV['liveries'];		
@@ -112,9 +141,70 @@ function _RestructureLiveryData (sGameMode){
 			var iLivID = aLiveries[j].id;
 			var sLivName = aLiveries[j].name;
 			
-			this.oLiveryDataStructured[sGameMode][oV.id][iLivID] = sLivName;												
+			this.oLiveryDataStructured[sGameMode][oV.id][iLivID] = sLivName;
+			this.oLiveryDataStructuredName[sGameMode][oV.id][sLivName] = iLivID;
 		}				
 		
+	}
+
+	////////////////////
+	// statically add an "Example" Livery with id 0 for all vehicles where no other liveries are available
+	////////////////////
+
+	var aVehiclesWoLiveries = [
+		728234598,	//Acura NSX
+		-1443190363,	//Agajanian Watson Roadster
+		-1303813490,	//Aston Martin DB11
+		-91815086,	//Aston Martin DBR1/300
+		1268015922,	//Aston Martin Vantage GT12
+		2082176226,	//Audi A1 quattro
+		1469658023,	//Audi R8 V10 plus 5.2 FSI quattro
+		1400443574,	//BAC Mono
+		-1226176940,	//BMW 1 Series M Coupé
+		143364290,	//BMW 2002 Turbo
+		178583869,	//Chevrolet Camaro ZL-1
+		1141733552,	//Chevrolet Corvette Z06
+		2006190056,	//Ferrari 458 Speciale A
+		-505616410,	//Ferrari F12tdf
+		-1967832633,	//Ferrari F40
+		1639105598,	//Ford Escort RS1600
+		-1796949190,	//Ford Escort RS1600 (Rallycross)
+		-1548941295,	//Ford F-150 RTR Ultimate Funhaver
+		366881611,	//Ford GT
+		1397255601,	//Ford Mustang 2+2 Fastback
+		1230061845,	//Ford Mustang GT
+		373960596,	//Honda Civic Type-R
+		1187826685,	//Jaguar F-Type SVR Coupé
+		-387045855,	//Jaguar XJ220 S
+		1977120176,	//Lamborghini Aventador LP700-4
+		1850232477,	//Lamborghini Huracán LP610-4
+		1564669712,	//Lamborghini Veneno LP750-4
+		980572679,	//McLaren 570S
+		1106819298,	//McLaren 720S
+		307010432,	//McLaren F1
+		-1748676965,	//McLaren P1 ™
+		-1522922538,	//Mercedes-AMG A 45 4MATIC
+		-78832007,	//Mercedes-AMG C 63 Coupé S
+		-2059595338,	//Mercedes-AMG GT R
+		-149617068,	//Mitsubishi Lancer Evolution IX FQ360
+		460478144,	//Mitsubishi Lancer Evolution VI T.M.E.
+		998947753,	//Mitsubishi Lancer Evolution X FQ400
+		85063219,	//Nissan GT-R Nismo (R35)
+		1356687088,	//Pagani Huayra BC
+		-1617916111,	//Pagani Zonda Cinque Roadster
+		-2133597590,	//Porsche 911 GT3 RS
+		-698401632,	//Porsche 918 Spyder Weissach
+		-1048050877,	//Radical RXC Turbo
+		-41807622,	//Toyota 86
+		-235751604,	//Toyota GT-86
+		1278633095,	//Toyota GT-86 Rocket Bunny Street
+	]
+
+	// add "Example" livery with id 0
+	for (var i = 0; i < aVehiclesWoLiveries.length; i++ ){
+		//console.log("key: ",key);
+		this.oLiveryDataStructured[sGameMode][aVehiclesWoLiveries[i]][0] = "Example";
+		this.oLiveryDataStructuredName[sGameMode][aVehiclesWoLiveries[i]]["Example"] = 0;
 	}
 			
 	return true;	
@@ -19296,6 +19386,7 @@ this.aVehicleLiveryInfoExt['PCARS2'] = [
 
 PCARSVEHICLELIVERYLIST.prototype.getNameById=getNameById;
 PCARSVEHICLELIVERYLIST.prototype.getVehicleNumberById=getVehicleNumberById;
+PCARSVEHICLELIVERYLIST.prototype.getIdByName=getIdByName;
 PCARSVEHICLELIVERYLIST.prototype.getNameByIdNormalized=getNameByIdNormalized;
 PCARSVEHICLELIVERYLIST.prototype._NameNormalization=_NameNormalization;
 PCARSVEHICLELIVERYLIST.prototype._RestructureLiveryData=_RestructureLiveryData;

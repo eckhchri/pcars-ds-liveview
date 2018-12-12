@@ -59,7 +59,7 @@ function resetRacestats(aStats){
 	aStats = {};
 	aStats['drivers']	= {};
 	
-	console.log("Reset Race Statistik ! Size after Deletion: ", aStats);
+	if(log >= 3){console.log("Reset Race Statistik ! Size after Deletion: ", aStats);}
 	
 	return aStats;
 }

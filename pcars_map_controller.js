@@ -39,7 +39,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 			case "google":
 							
 				this.oCurMapObj = new pcars_map_google(sMaptype, sMapHtmlId, aMapSettings);
-				console.log("TODO pcars_map_controller.constructor() call for google!" , this);
+				if(log >= 3){console.log("TODO pcars_map_controller.constructor() call for google!" , this);}
 				if (typeof this.oCurMapObj == 'object'){
 					
 				}			
@@ -154,7 +154,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	 */	
 	changeMapSettings(newTrackObj, mapobj, trackid){
 		
-		console.log("TODO pcars_map_controller.changeMapSettings() called", this);		
+		if(log >= 3){console.log("TODO pcars_map_controller.changeMapSettings() called", this);}
 	//	if (this.oCurMapObj && this.oCurMapObj.isReady()){		
 			return this.oCurMapObj.changeMapSettings(newTrackObj, mapobj, trackid);
 	//	}

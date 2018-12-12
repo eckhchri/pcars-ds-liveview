@@ -74,7 +74,7 @@ function GPSSensor(initData) {
 					var padding = 10;
 	
 					//update internal data which drive redrawing on zoom_changed
-console.log("TODO GPSSensor; data: ", data);					
+					if(log >= 3){console.log("TODO GPSSensor; data: ", data);}
 					_data = data.slice();
 					   
 					//Detect time between StopTransitionDelay set to "true" and now

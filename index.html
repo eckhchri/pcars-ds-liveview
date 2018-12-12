@@ -91,7 +91,7 @@
 	<div id="map">Google Maps.</div>
 	
 	<!--  refpoint fiddling window -->		   
-	<div id="RefpointFiddling" class="mapoverlay">
+	<div id="RefpointFiddling" class="mapoverlay focus">
 		<h3>Refpoint Fiddling</h3><br>
 		<table>
 			<tr><td>refLat:</td><td><input type="text" name="fiddling_reflat_name" id="fiddling_reflat"></td></tr>
@@ -109,8 +109,12 @@
 	</div>
 
 	<div id="LiveryOverviewVehicle" class="mapoverlay LiveryOverview">
-		<div id="LiveryOverviewVehicleHead"> All Liveries  </div>
+			<div id="LiveryOverviewVehicleHead" class="LiveryOverviewHead"><span id="txtLiveryOverview">All Liveries<&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Livery Overview" id="cbLiveryOverviewClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
 	</div>
+
+	<div id="SpotterGuide" class="mapoverlay LiveryOverview">
+		<div id="SpotterGuideHead" class="LiveryOverviewHead"><span id="txtSpotterGuide">Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" title="Open New Window" id="cbSpotterGuideNewWindow" value="Print" style="background-color:#dddddd; width:50px"></input></div>
+        </div>
 
 	<div id="LiveryImageWrapperDriverTable" class="LiveryImageWrapper">
 		<img id="LiveryImageDriverTable"  class="overlayLiveryImage" src="">
@@ -130,7 +134,7 @@
 		Todo: Replay
 	</div>
 	
-   	<div id="DSdata" class="pcarswindowgrp2">
+   	<div id="DSdata" class="pcarswindowgrp2 focus">
 		<div id="pcars-dsurl"></div>
 		<div id="pcars-dsstate"></div>
 		<div id="pcars-dsjoinable"></div>
@@ -157,18 +161,18 @@
 	</div>
 	
    	<!-- definition of data areas, the order of the tables decides which one is in foreground and which in background-->
-	<div id="TrackList" class="pcarswindowgrp2">
+	<div id="TrackList" class="pcarswindowgrp2 focus">
 		<table id="tracklisttable"></table>
 		<div id="pager_tracklisttable"></div>
 	</div>
-	<div id="CarList" class="pcarswindowgrp2">
+	<div id="CarList" class="pcarswindowgrp2 focus">
 		<table id="carlisttable"></table>
 	</div>
-	<div id="DriverDataArea" class="pcarswindowgrp2">
+	<div id="DriverDataArea" class="pcarswindowgrp2 focus">
 		<table id="DriverDataTable"></table>
 	</div>
 	
-	<div id="DSRecStatistics">
+	<div id="DSRecStatistics" class="focus">
 	   <table>
 	   <!-- https://www.w3.org/TR/CSS21/tables.html#table-display -->
 		<tr class="replay_row">
@@ -240,7 +244,7 @@
 	
 
 	<!-- definition of option panel-->	
-	<div id="Settings" class="pcarswindowgrp2">
+	<div id="Settings" class="pcarswindowgrp2 focus">
 		Settings: <br>
 
 		<!-- API dropdown -->
@@ -328,7 +332,7 @@
 		}
 
 		if (GOOGLE_MAP_KEY.length <= 0 ){
-			console.log("+++++++++ GOOGLE_MAP_KEY seems empty: " , GOOGLE_MAP_KEY );
+			if(log >= 2){console.log("+++++++++ GOOGLE_MAP_KEY seems empty: " , GOOGLE_MAP_KEY );}
 		}
 				
 		var script = document.createElement('script');
@@ -402,6 +406,7 @@
 	var scrollPositionTrackTable = 0;	// used for saving the current scollbar position
 	var cellDataDrivername;
 	var cellDataVehiclename;
+	var cellDataTrackID;
 
 	// init PCARS Live View classes
 	var PLV_S				=	new PCARSLV_SETTINGS();
@@ -517,8 +522,8 @@ function initialize_app(){
 	if ( SHOWDRIVERDATA	== false ) { 	$( "#DriverDataArea" ).hide();	}
 	if ( SHOWSETTINGS	== false ) { 	$( "#Settings" ).hide();		}
 	if ( SHOWCARLIST	== false ) { 	$( "#CarList" ).hide();			}
-	if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
-	if ( SHOWDSREPLAY	== false ) { 	$( "#DSreplay" ).hide();		}
+	//if ( SHOWDSSTATISTIC== false ) { 	$( "#DSstatistic" ).hide();		}
+	//if ( SHOWDSREPLAY	== false ) { 	$( "#DSreplay" ).hide();		}
 	if ( SHOWRECSTATISTIC== false ) { 	$( "#DSRecStatistics" ).hide();		}
 	if ( SHOWREFPOINTFIDDLING== false || devmode_tm == false ) { 	$( "#RefpointFiddling" ).hide();		}
 	
@@ -563,6 +568,7 @@ function initialize_app(){
 			$( "#DSRecStatistics" ).draggable();
 			$( "#LiveryImageWrapperDriverTable" ).draggable();
 			$( "#LiveryOverviewVehicle" ).draggable();
+			$( "#SpotterGuide" ).draggable();
 		});			
 		
 	});
@@ -631,7 +637,7 @@ function initialize_app(){
 	//init map	
 	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMP[cuircitID]);	
 	oPcarsMapCtrl.init_map(aRefPointTMP[cuircitID], aSensorData);
-console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
+	if(log >= 3){console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);}
 	
 	// init MapType Selection		
 	var aMapTypes = oPcarsMapCtrl.getMapTypes();
@@ -871,8 +877,9 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				jQuery('#TrackList').height(0);
     		},
     		onSelectRow: function (rowId, status, e) {
+				//disabled: handling moved to beforeSelectRow, select and deselect now with left mouse button
 				//change map location				
-				if (!e || e.which === 1) {  // left click                  
+				/*if (!e || e.which === 1) {  // left click                  
 					//Todo:  change fixed row id to name of the row
 					var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowId, 1);
 					oPcarsMapCtrl.circuitID = celltrackid;	//oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
@@ -881,18 +888,42 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 				}else if( !e || e.which === 3 ){	//right click				              		
 		              		oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
 					oPcarsMapCtrl.circuitID = -1;	// reset value to default
-				}
-			},
-			ondblClickRow:	function (rowid, iRow, iCol, e) {
-				//double clikc not used because overlapping event with onSelectRow				
-			},
-			caption: "List of available Tracks",
-			rowNum: 300,
-			//rowList:[10,20,30],
-			//pager: 'pager_tracklisttable',
-                	loadComplete: function(){
-                        	jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionTrackTable);
-	                }
+				}*/
+
+		},
+		afterInsertRow: function (rowid, rowdata, rowelem) {
+			// reselect the original selected row on grid reload
+			if (rowdata.trackid == cellDataTrackID){
+				jQuery(this).jqGrid('setSelection',rowid);				
+			}
+		},
+		ondblClickRow:	function (rowid, iRow, iCol, e) {
+			//double clikc not used because overlapping event with onSelectRow				
+		},
+		caption: "List of available Tracks",
+		rowNum: 300,
+		//rowList:[10,20,30],
+		//pager: 'pager_tracklisttable',
+                loadComplete: function(){
+                       	jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionTrackTable);
+		},
+		beforeSelectRow: function(rowid){
+			//this event is triggered only once shortly before the row is selected
+
+			// if you select an already selected row, deselect it
+			if($(this).jqGrid("getGridParam", "selrow") === rowid){
+				$(this).jqGrid("resetSelection");
+				oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
+				oPcarsMapCtrl.circuitID = -1;   // reset value to default
+			}else{
+				//else a row is selected
+				var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowid, 1);
+				oPcarsMapCtrl.circuitID = celltrackid;  //oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
+				oPcarsMapCtrl.changeMapSettings(aRefPointTMP[celltrackid] , oMap , celltrackid);
+
+				return true;
+			}
+		}
 	});			
 	//add filter option bar
 	jQuery("#tracklisttable").jqGrid('filterToolbar', { 
@@ -925,7 +956,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	        hiddengrid: JQGridCartableCollapsed,
 	        width:	800,
 		ignoreCase:true,
-	        colNames:['ID','Name','class', 'Game Scope', 'link', 'Comment'],
+	        colNames:['ID','Name','Class', 'Game Scope', 'Link', 'Comment'],
 	        colModel:[
 					{name:'vehicleid', 		width:100, 	sorttype:"int", index:'vehicleid'},
 					{name:'name', 			width:260, 	sorttype:"text"},
@@ -941,38 +972,46 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	        caption: 'List of available Cars&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table" id="cbCarlistExport" value="Export" style="background-color:#dddddd"></input><div id="pcars-carlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo"></div>',
 		rowNum: 400,	
 		beforeSelectRow: function(rowid){
-			//this event is triggered only once shortly before the row is selectedi
+			//this event is triggered only once shortly before the row is selected
 
 			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
 				$("#LiveryOverviewVehicle").hide();
-				$("#LiveryGridDriverTable").remove();
+				$("#LiveryGridContainerCarTable").remove();
+
+				document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
 			}else{
 				//else a row is selected
 
 				var rowData = $(this).jqGrid('getRowData', rowid);
 				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
-				console.log("File Liveries",oLiveries);
-				var filename = "";
+				var gamescope = rowData.gamescope;
+
+				// Liveries for PCARS2 cars are shown only, even if there is the same Vehicle ID in PCARS1 and 2
+				if(!gamescope.includes("PCARS2")){
+					oLiveries = {};
+				}
 			
 				//remove old grid
-				$("#LiveryGridDriverTable").remove();
+				$("#LiveryGridContainerCarTable").remove();
 				//built Grid
-				var HTMLcode = "<div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+				var HTMLcode = "<div id='LiveryGridContainerCarTable' class='LiveryGridContainer'><div id= 'LiveryGridCarTable' class='LiveryGrid'>";
 				if(oLiveries[rowData.vehicleid]){
 					for (var key in oLiveries[rowData.vehicleid] ){
 						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
-						filename = "data/liveries/" + rowData.vehicleid + "/id" + key;
-						console.log("filename: ",filename);
-						HTMLcode = HTMLcode + "<div class='LiveryGridItem'><img class='LiveryGridImage' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
-							"<br><span class='overlayLiveryImageText'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
+						HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageCarTable' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
+							"<span class='LiveryGridText LiveryGridTextBottomRight'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
 					}
 				}else{
 					//ToDo: Vehicle Liveries not available
+					HTMLcode += "<div>No Data for this car available</div>";
 				}
 
-				HTMLcode += "</div>";			
+				HTMLcode += "</div></div>";			
+
+				// set Headline
+				document.getElementById("txtLiveryOverview").innerHTML = "All Liveries of \"" + rowData.name + "\"&nbsp;&nbsp;&nbsp;&nbsp;";
 
 				//add Grid to HTML
 				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
@@ -998,7 +1037,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 	    
 	    return e.result === undefined ? true : e.result;
 	});
-	
+
 	
 	//set vehicleListtable data	
 	refreshVehicleList( PCARSVehicleList.getVehicleList() );	
@@ -1227,7 +1266,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 
 						//init array with driver hashes if they are undefined
 						if (!aRaceData[curDriverHash]){
-							console.log("init aRaceData array");
+						if(log >= 3){console.log("init aRaceData array");}
 							aRaceData[curDriverHash] = {
 								NumPits: 0,
 								State: e.data.driverlist[i].State,
@@ -1522,7 +1561,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		if (SessionState_old != "Lobby" && SessionState_old != "Loading" && SessionStage_old == "Practice1" && SessionStage != "Practice1"){     //During SessionState Lobby the SessionStage is Practice1
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");	//sort grid for the case that the user changed the sorting
-			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Practice 1 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1530,7 +1569,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		if (SessionStage_old == "Practice2" && SessionStage != "Practice2"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Practice 2 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1539,7 +1578,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		if ((SessionStage_old == "Qualifying" && SessionStage != "Qualifying") || (SessionStage_old == "Qualifying1" && SessionStage != "Qualifying1")){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Qualifying Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1547,7 +1586,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		if (SessionStage_old == "Warmup" && SessionStage != "Warmup"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Warmup Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1555,7 +1594,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","lastlap","posx","posy","posz","cssclasses"]);
+			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Race 1 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 		}
@@ -1568,12 +1607,12 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
-				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","lastlap","posx","posy","posz","cssclasses"]);
+				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 				PDFdocDefinition.content.push({text: 'Race Results', style: 'header' });
 				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
 			if (SessionStage_old == "Race2"){
-				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","lastlap","posx","posy","posz","cssclasses"]);
+				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 				PDFdocDefinition.content.push({text: 'Race 2 Results', style: 'header' });
 				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
@@ -1623,7 +1662,7 @@ console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);
 		
 		//update marker
 //		sensorLayer.update(aSensorData);  // TODO_SENSORLAYER
-console.log("TODO aSensorData: " , aSensorData);
+		if(log >= 3){console.log("TODO aSensorData: " , aSensorData);}
 
 		// fiddling
 		/*if(devmode_tm == true){			
@@ -1897,7 +1936,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			
 	}, false);
 	//initial call of the tracklist worker. initiate endless loop
-	console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );
+	if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );}
 	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTrackname2ID });
 		
 
@@ -1913,7 +1952,7 @@ console.log("TODO aSensorData: " , aSensorData);
 //		scrollerbar:true,
 		caption: "List of available drivers",
 		ignoreCase:true,
-		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'VehicleClass', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'Team/#', 'Vehicle Class', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
 						{name:'driverposition', width:18, align:"center", sorttype:"int", search:true},
@@ -1923,6 +1962,7 @@ console.log("TODO aSensorData: " , aSensorData);
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
                         {name:'lapnumber',width:18, align:"center",sorttype:"int"},
                         {name:'vehiclename',width:130,sorttype:"text"},
+			{name:'liveryname',hidden: true,width:130,sorttype:"text"},
                         {name:'vehicleclass',width:50,sorttype:"text"},
                         {name:'lastlap',width:39, align:"center",sorttype:"text"},
                         {name:'fastestlap',width:41, align:"center",sorttype:"text"},
@@ -2013,33 +2053,36 @@ console.log("TODO aSensorData: " , aSensorData);
 			}else{
 				//else a row is selected
 				var rowData = $(this).jqGrid('getRowData', rowid);
+				var VehicleID = PCARSVehicleList.NametoIDExt[CurGameRunning][rowData.vehiclename];
+				var LiveryName = rowData.liveryname;
+				var LiveryID = PCARSVehicleLiveryList.getIdByName(VehicleID,LiveryName);
 
 				var filename = "";
-				var LiveryName = "";
 
-				for (var i = 0; i < aDrivers.length; i++ ){
-					if(aDrivers[i].Name == rowData.drivername){
-						curDriver = aDrivers[i]; //needed for the URL check, because in the later get(filenmae) function the index of the for loop is not working
-						LiveryName = PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId);
-						elLiveryImage.setAttribute("title", LiveryName);
-						document.getElementById("overlayLiveryImageTextDriverTable").innerHTML = LiveryName;
+				elLiveryImage.setAttribute("title", LiveryName);
+				document.getElementById("overlayLiveryImageTextDriverTable").innerHTML = LiveryName;
 
-						//filename generated with livery ID
-						filename = "data/liveries/" + curDriver.VehicleId + "/id" + curDriver.LiveryId + ".png";
+				//filename generated with livery ID
+				filename = "data/liveries/" + VehicleID + "/id" + LiveryID + ".png";
 
-						$.get(filename)
-							.done(function(){
-								//if livery ID png file is available use it
-								elLiveryImage.setAttribute("src", filename);
-							}).fail(function(){
-								//no vehicle png file found. In this case use the "not available"  file
-								filename = "data/liveries/na.png"
-								elLiveryImage.setAttribute("src", filename);
-							})
-						if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", curDriver.LiveryId, " / Livery Name: ", PCARSVehicleLiveryList.getNameById(curDriver.VehicleId, curDriver.LiveryId));}
-					}
+				// If there is only the Example Livery for the vehicle, then show the custom livery in stead of the NA livery
+				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+				// check if the "Example" Livery with ID 0 is available, in this case there are no other liveries available
+				if(oLiveries[VehicleID][0]){
+					filename = "data/liveries/" + VehicleID + "/id99.png";
 				}
-				
+
+				$.get(filename)
+					.done(function(){
+						//if livery ID png file is available use it
+						elLiveryImage.setAttribute("src", filename);
+					}).fail(function(){
+						//no vehicle png file found. In this case use the "not available"  file
+						filename = "data/liveries/na.png"
+						elLiveryImage.setAttribute("src", filename);
+					})
+				if(log >= 3){console.log("Troubleshooting Liveries -- Livery ID: ", LiveryID, " / Livery Name: ", LiveryName);}
+
 				//make Image Overlay visible
 				$("#LiveryImageWrapperDriverTable").show();
 				if(SHOWLIVERYNAMES){
@@ -2104,7 +2147,7 @@ console.log("TODO aSensorData: " , aSensorData);
 	//$('#DriverDataArea span.ui-jqgrid-title').after(' | Stop refresh table:<input type="checkbox" id="cbDriverlistRefresh"/>');
 	//Method with Button
 	//TODO: tune Layout
-	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Pause automatic refresh of table" id="cbDriverlistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;"><div id="pcars-driverlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo">');
+	jQuery('#DriverDataTable').setCaption('Driver Table&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Pause automatic refresh of table" id="cbDriverlistRefresh" value="Pause" style="background-color:#dddddd; width:50px"></input>'+ '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Open a Spotter Guide" id="cbDriverlistSpotterGuide" value="Spotter Guide" style="background-color:#dddddd; width:95px"></input>' + '&nbsp;&nbsp;&nbsp;' + '<input type="button" title="Export table to CSV" id="cbDriverlistExport" value="Export" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;' + '<input type="button" title="Export all past session results of this race weekend to CSV" id="cbDriverlistExportAll" value="Export All" style="background-color:#dddddd"></input>' + '&nbsp;&nbsp;&nbsp;&nbsp;' + '<input type="text" id="txtSessionStage" readonly size="30" style="border:0; background: transparent; font-weight:bold;"><div id="pcars-driverlist-records-displayed" class="pcars_jqgrid_caption_additionalinfo">');
 			
 	// checkbox Event handling
 	$('#cbDriverlistRefresh').click(function () {
@@ -2118,6 +2161,91 @@ console.log("TODO aSensorData: " , aSensorData);
 		//Method with Button
 		var self = this;
 		changeRefreshDriverlist(self);                                                
+	});
+
+	$('#cbDriverlistSpotterGuide').click(function () {
+
+		var oLiveries = {};
+
+		// Built Grid with global aDrivers array. In this case sorting and filtering via table is ignored
+		/*
+		//remove old grid
+		$("#LiveryGridContainerDriverTable").remove();
+
+		if(CurGameRunning == "PCARS2"){
+			oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+		}
+
+		var HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+		for (var i = 0; i < aDrivers.length; i++ ){
+			var LiveryName = "NA";
+			if(oLiveries[aDrivers[i].VehicleId]){
+				LiveryName = oLiveries[aDrivers[i].VehicleId][aDrivers[i].LiveryId];
+			}
+
+			HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + aDrivers[i].VehicleId + "/id" + aDrivers[i].LiveryId + ".png' onerror='this.src=\"data/liveries/na.png\";'>" +
+				"<span class='LiveryGridText LiveryGridTextTopLeft'><strong>" + aDrivers[i].RacePosition + ".</strong>&nbsp;" + aDrivers[i].Name + "</span>" +
+				"<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
+				"<span class='LiveryGridText LiveryGridTextBottomLeft'>" + aDrivers[i].VehicleClassName + "</span>" +
+				"<span class='LiveryGridText LiveryGridTextBottomRight'>" + aDrivers[i].VehicleName + "</span>" +
+				"</div>";
+			}
+		HTMLcode += "</div></div>";*/
+		// END built Grid with global aDrivers array
+
+		// Built Grid with table data. In this case you can filter and sort the table and you can see the result in the Spotter Guide, too.
+		var gridstate = jQuery("#DriverDataTable").jqGrid("getGridParam", "gridstate");
+		var HTMLcode;
+
+		//remove old grid
+		$("#LiveryGridContainerDriverTable").remove();
+
+		if(gridstate == "visible"){
+			var TableData = jQuery("#DriverDataTable").jqGrid("getRowData");
+
+			if(CurGameRunning == "PCARS2"){
+				oLiveries = PCARSVehicleLiveryList.oLiveryDataStructuredName.PCARS2;
+			}
+
+			HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>";
+			for (var i = 0; i < TableData.length; i++ ){
+				var LiveryName = TableData[i].liveryname;
+
+				var VehicleID = PCARSVehicleList.NametoIDExt[CurGameRunning][TableData[i].vehiclename];
+				var LiveryID = PCARSVehicleLiveryList.getIdByName(VehicleID,LiveryName);
+
+				HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageSpotterGuide' src='data/liveries/" + VehicleID + "/id" + LiveryID + ".png' onerror='this.src=\"data/liveries/na.png\";'>"+
+					"<span class='LiveryGridText LiveryGridTextTopLeft'><strong>" + TableData[i].driverposition + ".</strong>&nbsp;" + TableData[i].drivername + "</span>" +
+					"<span class='LiveryGridText LiveryGridTextTopRight'>" + LiveryName + "</span>" +
+					"<span class='LiveryGridText LiveryGridTextBottomLeft'>" + TableData[i].vehicleclass + "</span>" +
+					"<span class='LiveryGridText LiveryGridTextBottomRight'>" + TableData[i].vehiclename + "</span>" +
+					"</div>";
+			}
+			HTMLcode += "</div></div>";
+			// END Built Grid with table data.
+
+			// set Headline
+			document.getElementById("txtSpotterGuide").innerHTML = "Spotter Guide for \"" + SessionStage + "\"&nbsp;&nbsp;&nbsp;&nbsp;";
+			//add Grid to HTML
+			$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
+		 }else{
+			HTMLcode = "<div id='LiveryGridContainerDriverTable' class='LiveryGridContainer'><div id= 'LiveryGridDriverTable' class='LiveryGrid'>Please unfold the Driver Table first.</div></div>";
+			document.getElementById("txtSpotterGuide").innerHTML = "Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;";
+			//add Grid to HTML
+			$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
+		}
+
+		$("#SpotterGuide").show();
+	});
+
+	$('#cbSpotterGuideClose').click(function () {
+		$("#SpotterGuide").hide();
+
+		// reset headline text
+		document.getElementById("txtSpotterGuide").innerHTML = "Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;";
+
+		//remove old grid
+		$("#LiveryGridContainerDriverTable").remove();
 	});
         
 	function changeRefreshDriverlist(data){
@@ -2141,7 +2269,7 @@ console.log("TODO aSensorData: " , aSensorData);
 		var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__" + (trackname.slice(trackname.indexOf(":")+2)) + "__Current_Drivertable";
 		
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),filename);
+			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),filename);
 		}
 
 		if (ExportType === "PDF" || ExportType === "BOTH") {
@@ -2215,7 +2343,7 @@ console.log("TODO aSensorData: " , aSensorData);
 			ExportCSV(JSONToCSVConvertor(jQuery("#tracklisttable").jqGrid("getRowData"), "Track Table",true,jQuery("#tracklisttable").jqGrid("getGridParam", "colNames"),["id"]),"Report_TrackTable");
 		}
 		if (ExportType === "PDF" || ExportType === "BOTH") {
-			console.log("tracklisttable",jQuery("#tracklisttable").getRowData());
+			if(log >= 3){console.log("tracklisttable",jQuery("#tracklisttable").getRowData());}
 			var PDFdocDefinition = {
 				pageSize: 'A4',
 				pageOrientation: 'landscape',
@@ -2290,7 +2418,63 @@ console.log("TODO aSensorData: " , aSensorData);
 			}
 		}
 	});
-	
+
+	$('#cbLiveryOverviewClose').click(function () {
+                $("#LiveryOverviewVehicle").hide();
+
+		// deselect table row
+		jQuery("#carlisttable").jqGrid("resetSelection");
+
+		// reset headline text
+		document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
+
+                //remove old grid
+                $("#LiveryGridContainerCarTable").remove();
+        });
+
+	$('#cbSpotterGuideNewWindow').click(function () {
+		// set data for new window
+		var html = $("#SpotterGuide").html();
+		//set data for head tag, CSS file is needed at least
+		var head = "<link rel='stylesheet' href='./css/pcars.css'>";
+
+		var x=window.open();    // new Tab
+		//var x=window.open('','','width=600, height=600'); // new Window
+		//var x=window.open('','','toolbar=1'); // new Window with Toolbar, but Toolbar not working in Chrome
+
+		x.document.open();
+
+		// write HTML data, generates a complete site with head, body
+		x.document.write(html);
+
+		// write HTML head data
+		x.document.head.innerHTML = head;
+
+		// remove the Close button
+		var element = x.document.getElementById("cbSpotterGuideClose");
+		element.parentNode.removeChild(element);
+
+		// remove the Print button
+		element = x.document.getElementById("cbSpotterGuideNewWindow");
+		element.parentNode.removeChild(element);
+
+		// remove overflow, because with overflow enabled a print job only prints the current viewable part and not the complete grid
+		element = x.document.getElementById("LiveryGridContainerDriverTable");
+		element.style = "overflow-y: unset; font-family: sans-serif; font-size: 12px;";
+
+	});
+
+	// change z-index for windows with CSS class focus
+	$('.focus').mousedown(function() {
+		var focusWindows = $('.focus');
+		var focusedWindow = $(this);
+
+		// give all windows from class "focus" z-index 10
+		$(this).siblings('.focus').css('z-index', 10);
+		// give the focused window the z-index 11
+		$(this).css('z-index', 11);
+	});
+
 }
 /////////////////////////////////////////////////end of application function
 
@@ -2309,6 +2493,12 @@ function refreshTrackList(a){
 
 	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
         scrollPositionTrackTable = jQuery("#tracklisttable").closest(".ui-jqgrid-bdiv").scrollTop();
+
+	// retrieve TrackID of the current selected row, because the automatic reload of the grid deletes the selection.
+        //On grid reload the event afterInsertRow is fired and the original selected row is reselected based on TrackID.
+        var selRowId = jQuery("#tracklisttable").jqGrid("getGridParam", "selrow");
+        cellDataTrackID = jQuery("#tracklisttable").jqGrid("getCell", selRowId, "trackid");
+
 	
 	// clean complete table befor reloading new data to prevent ghost entries
 	jQuery("#tracklisttable").jqGrid("clearGridData");
@@ -2372,6 +2562,7 @@ function refreshDriverList(a, ForceRefresh){
 	var _data;
 	//var _allDrivers = new Array();
 	var Gaps = [];
+	var oLiveries = {};
 
 	// save scrollPosition to prevent that the table is scrolled to the top after the automatic reload. The scrollPosition is reset in the jqgrid loadComplete event.
 	scrollPositionDriverTable = jQuery("#DriverDataTable").closest(".ui-jqgrid-bdiv").scrollTop();
@@ -2389,12 +2580,17 @@ function refreshDriverList(a, ForceRefresh){
 	// get current size of the table
     //var GridSize = jQuery("#DriverDataTable").getGridParam("reccount");	//disabled, because after clearGridData it is 0 every time
 
+	//get Livery data
+	if(CurGameRunning == "PCARS2"){
+		oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+	}
 
 	//todo: if drivertable is longer then new driverlist, all old values should be deleted
 	//todo: if clearGridData method is working, no need for a decision if use setRowData or addRowData !
 	for (i=0; i < a.length; i++) {
 		
 		var tmpPits = "-";
+		var LiveryName = "NA";
 		
 		if (SessionStage_old == "Race1" || SessionStage_old == "Race2"){	//SessionStage_old, because of Issue 116 - the auto export needs one worker run more after the Quali is over, where the laptime gaps must be calculated. If SessionStage is used, Race Gaps are calculated at the moment of the Export and that is wrong for a Quali result
 			if(a[i].Gap2Ahead){Gaps.gap2ahead = a[i].Gap2Ahead;}
@@ -2410,7 +2606,11 @@ function refreshDriverList(a, ForceRefresh){
 		if(a[i].NumPits != undefined){
                         tmpPits = a[i].NumPits;
                 }
-		
+
+		if(oLiveries[a[i].VehicleId]){
+				LiveryName = oLiveries[a[i].VehicleId][a[i].LiveryId];
+		}
+
 		_data = {   
 					refid:					a[i].RefID
 					,driverposition:		a[i].RacePosition
@@ -2420,6 +2620,7 @@ function refreshDriverList(a, ForceRefresh){
 					,driversector:			a[i].CurrentSector
 					,lapnumber:				a[i].CurrentLap
 					,vehiclename:			a[i].VehicleName
+					,liveryname:			LiveryName
 					,vehicleclass:			a[i].VehicleClassName
 					,lastlap:				ConvertLaptimeInReadbaleFormat(a[i].LastLapTime)
 					,fastestlap:			ConvertLaptimeInReadbaleFormat(a[i].FastestLapTime)
@@ -2786,7 +2987,7 @@ function initDemoData(aNewData, SetApiModeTo ){
 	
 	//also reset Race Statistics
 	aRacestats = PCARS_Rec.resetRacestats(aRacestats);
-	console.log("Reset Race Statistik 3! Size: ", aRacestats);
+	if(log >= 3){console.log("Reset Race Statistik 3! Size: ", aRacestats);}
 
 	//switch to demo mode
 	HTMLCTRL.APIMODE_SetSelection( "DEMO" );
@@ -3201,7 +3402,6 @@ function OverrideRefpointValue(RefpointVar, value){
 	aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
 	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
 }
-
 
        </script>
    </body>

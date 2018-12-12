@@ -155,6 +155,7 @@
 				background-size:	contain;			
 				opacity: 			1;
 				margin: 			auto; 
+				display: none;
 	     }
 	     
 	     #DSreplay{
@@ -166,6 +167,7 @@
 				background-size:	contain;                                
 				opacity: 			0.5;
 				margin: 			auto;
+				display: none;
 	     }
 	     
 		
@@ -222,20 +224,31 @@
         }
 	.LiveryOverview{
                                 position:       absolute;
-                                left:           19%;
+                                left:           17%;
                                 top:            30px;
-                                width:          78%;
+                                width:          82%;
                                 height:         90%;
                                 border:         1;
                                 background:     white;
                                 color:          black;
                                 padding:        5px;
-				overflow-y:	auto;
+				/*overflow-y:	auto;*/
 				z-index:	70;
+	}
+
+	.LiveryOverviewHead{
+		font-size: 15px;
+		font-weight: bold;
+		padding: 3px;
         }
+
 	#LiveryOverviewVehicle{
 				display: none;
 	}
+
+	#SpotterGuide{
+                                display: none;
+        }
 
 /* CSS GRid layout for recorder and replay elments */		
 .pcars_grid_recorder_replay	{
@@ -373,20 +386,83 @@ input:checked + .slider:before {
   padding: 2px 3px;
 }
 
+.LiveryGridContainer {
+	overflow-y: auto;
+	height: 93%;
+	margin-top: 5px;
+}
+
 .LiveryGrid {
   display: grid;
-  grid-template-columns: auto auto auto auto;
-  /*background-color: #2196F3;*/
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-gap: 4px;
   padding: 10px;
 }
+
 .LiveryGridItem {
-  /*background-color: rgba(255, 255, 255, 0.8);*/
-  border: 1px solid rgba(0, 0, 0, 0.8);
-  padding-bottom: 5px;
-  text-align: center;
+  border: 2px solid rgba(0, 0, 0, 0.8);
+  height: 145px;
+  position:relative
 }
+
 .LiveryGridImage {
   -webkit-filter: drop-shadow(5px 5px 5px #222);
   filter: drop-shadow(5px 5px 5px #222);
-  width: 270px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.LiveryGridImageCarTable {
+  max-width: 285px;
+  max-height: 125px;
+}
+
+.LiveryGridImageSpotterGuide {
+  max-width: 275px;
+  max-height: 115px;
+}
+
+.LiveryGridText{
+  height: 14px;
+  display: flex;
+  align-items: center;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  background: white;
+  padding: 2px 3px;
+}
+
+.LiveryGridTextTopLeft{
+  position: absolute;
+  top: -0.5px;
+  left: -0.5px;
+}
+
+.LiveryGridTextTopRight{
+  position: absolute;
+  top: -0.5px;
+  right: 0px;
+  font-size: 10px;
+}
+
+.LiveryGridTextBottomLeft{
+  position: absolute;
+  bottom: -0.5px;
+  left: -0.5px;
+  color: white;
+  background-color: black;
+  font-weight: bold;
+}
+
+.LiveryGridTextBottomRight{
+  position: absolute;
+  bottom: -0.5px;
+  right: 0px;
+  font-size: 10px;
+  color: white;
+  background-color: black;
 }

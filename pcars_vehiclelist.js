@@ -844,6 +844,12 @@ this.aVehicleInfoExt['PCARS1'] = [
 this.aVehicleInfoExt['PCARS2']	=	[];
 this.aVehicleInfoExt['PCARS2']	= 	[
       {
+	"id" : 9999999999,
+	"name" : "Slightly Mad Studios Ltd",
+	"class" : "NA"
+      },
+//////pcars2 data begins here
+      {
         "id" : 9503224,
         "name" : "BMW 320 TC (E90)",
         "class" : "Touring Car"
@@ -1435,7 +1441,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1748676965,
-        "name" : "McLaren P1™",
+        "name" : "McLaren P1 ™",
         "class" : "Road A"
       },
       {
@@ -1505,7 +1511,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -1339322144,
-        "name" : "McLaren P1™ GTR",
+        "name" : "McLaren P1 ™ GTR",
         "class" : "Track Day A"
       },
       {
@@ -1670,7 +1676,7 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       },
       {
         "id" : -486674040,
-        "name" : "Pagani Zonda Revolucion",
+        "name" : "Pagani Zonda Revolución",
         "class" : "Track Day A"
       },
       {
