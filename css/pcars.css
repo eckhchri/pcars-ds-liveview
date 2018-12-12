@@ -20,6 +20,7 @@
 				border:		1;
 				background:	lightgreen;
 				padding:	5px;
+				z-index:	11;
 	     }
 	     
 	     .ui-jqgrid .ui-jqgrid-bdiv { 
@@ -32,7 +33,8 @@
                 left:           1%;
                 top:            63px;
                 border:         1;
-				text-align: 	center;
+		text-align: 	center;
+		z-index:	12;
 	     }
 	     #TrackList .ui-jqgrid-bdiv{
 				max-height: 400px;
@@ -49,7 +51,8 @@
                 left:           1%;
                 top:            92px;
                 border:         1;
-				text-align: 	center;
+		text-align: 	center;
+		z-index:	13;
 	     }
 	     #CarList .ui-jqgrid-bdiv{
 				max-height: 400px;
@@ -80,7 +83,8 @@
 				position:       absolute;
 				left:           1%;
 				top:            32px;
-				background:	lightgrey
+				background:	lightgrey;
+				z-index:	14;
 	     }
 	    	         
 	     #hide {
@@ -91,7 +95,8 @@
 				position:       absolute;
                 left:           75%;
                 top:            25px;
-                background:     lightgrey
+                background:     lightgrey;
+		z-index:	16;
 	     }
 	     
 	     .mapoverlay{
@@ -122,6 +127,7 @@
                 right:			10px;                
                 border-width: 			1px;
                 border-style:			dashed;
+		z-index:	15;
                 -webkit-border-radius: 	2px;
 				-moz-border-radius: 	2px;
 				border-radius: 			2px;
@@ -221,6 +227,7 @@
 				background:	green;
 				color:		darkgrey;
 				padding:	5px;
+				z-index:	10;
         }
 	.LiveryOverview{
                                 position:       absolute;

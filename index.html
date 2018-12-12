@@ -2469,16 +2469,48 @@ function initialize_app(){
 
 	});
 
-	// change z-index for windows with CSS class focus
-	$('.focus').mousedown(function() {
-		var focusWindows = $('.focus');
-		var focusedWindow = $(this);
 
-		// give all windows from class "focus" z-index 10
-		$(this).siblings('.focus').css('z-index', 10);
-		// give the focused window the z-index 11
-		$(this).css('z-index', 11);
+	///////
+	// change z-index for windows with CSS class focus
+
+	// store z-index-ordered windows from class "focus" in an array
+	var aFocusWindows = $('.focus').toArray().sort(function(a, b) {
+		return parseInt($(a).css('zIndex'), 10) - parseInt($(b).css('zIndex'), 10);
 	});
+
+	// store available z-indices
+	var zIndices = [];
+	for (var i = 0; i < aFocusWindows.length; ++i) {
+		zIndices.push($(aFocusWindows[i]).css('zIndex'));
+	}
+
+	$('.focus').mousedown(function() {
+	//$('.focus').on("mousedown", function () {	//recommended way?
+
+		////// old, simple method
+		// give all windows from class "focus" z-index 10
+		//$(this).siblings('.focus').css('z-index', 10);
+		// give the focused window the z-index 11
+		//$(this).css('z-index', 11);
+
+
+		////// new method
+		var element = this;
+
+		var index = aFocusWindows.indexOf(element);
+		// check if clicked element is not already the frontmost
+		if (index < aFocusWindows.length - 1) {
+			// remove current element from array and insert again at end
+			aFocusWindows.splice(index, 1);
+			aFocusWindows.push(this);
+
+			// re-assign stored z-indices for new window order
+			for (var i = 0; i < aFocusWindows.length; ++i) {
+				$(aFocusWindows[i]).css('zIndex', zIndices[i]);
+			}
+		}
+	});
+	////// END change z-index 
 
 }
 /////////////////////////////////////////////////end of application function
