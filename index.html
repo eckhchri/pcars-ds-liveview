@@ -3297,63 +3297,70 @@ function initW2UI(){
 	    		
 	        	switch (event.target) {
 	        	
-	        		case "w2ui_drivertable": 	
-	        									$( "#DriverDataArea" ).toggle();
-	        									//w2ui.toolbar.items[5].icon = "w2ui-icon-cross";
-	        									//w2ui.toolbar.refresh();	        									
-	        									//this.refresh();
-	        									//$( "#toolbar" ).refresh();
-	        									break;
+	        		case "w2ui_drivertable": 		if($('#DriverDataArea').css('display') == 'none'){setWindowFocus(document.getElementById('DriverDataArea'));}
+       									$( "#DriverDataArea" ).toggle();
+       									//w2ui.toolbar.items[5].icon = "w2ui-icon-cross";
+       									//w2ui.toolbar.refresh();	        									
+       									//this.refresh();
+       									//$( "#toolbar" ).refresh();
+       									break;
 	        		
-	        		case "w2ui_tracktable": 	$( "#TrackList" ).toggle(); break;
-	        			             		             
-	             	case "w2ui_cartable": 		$( "#CarList" ).toggle(); break;
+	        		case "w2ui_tracktable": 		if($('#TrackList').css('display') == 'none'){setWindowFocus(document.getElementById('TrackList'));}
+									$( "#TrackList" ).toggle(); 
+									break;
+	        		
+				case "w2ui_cartable":			if($('#CarList').css('display') == 'none'){setWindowFocus(document.getElementById('CarList'));}
+									$( "#CarList" ).toggle();
+									break;
 	             			             	
-	             	case "w2ui_dsdata":			$( "#DSdata" ).toggle(); break;
+				case "w2ui_dsdata":			if($('#DSdata').css('display') == 'none'){setWindowFocus(document.getElementById('DSdata'));}
+									$( "#DSdata" ).toggle(); 
+									break;
 	             	
-	             	case "w2ui_dssettings":		$( "#Settings" ).toggle(); break;
+				case "w2ui_dssettings":			if($('#Settings').css('display') == 'none'){setWindowFocus(document.getElementById('Settings'));}
+									$( "#Settings" ).toggle(); 
+									break;
 					
-					case "w2ui_recstatistics":	$( "#DSRecStatistics" ).toggle(); break;
+				case "w2ui_recstatistics":		if($('#DSRecStatistics').css('display') == 'none'){setWindowFocus(document.getElementById('DSRecStatistics'));}
+									$( "#DSRecStatistics" ).toggle(); 
+									break;
 	             		             	
-	             	case "w2ui_liveview":
-	             								$( "#DSreplay" ).hide();
-												$( "#DSstatistic" ).hide();
-												$( ".pcarswindowgrp2" ).each(function( index ) {
-													$( this ).removeClass( "pcars-force-hide" );	             									
-             									});
-												this.enable('w2ui_drivertable');
-												this.enable('w2ui_tracktable');
-												this.enable('w2ui_cartable');
-												this.enable('w2ui_dsdata');
-												break;	
+				case "w2ui_liveview":			$( "#DSreplay" ).hide();
+									$( "#DSstatistic" ).hide();
+									$( ".pcarswindowgrp2" ).each(function( index ) {
+										$( this ).removeClass( "pcars-force-hide" );	             									
+             								});
+									this.enable('w2ui_drivertable');
+									this.enable('w2ui_tracktable');
+									this.enable('w2ui_cartable');
+									this.enable('w2ui_dsdata');
+									break;	
 	             	
-	             	case "w2ui_statistics":		
-	             								$( "#DSstatistic" ).fadeIn( "slow" ); 
-	             								$( "#DSreplay" ).hide();	             								
-	             								$( ".pcarswindowgrp2" ).each(function( index ) {
-													$( this ).addClass( "pcars-force-hide" );	             									
-             									});
-	             								this.disable('w2ui_drivertable');
-	             								this.disable('w2ui_tracktable');
-	             								this.disable('w2ui_cartable');
-	             								this.disable('w2ui_dsdata');
+				case "w2ui_statistics":			$( "#DSstatistic" ).fadeIn( "slow" ); 
+	             							$( "#DSreplay" ).hide();	             								
+	             							$( ".pcarswindowgrp2" ).each(function( index ) {
+										$( this ).addClass( "pcars-force-hide" );	             									
+             								});
+	             							this.disable('w2ui_drivertable');
+	             							this.disable('w2ui_tracktable');
+	             							this.disable('w2ui_cartable');
+	             							this.disable('w2ui_dsdata');
 	             								
-	             								//trigger lap Statistic call
-	             								//alert ("test");
-	             								initLap_LapChart( transformData(aRacestats) );
-	             								break;	             							
+	             							//trigger lap Statistic call
+	             							//alert ("test");
+	             							initLap_LapChart( transformData(aRacestats) );
+	             							break;	             							
 	             	
-	             	case "w2ui_replay":			             								
-	             								$( "#DSreplay" ).fadeIn( "slow" );
-	             								$( "#DSstatistic" ).hide();	             									             								
-	             								$( ".pcarswindowgrp2" ).each(function( index ) {
-													$( this ).addClass( "pcars-force-hide" );	             									
-             									});
-	             								this.disable('w2ui_drivertable');
-	             								this.disable('w2ui_tracktable');
-	             								this.disable('w2ui_cartable');
-	             								this.disable('w2ui_dsdata');
-	             								break;
+				case "w2ui_replay":			$( "#DSreplay" ).fadeIn( "slow" );
+	             							$( "#DSstatistic" ).hide();	             									             								
+	             							$( ".pcarswindowgrp2" ).each(function( index ) {
+										$( this ).addClass( "pcars-force-hide" );	             									
+             								});
+	             							this.disable('w2ui_drivertable');
+	             							this.disable('w2ui_tracktable');
+	             							this.disable('w2ui_cartable');
+	             							this.disable('w2ui_dsdata');
+	             							break;
 													             			             			             		             		
 	        	}
 	        	
@@ -3417,7 +3424,7 @@ function OverrideRefpointValue(RefpointVar, value){
 // change z-index for windows with CSS class focus
 function setWindowFocus(focusElement){
 	var elClasses = $(focusElement).attr("class");
-
+	
 	// change focus only if the focusElement has the "focus" class, which means it is then member in the aFocusWindows array
 	if(elClasses.includes("focus")){
 		////// old, simple method
