@@ -72,6 +72,8 @@ var DisplayDurationCREST 	=	100;		// initial duration for displaying marker upda
 
 var UpdateRateDS 			=	500;   //Update rate of DS. Currently used for calculation of the duration. If the calculation result is below 500 ms, it is set to 500 ms.
 var GuiUpdateIntervall		=	3;	 //intervall fo updating GUI element,values etc. in seconds
+var UpdateRateDriverTableMin	=	1000;	//The minimum interval between a reload of the driver table grid. The reload happens normally every polling/worker run, 
+						// but if interval between this pollings is low the table interaction is bad. The minimun interval prevents this.
 
 //StopTransitionDelay_minTimeRun - Time of disabled tranformWithEase function and using the transform function instead (markers jumping instead of smooth moving) on SessionState and SessionStage changes, and on zooming and dragging the map. 
 //To understand this you first have to know that the marker positions are in relation to your display in pixel coordinates and not in relation to the map. 

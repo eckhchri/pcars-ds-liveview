@@ -361,6 +361,9 @@
 	var sensorLayer_UpdateTime;		//time, when marker are updated
 	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
 	var sensorLayer_UpdateDelta;		//time between recent and current dsdata-worker run, when the marker were updated
+	var DriverTable_ReloadTime;
+	var DriverTable_ReloadTime_old;
+
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;
@@ -1068,7 +1071,8 @@ function initialize_app(){
 	///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	// create DS data object
 	var workerDSDATA			=	new Worker('./worker_dsdata.js');
-	sensorLayer_UpdateTime_old	=	Date.now();	//initialize a value for first time
+	sensorLayer_UpdateTime_old	=	Date.now();	//initialize a value for first timei
+	DriverTable_ReloadTime_old	=	Date.now();
 	//event handler of the worker
 	workerDSDATA.addEventListener('message', function(e) {
 		
@@ -2565,8 +2569,16 @@ function refreshVehicleList(a){
 
 //////////////////
 function refreshDriverList(a, ForceRefresh){
+
+	DriverTable_ReloadTime = Date.now();
+	var DriverTable_ReloadTime_Delta = DriverTable_ReloadTime - DriverTable_ReloadTime_old;
+
+	if(DriverTable_ReloadTime_Delta > UpdateRateDriverTableMin){
+		DriverTable_ReloadTime_old = Date.now();
+	}
+
 	// stop refreshing jqgrid in several cases
-	if (!ForceRefresh && (StopRefreshDriverlist == "true" || jQuery("#DriverDataTable").getGridParam('gridstate') == 'hidden')) {
+	if (!ForceRefresh && (StopRefreshDriverlist == "true" || jQuery("#DriverDataTable").getGridParam('gridstate') == 'hidden' || DriverTable_ReloadTime_Delta < UpdateRateDriverTableMin)) {
                 //if(log >= 4){console.log("--- INFO stop refresh driverlist because StopRefreshDriverlist or grid is in status hidden!"  );}
                 return 1;
 	}
