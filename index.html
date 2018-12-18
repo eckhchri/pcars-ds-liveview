@@ -112,7 +112,7 @@
 			<div id="LiveryOverviewVehicleHead" class="LiveryOverviewHead"><span id="txtLiveryOverview">All Liveries<&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Livery Overview" id="cbLiveryOverviewClose" value="Close" style="background-color:#dddddd; width:50px"></input></div>
 	</div>
 
-	<div id="SpotterGuide" class="mapoverlay LiveryOverview">
+	<div id="SpotterGuide" class="mapoverlay LiveryOverview focus">
 		<div id="SpotterGuideHead" class="LiveryOverviewHead"><span id="txtSpotterGuide">Spotter Guide&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="button" title="Close Spotter Guide" id="cbSpotterGuideClose" value="Close" style="background-color:#dddddd; width:50px"></input>&nbsp;&nbsp;&nbsp;&nbsp;<input type="button" title="Open New Window" id="cbSpotterGuideNewWindow" value="Print" style="background-color:#dddddd; width:50px"></input></div>
         </div>
 
@@ -1030,6 +1030,8 @@ function initialize_app(){
 				//add Grid to HTML
 				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
 				
+				//set window focus on new Livery Overview window
+				setWindowFocus(document.getElementById('SpotterGuide'));
 				$("#LiveryOverviewVehicle").show();
 				
 				return true;
@@ -2258,6 +2260,8 @@ function initialize_app(){
 				//add Grid to HTML
 				$( HTMLcode ).insertAfter( "#SpotterGuideHead" );
 			}
+			//set window focus on new Spotter Guide window
+			setWindowFocus(document.getElementById('SpotterGuide'));
 			$("#SpotterGuide").show();
 		}else{	// If the button has the pressed state the Spotter Guide is already opened and will be closed now, the button style is changed to unpressed
 			//set button style to unpressed look
