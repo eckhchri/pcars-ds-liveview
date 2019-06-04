@@ -48,8 +48,13 @@ class pcars_map_controller extends PCARSLV_BASIC {
 			//Text
 			case "text":				
 				break;
-				
-				
+			
+			//Raw
+			case "raw":				
+				this.oCurMapObj = new pcars_map_raw(sMaptype, sMapHtmlId, aMapSettings);
+				if(log >= 3){console.log("SICECKHA TODO pcars_map_raw initialized!" , this);}
+				break;	
+								
 			//BING
 			case "bing":				
 				break;
@@ -82,6 +87,12 @@ class pcars_map_controller extends PCARSLV_BASIC {
 			                        'value': 'text',
 			                        'display_value': 'Text (placebo)',
 			                 },
+			                 
+			  'raw':
+			                 {
+			                        'value': 'raw',
+			                        'display_value': 'Raw',
+			                 },			                 
 			                 
 			   'bing':
 			                 {
@@ -141,7 +152,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */	
 	updateMarker(aMarkerObject){
-		
+		if(log >= 3){console.log("SICECKHA pcars_map_controller.updateMarker() called!");}
 		return this.oCurMapObj.updateMarker(aMarkerObject);				
 	}
 	
