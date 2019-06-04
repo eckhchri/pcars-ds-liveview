@@ -151,8 +151,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	 * param {array} 
 	 * return {boolean} true if all is fine, false if something went wrong
 	 */	
-	updateMarker(aMarkerObject){
-		if(log >= 3){console.log("SICECKHA pcars_map_controller.updateMarker() called!");}
+	updateMarker(aMarkerObject){		
 		return this.oCurMapObj.updateMarker(aMarkerObject);				
 	}
 	
@@ -165,7 +164,7 @@ class pcars_map_controller extends PCARSLV_BASIC {
 	 */	
 	changeMapSettings(newTrackObj, mapobj, trackid){
 		
-		if(log >= 3){console.log("TODO pcars_map_controller.changeMapSettings() called", this);}
+		//if(log >= 3){console.log("TODO pcars_map_controller.changeMapSettings() called", this);}
 	//	if (this.oCurMapObj && this.oCurMapObj.isReady()){		
 			return this.oCurMapObj.changeMapSettings(newTrackObj, mapobj, trackid);
 	//	}
