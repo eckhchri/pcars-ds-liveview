@@ -618,7 +618,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"curgamerunning":		"PCARS1"
 					,"attributes":{
 						"TrackId":			TrackID
-						,"SessionStage":	myArr.gameStates.mSessionState
+						,"SessionStage":	this.aMappingSessionStateCREST[ myArr.gameStates.mSessionState ]
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
@@ -701,7 +701,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					,"curgamerunning":		"PCARS2"
 					,"attributes":{
 						"TrackId":			TrackID
-						,"SessionStage":	myArr.gameStates.mSessionState
+						,"SessionStage":	this.aMappingSessionStateCREST[ myArr.gameStates.mSessionState ]
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
@@ -751,7 +751,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							PosX,								//PositionX in meters
 							PosY,								//PositionY in meters
 							PosZ,								//PositionZ in meters
-							myArr.participants.mParticipantInfo[i].mRaceStates,		//RaceState
+							this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ], //RaceState
 							this.aSectormappingCREST[ myArr.participants.mParticipantInfo[i].mCurrentSector ], //CurrentSector
 							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 							FastestLapTime,							//FastestLapTime
