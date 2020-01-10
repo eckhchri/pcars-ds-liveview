@@ -64,7 +64,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		"1": "Not Started",
 		"2": "Racing",
 		"3": "Finished",
-		"4": "DQF",
+		"4": "Disqualified",
 		"5": "Retired",
 		"6": "DNF",
 		//-------------
