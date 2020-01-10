@@ -21,50 +21,56 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	// 	1 			- 	2
 	// 	2 			- 	3
 	//	0			-	0
-	this.aSectormapping = {
+	this.aSectormappingDS = {
 				"3": '1',
 				"1": '2',
 				"2": '3',
 				"0": '0'
 	};
-	
-	var CREST_mGameState = [
-		"GAME_EXITED",
-		"GAME_FRONT_END",
-		"GAME_INGAME_PLAYING",
-		"GAME_INGAME_PAUSED",
-		"GAME_INGAME_INMENU_TIME_TICKING",
-		"GAME_INGAME_RESTARTING",
-		"GAME_INGAME_REPLAY",
-		"GAME_FRONT_END_REPLAY",
-		//-------------
-		"GAME_MAX"
-	];
 
-	var CREST_mSessionState = [
-		"SESSION_INVALID",
-		"SESSION_PRACTICE",
-		"SESSION_TEST",
-		"SESSION_QUALIFY",
-		"SESSION_FORMATION_LAP",
-		"SESSION_RACE",
-		"SESSION_TIME_ATTACK",
-		//-------------
-		"SESSION_MAX"
-	];
-
-	var CREST_mRaceState = [
-		"RACESTATE_INVALID",
-		"RACESTATE_NOT_STARTED",
-		"RACESTATE_RACING",
-		"RACESTATE_FINISHED",
-		"RACESTATE_DISQUALIFIED",
-		"RACESTATE_RETIRED",
-		"RACESTATE_DNF",
-		//-------------
-		"RACESTATE_MAX"
-	];
+	this.aSectormappingCREST = {
+				"0": '1',
+				"1": '2',
+				"2": '3'
+	};
 	
+	this.aMappingGameStateCREST = {
+		"0": "Exited",
+		"1": "Front End",
+		"2": "InGame Playing",
+		"3": "InGame Paused",
+		"4": "InGame InMenu Time_Ticking",
+		"5": "InGame Restarting",
+		"6": "InGame Replay",
+		"7": "Front End Replay",
+		//-------------
+		"8": "Max"
+	};
+
+	this.aMappingSessionStateCREST = {
+		"0": "Invalid",
+		"1": "Practice1",
+		"2": "Test",
+		"3": "Qualifying1",
+		"4": "Formation Lap",
+		"5": "Race1",
+		"6": "Time Attack",
+		//-------------
+		"7": "Max"
+	};
+
+	this.aMappingRaceStateCREST = {
+		"0": "Invalid",
+		"1": "Not Started",
+		"2": "Racing",
+		"3": "Finished",
+		"4": "DQF",
+		"5": "Retired",
+		"6": "DNF",
+		//-------------
+		"7": "Max"
+	};
+
 	//if(log >= 3){console.log("Receive_DS_data() --- receivemode this: " , this);}
 
 	if (this.receivevariant == undefined){
@@ -366,7 +372,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                                myArr.response.participants[i].attributes.PositionY,
 		                                                myArr.response.participants[i].attributes.PositionZ,
 		                                                myArr.response.participants[i].attributes.State,
-		                                                this.aSectormapping[ myArr.response.participants[i].attributes.CurrentSector ],		                                                
+		                                                this.aSectormappingDS[ myArr.response.participants[i].attributes.CurrentSector ],		                                                
 		                                                myArr.response.participants[i].attributes.RacePosition,
 		                                                myArr.response.participants[i].attributes.FastestLapTime,
 		                                                myArr.response.participants[i].attributes.LastLapTime,
@@ -509,7 +515,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		                                                myArr.response.participants[i].attributes.PositionY,
 		                                                myArr.response.participants[i].attributes.PositionZ,
 		                                                myArr.response.participants[i].attributes.State,
-		                                                this.aSectormapping[ myArr.response.participants[i].attributes.CurrentSector ],		                                                
+		                                                this.aSectormappingDS[ myArr.response.participants[i].attributes.CurrentSector ],		                                                
 		                                                myArr.response.participants[i].attributes.RacePosition,
 		                                                myArr.response.participants[i].attributes.FastestLapTime,
 		                                                myArr.response.participants[i].attributes.LastLapTime,
@@ -651,7 +657,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 								PosY,								//PositionY in meters
 								PosZ,								//PositionZ in meters
 								"NA",								//State - NA
-								myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+								this.aSectormappingCREST[ myArr.participants.mParticipantInfo[i].mCurrentSector ], //CurrentSector
 								myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 								0,								//FastestLapTime - NA
 								0,								//LastLapTime - NA
@@ -746,7 +752,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							PosY,								//PositionY in meters
 							PosZ,								//PositionZ in meters
 							myArr.participants.mParticipantInfo[i].mRaceStates,		//RaceState
-							myArr.participants.mParticipantInfo[i].mCurrentSector,		//CurrentSector
+							this.aSectormappingCREST[ myArr.participants.mParticipantInfo[i].mCurrentSector ], //CurrentSector
 							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 							FastestLapTime,							//FastestLapTime
 							LastLapTime,							//LastLapTime

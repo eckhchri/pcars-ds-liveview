@@ -1122,7 +1122,7 @@ function initialize_app(){
 			if(resttime != "-"){
 				resttime = '  Time: ' + resttime;
 			}
-			if (SessionState == "Race" || SessionState == 2 || SessionState == 3){	//SessionState 2 and 3 is for CREST mode, enum for GAME_INGAME_PLAYING and GAME_INGAME_PAUSED
+			if (SessionState == "Race" || SessionState == 2 || SessionState == 3 || SessionState == 4){	//SessionState 2 and 3 is for CREST mode, enum for GAME_INGAME_PLAYING and GAME_INGAME_PAUSED
 				if(SessionStage != "Race1" && SessionStage != "Race2"){
 					document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + resttime.slice(0,-4);     //slice for deleting the milliseconds part of the time
 					ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:   " + e.data.globals.attributes.SessionTimeDuration/60 + " min");
@@ -1277,7 +1277,7 @@ function initialize_app(){
 			
 				if(APIMODE != "DEMO"){
 					// pit stop counting logic
-					if(SessionStage == "Race1" || SessionStage == "Race2"){
+					if(SessionStage == "Race1" || SessionStage == "Race2"|| SessionStage == 5){
 						// Build a Driver Hash with Driver Name and Vehicle ID for identifying a driver uniquely, in multiplayer it is possible that a Driver Name occurs twice, a Human Player and an AI
 						var curDriverHash = e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId;
 						//Fill PosDriver array
@@ -2639,7 +2639,7 @@ function refreshDriverList(a, ForceRefresh){
 		var tmpPits = "-";
 		var LiveryName = "NA";
 		
-		if (SessionStage_old == "Race1" || SessionStage_old == "Race2"){	//SessionStage_old, because of Issue 116 - the auto export needs one worker run more after the Quali is over, where the laptime gaps must be calculated. If SessionStage is used, Race Gaps are calculated at the moment of the Export and that is wrong for a Quali result
+		if (SessionStage_old == "Race1" || SessionStage_old == "Race2" || SessionStage_old == 5){	//SessionStage_old, because of Issue 116 - the auto export needs one worker run more after the Quali is over, where the laptime gaps must be calculated. If SessionStage is used, Race Gaps are calculated at the moment of the Export and that is wrong for a Quali result
 			if(a[i].Gap2Ahead){Gaps.gap2ahead = a[i].Gap2Ahead;}
 			if(a[i].Gap2First){Gaps.gap2first = a[i].Gap2First;}
 		}else if (i == 0){
