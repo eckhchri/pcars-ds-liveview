@@ -119,13 +119,13 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		}
 	}
 	aDrivers.driverlist	=	new Array();
-	
+
 	// DriverDummy object for API error, if the API don't returns the data for all drivers
 	//PosX = 100km, in result you don't see the marker on the map
 	var DriverDummyAPIerror = new PCARSdriver();
 	DriverDummyAPIerror.SetExampleData();
 	DriverDummyAPIerror.UpdateObjectData({Name: "API Error", State: "Error", FastestLapTime: 0, LastLapTime: 0, CurrentLap: 0, PosX: 100000000});
-	
+
 	var aEmptyArray		=	new Array();
 	var TrackName;
 	var TrackID;
@@ -137,7 +137,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	var IsPlayer = 0;
 	var FastestLapTime;
 	var LastLapTime;
-	
+	var S1Time;
+	var S2Time;
+	var S3Time;
+
 	if(this.receivemode == "GETDEMODATA"){
 		/*var recording_position = timeout;
 		var demo_el = demo[recording_position];*/
@@ -731,6 +734,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					// the round functions fixes the problem
 					FastestLapTime = Math.round(myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000);
 					LastLapTime = Math.round(myArr.participants.mParticipantInfo[i].mLastLapTimes * 1000);
+					S1Time = Math.round(myArr.participants.mParticipantInfo[i].mCurrentSector1Times * 1000);
+					S2Time = Math.round(myArr.participants.mParticipantInfo[i].mCurrentSector2Times * 1000);
+					S3Time = Math.round(myArr.participants.mParticipantInfo[i].mCurrentSector3Times * 1000);
 
 					// The first participant in the array should be always the human player - check again
 					if (i == 0){
@@ -756,9 +762,9 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 							FastestLapTime,							//FastestLapTime
 							LastLapTime,							//LastLapTime
-							myArr.participants.mParticipantInfo[i].mCurrentSector1Times,	//S1Time
-							myArr.participants.mParticipantInfo[i].mCurrentSector2Times,    //S2Time
-							myArr.participants.mParticipantInfo[i].mCurrentSector3Times,    //S3Time
+							S1Time,								//S1Time
+							S2Time,								//S2Time
+							S3Time,								//S3Time
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
