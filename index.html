@@ -2821,7 +2821,10 @@ function ConvertLaptimeInReadbaleFormat(milliseconds){
 	
 	var str = '';
 
-	var ms = parseInt((milliseconds%1000))
+	//if(log >= 3){console.log("+++++++++ Math.round called 1 time");}
+	// solution for Issue #137
+	var ms = parseInt(Math.round(milliseconds)%1000)
+	//var ms = parseInt((milliseconds%1000))
 	 , s = parseInt((milliseconds/1000)%60)
 	 , m = parseInt((milliseconds/(1000*60))%60);
 
