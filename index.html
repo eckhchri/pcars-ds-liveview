@@ -1462,6 +1462,11 @@ function initialize_app(){
                                                                 }
 							} // end Sector Change 2->3
 
+							//if the driver on position 2 overtakes the first or a driver is disqualified (Issue #124), the gaps must be reset to "-"
+							if(e.data.driverlist[i].RacePosition == 1 || e.data.driverlist[i].State == "Disqualified"){
+								aRaceData[curDriverHash].Gap2Ahead = "-";
+								aRaceData[curDriverHash].Gap2First = "-";
+							}
 							
                                                 } // end calculation on Sector Change
 
