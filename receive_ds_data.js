@@ -71,6 +71,17 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		"7": "Max"
 	};
 
+	this.aMappingPitModeCREST = {
+		"0": "None",
+		"1": "EnteringPits",
+		"2": "InPits",
+		"3": "ExitingPits",
+		"4": "InGarage",
+		"5": "ExitingGarage",
+                //-------------
+                "6": "Max"
+	}
+
 	//if(log >= 3){console.log("Receive_DS_data() --- receivemode this: " , this);}
 
 	if (this.receivevariant == undefined){
@@ -140,6 +151,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	var S1Time;
 	var S2Time;
 	var S3Time;
+	var RaceState;
 
 	if(this.receivemode == "GETDEMODATA"){
 		/*var recording_position = timeout;
@@ -720,15 +732,15 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					aDrivers.push( DriverDummy );						
 					return aDrivers;
 				}	
-				
+
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
-	
+
 				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
 					// read data of all participants and put it in an array of PCARSdriver objects
 					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
 					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
 					PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
-					
+
 					//Convert times from seconds to milliseconds, because SharedMemory returns the laptimes in seconds with 4 places after decimal point
 					//After conversation you still have 1 place after the decimal point (0.7 milliseconds for example) and the drivertable cuts it and then 0.7 milliseconds = 0, but should be 1.
 					//The round functions fixes the problem. On the other hand rounding is a problem for the race gap calculation, because you sum up all lap times. With every added lap time to the sum, the chance of an error inreases (example: 0.49+0.49=0.98 but with rounded values 0+0=0)
@@ -743,10 +755,19 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					// The first participant in the array should be always the human player - check again
 					if (i == 0){
 						IsPlayer = 1;
+						//if(log >= 3){console.log("Stage: ", this.aMappingSessionStateCREST[ myArr.gameStates.mSessionState ], " / RaceState: ",this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ], " / PitMode: " , this.aMappingPitModeCREST[ myArr.participants.mParticipantInfo[i].mPitModes ]);}
 					}else{
 						IsPlayer = 0;
 					}
-					
+
+					//The pit counter in DS modes is triggered by the RaceState EnteringPits, which is in CREST2 mode not directly available. Shared Memory of pcars2 provides the additional value mPitModes.
+					//If the Pit Mode is "EnteringPits" or "InPits" or "ExitingPits"  writing the PitMode into the RaceState, which then match with the RaceState of the DS modes
+					if (myArr.participants.mParticipantInfo[i].mPitModes > 0 && myArr.participants.mParticipantInfo[i].mPitModes < 4){
+						RaceState = this.aMappingPitModeCREST[ myArr.participants.mParticipantInfo[i].mPitModes ];
+					}else{
+						RaceState = this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ];
+					}
+
 					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
 					loopcnt++;
 
@@ -759,7 +780,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 							PosX,								//PositionX in meters
 							PosY,								//PositionY in meters
 							PosZ,								//PositionZ in meters
-							this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ], //RaceState
+							RaceState, 							//RaceState
 							this.aSectormappingCREST[ myArr.participants.mParticipantInfo[i].mCurrentSector ], //CurrentSector
 							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
 							FastestLapTime,							//FastestLapTime
