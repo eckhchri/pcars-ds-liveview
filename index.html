@@ -503,6 +503,8 @@
                 zIndices.push($(aFocusWindows[i]).css('zIndex'));
         }
 
+	var slider_replaybar_sliding = false;
+
 	//// FOR DEVELOPER PURPOSES ONLY
 	//// checks for missing Livery Files, enable it only if you want to check these, result in browser developer console
 	//PCARSVehicleLiveryList.checkfiles('PCARS2');
@@ -842,11 +844,18 @@ function initialize_app(){
 			max:	demo_start_pos+1,
       		value:	demo_start_pos, 
 			step:	1,
+			start:   function( event, ui ) {
+				slider_replaybar_sliding = true;
+			},
 			stop:	function( event, ui ) {
 						$( "#replaybar_curpos_infobox" ).val( ui.value );
 						//set new values if needed
 						record_pos = ui.value;
-      			}
+						slider_replaybar_sliding = false;
+      			},
+			slide:   function( event, ui ) {
+				$( "#replaybar_curpos_infobox" ).val( ui.value );
+			}
     		});
     		$( "#replaybar_curpos_infobox" ).val( demo_start_pos );
   	});
@@ -1128,7 +1137,12 @@ function initialize_app(){
 					ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:   " + e.data.globals.attributes.SessionTimeDuration/60 + " min");
 				}else{
 					if (e.data.driverlist[0] ){
-						document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + '   Lap: ' + e.data.driverlist[0].CurrentLap + '/' + e.data.globals.attributes.RaceLength
+						//In CREST modes the RaceLength is not provided and set to 0. In this case it is not shown. <- check again, found value mLapsInEvent
+						//if(e.data.globals.attributes.RaceLength > 0){
+							document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + '   Lap: ' + e.data.driverlist[0].CurrentLap + '/' + e.data.globals.attributes.RaceLength;
+						//}else{
+						//	document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + '   Lap: ' + e.data.driverlist[0].CurrentLap;
+						//}
 					}
 					ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:    -" );
 				}
@@ -3134,12 +3148,16 @@ function updateSliderReplaybarOptions( settings ){
 	
 	 //if(log >= 3){console.log('+++++++++++ updateSliderReplaybarOptions $( "#slider-replaybar" ): ', $( "#slider-replaybar" ) );}	
 		//$("#slider-replaybar").slider('option',{min: demo_start_pos, max: demo_end_pos});
+	if(!slider_replaybar_sliding){
 		$( "#slider-replaybar" ).slider({
 			min: demo_start_pos,
 			max: demo_end_pos,
 			value: record_pos
 		});
-		$( "#replaybar_curpos_infobox" ).val( record_pos );	
+
+		$( "#replaybar_curpos_infobox" ).val( record_pos );
+	}
+	//$( "#replaybar_curpos_infobox" ).val( record_pos );	
 }
 
 

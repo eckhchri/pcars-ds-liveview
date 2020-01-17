@@ -637,7 +637,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
-						,"RaceLength":          0
+						,"RaceLength":          myArr.timings.mLapsInEvent
 						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
 						,"TemperatureTrack":	myArr.weather.mTrackTemperature
 					}
@@ -720,12 +720,12 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
-						,"RaceLength":          0
+						,"RaceLength":          myArr.timings.mLapsInEvent
 						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
 						,"TemperatureTrack":	myArr.weather.mTrackTemperature
 					}
 				}
-				
+
 				// if no users joined return example Data
 				if ( myArr.participants.mNumParticipants == 0 ){				
 					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}	
