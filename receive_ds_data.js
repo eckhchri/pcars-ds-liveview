@@ -637,7 +637,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
-						,"RaceLength":          myArr.timings.mLapsInEvent
+						,"RaceLength":          myArr.eventInformation.mLapsInEvent
 						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
 						,"TemperatureTrack":	myArr.weather.mTrackTemperature
 					}
@@ -720,7 +720,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 						,"SessionState":	myArr.gameStates.mGameState
 						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
 						,"SessionTimeElapsed":	0
-						,"RaceLength":          myArr.timings.mLapsInEvent
+						,"RaceLength":          myArr.eventInformation.mLapsInEvent
 						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
 						,"TemperatureTrack":	myArr.weather.mTrackTemperature
 					}
