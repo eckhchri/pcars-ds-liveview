@@ -28,6 +28,12 @@
 			 max-height: 80vh; /*defines value relativ to browser window size*/ 
 		}
 
+	     /*selected row of jqgrid tables*/
+	     .ui-jqgrid .ui-state-highlight {
+			background: #ffffcc;
+			border: #b3b300;
+	     }
+
 	     #TrackList{
 				position:       absolute;
                 left:           1%;
