@@ -79,7 +79,10 @@ function getIdByName(sVehicleID, sLiveryName){
 	if(this.oLiveryDataStructuredName[this.sGameMode][sVehicleID]){
         	if (this.oLiveryDataStructuredName[this.sGameMode][sVehicleID][sLiveryName]){
                 	return this.oLiveryDataStructuredName[this.sGameMode][sVehicleID][sLiveryName];
-	        }
+	        }else{
+			//return the custom livery ID if no other livery is available, which is mainly used for the CREST modes, because there is never a livery name available
+			return 99;
+		}
 	}
 
         return sResult;
