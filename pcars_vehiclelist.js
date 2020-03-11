@@ -2034,6 +2034,16 @@ this.aVehicleInfoExt['PCARS2']	= 	[
       }, 
 ];
 
+this.aVehicleInfoExt['AMS2']  =       [];
+this.aVehicleInfoExt['AMS2']  =       [
+	{
+	  "id" : 1000000001,
+	  "name" : "Dummy A",
+	  "class" : "Class A"
+
+	}
+];
+
 }// end load vehicle data
 
 ////////////////////

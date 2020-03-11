@@ -96,6 +96,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				"GETVEHICLELIST"  		: "/api/list/vehicles",
 				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
+                                "GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETDEMODATA"    		: ""
 			};	
 
@@ -254,6 +255,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				case	"GETCRESTDRIVERDATA":	return aDrivers;
 					
 				case	"GETCREST2DRIVERDATA":	return aDrivers;
+
+                                case	"GETCREST2AMS2DRIVERDATA":	return aDrivers;
 				
 
 			} // end switch	
@@ -808,6 +811,118 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 					}
 				}
 				   
+				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
+				return aDrivers;
+
+			case "GETCREST2AMS2DRIVERDATA":
+
+				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
+				if(log >= 2){console.log("---CREST2 Trackname: ", TrackName);}
+				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
+
+				//overwrite default values with CRESt specific ones
+				aDrivers.globals = {
+					"joinable":				"CREST Mode"
+					,"lobbyid":				"CREST Mode"
+					,"max_member_count":	"CREST Mode"
+					,"now":					"CREST Mode"
+					,"state":				"CREST Mode"
+					,"datasource":			"CRESTv2"
+					,"curgamerunning":		"AMS2"
+					,"attributes":{
+						"TrackId":			TrackID
+						,"SessionStage":	this.aMappingSessionStateCREST[ myArr.gameStates.mSessionState ]
+						,"SessionState":	myArr.gameStates.mGameState
+						,"SessionTimeDuration":	myArr.timings.mEventTimeRemaining	//CREST has directly the resttime, SessionTimeDuration - SessionTimeElapsed = resttime
+						,"SessionTimeElapsed":	0
+						,"RaceLength":          myArr.eventInformation.mLapsInEvent
+						,"TemperatureAmbient":	myArr.weather.mAmbientTemperature
+						,"TemperatureTrack":	myArr.weather.mTrackTemperature
+					}
+				}
+
+				// if no users joined return example Data
+				if ( myArr.participants.mNumParticipants == 0 ){
+					if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
+					aDrivers.push( DriverDummy );
+					return aDrivers;
+				}
+
+				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
+
+				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
+					// read data of all participants and put it in an array of PCARSdriver objects
+					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
+					PosY = myArr.participants.mParticipantInfo[i].mWorldPosition[1] * 1000;
+					PosZ = myArr.participants.mParticipantInfo[i].mWorldPosition[2] * 1000;
+
+					//Convert times from seconds to milliseconds, because SharedMemory returns the laptimes in seconds with 4 places after decimal point
+					//After conversation you still have 1 place after the decimal point (0.7 milliseconds for example) and the drivertable cuts it and then 0.7 milliseconds = 0, but should be 1.
+					//The round functions fixes the problem. On the other hand rounding is a problem for the race gap calculation, because you sum up all lap times. With every added lap time to the sum, the chance of an error inreases (example: 0.49+0.49=0.98 but with rounded values 0+0=0)
+					//Moved the Math.round calls to the function ConvertLaptimeInReadbaleFormat in the index.html - Issue #137
+					FastestLapTime = myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000;
+					LastLapTime = myArr.participants.mParticipantInfo[i].mLastLapTimes * 1000;
+					S1Time = myArr.participants.mParticipantInfo[i].mCurrentSector1Times * 1000;
+					S2Time = myArr.participants.mParticipantInfo[i].mCurrentSector2Times * 1000;
+					S3Time = myArr.participants.mParticipantInfo[i].mCurrentSector3Times * 1000;
+					//if(log >= 3){console.log("+++++++++ Math.round called 5 times for Last, Fastest and 3 sector times");}
+
+					// The first participant in the array should be always the human player - check again
+					if (i == 0){
+						IsPlayer = 1;
+						//if(log >= 3){console.log("Stage: ", this.aMappingSessionStateCREST[ myArr.gameStates.mSessionState ], " / RaceState: ",this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ], " / PitMode: " , this.aMappingPitModeCREST[ myArr.participants.mParticipantInfo[i].mPitModes ]);}
+					}else{
+						IsPlayer = 0;
+					}
+
+					//The pit counter in DS modes is triggered by the RaceState EnteringPits, which is in CREST2 mode not directly available. Shared Memory of pcars2 provides the additional value mPitModes.
+					//If the Pit Mode is "EnteringPits" or "InPits" or "ExitingPits"  writing the PitMode into the RaceState, which then match with the RaceState of the DS modes
+					if (myArr.participants.mParticipantInfo[i].mPitModes > 0 && myArr.participants.mParticipantInfo[i].mPitModes < 4){
+						RaceState = this.aMappingPitModeCREST[ myArr.participants.mParticipantInfo[i].mPitModes ];
+					}else{
+						RaceState = this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ];
+					}
+
+					index = CalculateIndexDriverArray (myArr.participants.mParticipantInfo[i].mRacePosition, loopcnt);
+					loopcnt++;
+
+					aDrivers.driverlist[index] =
+						new PCARSdriver(
+							0,								//RefId - NA
+							myArr.participants.mParticipantInfo[i].mName,			//Name
+							IsPlayer,							//IsPlayer
+							0,								//GridPosition - NA
+							PosX,								//PositionX in meters
+							PosY,								//PositionY in meters
+							PosZ,								//PositionZ in meters
+							RaceState, 							//RaceState
+							this.aSectormappingCREST[ myArr.participants.mParticipantInfo[i].mCurrentSector ], //CurrentSector
+							myArr.participants.mParticipantInfo[i].mRacePosition,		//RacePosition
+							FastestLapTime,							//FastestLapTime
+							LastLapTime,							//LastLapTime
+							S1Time,								//S1Time
+							S2Time,								//S2Time
+							S3Time,								//S3Time
+							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
+							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
+							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
+							myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
+							0								//LiveryId - NA
+							//numPits,							//numPits must not be filled
+							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
+							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
+						);
+				}
+
+				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+				for (var i = 0;i<aDrivers.driverlist.length;i++){
+					if(!aDrivers.driverlist[i]){
+						DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+						aDrivers.driverlist[i] = DriverDummyAPIerror;
+						if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+					}
+				}
+
 				//if(log >= 3){console.log (  "Array of aDriver Objects: " + aDrivers);}
 				return aDrivers;
 	

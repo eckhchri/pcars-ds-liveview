@@ -256,7 +256,8 @@
 	      		<option>DS</option>
 	      		<option>DS2</option>
 	      		<option>CREST</option>
-				<option>CREST2</option>
+			<option>CREST2</option>
+			<option>CREST2-AMS2</option>
 	      		<option>DEMO</option>
 			</select>
 		</fieldset>
@@ -622,6 +623,15 @@ function initialize_app(){
 			CREST2ServerURL		=	get_url_param('crest2url');
 			CREST2Port			=	get_url_param('crest2port');
 			APIMODE				=	"CREST2";
+			DisplayDuration		=	DisplayDurationCREST;
+			//overwrite dropdown menu selection
+			HTMLCTRL.APIMODE_SetSelection( APIMODE );
+		}
+		// check if url params overwrite the default CREST2-AMS2 info
+		if (get_url_param('crest2ams2url') && get_url_param('crest2ams2port'))	{
+			CREST2AMS2ServerURL		=	get_url_param('crest2url');
+			CREST2AMS2Port			=	get_url_param('crest2port');
+			APIMODE				=	"CREST2-AMS2";
 			DisplayDuration		=	DisplayDurationCREST;
 			//overwrite dropdown menu selection
 			HTMLCTRL.APIMODE_SetSelection( APIMODE );
@@ -1797,6 +1807,15 @@ function initialize_app(){
                                         ,receivemode:   		"GETCREST2DRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
+                        case "CREST2-AMS2":  //CREST2 receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 CREST2AMS2ServerURL
+                                        ,dsport:                CREST2AMS2Port
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   		"GETCREST2AMS2DRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+                                break;
                         case "DEMO":   //DEMO receive mode
 
 	                        //Calculation of WORKERDELAY_DEMODATA to adapt the playback speed to the recording speed
@@ -1881,6 +1900,10 @@ function initialize_app(){
 		case "CREST2":
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
 			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, 2000, "GETCREST2DRIVERDATA", aRefPointTrackname2ID);
+			break;
+                case "CREST2-AMS2":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2AMS2ServerURL, dsport: CREST2AMS2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2AMS2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(CREST2AMS2ServerURL, CREST2AMS2Port, 2000, "GETCREST2AMS2DRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker

@@ -20,6 +20,8 @@ var CRESTServerURL 		= "localhost";
 var CRESTPort			= 8080;
 var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
+var CREST2AMS2ServerURL = "10.10.10.10";
+var CREST2AMS2Port      = 8180;
 
 /*
 var aAPIMODEMAPPING = 
