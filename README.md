@@ -51,7 +51,7 @@ Open the website to see a demonstration, click on "Load from URL" and choose a D
 
 **Supports the following Data Sources**
 - Dedicated Server API from Project CARS 1 and 2 - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
-- CREST/CREST2 API - CREST2: https://github.com/viper4gh/CREST2,  http://forum.projectcarsgame.com/showthread.php?62359-CREST2-a-k-a-CARS2-REST-API&p=1494976#post1494976 / CREST1: https://github.com/NLxAROSA/CREST/tree/CREST2, http://cars-rest-api.com/ (not available anymore), 
+- CREST/CREST2 API - CREST2 (pcars2): https://github.com/viper4gh/CREST2,  http://forum.projectcarsgame.com/showthread.php?62359-CREST2-a-k-a-CARS2-REST-API&p=1494976#post1494976 / CREST (pcars): https://github.com/NLxAROSA/CREST/tree/CREST2, http://cars-rest-api.com/ (not available anymore), 
 
 **Default parameters**:
 - dedicated server url:   MY-URL.com
