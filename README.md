@@ -3,7 +3,7 @@
 ## What is it?
 
 The main goal of this project was to show information about races like you need it for TV broadcasts or for race engineers.\
-This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is also the main focus. But it can also poll the CREST1/CREST2 API, which provides the Shared Memory data of Project CARS 1 and 2 via HTTP.\
+This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is also the main focus. But it can also poll the CREST1/[CREST2](https://github.com/viper4gh/CREST2/blob/master/README.md) API, which provides the Shared Memory data of Project CARS 1 and 2 via HTTP.\
 If you open this website it has Google Maps in background, which shows the current race track and markers of all drivers where they are.
 As overlay you have some tables:
 - Driver Table - shows all driver names with their position, which car they drive and timings.
@@ -51,7 +51,7 @@ Open the website to see a demonstration, click on "Load from URL" and choose a D
 
 **Supports the following Data Sources**
 - Dedicated Server API from Project CARS 1 and 2 - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
-- CREST/CREST2 API - CREST2 (pcars2): https://github.com/viper4gh/CREST2,  http://forum.projectcarsgame.com/showthread.php?62359-CREST2-a-k-a-CARS2-REST-API&p=1494976#post1494976 / CREST (pcars): https://github.com/NLxAROSA/CREST/tree/CREST2, http://cars-rest-api.com/ (not available anymore), 
+- CREST/CREST2 API - CREST2 (pcars2): https://github.com/viper4gh/CREST2/blob/master/README.md,  http://forum.projectcarsgame.com/showthread.php?62359-CREST2-a-k-a-CARS2-REST-API&p=1494976#post1494976 / CREST (pcars): https://github.com/NLxAROSA/CREST/tree/CREST2, http://cars-rest-api.com/ (not available anymore), 
 
 **Default parameters**:
 - dedicated server url:   MY-URL.com
