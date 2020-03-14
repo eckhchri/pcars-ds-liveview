@@ -62,15 +62,22 @@ function CSSClassChanger(aCSSDefinition){
 		
 		return 1;
 	}
-	
+
+	//
+	function cleanDriverLabelStyles(){
+		setStyle( '', this.aCSSClasses['styledriverlabel'] );			
+		delete this.aCSSClasses['styledriverlabel'];
+	}
 	
 	//cut driverlabe to display only race position
 	function setDriverLabelStyle(mode, options){
 		
 		switch (mode){
 		
-		case "cutdriverlabel":
-			//delete this.aCSSClasses['styledriverlabel'];
+		case "cutdriverlabeldark":
+
+			this.cleanDriverLabelStyles();
+
 			var CSSStyleHandle = setStyle(
 				    '.driverlabel{\n'				+ 								    			    
 						'/*max-width: 29px;*/\n'	+
@@ -85,11 +92,57 @@ function CSSClassChanger(aCSSDefinition){
 			this.aCSSClasses['styledriverlabel']	=	(CSSStyleHandle);
 			break;
 			
-		case "normal":
-			
-			setStyle( '', this.aCSSClasses['styledriverlabel'] );
-			
+		case "normallabelsdark":
+
+			this.cleanDriverLabelStyles();
+
+			var CSSStyleHandle = setStyle(
+				'.driverlabel{\n'				+ 								    			    
+					'fill: black;\n'			+
+				'}\n',
+				CSSStyleHandle );
+	
+			//remember object handle
+			this.aCSSClasses['styledriverlabel']	=	(CSSStyleHandle);
+
+			/*
+			setStyle( '', this.aCSSClasses['styledriverlabel'] );			
 			delete this.aCSSClasses['styledriverlabel'];
+			*/
+			break;
+		
+		case "normallabelslight":
+
+			this.cleanDriverLabelStyles();
+			
+				// 'text-shadow: 1px 1px grey; \n'		+
+				//'text-decoration-color: white \n' +
+			var CSSStyleHandle = setStyle(
+				'.driverlabel{\n'				+ 								    			    				
+					'overflow: hidden; \n'		+
+					'text-overflow: clip; \n'	+
+					'white-space: nowrap; \n'	+					
+					'fill: lightgrey; \n'			+					
+				'}\n',
+				CSSStyleHandle );
+	
+			//remember object handle
+			this.aCSSClasses['styledriverlabel']	=	(CSSStyleHandle);			
+			break;
+
+		case "cutlabelslight":
+		
+			this.cleanDriverLabelStyles();
+			
+			var CSSStyleHandle = setStyle(
+				'.driverlabel{\n'				+ 								    			    
+					'max-width: 5ch; \n'		+
+					'fill: lightgrey; \n'			+
+				'}\n',
+				CSSStyleHandle );
+	
+			//remember object handle
+			this.aCSSClasses['styledriverlabel']	=	(CSSStyleHandle);
 			break;
 		
 		case "update_opacity_drivers":
@@ -367,6 +420,7 @@ CSSClassChanger.prototype.ClearAllCssClases=ClearAllCssClases;
 CSSClassChanger.prototype.ClearSpecificCssClases=ClearSpecificCssClases;
 CSSClassChanger.prototype.ColorTop3vehicles=ColorTop3vehicles;
 CSSClassChanger.prototype.setDriverLabelStyle=setDriverLabelStyle;
+CSSClassChanger.prototype.cleanDriverLabelStyles=cleanDriverLabelStyles;
 CSSClassChanger.prototype.ColorDynClasses=ColorDynClasses;
 CSSClassChanger.prototype.ColorSameVName=ColorSameVName;
 CSSClassChanger.prototype.ColorSameClass=ColorSameClass;
