@@ -67,7 +67,7 @@ var JQGridCartableCollapsed	=	true;   // [true | false] table default collapsed 
 
 //defines a delay for each worker to reduce CPU load
 var WORKERDELAY_TRACKLIST	=	5000; 	// in ms
-var WORKERDELAY_DSDATA  	=	100;    // in ms
+var WORKERDELAY_DSDATA  	=	100;    // in ms - The lower the value the smoother the marker moving, but the higher the CPU load and network traffic.
 
 var DisplayDuration			=	500;		// initial duration for displaying marker updates
 var DisplayDurationCREST 	=	100;		// initial duration for displaying marker updates
