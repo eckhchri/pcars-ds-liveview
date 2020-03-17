@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<script src="./lib/jszip/jszip.min.js"></script>
+		<script type="text/javascript">
+
+			//initRecFileReader();
+
+			function initRecFileReader(){
+
+				var fileInput 	= 	document.getElementById("RecFileUploader");
+
+				//console.log('fileInput: ', fileInput);
+				readFile = function () {
+					var reader = new FileReader();
+					reader.onload = function () {
+
+						//INFO: it slice file with static value 33. hopefully its each time the same length to cut off the prefix like "___PCARSCompressedJSONC_v01___" !! 
+						// since moving to zip compression, set slice to 0
+						importData(reader.result.slice(0));	
+
+			
+			
+						//and initialize demo array with new data -> because of async read of zipFile, initDemoData(...) called within pcars_recorder.js 			
+		        		};		
+			        	// start reading the file. When it is done, calls the onload event defined above.
+				        reader.readAsBinaryString(fileInput.files[0]);
+				};
+				fileInput.addEventListener('change', readFile);
+
+				//TODO:  Reset fileInput. Needed to load file with same name again	
+			}
+
+
+			function importData(compressedData){
+
+				//console.log('+++++++++++ PCARSREC importData(). Importing new compressed data: ', compressedData );
+	
+				var new_zip = new JSZip();
+				new_zip.loadAsync(compressedData)
+				.then(function(zip) {
+					// select file within zip archive by filename
+					//TODO: replace "data.pcars"  this.FileNameInArchive . Cast to String needed?	
+					return zip.file( "data.pcars" ).async("string");
+				})		
+				.then(function success(uncompressedData) {
+    			
+					var sCoord;
+					var output = "";
+					uncompressedData = JSON.parse(uncompressedData);
+					//TODO: really needed to save import to this.data?????????????????????????????????????????
+					//this.data = uncompressedData;		  
+					//initDemoData(uncompressedData, "yes"); //-> Async Call
+					console.log(uncompressedData[0]);
+					output = "Track ID: "+ uncompressedData[0].globals.attributes.TrackId+"<br><br>";
+					uncompressedData.forEach(function (item, index) {
+						if(item.participants[0]){
+							console.log(index+":["+item.participants[0].PosX.toFixed(0)+","+item.participants[0].PosZ.toFixed(0)+"],");
+							sCoord = "["+item.participants[0].PosX.toFixed(0)+","+item.participants[0].PosZ.toFixed(0)+"],<br>";
+							output = output.concat(sCoord);
+						}
+
+					});
+
+					document.getElementById("data").innerHTML = output;
+
+
+				
+			      }, function error(e) {
+					alert("Error unzip: " + e);
+			      });
+		
+				return 1;
+			}
+		</script>
+	</head>
+	<body>
+		<input id="RecFileUploader" type="file" name="Select PCARS File" onClick="initRecFileReader();">
+		<p id="data"></p>
+
+	</body>
+</html>
