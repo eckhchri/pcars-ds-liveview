@@ -1153,6 +1153,27 @@ function Refpoint(circuit_id)
 		,"Comment": "finished"
 		});
 	
+	////AMS2 Tracks
+	//Virginia
+	aRefPoints[100] = CopyObjectWithModifications(aRefPoints[9999999999],
+		{
+		"refLat":        36.56708
+		,"refLong":      -79.209072
+		,"rotation":     -1.075
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 0.999
+		,"cor_PosY_mul": 1.002
+		,"Name":         "Virginia Virginia_Full"
+		,"Name2":	 ""
+		,"AltNames":	 "Virginia Virginia_Full"
+		,"Zoom":         15
+		,"MapInitLat":   36.561228
+		,"MapInitLong":  -79.206432
+		,"Comment": "WIP"
+		});
+
+
 	//// fictional tracks
 	//Azure Coast
 	aRefPoints[560711985] = CopyObjectWithModifications(aRefPoints[8888888888],
