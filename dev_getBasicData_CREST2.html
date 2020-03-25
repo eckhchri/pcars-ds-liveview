@@ -1,0 +1,42 @@
+<html>
+<head>
+    <script type="text/javascript">
+        function RequestData(URL){
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.open("GET", URL, false);
+            xmlhttp.send(null);
+			
+			if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+			
+				var myArr = JSON.parse( xmlhttp.responseText );
+				var strData = "";
+				
+				// output complete Shared Memory data to browser developer console
+				console.log(myArr);
+
+				// Show basic data
+				strData = "Trackname for Refpoint: \"" + myArr.eventInformation.mTrackLocation + " " + myArr.eventInformation.mTrackVariation + "\"" +
+					"<br>Trackname for GUI: " + myArr.eventInformation.mTranslatedTrackLocation + " - " + myArr.eventInformation.mTranslatedTrackVariation +
+					"<br>Car: \"" + myArr.vehicleInformation.mCarName + "\"" +
+					"<br>Car Class: \"" + myArr.vehicleInformation.mCarClassName + "\"" +
+					"<br><br>All Participant Cars:<br>";
+
+				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
+					strData = strData + i + " - Car: \"" + myArr.participants.mParticipantInfo[i].mCarNames + "\" / Car Class: \"" + myArr.participants.mParticipantInfo[i].mCarClassNames + "\"<br>";
+				}
+
+				document.getElementById("data").innerHTML = strData;
+			}
+        }
+
+    </script>
+</head>
+<body>
+<!-- 
+If you want to open the website on another system in your network you have to replace localhost by the ip address of the system where CREST2 is running, e.g. 'http://192.168.0.5:8180/crest2/v1/api'
+ -->
+<p><a href="#" onClick="RequestData('http://localhost:8180/crest2/v1/api');">Request</a></p>
+<p id="data"></p>
+
+</body>
+</html>
