@@ -2787,37 +2787,39 @@ function buildTracklist( aTrackList , aRefPoint ){
 	// go through all responded tracks from pcars dedicated server
 	if(log >= 3){console.log("tmpObject problem in FF - Issue #141, aTrackList: ",aTrackList);}
 	for (var i=0; i < aTrackList.length; i++) {
-		tmpObject = aTrackList[i];
+		if(aTrackList[i] != undefined){ //added if, temporarily workaround for issue #141
+			tmpObject = aTrackList[i];
 
-		//if refpoint for a track exists
-		if (aRefPointInt['' + tmpObject.trackid]){
+			//if refpoint for a track exists
+			if (aRefPointInt['' + tmpObject.trackid]){
 
-			aNewTrackList[tmpObject.trackid.toString()] = { 	
-				trackid:	tmpObject.trackid
-				,trackname:	tmpObject.name
-				,altnames:      aRefPointInt[tmpObject.trackid]["AltNames"]
-				,gridsize:	tmpObject.gridsize
-				,refpoint:	"yes"
-				,comment:	aRefPointInt[tmpObject.trackid]["Comment"]
-            };
+				aNewTrackList[tmpObject.trackid.toString()] = {
+					trackid:	tmpObject.trackid
+					,trackname:	tmpObject.name
+					,altnames:      aRefPointInt[tmpObject.trackid]["AltNames"]
+					,gridsize:	tmpObject.gridsize
+					,refpoint:	"yes"
+					,comment:	aRefPointInt[tmpObject.trackid]["Comment"]
+				};
 
-		//no Refpoint entry exists , fill with dummy values
-		}else{
-			
-			aNewTrackList[tmpObject.trackid.toString()] = {
-				trackid:	tmpObject.trackid
-				,trackname:	tmpObject.name
-				,altnames:      "-"
-				,gridsize:	tmpObject.gridsize
-				,refpoint:	"no"
-				,comment:	"no comment because no refpoint"
-           };
+			//no Refpoint entry exists , fill with dummy values
+			}else{
+
+				aNewTrackList[tmpObject.trackid.toString()] = {
+					trackid:	tmpObject.trackid
+					,trackname:	tmpObject.name
+					,altnames:      "-"
+					,gridsize:	tmpObject.gridsize
+					,refpoint:	"no"
+					,comment:	"no comment because no refpoint"
+				};
+			}
+
+			// remember trackids that allready covered by DS output from RefpointArray
+			aSkipList['' + tmpObject.trackid] = "allready found";
 		}
-			
-		// remember trackids that allready covered by DS output from RefpointArray
-		aSkipList['' + tmpObject.trackid] = "allready found";
 	}
-			
+
 	//fill up with refpoint entries that are not listed in DS array
 	for (var key in aRefPointInt ){
 				
