@@ -1173,11 +1173,11 @@ function Refpoint(circuit_id)
 		});
 	//Virgina Grand
 	aRefPoints[101] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Grand","AltNames":"Virginia Virginia_Grand"});
-	//Virgina Grand
+	//Virgina North
 	aRefPoints[102] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway North","AltNames":"Virginia Virginia_North"});
-	//Virgina Grand
+	//Virgina South
 	aRefPoints[103] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South"});
-	//Virgina Grand
+	//Virgina Patriot
 	aRefPoints[104] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot"});
 
 	//// fictional tracks
