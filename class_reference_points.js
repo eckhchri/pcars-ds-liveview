@@ -1154,7 +1154,7 @@ function Refpoint(circuit_id)
 		});
 	
 	////AMS2 Tracks
-	//Virginia
+	//Virginia Full
 	aRefPoints[100] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
 		"refLat":        36.56708
@@ -1164,15 +1164,21 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 0.999
 		,"cor_PosY_mul": 1.002
-		,"Name":         "Virginia Virginia_Full"
-		,"Name2":	 ""
+		,"Name":         "VIRginia International Raceway Full"
 		,"AltNames":	 "Virginia Virginia_Full"
 		,"Zoom":         15
 		,"MapInitLat":   36.561228
 		,"MapInitLong":  -79.206432
 		,"Comment": "WIP"
 		});
-
+	//Virgina Grand
+	aRefPoints[101] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Grand","AltNames":"Virginia Virginia_Grand"});
+	//Virgina Grand
+	aRefPoints[102] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway North","AltNames":"Virginia Virginia_North"});
+	//Virgina Grand
+	aRefPoints[103] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South"});
+	//Virgina Grand
+	aRefPoints[104] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot"});
 
 	//// fictional tracks
 	//Azure Coast
