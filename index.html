@@ -2785,6 +2785,7 @@ function buildTracklist( aTrackList , aRefPoint ){
 	var aSkipList		= []; //List of all existing RefIDs
 
 	// go through all responded tracks from pcars dedicated server
+	if(log >= 3){console.log("tmpObject problem in FF - Issue #141, aTrackList: ",aTrackList);}
 	for (var i=0; i < aTrackList.length; i++) {
 		tmpObject = aTrackList[i];
 
