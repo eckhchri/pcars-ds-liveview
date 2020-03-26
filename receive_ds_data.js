@@ -96,9 +96,31 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				"GETVEHICLELIST"  		: "/api/list/vehicles",
 				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
-                                "GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
+    			"GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETDEMODATA"    		: ""
-			};	
+	};	
+
+////////    nested functions     //////////////
+// put into a function because of issue #141
+function returnDataSendError(rMode){
+
+	switch ( rMode ){
+		
+		case	"GETDSANDDRIVERDATA":	return aDrivers;
+
+		case	"GETTRACKLIST":		return aEmptyArray;
+		
+		case	"GETVEHICLELIST":	return aEmptyArray;
+		
+		case	"GETCRESTDRIVERDATA":	return aDrivers;
+			
+		case	"GETCREST2DRIVERDATA":	return aDrivers;
+
+		case	"GETCREST2AMS2DRIVERDATA":	return aDrivers;
+		
+		default: return aDrivers;
+	} // end switch	
+}
 
 //todo: Decison Using XMLHTTP class oder   THREE
 //      http://api.jquery.com/jquery.getjson/
@@ -153,7 +175,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	var S2Time;
 	var S3Time;
 	var RaceState;
-
+		
 	if(this.receivemode == "GETDEMODATA"){
 		/*var recording_position = timeout;
 		var demo_el = demo[recording_position];*/
@@ -244,22 +266,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 		}catch(err){
 			
 			if(log >= 3){console.log("Error while sending Request to DS!:" + err );}
-			switch ( this.receivemode ){
-			
-				case	"GETDSANDDRIVERDATA":	return aDrivers;
-	
-				case	"GETTRACKLIST":		return aEmptyArray;
-				
-				case	"GETVEHICLELIST":	return aEmptyArray;
-				
-				case	"GETCRESTDRIVERDATA":	return aDrivers;
-					
-				case	"GETCREST2DRIVERDATA":	return aDrivers;
-
-                                case	"GETCREST2AMS2DRIVERDATA":	return aDrivers;
-				
-
-			} // end switch	
+			return returnDataSendError(this.receivemode);		
 		}
 
 		//sucessfull request
@@ -928,7 +935,10 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	
 		  } // End SWITCH
 	
-	    	}
+	    }else{
+			// added because of issue #141
+			return returnDataSendError(this.receivemode);	
+		}
 		
 		// return empty array: no DS, no Memebers, ...
 	
