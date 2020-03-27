@@ -218,7 +218,7 @@
                                 <div>Export Data:</div>
                         </td>
                         <td class="box">
-                                <button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed('PCARS_recording.zip')">export</button>
+                                <button id="btn-export-rec-data" class="btn" onclick="PCARS_Rec.exportDataCompressed(builtFilename('rec'))">export</button>
                         </td>
 		
 		</tr>	
@@ -1673,7 +1673,8 @@ function initialize_app(){
                 		var trackname = $("#pcars-trackname").text();
 		                var racelength = $("#pcars-racelength").text();
 
-		                var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__Results for " + (trackname.slice(trackname.indexOf(":")+2)) + "__" + (racelength.slice(racelength.indexOf(":")+2)) + " Race";
+		                //var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__Results for " + (trackname.slice(trackname.indexOf(":")+2)) + "__" + (racelength.slice(racelength.indexOf(":")+2)) + " Race";
+		                var filename = builtFilename("drivertable_all");
 
 				for (var key in CSVExport) {
 					if(CSVExport[key] != ""){
@@ -2354,7 +2355,8 @@ function initialize_app(){
 		var curDate = new Date();
 		var trackname = $("#pcars-trackname").text();
 
-		var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__" + (trackname.slice(trackname.indexOf(":")+2)) + "__Current_Drivertable";
+		//var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__" + (trackname.slice(trackname.indexOf(":")+2)) + "__Current_Drivertable";
+		var filename = builtFilename("drivertable");
 		
 		if (ExportType === "CSV" || ExportType === "BOTH") {
 			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),filename);
@@ -2411,7 +2413,8 @@ function initialize_app(){
 		var trackname = $("#pcars-trackname").text();
 		var racelength = $("#pcars-racelength").text();
 
-		var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__Results for " + (trackname.slice(trackname.indexOf(":")+2)) + "__" + (racelength.slice(racelength.indexOf(":")+2)) + " Race";
+		//var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__Results for " + (trackname.slice(trackname.indexOf(":")+2)) + "__" + (racelength.slice(racelength.indexOf(":")+2)) + " Race";
+		var filename = builtFilename("drivertable_all");
 
 		for (var key in CSVExport) {
 			if(CSVExport[key] != ""){
@@ -2428,7 +2431,7 @@ function initialize_app(){
 	
 	$('#cbTracklistExport').click(function () {
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(JSONToCSVConvertor(jQuery("#tracklisttable").jqGrid("getRowData"), "Track Table",true,jQuery("#tracklisttable").jqGrid("getGridParam", "colNames"),["id"]),"Report_TrackTable");
+			ExportCSV(JSONToCSVConvertor(jQuery("#tracklisttable").jqGrid("getRowData"), "Track Table",true,jQuery("#tracklisttable").jqGrid("getGridParam", "colNames"),["id"]),builtFilename("tracktable"));
 		}
 		if (ExportType === "PDF" || ExportType === "BOTH") {
 			if(log >= 3){console.log("tracklisttable",jQuery("#tracklisttable").getRowData());}
@@ -2463,7 +2466,7 @@ function initialize_app(){
 			};
 			if(log >= 3){console.log("PDFdocDefinition: ", PDFdocDefinition);}
 			if (jQuery("#tracklisttable").getGridParam("records") > 0){
-				pdfMake.createPdf(PDFdocDefinition).download('Report_TrackTable.pdf');
+				pdfMake.createPdf(PDFdocDefinition).download(builtFilename("tracktable"));
 			}
 		}
 	});
@@ -3540,6 +3543,47 @@ function setWindowFocus(focusElement){
 	}else{
 		return false;
 	}
+}
+
+function builtFilename(mode){
+	var filename = "file";
+	var trackname = $("#pcars-trackname").text();
+	trackname = trackname.slice(trackname.indexOf(":")+2);
+	var racelength = $("#pcars-racelength").text();
+	racelength = racelength.slice(racelength.indexOf(":")+2);
+
+	var curDate = new Date();
+	var strYear = curDate.getFullYear();
+	var strMonth = (curDate.getMonth()+1) < 10 ? "0" + (curDate.getMonth()+1) : (curDate.getMonth()+1);
+	var strDate = curDate.getDate() < 10 ? "0" + curDate.getDate() : curDate.getDate();
+	var strHour = curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours();
+	var strMin = curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes();
+	var strSec = curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds();
+
+	var strFullDate = strYear + "-" + strMonth + "-" + strDate + "__" + strHour + "-" + strMin + "-" + strSec;
+
+	switch(mode) {
+		case "rec":
+			if(devmode_tm){
+				// Add trackname additionally in devmode_tm, it is not useful in normal mode, because the trackname ist built if you click on "Export", but you can stop the recording earlier with the switch.
+				// Between stopping and exporting the record the track can change
+				filename = strFullDate + "__" + trackname + "__PCARS_recording.zip";
+			}else{
+				filename = strFullDate + "__PCARS_recording.zip";
+			}
+			break;
+		case "drivertable":
+			filename = strFullDate + "__" + trackname + "__Current_Drivertable";
+			break;
+		case "drivertable_all":
+			filename = strFullDate + "__Results for " + trackname + "__" + racelength + " Race";;
+			break;
+		case "tracktable":
+			filename = strFullDate + "__TrackTable";
+			break;
+	}
+
+	return filename;
 }
 
        </script>
