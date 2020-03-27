@@ -79,7 +79,7 @@ function exportDataCompressed(filename){
 		zip.generateAsync({type:"blob", compression: "DEFLATE", compressionOptions : {level:9} })
 		.then(function(content) {
 			// using FileSaver.js, save zip file
-			saveAs(content, "PCARS_recording.zip" );
+			saveAs(content, filename);
 		});
 								
 	}else{

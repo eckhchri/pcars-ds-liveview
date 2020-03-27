@@ -175,7 +175,9 @@ function returnDataSendError(rMode){
 	var S2Time;
 	var S3Time;
 	var RaceState;
-		
+
+	var strConsoleLog = ""; // Debugging Issue #131
+
 	if(this.receivemode == "GETDEMODATA"){
 		/*var recording_position = timeout;
 		var demo_el = demo[recording_position];*/
@@ -857,6 +859,8 @@ function returnDataSendError(rMode){
 
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
 
+				strConsoleLog = "Debugging Issue #131 - Index/Driver: "; // Debugging Issue #131
+
 				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
 					// read data of all participants and put it in an array of PCARSdriver objects
 					PosX = myArr.participants.mParticipantInfo[i].mWorldPosition[0] * 1000;
@@ -919,7 +923,10 @@ function returnDataSendError(rMode){
 							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
 							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
 						);
+					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + ", "; // Debugging Issue #131
 				}
+
+				if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
 
 				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
 				for (var i = 0;i<aDrivers.driverlist.length;i++){
