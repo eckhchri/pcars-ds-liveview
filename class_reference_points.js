@@ -1169,16 +1169,16 @@ function Refpoint(circuit_id)
 		,"Zoom":         15
 		,"MapInitLat":   36.561228
 		,"MapInitLong":  -79.206432
-		,"Comment": "WIP"
+		,"Comment": "finished"
 		});
 	//Virgina Grand
 	aRefPoints[101] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Grand","AltNames":"Virginia Virginia_Grand"});
 	//Virgina North
-	aRefPoints[102] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway North","AltNames":"Virginia Virginia_North"});
+	aRefPoints[102] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway North","AltNames":"Virginia Virginia_North","Zoom":16,"MapInitLat":36.564636});
 	//Virgina South
-	aRefPoints[103] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South"});
+	aRefPoints[103] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South","Zoom":16,"MapInitLat":36.556187,"MapInitLong":-79.206856});
 	//Virgina Patriot
-	aRefPoints[104] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot"});
+	aRefPoints[104] = CopyObjectWithModifications(aRefPoints[100], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot","Zoom":17,"MapInitLat":36.558623,"MapInitLong":-79.207231});
 
 	//// fictional tracks
 	//Azure Coast
