@@ -76,6 +76,11 @@
 	<script src="./class_reference_points.js" charset="utf-8"></script>
 	<script src="./css_classchanger.js" charset="utf-8"></script>
 	<script src="./pcars_recorder.js" charset="utf-8"></script>
+	<script src="./RefPoint.js" charset="utf-8"></script>
+	<script src="./RefPointData.js" charset="utf-8"></script>
+	<script src="./RefPointDataPCARS1.js" charset="utf-8"></script>
+	<script src="./RefPointDataPCARS2.js" charset="utf-8"></script>
+	<script src="./RefPointDataAMS2.js" charset="utf-8"></script>
 	
 			
 		
@@ -347,7 +352,6 @@
 	}
 	window.onload = loadGoogleMapAPI;
 
-
 	// initialize vars
 	var oPcarsMapCtrl 		=	null; // TODO_SENSORLAYER controller object of all map types
 	var oMap;				// google map object, aka map, sometimes used as global variable TODO_SENSORLAYER
@@ -360,7 +364,7 @@
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var global_i			= 0;
 	
-	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|PCARS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
+	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|AMS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
 	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
@@ -371,8 +375,9 @@
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;
-	var oRPs					=	new Refpoint("-1");  // object of track RefPoints
-	var aRefPointTMP			= 	oRPs.GetRefPointHash();		// hash of all RefPoints for available tracks
+	//var oRPs					=	new Refpoint("-1");  // object of track RefPoints
+	var oRPs 					=	new RefPoint(CurGameRunning);
+	var aRefPointTMP			= 	oRPs.GetRefPointsGameCurGame();		// hash of all RefPoints for available tracks
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
 	
 	var StopRefreshTracklist	=	"false";
@@ -1125,7 +1130,7 @@ function initialize_app(){
 		ChangeHtmlContentByID( '#pcars-dslobbyid' 	, "DS Lobby ID:	" 	+ e.data.globals.lobbyid );		
 		ChangeHtmlContentByID( '#pcars-dsnow' 		, "DS now: "		+ e.data.globals.now );				
 		ChangeHtmlContentByID( '#pcars-apimode' 	, "API: "			+ APIMODE );
-		ChangeHtmlContentByID( '#pcars-curgamerunning', "CurGameRunning:	" + CurGameRunning );
+		ChangeHtmlContentByID( '#pcars-curgamerunning', "Game mode:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "Pos: " + record_pos + " / "  + demo.length);		
 		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName: ' + aRefPointTMP[tmpcuircitID]["Name"] );
@@ -3371,7 +3376,13 @@ function initW2UI(){
                           'Map Type:' +
                           '</div>' 
 				},		        
-				{ type: 'break', id: 'break5' },
+				{ type: 'break', id: 'break5' },				
+				{ type: 'html',  id: 'common_stats_game',
+                    html: '<div id="pcars-curgamerunning" style="padding: 3px 10px;">' +
+                          'Game:' +
+                          '</div>' 
+				},
+				{ type: 'break', id: 'break6' },
                 { type: 'spacer' },
 				{ type: 'html', id: 'item9',
                 	html:	'<div id="pcars-scriptversion">Version: ' + SCRIPTVERSION +
