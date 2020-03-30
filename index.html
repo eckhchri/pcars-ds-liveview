@@ -378,7 +378,9 @@
 	//var oRPs					=	new Refpoint("-1");  // object of track RefPoints
 	var oRPs 					=	new RefPoint(CurGameRunning);
 	console.log("A406959 ", oRPs);
-	var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of all RefPoints for available tracks
+	//var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of all RefPoints for available tracks
+	var aRefPointTMP			= 	oRPs.getRefPointsAll(); // hash of all RefPoints for available tracks
+	var aRefPointTMPAll			=   oRPs.getRefPointsAll();
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
 	
 	var StopRefreshTracklist	=	"false";
@@ -671,8 +673,8 @@ function initialize_app(){
 	
 	
 	//init map	
-	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMP[cuircitID]);	
-	oPcarsMapCtrl.init_map(aRefPointTMP[cuircitID], aSensorData);
+	oPcarsMapCtrl = new pcars_map_controller ( DEFAULT_MAP_TYPE ,'map' ,aRefPointTMPAll[cuircitID]);	
+ 	oPcarsMapCtrl.init_map(aRefPointTMPAll[cuircitID], aSensorData);
 	if(log >= 3){console.log("TODO new pcars_map_controller 2 : ", oPcarsMapCtrl);}
 	
 	// init MapType Selection		
@@ -952,17 +954,16 @@ function initialize_app(){
 		},
 		beforeSelectRow: function(rowid){
 			//this event is triggered only once shortly before the row is selected
-
 			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
 				$(this).jqGrid("resetSelection");
-				oPcarsMapCtrl.changeMapSettings(aRefPointTMP[cuircitID] , oMap , cuircitID);
+				oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[cuircitID] , oMap , cuircitID);
 				oPcarsMapCtrl.circuitID = -1;   // reset value to default
 			}else{
 				//else a row is selected
 				var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowid, 1);
 				oPcarsMapCtrl.circuitID = celltrackid;  //oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
-				oPcarsMapCtrl.changeMapSettings(aRefPointTMP[celltrackid] , oMap , celltrackid);
+				oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[celltrackid] , oMap , celltrackid);
 
 				return true;
 			}
@@ -2596,17 +2597,17 @@ function refreshTrackList(a){
 
 	var gridcnt = 0;
 	var _data;
-	
+
 	for (var key in a ){		
 		_data = {
 					id:             gridcnt
 					,trackid:       a[key]["trackid"]
 					,trackname:     a[key]["trackname"]
 					,altnames:      a[key]["altnames"]
+					,gamename:		a[key]["game_name"]
 					,gridsize:      a[key]["gridsize"]
 					,refpoint:      a[key]["refpoint"]
-					,comment:       a[key]["comment"]
-					,gamename:		a[key]["gamesname"]
+					,comment:       a[key]["comment"]					
 		};		
 		jQuery("#tracklisttable").jqGrid('addRowData',gridcnt, _data);
 
@@ -2806,10 +2807,10 @@ function buildTracklist( aTrackList , aRefPoint ){
 					trackid:	tmpObject.trackid
 					,trackname:	tmpObject.name
 					,altnames:	aRefPointInt[tmpObject.trackid]["AltNames"]
+					,gamename:	aRefPointInt[tmpObject.trackid]["game_name"]
 					,gridsize:	tmpObject.gridsize
 					,refpoint:	"yes"
-					,comment:	aRefPointInt[tmpObject.trackid]["Comment"]
-					,gamename:	"--" //aRefPointInt[tmpObject.trackid]["gameName"]
+					,comment:	aRefPointInt[tmpObject.trackid]["Comment"]					
 				};
 
 			//no Refpoint entry exists , fill with dummy values
@@ -2819,10 +2820,10 @@ function buildTracklist( aTrackList , aRefPoint ){
 					trackid:	tmpObject.trackid
 					,trackname:	tmpObject.name
 					,altnames:      "-"
+					,gamename:	tmpObject.game_name
 					,gridsize:	tmpObject.gridsize
 					,refpoint:	"no"
-					,comment:	"no comment because no refpoint"
-					,gamename:	"-"
+					,comment:	"no comment because no refpoint"					
 				};
 			}
 
@@ -2840,16 +2841,16 @@ function buildTracklist( aTrackList , aRefPoint ){
 		};
 
 		aNewTrackList['' + key] = {
-				trackid:	key
-				,trackname:	aRefPointInt[key]["Name"]
+				trackid:		key
+				,trackname:		aRefPointInt[key]["Name"]
 				,altnames:      aRefPointInt[key]["AltNames"]
-				,gridsize:	"no info"
-				,refpoint:	"yes"
-				,comment:       aRefPointInt[key]["Comment"]
-				,gamename:	"-"
+				,gamename:		aRefPointInt[key]["game_name"]
+				,gridsize:		"no info"
+				,refpoint:		"yes"
+				,comment:       aRefPointInt[key]["Comment"]				
 		};
 	}
-
+	
 	return aNewTrackList;
 }
 

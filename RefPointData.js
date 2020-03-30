@@ -25,6 +25,11 @@ class RefPointData  {
     *	@param {object} a hash of changes, to overwrite	
     */
     CopyObjectWithModifications(source, changes ){
+        
+        if (!source ||! changes){
+            return {};
+        }
+        
     	var dest = {};
         dest =  JSON.parse( JSON.stringify( source  ) );
 

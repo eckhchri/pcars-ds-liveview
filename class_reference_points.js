@@ -31,7 +31,7 @@ function Refpoint(circuit_id)
 		,"AltNames":""					// a csv list of additonal names in several APIs CREST1/CREST2/shared memory ...
         ,"Zoom":         19				// wanted zoom level for initial google map
         ,"MapInitLat":   51.500657		// google map initialization coords
-        ,"MapInitLong":  -0.071587
+        ,"MapInitLong":  -0.071587	
 		,"fictional":	 false
 	   	,"Comment": "Default"
 	   	,"game_name": 	this.gameName

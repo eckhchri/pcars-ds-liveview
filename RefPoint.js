@@ -12,7 +12,7 @@ class RefPoint  {
         this.refPointDefault = {};
         this.refPoints = {};
         this.refPoints['PCARS1'] = new Refpoint("-1").GetRefPointHash();
-        this.refPoints['PCARS2'] = new Refpoint("-1").GetRefPointHash();
+        this.refPoints['PCARS2'] = new Refpoint("-1").GetRefPointHash(); 
         this.refPoints['AMS2'] = new RefPointDataAMS2(gameId).getData();
 
         this.refPointsAll = this._mergeDataObjects(); // all refpoints in one merged object
@@ -118,26 +118,6 @@ class RefPoint  {
         return aTrackname2ID;
 
     }
-
-    /*	to copy cuircit variantions from one object to another
-    *
-    *	@param {object} a hash of a specific RefPoint Element	
-    *	@param {object} a hash of changes, to overwrite	
-    */
-    CopyObjectWithModifications(source, changes ){
-        var dest = {};
-            dest =  JSON.parse( JSON.stringify( source  ) );
-
-        for (var key in changes)
-        {
-            //console.log("Object Dest: " , dest["Name"]);
-            //console.log("key: " + key + "   value: " + changes[key]);
-            dest[key] = changes[key];
-        }
-
-        return JSON.parse( JSON.stringify( dest ) );	
-    }
-
 
     /* GetMappingTrackname2Trackid()
     * 
