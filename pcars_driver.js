@@ -4,7 +4,7 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         // vars
 		this.RefID				=	RefID;
 		this.oIdx				=	""; // original index within game API
-        this.Name      			=	Name;
+		this.Name      			=	Name;
         this.IsPlayer  			= 	IsPlayer;
         this.GridPosition   	=	GridPosition;
         this.PosX      			=	PosX;

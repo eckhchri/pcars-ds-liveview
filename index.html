@@ -1511,10 +1511,10 @@ function initialize_app(){
 				
 				//fill data array
 				aSensorData[i] = {
-						"Key": 					e.data.driverlist[i].Name
-						//"Key":					aDrivers.driverlist[i].GetUniqueId()
-						,"MarkerLabel" :		buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )
-						//,"MarkerLabel" :        aDrivers.driverlist[i].buildDriverLabel()							
+						//"Key": 				e.data.driverlist[i].Name
+						"Key":					e.data.driverlist[i].GetUniqueId()
+						//,"MarkerLabel" :		buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )
+						,"MarkerLabel" :        e.data.driverlist[i].buildDriverLabel()							
 						,"DateTime":			"2013-09-04T09:41:09+10:00"
 						,"Lat": 				gpsCoTmp["Lat"]
 						,"Long": 				gpsCoTmp["Long"]
@@ -1931,13 +1931,13 @@ function initialize_app(){
 
                // calculate GPS coordinates
                 var gpsCoTmp =  calc_coordinates (cuircitID , aDrivers.driverlist[i].GetPosX() , aDrivers.driverlist[i].GetPosZ() , aRefPointTMP );
-
+console.log("A406959 aSensorData[i]" ,aSensorData[i]  );				
                 // fill data array
                 aSensorData[i] = {
-								"Key":					aDrivers.driverlist[i].GetName()
-								//"Key":					aDrivers.driverlist[i].GetUniqueId()
-								,"MarkerLabel" :        buildDriverName( aDrivers.driverlist[i].GetName() , aDrivers.driverlist[i].GetRacePosition() )
-								//,"MarkerLabel" :        aDrivers.driverlist[i].buildDriverLabel()								
+								//"Key":					aDrivers.driverlist[i].GetName()
+								"Key":					aDrivers.driverlist[i].GetUniqueId()
+								//,"MarkerLabel" :        buildDriverName( aDrivers.driverlist[i].GetName() , aDrivers.driverlist[i].GetRacePosition() )
+								,"MarkerLabel" :        aDrivers.driverlist[i].buildDriverLabel()								
                                 ,"DateTime":            "2013-09-04T09:41:09+10:00"
                                 ,"Lat":					gpsCoTmp["Lat"]
                                 ,"Long":				gpsCoTmp["Long"]
@@ -2753,10 +2753,12 @@ function refreshDriverList(a, ForceRefresh){
 }
 
 //should move into pcars_driver class
+/*
 function buildDriverName(drivername , raceposition){
 	// Diego Xavier on race position 5 => "5-Diego Xavier"
 	return raceposition + " - " + drivername;
 }
+*/
 
 
 function transformVehicleObjectToHash(a){
