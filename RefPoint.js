@@ -12,7 +12,7 @@ class RefPoint  {
         this.refPointDefault = {};
         this.refPoints = {};
         this.refPoints['PCARS1'] = new Refpoint("-1").GetRefPointHash();
-        this.refPoints['PCARS2'] = {};//new Refpoint("-1").GetRefPointHash();
+        this.refPoints['PCARS2'] = new Refpoint("-1").GetRefPointHash();
         this.refPoints['AMS2'] = new RefPointDataAMS2(gameId).getData();
 
         this.refPointsAll = this._mergeDataObjects(); // all refpoints in one merged object
