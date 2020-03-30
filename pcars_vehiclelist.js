@@ -2037,10 +2037,299 @@ this.aVehicleInfoExt['PCARS2']	= 	[
 this.aVehicleInfoExt['AMS2']  =       [];
 this.aVehicleInfoExt['AMS2']  =       [
 	{
-	  "id" : 1000000001,
-	  "name" : "Dummy A",
-	  "class" : "Class A"
-
+		"id" : 1000,
+		"name" : "Caterham Academy",
+		"class" : "Cat_Academy"
+	},
+	{
+		"id" : 1001,
+		"name" : "Caterham Superlight",
+		"class" : "Cat_Superlight"
+	},
+	{
+		"id" : 1002,
+		"name" : "Caterham Supersport",
+		"class" : "Cat_Supersport"
+	},
+	{
+		"id" : 1003,
+		"name" : "Caterham 620R",
+		"class" : "Cat620R"
+	},
+	{
+		"id" : 1004,
+		"name" : "Chevette",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1005,
+		"name" : "Puma GTE",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1006,
+		"name" : "Pas Classic B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1007,
+		"name" : "Copa Classic B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1008,
+		"name" : "Puma GTB",
+		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : 1009,
+		"name" : "Copa Classic A",
+		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : 1010,
+		"name" : "Copa Fusca",
+		"class" : "CopaFusca"
+	},
+	{
+		"id" : 1011,
+		"name" : "Iveco Stralis",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : 1012,
+		"name" : "Mercedes-Benz",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : 1013,
+		"name" : "MAN",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : 1014,
+		"name" : "VW",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : 1015,
+		"name" : "Copa Uno",
+		"class" : "CopaUno"
+	},
+	{
+		"id" : 1016,
+		"name" : "F309",
+		"class" : "F-3"
+	},
+	{
+		"id" : 1017,
+		"name" : "F301",
+		"class" : "F-3"
+	},
+	{
+		"id" : 1018,
+		"name" : "Formula Classic Gen1 Model 2",
+		"class" : "F-Classic_Gen1"
+	},
+	{
+		"id" : 1019,
+		"name" : "Formula Classic Gen1 Model 1",
+		"class" : "F-Classic_Gen1"
+	},
+	{
+		"id" : 1020,
+		"name" : "Formula Classic Gen2 Model 1",
+		"class" : "F-Classic_Gen2"
+	},
+	{
+		"id" : 1021,
+		"name" : "Formula Classic Gen2 Model 2",
+		"class" : "F-Classic_Gen2"
+	},
+	{
+		"id" : 1022,
+		"name" : "Formula Classic Gen2 Model 3",
+		"class" : "F-Classic_Gen2"
+	},
+	{
+		"id" : 1023,
+		"name" : "Formula Classic Gen3 Model 1",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : 1024,
+		"name" : "Formula Classic Gen3 Model 3",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : 1025,
+		"name" : "Formula Classic Gen3 Model 2",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : 1026,
+		"name" : "Formula Reiza",
+		"class" : "F-Reiza"
+	},
+	{
+		"id" : 1027,
+		"name" : "Formula Trainer Advanced",
+		"class" : "F-Trainer_A"
+	},
+	{
+		"id" : 1028,
+		"name" : "Formula Trainer",
+		"class" : "F-Trainer"
+	},
+	{
+		"id" : 1029,
+		"name" : "Formula Ultimate 2019",
+		"class" : "F-Ultimate"
+	},
+	{
+		"id" : 1030,
+		"name" : "Formula V10",
+		"class" : "F-V10_Gen2"
+	},
+	{
+		"id" : 1031,
+		"name" : "Formula V12",
+		"class" : "F-V12"
+	},
+	{
+		"id" : 1032,
+		"name" : "Formula Vee Fin",
+		"class" : "F-Vee"
+	},
+	{
+		"id" : 1033,
+		"name" : "Formula Vee",
+		"class" : "F-Vee"
+	},
+	{
+		"id" : 1034,
+		"name" : "Formula Vintage G1M1",
+		"class" : "F-Vintage_Gen1"
+	},
+	{
+		"id" : 1035,
+		"name" : "Formula Vintage G1M2",
+		"class" : "F-Vintage_Gen1"
+	},
+	{
+		"id" : 1036,
+		"name" : "Formula Vintage G2M2",
+		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : 1037,
+		"name" : "Formula Vintage G2M1",
+		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : 1038,
+		"name" : "Ultima GTR Race",
+		"class" : "GTOpen"
+	},
+	{
+		"id" : 1039,
+		"name" : "Kart 125cc Shifter",
+		"class" : "Kart"
+	},
+	{
+		"id" : 1040,
+		"name" : "Kart 125cc 2STROKE",
+		"class" : "Kart"
+	},
+	{
+		"id" : 1041,
+		"name" : "Kart GX390 Race",
+		"class" : "Kart"
+	},
+	{
+		"id" : 1042,
+		"name" : "Kart GX390 Rental",
+		"class" : "Kart"
+	},
+	{
+		"id" : 1043,
+		"name" : "Mitsubishi Lancer R",
+		"class" : "LancerCup"
+	},
+	{
+		"id" : 1044,
+		"name" : "Mitsubishi Lancer RS",
+		"class" : "LancerCup"
+	},
+	{
+		"id" : 1045,
+		"name" : "Opala OldStock",
+		"class" : "OldStock"
+	},
+	{
+		"id" : 1046,
+		"name" : "MetalMoro AJR Honda",
+		"class" : "P1"
+	},
+	{
+		"id" : 1047,
+		"name" : "MetalMoro AJR Chevy V8",
+		"class" : "P1"
+	},
+	{
+		"id" : 1048,
+		"name" : "MetalMoro AJR Judd",
+		"class" : "P1"
+	},
+	{
+		"id" : 1049,
+		"name" : "MetalMoro MRX Sharkfin",
+		"class" : "P2"
+	},
+	{
+		"id" : 1050,
+		"name" : "MetalMoro MRX Honda",
+		"class" : "P3"
+	},
+	{
+		"id" : 1051,
+		"name" : "MCR S2000",
+		"class" : "P4"
+	},
+	{
+		"id" : 1052,
+		"name" : "MetalMoro MRX",
+		"class" : "P4"
+	},
+	{
+		"id" : 1053,
+		"name" : "Roco 001",
+		"class" : "P4"
+	},
+	{
+		"id" : 1054,
+		"name" : "Sprint Race",
+		"class" : "SprintRace"
+	},
+	{
+		"id" : 1055,
+		"name" : "Stock Car Brasil",
+		"class" : "StockCarV8"
+	},
+	{
+		"id" : 1056,
+		"name" : "Ultima",
+		"class" : "Street"
+	},
+	{
+		"id" : 1057,
+		"name" : "Superkart 250cc (PF=Yes)",
+		"class" : "SuperKart"
+	},
+	{
+		"id" : 1058,
+		"name" : "Super V8",
+		"class" : "SuperV8"
 	}
 ];
 
