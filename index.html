@@ -1512,7 +1512,9 @@ function initialize_app(){
 				//fill data array
 				aSensorData[i] = {
 						"Key": 					e.data.driverlist[i].Name
-						,"MarkerLabel" :		buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )						
+						//"Key":					aDrivers.driverlist[i].GetUniqueId()
+						,"MarkerLabel" :		buildDriverName( e.data.driverlist[i].Name , e.data.driverlist[i].RacePosition )
+						//,"MarkerLabel" :        aDrivers.driverlist[i].buildDriverLabel()							
 						,"DateTime":			"2013-09-04T09:41:09+10:00"
 						,"Lat": 				gpsCoTmp["Lat"]
 						,"Long": 				gpsCoTmp["Long"]
@@ -1932,8 +1934,10 @@ function initialize_app(){
 
                 // fill data array
                 aSensorData[i] = {
-                                "Key":					aDrivers.driverlist[i].GetName()
-                                ,"MarkerLabel" :        buildDriverName( aDrivers.driverlist[i].GetName() , aDrivers.driverlist[i].GetRacePosition() )
+								"Key":					aDrivers.driverlist[i].GetName()
+								//"Key":					aDrivers.driverlist[i].GetUniqueId()
+								,"MarkerLabel" :        buildDriverName( aDrivers.driverlist[i].GetName() , aDrivers.driverlist[i].GetRacePosition() )
+								//,"MarkerLabel" :        aDrivers.driverlist[i].buildDriverLabel()								
                                 ,"DateTime":            "2013-09-04T09:41:09+10:00"
                                 ,"Lat":					gpsCoTmp["Lat"]
                                 ,"Long":				gpsCoTmp["Long"]
@@ -2733,11 +2737,7 @@ function refreshDriverList(a, ForceRefresh){
 					,cssclasses:			a[i].CSSGridClasses
 		};
 		//update line
-		jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);
-	
-		//build hash for clean up map
-		//deactivated 07.02.2017
-		//_allDrivers[buildDriverName(a[i].Name, a[i].RacePosition)] =  {driverposition : a[i].RacePosition};		
+		jQuery("#DriverDataTable").jqGrid('addRowData',i, _data);		
 	}
 
 	// hide inclassposition drivertable column, if there is only one vehicle class active
@@ -2752,10 +2752,12 @@ function refreshDriverList(a, ForceRefresh){
 	return 1;
 }
 
+//should move into pcars_driver class
 function buildDriverName(drivername , raceposition){
 	// Diego Xavier on race position 5 => "5-Diego Xavier"
 	return raceposition + " - " + drivername;
 }
+
 
 function transformVehicleObjectToHash(a){
 	

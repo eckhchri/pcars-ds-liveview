@@ -2,7 +2,8 @@
 function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, S1Time, S2Time, S3Time, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First){
 	
         // vars
-        this.RefID				=	RefID;
+		this.RefID				=	RefID;
+		this.oIdx				=	""; // original index within game API
         this.Name      			=	Name;
         this.IsPlayer  			= 	IsPlayer;
         this.GridPosition   	=	GridPosition;
@@ -10,21 +11,21 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
         this.PosY      			=	PosY;
         this.PosZ      			=	PosZ;
         this.State     			=	State;
-        this.CurrentSector 		=   CurrentSector;
-        this.RacePosition  		=   RacePosition;
-        this.FastestLapTime		=   FLapTime;
-        this.LastLapTime   		=   LLapTime;
-	this.S1Time			=   S1Time;
-	this.S2Time                     =   S2Time;
-	this.S3Time                     =   S3Time;
-        this.Orientation   		=   Orient;
-        this.Speed	   			=   Spd;
+        this.CurrentSector 		=	CurrentSector;
+        this.RacePosition  		=	RacePosition;
+        this.FastestLapTime		=	FLapTime;
+        this.LastLapTime   		=	LLapTime;
+		this.S1Time				=	S1Time;
+		this.S2Time				=	S2Time;
+		this.S3Time				=	S3Time;
+        this.Orientation		=	Orient;
+        this.Speed	   			=	Spd;
         this.CurrentLap			=	CurrentLap;
         this.VehicleId			=	VehicleId;
-	this.LiveryId			=	LiveryId;
+		this.LiveryId			=	LiveryId;
         this.NumPits			=	(typeof(NumPits) !== 'undefined') ? NumPits : undefined;	//number of the current pits, only used within demo mode to keep consitency while a fast forward etc
-	this.Gap2Ahead			=	(typeof(Gap2Ahead) !== 'undefined') ? Gap2Ahead : undefined;
-	this.Gap2First                  =       (typeof(Gap2First) !== 'undefined') ? Gap2First : undefined;
+		this.Gap2Ahead			=	(typeof(Gap2Ahead) !== 'undefined') ? Gap2Ahead : undefined;
+		this.Gap2First			=	(typeof(Gap2First) !== 'undefined') ? Gap2First : undefined;
         
         this.VehicleName		=	"";				// will filled by IDtoName mapping
         this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
@@ -44,6 +45,21 @@ function CalcGPSCoordinates(){
 
 function GetName(){
 	return this.Name;
+}
+
+function GetUniqueId(){
+	/* disabled to keep compatible to old recordings
+	if (this.oIdx){
+		return this.oIdx + this.Name;
+	}
+	*/
+	return "" + this.Name;
+}
+
+function buildDriverLabel(drivername , raceposition){
+	// Diego Xavier on race position 5 => "5-Diego Xavier"
+	//return raceposition + " - " + drivername;
+	return this.GetRacePosition() + " - " + this.GetName();
 }
 
 function GetIsPlayer(){
@@ -268,6 +284,8 @@ function getGap2First(){
 PCARSdriver.CalcGPSCoordinates=CalcGPSCoordinates;
 PCARSdriver.prototype.GetRefID=GetRefID;
 PCARSdriver.prototype.GetName=GetName;
+PCARSdriver.prototype.GetUniqueId=GetUniqueId;
+PCARSdriver.prototype.buildDriverLabel=buildDriverLabel;
 PCARSdriver.prototype.GetIsPlayer=GetIsPlayer;
 PCARSdriver.prototype.GetPosX=GetPosX;
 PCARSdriver.prototype.GetPosY=GetPosY;
