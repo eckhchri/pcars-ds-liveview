@@ -374,11 +374,9 @@
 
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
-	var DisplayDurationCorrector =	0;
-	//var oRPs					=	new Refpoint("-1");  // object of track RefPoints
-	var oRPs 					=	new RefPoint(CurGameRunning);
-	console.log("A406959 ", oRPs);
-	//var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of all RefPoints for available tracks
+	var DisplayDurationCorrector =	0;	
+	var oRPs 					=	new RefPoint(CurGameRunning);	
+	//var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of game related RefPoints of tracks
 	var aRefPointTMP			= 	oRPs.getRefPointsAll(); // hash of all RefPoints for available tracks
 	var aRefPointTMPAll			=   oRPs.getRefPointsAll();
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
@@ -2604,7 +2602,7 @@ function refreshTrackList(a){
 					,trackid:       a[key]["trackid"]
 					,trackname:     a[key]["trackname"]
 					,altnames:      a[key]["altnames"]
-					,gamename:		a[key]["game_name"]
+					,gamename:		a[key]["gamename"]
 					,gridsize:      a[key]["gridsize"]
 					,refpoint:      a[key]["refpoint"]
 					,comment:       a[key]["comment"]					
