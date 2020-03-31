@@ -124,12 +124,12 @@ class RefPoint  {
     * returns an hash for mapping different spellings of a cicuit to a unique ID
     * 
     */
-    GetMappingTrackname2Trackid(){
+    /*GetMappingTrackname2Trackid(){
 
         var aTrackname2ID	= new Array();
         var sAltNames		= '';   // tmp alternative name string
         var aNamesTmp		= new Array();
-            
+
         // travers trough all Refpoints
         for (var key in this.aRPs){
                     
@@ -155,7 +155,7 @@ class RefPoint  {
         aTrackname2ID[''] = "9999999999";
                 
         return aTrackname2ID;
-    }
+    }*/
 
     /*
     * merge all refpoint objects to on list
