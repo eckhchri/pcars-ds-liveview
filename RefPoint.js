@@ -1,6 +1,5 @@
 class RefPoint  {
-		
-		
+			
 	/* 
 	 * init class
 	 */	
@@ -97,7 +96,7 @@ class RefPoint  {
             // add 'Name' and 'Name2' to mapping if the attribute is NOT empty
             if (this.refPointsAll[key+'']['Name'] != '') { aTrackname2ID[this.refPointsAll[key+'']['Name']] = key+''; }
             // Name2 not used anymore - Issue #140
-	    //if (this.refPointsAll[key+'']['Name2']!= '') { aTrackname2ID[this.refPointsAll[key+'']['Name2']] = key+''; }
+	        //if (this.refPointsAll[key+'']['Name2']!= '') { aTrackname2ID[this.refPointsAll[key+'']['Name2']] = key+''; }
                     
             // add 'AltNames' to mapping
             if (this.refPointsAll[key]['AltNames'] && this.refPointsAll[key]['AltNames'] != '' ){			
@@ -119,45 +118,7 @@ class RefPoint  {
         return aTrackname2ID;
 
     }
-
-    /* GetMappingTrackname2Trackid()
-    * 
-    * returns an hash for mapping different spellings of a cicuit to a unique ID
-    * 
-    */
-    /*GetMappingTrackname2Trackid(){
-
-        var aTrackname2ID	= new Array();
-        var sAltNames		= '';   // tmp alternative name string
-        var aNamesTmp		= new Array();
-
-        // travers trough all Refpoints
-        for (var key in this.aRPs){
-                    
-            // add 'Name' and 'Name2' to mapping if the attribute is NOT empty
-            if (this.aRPs[key+'']['Name'] != '') { aTrackname2ID[this.aRPs[key+'']['Name']] = key+''; }
-            if (this.aRPs[key+'']['Name2']!= '') { aTrackname2ID[this.aRPs[key+'']['Name2']] = key+''; }
-                    
-            // add 'AltNames' to mapping
-            if (this.aRPs[key]['AltNames'] && this.aRPs[key]['AltNames'] != '' ){			
-                // split into array and add each name to mapping
-                aNamesTmp = this.aRPs[key]['AltNames'].split(',');			
-                for (i = 0; i < aNamesTmp.length; i++) {				
-                    aTrackname2ID[aNamesTmp[i]+''] = key;
-                }			            
-            }
-            
-            // reset values
-            sAltNames = "";	
-            aNamesTmp = new Array();			
-        }
-        
-        //Crest Mode provide empty string in Lobby
-        aTrackname2ID[''] = "9999999999";
-                
-        return aTrackname2ID;
-    }*/
-
+    
     /*
     * merge all refpoint objects to on list
     */
