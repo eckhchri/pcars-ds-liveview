@@ -55,13 +55,13 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": "finished"
 		});		
 		//Virgina Grand
-		this.refPoints[160] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "VIRginia International Raceway Grand","AltNames":"Virginia Virginia_Grand"});
+		this.refPoints[160] = this.CopyObjectWithModifications(this.refPoints[159], {"Name": "VIRginia International Raceway Grand","AltNames":"Virginia Virginia_Grand"});
 		//Virgina North
-		this.refPoints[161] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "VIRginia International Raceway North","AltNames":"Virginia Virginia_North","Zoom":16,"MapInitLat":36.564636});
+		this.refPoints[161] = this.CopyObjectWithModifications(this.refPoints[159], {"Name": "VIRginia International Raceway North","AltNames":"Virginia Virginia_North","Zoom":16,"MapInitLat":36.564636});
 		//Virgina South
-		this.refPoints[162] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South","Zoom":16,"MapInitLat":36.556187,"MapInitLong":-79.206856});
+		this.refPoints[162] = this.CopyObjectWithModifications(this.refPoints[159], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South","Zoom":16,"MapInitLat":36.556187,"MapInitLong":-79.206856});
 		//Virgina Patriot
-		this.refPoints[163] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot","Zoom":17,"MapInitLat":36.558623,"MapInitLong":-79.207231});
+		this.refPoints[163] = this.CopyObjectWithModifications(this.refPoints[159], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot","Zoom":17,"MapInitLat":36.558623,"MapInitLong":-79.207231});
 		
 	}
 	
