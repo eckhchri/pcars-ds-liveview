@@ -1124,7 +1124,7 @@ function initialize_app(){
 		if(!aRefPointTMP[tmpcuircitID]){
 			tmpcuircitID = 8888888888;
 		}
-                
+
 		// write in HTML page for DS status		 
 		ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
 		ChangeHtmlContentByID( '#pcars-dsstate' 	, "DS State: " 		+ e.data.globals.state );
@@ -1135,7 +1135,7 @@ function initialize_app(){
 		ChangeHtmlContentByID( '#pcars-curgamerunning', "Game mode:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "Pos: " + record_pos + " / "  + demo.length);		
-		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName: ' + aRefPointTMP[tmpcuircitID]["Name"] );
+		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName: ' + aRefPointTMP[cuircitID]["Name"] );
 		ChangeHtmlContentByID( '#pcars-racelength'      , 'Race Length: ' + e.data.globals.attributes.RaceLength + ' Laps' );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
@@ -1920,6 +1920,11 @@ function initialize_app(){
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'],originalcurgamerunning : demo[record_pos]['globals']['curgamerunning'], arefpoint: aRefPointTrackname2ID});
 			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTrackname2ID, {originaldatasource : demo[record_pos]['globals']['datasource'], originalcurgamerunning : demo[record_pos]['globals']['curgamerunning']});
 			cuircitID = aDrivers.globals.attributes.TrackId;
+			// If the refpoint for the given ID from demo data is unknown, switch to fictional track - Issue #143
+			// This can happen if the demo element in config.js is wrong configured
+			if(!aRefPointTMP[cuircitID]){
+				cuircitID = 8888888888;
+			}
 			break;
 		default:
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
