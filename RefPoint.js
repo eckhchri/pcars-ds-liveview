@@ -96,7 +96,8 @@ class RefPoint  {
                     
             // add 'Name' and 'Name2' to mapping if the attribute is NOT empty
             if (this.refPointsAll[key+'']['Name'] != '') { aTrackname2ID[this.refPointsAll[key+'']['Name']] = key+''; }
-            if (this.refPointsAll[key+'']['Name2']!= '') { aTrackname2ID[this.refPointsAll[key+'']['Name2']] = key+''; }
+            // Name2 not used anymore - Issue #140
+	    //if (this.refPointsAll[key+'']['Name2']!= '') { aTrackname2ID[this.refPointsAll[key+'']['Name2']] = key+''; }
                     
             // add 'AltNames' to mapping
             if (this.refPointsAll[key]['AltNames'] && this.refPointsAll[key]['AltNames'] != '' ){			
