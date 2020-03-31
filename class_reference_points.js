@@ -10,7 +10,7 @@ function Refpoint(circuit_id)
 	this.Rot			=	undefined;
 	this.cuircit_name	=	undefined;
 	this.aRPs			=	undefined;   // object refpoints
-    this.gameName		=	'PCARS1&2';    
+    this.gameName		=	'PCARS1u2';    
 	var aRefPoints = new Array();
 
 	//static information
@@ -27,7 +27,7 @@ function Refpoint(circuit_id)
 		,"cor_PosX_mul": 1				// correction multiplier for PosX on input data before calculation / the multipliers have a similar result as the cor_r_xxx values, but help better for tracks with a rotation error
 		,"cor_PosY_mul": 1				// correction multiplier for PosY on input data before calculation
 		,"Name":         "Slightly Mad Studios Ltd"	// real name of the circuit in DS API
-		,"Name2":	 ""					// real name of the circuit in Game API, if it differs from DS API Name
+		//,"Name2":	 ""					// real name of the circuit in Game API, if it differs from DS API Name
 		,"AltNames":""					// a csv list of additonal names in several APIs CREST1/CREST2/shared memory ...
         ,"Zoom":         19				// wanted zoom level for initial google map
         ,"MapInitLat":   51.500657		// google map initialization coords
@@ -111,13 +111,13 @@ function Refpoint(circuit_id)
 		,"cor_r_Lat":    0
 		,"cor_PosX_mul": 1
 		,"cor_PosY_mul": 1
-	        ,"Name":         "Dubai Autodrome GP"
-	        ,"Name2":	 ""
+		,"Name":         "Dubai Autodrome GP"
+		,"Name2":	 ""
 		,"AltNames":	 "Dubai_Autodrome GP,Dubai Autodrome Grand Prix"	//"mTrackLocation":"Dubai Autodrome","mTrackVariation":"Grand Prix"
-	        ,"Zoom":         17
-	        ,"MapInitLat":   25.050102
-	        ,"MapInitLong":  55.238634
-	        ,"Comment": "live check"
+		,"Zoom":         17
+	    ,"MapInitLat":   25.050102
+		,"MapInitLong":  55.238634
+	    ,"Comment": "live check"
 		});
 
 	///Dubai Autodrome International
@@ -146,23 +146,23 @@ function Refpoint(circuit_id)
 	aRefPoints[1735854797] = CopyObjectWithModifications(aRefPoints[-661887517], {"Name": "Dubai Autodrome Club","Name2": "","AltNames":"Dubai_Autodrome Club","MapInitLat": 25.049058,"MapInitLong": 55.236882});
 
 	//Nuerburgring GP
-        aRefPoints[-945967394] = CopyObjectWithModifications(aRefPoints[9999999999],
-                {
-                "refLat":        50.332743	//50.332733 
-                ,"refLong":      6.943395	//6.943355
-                ,"rotation":     -0.35	//-0.9 
-                ,"cor_r_Long":   0	//30000000
+    aRefPoints[-945967394] = CopyObjectWithModifications(aRefPoints[9999999999],
+        {
+        "refLat":        50.332743	//50.332733 
+    	,"refLong":      6.943395	//6.943355
+        ,"rotation":     -0.35	//-0.9 
+        ,"cor_r_Long":   0	//30000000
 		,"cor_r_Lat":    0	//-30000000 
 		,"cor_PosX_mul": 1.005	//1
 		,"cor_PosY_mul": 0.9985	//1
-                ,"Name":         "Nürburgring GP"
-                ,"Name2":	 ""
+        ,"Name":         "Nürburgring GP"
+        ,"Name2":	 ""
 		,"AltNames":	 "Nürburgring Grand Prix,Nurburgring GP"	//"mTrackLocation":"Nürburgring","mTrackVariation":"Grand Prix"
-                ,"Zoom":         15
-                ,"MapInitLat":   50.332154
-                ,"MapInitLong":  6.940467
-                ,"Comment": "finished, small discrepancies"
-                });
+        ,"Zoom":         15
+    	,"MapInitLat":   50.332154
+        ,"MapInitLong":  6.940467
+        ,"Comment": "finished, small discrepancies"
+    	});
 	//Nuerburgring Sprint Short
 	aRefPoints[-810715843] = CopyObjectWithModifications(aRefPoints[-945967394],
 		{
