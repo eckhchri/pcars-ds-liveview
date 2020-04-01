@@ -10,7 +10,7 @@ function Refpoint(circuit_id)
 	this.Rot			=	undefined;
 	this.cuircit_name	=	undefined;
 	this.aRPs			=	undefined;   // object refpoints
-    this.gameName		=	'PCARS1a2';    
+    this.gameName		=	'PCARS1&2';    
 	var aRefPoints = new Array();
 
 	//static information
