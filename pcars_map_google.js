@@ -1,7 +1,7 @@
 
 /*
  * Open points:
- * - this.oMapLocal.addListener('zoom_changed', function(e)  ... Zugriff auf zum Bsp this.sensorLayer.interruptTransition(); nicht m�glich, deshlab derzeit deactiviert !!!!!!!!!!
+ * - this.oMapLocal.addListener('zoom_changed', function(e)  ... Zugriff auf zum Bsp this.sensorLayer.interruptTransition(); nicht möglich, deshlab derzeit deactiviert !!!!!!!!!!
  * 
  * 
  * 
