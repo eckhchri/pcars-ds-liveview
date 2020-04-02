@@ -37,7 +37,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
-			,"Name":	"Adelaide Historic"
+			,"Name":	"Adelaide Modern"
 			,"AltNames":	""
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
@@ -46,7 +46,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"initially added"
 		});
 		//Adelaide Modern
-		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Modern","AltNames":""});
+		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic","AltNames":""});
 
 		//Azure Circuit
 		this.refPoints[102] = this.CopyObjectWithModifications(this.refPoints[9999999999],
