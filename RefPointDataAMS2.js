@@ -27,25 +27,24 @@ class RefPointDataAMS2 extends RefPointData {
 
 
 		////AMS2 Tracks
-		//Adelaide Historic
+		//Adelaide Modern
 		this.refPoints[100] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-34.928456
+			,"refLong":	138.618758
+			,"rotation":	-1.55
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Adelaide Modern"
 			,"AltNames":	""
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-34.699531
+			,"MapInitLong":	138.565149
+			,"Comment":	"WIP"
 		});
-		//Adelaide Modern
+		//Adelaide Historic
 		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic","AltNames":""});
 
 		//Azure Circuit
@@ -91,20 +90,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Cadwell Park
 		this.refPoints[105] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	53.310311
+			,"refLong":	-0.05949
+			,"rotation":	-2.3
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
+			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":1
 			,"Name":	"Cadwell Park"
 			,"AltNames":	"CadwellPark CadwellPark"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	53.308865
+			,"MapInitLong":	-0.063534
+			,"Comment":	"WIP"
 		});
 
 		//Campo Grande
