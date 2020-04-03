@@ -2283,7 +2283,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1049,
-		"name" : "MetalMoro MRX Sharkfin",
+		"name" : "MetalMoro MRX Honda Turbo",
 		"class" : "P2"
 	},
 	{
@@ -2298,13 +2298,13 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1052,
-		"name" : "MetalMoro MRX",
-		"class" : "P4"
+		"name" : "MetalMoro MRX Duratec",
+		"class" : "P3"
 	},
 	{
 		"id" : 1053,
 		"name" : "Roco 001",
-		"class" : "P4"
+		"class" : "P3"
 	},
 	{
 		"id" : 1054,
@@ -2330,7 +2330,18 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1058,
 		"name" : "Super V8",
 		"class" : "SuperV8"
+	},
+        {
+		"id" : 1060,
+		"name" : "MetalMoro AJR V6 Turbo",
+		"class" : "P1"
+	},
+	{
+		"id" : 1061,
+		"name" : "MetalMoro MRX Duratec",
+		"class" : "P4"
 	}
+
 ];
 
 }// end load vehicle data
