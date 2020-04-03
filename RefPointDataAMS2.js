@@ -40,8 +40,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Name":	"Adelaide Modern"
 			,"AltNames":	""
 			,"Zoom":	16
-			,"MapInitLat":	-34.699531
-			,"MapInitLong":	138.565149
+			,"MapInitLat":	-34.928456
+			,"MapInitLong":	138.618758
 			,"Comment":	"WIP"
 		});
 		//Adelaide Historic
