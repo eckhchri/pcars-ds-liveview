@@ -1,5 +1,5 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, S1Time, S2Time, S3Time, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First){
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, S1Time, S2Time, S3Time, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First,VehicleName, VehicleClassName, i){
 	
         // vars
 		this.RefID				=	RefID;
@@ -27,8 +27,13 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
 		this.Gap2Ahead			=	(typeof(Gap2Ahead) !== 'undefined') ? Gap2Ahead : undefined;
 		this.Gap2First			=	(typeof(Gap2First) !== 'undefined') ? Gap2First : undefined;
         
-        this.VehicleName		=	"";				// will filled by IDtoName mapping
-        this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
+        //this.VehicleName		=	"";				// will filled by IDtoName mapping
+        //this.VehicleClassName 	=   'undefined';  // will be set in index.html because this information is not available within all API modes
+
+		this.VehicleName		=	(typeof(VehicleName) !== 'undefined') ? VehicleName : "";
+		this.VehicleClassName	=	(typeof(VehicleClassName) !== 'undefined') ? VehicleClassName : 'undefined';
+
+		this.i				=	(typeof(i) !== 'undefined') ? i : 0;	// driver array index from API
 
         //private vars
         var privateLat;
@@ -184,15 +189,19 @@ function setVehicleClassNameByMapping(mappingID, mappingName){
 	//if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()  mappingID: ", mappingID);}
 	//if(log >= 3){console.log("+++++++++ setVehicleClassNameByMapping()   mappingName: ",  mappingName);}
 	
-	//set VehicleClass by mapping information; if no math it is undefined
-	if (mappingID['' + this.VehicleId]){		
-		this.VehicleClassName = mappingID['' + this.VehicleId];		
-	}else if (mappingName['' + this.VehicleName]){
-		this.VehicleClassName = mappingName['' + this.VehicleName];		
-	}else{
-		//if this.VehicleId was not converted to VehicleName
-		this.VehicleClassName = "not defined";
-	}		
+	// in CREST modes the vehicle class comes from the SharedMemory and a mapping to our own data is not needed
+	// use the mapping only if the vehicle class is still undefined
+	if(this.VehicleClassName == 'undefined'){
+		//set VehicleClass by mapping information; if no match it is undefined
+		if (mappingID['' + this.VehicleId]){
+			this.VehicleClassName = mappingID['' + this.VehicleId];
+		}else if (mappingName['' + this.VehicleName]){
+			this.VehicleClassName = mappingName['' + this.VehicleName];
+		}else{
+			//if this.VehicleId was not converted to VehicleName
+			this.VehicleClassName = "not defined";
+		}
+	}
 }
 
 function GetCSSTextClass() {

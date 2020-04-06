@@ -927,11 +927,15 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
-							myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
-							0								//LiveryId - NA
-							//numPits,							//numPits must not be filled
-							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
-							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
+							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
+							0,								//VehicleID - NA
+							0,								//LiveryId - NA
+							undefined,							//numPits must not be filled
+							undefined,						//Gap2Ahead
+							undefined,						//Gap2First
+							myArr.participants.mParticipantInfo[i].mCarNames,			//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName
+							myArr.participants.mParticipantInfo[i].mCarClassNames,		//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass 
+							i
 						);
 					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + ", "; // Debugging Issue #131
 				}

@@ -1276,10 +1276,14 @@ function initialize_app(){
 		var tmpVeName ="";
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
-			
-				//convert vehicleID to VehicleName
-				e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );				
-				
+
+				// in CREST modes the VehicleName is already set by the received data from API
+				// use the conversion only if the VehicleName is still empty
+				if(e.data.driverlist[i].VehicleName == ""){
+					//convert vehicleID to VehicleName
+					e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );
+				}
+
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
 
