@@ -1,9 +1,8 @@
 // CLASS of an pCars Driver
-function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, S1Time, S2Time, S3Time, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First,VehicleName, VehicleClassName, i){
+function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,CurrentSector, RacePosition, FLapTime, LLapTime, S1Time, S2Time, S3Time, Orient, Spd,CurrentLap, VehicleId, LiveryId, NumPits, Gap2Ahead, Gap2First,VehicleName, VehicleClassName, oIdx){
 	
         // vars
 		this.RefID				=	RefID;
-		this.oIdx				=	""; // original index within game API
 		this.Name      			=	Name;
         this.IsPlayer  			= 	IsPlayer;
         this.GridPosition   	=	GridPosition;
@@ -33,7 +32,7 @@ function PCARSdriver(RefID,Name,IsPlayer,GridPosition,PosX,PosY,PosZ,State,Curre
 		this.VehicleName		=	(typeof(VehicleName) !== 'undefined') ? VehicleName : "";
 		this.VehicleClassName	=	(typeof(VehicleClassName) !== 'undefined') ? VehicleClassName : 'undefined';
 
-		this.i				=	(typeof(i) !== 'undefined') ? i : 0;	// driver array index from API
+		this.oIdx				=	(typeof(oIdx) !== 'undefined') ? oIdx : 0;	// original index within game API
 
         //private vars
         var privateLat;
