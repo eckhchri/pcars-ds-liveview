@@ -2340,6 +2340,16 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1061,
 		"name" : "MetalMoro MRX Duratec",
 		"class" : "P4"
+	},
+	{
+		"id" : 1062,
+		"name" : "Uno Classic B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1063,
+		"name" : "Fusca CA",
+		"class" : "CopaClassicFL"
 	}
 
 ];
