@@ -52,12 +52,11 @@ function GetName(){
 }
 
 function GetUniqueId(){
-	/* disabled to keep compatible to old recordings
-	if (this.oIdx){
+	//old recordings still working, because the receive function has no problem if the value is missing in the recorded data and interprets it as undefined which is converted to 0 by the PCARSDriver class.
+	//if (this.oIdx){	// this check is not working, because this.oIdx can have the value 0 and then it is interpreted as false. 0 is the default for undefined oIdx, but also the first element index of a valid array.
 		return this.oIdx + this.Name;
-	}
-	*/
-	return "" + this.Name;
+	//}
+	//return "" + this.Name;
 }
 
 function buildDriverLabel(drivername , raceposition){
