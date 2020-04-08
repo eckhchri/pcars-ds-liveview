@@ -2194,17 +2194,17 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 		stringResult: true,
 		searchOnEnter: false,
 		defaultSearch: "cn",
-		beforeSearch: function () {
+		/*beforeSearch: function () {
 			DrivernamesBeforeSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
-		},
+		},*/
 		afterSearch: function (e, rowid, orgClickEvent) {
 			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
 			var AllRowData 				= jQuery("#DriverDataTable").jqGrid('getGridParam','data');
 			//var DrivernamesAfterSearch	= jQuery("#DriverDataTable").jqGrid('getCol','drivername');
-			var DrivernamesAfterSearch = [];
+			var DriverKeysAfterSearch = [];
 			var tmpDriver = new PCARSdriver();
 			FilteredRowData.forEach(function(row) {
-				DrivernamesAfterSearch.push(tmpDriver.GetUniqueId(row.oidx,row.drivername));
+				DriverKeysAfterSearch.push(tmpDriver.GetUniqueId(row.oidx,row.drivername));
 			});
 		
 			//var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
@@ -2218,14 +2218,14 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 			if(log >= 2){console.log("+++ drivernames to show: ", DrivernamesToUnhide);}
 			*/
 			
-			if(DrivernamesAfterSearch.length != AllRowData.length){
-				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DrivernamesAfterSearch.length + " / " + AllRowData.length);
+			if(DriverKeysAfterSearch.length != AllRowData.length){
+				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DriverKeysAfterSearch.length + " / " + AllRowData.length);
 			}else{
 				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed'           , "");
 			}
 
 			//add/remove assignment of CSS class
-			CSSClsChg.HideSpecificDrivers( DrivernamesAfterSearch );			
+			CSSClsChg.HideSpecificDrivers( DriverKeysAfterSearch );
 			//Workaround: every filter event a new OPACITY css styles has to be set to change driver properties
 			CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: $( "#filtered_driver_opacity" ).val()} );
 			
