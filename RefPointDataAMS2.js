@@ -38,14 +38,13 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Adelaide Modern"
-			,"AltNames":	""
 			,"Zoom":	16
 			,"MapInitLat":	-34.928456
 			,"MapInitLong":	138.618758
 			,"Comment":	"finished"
 		});
 		//Adelaide Historic
-		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic","AltNames":""});
+		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic"});
 
 		//Azure Circuit
 		this.refPoints[102] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -384,7 +383,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Kyalami Historic"
-			,"AltNames":	""
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
 			,"MapInitLong":	-113.566253
@@ -428,7 +426,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Montreal Modern"
-			,"AltNames":	""
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
 			,"MapInitLong":	-113.566253
@@ -436,7 +433,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"initially added"
 		});
 		//Montreal Historic
-		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic","AltNames":""});
+		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic"});
 
 		//Ortona Kart One
 		this.refPoints[138] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -474,7 +471,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Oulton Park International"
-			,"AltNames":	""
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
 			,"MapInitLong":	-113.566253
@@ -518,7 +514,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Snetterton 300"
-			,"AltNames":	""
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
 			,"MapInitLong":	-113.566253
@@ -526,7 +521,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"initially added"
 		});
 		//Snetterton 200
-		this.refPoints[148] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 200","AltNames":""});
+		this.refPoints[148] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 200"});
 
 		//Spielberg Modern
 		this.refPoints[149] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -539,7 +534,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Spielberg Modern"
-			,"AltNames":	""
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
 			,"MapInitLong":	-113.566253
@@ -547,11 +541,11 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"initially added"
 		});
 		//Spielberg Short
-		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short","AltNames":""});
+		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short"});
 		//Spielberg Vintage
-		this.refPoints[151] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Vintage","AltNames":""});
+		this.refPoints[151] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Vintage"});
 		//Spielberg Historic
-		this.refPoints[152] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Historic","AltNames":""});
+		this.refPoints[152] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Historic"});
 
 		//Tarumã Internacional
 		this.refPoints[153] = this.CopyObjectWithModifications(this.refPoints[9999999999],
