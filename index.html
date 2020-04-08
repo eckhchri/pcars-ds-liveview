@@ -1622,7 +1622,7 @@ function initialize_app(){
 		if (SessionState_old != "Lobby" && SessionState_old != "Loading" && SessionStage_old == "Practice1" && SessionStage != "Practice1"){     //During SessionState Lobby the SessionStage is Practice1
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");	//sort grid for the case that the user changed the sorting
-			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Practice 1 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1630,7 +1630,7 @@ function initialize_app(){
 		if (SessionStage_old == "Practice2" && SessionStage != "Practice2"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Practice 2 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1639,7 +1639,7 @@ function initialize_app(){
 		if ((SessionStage_old == "Qualifying" && SessionStage != "Qualifying") || (SessionStage_old == "Qualifying1" && SessionStage != "Qualifying1")){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Qualifying Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1647,7 +1647,7 @@ function initialize_app(){
 		if (SessionStage_old == "Warmup" && SessionStage != "Warmup"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Warmup Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1655,7 +1655,7 @@ function initialize_app(){
 		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
+			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Race 1 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 		}
@@ -1668,12 +1668,12 @@ function initialize_app(){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
-				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
+				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 				PDFdocDefinition.content.push({text: 'Race Results', style: 'header' });
 				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
 			if (SessionStage_old == "Race2"){
-				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
+				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 				PDFdocDefinition.content.push({text: 'Race 2 Results', style: 'header' });
 				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
@@ -2032,11 +2032,12 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 //		scrollerbar:true,
 		caption: "List of available drivers",
 		ignoreCase:true,
-		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'Team/#', 'Vehicle Class', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','Pos', 'InClassPos', 'oIndex', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'Team/#', 'Vehicle Class', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
 						{name:'driverposition', width:18, align:"center", sorttype:"int", search:true},
 						{name:'inclassposition', width:18, align:"center", sorttype:"int", search:true},
+						{name:'oidx', hidden: true, width:1, align:"center", sorttype:"int"},
                         {name:'drivername', width:110,sorttype:"text", search:true},
                         {name:'driverstate',width:40, align:"center",sorttype:"text"},
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
@@ -2197,9 +2198,14 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 			DrivernamesBeforeSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
 		},
 		afterSearch: function (e, rowid, orgClickEvent) {
-			//var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
+			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
 			var AllRowData 				= jQuery("#DriverDataTable").jqGrid('getGridParam','data');
-			var DrivernamesAfterSearch	= jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+			//var DrivernamesAfterSearch	= jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+			var DrivernamesAfterSearch = [];
+			var tmpDriver = new PCARSdriver();
+			FilteredRowData.forEach(function(row) {
+				DrivernamesAfterSearch.push(tmpDriver.GetUniqueId(row.oidx,row.drivername));
+			});
 		
 			//var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
 			//var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
@@ -2374,7 +2380,7 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 		//var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__" + (trackname.slice(trackname.indexOf(":")+2)) + "__Current_Drivertable";
 		
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),builtFilename("drivertable"));
+			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),builtFilename("drivertable"));
 		}
 
 		if (ExportType === "PDF" || ExportType === "BOTH") {
@@ -2725,6 +2731,7 @@ function refreshDriverList(a, ForceRefresh){
 					refid:					a[i].RefID
 					,driverposition:		a[i].RacePosition
 					,inclassposition:		a[i].InClassPos
+					,oidx:					a[i].oIdx
 					,drivername:			a[i].Name
 					,driverstate:			a[i].State
 					,driversector:			a[i].CurrentSector

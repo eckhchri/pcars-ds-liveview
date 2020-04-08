@@ -51,10 +51,12 @@ function GetName(){
 	return this.Name;
 }
 
-function GetUniqueId(){
+function GetUniqueId(oIdx, Name){
+	oIdx = (typeof(oIdx) !== 'undefined') ? oIdx : this.oIdx;
+	Name = (typeof(Name) !== 'undefined') ? Name : this.Name;
 	//old recordings still working, because the receive function has no problem if the value is missing in the recorded data and interprets it as undefined which is converted to 0 by the PCARSDriver class.
 	//if (this.oIdx){	// this check is not working, because this.oIdx can have the value 0 and then it is interpreted as false. 0 is the default for undefined oIdx, but also the first element index of a valid array.
-		return this.oIdx + this.Name;
+		return oIdx + Name;
 	//}
 	//return "" + this.Name;
 }
