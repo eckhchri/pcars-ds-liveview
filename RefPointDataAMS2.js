@@ -42,7 +42,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-34.928456
 			,"MapInitLong":	138.618758
-			,"Comment":	"WIP"
+			,"Comment":	"finished"
 		});
 		//Adelaide Historic
 		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic","AltNames":""});
@@ -50,39 +50,37 @@ class RefPointDataAMS2 extends RefPointData {
 		//Azure Circuit
 		this.refPoints[102] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	43.73705
+			,"refLong":	7.427395
+			,"rotation":	126
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.983
+			,"cor_PosY_mul":0.985
 			,"Name":	"Azure Circuit"
 			,"AltNames":	"Azure_Circuit Azure_Circuit"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	43.737186
+			,"MapInitLong":	7.425732
+			,"Comment":	"finished"
 		});
 
 		//Brands Hatch Grand Prix
 		this.refPoints[103] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	51.36051
+			,"refLong":	0.261179
+			,"rotation":	2.1
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":0.998
 			,"Name":	"Brands Hatch Grand Prix"
 			,"AltNames":	"BrandsHatch GrandPrix"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	51.356786
+			,"MapInitLong":	0.262930
+			,"Comment":	"finished"
 		});
 		//Brands Hatch Indy
 		this.refPoints[104] = this.CopyObjectWithModifications(this.refPoints[103], {"Name": "Brands Hatch Indy","AltNames":"BrandsHatch Indy"});
@@ -188,20 +186,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Donington GP
 		this.refPoints[112] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	52.829917
+			,"refLong":	-1.381361
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":0.9975
 			,"Name":	"Donington GP"
 			,"AltNames":	"Donington Donington_GP"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	52.830756
+			,"MapInitLong":	-1.375103
+			,"Comment":	"finished"
 		});
 		//Donington National
 		this.refPoints[113] = this.CopyObjectWithModifications(this.refPoints[112], {"Name": "Donington National","AltNames":"Donington Donington_Nat"});
