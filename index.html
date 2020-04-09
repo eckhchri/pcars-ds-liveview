@@ -3702,11 +3702,11 @@ function OverrideRefpointValue(RefpointVar, value, slide){
 		aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar] = value; //Overwrite original value, too, for new slider fiddling
 	}else{
 		//Slider is used
-		// Refpoint Fiddling - an additional Refpoint object is needed, because for the fiddling sliders we need an original unchanged refpoint
-		var oRPsFiddling			= 	new RefPoint(CurGameRunning);
-		var aRefPointFiddling		=   oRPsFiddling.getRefPointsAll();
+		//An additional Refpoint object is needed. For the fiddling sliders we need an original unchanged refpoint as slider baseline, because sliding changes the current refpoint in real time
+		var oRPsFiddling			=	new RefPoint(CurGameRunning);
+		var aRefPointFiddling		=	oRPsFiddling.getRefPointsAll();
 		var oVal = parseFloat(aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar]) + value;
-		oVal = round(oVal,6);	// needed, because adding a value to a float like above, results in a float line 51.2367000000002 or 51.23456699999997
+		oVal = round(oVal,6);	// needed, because adding a value to a float like above, results in a float like 51.2367000000002 or 51.23456699999997
 
 		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = oVal;
 
