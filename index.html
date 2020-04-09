@@ -101,15 +101,25 @@
 		<h3>Refpoint Fiddling</h3><br>
 		<table>
 			<tr><td>refLat:</td><td><input type="text" name="fiddling_reflat_name" id="fiddling_reflat"></td></tr>
+			<tr><td colspan="2"><div id="slider-refLat"></div></td></tr>
 			<tr><td>refLong:</td><td><input type="text" name="fiddling_reflong_name" id="fiddling_reflong"></td></tr>  		
-	  		<tr><td>rotation:</td><td><input type="text" name="fiddling_rotation_name" id="fiddling_rotation"></td></tr>
-  			<tr><td>cor_r_Long:</td><td><input type="text" name="fiddling_cor_r_long_name" id="fiddling_cor_r_long"></td></tr>
-	  		<tr><td>cor_r_Lat:</td><td><input type="text" name="fiddling_cor_r_lat_name" id="fiddling_cor_r_lat"></td></tr>
-	  		<tr><td>cor_PosX_mul:</td><td><input type="text" name="fiddling_cor_posx_mul" id="fiddling_cor_posx_mul"></td></tr>
-	  		<tr><td>cor_PosY_mul:</td><td><input type="text" name="fiddling_cor_posy_mul" id="fiddling_cor_posy_mul">  	</td></tr>	
+			<tr><td colspan="2"><div id="slider-refLong"></div></td></tr>
+			<tr><td>rotation:</td><td><input type="text" name="fiddling_rotation_name" id="fiddling_rotation"></td></tr>
+			<tr><td colspan="2"><div id="slider-rotation"></div></td></tr>
+			<tr><td>cor_r_Long:</td><td><input type="text" name="fiddling_cor_r_long_name" id="fiddling_cor_r_long"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_r_Long"></div></td></tr>
+			<tr><td>cor_r_Lat:</td><td><input type="text" name="fiddling_cor_r_lat_name" id="fiddling_cor_r_lat"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_r_Lat"></div></td></tr>
+			<tr><td>cor_PosX_mul:</td><td><input type="text" name="fiddling_cor_posx_mul" id="fiddling_cor_posx_mul"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_PosX_mul"></div></td></tr>
+			<tr><td>cor_PosY_mul:</td><td><input type="text" name="fiddling_cor_posy_mul" id="fiddling_cor_posy_mul"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_PosY_mul"></div></td></tr>
 			<tr><td>Zoom:</td><td><input type="text" name="fiddling_zoom" id="fiddling_zoom"></td></tr>
+			<tr><td colspan="2"><div id="slider-Zoom"></div></td></tr>
 			<tr><td>MapInitLat:</td><td><input type="text" name="fiddling_mapinitlat" id="fiddling_mapinitlat"></td></tr>
+			<tr><td colspan="2"><div id="slider-MapInitLat"></div></td></tr>
 			<tr><td>MapInitLong:</td><td><input type="text" name="fiddling_mapinitlong" id="fiddling_mapinitlong"></td></tr>
+			<tr><td colspan="2"><div id="slider-MapInitLong"></div></td></tr>
 		</table>
 		<p>	
 	</div>
@@ -375,12 +385,12 @@
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;	
-	var oRPs 					=	new RefPoint(CurGameRunning);	
+	var oRPs 					=	new RefPoint(CurGameRunning);
 	//var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of game related RefPoints of tracks
 	var aRefPointTMP			= 	oRPs.getRefPointsAll(); // hash of all RefPoints for available tracks
 	var aRefPointTMPAll			=   oRPs.getRefPointsAll();
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
-	
+
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var StopRawDataAppending	=	false;
@@ -682,34 +692,34 @@ function initialize_app(){
 
 	//Override refpoint variables for optimize/tune the refpoints, for developers only
 	$("#fiddling_reflat").change(function(e){
-		OverrideRefpointValue("refLat", parseFloat($(this).val()));
+		OverrideRefpointValue("refLat", parseFloat($(this).val()), false);
 	});		
 	$("#fiddling_reflong").change(function(e){
-		OverrideRefpointValue("refLong", parseFloat($(this).val()));
+		OverrideRefpointValue("refLong", parseFloat($(this).val()), false);
 	});
 	$("#fiddling_rotation").change(function(e){
-		OverrideRefpointValue("rotation", parseFloat($(this).val()));
+		OverrideRefpointValue("rotation", parseFloat($(this).val()), false);
 	});
 	$("#fiddling_cor_r_long").change(function(e){
-		OverrideRefpointValue("cor_r_Long", parseInt($(this).val()));
+		OverrideRefpointValue("cor_r_Long", parseInt($(this).val()), false);
 	});
 	$("#fiddling_cor_r_lat").change(function(e){
-		OverrideRefpointValue("cor_r_Lat", parseInt($(this).val()));
+		OverrideRefpointValue("cor_r_Lat", parseInt($(this).val()), false);
 	});
 	$("#fiddling_cor_posx_mul").change(function(e){
-		OverrideRefpointValue("cor_PosX_mul", parseFloat($(this).val()));
+		OverrideRefpointValue("cor_PosX_mul", parseFloat($(this).val()), false);
 	});
 	$("#fiddling_cor_posy_mul").change(function(e){
-		OverrideRefpointValue("cor_PosY_mul", parseFloat($(this).val()));
+		OverrideRefpointValue("cor_PosY_mul", parseFloat($(this).val()), false);
 	});
 	 $("#fiddling_zoom").change(function(e){
-		OverrideRefpointValue("Zoom", parseInt($(this).val()));
+		OverrideRefpointValue("Zoom", parseInt($(this).val()), false);
         });
 	 $("#fiddling_mapinitlat").change(function(e){
-		OverrideRefpointValue("MapInitLat", parseFloat($(this).val()));
+		OverrideRefpointValue("MapInitLat", parseFloat($(this).val()), false);
         });
 	 $("#fiddling_mapinitlong").change(function(e){
-		OverrideRefpointValue("MapInitLong", parseFloat($(this).val()));
+		OverrideRefpointValue("MapInitLong", parseFloat($(this).val()), false);
         });
 	
 	
@@ -877,6 +887,146 @@ function initialize_app(){
     		});
     		$( "#replaybar_curpos_infobox" ).val( demo_start_pos );
   	});
+
+	$(function() {
+		$( "#slider-refLat" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("refLat", slider_cor, true);
+				}
+			});
+	});
+
+	$(function() {
+		$( "#slider-refLong" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("refLong", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-rotation" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/100; //slider values +/- 1-1000 changing rotation +/- 0-10°
+				OverrideRefpointValue("rotation", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_r_Long" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value*100000; //slider values +/- 1-1000 changing value +/- 0-100.000.000
+				OverrideRefpointValue("cor_r_Long", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_r_Lat" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value*100000; //slider values +/- 1-1000 changing value +/- 0-100.000.000
+				OverrideRefpointValue("cor_r_Lat", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_PosX_mul" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000; //slider values +/- 1-1000 changing value +/- 0-1
+				OverrideRefpointValue("cor_PosX_mul", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_PosY_mul" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000; //slider values +/- 1-1000 changing value +/- 0-1
+				OverrideRefpointValue("cor_PosY_mul", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-Zoom" ).slider({
+			range: "max",
+			min: -5,
+			max: 5,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value; //slider values +/- 1-5
+				OverrideRefpointValue("Zoom", slider_cor, true);
+				}
+			});
+	});
+
+	$(function() {
+		$( "#slider-MapInitLat" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/100000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("MapInitLat", slider_cor, true);
+				}
+			});
+	});
+
+	$(function() {
+		$( "#slider-MapInitLong" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/100000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("MapInitLong", slider_cor, true);
+				}
+			});
+	});
 	
 	//fa buttons
 	$(function() {
@@ -3538,12 +3688,29 @@ function initToolTips(){
 }
 
 //Override refpoint variables for optimizing/tuning refpoints, for developers only
-function OverrideRefpointValue(RefpointVar, value){
+function OverrideRefpointValue(RefpointVar, value, slide){
 	//check if there is a circuitID of a selected tracklisttable row. -1 means there is no. In this case the live circuit ID from the current APIMODE is used.
 	if(oPcarsMapCtrl.circuitID == -1){
 		oPcarsMapCtrl.circuitID = cuircitID;
 	}
-	aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
+
+	var slider = "#slider-" + RefpointVar;	//get corresponding slider
+	if(!slide){
+		//Input field is used
+		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
+		$( slider ).slider({value: 0});	//reset slider
+		aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar] = value; //Overwrite original value, too, for new slider fiddling
+	}else{
+		//Slider is used
+		// Refpoint Fiddling - an additional Refpoint object is needed, because for the fiddling sliders we need an original unchanged refpoint
+		var oRPsFiddling			= 	new RefPoint(CurGameRunning);
+		var aRefPointFiddling		=   oRPsFiddling.getRefPointsAll();
+		var oVal = parseFloat(aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar]) + value;
+		oVal = round(oVal,6);	// needed, because adding a value to a float like above, results in a float line 51.2367000000002 or 51.23456699999997
+
+		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = oVal;
+
+	}
 	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
 }
 
@@ -3621,6 +3788,11 @@ function builtFilename(mode){
 	}
 
 	return filename;
+}
+
+//round function for floats where I can specify the digit after decimal point
+function round(number, decimals) { 
+	return +(Math.round(number + "e+" + decimals) + "e-" + decimals); 
 }
 
        </script>
