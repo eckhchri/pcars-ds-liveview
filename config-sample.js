@@ -221,7 +221,7 @@ var zoom_settings = [
 
 var trackmap_opacity = 0.7;	//only needed for middle line
 var trackmap_color_LineMid = '#E0E0E0';
-var trackmap_color_LineBorders = '#FF0000';
+var trackmap_color_LineBorders = '#FF0000';	//only used for fictional tracks and in dev mode
 
 
 var devmode_tm = false;  // [true | false] developer mode for trackmaps
