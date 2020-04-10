@@ -99,15 +99,25 @@
 		<h3>Refpoint Fiddling</h3><br>
 		<table>
 			<tr><td>refLat:</td><td><input type="text" name="fiddling_reflat_name" id="fiddling_reflat"></td></tr>
+			<tr><td colspan="2"><div id="slider-refLat"></div></td></tr>
 			<tr><td>refLong:</td><td><input type="text" name="fiddling_reflong_name" id="fiddling_reflong"></td></tr>  		
-	  		<tr><td>rotation:</td><td><input type="text" name="fiddling_rotation_name" id="fiddling_rotation"></td></tr>
-  			<tr><td>cor_r_Long:</td><td><input type="text" name="fiddling_cor_r_long_name" id="fiddling_cor_r_long"></td></tr>
-	  		<tr><td>cor_r_Lat:</td><td><input type="text" name="fiddling_cor_r_lat_name" id="fiddling_cor_r_lat"></td></tr>
-	  		<tr><td>cor_PosX_mul:</td><td><input type="text" name="fiddling_cor_posx_mul" id="fiddling_cor_posx_mul"></td></tr>
-	  		<tr><td>cor_PosY_mul:</td><td><input type="text" name="fiddling_cor_posy_mul" id="fiddling_cor_posy_mul">  	</td></tr>	
+			<tr><td colspan="2"><div id="slider-refLong"></div></td></tr>
+			<tr><td>rotation:</td><td><input type="text" name="fiddling_rotation_name" id="fiddling_rotation"></td></tr>
+			<tr><td colspan="2"><div id="slider-rotation"></div></td></tr>
+			<tr><td>cor_r_Long:</td><td><input type="text" name="fiddling_cor_r_long_name" id="fiddling_cor_r_long"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_r_Long"></div></td></tr>
+			<tr><td>cor_r_Lat:</td><td><input type="text" name="fiddling_cor_r_lat_name" id="fiddling_cor_r_lat"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_r_Lat"></div></td></tr>
+			<tr><td>cor_PosX_mul:</td><td><input type="text" name="fiddling_cor_posx_mul" id="fiddling_cor_posx_mul"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_PosX_mul"></div></td></tr>
+			<tr><td>cor_PosY_mul:</td><td><input type="text" name="fiddling_cor_posy_mul" id="fiddling_cor_posy_mul"></td></tr>
+			<tr><td colspan="2"><div id="slider-cor_PosY_mul"></div></td></tr>
 			<tr><td>Zoom:</td><td><input type="text" name="fiddling_zoom" id="fiddling_zoom"></td></tr>
+			<tr><td colspan="2"><div id="slider-Zoom"></div></td></tr>
 			<tr><td>MapInitLat:</td><td><input type="text" name="fiddling_mapinitlat" id="fiddling_mapinitlat"></td></tr>
+			<tr><td colspan="2"><div id="slider-MapInitLat"></div></td></tr>
 			<tr><td>MapInitLong:</td><td><input type="text" name="fiddling_mapinitlong" id="fiddling_mapinitlong"></td></tr>
+			<tr><td colspan="2"><div id="slider-MapInitLong"></div></td></tr>
 		</table>
 		<p>	
 	</div>
@@ -373,12 +383,12 @@
 	var UnHide					= "false";	//UnHide markers
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;	
-	var oRPs 					=	new RefPoint(CurGameRunning);	
+	var oRPs 					=	new RefPoint(CurGameRunning);
 	//var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of game related RefPoints of tracks
 	var aRefPointTMP			= 	oRPs.getRefPointsAll(); // hash of all RefPoints for available tracks
 	var aRefPointTMPAll			=   oRPs.getRefPointsAll();
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
-	
+
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var StopRawDataAppending	=	false;
@@ -680,34 +690,34 @@ function initialize_app(){
 
 	//Override refpoint variables for optimize/tune the refpoints, for developers only
 	$("#fiddling_reflat").change(function(e){
-		OverrideRefpointValue("refLat", parseFloat($(this).val()));
+		OverrideRefpointValue("refLat", parseFloat($(this).val()), false);
 	});		
 	$("#fiddling_reflong").change(function(e){
-		OverrideRefpointValue("refLong", parseFloat($(this).val()));
+		OverrideRefpointValue("refLong", parseFloat($(this).val()), false);
 	});
 	$("#fiddling_rotation").change(function(e){
-		OverrideRefpointValue("rotation", parseFloat($(this).val()));
+		OverrideRefpointValue("rotation", parseFloat($(this).val()), false);
 	});
 	$("#fiddling_cor_r_long").change(function(e){
-		OverrideRefpointValue("cor_r_Long", parseInt($(this).val()));
+		OverrideRefpointValue("cor_r_Long", parseInt($(this).val()), false);
 	});
 	$("#fiddling_cor_r_lat").change(function(e){
-		OverrideRefpointValue("cor_r_Lat", parseInt($(this).val()));
+		OverrideRefpointValue("cor_r_Lat", parseInt($(this).val()), false);
 	});
 	$("#fiddling_cor_posx_mul").change(function(e){
-		OverrideRefpointValue("cor_PosX_mul", parseFloat($(this).val()));
+		OverrideRefpointValue("cor_PosX_mul", parseFloat($(this).val()), false);
 	});
 	$("#fiddling_cor_posy_mul").change(function(e){
-		OverrideRefpointValue("cor_PosY_mul", parseFloat($(this).val()));
+		OverrideRefpointValue("cor_PosY_mul", parseFloat($(this).val()), false);
 	});
 	 $("#fiddling_zoom").change(function(e){
-		OverrideRefpointValue("Zoom", parseInt($(this).val()));
+		OverrideRefpointValue("Zoom", parseInt($(this).val()), false);
         });
 	 $("#fiddling_mapinitlat").change(function(e){
-		OverrideRefpointValue("MapInitLat", parseFloat($(this).val()));
+		OverrideRefpointValue("MapInitLat", parseFloat($(this).val()), false);
         });
 	 $("#fiddling_mapinitlong").change(function(e){
-		OverrideRefpointValue("MapInitLong", parseFloat($(this).val()));
+		OverrideRefpointValue("MapInitLong", parseFloat($(this).val()), false);
         });
 	
 	
@@ -850,7 +860,7 @@ function initialize_app(){
 						GuiUpdateIntervall = ui.value;
       			}
     		});
-    		$( "#workerdelay_dsdata" ).val( $( "#slider-workerdelay_dsdata" ).slider( "value" ) );
+    		$( "#gui_update_interval" ).val( $( "#slider-gui_update_interval" ).slider( "value" ) );
   	});
 	
 	$(function() {
@@ -875,6 +885,146 @@ function initialize_app(){
     		});
     		$( "#replaybar_curpos_infobox" ).val( demo_start_pos );
   	});
+
+	$(function() {
+		$( "#slider-refLat" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("refLat", slider_cor, true);
+				}
+			});
+	});
+
+	$(function() {
+		$( "#slider-refLong" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("refLong", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-rotation" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/100; //slider values +/- 1-1000 changing rotation +/- 0-10°
+				OverrideRefpointValue("rotation", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_r_Long" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value*100000; //slider values +/- 1-1000 changing value +/- 0-100.000.000
+				OverrideRefpointValue("cor_r_Long", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_r_Lat" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value*100000; //slider values +/- 1-1000 changing value +/- 0-100.000.000
+				OverrideRefpointValue("cor_r_Lat", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_PosX_mul" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000; //slider values +/- 1-1000 changing value +/- 0-1
+				OverrideRefpointValue("cor_PosX_mul", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-cor_PosY_mul" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/1000; //slider values +/- 1-1000 changing value +/- 0-1
+				OverrideRefpointValue("cor_PosY_mul", slider_cor, true);
+				}
+			});
+	  });
+
+	  $(function() {
+		$( "#slider-Zoom" ).slider({
+			range: "max",
+			min: -5,
+			max: 5,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value; //slider values +/- 1-5
+				OverrideRefpointValue("Zoom", slider_cor, true);
+				}
+			});
+	});
+
+	$(function() {
+		$( "#slider-MapInitLat" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/100000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("MapInitLat", slider_cor, true);
+				}
+			});
+	});
+
+	$(function() {
+		$( "#slider-MapInitLong" ).slider({
+			range: "max",
+			min: -1000,
+			max: 1000,
+			value: 0,
+			step: 1,
+			slide: function( event, ui ) {
+				var slider_cor = ui.value/100000; //slider values +/- 0-1000 changing 3rd-6th digit after decimal point
+				OverrideRefpointValue("MapInitLong", slider_cor, true);
+				}
+			});
+	});
 	
 	//fa buttons
 	$(function() {
@@ -1274,10 +1424,14 @@ function initialize_app(){
 		var tmpVeName ="";
 		//update map
 		for (var i = 0; i < e.data.driverlist.length; i++ ){
-			
-				//convert vehicleID to VehicleName
-				e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );				
-				
+
+				// in CREST modes the VehicleName is already set by the received data from API
+				// use the conversion only if the VehicleName is still empty
+				if(e.data.driverlist[i].VehicleName == ""){
+					//convert vehicleID to VehicleName
+					e.data.driverlist[i].VehicleName	=  PCARSVehicleList.VehicleIdToName(e.data.driverlist[i].VehicleId , CurGameRunning );
+				}
+
 				//calculate GPS coordinates
 				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
 
@@ -1616,7 +1770,7 @@ function initialize_app(){
 		if (SessionState_old != "Lobby" && SessionState_old != "Loading" && SessionStage_old == "Practice1" && SessionStage != "Practice1"){     //During SessionState Lobby the SessionStage is Practice1
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");	//sort grid for the case that the user changed the sorting
-			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Practice1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Practice 1 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1624,7 +1778,7 @@ function initialize_app(){
 		if (SessionStage_old == "Practice2" && SessionStage != "Practice2"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Practice2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Practice 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Practice 2 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1633,7 +1787,7 @@ function initialize_app(){
 		if ((SessionStage_old == "Qualifying" && SessionStage != "Qualifying") || (SessionStage_old == "Qualifying1" && SessionStage != "Qualifying1")){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Qualifying = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Qualifying Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Qualifying Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1641,7 +1795,7 @@ function initialize_app(){
 		if (SessionStage_old == "Warmup" && SessionStage != "Warmup"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
+			CSVExport.Warmup = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Warmup Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driverstate","driversector","liveryname","lastlap","pits","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Warmup Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),false));
 		}
@@ -1649,7 +1803,7 @@ function initialize_app(){
 		if (SessionStage_old == "Race1" && SessionStage != "Race1" && SessionState == "Race"){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
-			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
+			CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 1 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 			PDFdocDefinition.content.push({text: 'Race 1 Results', style: 'header' });
 			PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 		}
@@ -1662,12 +1816,12 @@ function initialize_app(){
 			refreshDriverList(e.data.driverlist, true);
 			jQuery("#DriverDataTable").jqGrid('sortGrid',"driverposition",false,"asc");
 			if (SessionStage_old == "Race1"){       //matches if Race1 is the only race
-				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
+				CSVExport.Race1 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 				PDFdocDefinition.content.push({text: 'Race Results', style: 'header' });
 				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
 			if (SessionStage_old == "Race2"){
-				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
+				CSVExport.Race2 = JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Race 2 Results",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","lastlap","posx","posy","posz","cssclasses"]);
 				PDFdocDefinition.content.push({text: 'Race 2 Results', style: 'header' });
 				PDFdocDefinition.content.push(PDFgenerateTable(jQuery("#DriverDataTable").getRowData(),true));
 			}
@@ -2026,11 +2180,12 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 //		scrollerbar:true,
 		caption: "List of available drivers",
 		ignoreCase:true,
-		colNames:['RefID','Pos', 'InClassPos', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'Team/#', 'Vehicle Class', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
+		colNames:['RefID','Pos', 'InClassPos', 'oIndex', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'Team/#', 'Vehicle Class', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
 						{name:'driverposition', width:18, align:"center", sorttype:"int", search:true},
 						{name:'inclassposition', width:18, align:"center", sorttype:"int", search:true},
+						{name:'oidx', hidden: true, width:1, align:"center", sorttype:"int"},
                         {name:'drivername', width:110,sorttype:"text", search:true},
                         {name:'driverstate',width:40, align:"center",sorttype:"text"},
                         {name:'driversector',width:20, align:"center",sorttype:"int"},
@@ -2187,13 +2342,18 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 		stringResult: true,
 		searchOnEnter: false,
 		defaultSearch: "cn",
-		beforeSearch: function () {
+		/*beforeSearch: function () {
 			DrivernamesBeforeSearch = jQuery("#DriverDataTable").jqGrid('getCol','drivername');
-		},
+		},*/
 		afterSearch: function (e, rowid, orgClickEvent) {
-			//var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
+			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
 			var AllRowData 				= jQuery("#DriverDataTable").jqGrid('getGridParam','data');
-			var DrivernamesAfterSearch	= jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+			//var DrivernamesAfterSearch	= jQuery("#DriverDataTable").jqGrid('getCol','drivername');
+			var DriverKeysAfterSearch = [];
+			var tmpDriver = new PCARSdriver();
+			FilteredRowData.forEach(function(row) {
+				DriverKeysAfterSearch.push(tmpDriver.GetUniqueId(row.oidx,row.drivername));
+			});
 		
 			//var DrivernamesToHide = $(DrivernamesBeforeSearch).not(DrivernamesAfterSearch).get();
 			//var DrivernamesToUnhide = $(DrivernamesAfterSearch).not(DrivernamesBeforeSearch).get();
@@ -2206,14 +2366,14 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 			if(log >= 2){console.log("+++ drivernames to show: ", DrivernamesToUnhide);}
 			*/
 			
-			if(DrivernamesAfterSearch.length != AllRowData.length){
-				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DrivernamesAfterSearch.length + " / " + AllRowData.length);
+			if(DriverKeysAfterSearch.length != AllRowData.length){
+				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DriverKeysAfterSearch.length + " / " + AllRowData.length);
 			}else{
 				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed'           , "");
 			}
 
 			//add/remove assignment of CSS class
-			CSSClsChg.HideSpecificDrivers( DrivernamesAfterSearch );			
+			CSSClsChg.HideSpecificDrivers( DriverKeysAfterSearch );
 			//Workaround: every filter event a new OPACITY css styles has to be set to change driver properties
 			CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: $( "#filtered_driver_opacity" ).val()} );
 			
@@ -2368,7 +2528,7 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 		//var filename = curDate.getFullYear()+ "-" + (curDate.getMonth()+1) + "-" + curDate.getDate() + "__" + (curDate.getHours() < 10 ? "0" + curDate.getHours() : curDate.getHours()) + "-" + (curDate.getMinutes() < 10 ? "0" + curDate.getMinutes() : curDate.getMinutes()) + "-" + (curDate.getSeconds() < 10 ? "0" + curDate.getSeconds() : curDate.getSeconds()) + "__" + (trackname.slice(trackname.indexOf(":")+2)) + "__Current_Drivertable";
 		
 		if (ExportType === "CSV" || ExportType === "BOTH") {
-			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","driversector","liveryname","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),builtFilename("drivertable"));
+			ExportCSV(JSONToCSVConvertor(jQuery("#DriverDataTable").jqGrid("getRowData"), "Current Driver Table",true,jQuery("#DriverDataTable").jqGrid("getGridParam", "colNames"),["refid","id","oidx","driversector","liveryname","posx","posy","posz","cssclasses"]/*,"Report_DriverTable"*/),builtFilename("drivertable"));
 		}
 
 		if (ExportType === "PDF" || ExportType === "BOTH") {
@@ -2719,6 +2879,7 @@ function refreshDriverList(a, ForceRefresh){
 					refid:					a[i].RefID
 					,driverposition:		a[i].RacePosition
 					,inclassposition:		a[i].InClassPos
+					,oidx:					a[i].oIdx
 					,drivername:			a[i].Name
 					,driverstate:			a[i].State
 					,driversector:			a[i].CurrentSector
@@ -3525,12 +3686,29 @@ function initToolTips(){
 }
 
 //Override refpoint variables for optimizing/tuning refpoints, for developers only
-function OverrideRefpointValue(RefpointVar, value){
+function OverrideRefpointValue(RefpointVar, value, slide){
 	//check if there is a circuitID of a selected tracklisttable row. -1 means there is no. In this case the live circuit ID from the current APIMODE is used.
 	if(oPcarsMapCtrl.circuitID == -1){
 		oPcarsMapCtrl.circuitID = cuircitID;
 	}
-	aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
+
+	var slider = "#slider-" + RefpointVar;	//get corresponding slider
+	if(!slide){
+		//Input field is used
+		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
+		$( slider ).slider({value: 0});	//reset slider
+		aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar] = value; //Overwrite original value, too, for new slider fiddling
+	}else{
+		//Slider is used
+		//An additional Refpoint object is needed. For the fiddling sliders we need an original unchanged refpoint as slider baseline, because sliding changes the current refpoint in real time
+		var oRPsFiddling			=	new RefPoint(CurGameRunning);
+		var aRefPointFiddling		=	oRPsFiddling.getRefPointsAll();
+		var oVal = parseFloat(aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar]) + value;
+		oVal = round(oVal,6);	// needed, because adding a value to a float like above, results in a float like 51.2367000000002 or 51.23456699999997
+
+		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = oVal;
+
+	}
 	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
 }
 
@@ -3608,6 +3786,11 @@ function builtFilename(mode){
 	}
 
 	return filename;
+}
+
+//round function for floats where I can specify the digit after decimal point
+function round(number, decimals) { 
+	return +(Math.round(number + "e+" + decimals) + "e-" + decimals); 
 }
 
        </script>

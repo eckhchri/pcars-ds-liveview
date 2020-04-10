@@ -10,13 +10,13 @@ As overlay you have some tables:
 - Car Table - a list of all cars, which are available in Project CARS
 - Track Table - a list of all tracks, which are available in Project CARS
 
-Further there is a recording/playback panel and some other great stuff. You can find more info about the features in the "Nice to know" section at the end.\
-It's also important to know that javascript is executed on client side. That means your PC/Tablet/... where you start a browser and open this website is polling the Dedicated Server or CREST API via HTTP requests.
+Further there is a recording/playback panel and some other great stuff. You can find more info about the features in the "[Nice to know](#nice-to-know)" section at the end.\
+It's also important to know that javascript is executed on client side. That means your PC/Tablet/... where you start a browser and open this website is polling the Dedicated Server or CREST API via HTTP requests. Look at the [communication schemes](#communication-schemes) for more info.
 
 ![Screenshot](docs/ds-liveview_main_view.jpg)
 
 ## [DEMO Website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/)
-Open the website to see a demonstration, click on "Load from URL" and choose a DEMO file.
+Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/) to see a demonstration, click on "Load from URL" and choose a DEMO file.
 
 ## Usage:
 - default URL after extracting/cloning to your Webserver: http://[your Webserver url]/index.html

@@ -1,7 +1,7 @@
 
 /*
  * Open points:
- * - this.oMapLocal.addListener('zoom_changed', function(e)  ... Zugriff auf zum Bsp this.sensorLayer.interruptTransition(); nicht möglich, deshlab derzeit deactiviert !!!!!!!!!!
+ * - this.oMapLocal.addListener('zoom_changed', function(e)  ... Zugriff auf zum Bsp this.sensorLayer.interruptTransition(); nicht mÃ¶glich, deshlab derzeit deactiviert !!!!!!!!!!
  * 
  * 
  * 
@@ -166,43 +166,63 @@ class pcars_map_google extends pcars_map {
 			// use local variable instead of global map		
 			mapobj = this.init_map( newTrackObj );			
 		}
-	
-		//load json file for a specific trackmap	
-		d3.json( "./data/trackmaps/trackmap"+ trackid +".json" , function( gjdata ) {
-			
-			if (typeof gjdata === 'undefined' || !gjdata){								
-				if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
-				tmGPS = {};	//clear trackmap data if there is no new trackmap data available
-			}else{
-				//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
-				for (var key in gjdata) {
-					tmGPS[key] = [];
-					if (key != "comment"){
-						//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
-						for (var i = 0; i < gjdata[key].length; i++ ){
-							var gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
 
-							tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
+		// show coordinate system
+		if(devmode_tm == true){
+			//calculate GPS coodinates for CoordSystem
+			var LineEnd = calc_coordinates (trackid , 0, 0, aRefPointTMP);
+			for (var key in CoordSystem) {
+				var LineStart = calc_coordinates (trackid , CoordSystem[key][0], CoordSystem[key][1], aRefPointTMP);
+				CoordSystemGPS[key] = [{lat: LineStart.Lat, lng: LineStart.Long},{lat: LineEnd.Lat, lng: LineEnd.Long}];
+			}
+		}
+
+		// don't read trackmap file for default refpoints
+		if(trackid != 9999999999 && trackid != 8888888888 && trackid != 0){
+			var Game = newTrackObj.game_name;
+
+			// Trackmaps for PCARS1 and 2 combined to PCARS
+			if(newTrackObj.game_name == "PCARS1&2"){Game = "PCARS1a2";}
+
+			var file = "./data/trackmaps/tm_"+ Game + "_" + trackid +".json";
+			if(log >= 3){console.log("Trackmap File: ",file, "/ newTrackObj: ", newTrackObj);}
+			
+			//load json file for a specific trackmap	
+			d3.json( file , function( gjdata ) {	//activate after renaming files
+				if (typeof gjdata === 'undefined' || !gjdata){
+					if(log >= 3){console.log("changeMapSettings_with_geojson() gjdata is empty or null:  ", gjdata );}
+					tmGPS = {};	//clear trackmap data if there is no new trackmap data available
+				}else{
+					//transform the PosX und PosZ coordinates to GPS Longitude and Latitude
+					for (var key in gjdata) {
+						tmGPS[key] = [];
+						if (key != "comment"){
+							//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
+							for (var i = 0; i < gjdata[key].length; i++ ){
+								var gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
+
+								tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
+							}
 						}
 					}
 				}
-			}
 
-			 // show coordinate system
-	                if(devmode_tm == true){
-	                        //calculate GPS coodinates for CoordSystem
-				var LineEnd = calc_coordinates (trackid , 0, 0, aRefPointTMP);
-                        	for (var key in CoordSystem) {
-                	                var LineStart = calc_coordinates (trackid , CoordSystem[key][0], CoordSystem[key][1], aRefPointTMP);
-					CoordSystemGPS[key] = [{lat: LineStart.Lat, lng: LineStart.Long},{lat: LineEnd.Lat, lng: LineEnd.Long}];
-        	                }
-	                }
-			
-			// Use explicit global Variable oPcarsMapCtrl 
-			oPcarsMapCtrl.oCurMapObj.changeMapSettingsGJ(newTrackObj, mapobj, tmGPS);  
-	
-		});         	  
-	
+				// Use explicit global Variable oPcarsMapCtrl 
+				oPcarsMapCtrl.oCurMapObj.changeMapSettingsGJ(newTrackObj, mapobj, tmGPS);  
+
+			});
+		}else{
+			//reset trackmap / without it would use the trackmap of the before chosen track
+			tmGPS = {};
+			oPcarsMapCtrl.oCurMapObj.changeMapSettingsGJ(newTrackObj, mapobj, tmGPS);
+		}
+
+		//oPcarsMapCtrl.oCurMapObj.changeMapSettingsGJ(newTrackObj, mapobj, tmGPS);
+		// we have to use this call in both cases (if/else) for default refpoints and all other tracks separately
+		// because the trackmap loading function d3.json() waits till the file loading is finished before it executes the code in it
+		// if we would use the changeMapSettings call here only, then in the if-case (when a trackmap is loaded), the call here happens earlier then the file is completely loaded
+		// and then the tmGPS data from the previous chosen map is used
+
 		return mapobj;
 	}
 	
@@ -264,8 +284,8 @@ class pcars_map_google extends pcars_map {
 			if ( gjdata['line_mid'] ){		
 				PolyLineMid = new google.maps.Polyline({
 				    path: gjdata['line_mid'],
-				    strokeColor: '#E0E0E0',
-				    strokeOpacity: 1,
+				    strokeColor: trackmap_color_LineMid,
+				    strokeOpacity: trackmap_opacity,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeightMid
 				  });
 				
@@ -276,7 +296,7 @@ class pcars_map_google extends pcars_map {
 			if ( gjdata['line_inner'] && (newTrackObj["fictional"] || devmode_tm) ){		
 				PolyLineInner = new google.maps.Polyline({
 				    path: gjdata['line_inner'],
-				    strokeColor: '#FF0000',
+				    strokeColor: trackmap_color_LineBorders,
 				    strokeOpacity: 1.0,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
@@ -289,7 +309,7 @@ class pcars_map_google extends pcars_map {
 			if ( gjdata['line_outer'] && (newTrackObj["fictional"] || devmode_tm) ){		
 				PolyLineOuter = new google.maps.Polyline({
 				    path: gjdata['line_outer'],
-				    strokeColor: '#FF0000',
+				    strokeColor: trackmap_color_LineBorders,
 				    strokeOpacity: 1.0,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
@@ -327,8 +347,8 @@ class pcars_map_google extends pcars_map {
 		}// end map track polyline
 
 		if(devmode_tm == true && SHOWREFPOINTFIDDLING == true){			
-			// set current values to HTML inpout fields
-			$("#fiddling_refpoint").val("1");
+			// set current values to HTML input fields
+			//$("#fiddling_refpoint").val("1");
 			$("#fiddling_reflat").val(newTrackObj["refLat"]);
 			$("#fiddling_reflong").val(newTrackObj["refLong"]);
 			$("#fiddling_rotation").val(newTrackObj["rotation"]);

@@ -558,7 +558,7 @@ function Refpoint(circuit_id)
 	//Donington Park GP
 	aRefPoints[354022214] = CopyObjectWithModifications(aRefPoints[9999999999],
 		{
-		"refLat":        52.830575
+		"refLat":        52.830615
 		,"refLong":      -1.374732
 		,"rotation":     174
 		,"cor_r_Long":   10000000

@@ -234,7 +234,10 @@ function returnDataSendError(rMode){
 								demo_el.participants[i].LiveryId,
 								demo_el.participants[i].NumPits,
 								demo_el.participants[i].Gap2Ahead,
-								demo_el.participants[i].Gap2First
+								demo_el.participants[i].Gap2First,
+								demo_el.participants[i].VehicleName,
+								demo_el.participants[i].VehicleClassName,
+								demo_el.participants[i].oIdx
 							);
 		}
 		// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
@@ -410,7 +413,13 @@ function returnDataSendError(rMode){
 		                                                myArr.response.participants[i].attributes.Speed,
 		                                                myArr.response.participants[i].attributes.CurrentLap,
 		                                                myArr.response.participants[i].attributes.VehicleId,
-								myArr.response.participants[i].attributes.LiveryId
+								myArr.response.participants[i].attributes.LiveryId,
+														undefined,	//NumPits
+														undefined,	//Gap2Ahead
+														undefined,	//Gap2First
+														undefined,	//VehicleName - NA
+														undefined,	//VehicleClassName - NA
+														i			//oIdx API index
 		                                         	);
 					}
 	
@@ -555,7 +564,13 @@ function returnDataSendError(rMode){
 		                                                myArr.response.participants[i].attributes.Speed,
 		                                                myArr.response.participants[i].attributes.CurrentLap,
 		                                                myArr.response.participants[i].attributes.VehicleId,
-								myArr.response.participants[i].attributes.LiveryId
+								myArr.response.participants[i].attributes.LiveryId,
+														undefined,	//NumPits
+														undefined,	//Gap2Ahead
+														undefined,	//Gap2First
+														undefined,	//VehicleName - NA
+														undefined,	//VehicleClassName - NA
+														i			//oIdx API index
 		                                         	);
 							strConsoleLog = strConsoleLog + i + "/" + myArr.response.participants[i].attributes.Name + ", "; // Debugging Issue #131
 					}
@@ -700,7 +715,13 @@ function returnDataSendError(rMode){
 								0,								//Speed - NA
 								myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
 								2091910841,							//VehicleId
-								0								//LiveryId - NA
+								0,								//LiveryId - NA
+								undefined,						//numPits
+								undefined,						//Gap2Ahead
+								undefined,						//Gap2First
+								undefined,						//VehicleName - NA
+								undefined,						//VehicleClassName - NA
+								i								//oIdx API Index
 							);
 				}
 				
@@ -810,11 +831,14 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
-							myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
-							0								//LiveryId - NA
-							//numPits,							//numPits must not be filled
-							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
-							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
+							0,								//VehicleID - NA
+							0,								//LiveryId - NA
+							undefined,						//numPits must not be filled
+							undefined,						//Gap2Ahead
+							undefined,						//Gap2First
+							myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName
+							myArr.participants.mParticipantInfo[i].mCarClassNames,	//VehicleClassName
+							i														//oIdx API Index
 						);
 					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + ", "; // Debugging Issue #131
 				}
@@ -927,11 +951,15 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
-							myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
-							0								//LiveryId - NA
-							//numPits,							//numPits must not be filled
-							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleName - cannot use, because numPits must not be filled and VehicleName is no function parameter
-							//myArr.participants.mParticipantInfo[i].mCarClassNames		//Vehicleclass - cannot use, because numPits must not be filled and VehicleClass is no function parameter
+							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
+							0,								//VehicleID - NA
+							0,								//LiveryId - NA
+							undefined,							//numPits must not be filled
+							undefined,						//Gap2Ahead
+							undefined,						//Gap2First
+							myArr.participants.mParticipantInfo[i].mCarNames,			//VehicleName
+							myArr.participants.mParticipantInfo[i].mCarClassNames,		//VehicleClassName 
+							i															//oIdx API index
 						);
 					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + ", "; // Debugging Issue #131
 				}
