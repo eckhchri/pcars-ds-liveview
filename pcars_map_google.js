@@ -284,8 +284,8 @@ class pcars_map_google extends pcars_map {
 			if ( gjdata['line_mid'] ){		
 				PolyLineMid = new google.maps.Polyline({
 				    path: gjdata['line_mid'],
-				    strokeColor: '#E0E0E0',
-				    strokeOpacity: 1,
+				    strokeColor: trackmap_color_LineMid,
+				    strokeOpacity: trackmap_opacity,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeightMid
 				  });
 				
@@ -296,7 +296,7 @@ class pcars_map_google extends pcars_map {
 			if ( gjdata['line_inner'] && (newTrackObj["fictional"] || devmode_tm) ){		
 				PolyLineInner = new google.maps.Polyline({
 				    path: gjdata['line_inner'],
-				    strokeColor: '#FF0000',
+				    strokeColor: trackmap_color_LineBorders,
 				    strokeOpacity: 1.0,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
@@ -309,7 +309,7 @@ class pcars_map_google extends pcars_map {
 			if ( gjdata['line_outer'] && (newTrackObj["fictional"] || devmode_tm) ){		
 				PolyLineOuter = new google.maps.Polyline({
 				    path: gjdata['line_outer'],
-				    strokeColor: '#FF0000',
+				    strokeColor: trackmap_color_LineBorders,
 				    strokeOpacity: 1.0,
 				    strokeWeight: zoom_settings[newTrackObj["Zoom"]].lineWeight
 				  });
@@ -347,8 +347,8 @@ class pcars_map_google extends pcars_map {
 		}// end map track polyline
 
 		if(devmode_tm == true && SHOWREFPOINTFIDDLING == true){			
-			// set current values to HTML inpout fields
-			$("#fiddling_refpoint").val("1");
+			// set current values to HTML input fields
+			//$("#fiddling_refpoint").val("1");
 			$("#fiddling_reflat").val(newTrackObj["refLat"]);
 			$("#fiddling_reflong").val(newTrackObj["refLong"]);
 			$("#fiddling_rotation").val(newTrackObj["rotation"]);

@@ -219,4 +219,9 @@ var zoom_settings = [
         {"lineWeight": 4,	"lineWeightMid": 14,      "markerRadius": 4.5}    //zoom 21
 ];
 
+var trackmap_opacity = 0.7;	//only needed for middle line
+var trackmap_color_LineMid = '#E0E0E0';
+var trackmap_color_LineBorders = '#FF0000';
+
+
 var devmode_tm = false;  // [true | false] developer mode for trackmaps
