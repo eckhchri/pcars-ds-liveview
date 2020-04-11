@@ -308,6 +308,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Interlagos Historic
 		this.refPoints[124] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic","AltNames":""});
+		//Interlagos Historic External Ring
+		this.refPoints[164] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic External Ring","AltNames":"Interlagos Historic_Outer"});
 
 		//Jacarepaguá Historic 1988
 		this.refPoints[125] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -522,6 +524,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Snetterton 200
 		this.refPoints[148] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 200"});
+		//Snetterton 100
+		this.refPoints[165] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 100","AltNames":"Snetterton 200"});	//AltName ist duplicate of 200 variation, but comes from Shared Memory
 
 		//Spielberg Modern
 		this.refPoints[149] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -588,6 +592,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Velo Città TrackDay
 		this.refPoints[156] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città TrackDay","AltNames":"VeloCitta TrackDay"});
+		//Velo Città ClubDay
+		this.refPoints[166] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città ClubDay","AltNames":"VeloCitta ClubDay"});
 
 		//Velopark 2017
 		this.refPoints[157] = this.CopyObjectWithModifications(this.refPoints[9999999999],
