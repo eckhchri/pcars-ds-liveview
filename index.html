@@ -1107,12 +1107,21 @@ function initialize_app(){
 				$(this).jqGrid("resetSelection");
 				oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[cuircitID] , oMap , cuircitID);
 				oPcarsMapCtrl.circuitID = -1;   // reset value to default
+
+				if(devmode_tm && SHOWREFPOINTFIDDLING){
+					$("#slider-refLat").slider({value: 0});	//reset slider
+					//ToDo: add all other sliders
+				}
 			}else{
 				//else a row is selected
 				var celltrackid = jQuery("#tracklisttable").jqGrid('getCell', rowid, 1);
 				oPcarsMapCtrl.circuitID = celltrackid;  //oPcarsMapCtrl.circuitID is a global value and used for the refpoint fiddling window to change the Map Settings with the selected row
 				oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[celltrackid] , oMap , celltrackid);
 
+				if(devmode_tm && SHOWREFPOINTFIDDLING){
+					$("#slider-refLat").slider({value: 0});	//reset slider
+					//ToDo: add all other sliders
+				}
 				return true;
 			}
 		}
