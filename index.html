@@ -1107,8 +1107,7 @@ function initialize_app(){
 				oPcarsMapCtrl.circuitID = -1;   // reset value to default
 
 				if(devmode_tm && SHOWREFPOINTFIDDLING){
-					$("#slider-refLat").slider({value: 0});	//reset slider
-					//ToDo: add all other sliders
+					reset_fiddling_sliders();
 				}
 			}else{
 				//else a row is selected
@@ -1117,8 +1116,7 @@ function initialize_app(){
 				oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[celltrackid] , oMap , celltrackid);
 
 				if(devmode_tm && SHOWREFPOINTFIDDLING){
-					$("#slider-refLat").slider({value: 0});	//reset slider
-					//ToDo: add all other sliders
+					reset_fiddling_sliders();
 				}
 				return true;
 			}
@@ -3800,6 +3798,20 @@ function builtFilename(mode){
 //round function for floats where I can specify the digit after decimal point
 function round(number, decimals) { 
 	return +(Math.round(number + "e+" + decimals) + "e-" + decimals); 
+}
+
+// reset refpoint fiddling sliders
+function reset_fiddling_sliders(){
+	$("#slider-refLat").slider({value: 0});
+	$("#slider-refLong").slider({value: 0});
+	$("#slider-rotation").slider({value: 0});
+	$("#slider-cor_r_Long").slider({value: 0});
+	$("#slider-cor_r_Lat").slider({value: 0});
+	$("#slider-cor_PosX_mul").slider({value: 0});
+	$("#slider-cor_PosY_mul").slider({value: 0});
+	$("#slider-Zoom").slider({value: 0});
+	$("#slider-MapInitLat").slider({value: 0});
+	$("#slider-MapInitLong").slider({value: 0});
 }
 
        </script>
