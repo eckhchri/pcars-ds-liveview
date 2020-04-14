@@ -99,64 +99,61 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	53.308865
 			,"MapInitLong":	-0.063534
-			,"Comment":	"WIP"
+			,"Comment":	"finished"
 		});
 
 		//Campo Grande
 		this.refPoints[106] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-20.475932
+			,"refLong":	-54.466071
+			,"rotation":	0.2
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.992
+			,"cor_PosY_mul":1.003
 			,"Name":	"Campo Grande"
 			,"AltNames":	"CampoGrande CampoGrande"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-20.476112
+			,"MapInitLong":	-54.465827
+			,"Comment":	"finished"
 		});
 
 		//Cascavel
 		this.refPoints[107] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-24.981055
+			,"refLong":	-53.386346
+			,"rotation":	-1
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":1.003
 			,"Name":	"Cascavel"
 			,"AltNames":	"Cascavel4 Cascavel5"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	17
+			,"MapInitLat":	-24.982412
+			,"MapInitLong":	-53.384565
+			,"Comment":	"finished"
 		});
 
 		//Curitiba
 		this.refPoints[108] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-25.447680
+			,"refLong":	-49.195833
+			,"rotation":	-1.5
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":1.005
+			,"cor_PosY_mul":1.01
 			,"Name":	"Curitiba"
 			,"AltNames":	"Curitiba CuritibaInternacional"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-25.449937
+			,"MapInitLong":	-49.195733
+			,"Comment":	"finished"
 		});
 		//Curitiba Outer
 		this.refPoints[109] = this.CopyObjectWithModifications(this.refPoints[108], {"Name": "Curitiba Outer","AltNames":"Curitiba Curitiba_outer"});
@@ -164,20 +161,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Curvelo Long
 		this.refPoints[110] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-18.807352
+			,"refLong":	-44.409001
+			,"rotation":	0.1
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosY_mul":1.005
 			,"Name":	"Curvelo Long"
 			,"AltNames":	"Curvelo CurveloLong"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-18.805342
+			,"MapInitLong":	-44.408201
+			,"Comment":	"finished"
 		});
 		//Curvelo Short
 		this.refPoints[111] = this.CopyObjectWithModifications(this.refPoints[110], {"Name": "Curvelo Short","AltNames":"Curvelo CurveloShort"});
@@ -205,20 +201,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Goiânia
 		this.refPoints[114] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-16.718458
+			,"refLong":	-49.193975
+			,"rotation":	0.3
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":0.992
 			,"Name":	"Goiânia"
 			,"AltNames":	"Goiania GoianiaMixed"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-16.717864
+			,"MapInitLong":	-49.192500
+			,"Comment":	"finished"
 		});
 		//Goiânia External
 		this.refPoints[115] = this.CopyObjectWithModifications(this.refPoints[114], {"Name": "Goiânia External","AltNames":"Goiania GoianiaOuter"});
@@ -228,39 +223,37 @@ class RefPointDataAMS2 extends RefPointData {
 		//Guapore
 		this.refPoints[117] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	-28.844471
+			,"refLong":	-51.852602
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":1.014
+			,"cor_PosY_mul":0.995
 			,"Name":	"Guapore"
 			,"AltNames":	"Guapore Guapore"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-28.846355
+			,"MapInitLong":	-51.852850
+			,"Comment":	"finished"
 		});
 
 		//Ibarra
 		this.refPoints[118] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	0.380338
+			,"refLong":	-78.098315
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.007
 			,"Name":	"Ibarra"
 			,"AltNames":	"Ibarra4 Ibarra5"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	17
+			,"MapInitLat":	0.380725
+			,"MapInitLong":	-78.094564
+			,"Comment":	"finished"
 		});
 
 		//Imola
