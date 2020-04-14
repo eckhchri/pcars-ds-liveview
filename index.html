@@ -389,6 +389,11 @@
 	var aRefPointTMPAll			=   oRPs.getRefPointsAll();
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
 
+	//An additional Refpoint object for fiddling is needed. For the fiddling sliders we need an original unchanged refpoint as slider baseline, because sliding changes the current refpoint in real time
+	//If you then set the value via input field, the refpoint and the fiddling refpoint are both updated for new slider baseline
+	var oRPsFiddling			=	new RefPoint(CurGameRunning);
+	var aRefPointFiddling		=	oRPsFiddling.getRefPointsAll();
+
 	var StopRefreshTracklist	=	"false";
 	var StopRefreshDriverlist	=	"false";
 	var StopRawDataAppending	=	false;
@@ -3704,6 +3709,7 @@ function OverrideRefpointValue(RefpointVar, value, slide){
 	}
 
 	var slider = "#slider-" + RefpointVar;	//get corresponding slider
+
 	if(!slide){
 		//Input field is used
 		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
@@ -3711,14 +3717,9 @@ function OverrideRefpointValue(RefpointVar, value, slide){
 		aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar] = value; //Overwrite original value, too, for new slider fiddling
 	}else{
 		//Slider is used
-		//An additional Refpoint object is needed. For the fiddling sliders we need an original unchanged refpoint as slider baseline, because sliding changes the current refpoint in real time
-		var oRPsFiddling			=	new RefPoint(CurGameRunning);
-		var aRefPointFiddling		=	oRPsFiddling.getRefPointsAll();
 		var oVal = parseFloat(aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar]) + value;
 		oVal = round(oVal,6);	// needed, because adding a value to a float like above, results in a float like 51.2367000000002 or 51.23456699999997
-
 		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = oVal;
-
 	}
 	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
 }
