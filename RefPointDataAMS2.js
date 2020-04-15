@@ -408,19 +408,18 @@ class RefPointDataAMS2 extends RefPointData {
 		//Montreal Modern
 		this.refPoints[136] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	45.503808
+			,"refLong":	-73.523765
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosY_mul":1.007
 			,"Name":	"Montreal Modern"
 			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"MapInitLat":	45.505605
+			,"MapInitLong":	-73.524751
+			,"Comment":	"finished"
 		});
 		//Montreal Historic
 		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic"});
@@ -428,20 +427,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Ortona Kart One
 		this.refPoints[138] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	42.305351
+			,"refLong":	14.379913
+			,"rotation":	0.4
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosY_mul":0.998
 			,"Name":	"Ortona Kart One"
 			,"AltNames":	"Ortona Ortona1"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	18
+			,"MapInitLat":	42.304976
+			,"MapInitLong":	14.378702
+			,"Comment":	"finished"
 		});
 		//Ortona Kart Two
 		this.refPoints[139] = this.CopyObjectWithModifications(this.refPoints[138], {"Name": "Ortona Kart Two","AltNames":"Ortona Ortona_2"});
