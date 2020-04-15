@@ -259,20 +259,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Imola
 		this.refPoints[119] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	44.344389
+			,"refLong":	11.714520
+			,"rotation":	-0.05
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":0.999
 			,"Name":	"Imola"
 			,"AltNames":	"ImolaAMS2 Imola_GP_2018"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	44.341112
+			,"MapInitLong":	11.712506
+			,"Comment":	"finished"
 		});
 		//Imola Historic 1972
 		this.refPoints[120] = this.CopyObjectWithModifications(this.refPoints[119], {"Name": "Imola Historic 1972","AltNames":"ImolaAMS2 Imola_GP_1988"});	//AltName ist duplicate of 1988 variation, but comes from Shared Memory
@@ -284,31 +283,30 @@ class RefPointDataAMS2 extends RefPointData {
 		//Interlagos Grand Prix
 		this.refPoints[123] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-23.702013
+			,"refLong":	-46.695844
+			,"rotation":	0.2
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.004
 			,"Name":	"Interlagos Grand Prix"
 			,"AltNames":	"Interlagos GP"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-23.701256
+			,"MapInitLong":	-46.696486
+			,"Comment":	"finished"
 		});
 		//Interlagos Historic
 		this.refPoints[124] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic","AltNames":""});
 		//Interlagos Historic External Ring
 		this.refPoints[164] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic External Ring","AltNames":"Interlagos Historic_Outer"});
 
-		//Jacarepaguá Historic 1988
+		//Jacarepaguá Historic 1988 - not existing anymore - added coordinates where it was in the past
 		this.refPoints[125] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	-22.976979
+			,"refLong":	-43.394669
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
@@ -317,48 +315,46 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Name":	"Jacarepaguá Historic 1988"
 			,"AltNames":	"Jacarepagua Jacarepagua_Historic"
 			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"MapInitLat":	-22.976979
+			,"MapInitLong":	-43.394669
+			,"fictional":	 true
+			,"Comment":	"finished"
 		});
 
 		//Jerez Grand Prix
 		this.refPoints[126] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	36.708457
+			,"refLong":	-6.032549
+			,"rotation":	-1.75
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.9975
+			,"cor_PosY_mul":1.002
 			,"Name":	"Jerez Grand Prix"
 			,"AltNames":	"Jerez GP"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	36.708665
+			,"MapInitLong":	-6.033030
+			,"Comment":	"finished"
 		});
 
 		//Kansai GP
 		this.refPoints[127] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	34.844384
+			,"refLong":	136.532731
+			,"rotation":	-1.0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":0.998
 			,"Name":	"Kansai GP"
 			,"AltNames":	"Kansai Kansai_GP"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	34.844069
+			,"MapInitLong":	136.533418
+			,"Comment":	"finished"
 		});
 		//Kansai East
 		this.refPoints[128] = this.CopyObjectWithModifications(this.refPoints[127], {"Name": "Kansai East","AltNames":"Kansai Kansai_East"});
@@ -367,41 +363,40 @@ class RefPointDataAMS2 extends RefPointData {
 		//Kansai Classic
 		this.refPoints[130] = this.CopyObjectWithModifications(this.refPoints[127], {"Name": "Kansai Classic","AltNames":"Kansai Kansai_Classic"});
 
-		//Kyalami Historic
+		//Kyalami Historic - the track layout difference between the historic and the present track is too big and areas of the old track are built up with houses - set it to fictional, but added coordinates where it was in the past
 		this.refPoints[131] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	-25.992763
+			,"refLong":	28.06786
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Kyalami Historic"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-25.994356
+			,"MapInitLong":	28.068974
+			,"fictional":	 true
+			,"Comment":	"finished"
 		});
 
 		//Londrina Long
 		this.refPoints[132] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-23.281094
+			,"refLong":	-51.167276
+			,"rotation":	0.2
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.987
+			,"cor_PosY_mul":0.985
 			,"Name":	"Londrina Long"
 			,"AltNames":	"Londrina Londrina_long"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	17
+			,"MapInitLat":	-23.281892
+			,"MapInitLong":	-51.167368
+			,"Comment":	"finished"
 		});
 		//Londrina Short
 		this.refPoints[133] = this.CopyObjectWithModifications(this.refPoints[132], {"Name": "Londrina Short","AltNames":"Londrina Londrina_short"});
