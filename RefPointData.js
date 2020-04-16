@@ -43,12 +43,18 @@ class RefPointData  {
         {
         "refLat":        40.997664
         ,"refLong":      -113.566253
+		,"rotation":     0
+		,"cor_r_Long":   0
+		,"cor_r_Lat":    0
+		,"cor_PosX_mul": 1
+		,"cor_PosY_mul": 1
         ,"Name":         "Salt Lake USA"
         ,"Zoom":         15
         ,"MapInitLat":   40.997664
         ,"MapInitLong":  -113.566253
         ,"fictional":	 true
         ,"Comment": "Default for fictional tracks"
+		,"game_name": 	this.gameName
         };
 
         return data;

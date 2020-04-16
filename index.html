@@ -1273,7 +1273,6 @@ function initialize_app(){
 		SessionStage 	= e.data.globals.attributes.SessionStage;
 		CurGameRunning 	= e.data.globals.curgamerunning;
 
-		console.log("Switch Track - CurGameRunning: ",CurGameRunning," / CurGameRunning_old: ",CurGameRunning_old);
 		//Reset refpoint array if CurGameRunning is changing
 		if (CurGameRunning != CurGameRunning_old){
 			aRefPointTMP = oRPs.getRefPointsByGame(CurGameRunning);
