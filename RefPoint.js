@@ -88,9 +88,13 @@ class RefPoint  {
     GetMappingTrackname2Trackid(gameId){
 
         if(!gameId || gameId ==''){
-            // for all tracks.
-            // duplicates in tracks are an problem because the name is the id within the hash. Only one will match
-            return this.GetMappingTrackname2TrackidbyObject( this.refPointsAll );
+
+            // validate gameId is a valid value
+            if (this.refPoints.hasOwnProperty(gameId)){
+                // for all tracks.
+                // duplicates in tracks are an problem because the name is the id within the hash. Only one will match
+                return this.GetMappingTrackname2TrackidbyObject( this.refPointsAll );
+            }
         }else{
             //game specific call
             return this.GetMappingTrackname2TrackidbyObject( this.refPoints[gameId] );
