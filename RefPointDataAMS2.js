@@ -513,7 +513,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Snetterton 100
 		this.refPoints[165] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 100","AltNames":"Snetterton 200"});	//AltName ist duplicate of 200 variation, but comes from Shared Memory
 
-		//Spielberg Modern
+		//Spielberg GP
 		this.refPoints[149] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	40.997664
@@ -523,7 +523,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
-			,"Name":	"Spielberg Modern"
+			,"Name":	"Spielberg GP"
+			,"AltNames":	"Spielberg Modern"
 			,"Zoom":	15
 			,"MapInitLat":	40.997664
 			,"MapInitLong":	-113.566253
@@ -531,11 +532,11 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"initially added"
 		});
 		//Spielberg Short
-		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short"});
+		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short","AltNames":""});
 		//Spielberg Vintage
-		this.refPoints[151] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Vintage"});
+		this.refPoints[151] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Vintage","AltNames":""});
 		//Spielberg Historic
-		this.refPoints[152] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Historic"});
+		this.refPoints[152] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Historic","AltNames":""});
 
 		//Tarumã Internacional
 		this.refPoints[153] = this.CopyObjectWithModifications(this.refPoints[9999999999],
