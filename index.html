@@ -2167,9 +2167,9 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 			if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste URL/Port: " + sCurUrl +" / "+ sCurPort );}
 			if ( e.data.aTrack.length > 0 ){
 				// in case DS return a result refresh track table
-				refreshTrackList(buildTracklist(e.data.aTrack , oRPs.getRefPointsAll() ));		
+				refreshTrackList(buildTracklist(e.data.aTrack , aRefPointTMPAll ));
 			}else{				
-				refreshTrackList(buildTracklist(e.data.aTrack , oRPs.getRefPointsAll() ));
+				refreshTrackList(buildTracklist(e.data.aTrack , aRefPointTMPAll ));
 				
 				w_tracklist.postMessage({
 					workerdelay: 	WORKERDELAY_TRACKLIST
