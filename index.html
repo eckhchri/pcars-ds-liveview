@@ -373,6 +373,7 @@
 	var global_i			= 0;
 	
 	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|AMS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
+	var CurGameRunning_old	=	CurGameRunning;	//In case of CurGameRunning is changing, we use both values to compare it and if they are different we can reset the refpoint array for the current game
 	var sensorLayer;
 	var sensorLayer_UpdateTime;		//time, when marker are updated
 	var sensorLayer_UpdateTime_old;		//time of the recent dsdata-worker run, when the marker were updated
@@ -384,8 +385,8 @@
 	var UnHide_Timer			= 0;		//Timer for UnHide markers
 	var DisplayDurationCorrector =	0;	
 	var oRPs 					=	new RefPoint(CurGameRunning);
-	//var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of game related RefPoints of tracks
-	var aRefPointTMP			= 	oRPs.getRefPointsAll(); // hash of all RefPoints for available tracks
+	var aRefPointTMP			= 	oRPs.getRefPointsByGame(CurGameRunning); // hash of game related RefPoints of tracks
+	//var aRefPointTMP			= 	oRPs.getRefPointsAll(); // hash of all RefPoints for available tracks
 	var aRefPointTMPAll			=   oRPs.getRefPointsAll();
 	var aRefPointTrackname2ID	=   oRPs.GetMappingTrackname2Trackid(); // hash to map Trackname variants to unique trackid	
 
@@ -1267,10 +1268,17 @@ function initialize_app(){
 	workerDSDATA.addEventListener('message', function(e) {
 		
 		//if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
-                
+
 		SessionState 	= e.data.globals.attributes.SessionState;
 		SessionStage 	= e.data.globals.attributes.SessionStage;
 		CurGameRunning 	= e.data.globals.curgamerunning;
+
+		console.log("Switch Track - CurGameRunning: ",CurGameRunning," / CurGameRunning_old: ",CurGameRunning_old);
+		//Reset refpoint array if CurGameRunning is changing
+		if (CurGameRunning != CurGameRunning_old){
+			aRefPointTMP = oRPs.getRefPointsByGame(CurGameRunning);
+			CurGameRunning_old = CurGameRunning;
+		}
 
 		// Fill global object with current driver data. Used to get access to the data from outside the worker, for example in jqgrid event listeners of the driver table
 		aDrivers = e.data.driverlist;
@@ -1293,7 +1301,7 @@ function initialize_app(){
 		ChangeHtmlContentByID( '#pcars-curgamerunning', "Game mode:	" + CurGameRunning );
 		ChangeHtmlContentByID( '#pcars-displayduration' 	, "Display Duration: " + DisplayDuration );
 		ChangeHtmlContentByID( '#pcars-record_pos' 	, "Pos: " + record_pos + " / "  + demo.length);		
-		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName: ' + aRefPointTMP[cuircitID]["Name"] );
+		ChangeHtmlContentByID( '#pcars-trackname' 	, 'TrackName: ' + aRefPointTMP[tmpcuircitID]["Name"] );
 		ChangeHtmlContentByID( '#pcars-racelength'      , 'Race Length: ' + e.data.globals.attributes.RaceLength + ' Laps' );
 		ChangeHtmlContentByID( '#pcars-dssessionstage' 	, "DS SessionStage:   " + SessionStage );		
 		ChangeHtmlContentByID( '#pcars-dssessionstate' 	, "DS SessionState:   " + SessionState );
@@ -1445,7 +1453,7 @@ function initialize_app(){
 				}
 
 				//calculate GPS coordinates
-				gpsCoTmp =  calc_coordinates (cuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
+				gpsCoTmp =  calc_coordinates (tmpcuircitID , e.data.driverlist[i].PosX , e.data.driverlist[i].PosZ , aRefPointTMP);
 
 				//cast object type because losing while webworker transfer
 				e.data.driverlist[i].__proto__ = PCARSdriver.prototype;

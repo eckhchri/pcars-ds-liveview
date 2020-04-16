@@ -170,9 +170,9 @@ class pcars_map_google extends pcars_map {
 		// show coordinate system
 		if(devmode_tm == true){
 			//calculate GPS coodinates for CoordSystem
-			var LineEnd = calc_coordinates (trackid , 0, 0, aRefPointTMP);
+			var LineEnd = calc_coordinates (trackid , 0, 0, aRefPointTMPAll);
 			for (var key in CoordSystem) {
-				var LineStart = calc_coordinates (trackid , CoordSystem[key][0], CoordSystem[key][1], aRefPointTMP);
+				var LineStart = calc_coordinates (trackid , CoordSystem[key][0], CoordSystem[key][1], aRefPointTMPAll);
 				CoordSystemGPS[key] = [{lat: LineStart.Lat, lng: LineStart.Long},{lat: LineEnd.Lat, lng: LineEnd.Long}];
 			}
 		}
@@ -199,7 +199,7 @@ class pcars_map_google extends pcars_map {
 						if (key != "comment"){
 							//if(log >= 3){console.log("gjdata pre calculation ", key, ": ", JSON.stringify(gjdata[key]));}
 							for (var i = 0; i < gjdata[key].length; i++ ){
-								var gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMP);
+								var gpsCoTmp = calc_coordinates (trackid , gjdata[key][i][0] , gjdata[key][i][1] , aRefPointTMPAll);
 
 								tmGPS[key][i] = {lat: gpsCoTmp.Lat, lng: gpsCoTmp.Long};
 							}

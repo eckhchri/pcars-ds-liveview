@@ -140,7 +140,8 @@ function returnDataSendError(rMode){
 		,"now":			"default parameters"
 		,"state":		"default parameters"
 		,"datasource":	"default parameters"
-		,"curgamerunning": "default parameters"
+		//,"curgamerunning": "default parameters"
+		,"curgamerunning": demo[0]['globals']['curgamerunning']	// for generating the refpoint array for the current running game we need always a valid game, "default parameters" is not working
 		,"attributes":{
 			"TrackId":      9999999999
 			,"GridSize":            0
