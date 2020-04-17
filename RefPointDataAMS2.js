@@ -61,7 +61,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	43.737186
 			,"MapInitLong":	7.425732
-			,"Comment":	"finished"
+			,"Comment":	"finished, discrepancies"
 		});
 
 		//Brands Hatch Grand Prix
@@ -99,7 +99,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	53.308865
 			,"MapInitLong":	-0.063534
-			,"Comment":	"finished"
+			,"Comment":	"finished, small discrepancies"
 		});
 
 		//Campo Grande
@@ -253,7 +253,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	17
 			,"MapInitLat":	0.380725
 			,"MapInitLong":	-78.094564
-			,"Comment":	"finished"
+			,"Comment":	"finished, small discrepancies"
 		});
 
 		//Imola
@@ -321,7 +321,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"finished"
 		});
 
-		//Jerez Grand Prix
+		//Jerez
 		this.refPoints[126] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	36.708457
@@ -331,13 +331,15 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.9975
 			,"cor_PosY_mul":1.002
-			,"Name":	"Jerez Grand Prix"
-			,"AltNames":	"Jerez GP"
+			,"Name":	"Jerez"
+			,"AltNames":	"Jerez Chicane"
 			,"Zoom":	16
 			,"MapInitLat":	36.708665
 			,"MapInitLong":	-6.033030
 			,"Comment":	"finished"
 		});
+		//Jerez Standard
+		this.refPoints[167] = this.CopyObjectWithModifications(this.refPoints[126], {"Name": "Jerez Standard","AltNames":""});
 
 		//Kansai GP
 		this.refPoints[127] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -354,7 +356,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	34.844069
 			,"MapInitLong":	136.533418
-			,"Comment":	"finished"
+			,"Comment":	"finished, small discrepancies"
 		});
 		//Kansai East
 		this.refPoints[128] = this.CopyObjectWithModifications(this.refPoints[127], {"Name": "Kansai East","AltNames":"Kansai Kansai_East"});
@@ -396,7 +398,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	17
 			,"MapInitLat":	-23.281892
 			,"MapInitLong":	-51.167368
-			,"Comment":	"finished"
+			,"Comment":	"finished, discrepancies"
 		});
 		//Londrina Short
 		this.refPoints[133] = this.CopyObjectWithModifications(this.refPoints[132], {"Name": "Londrina Short","AltNames":"Londrina Londrina_short"});
@@ -419,7 +421,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	15
 			,"MapInitLat":	45.505605
 			,"MapInitLong":	-73.524751
-			,"Comment":	"finished"
+			,"Comment":	"finished, small discrepancies"
 		});
 		//Montreal Historic
 		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic"});
@@ -451,19 +453,18 @@ class RefPointDataAMS2 extends RefPointData {
 		//Oulton Park International
 		this.refPoints[142] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	53.180045
+			,"refLong":	-2.612829
+			,"rotation":	-0.3
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":0.9992
 			,"Name":	"Oulton Park International"
 			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"MapInitLat":	53.176808
+			,"MapInitLong":	-2.616589
+			,"Comment":	"finished"
 		});
 		//Oulton Park Fosters
 		this.refPoints[143] = this.CopyObjectWithModifications(this.refPoints[142], {"Name": "Oulton Park Fosters","AltNames":"OultonPark OultonPark_Fosters"});
@@ -475,38 +476,36 @@ class RefPointDataAMS2 extends RefPointData {
 		//Santa Cruz
 		this.refPoints[146] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-29.799978
+			,"refLong":	-52.436404
+			,"rotation":	-0.3
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":1.035
+			,"cor_PosY_mul":1.04
 			,"Name":	"Santa Cruz"
 			,"AltNames":	"SantaCruz SantaCruz"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-29.799883
+			,"MapInitLong":	-52.436274
+			,"Comment":	"finished, discrepancies"
 		});
 
 		//Snetterton 300
 		this.refPoints[147] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	52.464919
+			,"refLong":	0.947226
+			,"rotation":	1.6
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":0.999
 			,"Name":	"Snetterton 300"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	52.464971
+			,"MapInitLong":	0.947056
+			,"Comment":	"finished"
 		});
 		//Snetterton 200
 		this.refPoints[148] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 200"});
@@ -516,20 +515,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Spielberg GP
 		this.refPoints[149] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	47.219792
+			,"refLong":	14.763686
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
+			,"cor_PosX_mul":0.994
 			,"cor_PosY_mul":1
 			,"Name":	"Spielberg GP"
 			,"AltNames":	"Spielberg Modern"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	47.223546
+			,"MapInitLong":	14.761707
+			,"Comment":	"finished, discrepancies"
 		});
 		//Spielberg Short
 		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short","AltNames":""});
