@@ -652,8 +652,8 @@ function returnDataSendError(rMode){
 			case  "GETCRESTDRIVERDATA":
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
-				if(log >= 2){console.log("---CREST1 Trackname: ", TrackName);}
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
+				if(log >= 2){console.log("---CREST1 Trackname: ", TrackName, " / TrackID: ", TrackID);}
 				
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
@@ -741,8 +741,8 @@ function returnDataSendError(rMode){
 			case  "GETCREST2DRIVERDATA":
 			
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
-				if(log >= 2){console.log("---CREST2 Trackname: ", TrackName);}
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
+				if(log >= 2){console.log("---CREST2 Trackname: ", TrackName, " / TrackID: ", TrackID);}
 			
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
@@ -861,8 +861,8 @@ function returnDataSendError(rMode){
 			case "GETCREST2AMS2DRIVERDATA":
 
 				TrackName = BuildTrackNameFromGameAPI(myArr.eventInformation.mTrackLocation,myArr.eventInformation.mTrackVariation);
-				if(log >= 2){console.log("---CREST2 Trackname: ", TrackName);}
 				TrackID = GetTrackIDbyName(TrackName , this.aRefPointName2ID);
+				if(log >= 2){console.log("---CREST2-AMS2 Trackname: ", TrackName, " / TrackID: ", TrackID, " / this.aRefPointName2ID: ", this.aRefPointName2ID);}
 
 				//overwrite default values with CRESt specific ones
 				aDrivers.globals = {
