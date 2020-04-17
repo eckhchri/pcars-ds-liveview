@@ -539,20 +539,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Tarumã Internacional
 		this.refPoints[153] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
+			"refLat":	-30.048717
+			,"refLong":	-51.018292
 			,"rotation":	0
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.992
+			,"cor_PosY_mul":0.99
 			,"Name":	"Tarumã Internacional"
 			,"AltNames":	"Taruma Internacional"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	17
+			,"MapInitLat":	-30.048547
+			,"MapInitLong":	-51.019394
+			,"Comment":	"finished, discrepancies"
 		});
 		//Tarumã Chicane
 		this.refPoints[154] = this.CopyObjectWithModifications(this.refPoints[153], {"Name": "Tarumã Chicane","AltNames":"Taruma Chicane"});
@@ -560,20 +559,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Velo Città
 		this.refPoints[155] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-22.287702
+			,"refLong":	-46.848099
+			,"rotation":	-0.65
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.003
 			,"Name":	"Velo Città"
 			,"AltNames":	"VeloCitta VeloCitta1"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-22.289251
+			,"MapInitLong":	-46.848153
+			,"Comment":	"finished, small discrepancies"
 		});
 		//Velo Città TrackDay
 		this.refPoints[156] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città TrackDay","AltNames":"VeloCitta TrackDay"});
@@ -583,20 +581,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Velopark 2017
 		this.refPoints[157] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	40.997664
-			,"refLong":	-113.566253
-			,"rotation":	0
+			"refLat":	-29.823389
+			,"refLong":	-51.320824
+			,"rotation":	-0.5
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":1.04
+			,"cor_PosY_mul":1.044
 			,"Name":	"Velopark 2017"
 			,"AltNames":	"Velopark Velopark_2017"
-			,"Zoom":	15
-			,"MapInitLat":	40.997664
-			,"MapInitLong":	-113.566253
-			,"fictional":	 true	//remove after refpoint has been determined
-			,"Comment":	"initially added"
+			,"Zoom":	16
+			,"MapInitLat":	-29.823810
+			,"MapInitLong":	-51.320110
+			,"Comment":	"finished"
 		});
 		//Velopark 2010
 		this.refPoints[158] = this.CopyObjectWithModifications(this.refPoints[157], {"Name": "Velopark 2010","AltNames":"Velopark Velopark_2010"});
