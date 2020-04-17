@@ -1277,7 +1277,7 @@ function initialize_app(){
 		if (CurGameRunning != CurGameRunning_old){
 			aRefPointTMP = oRPs.getRefPointsByGame(CurGameRunning);
 			aRefPointTrackname2ID = oRPs.GetMappingTrackname2Trackid(CurGameRunning);
-			e.data.arefpoint = aRefPointTrackname2ID;	// needed, because aRefPointTrackname2ID is transfered to the the first start only
+			e.data.arefpoint = aRefPointTrackname2ID;	// needed, because aRefPointTrackname2ID is transfered to the worker the first start only
 			if(log >= 3){console.log("Game switched - CurGameRunning", CurGameRunning, " / aRefPointTrackname2ID: ", aRefPointTrackname2ID, " / e.data:", e.data.arefpoint);}
 			CurGameRunning_old = CurGameRunning;
 		}
