@@ -309,10 +309,15 @@
 		</select>
 		
 		<p>
-  			<label for="amount">"Hidden"Driver Opacity:</label>
+			<label for="amount">"Hidden"Driver Opacity:</label>
 			<input type="text" class="CSS_OPACITY_DRIVER" id="filtered_driver_opacity" readonly style="border:0;">
 			<div id="slider-filtered_driver_opacity"></div>
-		</p>	
+		</p>
+		<p>
+			<label for="amount">Trackmap Opacity:</label>
+			<input type="text" id="trackmap_opacity" readonly style="border:0;">
+			<div id="slider-trackmap_opacity"></div>
+		</p>
 		<br>----<br>
   			<label for="amount">WORKERDELAY_DSDATA:</label>
 			<input type="text" id="workerdelay_dsdata" readonly style="border:0;">
@@ -851,6 +856,27 @@ function initialize_app(){
 		//initial set a CSS class
     	CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: $( "#filtered_driver_opacity" ).val()} );
   	});
+
+	$(function() {
+		$( "#slider-trackmap_opacity" ).slider({
+			range: "max",
+			min:	0,
+			max:	1,
+			value:	trackmap_opacity,
+			step:	0.1,
+			slide:	function( event, ui ) {
+					$( "#trackmap_opacity" ).val( ui.value );
+					//set new value
+					trackmap_opacity = ui.value;
+					//check if there is a circuitID of a selected tracklisttable row. -1 means there is no. In this case the live circuit ID from the current APIMODE is used.
+					if(oPcarsMapCtrl.circuitID == -1){
+						oPcarsMapCtrl.circuitID = cuircitID;
+					}
+					oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[oPcarsMapCtrl.circuitID], oMap, oPcarsMapCtrl.circuitID);	//Update Map
+				}
+		});
+		$( "#trackmap_opacity" ).val( $( "#slider-trackmap_opacity" ).slider( "value" ) );
+	});
 		
 	
 	$(function() {
