@@ -3722,16 +3722,16 @@ function OverrideRefpointValue(RefpointVar, value, slide){
 
 	if(!slide){
 		//Input field is used
-		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
+		aRefPointTMPAll[oPcarsMapCtrl.circuitID][RefpointVar] = value;	//Override refpoint variable
 		$( slider ).slider({value: 0});	//reset slider
 		aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar] = value; //Overwrite original value, too, for new slider fiddling
 	}else{
 		//Slider is used
 		var oVal = parseFloat(aRefPointFiddling[oPcarsMapCtrl.circuitID][RefpointVar]) + value;
 		oVal = round(oVal,6);	// needed, because adding a value to a float like above, results in a float like 51.2367000000002 or 51.23456699999997
-		aRefPointTMP[oPcarsMapCtrl.circuitID][RefpointVar] = oVal;
+		aRefPointTMPAll[oPcarsMapCtrl.circuitID][RefpointVar] = oVal;
 	}
-	oPcarsMapCtrl.changeMapSettings(aRefPointTMP[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
+	oPcarsMapCtrl.changeMapSettings(aRefPointTMPAll[oPcarsMapCtrl.circuitID]  , oMap , oPcarsMapCtrl.circuitID);	//Update Map
 }
 
 // change z-index for windows with CSS class focus
