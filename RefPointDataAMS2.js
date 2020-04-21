@@ -448,7 +448,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Ortona Kart Three
 		this.refPoints[140] = this.CopyObjectWithModifications(this.refPoints[138], {"Name": "Ortona Kart Three","AltNames":"Ortona Ortona_3"});
 		//Ortona Kart Four
-		this.refPoints[141] = this.CopyObjectWithModifications(this.refPoints[138], {"Name": "Ortona Kart Four","AltNames":"Ortona Ortona4"});
+		this.refPoints[141] = this.CopyObjectWithModifications(this.refPoints[138], {"Name": "Ortona Kart Four","AltNames":"Ortona Ortona4","MapInitLat": 42.305336});
 
 		//Oulton Park International
 		this.refPoints[142] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -461,13 +461,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.997
 			,"cor_PosY_mul":0.9992
 			,"Name":	"Oulton Park International"
+			,"AltNames":	"OultonPark OultonPark_International"
 			,"Zoom":	15
 			,"MapInitLat":	53.176808
 			,"MapInitLong":	-2.616589
 			,"Comment":	"finished"
 		});
 		//Oulton Park Fosters
-		this.refPoints[143] = this.CopyObjectWithModifications(this.refPoints[142], {"Name": "Oulton Park Fosters","AltNames":"OultonPark OultonPark_Fosters"});
+		this.refPoints[143] = this.CopyObjectWithModifications(this.refPoints[142], {"Name": "Oulton Park Fosters","AltNames":"OultonPark OultonPark_Fosters","Zoom": 16,"MapInitLat": 53.178898});
 		//Oulton Park Island
 		this.refPoints[144] = this.CopyObjectWithModifications(this.refPoints[142], {"Name": "Oulton Park Island","AltNames":"OultonPark OultonPark_Island"});
 		//Oulton Park Classic
@@ -510,7 +511,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Snetterton 200
 		this.refPoints[148] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 200"});
 		//Snetterton 100
-		this.refPoints[165] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 100","AltNames":"Snetterton 200"});	//AltName ist duplicate of 200 variation, but comes from Shared Memory
+		this.refPoints[165] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 100","AltNames":"Snetterton 200","Zoom": 17,"MapInitLong": 0.942476});	//AltName ist duplicate of 200 variation, but comes from Shared Memory
 
 		//Spielberg GP
 		this.refPoints[149] = this.CopyObjectWithModifications(this.refPoints[9999999999],
