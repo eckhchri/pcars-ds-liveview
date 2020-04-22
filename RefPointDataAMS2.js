@@ -531,11 +531,11 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"finished, discrepancies"
 		});
 		//Spielberg Short
-		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short","AltNames":""});
-		//Spielberg Vintage
-		this.refPoints[151] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Vintage","AltNames":""});
-		//Spielberg Historic
-		this.refPoints[152] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Historic","AltNames":""});
+		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short","AltNames":"","refLong": 14.763715,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.997,"Zoom": 17,"MapInitLat": 47.221266,"MapInitLong": 14.764347});
+		//Spielberg Historic 1974
+		this.refPoints[151] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Historic 1974","AltNames":"Spielberg Vintage","refLat": 47.219763,"refLong": 14.763679,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.99,"MapInitLat": 47.223176,"MapInitLong": 14.760487});
+		//Spielberg Historic 1977
+		this.refPoints[152] = this.CopyObjectWithModifications(this.refPoints[151], {"Name": "Spielberg Historic 1977","AltNames":"Spielberg Historic"});
 
 		//Tarumã Internacional
 		this.refPoints[153] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -574,10 +574,10 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-46.848153
 			,"Comment":	"finished, small discrepancies"
 		});
-		//Velo Città TrackDay
-		this.refPoints[156] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città TrackDay","AltNames":"VeloCitta TrackDay"});
-		//Velo Città ClubDay
-		this.refPoints[166] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città ClubDay","AltNames":"VeloCitta ClubDay"});
+		//Velo Città Track Day
+		this.refPoints[156] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città Track Day","AltNames":"VeloCitta TrackDay"});
+		//Velo Città Club Day
+		this.refPoints[166] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città Club Day","AltNames":"VeloCitta ClubDay","Zoom": 17,"MapInitLat": -22.287711,"MapInitLong": -46.849323});
 
 		//Velopark 2017
 		this.refPoints[157] = this.CopyObjectWithModifications(this.refPoints[9999999999],
