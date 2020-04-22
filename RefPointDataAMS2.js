@@ -27,7 +27,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 
 		////AMS2 Tracks
-		//Adelaide Modern
+		//Adelaide
 		this.refPoints[100] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-34.928456
@@ -37,14 +37,15 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
-			,"Name":	"Adelaide Modern"
+			,"Name":	"Adelaide"
+			,"AltNames":	"Adelaide Modern"
 			,"Zoom":	16
 			,"MapInitLat":	-34.928456
 			,"MapInitLong":	138.618758
 			,"Comment":	"finished"
 		});
-		//Adelaide Historic
-		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic","MapInitLat": -34.927166,"MapInitLong": 138.617828});
+		//Adelaide Historic 1988
+		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic 1988","AltNames":"Adelaide Historic","MapInitLat": -34.927166,"MapInitLong": 138.617828});
 
 		//Azure Circuit
 		this.refPoints[102] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -64,7 +65,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"finished, discrepancies"
 		});
 
-		//Brands Hatch Grand Prix
+		//Brands Hatch GP
 		this.refPoints[103] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	51.36051
@@ -74,7 +75,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":0.998
-			,"Name":	"Brands Hatch Grand Prix"
+			,"Name":	"Brands Hatch GP"
 			,"AltNames":	"BrandsHatch GrandPrix"
 			,"Zoom":	16
 			,"MapInitLat":	51.356786
@@ -238,7 +239,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"finished"
 		});
 
-		//Ibarra
+		//Ibarra Autódromo Yahuarcocha
 		this.refPoints[118] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	0.380338
@@ -248,7 +249,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":1.007
-			,"Name":	"Ibarra"
+			,"Name":	"Ibarra Autódromo Yahuarcocha"
 			,"AltNames":	"Ibarra4 Ibarra5"
 			,"Zoom":	17
 			,"MapInitLat":	0.380725
@@ -280,7 +281,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Imola Historic 2001
 		this.refPoints[122] = this.CopyObjectWithModifications(this.refPoints[119], {"Name": "Imola Historic 2001","AltNames":"ImolaAMS2 Imola_GP_2001"});
 
-		//Interlagos Grand Prix
+		//Interlagos
 		this.refPoints[123] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-23.702013
@@ -290,17 +291,17 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":1.004
-			,"Name":	"Interlagos Grand Prix"
+			,"Name":	"Interlagos"
 			,"AltNames":	"Interlagos GP"
 			,"Zoom":	16
 			,"MapInitLat":	-23.701256
 			,"MapInitLong":	-46.696486
 			,"Comment":	"finished"
 		});
-		//Interlagos Historic
-		this.refPoints[124] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic","AltNames":"","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
-		//Interlagos Historic External Ring
-		this.refPoints[164] = this.CopyObjectWithModifications(this.refPoints[124], {"Name": "Interlagos Historic External Ring","AltNames":"Interlagos Historic_Outer"});
+		//Interlagos Historic 1976
+		this.refPoints[124] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
+		//Interlagos Historic Outer
+		this.refPoints[164] = this.CopyObjectWithModifications(this.refPoints[124], {"Name": "Interlagos Historic Outer","AltNames":"Interlagos Historic_Outer"});
 
 		//Jacarepaguá Historic 1988 - not existing anymore - added coordinates where it was in the past
 		this.refPoints[125] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -365,7 +366,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Kansai Classic
 		this.refPoints[130] = this.CopyObjectWithModifications(this.refPoints[127], {"Name": "Kansai Classic","AltNames":"Kansai Kansai_Classic"});
 
-		//Kyalami Historic - the track layout difference between the historic and the present track is too big and areas of the old track are built up with houses - set it to fictional, but added coordinates where it was in the past
+		//Kyalami Historic 1976 - the track layout difference between the historic and the present track is too big and areas of the old track are built up with houses - set it to fictional, but added coordinates where it was in the past
 		this.refPoints[131] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-25.992763
@@ -375,7 +376,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
-			,"Name":	"Kyalami Historic"
+			,"Name":	"Kyalami Historic 1976"
+			,"AltNames":	"Kyalami Historic"
 			,"Zoom":	16
 			,"MapInitLat":	-25.994356
 			,"MapInitLong":	28.068974
@@ -407,7 +409,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Londrina Kart Two
 		this.refPoints[135] = this.CopyObjectWithModifications(this.refPoints[134], {"Name": "Londrina Kart Two","AltNames":"Londrina LondrinaKart2"});
 
-		//Montreal Modern
+		//Montreal
 		this.refPoints[136] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	45.503808
@@ -417,14 +419,15 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1.007
-			,"Name":	"Montreal Modern"
+			,"Name":	"Montreal"
+			,"AltNames":	"Montreal Modern"
 			,"Zoom":	15
 			,"MapInitLat":	45.505605
 			,"MapInitLong":	-73.524751
 			,"Comment":	"finished, small discrepancies"
 		});
-		//Montreal Historic
-		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic"});
+		//Montreal Historic 1988
+		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic 1988","AltNames":"Montreal Historic"});
 
 		//Ortona Kart One
 		this.refPoints[138] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -474,7 +477,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Oulton Park Classic
 		this.refPoints[145] = this.CopyObjectWithModifications(this.refPoints[142], {"Name": "Oulton Park Classic","AltNames":"OultonPark OultonPark_Classic"});
 
-		//Santa Cruz
+		//Santa Cruz do Sul
 		this.refPoints[146] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-29.799978
@@ -484,7 +487,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1.035
 			,"cor_PosY_mul":1.04
-			,"Name":	"Santa Cruz"
+			,"Name":	"Santa Cruz do Sul"
 			,"AltNames":	"SantaCruz SantaCruz"
 			,"Zoom":	16
 			,"MapInitLat":	-29.799883
