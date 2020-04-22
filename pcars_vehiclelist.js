@@ -2350,6 +2350,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1063,
 		"name" : "Fusca CA",
 		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : 1064,
+		"name" : "Puma P052",
+		"class" : "GT5"
 	}
 
 ];
