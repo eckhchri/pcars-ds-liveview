@@ -42,7 +42,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-34.928456
 			,"MapInitLong":	138.618758
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Adelaide Historic 1988
 		this.refPoints[101] = this.CopyObjectWithModifications(this.refPoints[100], {"Name": "Adelaide Historic 1988","AltNames":"Adelaide Historic","MapInitLat": -34.927166,"MapInitLong": 138.617828});
@@ -51,18 +51,18 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[102] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	43.73705
-			,"refLong":	7.427395
+			,"refLong":	7.427437
 			,"rotation":	126
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":0.983
+			,"cor_PosX_mul":0.978
 			,"cor_PosY_mul":0.985
 			,"Name":	"Azure Circuit"
 			,"AltNames":	"Azure_Circuit Azure_Circuit"
 			,"Zoom":	16
 			,"MapInitLat":	43.737186
 			,"MapInitLong":	7.425732
-			,"Comment":	"finished, discrepancies"
+			,"Comment":	"discrepancies"
 		});
 
 		//Brands Hatch GP
@@ -80,7 +80,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	51.356786
 			,"MapInitLong":	0.262930
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Brands Hatch Indy
 		this.refPoints[104] = this.CopyObjectWithModifications(this.refPoints[103], {"Name": "Brands Hatch Indy","AltNames":"BrandsHatch Indy","Zoom": 17,"MapInitLat": 51.359136,"MapInitLong": 0.26105});
@@ -100,7 +100,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	53.308865
 			,"MapInitLong":	-0.063534
-			,"Comment":	"finished, small discrepancies"
+			,"Comment":	"small discrepancies"
 		});
 
 		//Campo Grande
@@ -118,7 +118,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-20.476112
 			,"MapInitLong":	-54.465827
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 
 		//Cascavel
@@ -136,7 +136,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	17
 			,"MapInitLat":	-24.982412
 			,"MapInitLong":	-53.384565
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 
 		//Curitiba
@@ -154,7 +154,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-25.449937
 			,"MapInitLong":	-49.195733
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Curitiba Outer
 		this.refPoints[109] = this.CopyObjectWithModifications(this.refPoints[108], {"Name": "Curitiba Outer","AltNames":"Curitiba Curitiba_outer"});
@@ -174,7 +174,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-18.805342
 			,"MapInitLong":	-44.408201
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Curvelo Short
 		this.refPoints[111] = this.CopyObjectWithModifications(this.refPoints[110], {"Name": "Curvelo Short","AltNames":"Curvelo CurveloShort"});
@@ -194,7 +194,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	52.830756
 			,"MapInitLong":	-1.375103
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Donington National
 		this.refPoints[113] = this.CopyObjectWithModifications(this.refPoints[112], {"Name": "Donington National","AltNames":"Donington Donington_Nat"});
@@ -214,7 +214,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-16.717864
 			,"MapInitLong":	-49.192500
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Goiânia External
 		this.refPoints[115] = this.CopyObjectWithModifications(this.refPoints[114], {"Name": "Goiânia External","AltNames":"Goiania GoianiaOuter"});
@@ -236,7 +236,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-28.846355
 			,"MapInitLong":	-51.852850
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 
 		//Ibarra Autódromo Yahuarcocha
@@ -254,7 +254,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	17
 			,"MapInitLat":	0.380725
 			,"MapInitLong":	-78.094564
-			,"Comment":	"finished, small discrepancies"
+			,"Comment":	"small discrepancies"
 		});
 
 		//Imola
@@ -272,7 +272,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	44.341112
 			,"MapInitLong":	11.712506
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Imola Historic 1972
 		this.refPoints[120] = this.CopyObjectWithModifications(this.refPoints[119], {"Name": "Imola Historic 1972","AltNames":"ImolaAMS2 Imola_GP_1988"});	//AltName ist duplicate of 1988 variation, but comes from Shared Memory
@@ -296,7 +296,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-23.701256
 			,"MapInitLong":	-46.696486
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Interlagos Historic 1976
 		this.refPoints[124] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
@@ -315,11 +315,11 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosY_mul":1
 			,"Name":	"Jacarepaguá Historic 1988"
 			,"AltNames":	"Jacarepagua Jacarepagua_Historic"
-			,"Zoom":	15
-			,"MapInitLat":	-22.976979
-			,"MapInitLong":	-43.394669
+			,"Zoom":	17
+			,"MapInitLat":	-22.976879
+			,"MapInitLong":	-43.393929
 			,"fictional":	 true
-			,"Comment":	"finished"
+			,"Comment":	"NA anymore"
 		});
 
 		//Jerez
@@ -337,7 +337,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	36.708665
 			,"MapInitLong":	-6.033030
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Jerez Standard
 		this.refPoints[167] = this.CopyObjectWithModifications(this.refPoints[126], {"Name": "Jerez Standard","AltNames":""});
@@ -357,7 +357,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	34.844069
 			,"MapInitLong":	136.533418
-			,"Comment":	"finished, small discrepancies"
+			,"Comment":	"small discrepancies"
 		});
 		//Kansai East
 		this.refPoints[128] = this.CopyObjectWithModifications(this.refPoints[127], {"Name": "Kansai East","AltNames":"Kansai Kansai_East","MapInitLat": 34.842529,"MapInitLong": 136.540108});
@@ -382,7 +382,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLat":	-25.994356
 			,"MapInitLong":	28.068974
 			,"fictional":	 true
-			,"Comment":	"finished"
+			,"Comment":	"NA anymore"
 		});
 
 		//Londrina Long
@@ -400,7 +400,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	17
 			,"MapInitLat":	-23.281892
 			,"MapInitLong":	-51.167368
-			,"Comment":	"finished, discrepancies"
+			,"Comment":	"discrepancies"
 		});
 		//Londrina Short
 		this.refPoints[133] = this.CopyObjectWithModifications(this.refPoints[132], {"Name": "Londrina Short","AltNames":"Londrina Londrina_short"});
@@ -424,7 +424,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	15
 			,"MapInitLat":	45.505605
 			,"MapInitLong":	-73.524751
-			,"Comment":	"finished, small discrepancies"
+			,"Comment":	"small discrepancies"
 		});
 		//Montreal Historic 1988
 		this.refPoints[137] = this.CopyObjectWithModifications(this.refPoints[136], {"Name": "Montreal Historic 1988","AltNames":"Montreal Historic"});
@@ -444,7 +444,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	18
 			,"MapInitLat":	42.304976
 			,"MapInitLong":	14.378702
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Ortona Kart Two
 		this.refPoints[139] = this.CopyObjectWithModifications(this.refPoints[138], {"Name": "Ortona Kart Two","AltNames":"Ortona Ortona_2"});
@@ -468,7 +468,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	15
 			,"MapInitLat":	53.176808
 			,"MapInitLong":	-2.616589
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Oulton Park Fosters
 		this.refPoints[143] = this.CopyObjectWithModifications(this.refPoints[142], {"Name": "Oulton Park Fosters","AltNames":"OultonPark OultonPark_Fosters","Zoom": 16,"MapInitLat": 53.178898});
@@ -492,7 +492,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-29.799883
 			,"MapInitLong":	-52.436274
-			,"Comment":	"finished, discrepancies"
+			,"Comment":	"discrepancies"
 		});
 
 		//Snetterton 300
@@ -509,7 +509,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	52.464971
 			,"MapInitLong":	0.947056
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Snetterton 200
 		this.refPoints[148] = this.CopyObjectWithModifications(this.refPoints[147], {"Name": "Snetterton 200"});
@@ -531,7 +531,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	47.223546
 			,"MapInitLong":	14.761707
-			,"Comment":	"finished, discrepancies"
+			,"Comment":	"discrepancies"
 		});
 		//Spielberg Short
 		this.refPoints[150] = this.CopyObjectWithModifications(this.refPoints[149], {"Name": "Spielberg Short","AltNames":"","refLong": 14.763715,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.997,"Zoom": 17,"MapInitLat": 47.221266,"MapInitLong": 14.764347});
@@ -555,7 +555,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	17
 			,"MapInitLat":	-30.048547
 			,"MapInitLong":	-51.019394
-			,"Comment":	"finished, discrepancies"
+			,"Comment":	"discrepancies"
 		});
 		//Tarumã Chicane
 		this.refPoints[154] = this.CopyObjectWithModifications(this.refPoints[153], {"Name": "Tarumã Chicane","AltNames":"Taruma Chicane"});
@@ -575,7 +575,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-22.289251
 			,"MapInitLong":	-46.848153
-			,"Comment":	"finished, small discrepancies"
+			,"Comment":	"small discrepancies"
 		});
 		//Velo Città Track Day
 		this.refPoints[156] = this.CopyObjectWithModifications(this.refPoints[155], {"Name": "Velo Città Track Day","AltNames":"VeloCitta TrackDay"});
@@ -597,7 +597,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	-29.823810
 			,"MapInitLong":	-51.320110
-			,"Comment":	"finished"
+			,"Comment":	""
 		});
 		//Velopark 2010
 		this.refPoints[158] = this.CopyObjectWithModifications(this.refPoints[157], {"Name": "Velopark 2010","AltNames":"Velopark Velopark_2010"});
@@ -617,7 +617,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	15
 			,"MapInitLat":	36.561228
 			,"MapInitLong":	-79.206432
-			,"Comment":	"finished"
+			,"Comment":	""
 		});		
 		//Virgina Grand
 		this.refPoints[160] = this.CopyObjectWithModifications(this.refPoints[159], {"Name": "VIRginia International Raceway Grand","AltNames":"Virginia Virginia_Grand"});
