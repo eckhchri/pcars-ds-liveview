@@ -1,14 +1,14 @@
-# Project CARS Dedicated Server live view (pcars-ds-liveview)
+# Project CARS and Automobilista 2 liveview
 
 ## What is it?
 
 The main goal of this project was to show information about races like you need it for TV broadcasts or for race engineers.\
-This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is also the main focus. But it can also poll the CREST1/[CREST2](https://github.com/viper4gh/CREST2/blob/master/README.md) API, which provides the Shared Memory data of Project CARS 1 and 2 via HTTP.\
+This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is also the main focus. But it can also poll the CREST1/[CREST2](https://github.com/viper4gh/CREST2/blob/master/README.md) API, which provides the Shared Memory data of Project CARS 1/2 and Automobilista 2 via HTTP.\
 If you open this website it has Google Maps in background, which shows the current race track and markers of all drivers where they are.
 As overlay you have some tables:
 - Driver Table - shows all driver names with their position, which car they drive and timings.
-- Car Table - a list of all cars, which are available in Project CARS
-- Track Table - a list of all tracks, which are available in Project CARS
+- Car Table - a list of all cars, which are available in Project CARS / Automobilista 2
+- Track Table - a list of all tracks, which are available in Project CARS / Automobilista 2
 
 Further there is a recording/playback panel and some other great stuff. You can find more info about the features in the "[Nice to know](#nice-to-know)" section at the end.\
 It's also important to know that javascript is executed on client side. That means your PC/Tablet/... where you start a browser and open this website is polling the Dedicated Server or CREST API via HTTP requests. Look at the [communication schemes](#communication-schemes) for more info.
@@ -62,6 +62,8 @@ Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/
 - CREST server port:      8080
 - CREST2 server url:      localhost
 - CREST2 server port:     8180
+- CREST2AMS2ServerURL:	localhost
+- CREST2AMS2Port:	8180
  
 ## Requirements:
 - browser support: CHROME 44 or newer
