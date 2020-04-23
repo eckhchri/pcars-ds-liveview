@@ -1205,50 +1205,62 @@ function initialize_app(){
 
 			// if you select an already selected row, deselect it
 			if($(this).jqGrid("getGridParam", "selrow") === rowid){
-				$(this).jqGrid("resetSelection");
-				$("#LiveryOverviewVehicle").hide();
-				$("#LiveryGridContainerCarTable").remove();
-
-				document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
-			}else{
-				//else a row is selected
-
 				var rowData = $(this).jqGrid('getRowData', rowid);
-				var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
 				var gamescope = rowData.gamescope;
 
-				// Liveries for PCARS2 cars are shown only, even if there is the same Vehicle ID in PCARS1 and 2
-				if(!gamescope.includes("PCARS2")){
-					oLiveries = {};
+				//reset and close livery overview for PCARS2 cars only
+				if(gamescope.includes("PCARS2")){
+					$("#LiveryOverviewVehicle").hide();
+					//remove old grid
+					$("#LiveryGridContainerCarTable").remove();
+					// reset headline text
+					document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
 				}
-			
-				//remove old grid
-				$("#LiveryGridContainerCarTable").remove();
-				//built Grid
-				var HTMLcode = "<div id='LiveryGridContainerCarTable' class='LiveryGridContainer'><div id= 'LiveryGridCarTable' class='LiveryGrid'>";
-				if(oLiveries[rowData.vehicleid]){
-					for (var key in oLiveries[rowData.vehicleid] ){
-						//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
-						HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageCarTable' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
-							"<span class='LiveryGridText LiveryGridTextBottomRight'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
+				$(this).jqGrid("resetSelection");
+			}else{
+				//else a row is selected
+				var rowData = $(this).jqGrid('getRowData', rowid);
+				var gamescope = rowData.gamescope;
+
+				//show livery overview for PCARS2 cars only
+				if(gamescope.includes("PCARS2")){
+					var oLiveries = PCARSVehicleLiveryList.oLiveryDataStructured.PCARS2;
+
+					//remove old grid
+					$("#LiveryGridContainerCarTable").remove();
+					//built Grid
+					var HTMLcode = "<div id='LiveryGridContainerCarTable' class='LiveryGridContainer'><div id= 'LiveryGridCarTable' class='LiveryGrid'>";
+					if(oLiveries[rowData.vehicleid]){
+						for (var key in oLiveries[rowData.vehicleid] ){
+							//console.log("filename: data/liveries/",rowData.vehicleid,"/",key);
+							HTMLcode += "<div class='LiveryGridItem'><img class='LiveryGridImage LiveryGridImageCarTable' src='data/liveries/" + rowData.vehicleid + "/id" + key + ".png' onerror='this.src=\"data/liveries/na.png\";'>" + 
+								"<span class='LiveryGridText LiveryGridTextBottomRight'>"+ oLiveries[rowData.vehicleid][key] + "</span></div>";
+						}
+					}else{
+						//ToDo: Vehicle Liveries not available
+						HTMLcode += "<div>No Data for this car available</div>";
 					}
+
+					HTMLcode += "</div></div>";
+
+					// set Headline
+					document.getElementById("txtLiveryOverview").innerHTML = "All Liveries of \"" + rowData.name + "\"&nbsp;&nbsp;&nbsp;&nbsp;";
+
+					//add Grid to HTML
+					$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
+
+					//set window focus on new Livery Overview window
+					setWindowFocus(document.getElementById('SpotterGuide'));
+					$("#LiveryOverviewVehicle").show();
 				}else{
-					//ToDo: Vehicle Liveries not available
-					HTMLcode += "<div>No Data for this car available</div>";
+					// in case of a PCARS2 row was already selected and you select a row of another game, then livery overview must be reset and closed
+					// in case of a another game was already selected and you select a row of another game again, then it is not needed, but code is also executed, which is no big deal 
+					$("#LiveryOverviewVehicle").hide();
+					//remove old grid
+					$("#LiveryGridContainerCarTable").remove();
+					// reset headline text
+					document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
 				}
-
-				HTMLcode += "</div></div>";			
-
-				// set Headline
-				document.getElementById("txtLiveryOverview").innerHTML = "All Liveries of \"" + rowData.name + "\"&nbsp;&nbsp;&nbsp;&nbsp;";
-
-				//add Grid to HTML
-				$( HTMLcode ).insertAfter( "#LiveryOverviewVehicleHead" );
-				
-				//set window focus on new Livery Overview window
-				setWindowFocus(document.getElementById('SpotterGuide'));
-				$("#LiveryOverviewVehicle").show();
-				
 				return true;
 			}
 			//return true;
@@ -2739,17 +2751,21 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 	});
 
 	$('#cbLiveryOverviewClose').click(function () {
-                $("#LiveryOverviewVehicle").hide();
+		var selRowId = $("#carlisttable").jqGrid('getGridParam', 'selrow');
+		var rowData = $("#carlisttable").jqGrid('getRowData', selRowId);
+		var gamescope = rowData.gamescope;
 
+		//reset and close livery overview for PCARS2 cars only
+		if(gamescope.includes("PCARS2")){
+			$("#LiveryOverviewVehicle").hide();
+			//remove old grid
+			$("#LiveryGridContainerCarTable").remove();
+			// reset headline text
+			document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
+		}
 		// deselect table row
 		jQuery("#carlisttable").jqGrid("resetSelection");
-
-		// reset headline text
-		document.getElementById("txtLiveryOverview").innerHTML = "All Liveries&nbsp;&nbsp;&nbsp;&nbsp;";
-
-                //remove old grid
-                $("#LiveryGridContainerCarTable").remove();
-        });
+    });
 
 	$('#cbSpotterGuideNewWindow').click(function () {
 		// set data for new window
