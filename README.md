@@ -122,15 +122,13 @@ Then you can click on it and "Load unsafe scripts".
 
 - You can record a session. Use the "Start Recording" switch for starting and stopping the record. After stopping click the "Export" button. For long sessions this takes some time, because the record is saved in RAM of the Browser process. With clicking on export a zip file is generated. This zip file can be loaded with the Button "Datei auswählen"/"Select File" (in my bowser it is german). You maybe have to switch to DEMO API Type, if it is not switched automatically.
 
-- There are some records already in for demonstration. Switch to DEMO API Type. Click on Button "Load from URL" and choose a record. 
+- There are some records already in for demonstration. Click on Button "Load from URL" and choose a record. 
 
 - The Pit information during a race is no info from DS. It is detected by liveview, if a participant state changes to "EnteringPits". That means this info is only correct, if liveview is running all the time and receives these state changes. If you open liveview during a race, it can only detects from this moment on.
 
 - Same for the "Export All" Button in the Driver Table. liveview collects all session results for the complete race weekend and if you click on the button you get a csv and/or pdf (configurable via config.js) with all finished sessions till this moment. But liveview have to run from beginning of the first session. I hope this still works, I haven't test it for a long time and there were already some DS changes in the past. Further this feature only works in DS mode.
 
 - If you open the track table, you can use the left mouse button to select a track, the map then jumps to it, left mouse button on the selected row jumps back again. Fictional tracks have only a white background. For Sakitto GP are border lines available for example (there is also a recording for Sakitto GP), but for the most others not. These lines must be recorded with a car on track, which needs a lot of time and time is short - sorry.
-
-- The main focus of liveview is the DS mode, which means that some features are not working in CREST mode, like mentioned above with the Export All, but also the the Pit counting or the Session States in the Driver Table Header etc.
 
 - You can click on the column headers for sorting the table
 
