@@ -302,6 +302,24 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[124] = this.CopyObjectWithModifications(this.refPoints[123], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
 		//Interlagos Historic Outer
 		this.refPoints[164] = this.CopyObjectWithModifications(this.refPoints[124], {"Name": "Interlagos Historic Outer","AltNames":"Interlagos Historic_Outer"});
+		//Interlagos Kart One
+		this.refPoints[168] = this.CopyObjectWithModifications(this.refPoints[123], {
+			"refLat":	-23.702023
+			,"refLong":	-46.695884
+			,"rotation":	-0.2
+			,"cor_PosX_mul":1.01
+			,"cor_PosY_mul":1.005
+			,"Name": "Interlagos Kart One"
+			,"AltNames":""
+			,"Zoom": 		18
+			,"MapInitLat": -23.703726
+			,"MapInitLong":-46.693496
+			,"Comment":	"discrepancies"
+		});
+		//Interlagos Kart Two
+		this.refPoints[169] = this.CopyObjectWithModifications(this.refPoints[168], {"Name": "Interlagos Kart Two","AltNames":""});
+		//Interlagos Kart Three
+		this.refPoints[170] = this.CopyObjectWithModifications(this.refPoints[168], {"Name": "Interlagos Kart Three","AltNames":""});
 
 		//Jacarepaguá Historic 1988 - not existing anymore - added coordinates where it was in the past
 		this.refPoints[125] = this.CopyObjectWithModifications(this.refPoints[9999999999],
