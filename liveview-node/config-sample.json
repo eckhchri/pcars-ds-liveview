@@ -1,0 +1,5 @@
+{
+    "host": "CREST2URL",
+    "port": 8180,
+    "path": "/crest2/v1/api"
+}
