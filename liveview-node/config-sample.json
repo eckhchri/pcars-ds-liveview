@@ -1,5 +1,8 @@
 {
-    "host": "CREST2URL",
-    "port": 8180,
-    "path": "/crest2/v1/api"
+    "poll_host": "CREST2URL",
+    "poll_port": 8180,
+    "poll_path": "/crest2/v1/api",
+    "poll_timeout": 1000,
+    "poll_interval": 1000,
+    "webserver_port": 8080
 }

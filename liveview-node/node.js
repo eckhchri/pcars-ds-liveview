@@ -1,25 +1,28 @@
 const config = require('./config.json');
 
-var host = config.host;
-var port = config.port;
-var path = config.path;
-
 var http = require('http');
 
+var content = "";   // polled data from API and provided through webserver again
+
+
+
+////////////////////////////////////////
+//// Poll Game API
+////////////////////////////////////////
 setInterval(function () {
 
     var rest_options = {
-        host: host,
-        port: port,
-        path: path,
+        host: config.poll_host,
+        port: config.poll_port,
+        path: config.poll_path,
         method: 'GET',
-        timeout: 3000
+        timeout: config.poll_timeout
     };
 
         console.log("Request");
 
     var request = http.request(rest_options, function(response) {
-        var content = "";
+        content = "";
 
         // Handle data chunks
         response.on('data', function(chunk) {
@@ -45,4 +48,19 @@ setInterval(function () {
         });
 
     request.end();
-}, 1000);
+}, config.poll_interval);
+
+////////////////////////////////////////
+//// Webserver - providing API data
+////////////////////////////////////////
+
+var server = require('http');
+
+server.createServer(function (req, res) {
+  res.writeHead(200, {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*'
+    });
+  res.write(content);
+  res.end();
+}).listen(config.webserver_port);
