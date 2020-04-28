@@ -3,6 +3,7 @@ const config = require('./config.json');
 var http = require('http');
 
 var content = "";   // polled data from API and provided through webserver again
+var poll_statusCode = 503;
 
 ////////////////////////////////////////
 //// Poll Game API
@@ -22,6 +23,7 @@ setInterval(function () {
 	//API HTTP request
 	var request = http.request(http_options, function(response) {
 		content = "";
+		poll_statusCode = response.statusCode;
 
 		// Handle data chunks
 		response.on('data', function(chunk) {
@@ -34,6 +36,7 @@ setInterval(function () {
 				console.log("data: ",data);
 			//TODO: Do something with `data`.
 		});
+
 	});
 
 	// Report errors
@@ -44,6 +47,7 @@ setInterval(function () {
 	//Abort request if reaching timeout
 	request.on('timeout', function() {
 		request.abort();
+		content = "";
 		console.log("abort");
 	});
 
@@ -57,10 +61,21 @@ setInterval(function () {
 var server = require('http');
 
 server.createServer(function (req, res) {
-	res.writeHead(200, {
-		'Content-Type': 'application/json',
-		'Access-Control-Allow-Origin': '*'
-	});
-	res.write(content);
-	res.end();
+	// return 503 HTTP status if there is no data available or the API returns also a status code != 200
+	if (content == "" || poll_statusCode != 200){
+		res.writeHead(503, {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		});
+		res.write("{\"status\": \"503 Service unavailable\"}");
+		res.end();
+	}else{
+		// return data with HTTP status 200
+		res.writeHead(200, {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': '*'
+		});
+		res.write(content);
+		res.end();
+	}
 }).listen(config.webserver_port);

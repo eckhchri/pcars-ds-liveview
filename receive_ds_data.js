@@ -97,6 +97,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
     			"GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
+				//"GETCREST2AMS2DRIVERDATA"	: "",	// Test with liveview-node
 				"GETDEMODATA"    		: ""
 	};	
 
