@@ -32,8 +32,14 @@ setInterval(function () {
 
 		// Once we're done streaming the response, parse it as json.
 		response.on('end', function() {
-			var data = JSON.parse(content);
-				console.log("data: ",data);
+			var data = {};
+			try {
+				data = JSON.parse(content);
+			} catch(e) {
+				console.log("Error on parsing JSON data: ",e); // Error can happen if the providing service is started or stopped during runtime
+				//return ...?
+			}
+			console.log("data: ",data);
 			//TODO: Do something with `data`.
 		});
 

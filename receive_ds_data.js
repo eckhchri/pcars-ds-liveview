@@ -96,7 +96,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				"GETVEHICLELIST"  		: "/api/list/vehicles",
 				"GETCRESTDRIVERDATA"	: "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				"GETCREST2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
-    			"GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
+				"GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				//"GETCREST2AMS2DRIVERDATA"	: "",	// Test with liveview-node
 				"GETDEMODATA"    		: ""
 	};	
@@ -281,7 +281,18 @@ function returnDataSendError(rMode){
 
 			//https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse
 			// TODO: JSON.parse and UTF Strings:  http://stackoverflow.com/questions/18264519/javascript-json-parse-utf-8-problems?rq=1
-			var myArr 			= JSON.parse( xmlhttp.responseText );
+
+			var myArr = {};
+
+			// sometimes the HTTP response data is incomplete if the providing tool like CREST2 or node proxy is started or stopped while liveview is running.
+			// JSON.parse throws an error in this case.
+			//if(log >= 3){console.log("xmlhttp.responseText: ", xmlhttp.responseText);}
+			try {
+				myArr = JSON.parse( xmlhttp.responseText );
+			} catch(e) {
+				console.log("Error on parsing JSON response: ",e);
+				return returnDataSendError(this.receivemode);
+			}
 			var arrayoutput 	= myArr.toString();
 			var DriverDummy		= new PCARSdriver();
 			DriverDummy.SetExampleData();
