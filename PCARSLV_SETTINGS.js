@@ -125,6 +125,7 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 				"DS2" : 	'active',
 				"CREST" : 	'active',
 				"CREST2" : 	'active',
+				"CREST2AMS2" : 	'active',
 				"DEMO" : 	'active'				
 		}
 		
@@ -148,26 +149,37 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 			case "DS":
 				sCurUrl = DsServerURL;
 				sCurPort = DsPort;
+				sCurPath = DsPath;
 				break;
 
 			case "DS2":
 				sCurUrl = Ds2ServerURL;
 				sCurPort = Ds2Port;
+				sCurPath = Ds2Path;
 				break;
 			
 			case "CREST":
 				sCurUrl = CRESTServerURL;
 				sCurPort = CRESTPort;
+				sCurPath = CRESTPath;
 				break;
 			
 			case "CREST2":
 				sCurUrl = CREST2ServerURL;
 				sCurPort = CREST2Port;
+				sCurPath = CREST2Path;
+				break;
+
+			case "CREST2AMS2":
+				sCurUrl = CREST2AMS2ServerURL;
+				sCurPort = CREST2AMS2Port;
+				sCurPath = CREST2AMS2Path;
 				break;
 				
 			default:  // fall back to DS1 settings
 				sCurUrl = DsServerURL;
 				sCurPort = DsPort;
+				sCurPath = DsPath;
 		}
 		
 		if(log >= 3){console.log ("called setCurrentSettings() changed to: " +"|" + sCurUrl +' | '+ sCurPort);}

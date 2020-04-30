@@ -17,7 +17,7 @@ self.addEventListener('message', function(e) {
 	var aTrackList = setTimeout(function(){
 		
 		var a = new Array(); 
-		a["aTrack"] = Receive_DS_data( e.data.dsurl, e.data.dsport , e.data.timeout , e.data.receivemode, e.data.aRefpoint);
+		a["aTrack"] = Receive_DS_data( e.data.dsurl, e.data.dsport, e.data.dspath, e.data.timeout , e.data.receivemode, e.data.aRefpoint);
 		
 		//Workaround: needed to have a valid and full RefPoint hash in w_tracklist.addEventListener
 		a["aRefpoint"] = e.data.aRefpoint;

@@ -12,16 +12,35 @@ var GOOGLE_MAP_KEY = "";
 var AllowUrlParams	= false;		//[true|false]	to igrnore URL parameters for security reasons
 
 //Please your specific settings
+//Project CARS Dedicated Server
 var DsServerURL 		= "mydomain.com";
 var DsPort				= 9000;
+var DsPath				= "/api/session/status?attributes&members&participants";
+//Project CARS 2 Dedicated Server
 var Ds2ServerURL 		= "mydomain2.com";
 var Ds2Port				= 9000;
+var Ds2Path				= "/api/session/status?attributes&members&participants";
+//Project CARS 1 and 2 Dedicated Server track and vehicle path
+var DsTracksPath		= "/api/list/tracks";
+var DsVehiclesPath		= "/api/list/vehicles";
+//Project CARS CREST
 var CRESTServerURL 		= "localhost";
 var CRESTPort			= 8080;
+var CRESTPath			= "/crest/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true";
+//Project CARS 2 CREST2
 var CREST2ServerURL     = "localhost";
 var CREST2Port          = 8180;
+var CREST2Path			= "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true";
+//Automobilista 2 CREST2
 var CREST2AMS2ServerURL = "localhost";
 var CREST2AMS2Port      = 8180;
+var CREST2AMS2Path		= "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true";
+
+// nodejs Proxy liveview-node
+var use_node			= false;	// if set to true all settings above except Tracks and Vehicles Patch are overwritten with the node settings
+var nodeServerURL		= "locahost";
+var nodePort			= 8080;
+var nodePath			= "";
 
 /*
 var aAPIMODEMAPPING = 

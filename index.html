@@ -434,6 +434,7 @@
 	var cuircitID		=	9999999999;		//aDsData.TrackId;
 	var sCurUrl			= "";  //in each time this var should be the current DS URL independent of the APIMODE
 	var sCurPort		= "";  //in each time this var should be the current DS PORT independent of the APIMODE
+	var sCurPath		= "";  //in each time this var should be the current DS PATH independent of the APIMODE
 
 	var scrollPositionDriverTable = 0;	// used for saving the current scollbar position
 	var scrollPositionTrackTable = 0;	// used for saving the current scollbar position
@@ -2000,7 +2001,8 @@ function initialize_app(){
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 DsServerURL
-                                        ,dsport:                DsPort
+										,dsport:                DsPort
+										,dspath:                DsPath
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -2009,7 +2011,8 @@ function initialize_app(){
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 Ds2ServerURL
-                                        ,dsport:                Ds2Port
+										,dsport:                Ds2Port
+										,dspath:                Ds2Path
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETDS2ANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -2018,7 +2021,8 @@ function initialize_app(){
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CRESTServerURL
-                                        ,dsport:                CRESTPort
+										,dsport:                CRESTPort
+										,dspath:                CRESTPath
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -2027,7 +2031,8 @@ function initialize_app(){
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CREST2ServerURL
-                                        ,dsport:                CREST2Port
+										,dsport:                CREST2Port
+										,dspath:                CREST2Path
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETCREST2DRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -2036,7 +2041,8 @@ function initialize_app(){
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CREST2AMS2ServerURL
-                                        ,dsport:                CREST2AMS2Port
+										,dsport:                CREST2AMS2Port
+										,dspath:                CREST2AMS2Path
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETCREST2AMS2DRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -2068,7 +2074,8 @@ function initialize_app(){
 	                        workerDSDATA.postMessage({
 	                                workerdelay:            	WORKERDELAY_DEMODATA
 	                                ,dsurl:                 	""
-	                                ,dsport:                	0
+									,dsport:                	0
+									,dspath:					""
 	                                ,timeout:               	demo[record_pos]	//timeout parameter used for transerring demo_data array element to the worker
 	                                ,receivemode:   			"GETDEMODATA"
 	                                ,originaldatasource:		demo[record_pos]['globals']['datasource']	//keep original datasource
@@ -2096,7 +2103,8 @@ function initialize_app(){
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 DsServerURL
-                                        ,dsport:                DsPort
+										,dsport:                DsPort
+										,dspath:				DsPath
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
@@ -2111,29 +2119,29 @@ function initialize_app(){
 
 	switch(APIMODE) {
 		case "DS":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTrackname2ID);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, dspath: DsPath, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, DsPath, 2000, "GETDSANDDRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "DS2":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: Ds2ServerURL, dsport: Ds2Port, timeout: XMLHTTPTimeout, receivemode: "GETDS2ANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data(Ds2ServerURL, Ds2Port, 2000, "GETDS2ANDDRIVERDATA", aRefPointTrackname2ID);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: Ds2ServerURL, dsport: Ds2Port, dspath: Ds2Path, timeout: XMLHTTPTimeout, receivemode: "GETDS2ANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(Ds2ServerURL, Ds2Port, Ds2Path, 2000, "GETDS2ANDDRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "CREST":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, 2000, "GETCRESTDRIVERDATA", aRefPointTrackname2ID);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, dspath: CRESTPath, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, CRESTPath, 2000, "GETCRESTDRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "CREST2":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, 2000, "GETCREST2DRIVERDATA", aRefPointTrackname2ID);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, dspath: CREST2Path, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, CREST2Path, 2000, "GETCREST2DRIVERDATA", aRefPointTrackname2ID);
 			break;
                 case "CREST2-AMS2":
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2AMS2ServerURL, dsport: CREST2AMS2Port, timeout: XMLHTTPTimeout, receivemode: "GETCREST2AMS2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data(CREST2AMS2ServerURL, CREST2AMS2Port, 2000, "GETCREST2AMS2DRIVERDATA", aRefPointTrackname2ID);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2AMS2ServerURL, dsport: CREST2AMS2Port, dspath: CREST2AMS2Path, timeout: XMLHTTPTimeout, receivemode: "GETCREST2AMS2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(CREST2AMS2ServerURL, CREST2AMS2Port, CREST2AMS2Path, 2000, "GETCREST2AMS2DRIVERDATA", aRefPointTrackname2ID);
 			break;
 		case "DEMO":
 			//timeout parameter used for transerring demo_data array element to the worker
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'],originalcurgamerunning : demo[record_pos]['globals']['curgamerunning'], arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data("", 0, demo[record_pos], "GETDEMODATA", aRefPointTrackname2ID, {originaldatasource : demo[record_pos]['globals']['datasource'], originalcurgamerunning : demo[record_pos]['globals']['curgamerunning']});
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: "", dsport: 0, dspath: "", timeout: demo[record_pos], receivemode: "GETDEMODATA", originaldatasource: demo[record_pos]['globals']['datasource'],originalcurgamerunning : demo[record_pos]['globals']['curgamerunning'], arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data("", 0, "", demo[record_pos], "GETDEMODATA", aRefPointTrackname2ID, {originaldatasource : demo[record_pos]['globals']['datasource'], originalcurgamerunning : demo[record_pos]['globals']['curgamerunning']});
 			cuircitID = aDrivers.globals.attributes.TrackId;
 			// If the refpoint for the given ID from demo data is unknown, switch to fictional track - Issue #143
 			// This can happen if the demo element in config.js is wrong configured
@@ -2142,8 +2150,8 @@ function initialize_app(){
 			}
 			break;
 		default:
-			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
-			aDrivers = Receive_DS_data(DsServerURL, DsPort, 2000, "GETDSANDDRIVERDATA", aRefPointTrackname2ID);
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsServerURL, dsport: DsPort, dspath: DsPath, timeout: XMLHTTPTimeout, receivemode: "GETDSANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(DsServerURL, DsPort, DsPath, 2000, "GETDSANDDRIVERDATA", aRefPointTrackname2ID);
 	}
 
 	//only used for the first input
@@ -2220,6 +2228,7 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 					workerdelay: 	WORKERDELAY_TRACKLIST
 					,dsurl: 		sCurUrl
 					,dsport: 		sCurPort
+					,dspath:		DsTracksPath
 					,timeout: 		2000
 					,receivemode: 	"GETTRACKLIST" 
 					,aRefpoint:		e.data.aRefpoint});
@@ -2229,7 +2238,7 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 	}, false);
 	//initial call of the tracklist worker. initiate endless loop
 	if(log >= 3){console.log("+++++++++++ GETTRACKLIST Worker Trackliste 1 URL/Port: " + sCurUrl +" / "+ sCurPort );}
-	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTrackname2ID });
+	w_tracklist.postMessage({workerdelay: 100, dsurl: sCurUrl, dsport: sCurPort, dspath: DsTracksPath, timeout: 2000, receivemode: "GETTRACKLIST", aRefpoint: aRefPointTrackname2ID });
 		
 
 	//todo: add subgrid for more drivers information

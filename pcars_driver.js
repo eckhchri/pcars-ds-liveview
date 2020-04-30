@@ -144,7 +144,7 @@ function GetPosColor(){
 function SetExampleData() {
 		// set default parameter for a dummy object
 		this.RefID			=	9234567;
-        this.Name			=	"NO_PARTICIPANT_TestData";
+        this.Name			=	"NO_PARTICIPANT";
         this.IsPlayer		=	0;
         this.GridPosition	=	3;
         this.PosX			=	271;

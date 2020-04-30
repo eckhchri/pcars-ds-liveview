@@ -3,11 +3,11 @@
 
 //Receive_DS_data("[DS URL]]",9000);
 // http://[DS URL]:9000/api/session/status?attributes&members&participants
-function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam){
+function Receive_DS_data (url,port,path,timeout,receivemode, aRefPointTMP, confParam){
 
 	this.url				=	url;
 	this.port				=	port;
-	this.fullurl			=	'http://' +  url + ':' + port;
+	this.fullurl			=	'http://' +  url + ':' + port + path;
 	this.timeout			=	timeout;
 	this.receivemode		=	receivemode;		// GETDRIVERDATE , GETTRACKLIST
 	this.aRefPointName2ID	=	aRefPointTMP;		// mapping off all available Tracknames to track ID	
@@ -89,7 +89,8 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 	}
 
 	// todo: Mapping HASH fuer receivevariant festlegen
-	var aReceiveModes = {
+	// not needed anymore, the paths are now set in the config file
+	/*var aReceiveModes = {
 				"GETDSANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
 				"GETDS2ANDDRIVERDATA"	: "/api/session/status?attributes&members&participants",
 				"GETTRACKLIST"  		: "/api/list/tracks",
@@ -99,7 +100,7 @@ function Receive_DS_data (url,port,timeout,receivemode, aRefPointTMP, confParam)
 				"GETCREST2AMS2DRIVERDATA"	: "/crest2/v1/api?gameStates=true&participants=true&eventInformation=true&timings=true&weather=true",
 				//"GETCREST2AMS2DRIVERDATA"	: "",	// Test with liveview-node
 				"GETDEMODATA"    		: ""
-	};	
+	};	*/
 
 ////////    nested functions     //////////////
 // put into a function because of issue #141
@@ -260,7 +261,8 @@ function returnDataSendError(rMode){
 		// make an  xmlhttp request (synchr)
 		xmlhttp.open(
 				"GET",				
-				fullurl + aReceiveModes[this.receivemode]
+				//fullurl + aReceiveModes[this.receivemode]
+				fullurl
 				// optional parameter for decison: async = true, sync = false
 				, false
 			    );
