@@ -620,49 +620,76 @@ function initialize_app(){
 		
 	});
 
+	// overwrite all API URL and Port settings in case the nodejs Proxy is used
+	if(use_node){
+		DsServerURL		= nodeServerURL;
+		DsPort			= nodePort;
+		DsPath			= nodePath;
+		Ds2ServerURL	= nodeServerURL;
+		Ds2Port			= nodePort;
+		Ds2Path			= nodePath;
+		CRESTServerURL	= nodeServerURL;
+		CRESTPort		= nodePort;
+		CRESTPath		= nodePath;
+		CREST2ServerURL	= nodeServerURL;
+		CREST2Port		= nodePort;
+		CREST2Path		= nodePath;
+		CREST2AMS2ServerURL = nodeServerURL;
+		CREST2AMS2Port	= nodePort;
+		CREST2AMS2Path	= nodePath;
+	}
+
 	if (AllowUrlParams) {
-		// check if url params overwrite the default ds info
-		if (get_url_param('dsurl') && get_url_param('dsport'))	{
-				DsServerURL     =       get_url_param('dsurl');
-				DsPort          =       get_url_param('dsport');
-				APIMODE         =       "DS";
+		if(use_node){
+			// check if url params overwrite the default node settings
+			if (get_url_param('nodeurl') && get_url_param('nodeport'))	{
+					nodeServerURL     =       get_url_param('nodeurl');
+					nodePort          =       get_url_param('nodeport');
+			}
+		}else{
+			// check if url params overwrite the default ds info
+			if (get_url_param('dsurl') && get_url_param('dsport'))	{
+					DsServerURL     =       get_url_param('dsurl');
+					DsPort          =       get_url_param('dsport');
+					APIMODE         =       "DS";
+					//overwrite dropdown menu selection
+					HTMLCTRL.APIMODE_SetSelection( APIMODE );
+			}
+			// check if url params overwrite the default ds2 info
+			if (get_url_param('ds2url') && get_url_param('ds2port'))	{
+					Ds2ServerURL     =       get_url_param('ds2url');
+					Ds2Port          =       get_url_param('ds2port');
+					APIMODE         =       "DS2";
+					//overwrite dropdown menu selection
+					HTMLCTRL.APIMODE_SetSelection( APIMODE );
+			}
+			// check if url params overwrite the default CREST info
+			if (get_url_param('cresturl') && get_url_param('crestport'))	{
+				CRESTServerURL		=	get_url_param('cresturl');
+				CRESTPort			=	get_url_param('crestport');
+				APIMODE				=	"CREST";
+				DisplayDuration		=	DisplayDurationCREST;
 				//overwrite dropdown menu selection
 				HTMLCTRL.APIMODE_SetSelection( APIMODE );
-		}
-		// check if url params overwrite the default ds2 info
-		if (get_url_param('ds2url') && get_url_param('ds2port'))	{
-				Ds2ServerURL     =       get_url_param('ds2url');
-				Ds2Port          =       get_url_param('ds2port');
-				APIMODE         =       "DS2";
+			}
+			// check if url params overwrite the default CREST2 info
+			if (get_url_param('crest2url') && get_url_param('crest2port'))	{
+				CREST2ServerURL		=	get_url_param('crest2url');
+				CREST2Port			=	get_url_param('crest2port');
+				APIMODE				=	"CREST2";
+				DisplayDuration		=	DisplayDurationCREST;
 				//overwrite dropdown menu selection
 				HTMLCTRL.APIMODE_SetSelection( APIMODE );
-		}
-		// check if url params overwrite the default CREST info
-		if (get_url_param('cresturl') && get_url_param('crestport'))	{
-			CRESTServerURL		=	get_url_param('cresturl');
-			CRESTPort			=	get_url_param('crestport');
-			APIMODE				=	"CREST";
-			DisplayDuration		=	DisplayDurationCREST;
-			//overwrite dropdown menu selection
-			HTMLCTRL.APIMODE_SetSelection( APIMODE );
-		}
-		// check if url params overwrite the default CREST2 info
-		if (get_url_param('crest2url') && get_url_param('crest2port'))	{
-			CREST2ServerURL		=	get_url_param('crest2url');
-			CREST2Port			=	get_url_param('crest2port');
-			APIMODE				=	"CREST2";
-			DisplayDuration		=	DisplayDurationCREST;
-			//overwrite dropdown menu selection
-			HTMLCTRL.APIMODE_SetSelection( APIMODE );
-		}
-		// check if url params overwrite the default CREST2-AMS2 info
-		if (get_url_param('crest2ams2url') && get_url_param('crest2ams2port'))	{
-			CREST2AMS2ServerURL		=	get_url_param('crest2url');
-			CREST2AMS2Port			=	get_url_param('crest2port');
-			APIMODE				=	"CREST2-AMS2";
-			DisplayDuration		=	DisplayDurationCREST;
-			//overwrite dropdown menu selection
-			HTMLCTRL.APIMODE_SetSelection( APIMODE );
+			}
+			// check if url params overwrite the default CREST2-AMS2 info
+			if (get_url_param('crest2ams2url') && get_url_param('crest2ams2port'))	{
+				CREST2AMS2ServerURL		=	get_url_param('crest2url');
+				CREST2AMS2Port			=	get_url_param('crest2port');
+				APIMODE				=	"CREST2-AMS2";
+				DisplayDuration		=	DisplayDurationCREST;
+				//overwrite dropdown menu selection
+				HTMLCTRL.APIMODE_SetSelection( APIMODE );
+			}
 		}
 		// check if url params overwrite the default autoExport option
 		if (get_url_param('autoexport')){
@@ -1337,7 +1364,8 @@ function initialize_app(){
 		}
 
 		// write in HTML page for DS status		 
-		ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
+		//ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
+		ChangeHtmlContentByID( '#pcars-dsurl' 		, "Server URL:  "	 	+ sCurUrl + " : " +  sCurPort );
 		ChangeHtmlContentByID( '#pcars-dsstate' 	, "DS State: " 		+ e.data.globals.state );
 		ChangeHtmlContentByID( '#pcars-dsjoinable' 	, "DS Joinable: " 	+ e.data.globals.joinable );		
 		ChangeHtmlContentByID( '#pcars-dslobbyid' 	, "DS Lobby ID:	" 	+ e.data.globals.lobbyid );		
