@@ -1365,7 +1365,11 @@ function initialize_app(){
 
 		// write in HTML page for DS status		 
 		//ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
-		ChangeHtmlContentByID( '#pcars-dsurl' 		, "Server URL:  "	 	+ sCurUrl + " : " +  sCurPort );
+		if(APIMODE == "DEMO"){
+			ChangeHtmlContentByID( '#pcars-dsurl' 		, "DEMO Source:  "	 	+ e.data.globals.datasource );
+		}else{
+			ChangeHtmlContentByID( '#pcars-dsurl' 		, "Server URL:  "	 	+ sCurUrl + ":" +  sCurPort );
+		}
 		ChangeHtmlContentByID( '#pcars-dsstate' 	, "DS State: " 		+ e.data.globals.state );
 		ChangeHtmlContentByID( '#pcars-dsjoinable' 	, "DS Joinable: " 	+ e.data.globals.joinable );		
 		ChangeHtmlContentByID( '#pcars-dslobbyid' 	, "DS Lobby ID:	" 	+ e.data.globals.lobbyid );		
@@ -1392,7 +1396,11 @@ function initialize_app(){
 			if (SessionState == "Race" || SessionState == 2 || SessionState == 3 || SessionState == 4){	//SessionState 2 and 3 is for CREST mode, enum for GAME_INGAME_PLAYING and GAME_INGAME_PAUSED
 				if(SessionStage != "Race1" && SessionStage != "Race2"){
 					document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + resttime.slice(0,-4);     //slice for deleting the milliseconds part of the time
-					ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:   " + e.data.globals.attributes.SessionTimeDuration/60 + " min");
+					if (APIMODE == "DS" || APIMODE == "DS2"){
+						ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:   " + e.data.globals.attributes.SessionTimeDuration/60 + " min");
+					}else{
+						ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:    -");
+					}
 				}else{
 					if (e.data.driverlist[0] ){
 						//In CREST modes the RaceLength is not provided and set to 0. In this case it is not shown. <- check again, found value mLapsInEvent
@@ -3639,13 +3647,13 @@ function initW2UI(){
                 { type: 'radio',  id: 'w2ui_replay',  		group: '1', caption: 'Replay', icon: 'w2ui-icon-plus' },
                 { type: 'radio',  id: 'w2ui_statistics',  	group: '1', caption: 'Statistics', icon: 'w2ui-icon-plus' },                
 				{ type: 'break',  id: 'break1' },
-                { type: 'check',  id: 'w2ui_drivertable', 	caption: 'drivers', icon: 'w2ui-icon-check', checked: SHOWDRIVERDATA },
-                { type: 'check',  id: 'w2ui_tracktable', 	caption: 'tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
-                { type: 'check',  id: 'w2ui_cartable', 		caption: 'cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
-                { type: 'check',  id: 'w2ui_dsdata', 		caption: 'DS Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
+                { type: 'check',  id: 'w2ui_drivertable', 	caption: 'Drivers', icon: 'w2ui-icon-check', checked: SHOWDRIVERDATA },
+                { type: 'check',  id: 'w2ui_tracktable', 	caption: 'Tracks', icon: 'w2ui-icon-check', checked: SHOWTRACKLIST },
+                { type: 'check',  id: 'w2ui_cartable', 		caption: 'Cars', icon: 'w2ui-icon-check', checked: SHOWCARLIST },
+                { type: 'check',  id: 'w2ui_dsdata', 		caption: 'Data', icon: 'w2ui-icon-check', checked: SHOWDSDATA },
 				{ type: 'check',  id: 'w2ui_recstatistics', caption: 'Rec/Save/Load', icon: 'w2ui-icon-check', checked: SHOWRECSTATISTIC },
                 { type: 'break',  id: 'break2' },
-                { type: 'check',  id: 'w2ui_dssettings', 	caption: 'DS Set.', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },
+                { type: 'check',  id: 'w2ui_dssettings', 	caption: 'Settings', icon: 'w2ui-icon-pencil', checked: SHOWSETTINGS },
                 { type: 'break', id: 'break3' },
                 { type: 'html',  id: 'common_stats',
                     html: '<div id="pcars-apimode" style="padding: 3px 10px;">' +
