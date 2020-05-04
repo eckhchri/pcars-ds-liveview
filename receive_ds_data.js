@@ -800,7 +800,7 @@ function returnDataSendError(rMode){
 					//After conversation you still have 1 place after the decimal point (0.7 milliseconds for example) and the drivertable cuts it and then 0.7 milliseconds = 0, but should be 1.
 					//The round functions fixes the problem. On the other hand rounding is a problem for the race gap calculation, because you sum up all lap times. With every added lap time to the sum, the chance of an error inreases (example: 0.49+0.49=0.98 but with rounded values 0+0=0)
 					//Moved the Math.round calls to the function ConvertLaptimeInReadbaleFormat in the index.html - Issue #137
-					FastestLapTime = myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000;
+					FastestLapTime = Math.round(myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000);	// Issue #157
 					LastLapTime = myArr.participants.mParticipantInfo[i].mLastLapTimes * 1000;
 					S1Time = myArr.participants.mParticipantInfo[i].mCurrentSector1Times * 1000;
 					S2Time = myArr.participants.mParticipantInfo[i].mCurrentSector2Times * 1000;
@@ -920,7 +920,7 @@ function returnDataSendError(rMode){
 					//After conversation you still have 1 place after the decimal point (0.7 milliseconds for example) and the drivertable cuts it and then 0.7 milliseconds = 0, but should be 1.
 					//The round functions fixes the problem. On the other hand rounding is a problem for the race gap calculation, because you sum up all lap times. With every added lap time to the sum, the chance of an error inreases (example: 0.49+0.49=0.98 but with rounded values 0+0=0)
 					//Moved the Math.round calls to the function ConvertLaptimeInReadbaleFormat in the index.html - Issue #137
-					FastestLapTime = myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000;
+					FastestLapTime = Math.round(myArr.participants.mParticipantInfo[i].mFastestLapTimes * 1000);	// Issue #157
 					LastLapTime = myArr.participants.mParticipantInfo[i].mLastLapTimes * 1000;
 					S1Time = myArr.participants.mParticipantInfo[i].mCurrentSector1Times * 1000;
 					S2Time = myArr.participants.mParticipantInfo[i].mCurrentSector2Times * 1000;

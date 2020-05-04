@@ -2985,6 +2985,7 @@ function refreshDriverList(a, ForceRefresh){
 			Gaps = CalcGaps(a[i].FastestLapTime,a[0].FastestLapTime,a[i-1].FastestLapTime);
 		}
 		//if(log >= 3){console.log("Driver: " , a[i].Name , " , gap2ahead: ", Gaps.gap2ahead , " , gap2first: ", Gaps.gap2first);}
+		//if(log >= 3){console.log("Issue #157 - Driver: " , a[i].Name , " , gap2first: ", Gaps.gap2first, " laptime: ", a[i].FastestLapTime, " laptimefirst: ",a[0].FastestLapTime);}
                 
 		//Number of pits is only available during race, in all other sessions it is undefined and tmpPits stays "-"
 		if(a[i].NumPits != undefined){
