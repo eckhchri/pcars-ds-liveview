@@ -38,7 +38,7 @@ var CREST2AMS2Path		= "/crest2/v1/api?gameStates=true&participants=true&eventInf
 
 // nodejs Proxy liveview-node
 var use_node			= false;	// if set to true all settings above except Tracks and Vehicles Paths are overwritten with the node settings
-var nodeServerURL		= "locahost";
+var nodeServerURL		= "nodeServer";
 var nodePort			= 8080;
 var nodePath			= "";
 
