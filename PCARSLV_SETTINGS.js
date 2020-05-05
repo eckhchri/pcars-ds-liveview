@@ -170,7 +170,7 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 				sCurPath = CREST2Path;
 				break;
 
-			case "CREST2AMS2":
+			case "CREST2-AMS2":
 				sCurUrl = CREST2AMS2ServerURL;
 				sCurPort = CREST2AMS2Port;
 				sCurPath = CREST2AMS2Path;

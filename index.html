@@ -1563,7 +1563,8 @@ function initialize_app(){
 					// pit stop counting logic and Race gaps
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
 						// Build a Driver Hash with Driver Name and Vehicle ID for identifying a driver uniquely, in multiplayer it is possible that a Driver Name occurs twice, a Human Player and an AI
-						var curDriverHash = e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId;
+						//var curDriverHash = e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId;
+						var curDriverHash = e.data.driverlist[i].GetUniqueId();
 						//Fill PosDriver array
 		                                aPosDriver[e.data.driverlist[i].RacePosition] = curDriverHash;
 
