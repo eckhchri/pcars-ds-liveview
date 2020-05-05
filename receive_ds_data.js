@@ -846,7 +846,7 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mOrientations,		//Orientation - Array of 3 Euler Angles
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
-							0,								//VehicleID - NA
+							i,								//VehicleID - NA, use API driver array index instead
 							0,								//LiveryId - NA
 							undefined,						//numPits must not be filled
 							undefined,						//Gap2Ahead
@@ -967,7 +967,7 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mSpeeds,			//Speed
 							myArr.participants.mParticipantInfo[i].mCurrentLap,		//CurrentLap
 							//myArr.participants.mParticipantInfo[i].mCarNames,		//VehicleID is not available, use the VehicleName instead
-							0,								//VehicleID - NA
+							i,								//VehicleID - NA, use API driver array index instead
 							0,								//LiveryId - NA
 							undefined,							//numPits must not be filled
 							undefined,						//Gap2Ahead
