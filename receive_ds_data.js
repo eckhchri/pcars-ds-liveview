@@ -549,7 +549,7 @@ function returnDataSendError(rMode){
 	
 				}else{
 
-					strConsoleLog = "Debugging Issue #131 - Index/Driver: "; // Debugging Issue #131
+					strConsoleLog = "Debugging Issue #131 - Index/Driver: \n"; // Debugging Issue #131
 
 					for (var i = 0;i<myArr.response.participants.length;i++){
 						
@@ -587,10 +587,10 @@ function returnDataSendError(rMode){
 														undefined,	//VehicleClassName - NA
 														i			//oIdx API index
 		                                         	);
-							strConsoleLog = strConsoleLog + i + "/" + myArr.response.participants[i].attributes.Name + ", "; // Debugging Issue #131
+							strConsoleLog = strConsoleLog + i + "/" + myArr.response.participants[i].attributes.Name + "\n"; // Debugging Issue #131
 					}
 
-					if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
+					//if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
 	
 					// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
 					for (var i = 0;i<aDrivers.driverlist.length;i++){
@@ -788,7 +788,7 @@ function returnDataSendError(rMode){
 
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
 
-				strConsoleLog = "Debugging Issue #131 - Index/Driver: "; // Debugging Issue #131
+				strConsoleLog = "Debugging Issue #131 - Index/Driver: \n"; // Debugging Issue #131
 
 				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
 					// read data of all participants and put it in an array of PCARSdriver objects
@@ -816,8 +816,8 @@ function returnDataSendError(rMode){
 					}
 
 					//The pit counter in DS modes is triggered by the RaceState EnteringPits, which is in CREST2 mode not directly available. Shared Memory of pcars2 provides the additional value mPitModes.
-					//If the Pit Mode is "EnteringPits" or "InPits" or "ExitingPits"  writing the PitMode into the RaceState, which then match with the RaceState of the DS modes
-					if (myArr.participants.mParticipantInfo[i].mPitModes > 0 && myArr.participants.mParticipantInfo[i].mPitModes < 4){
+					//If the Pit Mode is "EnteringPits" or "InPits" or "ExitingPits" and mRaceStates not "Finished" (to prevent pit counting if the driver enters the pit after the race is finished) writing the PitMode into the RaceState, which then match with the RaceState of the DS modes
+					if (myArr.participants.mParticipantInfo[i].mPitModes > 0 && myArr.participants.mParticipantInfo[i].mPitModes < 4 && myArr.participants.mParticipantInfo[i].mRaceStates != 3){
 						RaceState = this.aMappingPitModeCREST[ myArr.participants.mParticipantInfo[i].mPitModes ];
 					}else{
 						RaceState = this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ];
@@ -855,10 +855,10 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mCarClassNames,	//VehicleClassName
 							i														//oIdx API Index
 						);
-					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + ", "; // Debugging Issue #131
+					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + "\n"; // Debugging Issue #131
 				}
 
-				if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
+				//if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
 	
 				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
 				for (var i = 0;i<aDrivers.driverlist.length;i++){
@@ -908,7 +908,7 @@ function returnDataSendError(rMode){
 
 				if(log >= 3){console.log("+-+-+-+-+-+-+-+-+-CREST Globals definition", aDrivers);}
 
-				strConsoleLog = "Debugging Issue #131 - Index/Driver: "; // Debugging Issue #131
+				strConsoleLog = "Debugging Issue #131 - Index/Driver: \n"; // Debugging Issue #131
 
 				for (var i = 0;i<myArr.participants.mNumParticipants;i++) {
 					// read data of all participants and put it in an array of PCARSdriver objects
@@ -936,8 +936,8 @@ function returnDataSendError(rMode){
 					}
 
 					//The pit counter in DS modes is triggered by the RaceState EnteringPits, which is in CREST2 mode not directly available. Shared Memory of pcars2 provides the additional value mPitModes.
-					//If the Pit Mode is "EnteringPits" or "InPits" or "ExitingPits"  writing the PitMode into the RaceState, which then match with the RaceState of the DS modes
-					if (myArr.participants.mParticipantInfo[i].mPitModes > 0 && myArr.participants.mParticipantInfo[i].mPitModes < 4){
+					//If the Pit Mode is "EnteringPits" or "InPits" or "ExitingPits" and mRaceStates not "Finished" (to prevent pit counting if the driver enters the pit after the race is finished) writing the PitMode into the RaceState, which then match with the RaceState of the DS modes
+					if (myArr.participants.mParticipantInfo[i].mPitModes > 0 && myArr.participants.mParticipantInfo[i].mPitModes < 4 && myArr.participants.mParticipantInfo[i].mRaceStates != 3){
 						RaceState = this.aMappingPitModeCREST[ myArr.participants.mParticipantInfo[i].mPitModes ];
 					}else{
 						RaceState = this.aMappingRaceStateCREST[ myArr.participants.mParticipantInfo[i].mRaceStates ];
@@ -976,10 +976,10 @@ function returnDataSendError(rMode){
 							myArr.participants.mParticipantInfo[i].mCarClassNames,		//VehicleClassName 
 							i															//oIdx API index
 						);
-					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + ", "; // Debugging Issue #131
+					strConsoleLog = strConsoleLog + i + "/" + myArr.participants.mParticipantInfo[i].mName + "\n"; // Debugging Issue #131
 				}
 
-				if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
+				//if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
 
 				// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
 				for (var i = 0;i<aDrivers.driverlist.length;i++){
