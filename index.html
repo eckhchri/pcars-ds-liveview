@@ -1564,7 +1564,12 @@ function initialize_app(){
 					if(SessionStage == "Race1" || SessionStage == "Race2"){
 						// Build a Driver Hash with Driver Name and Vehicle ID for identifying a driver uniquely, in multiplayer it is possible that a Driver Name occurs twice, a Human Player and an AI
 						//var curDriverHash = e.data.driverlist[i].Name+e.data.driverlist[i].VehicleId;
-						var curDriverHash = e.data.driverlist[i].GetUniqueId();
+						var curDriverHash = "";
+						// In multiplayer it is possible that a driver left the session during race. GetUniqueId() uses drivername and API driver array index to build a unique hash which have to be unique the complete race long. But if a driver left a session I don't know what happens with this array index, maybe the other drivers shifted to another array index. 
+						// A multiplayer test with one human player ist not possible, we need at least 2 human players. If a test shows that all drivers stay on the index, we can use GetUniqueId()
+						// Issue #159
+						curDriverHash = e.data.driverlist[i].Name+e.data.driverlist[i].VehicleName+e.data.driverlist[i].LiveryId;
+
 						//Fill PosDriver array
 		                                aPosDriver[e.data.driverlist[i].RacePosition] = curDriverHash;
 
