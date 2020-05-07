@@ -706,6 +706,8 @@ function initialize_app(){
 					APIMODE = $( this ).text();
 					// change common vars to current API Mode
 					PLV_S.setCurrentSettings(APIMODE);
+					// in case of a marked driver table row in pcars2 APIMODEs and a visible Livery Image the image visibility is changed to hidden - Issue #161
+					$("#LiveryImageWrapperDriverTable").hide();
 					if(log >= 4){console.log('------- Switch API Mode to: ', APIMODE );}										
 			});			
 	}); // end #APIMODE change event
