@@ -1546,7 +1546,9 @@ function initialize_app(){
 				e.data.driverlist[i].setVehicleClassNameByMapping( PCARSVehicleList.getIdToClassMapping( CurGameRunning ), PCARSVehicleList.getNameToClassMapping( CurGameRunning ) );
 					
 				//collect all vehicle classes of the current race
-				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId, CurGameRunning  ) ] = 1; 				
+				//aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleId, CurGameRunning  ) ] = 1;
+				//VehicleName is used now instead of the VehicleId before, because VehicleId is always 0 in CREST modes -> Issue #148
+				aCurrentVehicleClasses[ PCARSVehicleList.getClassNormalizedByString( e.data.driverlist[i].VehicleName, CurGameRunning  ) ] = 1;
 				aCurrentVehicleNames[ e.data.driverlist[i].getVehicleNameNormalized() ] = 1;
 								
 				//calculate "in class race position"
