@@ -2377,6 +2377,17 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 
 		loadComplete: function(){
 			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
+			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
+			var DriverKeysAfterSearch = [];
+			var tmpDriver = new PCARSdriver();
+			FilteredRowData.forEach(function(row) {
+				DriverKeysAfterSearch.push(tmpDriver.GetUniqueId(row.oidx,row.drivername));
+			});
+
+			//add/remove assignment of CSS class
+			CSSClsChg.HideSpecificDrivers( DriverKeysAfterSearch );
+			//Workaround: every filter event a new OPACITY css styles has to be set to change driver properties
+			//CSSClsChg.setDriverLabelStyle('update_opacity_drivers', {opacity_driver: $( "#filtered_driver_opacity" ).val()} );
 		},
 		beforeSelectRow: function(rowid){
 			//this event is triggered only once shortly before the row is selected
