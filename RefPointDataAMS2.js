@@ -384,6 +384,23 @@ class RefPointDataAMS2 extends RefPointData {
 		//Kansai Classic
 		this.refPoints[130] = this.CopyObjectWithModifications(this.refPoints[127], {"Name": "Kansai Classic","AltNames":"Kansai Kansai_Classic"});
 
+		//Kyalami 2019
+		this.refPoints[171] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	-25.997815
+			,"refLong":	28.068152
+			,"rotation":	0.03
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.992
+			,"cor_PosY_mul":0.987
+			,"Name":	"Kyalami 2019"
+			,"AltNames":	"Kyalami Kyalami_GP_2019"
+			,"Zoom":	16
+			,"MapInitLat":	-25.996806
+			,"MapInitLong":	28.067484
+			,"Comment":	""
+		});
 		//Kyalami Historic 1976 - the track layout difference between the historic and the present track is too big and areas of the old track are built up with houses - set it to fictional, but added coordinates where it was in the past
 		this.refPoints[131] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{

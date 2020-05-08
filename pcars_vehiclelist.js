@@ -2360,6 +2360,16 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1065,
 		"name" : "Opala Stock Cars 1986",
 		"class" : "Opala86"
+	},
+	{
+		"id" : 1066,
+		"name" : "Sigma P1",
+		"class" : "P2"
+	},
+	{
+		"id" : 1067,
+		"name" : "Pas Classic A",
+		"class" : "CopaClassicFL"
 	}
 
 ];
