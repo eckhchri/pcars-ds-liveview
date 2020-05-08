@@ -184,6 +184,7 @@
 	</div>
 	<div id="DriverDataArea" class="pcarswindowgrp2 focus">
 		<table id="DriverDataTable"></table>
+		<div id="pager_DriverDataTable"></div>
 	</div>
 	
 	<div id="DSRecStatistics" class="focus">
@@ -2297,6 +2298,10 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 //		scrollerbar:true,
 		caption: "List of available drivers",
 		ignoreCase:true,
+		pager: "#pager_DriverDataTable",
+		pgbuttons: false,     // disable page control like next, back button
+		pgtext: null,         // disable pager text like 'Page 0 of 10'
+		//viewrecords: true,
 		colNames:['RefID','Pos', 'InClassPos', 'oIndex', 'Driver Name', 'State', 'Sector', 'Lap', 'Vehicle', 'Team/#', 'Vehicle Class', 'last lap', 'fastest lap','diff','gap','Pits','Hu/AI','PosX', 'PosY', 'PosZ', 'CSSClasses' ],
 		colModel:[
                         {name:'refid',hidden: true, index:'invdate', width:40, sorttype:"int"},
@@ -2378,11 +2383,18 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 		loadComplete: function(){
 			jQuery(this).closest(".ui-jqgrid-bdiv").scrollTop(scrollPositionDriverTable);
 			var FilteredRowData = jQuery("#DriverDataTable").jqGrid('getRowData');
+			var AllRowData 				= jQuery("#DriverDataTable").jqGrid('getGridParam','data');
 			var DriverKeysAfterSearch = [];
 			var tmpDriver = new PCARSdriver();
 			FilteredRowData.forEach(function(row) {
 				DriverKeysAfterSearch.push(tmpDriver.GetUniqueId(row.oidx,row.drivername));
 			});
+
+			if(DriverKeysAfterSearch.length != AllRowData.length){
+				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed' 		, "# of records: " + DriverKeysAfterSearch.length + " / " + AllRowData.length);
+			}else{
+				HTMLCTRL.ChangeHtmlContentByID( '#pcars-driverlist-records-displayed'           , "");
+			}
 
 			//add/remove assignment of CSS class
 			CSSClsChg.HideSpecificDrivers( DriverKeysAfterSearch );
@@ -2461,6 +2473,18 @@ console.log("A406959 aSensorData[i]" ,aSensorData[i]  );
 		}
 	});
 	
+	//settings for the AdvanceD Search in the driver table pager at the bottom of the table
+	$("#DriverDataTable").jqGrid('navGrid', '#pager_DriverDataTable', {
+		edit: false,
+		add: false,
+		del: false,
+		refresh: false
+	}, {}, {}, {}, {
+		multipleSearch: true,
+		multipleGroup: false/*,
+		groupOps: [{ op: "OR", text: "any" }]*/
+	});
+
 	// register new event to #DriverDataTable table
 	$("#DriverDataTable").on('deselectRow', function(e, table, rowid){
 		//this event is triggered, if you have a selected row and select another row. In this case this trigger is for the deselection of the old selected row
