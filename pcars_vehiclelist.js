@@ -2283,12 +2283,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1049,
-		"name" : "MetalMoro MRX Honda Turbo",
+		"name" : "MetalMoro MRX Duratec Turbo P2",
 		"class" : "P2"
 	},
 	{
 		"id" : 1050,
-		"name" : "MetalMoro MRX Honda",
+		"name" : "MetalMoro MRX Honda P3",
 		"class" : "P3"
 	},
 	{
@@ -2298,7 +2298,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1052,
-		"name" : "MetalMoro MRX Duratec",
+		"name" : "MetalMoro MRX Duratec Turbo P3",
 		"class" : "P3"
 	},
 	{
@@ -2338,7 +2338,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1061,
-		"name" : "MetalMoro MRX Duratec",
+		"name" : "MetalMoro MRX Duratec P4",
 		"class" : "P4"
 	},
 	{
