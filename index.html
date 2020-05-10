@@ -374,8 +374,10 @@
 	var aDrivers 			=	new Array();		// array for PCARSdriver objects
 	var aSensorData 		=	new Array();		// array of Hashes, each hash includes parameters of a driver
 	var XMLHTTPTimeout		=	2000;
-	var StopTransitionDelay =	"true";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
+	var StopTransitionDelay =	"false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
+	var dsdata_workerrun_counter = 0;	// worker run counter for reactivating smooth marker transition, for example after dragging the map is finished this counter is activated and if it reached a limit the smooth transition is activated again
+	var count_dsdata_workerruns = false;	// set to true after dragging the map is finished for example and then the worker run counter is increased every worker run
 	var global_i			= 0;
 	
 	var CurGameRunning		=	demo[0]['globals']['curgamerunning'];   // PCARS1|PCARS2|AMS2 show the name of the current game is running and should be the same string used PCARSVEHICLELIST.aVehicleInfoExt !
@@ -1338,6 +1340,18 @@ function initialize_app(){
 		
 		//if(log >= 3){console.log('+++++++++++ GETDSANDDRIVERDATA Worker returned: ', e);}
 
+		// count ds data worker runs for reactivating smooth marker transition
+		if(count_dsdata_workerruns == true){
+			dsdata_workerrun_counter++;
+		}
+
+		// reactivate smooth transition - currently the limit is greater than 0, in this case the code could be directly in the if statement above, but maybe the limit will be increased in case of problems
+		if(dsdata_workerrun_counter > 0){
+			count_dsdata_workerruns = false;
+			dsdata_workerrun_counter = 0;
+			StopTransitionDelay = "false";
+		}
+
 		SessionState 	= e.data.globals.attributes.SessionState;
 		SessionStage 	= e.data.globals.attributes.SessionStage;
 		CurGameRunning 	= e.data.globals.curgamerunning;
@@ -1512,9 +1526,10 @@ function initialize_app(){
 		
 		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
 			StopTransitionDelay = "true";
-			StopTransitionDelay_StartTime = Date.now();
+			//StopTransitionDelay_StartTime = Date.now();
+			count_dsdata_workerruns = true;
 //			sensorLayer.interruptTransition();
-			oPcarsMapCtrl.interruptTransition(); //TODO_SENSORLAYER
+			//oPcarsMapCtrl.interruptTransition(); //TODO_SENSORLAYER
 
 		}
 		
@@ -2013,10 +2028,11 @@ function initialize_app(){
                         UnHide_Timer = UnHide_Timer + sensorLayer_UpdateDelta;
                         if (UnHide_Timer > 2000){
                         	StopTransitionDelay = "true";
+							count_dsdata_workerruns = true;
 //                                sensorLayer.interruptTransition(); //TODO_SENSORLAYER
 //                                sensorLayer.update(aSensorData); //TODO_SENSORLAYER
-                                oPcarsMapCtrl.interruptTransition();
-                                oPcarsMapCtrl.updateMarker(aSensorData);
+                                //oPcarsMapCtrl.interruptTransition();
+                                //oPcarsMapCtrl.updateMarker(aSensorData);
                                 
                                 CSSClsChg.UnHideAllSvg();
                                 HTMLCTRL.DRIVERCOLOR_SetActiveElement( CSSDEFAULTSET );		// es workaround for the Problem with the UnHideAllSvg() call
@@ -2039,7 +2055,7 @@ function initialize_app(){
 									participants:	e.data.driverlist
 						});								                      
 		}
-		
+
 		//call worker again for next itteration -> currently endless loop
 		switch(APIMODE) {
                         case "DS": //DS receive mode
@@ -2140,7 +2156,8 @@ function initialize_app(){
 	                        		}
 	                        
 	                                StopTransitionDelay = "true";
-	                                StopTransitionDelay_StartTime = Date.now();
+	                                //StopTransitionDelay_StartTime = Date.now();
+									count_dsdata_workerruns = true;
 	                        }
 	                        break;
                         default:

@@ -68,18 +68,18 @@ class pcars_map_google extends pcars_map {
 		
 		// add map Listener
 		var tmp = this.sensorLayer;
-		
+
 		// add listener to cover zoom side effects
 		this.oMapLocal.addListener('zoom_changed', function() {
 			//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
 			StopTransitionDelay = "true";
-			StopTransitionDelay_StartTime = Date.now();
-							
+			//StopTransitionDelay_StartTime = Date.now();
+
 			// interrupt and update markers		
 			oPcarsMapCtrl.interruptTransition();
 			//oPcarsMapCtrl.updateMarker(aSensorDataLOCAL);  // not needed anymore, because the draw funktion is automatically triggered and in the draw function the update function is executed
 			zoom_level = oPcarsMapCtrl.oCurMapObj.oMapLocal.getZoom(); //get new changed zoom level					
-					
+
 			// Polylines on zoom change with changing lineWeight
 			PolyLineMid.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeightMid});
 			PolyLineOuter.setOptions({strokeWeight: zoom_settings[zoom_level].lineWeight});
@@ -88,14 +88,33 @@ class pcars_map_google extends pcars_map {
 			
 	  	});
 
+		this.oMapLocal.addListener('dragstart', function() {
+			//StopTransitionDelay = "true";
+		});
+
+		this.oMapLocal.addListener('bounds_changed', function() {
+			StopTransitionDelay = "true";
+		});
+
+		this.oMapLocal.addListener('idle', function() {
+			//oPcarsMapCtrl.interruptTransition();
+			//StopTransitionDelay = "true";
+			count_dsdata_workerruns = true;
+
+			StopTransitionDelay = "true";
+			//StopTransitionDelay_StartTime = Date.now();
+			// interrupt and update markers
+			//oPcarsMapCtrl.interruptTransition();
+		});
+
 		// add listener to cover drag effects
                 this.oMapLocal.addListener('dragend', function() {
                         //if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
                         StopTransitionDelay = "true";
-                        StopTransitionDelay_StartTime = Date.now();
+                        //StopTransitionDelay_StartTime = Date.now();
 
                         // interrupt and update markers
-                        oPcarsMapCtrl.interruptTransition();
+                        //oPcarsMapCtrl.interruptTransition();
 
                 });
 			

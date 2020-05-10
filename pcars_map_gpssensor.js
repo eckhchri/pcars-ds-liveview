@@ -78,10 +78,13 @@ function GPSSensor(initData) {
 					_data = data.slice();
 					   
 					//Detect time between StopTransitionDelay set to "true" and now
-					var CurrentTime = Date.now();
-					var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
-					
-					if( StopTransitionDelay == "true" ){
+					// disabled because of a complete login overhaul - Issue #164
+					//var CurrentTime = Date.now();
+					//var StopTransitionDelay_TimeRun = CurrentTime - StopTransitionDelay_StartTime;
+
+					if(log >= 3){console.log("StopTransitionDelay: ",StopTransitionDelay, " / dsdata_workerrun_counter: ", dsdata_workerrun_counter);}
+
+					if( StopTransitionDelay == "true"){
 													
 							marker = _div.selectAll(".stations, svg")
 								.data(_data, function (d) { return d.Key; })
@@ -89,10 +92,10 @@ function GPSSensor(initData) {
 								.enter().append("svg:svg")
 								.each(transform)
 								.attr("class", function (d){ return d.CSSTextClasses });
-			
+
 							//reset to default after zoom event finished. 
 							//A zoom change in Google Maps takes some time. If the worker runs have a short interval you need a minimum time where the transformWithEase have to be interrupted
-							if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}
+							//if (StopTransitionDelay_TimeRun > StopTransitionDelay_minTimeRun) {StopTransitionDelay = "false";}	// disabled because of a complete login overhaul - Issue #164
 					
 					}else{
 									
@@ -102,11 +105,11 @@ function GPSSensor(initData) {
 								.enter().append("svg:svg")
 								.each(transform)
 								.attr("class", function (d){ return d.CSSTextClasses });
-			
+
 							//reset to default after zoom event finished
 							//StopTransitionDelay = "false";
 					}
-				
+
 					// Add a circle.
 					marker.append("svg:circle")
 						.attr("r", 4.5)
