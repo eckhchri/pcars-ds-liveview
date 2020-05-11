@@ -377,6 +377,9 @@
 	var StopTransitionDelay =	"false";	// if set to true, DisplayDuration set to 0 ( cases: zoom, mapchange )
 	var StopTransitionDelay_StartTime =	Date.now();	//timestamp for StopTransitionDelay is set to "true"
 	var dsdata_workerrun_counter = 0;	// worker run counter for reactivating smooth marker transition, for example after dragging the map is finished this counter is activated and if it reached a limit the smooth transition is activated again
+	var dsdata_workerrun_counter_limit_default = 1;	//if this limit is reached the smooth transition is reactivated, default for all cases except zoom at the moment
+	var dsdata_workerrun_counter_limit_other = 2;	//if this limit is reached the smooth transition is reactivated, on a map zoom event or the playback reaches the end and begins again or SessionStage change
+	var dsdata_workerrun_counter_limit_cur = dsdata_workerrun_counter_limit_default;	//current limit for  smooth transition reactivation
 	var count_dsdata_workerruns = false;	// set to true after dragging the map is finished for example and then the worker run counter is increased every worker run
 	var global_i			= 0;
 	
@@ -1345,11 +1348,15 @@ function initialize_app(){
 			dsdata_workerrun_counter++;
 		}
 
-		// reactivate smooth transition - currently the limit is greater than 0, in this case the code could be directly in the if statement above, but maybe the limit will be increased in case of problems
-		if(dsdata_workerrun_counter > 0){
+		// reactivate smooth transition - currently the limit is 1, in this case the code could be directly in the if statement above, but for a zoom event the limit is 2 and we need an extra if statement
+		if(dsdata_workerrun_counter >= dsdata_workerrun_counter_limit_cur){
 			count_dsdata_workerruns = false;
 			dsdata_workerrun_counter = 0;
 			StopTransitionDelay = "false";
+			// a zoom event changes the worker run counter limit to 2, return to defau1t if the zoom counter limit is reached
+			if(dsdata_workerrun_counter_limit_cur == dsdata_workerrun_counter_limit_other){
+				dsdata_workerrun_counter_limit_cur = dsdata_workerrun_counter_limit_default;
+			}
 		}
 
 		SessionState 	= e.data.globals.attributes.SessionState;
@@ -1525,11 +1532,11 @@ function initialize_app(){
 		//if (SessionState_old == "NA" && SessionState == "Loading"){CSSClsChg.HideAllSvg();}       //Hide if you switch receivemodes, because the default SessionState = "NA"
 		
 		if ((SessionStage_old != SessionStage && SessionStage_old != "") || (SessionState_old != SessionState && SessionState_old != "")){	//SessionStage_old != "" for startup, because the init value is "" - SessionState check, because SessionStage stays from SessionState "Loading" to "Race" for example, but the markers are reset at SessionState change for this case
+			// suspending smooth marker transition works only in CREST modes correct, because in DS modes it takes sometimes 2 or 3 seconds after the SessionStage change for replacing the cars to the new position
 			StopTransitionDelay = "true";
-			//StopTransitionDelay_StartTime = Date.now();
 			count_dsdata_workerruns = true;
-//			sensorLayer.interruptTransition();
-			//oPcarsMapCtrl.interruptTransition(); //TODO_SENSORLAYER
+			dsdata_workerrun_counter = 0;	// reset worker run counter, which is for the case if the counter increasing is already running
+			dsdata_workerrun_counter_limit_cur = dsdata_workerrun_counter_limit_other;	// set the worker run limit
 
 		}
 		
@@ -2029,6 +2036,8 @@ function initialize_app(){
                         if (UnHide_Timer > 2000){
                         	StopTransitionDelay = "true";
 							count_dsdata_workerruns = true;
+							dsdata_workerrun_counter = 0;	// reset worker run counter, which is for the case if the counter increasing is already running
+							dsdata_workerrun_counter_limit_cur = dsdata_workerrun_counter_limit_other;	// set the worker run limit
 //                                sensorLayer.interruptTransition(); //TODO_SENSORLAYER
 //                                sensorLayer.update(aSensorData); //TODO_SENSORLAYER
                                 //oPcarsMapCtrl.interruptTransition();
@@ -2154,10 +2163,11 @@ function initialize_app(){
 	                        		if (typeof record_pos !== 'number'){
 	                        			if(log >= 3){console.log("ERROR: -------- var type changes of record_pos to: ",  typeof record_pos );}	                        			
 	                        		}
-	                        
-	                                StopTransitionDelay = "true";
-	                                //StopTransitionDelay_StartTime = Date.now();
+
+									StopTransitionDelay = "true";
 									count_dsdata_workerruns = true;
+									dsdata_workerrun_counter = 0;	// reset worker run counter, which is for the case if the counter increasing is already running
+									dsdata_workerrun_counter_limit_cur = dsdata_workerrun_counter_limit_other;	// set the worker run limit
 	                        }
 	                        break;
                         default:

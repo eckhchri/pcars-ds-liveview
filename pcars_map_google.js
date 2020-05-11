@@ -72,7 +72,10 @@ class pcars_map_google extends pcars_map {
 		// add listener to cover zoom side effects
 		this.oMapLocal.addListener('zoom_changed', function() {
 			//if(log >= 4){console.log("+++++++++++++++++++++++++++++++++++++++++++ current StopTransitionDelay: " , StopTransitionDelay);}
+			console.log("zoom_changed stop");
 			StopTransitionDelay = "true";
+			dsdata_workerrun_counter = 0;	// reset worker run counter, which is for the case if the counter increasing is already running
+			dsdata_workerrun_counter_limit_cur = dsdata_workerrun_counter_limit_other;	// if the worker run limit for a map zoom event is reached, smooth transition is reactivated
 			//StopTransitionDelay_StartTime = Date.now();
 
 			// interrupt and update markers		
