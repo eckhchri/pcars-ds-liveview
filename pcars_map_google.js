@@ -93,6 +93,10 @@ class pcars_map_google extends pcars_map {
 		});
 
 		this.oMapLocal.addListener('bounds_changed', function() {
+			// the last smooth transition before it uses the direct transition must be interrupted. If it is not interrupted, it can happen that if it returns to smooth transition again the marker jump shortly to an old position
+			if(StopTransitionDelay == "false"){
+				oPcarsMapCtrl.interruptTransition();
+			}
 			StopTransitionDelay = "true";
 		});
 
