@@ -2370,6 +2370,26 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1067,
 		"name" : "Pas Classic A",
 		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : 1068,
+		"name" : "Fusca HC1",
+		"class" : "Hot Cars"
+	},
+	{
+		"id" : 1069,
+		"name" : "Col HC",
+		"class" : "Hot Cars"
+	},
+	{
+		"id" : 1070,
+		"name" : "Pas HotCars",
+		"class" : "Hot Cars"
+	},
+	{
+		"id" : 1071,
+		"name" : "Fusca HC2",
+		"class" : "Hot Cars"
 	}
 
 ];
