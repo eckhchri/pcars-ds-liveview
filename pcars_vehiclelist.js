@@ -2037,361 +2037,365 @@ this.aVehicleInfoExt['PCARS2']	= 	[
 this.aVehicleInfoExt['AMS2']  =       [];
 this.aVehicleInfoExt['AMS2']  =       [
 	{
-		"id" : 1000,
+		"id" : -950775810,
 		"name" : "Caterham Academy",
 		"class" : "Cat_Academy"
 	},
 	{
-		"id" : 1001,
-		"name" : "Caterham Superlight",
-		"class" : "Cat_Superlight"
-	},
-	{
-		"id" : 1002,
-		"name" : "Caterham Supersport",
-		"class" : "Cat_Supersport"
-	},
-	{
-		"id" : 1003,
+		"id" : 1864701845,
 		"name" : "Caterham 620R",
 		"class" : "Cat620R"
 	},
 	{
-		"id" : 1004,
-		"name" : "Chevette",
-		"class" : "CopaClassicB"
+		"id" : -1660644383,
+		"name" : "Caterham Superlight",
+		"class" : "Cat_Superlight"
 	},
 	{
-		"id" : 1005,
-		"name" : "Puma GTE",
-		"class" : "CopaClassicB"
+		"id" : 851522805,
+		"name" : "Caterham Supersport",
+		"class" : "Cat_Supersport"
 	},
 	{
-		"id" : 1006,
-		"name" : "Pas Classic B",
-		"class" : "CopaClassicB"
-	},
-	{
-		"id" : 1007,
-		"name" : "Copa Classic B",
-		"class" : "CopaClassicB"
-	},
-	{
-		"id" : 1008,
-		"name" : "Puma GTB",
-		"class" : "CopaClassicFL"
-	},
-	{
-		"id" : 1009,
-		"name" : "Copa Classic A",
-		"class" : "CopaClassicFL"
-	},
-	{
-		"id" : 1010,
-		"name" : "Copa Fusca",
-		"class" : "CopaFusca"
-	},
-	{
-		"id" : 1011,
-		"name" : "Iveco Stralis",
-		"class" : "CopaTruck"
-	},
-	{
-		"id" : 1012,
-		"name" : "Mercedes-Benz",
-		"class" : "CopaTruck"
-	},
-	{
-		"id" : 1013,
-		"name" : "MAN",
-		"class" : "CopaTruck"
-	},
-	{
-		"id" : 1014,
-		"name" : "VW",
-		"class" : "CopaTruck"
-	},
-	{
-		"id" : 1015,
-		"name" : "Copa Uno",
-		"class" : "CopaUno"
-	},
-	{
-		"id" : 1016,
-		"name" : "F309",
-		"class" : "F-3"
-	},
-	{
-		"id" : 1017,
+		"id" : 428770333,
 		"name" : "F301",
 		"class" : "F-3"
 	},
 	{
-		"id" : 1018,
-		"name" : "Formula Classic Gen1 Model 2",
-		"class" : "F-Classic_Gen1"
+		"id" : 302183120,
+		"name" : "F309",
+		"class" : "F-3"
 	},
 	{
-		"id" : 1019,
+		"id" : 697161929,
 		"name" : "Formula Classic Gen1 Model 1",
 		"class" : "F-Classic_Gen1"
 	},
 	{
-		"id" : 1020,
+		"id" : -1819510420,
+		"name" : "Formula Classic Gen1 Model 2",
+		"class" : "F-Classic_Gen1"
+	},
+	{
+		"id" : -1667467124,
 		"name" : "Formula Classic Gen2 Model 1",
 		"class" : "F-Classic_Gen2"
 	},
 	{
-		"id" : 1021,
+		"id" : -1004811218,
 		"name" : "Formula Classic Gen2 Model 2",
 		"class" : "F-Classic_Gen2"
 	},
 	{
-		"id" : 1022,
+		"id" : -494068343,
 		"name" : "Formula Classic Gen2 Model 3",
 		"class" : "F-Classic_Gen2"
 	},
 	{
-		"id" : 1023,
+		"id" : -1700189536,
 		"name" : "Formula Classic Gen3 Model 1",
 		"class" : "F-Classic_Gen3"
 	},
 	{
-		"id" : 1024,
-		"name" : "Formula Classic Gen3 Model 3",
-		"class" : "F-Classic_Gen3"
-	},
-	{
-		"id" : 1025,
+		"id" : -1662617552,
 		"name" : "Formula Classic Gen3 Model 2",
 		"class" : "F-Classic_Gen3"
 	},
 	{
-		"id" : 1026,
-		"name" : "Formula Reiza",
-		"class" : "F-Reiza"
+		"id" : -1828044943,
+		"name" : "Formula Classic Gen3 Model 3",
+		"class" : "F-Classic_Gen3"
 	},
 	{
-		"id" : 1027,
-		"name" : "Formula Trainer Advanced",
-		"class" : "F-Trainer_A"
-	},
-	{
-		"id" : 1028,
-		"name" : "Formula Trainer",
-		"class" : "F-Trainer"
-	},
-	{
-		"id" : 1029,
-		"name" : "Formula Ultimate 2019",
-		"class" : "F-Ultimate"
-	},
-	{
-		"id" : 1030,
-		"name" : "Formula V10",
-		"class" : "F-V10_Gen2"
-	},
-	{
-		"id" : 1031,
-		"name" : "Formula V12",
-		"class" : "F-V12"
-	},
-	{
-		"id" : 1032,
-		"name" : "Formula Vee Fin",
-		"class" : "F-Vee"
-	},
-	{
-		"id" : 1033,
-		"name" : "Formula Vee",
-		"class" : "F-Vee"
-	},
-	{
-		"id" : 1034,
+		"id" : -1261768631,
 		"name" : "Formula Vintage G1M1",
 		"class" : "F-Vintage_Gen1"
 	},
 	{
-		"id" : 1035,
+		"id" : 318400650,
 		"name" : "Formula Vintage G1M2",
 		"class" : "F-Vintage_Gen1"
 	},
 	{
-		"id" : 1036,
-		"name" : "Formula Vintage G2M2",
-		"class" : "F-Vintage_Gen2"
-	},
-	{
-		"id" : 1037,
+		"id" : -1988395354,
 		"name" : "Formula Vintage G2M1",
 		"class" : "F-Vintage_Gen2"
 	},
 	{
-		"id" : 1038,
-		"name" : "Ultima GTR Race",
-		"class" : "GTOpen"
+		"id" : 617290135,
+		"name" : "Formula Vintage G2M2",
+		"class" : "F-Vintage_Gen2"
 	},
 	{
-		"id" : 1039,
-		"name" : "Kart 125cc Shifter",
-		"class" : "Kart"
+		"id" : -2140090167,
+		"name" : "Formula Vee",
+		"class" : "F-Vee"
 	},
 	{
-		"id" : 1040,
+		"id" : -186413128,
+		"name" : "Formula Vee Fin",
+		"class" : "F-Vee"
+	},
+	{
+		"id" : 575788923,
+		"name" : "Formula Trainer",
+		"class" : "F-Trainer"
+	},
+	{
+		"id" : 1982976051,
+		"name" : "Formula Trainer Advanced",
+		"class" : "F-Trainer_A"
+	},
+	{
+		"id" : 1948072701,
+		"name" : "Formula Reiza",
+		"class" : "F-Reiza"
+	},
+	{
+		"id" : -1142039519,
+		"name" : "Formula Ultimate 2019",
+		"class" : "F-Ultimate"
+	},
+	{
+		"id" : 523915852,
+		"name" : "Formula V10",
+		"class" : "F-V10_Gen2"
+	},
+	{
+		"id" : -2053858829,
+		"name" : "Formula V12",
+		"class" : "F-V12"
+	},
+	{
+		"id" : -487937394,
+		"name" : "Iveco Stralis",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : -819133010,
+		"name" : "MAN",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : 1647822272,
+		"name" : "Mercedes-Benz",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : -2086797102,
+		"name" : "VW",
+		"class" : "CopaTruck"
+	},
+	{
+		"id" : 844159614,
 		"name" : "Kart 125cc 2STROKE",
-		"class" : "Kart"
+		"class" : "Kart125cc"
 	},
 	{
-		"id" : 1041,
-		"name" : "Kart GX390 Race",
-		"class" : "Kart"
-	},
-	{
-		"id" : 1042,
+		"id" : -2116593279,
 		"name" : "Kart GX390 Rental",
-		"class" : "Kart"
+		"class" : "KartRental"
 	},
 	{
-		"id" : 1043,
-		"name" : "Mitsubishi Lancer R",
-		"class" : "LancerCup"
+		"id" : 374810616,
+		"name" : "Kart GX390 Race",
+		"class" : "KartGX390"
 	},
 	{
-		"id" : 1044,
-		"name" : "Mitsubishi Lancer RS",
-		"class" : "LancerCup"
+		"id" : -739789710,
+		"name" : "Kart 125cc Shifter",
+		"class" : "KartShifter"
 	},
 	{
-		"id" : 1045,
-		"name" : "Opala OldStock",
-		"class" : "OldStock"
-	},
-	{
-		"id" : 1046,
-		"name" : "MetalMoro AJR Honda",
-		"class" : "P1"
-	},
-	{
-		"id" : 1047,
-		"name" : "MetalMoro AJR Chevy V8",
-		"class" : "P1"
-	},
-	{
-		"id" : 1048,
-		"name" : "MetalMoro AJR Judd",
-		"class" : "P1"
-	},
-	{
-		"id" : 1049,
-		"name" : "MetalMoro MRX Duratec Turbo P2",
-		"class" : "P2"
-	},
-	{
-		"id" : 1050,
-		"name" : "MetalMoro MRX Honda P3",
-		"class" : "P3"
-	},
-	{
-		"id" : 1051,
+		"id" : 95104745,
 		"name" : "MCR S2000",
 		"class" : "P4"
 	},
 	{
-		"id" : 1052,
-		"name" : "MetalMoro MRX Duratec Turbo P3",
-		"class" : "P3"
+		"id" : 1932261404,
+		"name" : "MetalMoro AJR Chevy V8",
+		"class" : "P1"
 	},
 	{
-		"id" : 1053,
-		"name" : "Roco 001",
-		"class" : "P3"
+		"id" : -1236687924,
+		"name" : "MetalMoro AJR Honda",
+		"class" : "P1"
 	},
 	{
-		"id" : 1054,
-		"name" : "Sprint Race",
-		"class" : "SprintRace"
+		"id" : -1745773963,
+		"name" : "MetalMoro AJR Judd",
+		"class" : "P1"
 	},
 	{
-		"id" : 1055,
-		"name" : "Stock Car Brasil",
-		"class" : "StockCarV8"
-	},
-	{
-		"id" : 1056,
-		"name" : "Ultima",
-		"class" : "Street"
-	},
-	{
-		"id" : 1057,
-		"name" : "Superkart 250cc (PF=Yes)",
-		"class" : "SuperKart"
-	},
-	{
-		"id" : 1058,
-		"name" : "Super V8",
-		"class" : "SuperV8"
-	},
-        {
-		"id" : 1060,
+		"id" : 1618401665,
 		"name" : "MetalMoro AJR V6 Turbo",
 		"class" : "P1"
 	},
 	{
-		"id" : 1061,
+		"id" : -50694644,
+		"name" : "Mitsubishi Lancer R",
+		"class" : "LancerCup"
+	},
+	{
+		"id" : 213908738,
+		"name" : "Mitsubishi Lancer RS",
+		"class" : "LancerCup"
+	},
+	{
+		"id" : -1404228714,
+		"name" : "Sprint Race",
+		"class" : "SprintRace"
+	},
+	{
+		"id" : 253111186,
+		"name" : "Super V8",
+		"class" : "SuperV8"
+	},
+	{
+		"id" : 1323381033,
+		"name" : "Stock Car Brasil",
+		"class" : "StockCarV8"
+	},
+	{
+		"id" : 306371028,
+		"name" : "Superkart 250cc (PF=Yes)",
+		"class" : "SuperKart"
+	},
+	{
+		"id" : 1560162507,
+		"name" : "Ultima GTR",
+		"class" : "Street"
+	},
+	{
+		"id" : 306785397,
+		"name" : "Ultima GTR Race",
+		"class" : "GTOpen"
+	},
+	{
+		"id" : 703591920,
+		"name" : "MetalMoro MRX Duratec Turbo P2",
+		"class" : "P2"
+	},
+	{
+		"id" : 65202613,
+		"name" : "MetalMoro MRX Honda P3",
+		"class" : "P3"
+	},
+	{
+		"id" : -181636428,
 		"name" : "MetalMoro MRX Duratec P4",
 		"class" : "P4"
 	},
 	{
-		"id" : 1062,
-		"name" : "Uno Classic B",
-		"class" : "CopaClassicB"
+		"id" : -1834081784,
+		"name" : "MetalMoro MRX Duratec Turbo P3",
+		"class" : "P3"
 	},
 	{
-		"id" : 1063,
-		"name" : "Fusca CA",
-		"class" : "CopaClassicFL"
+		"id" : 802736208,
+		"name" : "Roco 001",
+		"class" : "P3"
 	},
 	{
-		"id" : 1064,
-		"name" : "Puma P052",
-		"class" : "GT5"
-	},
-	{
-		"id" : 1065,
-		"name" : "Opala Stock Cars 1986",
-		"class" : "Opala86"
-	},
-	{
-		"id" : 1066,
+		"id" : -1870819346,
 		"name" : "Sigma P1",
 		"class" : "P2"
 	},
 	{
-		"id" : 1067,
+		"id" : 245459304,
+		"name" : "Opala Stock Cars 1986",
+		"class" : "Opala86"
+	},
+	{
+		"id" : -62148492,
+		"name" : "Opala OldStock",
+		"class" : "OldStock"
+	},
+	{
+		"id" : -609305506,
+		"name" : "Puma GTB",
+		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : 1031807465,
+		"name" : "Puma GTE",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : -93205368,
+		"name" : "Puma P052",
+		"class" : "GT5"
+	},
+	{
+		"id" : -1155860123,
+		"name" : "Chevette",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1775576087,
+		"name" : "Copa Fusca",
+		"class" : "CopaFusca"
+	},
+	{
+		"id" : -815324367,
+		"name" : "Fusca CA",
+		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : -844211966,
+		"name" : "Copa Uno",
+		"class" : "CopaUno"
+	},
+	{
+		"id" : 311092313,
+		"name" : "Uno Classic B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : -45848101,
+		"name" : "Copa Classic A",
+		"class" : "CopaClassicFL"
+	},
+	{
+		"id" : -333355648,
+		"name" : "Copa Classic B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : 1661024873,
 		"name" : "Pas Classic A",
 		"class" : "CopaClassicFL"
 	},
 	{
-		"id" : 1068,
+		"id" : 1700425966,
+		"name" : "Pas Classic B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : -1086802614,
 		"name" : "Fusca HC1",
 		"class" : "Hot Cars"
 	},
 	{
-		"id" : 1069,
-		"name" : "Col HC",
+		"id" : 150641251,
+		"name" : "Fusca HC2",
 		"class" : "Hot Cars"
 	},
 	{
-		"id" : 1070,
+		"id" : 390318757,
 		"name" : "Pas HotCars",
 		"class" : "Hot Cars"
 	},
 	{
-		"id" : 1071,
-		"name" : "Fusca HC2",
+		"id" : 1653755268,
+		"name" : "Col HC",
 		"class" : "Hot Cars"
+	},
+	{
+		"id" : 1785300635,
+		"name" : "ARC Camaro",
+		"class" : "ARC_Cam"
 	}
-
 ];
 
 }// end load vehicle data
