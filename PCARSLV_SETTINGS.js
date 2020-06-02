@@ -123,9 +123,10 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 		var aVALIDAPIMODES = {				
 				"DS" : 		'active',
 				"DS2" : 	'active',
+				"DS-AMS2" : 'active',
 				"CREST" : 	'active',
 				"CREST2" : 	'active',
-				"CREST2AMS2" : 	'active',
+				"CREST2-AMS2" : 'active',
 				"DEMO" : 	'active'				
 		}
 		
@@ -156,6 +157,12 @@ class PCARSLV_SETTINGS extends PCARSLV_BASIC {
 				sCurUrl = Ds2ServerURL;
 				sCurPort = Ds2Port;
 				sCurPath = Ds2Path;
+				break;
+
+			case "DS-AMS2":
+				sCurUrl = DsAMS2ServerURL;
+				sCurPort = DsAMS2Port;
+				sCurPath = DsAMS2Path;
 				break;
 			
 			case "CREST":

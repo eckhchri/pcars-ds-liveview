@@ -268,10 +268,11 @@
 			<label for="APIMODE">Select API Type</label>
 	    	<select class="APIMODE" name="APIMODE" id="APIMODE">
 	      		<option>DS</option>
-	      		<option>DS2</option>
+				<option>DS2</option>
+				<option>DS-AMS2</option>
 	      		<option>CREST</option>
-			<option>CREST2</option>
-			<option>CREST2-AMS2</option>
+				<option>CREST2</option>
+				<option>CREST2-AMS2</option>
 	      		<option>DEMO</option>
 			</select>
 		</fieldset>
@@ -666,6 +667,14 @@ function initialize_app(){
 					Ds2ServerURL     =       get_url_param('ds2url');
 					Ds2Port          =       get_url_param('ds2port');
 					APIMODE         =       "DS2";
+					//overwrite dropdown menu selection
+					HTMLCTRL.APIMODE_SetSelection( APIMODE );
+			}
+			// check if url params overwrite the default DS-AMS2 info
+			if (get_url_param('dsams2url') && get_url_param('dsams2port'))	{
+					DsAMS2ServerURL		=		get_url_param('dsams2url');
+					DsAMS2Port			=		get_url_param('dsams2port');
+					APIMODE				=		"DS-AMS2";
 					//overwrite dropdown menu selection
 					HTMLCTRL.APIMODE_SetSelection( APIMODE );
 			}
@@ -1420,7 +1429,7 @@ function initialize_app(){
 			if (SessionState == "Race" || SessionState == 2 || SessionState == 3 || SessionState == 4){	//SessionState 2 and 3 is for CREST mode, enum for GAME_INGAME_PLAYING and GAME_INGAME_PAUSED
 				if(SessionStage != "Race1" && SessionStage != "Race2"){
 					document.getElementById("txtSessionStage").value = ' Session: ' + e.data.globals.attributes.SessionStage + resttime.slice(0,-4);     //slice for deleting the milliseconds part of the time
-					if (APIMODE == "DS" || APIMODE == "DS2"){
+					if (APIMODE == "DS" || APIMODE == "DS2" || APIMODE == "DS-AMS2"){
 						ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:   " + e.data.globals.attributes.SessionTimeDuration/60 + " min");
 					}else{
 						ChangeHtmlContentByID( '#pcars-dssessionlength'  , "DS Session Length:    -");
@@ -2077,7 +2086,7 @@ function initialize_app(){
                                         ,receivemode:   		"GETDSANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-			case "DS2": //DS2 receive mode
+						case "DS2": //DS2 receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 Ds2ServerURL
@@ -2085,6 +2094,16 @@ function initialize_app(){
 										,dspath:                Ds2Path
                                         ,timeout:               XMLHTTPTimeout
                                         ,receivemode:   		"GETDS2ANDDRIVERDATA"
+                                        ,arefpoint:             e.data.arefpoint});
+								break;
+						case "DS-AMS2": //DS2 receive mode
+                                workerDSDATA.postMessage({
+                                        workerdelay:            WORKERDELAY_DSDATA
+                                        ,dsurl:                 DsAMS2ServerURL
+										,dsport:                DsAMS2Port
+										,dspath:                DsAMS2Path
+                                        ,timeout:               XMLHTTPTimeout
+                                        ,receivemode:   		"GETDSAMS2ANDDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
                         case "CREST": //CREST receive mode
@@ -2097,7 +2116,7 @@ function initialize_app(){
                                         ,receivemode:   		"GETCRESTDRIVERDATA"
                                         ,arefpoint:             e.data.arefpoint});
                                 break;
-			case "CREST2":  //CREST2 receive mode
+						case "CREST2":  //CREST2 receive mode
                                 workerDSDATA.postMessage({
                                         workerdelay:            WORKERDELAY_DSDATA
                                         ,dsurl:                 CREST2ServerURL
@@ -2198,6 +2217,10 @@ function initialize_app(){
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: Ds2ServerURL, dsport: Ds2Port, dspath: Ds2Path, timeout: XMLHTTPTimeout, receivemode: "GETDS2ANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
 			aDrivers = Receive_DS_data(Ds2ServerURL, Ds2Port, Ds2Path, 2000, "GETDS2ANDDRIVERDATA", aRefPointTrackname2ID);
 			break;
+		case "DS-AMS2":
+			workerDSDATA.postMessage({workerdelay: 100, dsurl: DsAMS2ServerURL, dsport: DsAMS2Port, dspath: DsAMS2Path, timeout: XMLHTTPTimeout, receivemode: "GETDSAMS2ANDDRIVERDATA", arefpoint: aRefPointTrackname2ID});
+			aDrivers = Receive_DS_data(DsAMS2ServerURL, DsAMS2Port, DsAMS2Path, 2000, "GETDSAMS2ANDDRIVERDATA", aRefPointTrackname2ID);
+			break;
 		case "CREST":
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: CRESTServerURL, dsport: CRESTPort, dspath: CRESTPath, timeout: XMLHTTPTimeout, receivemode: "GETCRESTDRIVERDATA", arefpoint: aRefPointTrackname2ID});
 			aDrivers = Receive_DS_data(CRESTServerURL, CRESTPort, CRESTPath, 2000, "GETCRESTDRIVERDATA", aRefPointTrackname2ID);
@@ -2206,7 +2229,7 @@ function initialize_app(){
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2ServerURL, dsport: CREST2Port, dspath: CREST2Path, timeout: XMLHTTPTimeout, receivemode: "GETCREST2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
 			aDrivers = Receive_DS_data(CREST2ServerURL, CREST2Port, CREST2Path, 2000, "GETCREST2DRIVERDATA", aRefPointTrackname2ID);
 			break;
-                case "CREST2-AMS2":
+        case "CREST2-AMS2":
 			workerDSDATA.postMessage({workerdelay: 100, dsurl: CREST2AMS2ServerURL, dsport: CREST2AMS2Port, dspath: CREST2AMS2Path, timeout: XMLHTTPTimeout, receivemode: "GETCREST2AMS2DRIVERDATA", arefpoint: aRefPointTrackname2ID});
 			aDrivers = Receive_DS_data(CREST2AMS2ServerURL, CREST2AMS2Port, CREST2AMS2Path, 2000, "GETCREST2AMS2DRIVERDATA", aRefPointTrackname2ID);
 			break;

@@ -20,7 +20,11 @@ var DsPath				= "/api/session/status?attributes&members&participants";
 var Ds2ServerURL 		= "mydomain2.com";
 var Ds2Port				= 9000;
 var Ds2Path				= "/api/session/status?attributes&members&participants";
-//Project CARS 1 and 2 Dedicated Server track and vehicle path
+//Automobilista 2 Dedicated Server
+var DsAMS2ServerURL 	= "mydomainAMS2.com";
+var DsAMS2Port			= 9000;
+var DsAMS2Path			= "/api/session/status?attributes&members&participants";
+//Project CARS 1, 2 and AMS2 Dedicated Server track and vehicle path
 var DsTracksPath		= "/api/list/tracks";
 var DsVehiclesPath		= "/api/list/vehicles";
 //Project CARS CREST
@@ -62,7 +66,7 @@ var aAPIMODEMAPPING =
 */
 
 
-//default API mode, possible values: DS, CREST, CREST2 or DEMO
+//default API mode, possible values: DS, CREST, DS2, CREST2, DS-AMS2, CREST2-AMS2 or DEMO
 var APIMODE   		=   "DEMO";	// Default API Mode
 
 //hide or unhide elements

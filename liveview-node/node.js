@@ -22,6 +22,11 @@ switch(config.APIMODE){
 		poll_port = config.Ds2Port;
 		poll_path = config.Ds2Path;
 		break;
+	case "DS-AMS2":
+		poll_host = config.DsAMS2ServerURL;
+		poll_port = config.DsAMS2Port;
+		poll_path = config.DsAMS2Path;
+		break;
 	case "CREST":
 		poll_host = config.CRESTServerURL;
 		poll_port = config.CRESTPort;

@@ -1,5 +1,5 @@
 module.exports = {
-	//API mode, possible values: DS, DS2, CREST, CREST2, CREST2-AMS2 - it defines which API settings from below are used
+	//API mode, possible values: DS, DS2, DS-AMS2, CREST, CREST2, CREST2-AMS2 - it defines which API settings from below are used
 	APIMODE:	"DS2",
 	
 	// API settings
@@ -11,6 +11,10 @@ module.exports = {
 	Ds2ServerURL:	"mydomain2.com",
 	Ds2Port:		9000,
 	Ds2Path:		"/api/session/status?attributes&members&participants",
+	//Automobilista 2 Dedicated Server
+	DsAMS2ServerURL:"mydomainAMS2.com",
+	DsAMS2Port:		9000,
+	DsAMS2Path:		"/api/session/status?attributes&members&participants",
 	//Project CARS CREST
 	CRESTServerURL:	"localhost",
 	CRESTPort:		8080,

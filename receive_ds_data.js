@@ -110,6 +110,10 @@ function returnDataSendError(rMode){
 		
 		case	"GETDSANDDRIVERDATA":	return aDrivers;
 
+		case	"GETDS2ANDDRIVERDATA":	return aDrivers;
+
+		case	"GETDSAMS2ANDDRIVERDATA":	return aDrivers;
+
 		case	"GETTRACKLIST":		return aEmptyArray;
 		
 		case	"GETVEHICLELIST":	return aEmptyArray;
@@ -608,7 +612,156 @@ function returnDataSendError(rMode){
 				
 				return aDrivers;
 				
-				
+				case "GETDSAMS2ANDDRIVERDATA":
+
+					// collect DS2 common data
+					//Todo: adjust to DS2 values
+					if ( myArr.response.state == "Idle" ){
+						//	Todo: put all values into Array?
+						aDrivers.globals = {
+							"joinable":				myArr.response.joinable
+							,"lobbyid":             0
+							,"max_member_count":    myArr.response.max_member_count
+							,"now":                 myArr.response.now
+							,"state":               myArr.response.state
+							,"datasource":			"DSAMS2"
+							,"curgamerunning":		"AMS2"			//used for correct data mapping of Vehiclelist and tracklist. Do not change because its used to access an hash directly
+							,"attributes":		{
+								"TrackId":		9999999999
+								,"GridSize":		0
+								,"MaxPlayers":		0
+								,"SessionStage":	""
+								,"SessionState":	""
+								,"SessionTimeDuration":	0
+								,"SessionTimeElapsed":	0
+								,"RaceLength":		0
+								,"TemperatureAmbient":	20
+								,"TemperatureTrack":	30
+							}
+						}
+					}else if ( myArr.response.state == "Running" ){
+						aDrivers.globals = {
+							"joinable":            myArr.response.joinable
+							,"lobbyid":             0
+							,"max_member_count":    myArr.response.max_member_count
+							,"now":                 myArr.response.now
+							,"state":               myArr.response.state
+							,"datasource":			"DSAMS2"
+							,"curgamerunning":		"AMS2"
+							,"name":                myArr.response.name
+							,"attributes":		{
+								"TrackId":		myArr.response.attributes.TrackId
+								,"GridSize":		myArr.response.attributes.GridSize
+								,"MaxPlayers":		myArr.response.attributes.MaxPlayers
+								,"SessionStage":	myArr.response.attributes.SessionStage
+								,"SessionState":	myArr.response.attributes.SessionState
+								,"SessionTimeDuration":	myArr.response.attributes.SessionTimeDuration
+								,"SessionTimeElapsed":	myArr.response.attributes.SessionTimeElapsed	
+								,"RaceLength":		myArr.response.attributes.RaceLength
+								,"TemperatureAmbient":	myArr.response.attributes.TemperatureAmbient/1000
+								,"TemperatureTrack":	myArr.response.attributes.TemperatureTrack/1000
+							}
+						}
+					}else{
+						// in case of othe stati return a defined value
+						aDrivers.globals = {
+							"joinable":            "unknown mode"
+							,"lobbyid":             "unknown mode"
+							,"max_member_count":    "unknown mode"
+							,"now":                 "unknown mode"
+							,"state":               "unknown mode"
+							,"datasource":		   "DSAMS2"
+							,"curgamerunning":		"AMS2"
+							,"name":                "unknown mode"
+							,"attributes":		{
+								"TrackId":		9999999999
+								,"GridSize":		0
+								,"MaxPlayers":		0
+								,"SessionStage":	""
+								,"SessionState":	""
+								,"SessionTimeDuration":	0
+								,"SessionTimeElapsed":	0
+								,"RaceLength":		0
+								,"TemperatureAmbient":	20
+								,"TemperatureTrack":	30
+							}
+						}
+					}
+
+					/* attributes now single mapped above in the "Running" state, because there are 63 attributes and they need a lot of space during recording
+					//cath all attributes
+					for (var key in myArr.response.attributes) {
+						aDrivers.globals.attributes[key] =  myArr.response.attributes[key];
+					}*/
+
+					// collect Driverdata
+					if ( myArr.response.participants.length == 0 ){
+
+						if(log >= 3){console.log("no Participants found in DS, leave function and use Test data array!");}
+						// put empty dummy object into array
+						aDrivers.driverlist.push( DriverDummy );
+
+					}else{
+
+						strConsoleLog = "Debugging Issue #131 - Index/Driver: \n"; // Debugging Issue #131
+
+						for (var i = 0;i<myArr.response.participants.length;i++){
+
+							//if(log >= 3){console.log ( "DS Participants:" , myArr.response.participants);}
+							// read data of all participants and put it in an array of PCARSdriver objects
+							index = CalculateIndexDriverArray (myArr.response.participants[i].attributes.RacePosition, loopcnt);
+							loopcnt++;
+
+							aDrivers.driverlist[index] =
+								new PCARSdriver(
+									myArr.response.participants[i].attributes.RefId,
+									myArr.response.participants[i].attributes.Name,
+									myArr.response.participants[i].attributes.IsPlayer,
+									myArr.response.participants[i].attributes.GridPosition,
+									myArr.response.participants[i].attributes.PositionX,
+									myArr.response.participants[i].attributes.PositionY,
+									myArr.response.participants[i].attributes.PositionZ,
+									myArr.response.participants[i].attributes.State,
+									this.aSectormappingDS[ myArr.response.participants[i].attributes.CurrentSector ],
+									myArr.response.participants[i].attributes.RacePosition,
+									myArr.response.participants[i].attributes.FastestLapTime,
+									myArr.response.participants[i].attributes.LastLapTime,
+									myArr.response.participants[i].attributes.Sector1Time,
+									myArr.response.participants[i].attributes.Sector2Time,
+									myArr.response.participants[i].attributes.Sector3Time,
+									myArr.response.participants[i].attributes.Orientation,
+									myArr.response.participants[i].attributes.Speed,
+									myArr.response.participants[i].attributes.CurrentLap,
+									myArr.response.participants[i].attributes.VehicleId,
+									myArr.response.participants[i].attributes.LiveryId,
+									undefined,	//NumPits
+									undefined,	//Gap2Ahead
+									undefined,	//Gap2First
+									undefined,	//VehicleName - NA
+									undefined,	//VehicleClassName - NA
+									i			//oIdx API index
+								);
+							strConsoleLog = strConsoleLog + i + "/" + myArr.response.participants[i].attributes.Name + "\n"; // Debugging Issue #131
+						}
+
+						//if(log >= 3){console.log (strConsoleLog);} // Debugging Issue #131
+
+						// check complete driverlist for missing objects. Sometimes the API do not returns all drivers and then there is an array element missing which throws an error during access
+						for (var i = 0;i<aDrivers.driverlist.length;i++){
+							if(!aDrivers.driverlist[i]){
+								DriverDummyAPIerror.UpdateObjectData({RacePosition: i+1});
+								aDrivers.driverlist[i] = DriverDummyAPIerror;
+								if(log >= 2){console.log ( "Receive API ERROR, replaced missing driver array object. Array element: ", i, "  driver array: " , aDrivers.driverlist);}
+							}
+						}
+
+						//if(log >= 3){console.log ( "DS Mode Full Return:" , aDrivers);}
+						// return information
+						return aDrivers;
+					}
+
+					return aDrivers;
+
 				
 			case "GETTRACKLIST":
 
