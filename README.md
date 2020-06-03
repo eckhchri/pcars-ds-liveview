@@ -122,7 +122,7 @@ Then you can click on it and "Load unsafe scripts".
 
 ## Node Proxy
 Liveview is written in javascript and executed on client side. If bigger communities want to use such a tool many clients would query the HTTP API. We don't know how many connections the DS HTTP API webserver can handle and if there could be a negative effect on the DS performance itself.\
-For this case we implement a small Node Proxy which simply queries the HTTP API and provides it again as HTTP webserver.
+For this case we implemented a small Node Proxy which simply queries the HTTP API and provides it again as HTTP webserver.
 You can find it in the folder "liveview-node".\
 **Requirements:** Linux or Windows with installed Node.js ([Download](https://nodejs.org/en/download/)). The basic installation of node.js is enough, because we only use the HTTP module and no other extra modules.
 
