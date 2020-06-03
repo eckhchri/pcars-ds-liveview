@@ -3,7 +3,7 @@
 ## What is it?
 
 The main goal of this project was to show information about races like you need it for TV broadcasts or for race engineers.\
-This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1 and 2 to get this information, which is also the main focus. But it can also poll the CREST1/[CREST2](https://github.com/viper4gh/CREST2/blob/master/README.md) API, which provides the Shared Memory data of Project CARS 1/2 and Automobilista 2 via HTTP.\
+This project is webbased and written in javascript. It polls the Dedicated Server API for Multiplayer sessions of Project CARS 1, 2 and Automobilista 2 to get this information, which is also the main focus. But it can also poll the CREST1/[CREST2](https://github.com/viper4gh/CREST2/blob/master/README.md) API, which provides the Shared Memory data of Project CARS 1, 2 and Automobilista 2 via HTTP.\
 If you open this website it has Google Maps in background, which shows the current race track and markers of all drivers where they are.
 As overlay you have some tables:
 - Driver Table - shows all driver names with their position, which car they drive and timings.
@@ -34,6 +34,10 @@ Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/
 						http://[your Webserver url]/index.html?ds2url=[DS HTTP API url]&ds2port=[DS HTTP API Port]
 						
 						example: http://www.xyz.com/index.html?ds2url=www.xyzDS.com&ds2port=9000
+- Overwriting default AMS2 DS parameters:  
+						http://[your Webserver url]/index.html?dsams2url=[DS HTTP API url]&dsams2port=[DS HTTP API Port]
+						
+						example: http://www.xyz.com/index.html?ds2url=www.xyzDS.com&ds2port=9000
 - Overwriting default CREST parameters:   
 						http://[your Webserver url]/index.html?cresturl=[IP address of gaming PC]&crestport=[CREST Port]
 						
@@ -50,14 +54,16 @@ Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/
 						example: http://www.xyz.com/index.html?api_key=1234567890ABCDEF
 
 **Supports the following Data Sources**
-- Dedicated Server API from Project CARS 1 and 2 - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API
+- Dedicated Server API from Project CARS 1, 2 and Automobilista 2 - http://forum.projectcarsgame.com/showthread.php?26520-Dedicated-Server-API, https://forum.reizastudios.com/threads/dedicated-server-tool.10141/
 - CREST/CREST2 API - CREST2 (pcars2): https://github.com/viper4gh/CREST2/blob/master/README.md,  http://forum.projectcarsgame.com/showthread.php?62359-CREST2-a-k-a-CARS2-REST-API&p=1494976#post1494976 / CREST (pcars): https://github.com/NLxAROSA/CREST/tree/CREST2, http://cars-rest-api.com/ (not available anymore), 
 
 **Default parameters**:
-- dedicated server url:   MY-URL.com
+- dedicated server url:   mydomain.com
 - dedicated server port:  9000
-- pcars2 dedicated server url:   MY-URL.com
+- pcars2 dedicated server url:   mydomain2.com
 - pcars2 dedicated server port:  9000
+- AMS2 dedicated server url:   mydomainAMS2.com
+- AMS2 dedicated server port:  9000
 - CREST server url:       localhost
 - CREST server port:      8080
 - CREST2 server url:      localhost
