@@ -120,9 +120,29 @@ httpApiInterface : ""
 Another problem could be if you open the liveview via HTTPS on your webserver, because the DS is polled via HTTP. In this case your Chrome prevents this and shows an icon on the right side of the address field.\
 Then you can click on it and "Load unsafe scripts".
 
+## Node Proxy
+Liveview is written in javascript and executed on client side. If bigger communities want to use such a tool many clients would query the HTTP API. We don't know how many connections the DS HTTP API webserver can handle and if there could be a negative effect on the DS performance itself.\
+For this case we implement a small Node Proxy which simply queries the HTTP API and provides it again as HTTP webserver.
+You can find it in the folder "liveview-node".\
+**Requirements:** Linux or Windows with installed Node.js ([Download](https://nodejs.org/en/download/)). The basic installation of node.js is enough, because we only use the HTTP module and no other extra modules.
+
+**Usage:**
+- the Node Proxy can run on a seperate system, but also on the server where the DS is running and also on the webserver where liveview is installed
+- copy the folder "liveview-node" to the system where you want to start it
+- rename config-sample.js to config.js and change settings with an editor, you have to set the APIMODE and URL/Port for this APIMODE
+- start the Node Proxy with: node node.js, the node proxy must have access to the DS HTTP API on default port 9000 TCP
+- the Node Proxy provides the data as webserver on port 8080, which is changeable in the config file
+- now go to the liveview config file, set APIMODE to the same mode which you configured in the Node proxy config, set "use_node" to "true" and set the "nodeServerURL" (maybe also "nodePort" if you changed it in the Node Proxy config)
+- open liveview in Chrome, your Client where liveview is running must have access to the Node Proxy on default port 8080 TCP
+- (optional) you can restrict the DS HTTP API access to the Node Proxy, because without Proxy there was the URL path "api/session/status" for public needed in the DS config under httpApiAccessLevels, there is still no authentication possible, but you can restrict public in the httpApiAccessFilters to the ip address of the Node Proxy for example
+
+**Additional Info:**\
+The Node Proxy can used for the CREST API modes, too. But the normal use case is in my opinion in combination with the DS modes.
+
 ## Communication Schemes
 ![Screenshot](docs/ds-liveview_Communication_Scheme_DS-Mode.jpg)
 ![Screenshot](docs/ds-liveview_Communication_Scheme_CREST.jpg)
+![Screenshot](docs/ds-liveview_Communication_Scheme_DS-Mode_Node-Proxy.jpg)
 
 ## Nice to know
 
