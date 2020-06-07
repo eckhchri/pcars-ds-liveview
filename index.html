@@ -1607,8 +1607,9 @@ function initialize_app(){
 						//Fill PosDriver array
 		                                aPosDriver[e.data.driverlist[i].RacePosition] = curDriverHash;
 
-						//init array with driver hashes if they are undefined
-						if (!aRaceData[curDriverHash]){
+						//init array with driver hashes if they are undefined or
+						// Issue #166 - reset aRaceData again on race start if current lap is 0, in this case there shouldn't be already other data in aRaceData, but it happens because the Quali driver data in DS mode is a short time still there at the beginning of SessionStage Race and if the driver has driven 2 laps in Quali the race Gap logic adds data to aRaceData which is wrong
+						if (!aRaceData[curDriverHash] || (e.data.driverlist[i].CurrentLap == 0 && aRaceData[curDriverHash].NumLaps > 1)){
 						if(log >= 3){console.log("init aRaceData array");}
 							aRaceData[curDriverHash] = {
 								NumPits: 0,
