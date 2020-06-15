@@ -19,9 +19,10 @@ It's also important to know that javascript is executed on client side. That mea
 Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/) to see a demonstration, click on "Load from URL" and choose a DEMO file.
 
 ## Usage:
-- default URL after extracting/cloning to your Webserver: http://[your Webserver url]/index.html
-- rename config-sample.js to config.js and change settings with an editor
-- put the google API key into the file "config_googleapikey.txt" in root directory of the project if available. It also works without the key, but then you have watermarks on map.
+- Extract a release or clone the master to your Webserver
+- Rename config-sample.js to config.js and change settings with an editor, at least the API settings (ServerURL and Port) which are to be used
+- If you want no watermarks on google maps you need a Google Maps API key ([HowTo](https://developers.google.com/maps/documentation/javascript/get-api-key)). If you have one set it in the config file or use the URL parameter described below.
+- Open the website in Chrome, default URL: http://[your Webserver url]/index.html
 
 **URL paramters**
 - If you want to use URL parameters, set AllowUrlParams to true in config.js
@@ -72,7 +73,8 @@ Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/
 - CREST2AMS2Port:	8180
  
 ## Requirements:
-- browser support: CHROME 44 or newer
+- Webserver where you can host this website
+- client browser support: CHROME 44 or newer
 
 ## Shared some info in Project CARS Forum
 - http://forum.projectcarsgame.com/showthread.php?65112-Live-stats-from-Dedicated-Server&p=1543705&viewfull=1#post1543705
@@ -122,8 +124,9 @@ Then you can click on it and "Load unsafe scripts".
 
 ## Node Proxy
 Liveview is written in javascript and executed on client side. If bigger communities want to use such a tool many clients would query the HTTP API. We don't know how many connections the DS HTTP API webserver can handle and if there could be a negative effect on the DS performance itself.\
-For this case we implemented a small Node Proxy which simply queries the HTTP API and provides it again as HTTP webserver.
-You can find it in the folder "liveview-node".\
+For this case we implemented a small Node Proxy which simply queries the HTTP API and provides it again as HTTP webserver.\
+Further the Node Proxy is supporting the basic authentication which is default activated in the DS HTTP API server.cfg if you request the path /api/session/status.\
+You can find the Node Proxy in the folder "liveview-node".\
 **Requirements:** Linux or Windows with installed Node.js ([Download](https://nodejs.org/en/download/)). The basic installation of node.js is enough, because we only use the HTTP module and no other extra modules.
 
 **Usage:**
