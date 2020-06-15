@@ -21,7 +21,7 @@ Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/
 ## Usage:
 - Extract a release or clone the master to your Webserver
 - Rename config-sample.js to config.js and change settings with an editor, at least the API settings (ServerURL and Port) which are to be used
-- If you want no watermarks on google maps you need a Google Maps API key ([HowTo](https://developers.google.com/maps/documentation/javascript/get-api-key)). If you have one set it in the config file or use the URL parameter described below.
+- If you want no watermarks on Google Maps you need a API key ([HowTo](https://developers.google.com/maps/documentation/javascript/get-api-key)). If you have one set it in the config file or use the URL parameter described below.
 - Open the website in Chrome, default URL: http://[your Webserver url]/index.html
 
 **URL paramters**
