@@ -15,8 +15,8 @@ It's also important to know that javascript is executed on client side. That mea
 
 ![Screenshot](docs/ds-liveview_main_view.jpg)
 
-## [DEMO Website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/)
-Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/pcars-ds-liveview/) to see a demonstration, click on "Load from URL" and choose a DEMO file.
+## [DEMO Website](http://www.christoph-eckhardt.de/pcarsdemo/)
+Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/) to see a demonstration, click on "Load from URL" and choose a DEMO file.
 
 ## Usage:
 - Extract a release or clone the master to your Webserver
