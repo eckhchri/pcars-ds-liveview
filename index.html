@@ -635,6 +635,9 @@ function initialize_app(){
 		Ds2ServerURL	= nodeServerURL;
 		Ds2Port			= nodePort;
 		Ds2Path			= nodePath;
+		DsAMS2ServerURL	= nodeServerURL;
+		DsAMS2Port		= nodePort;
+		DsAMS2Path		= nodePath;
 		CRESTServerURL	= nodeServerURL;
 		CRESTPort		= nodePort;
 		CRESTPath		= nodePath;
@@ -1400,6 +1403,8 @@ function initialize_app(){
 		//ChangeHtmlContentByID( '#pcars-dsurl' 		, "DS URL:  "	 	+ DsServerURL + " : " +  DsPort );
 		if(APIMODE == "DEMO"){
 			ChangeHtmlContentByID( '#pcars-dsurl' 		, "DEMO Source:  "	 	+ e.data.globals.datasource );
+		}else if(use_node == true){
+			ChangeHtmlContentByID( '#pcars-dsurl' 		, "Node Proxy URL:  "	 	+ nodeServerURL + ":" +  nodePort );
 		}else{
 			ChangeHtmlContentByID( '#pcars-dsurl' 		, "Server URL:  "	 	+ sCurUrl + ":" +  sCurPort );
 		}
