@@ -8,6 +8,7 @@ var content = "";   // polled data from API and provided through webserver again
 var poll_host;
 var poll_port;
 var poll_path;
+var poll_auth;
 var poll_statusCode = 503;
 
 // set APIMODE
@@ -16,36 +17,43 @@ switch(config.APIMODE){
 		poll_host = config.DsServerURL;
 		poll_port = config.DsPort;
 		poll_path = config.DsPath;
+		poll_auth = config.DsAuth;
 		break;
 	case "DS2":
 		poll_host = config.Ds2ServerURL;
 		poll_port = config.Ds2Port;
 		poll_path = config.Ds2Path;
+		poll_auth = config.Ds2Auth;
 		break;
 	case "DS-AMS2":
 		poll_host = config.DsAMS2ServerURL;
 		poll_port = config.DsAMS2Port;
 		poll_path = config.DsAMS2Path;
+		poll_auth = config.DsAMS2Auth;
 		break;
 	case "CREST":
 		poll_host = config.CRESTServerURL;
 		poll_port = config.CRESTPort;
 		poll_path = config.CRESTPath;
+		poll_auth = "";
 		break;
 	case "CREST2":
 		poll_host = config.CREST2ServerURL;
 		poll_port = config.CREST2Port;
 		poll_path = config.CREST2Path;
+		poll_auth = "";
 		break;
 	case "CREST2-AMS2":
 		poll_host = config.CREST2AMS2ServerURL;
 		poll_port = config.CREST2AMS2Port;
 		poll_path = config.CREST2AMS2Path;
+		poll_auth = "";
 		break;
 	default:
 		poll_host = config.Ds2ServerURL;
 		poll_port = config.Ds2Port;
 		poll_path = config.Ds2Path;
+		poll_auth = config.Ds2Auth;
 }
 
 // Show info on startup
@@ -71,6 +79,7 @@ setInterval(function () {
 		host: poll_host,
 		port: poll_port,
 		path: poll_path,
+		auth: poll_auth,
 		method: 'GET',
 		timeout: config.poll_timeout
 	};

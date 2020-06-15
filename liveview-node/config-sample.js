@@ -7,14 +7,17 @@ module.exports = {
 	DsServerURL:	"mydomain.com",
 	DsPort:			9000,
 	DsPath:			"/api/session/status?attributes&members&participants",
+	DsAuth:			"",		// user:password, for example "admin:pw1", emtpy string means no auth
 	//Project CARS 2 Dedicated Server
 	Ds2ServerURL:	"mydomain2.com",
 	Ds2Port:		9000,
 	Ds2Path:		"/api/session/status?attributes&members&participants",
+	Ds2Auth:		"",		// user:password, for example "admin:pw1", emtpy string means no auth
 	//Automobilista 2 Dedicated Server
 	DsAMS2ServerURL:"mydomainAMS2.com",
 	DsAMS2Port:		9000,
 	DsAMS2Path:		"/api/session/status?attributes&members&participants",
+	DsAMS2Auth:		"",		// user:password, for example "admin:pw1", emtpy string means no auth
 	//Project CARS CREST
 	CRESTServerURL:	"localhost",
 	CRESTPort:		8080,
