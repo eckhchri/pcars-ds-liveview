@@ -23,6 +23,7 @@ Open the [website](http://www.christoph-eckhardt.de/pcarsdemo/) to see a demonst
 - Rename config-sample.js to config.js and change settings with an editor, at least the API settings (ServerURL and Port) which are to be used
 - If you want no watermarks on Google Maps you need a API key ([HowTo](https://developers.google.com/maps/documentation/javascript/get-api-key)). If you have one set it in the config file or use the URL parameter described below.
 - Open the website in Chrome, default URL: http://[your Webserver url]/index.html
+- If you get no data from DS API, look at the "[Troubleshooting](#troubleshooting)" section
 
 **URL paramters**
 - If you want to use URL parameters, set AllowUrlParams to true in config.js
@@ -137,7 +138,7 @@ You can find the Node Proxy in the folder "liveview-node".\
 - the Node Proxy provides the data as webserver on port 8080, which is changeable in the config file
 - now go to the liveview config file, set APIMODE to the same mode which you configured in the Node proxy config, set "use_node" to "true" and set the "nodeServerURL" (maybe also "nodePort" if you changed it in the Node Proxy config)
 - open liveview in Chrome, your Client where liveview is running must have access to the Node Proxy on default port 8080 TCP
-- (optional) you can restrict the DS HTTP API access to the Node Proxy, because without Proxy there was the URL path "api/session/status" for public needed in the DS config under httpApiAccessLevels, there is still no authentication possible, but you can restrict public in the httpApiAccessFilters to the ip address of the Node Proxy for example
+- (optional) you can restrict the DS HTTP API access to the Node Proxy and activate the authentication in the DS config again, because without Proxy there was the URL path "api/session/status" for public needed in the DS config under httpApiAccessLevels (liveview itself is not supporting authentication), Node Proxy supports authentication and you can remove the line there (you have to add user and password from DS API config to the Node Proxy config), further you could restrict the access in the httpApiAccessFilters to the ip address of the Node Proxy for example
 
 **Additional Info:**\
 The Node Proxy can used for the CREST API modes, too. But the normal use case is in my opinion in combination with the DS modes.
