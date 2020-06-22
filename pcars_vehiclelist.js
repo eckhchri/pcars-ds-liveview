@@ -2395,6 +2395,21 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1785300635,
 		"name" : "ARC Camaro",
 		"class" : "ARC_Cam"
+	},
+	{
+		"id" : 1072,
+		"name" : "Opala 79",
+		"class" : "Opala79"
+	},
+	{
+		"id" : 1073,
+		"name" : "Copa Montana",
+		"class" : "Montana"
+	},
+	{
+		"id" : 1074,
+		"name" : "Camaro SS",
+		"class" : "Street"
 	}
 ];
 
