@@ -662,7 +662,54 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-1235504884] = this.CopyObjectWithModifications(this.refPoints[1063112912], {"Name": "VIRginia International Raceway South","AltNames":"Virginia Virginia_South","Zoom":16,"MapInitLat":36.556187,"MapInitLong":-79.206856});
 		//Virgina Patriot
 		this.refPoints[1284894334] = this.CopyObjectWithModifications(this.refPoints[1063112912], {"Name": "VIRginia International Raceway Patriot","AltNames":"Virginia Virginia_Patriot","Zoom":17,"MapInitLat":36.558623,"MapInitLong":-79.207231});
-		
+
+
+
+		// temporarily used dummy IDs till DS is updated
+
+		//Brasília Full / Autódromo de Brasília / Autódromo Internacional Nelson Piquet
+		this.refPoints[172] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	-15.772805
+			,"refLong":	-47.899622
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.98
+			,"cor_PosY_mul":1.025
+			,"Name":	"Brasília Full"
+			,"AltNames":	"Brasilia Full"
+			,"Zoom":	16
+			,"MapInitLat":	-15.775946
+			,"MapInitLong":	-47.899455
+			,"Comment":	"Discrepancies"
+		});
+		//Brasília Outer
+		this.refPoints[173] = this.CopyObjectWithModifications(this.refPoints[172], {"Name": "Brasília Outer","AltNames":"Brasilia Outer"});
+
+		//Granja Viana CopaSaoPauloStage2
+		this.refPoints[174] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	-23.604927
+			,"refLong":	-46.836331
+			,"rotation":	-0.5
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.99
+			,"cor_PosY_mul":1.01
+			,"Name":	"Granja Viana CopaSaoPauloStage2"
+			,"AltNames":	"Granja_Viana CopaSaoPauloStage2"
+			,"Zoom":	18
+			,"MapInitLat":	-23.605089
+			,"MapInitLong":	-46.836638
+			,"Comment":	""
+		});
+		//Granja Viana GranjaVianaKart101
+		this.refPoints[175] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart101","AltNames":"Granja_Viana GranjaVianaKart101"});
+		//Granja Viana GranjaVianaKart102
+		this.refPoints[176] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart102","AltNames":"Granja_Viana GranjaVianaKart102"});
+		//Granja Viana GranjaVianaKart121
+		this.refPoints[177] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart121","AltNames":"Granja_Viana GranjaVianaKart121"});
 	}
 	
 }

@@ -270,6 +270,9 @@ function returnDataSendError(rMode){
 				// optional parameter for decison: async = true, sync = false
 				, false
 			    );
+		//xmlhttp.setRequestHeader("Access-Control-Allow-Origin", "*");
+		//xmlhttp.setRequestHeader("Authorization", "Basic " + btoa("user" + ":" + "password"));
+
 		//force UTF8 encoding for issue #79
 		xmlhttp.overrideMimeType("application/xml; charset=UTF-8");
 		
