@@ -2396,6 +2396,8 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "ARC Camaro",
 		"class" : "ARC_Cam"
 	},
+
+	// temporarily used dummy IDs till DS is updated
 	{
 		"id" : 1072,
 		"name" : "Opala 79",
@@ -2410,6 +2412,31 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1074,
 		"name" : "Camaro SS",
 		"class" : "Street"
+	},
+	{
+		"id" : 1075,
+		"name" : "Brabham BT44",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : 1076,
+		"name" : "Formula Retro V12",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : 1077,
+		"name" : "Formula Retro V8",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : 1078,
+		"name" : "Lotus Type 72E",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : 1079,
+		"name" : "Camaro SS",
+		"class" : "McLaren M23"
 	}
 ];
 
