@@ -2437,6 +2437,16 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1079,
 		"name" : "Camaro SS",
 		"class" : "McLaren M23"
+	},
+	{
+		"id" : 1080,
+		"name" : "Ginetta G55 GT4",
+		"class" : "G55Supercup"
+	},
+	{
+		"id" : 1081,
+		"name" : "Ginetta G58",
+		"class" : "P1"
 	}
 ];
 
