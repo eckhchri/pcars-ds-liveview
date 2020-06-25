@@ -710,6 +710,24 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[176] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart102","AltNames":"Granja_Viana GranjaVianaKart102"});
 		//Granja Viana GranjaVianaKart121
 		this.refPoints[177] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart121","AltNames":"Granja_Viana GranjaVianaKart121"});
+
+		//Riviera
+		this.refPoints[178] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	38.750455
+			,"refLong":	-9.393799
+			,"rotation":	0.25
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.002
+			,"Name":	"Riviera"
+			,"AltNames":	"Riviera GP"
+			,"Zoom":	16
+			,"MapInitLat":	38.750706
+			,"MapInitLong":	-9.393352
+			,"Comment":	""
+		});
 	}
 	
 }
