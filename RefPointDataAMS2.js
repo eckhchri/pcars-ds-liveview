@@ -730,7 +730,7 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 
 		//Bathurst
-		this.refPoints[179] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[1080325116] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-33.448695
 			,"refLong":	149.546165
