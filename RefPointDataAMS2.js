@@ -668,7 +668,7 @@ class RefPointDataAMS2 extends RefPointData {
 		// temporarily used dummy IDs till DS is updated
 
 		//Brasília Full / Autódromo de Brasília / Autódromo Internacional Nelson Piquet
-		this.refPoints[172] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[202837760] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-15.772805
 			,"refLong":	-47.899622
@@ -685,10 +685,10 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"Discrepancies"
 		});
 		//Brasília Outer
-		this.refPoints[173] = this.CopyObjectWithModifications(this.refPoints[172], {"Name": "Brasília Outer","AltNames":"Brasilia Outer"});
+		this.refPoints[1828328431] = this.CopyObjectWithModifications(this.refPoints[202837760], {"Name": "Brasília Outer","AltNames":"Brasilia Outer"});
 
 		//Granja Viana CopaSaoPauloStage2
-		this.refPoints[174] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-939269561] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	-23.604927
 			,"refLong":	-46.836331
@@ -705,14 +705,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	""
 		});
 		//Granja Viana GranjaVianaKart101
-		this.refPoints[175] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart101","AltNames":"Granja_Viana GranjaVianaKart101"});
+		this.refPoints[-844021865] = this.CopyObjectWithModifications(this.refPoints[-939269561], {"Name": "Granja Viana GranjaVianaKart101","AltNames":"Granja_Viana GranjaVianaKart101"});
 		//Granja Viana GranjaVianaKart102
-		this.refPoints[176] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart102","AltNames":"Granja_Viana GranjaVianaKart102"});
+		this.refPoints[553029608] = this.CopyObjectWithModifications(this.refPoints[-939269561], {"Name": "Granja Viana GranjaVianaKart102","AltNames":"Granja_Viana GranjaVianaKart102"});
 		//Granja Viana GranjaVianaKart121
-		this.refPoints[177] = this.CopyObjectWithModifications(this.refPoints[174], {"Name": "Granja Viana GranjaVianaKart121","AltNames":"Granja_Viana GranjaVianaKart121"});
+		this.refPoints[1153901510] = this.CopyObjectWithModifications(this.refPoints[-939269561], {"Name": "Granja Viana GranjaVianaKart121","AltNames":"Granja_Viana GranjaVianaKart121"});
 
-		//Riviera
-		this.refPoints[178] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		//Cascais
+		this.refPoints[1650761166] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	38.750455
 			,"refLong":	-9.393799
@@ -721,12 +721,30 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":1.002
-			,"Name":	"Riviera"
-			,"AltNames":	"Riviera GP"
+			,"Name":	"Cascais"
+			,"AltNames":	"Cascais GP"
 			,"Zoom":	16
 			,"MapInitLat":	38.750706
 			,"MapInitLong":	-9.393352
 			,"Comment":	""
+		});
+
+		//Bathurst
+		this.refPoints[179] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	-33.448695
+			,"refLong":	149.546165
+			,"rotation":	1.25
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":1.003
+			,"Name":	"Bathurst 2020"
+			,"AltNames":	"Bathurst Bathurst_2020"
+			,"Zoom":	15
+			,"MapInitLat":	-33.448809
+			,"MapInitLong":	149.555024
+			,"Comment":	"Discrepancies"
 		});
 	}
 	

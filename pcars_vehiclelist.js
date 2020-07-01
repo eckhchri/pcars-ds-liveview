@@ -2396,57 +2396,65 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "ARC Camaro",
 		"class" : "ARC_Cam"
 	},
-
-	// temporarily used dummy IDs till DS is updated
 	{
-		"id" : 1072,
+		"id" : -1201567586,
 		"name" : "Opala 79",
 		"class" : "Opala79"
 	},
 	{
-		"id" : 1073,
+		"id" : 979672157,
 		"name" : "Copa Montana",
 		"class" : "Montana"
 	},
 	{
-		"id" : 1074,
+		"id" : -2123166417,
 		"name" : "Camaro SS",
 		"class" : "Street"
 	},
 	{
-		"id" : 1075,
+		"id" : -1025098540,
 		"name" : "Brabham BT44",
 		"class" : "F-Retro"
 	},
 	{
-		"id" : 1076,
+		"id" : -532210519,
 		"name" : "Formula Retro V12",
 		"class" : "F-Retro"
 	},
 	{
-		"id" : 1077,
+		"id" : 1437730287,
 		"name" : "Formula Retro V8",
 		"class" : "F-Retro"
 	},
 	{
-		"id" : 1078,
+		"id" : 435621847,
 		"name" : "Lotus Type 72E",
 		"class" : "F-Retro"
 	},
 	{
-		"id" : 1079,
-		"name" : "Camaro SS",
-		"class" : "McLaren M23"
+		"id" : 553963368,
+		"name" : "McLaren M23",
+		"class" : "F-Retro"
 	},
 	{
-		"id" : 1080,
-		"name" : "Ginetta G55 GT4",
+		"id" : 2091910841,
+		"name" : "Ginetta G55 GT4 Supercup",
 		"class" : "G55Supercup"
 	},
 	{
-		"id" : 1081,
+		"id" : 1433352906,
 		"name" : "Ginetta G58",
 		"class" : "P1"
+	},
+	{
+		"id" : 1836524676,
+		"name" : "Stock Car 2020",
+		"class" : "StockCarV8_2020"
+	},
+	{
+		"id" : 619110280,
+		"name" : "Stock Car Corolla",
+		"class" : "StockCarV8_2020"
 	}
 ];
 
