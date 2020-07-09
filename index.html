@@ -3982,9 +3982,9 @@ function builtFilename(mode){
 			if(devmode_tm){
 				// Add trackname additionally in devmode_tm, it is not useful in normal mode, because the trackname ist built if you click on "Export", but you can stop the recording earlier with the switch.
 				// Between stopping and exporting the record the track can change
-				filename = strFullDate + "__" + trackname + "__PCARS_recording";
+				filename = strFullDate + "__" + CurGameRunning + "__" + trackname + "__rec";
 			}else{
-				filename = strFullDate + "__PCARS_recording";
+				filename = strFullDate + "__" + CurGameRunning + "__rec";
 			}
 			break;
 		case "drivertable":
