@@ -711,7 +711,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Granja Viana GranjaVianaKart121
 		this.refPoints[1153901510] = this.CopyObjectWithModifications(this.refPoints[-939269561], {"Name": "Granja Viana GranjaVianaKart121","AltNames":"Granja_Viana GranjaVianaKart121"});
 
-		//Cascais
+		//Cascais (Estoril)
 		this.refPoints[1650761166] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	38.750455
@@ -746,6 +746,30 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	149.555024
 			,"Comment":	"Discrepancies"
 		});
+
+		//Hockenheim GP
+		this.refPoints[-435924753] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	49.328901
+			,"refLong":	8.565022
+			,"rotation":	0.3
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":	"Hockenheim GP"
+			,"AltNames":	""
+			,"Zoom":	16
+			,"MapInitLat":	49.329718
+			,"MapInitLong":	8.574300
+			,"Comment":	"WIP"
+		});
+		//Hockenheim National
+		this.refPoints[-327427534] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim National","AltNames":"","MapInitLong":8.5725});
+		//Hockenheim Short A
+		this.refPoints[239659483] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Short A","AltNames":"Hockenheim Short_A","MapInitLat":49.329058,"MapInitLong":8.56877});
+		//Hockenheim Short B
+		this.refPoints[230784137] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Short B","AltNames":"Hockenheim Short_B","MapInitLat":49.329058,"MapInitLong":8.56877});
 	}
 	
 }
