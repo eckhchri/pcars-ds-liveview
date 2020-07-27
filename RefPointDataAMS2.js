@@ -752,7 +752,7 @@ class RefPointDataAMS2 extends RefPointData {
 		{
 			"refLat":	49.328901
 			,"refLong":	8.565022
-			,"rotation":	0.3
+			,"rotation":	0.35
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
@@ -770,6 +770,12 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[239659483] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Short A","AltNames":"Hockenheim Short_A","MapInitLat":49.329058,"MapInitLong":8.56877});
 		//Hockenheim Short B
 		this.refPoints[230784137] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Short B","AltNames":"Hockenheim Short_B","MapInitLat":49.329058,"MapInitLong":8.56877});
+		//Hockenheim Historic 2001
+		this.refPoints[-108270200] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Historic 2001","AltNames":"Hockenheim GP_2001","Zoom":15,"MapInitLat":49.332988,"MapInitLong":8.58105});
+		//Hockenheim Historic 1988
+		this.refPoints[534374248] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988","AltNames":"Hockenheim GP_1988"});
+		//Hockenheim Historic 1977
+		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
 	}
 	
 }
