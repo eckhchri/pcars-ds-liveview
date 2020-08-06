@@ -762,7 +762,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	16
 			,"MapInitLat":	49.329718
 			,"MapInitLong":	8.574300
-			,"Comment":	"WIP"
+			,"Comment":	""
 		});
 		//Hockenheim National
 		this.refPoints[-327427534] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim National","AltNames":"","MapInitLong":8.5725});
@@ -776,6 +776,24 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[534374248] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988","AltNames":"Hockenheim GP_1988"});
 		//Hockenheim Historic 1977
 		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
+
+		//Silverstone GP
+		this.refPoints[-931849903] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	52.071259
+			,"refLong":	-1.016689
+			,"rotation":	-1.55
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":0.9995
+			,"Name":	"Silverstone GP"
+			,"AltNames":	"Silverstone GrandPrix"
+			,"Zoom":	15
+			,"MapInitLat":	52.071727
+			,"MapInitLong":	-1.015736
+			,"Comment":	""
+		});
 	}
 	
 }

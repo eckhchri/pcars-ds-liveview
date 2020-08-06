@@ -2455,6 +2455,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 619110280,
 		"name" : "Stock Car Corolla",
 		"class" : "StockCarV8_2020"
+	},
+	{
+		"id" : 884102371,
+		"name" : "Formula V10 G1",
+		"class" : "F-V10_Gen1"
 	}
 ];
 
