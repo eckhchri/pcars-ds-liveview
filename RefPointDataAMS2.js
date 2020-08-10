@@ -794,6 +794,10 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-1.015736
 			,"Comment":	""
 		});
+		//Silverstone Historic 2001
+		this.refPoints[509991425] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 2001","AltNames":"Silverstone GrandPrix"});
+		//Silverstone Historic 1991
+		this.refPoints[189] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 1991","AltNames":"Silverstone GrandPrix"});
 	}
 	
 }
