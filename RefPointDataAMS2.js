@@ -275,7 +275,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	""
 		});
 		//Imola Historic 1972
-		this.refPoints[1003427592] = this.CopyObjectWithModifications(this.refPoints[731129913], {"Name": "Imola Historic 1972","AltNames":"ImolaAMS2 Imola_GP_1988"});	//AltName ist duplicate of 1988 variation, but comes from Shared Memory
+		this.refPoints[1003427592] = this.CopyObjectWithModifications(this.refPoints[731129913], {"Name": "Imola Historic 1972","AltNames":"ImolaAMS2 Imola_GP_1972"});
 		//Imola Historic 1988
 		this.refPoints[1544603199] = this.CopyObjectWithModifications(this.refPoints[731129913], {"Name": "Imola Historic 1988","AltNames":"ImolaAMS2 Imola_GP_1988"});
 		//Imola Historic 2001
@@ -541,15 +541,16 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.997
 			,"cor_PosY_mul":0.999
 			,"Name":	"Snetterton 300"
+			,"AltNames":	"Snetterton Snetterton_300"
 			,"Zoom":	16
 			,"MapInitLat":	52.464971
 			,"MapInitLong":	0.947056
 			,"Comment":	""
 		});
 		//Snetterton 200
-		this.refPoints[-1338478783] = this.CopyObjectWithModifications(this.refPoints[987592900], {"Name": "Snetterton 200"});
+		this.refPoints[-1338478783] = this.CopyObjectWithModifications(this.refPoints[987592900], {"Name": "Snetterton 200","AltNames":"Snetterton Snetterton_200"});
 		//Snetterton 100
-		this.refPoints[-1470317805] = this.CopyObjectWithModifications(this.refPoints[987592900], {"Name": "Snetterton 100","AltNames":"Snetterton 200","Zoom": 17,"MapInitLong": 0.942476});	//AltName ist duplicate of 200 variation, but comes from Shared Memory
+		this.refPoints[-1470317805] = this.CopyObjectWithModifications(this.refPoints[987592900], {"Name": "Snetterton 100","AltNames":"Snetterton Snetterton_100","Zoom": 17,"MapInitLong": 0.942476});
 
 		//Spielberg GP
 		this.refPoints[735562025] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -788,16 +789,16 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.997
 			,"cor_PosY_mul":0.9995
 			,"Name":	"Silverstone GP"
-			,"AltNames":	"Silverstone GrandPrix"
+			,"AltNames":	"Silverstone Silverstone_GP"
 			,"Zoom":	15
 			,"MapInitLat":	52.071727
 			,"MapInitLong":	-1.015736
 			,"Comment":	""
 		});
 		//Silverstone Historic 2001
-		this.refPoints[509991425] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 2001","AltNames":"Silverstone GrandPrix"});
+		this.refPoints[509991425] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 2001","AltNames":"Silverstone Silverstone_2001"});
 		//Silverstone Historic 1991
-		this.refPoints[189] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 1991","AltNames":"Silverstone GrandPrix"});
+		this.refPoints[-797317755] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 1991","AltNames":"Silverstone Silverstone_1991"});
 	}
 	
 }
