@@ -799,6 +799,18 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[509991425] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 2001","AltNames":"Silverstone Silverstone_2001"});
 		//Silverstone Historic 1991
 		this.refPoints[-797317755] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 1991","AltNames":"Silverstone Silverstone_1991"});
+		//Silverstone Historic 1975
+		this.refPoints[-526206945] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 1975","AltNames":"Silverstone Silverstone_1975"});
+		//Silverstone Historic 1975 No Chicane
+		this.refPoints[-533867030] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone Historic 1975 No Chicane","AltNames":"Silverstone Silverstone_1975_No_Chicane"});
+		//Silverstone National Historic 2001
+		this.refPoints[-507834810] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone National Historic 2001","AltNames":"Silverstone Silverstone_2001_National"});
+		//Silverstone International Historic 2001
+		this.refPoints[1648317775] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone International Historic 2001","AltNames":"Silverstone Silverstone_2001_International"});
+		//Silverstone National
+		this.refPoints[-1061474453] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone National","AltNames":"Silverstone Silverstone_Natl_2019"});
+		//Silverstone International
+		this.refPoints[964004535] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone International","AltNames":"Silverstone Silverstone_Intl_2019"});
 	}
 	
 }

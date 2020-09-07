@@ -2460,6 +2460,21 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 884102371,
 		"name" : "Formula V10 G1",
 		"class" : "F-V10_Gen1"
+	},
+	{
+		"id" : -1766950841,
+		"name" : "McLaren MP4/12",
+		"class" : "F-V10_Gen1"
+	},
+	{
+		"id" : -1201605905,
+		"name" : "Brabham BT26A",
+		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : 1061494025,
+		"name" : "Lotus Type 49C Cosworth",
+		"class" : "F-Vintage_Gen2"
 	}
 ];
 
