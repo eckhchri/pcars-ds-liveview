@@ -38,14 +38,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Adelaide"
-			,"AltNames":	"Adelaide Modern"
+			,"AltNames":	"Adelaide Adelaide_Modern"
 			,"Zoom":	16
 			,"MapInitLat":	-34.928456
 			,"MapInitLong":	138.618758
 			,"Comment":	""
 		});
 		//Adelaide Historic 1988
-		this.refPoints[-559709709] = this.CopyObjectWithModifications(this.refPoints[827815091], {"Name": "Adelaide Historic 1988","AltNames":"Adelaide Historic","MapInitLat": -34.927166,"MapInitLong": 138.617828});
+		this.refPoints[-559709709] = this.CopyObjectWithModifications(this.refPoints[827815091], {"Name": "Adelaide Historic 1988","AltNames":"Adelaide Adelaide_Historic","MapInitLat": -34.927166,"MapInitLong": 138.617828});
 
 		//Azure Circuit
 		this.refPoints[832629329] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -76,14 +76,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":0.998
 			,"Name":	"Brands Hatch GP"
-			,"AltNames":	"BrandsHatch GrandPrix"
+			,"AltNames":	"BrandsHatch BrandsHatch_GP"
 			,"Zoom":	16
 			,"MapInitLat":	51.356786
 			,"MapInitLong":	0.262930
 			,"Comment":	""
 		});
 		//Brands Hatch Indy
-		this.refPoints[-572148012] = this.CopyObjectWithModifications(this.refPoints[1534602052], {"Name": "Brands Hatch Indy","AltNames":"BrandsHatch Indy","Zoom": 17,"MapInitLat": 51.359136,"MapInitLong": 0.26105});
+		this.refPoints[-572148012] = this.CopyObjectWithModifications(this.refPoints[1534602052], {"Name": "Brands Hatch Indy","AltNames":"BrandsHatch BrandsHatch_Indy","Zoom": 17,"MapInitLat": 51.359136,"MapInitLong": 0.26105});
 
 		//Cadwell Park
 		this.refPoints[1910889511] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -132,7 +132,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.999
 			,"cor_PosY_mul":1.003
 			,"Name":	"Cascavel"
-			,"AltNames":	"Cascavel4 Cascavel5"
+			,"AltNames":	"Cascavel4 Cascavel"
 			,"Zoom":	17
 			,"MapInitLat":	-24.982412
 			,"MapInitLong":	-53.384565
@@ -292,16 +292,16 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":1.004
 			,"Name":	"Interlagos"
-			,"AltNames":	"Interlagos GP"
+			,"AltNames":	"Interlagos Interlagos_GP"
 			,"Zoom":	16
 			,"MapInitLat":	-23.701256
 			,"MapInitLong":	-46.696486
 			,"Comment":	""
 		});
 		//Interlagos Historic 1976
-		this.refPoints[1312214486] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
+		this.refPoints[1312214486] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Interlagos_Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
 		//Interlagos Historic Outer
-		this.refPoints[-1704124105] = this.CopyObjectWithModifications(this.refPoints[1312214486], {"Name": "Interlagos Historic Outer","AltNames":"Interlagos Historic_Outer"});
+		this.refPoints[-1704124105] = this.CopyObjectWithModifications(this.refPoints[1312214486], {"Name": "Interlagos Historic Outer","AltNames":"Interlagos Interlagos_Historic_Outer"});
 		//Interlagos Kart One
 		this.refPoints[228315736] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {
 			"refLat":	-23.702023
@@ -310,7 +310,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1.01
 			,"cor_PosY_mul":1.005
 			,"Name": "Interlagos Kart One"
-			,"AltNames":""
+			,"AltNames":"Interlagos GP"
 			,"Zoom": 		18
 			,"MapInitLat": -23.703726
 			,"MapInitLong":-46.693496
@@ -340,7 +340,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"NA anymore"
 		});
 
-		//Jerez
+		//Jerez Chicane
 		this.refPoints[1406264747] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	36.708457
@@ -350,15 +350,15 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.9975
 			,"cor_PosY_mul":1.002
-			,"Name":	"Jerez"
-			,"AltNames":	"Jerez Chicane"
+			,"Name":	"Jerez Chicane"
+			,"AltNames":	""
 			,"Zoom":	16
 			,"MapInitLat":	36.708665
 			,"MapInitLong":	-6.033030
 			,"Comment":	""
 		});
-		//Jerez Standard
-		this.refPoints[-1602971785] = this.CopyObjectWithModifications(this.refPoints[1406264747], {"Name": "Jerez Standard","AltNames":""});
+		//Jerez Moto
+		this.refPoints[-1602971785] = this.CopyObjectWithModifications(this.refPoints[1406264747], {"Name": "Jerez Moto","AltNames":"Jerez Standard"});
 
 		//Kansai GP
 		this.refPoints[1261622488] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -395,7 +395,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.992
 			,"cor_PosY_mul":0.987
 			,"Name":	"Kyalami 2019"
-			,"AltNames":	"Kyalami Kyalami_GP_2019"
+			,"AltNames":	"Kyalami Kyalami_2019"
 			,"Zoom":	16
 			,"MapInitLat":	-25.996806
 			,"MapInitLong":	28.067484
@@ -412,7 +412,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
 			,"Name":	"Kyalami Historic 1976"
-			,"AltNames":	"Kyalami Historic"
+			,"AltNames":	"Kyalami Kyalami_Historic"
 			,"Zoom":	16
 			,"MapInitLat":	-25.994356
 			,"MapInitLong":	28.068974
@@ -455,14 +455,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1.007
 			,"Name":	"Montreal"
-			,"AltNames":	"Montreal Modern"
+			,"AltNames":	"Montreal Montreal_Modern"
 			,"Zoom":	15
 			,"MapInitLat":	45.505605
 			,"MapInitLong":	-73.524751
 			,"Comment":	"small discrepancies"
 		});
 		//Montreal Historic 1988
-		this.refPoints[-696853932] = this.CopyObjectWithModifications(this.refPoints[-1239363445], {"Name": "Montreal Historic 1988","AltNames":"Montreal Historic"});
+		this.refPoints[-696853932] = this.CopyObjectWithModifications(this.refPoints[-1239363445], {"Name": "Montreal Historic 1988","AltNames":"Montreal Montreal_Historic"});
 
 		//Ortona Kart One
 		this.refPoints[809214670] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -523,7 +523,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":1.035
 			,"cor_PosY_mul":1.04
 			,"Name":	"Santa Cruz do Sul"
-			,"AltNames":	"SantaCruz SantaCruz"
+			,"AltNames":	"SantaCruz SantaCruzDoSul"
 			,"Zoom":	16
 			,"MapInitLat":	-29.799883
 			,"MapInitLong":	-52.436274
@@ -563,18 +563,18 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.994
 			,"cor_PosY_mul":1
 			,"Name":	"Spielberg GP"
-			,"AltNames":	"Spielberg Modern"
+			,"AltNames":	"Spielberg Spielberg_Modern"
 			,"Zoom":	16
 			,"MapInitLat":	47.223546
 			,"MapInitLong":	14.761707
 			,"Comment":	"discrepancies"
 		});
 		//Spielberg Short
-		this.refPoints[1819432538] = this.CopyObjectWithModifications(this.refPoints[735562025], {"Name": "Spielberg Short","AltNames":"","refLong": 14.763715,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.997,"Zoom": 17,"MapInitLat": 47.221266,"MapInitLong": 14.764347});
+		this.refPoints[1819432538] = this.CopyObjectWithModifications(this.refPoints[735562025], {"Name": "Spielberg Short","AltNames":"Spielberg Spielberg_Short","refLong": 14.763715,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.997,"Zoom": 17,"MapInitLat": 47.221266,"MapInitLong": 14.764347});
 		//Spielberg Historic 1974
-		this.refPoints[-213305159] = this.CopyObjectWithModifications(this.refPoints[735562025], {"Name": "Spielberg Historic 1974","AltNames":"Spielberg Vintage","refLat": 47.219763,"refLong": 14.763679,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.99,"MapInitLat": 47.223176,"MapInitLong": 14.760487});
+		this.refPoints[-213305159] = this.CopyObjectWithModifications(this.refPoints[735562025], {"Name": "Spielberg Historic 1974","AltNames":"Spielberg Spielberg_Vintage","refLat": 47.219763,"refLong": 14.763679,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.99,"MapInitLat": 47.223176,"MapInitLong": 14.760487});
 		//Spielberg Historic 1977
-		this.refPoints[-100668052] = this.CopyObjectWithModifications(this.refPoints[-213305159], {"Name": "Spielberg Historic 1977","AltNames":"Spielberg Historic"});
+		this.refPoints[-100668052] = this.CopyObjectWithModifications(this.refPoints[-213305159], {"Name": "Spielberg Historic 1977","AltNames":"Spielberg Spielberg_Historic"});
 
 		//Tarumã Internacional
 		this.refPoints[2074495683] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -587,14 +587,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.992
 			,"cor_PosY_mul":0.99
 			,"Name":	"Tarumã Internacional"
-			,"AltNames":	"Taruma Internacional"
+			,"AltNames":	"Taruma Taruma_Internacional"
 			,"Zoom":	17
 			,"MapInitLat":	-30.048547
 			,"MapInitLong":	-51.019394
 			,"Comment":	"discrepancies"
 		});
 		//Tarumã Chicane
-		this.refPoints[-108853074] = this.CopyObjectWithModifications(this.refPoints[2074495683], {"Name": "Tarumã Chicane","AltNames":"Taruma Chicane"});
+		this.refPoints[-108853074] = this.CopyObjectWithModifications(this.refPoints[2074495683], {"Name": "Tarumã Chicane","AltNames":"Taruma Taruma_Chicane"});
 
 		//Velo Città
 		this.refPoints[1882187011] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -614,9 +614,9 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"small discrepancies"
 		});
 		//Velo Città Track Day
-		this.refPoints[1557615576] = this.CopyObjectWithModifications(this.refPoints[1882187011], {"Name": "Velo Città Track Day","AltNames":"VeloCitta TrackDay"});
+		this.refPoints[1557615576] = this.CopyObjectWithModifications(this.refPoints[1882187011], {"Name": "Velo Città Track Day","AltNames":"VeloCitta VeloCittaTD"});
 		//Velo Città Club Day
-		this.refPoints[1956507207] = this.CopyObjectWithModifications(this.refPoints[1882187011], {"Name": "Velo Città Club Day","AltNames":"VeloCitta ClubDay","Zoom": 17,"MapInitLat": -22.287711,"MapInitLong": -46.849323});
+		this.refPoints[1956507207] = this.CopyObjectWithModifications(this.refPoints[1882187011], {"Name": "Velo Città Club Day","AltNames":"VeloCitta VeloCittaClubDay","Zoom": 17,"MapInitLat": -22.287711,"MapInitLong": -46.849323});
 
 		//Velopark 2017
 		this.refPoints[-1642426225] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -679,14 +679,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_PosX_mul":0.98
 			,"cor_PosY_mul":1.025
 			,"Name":	"Brasília Full"
-			,"AltNames":	"Brasilia Full"
+			,"AltNames":	"Brasilia Brasilia_Full"
 			,"Zoom":	16
 			,"MapInitLat":	-15.775946
 			,"MapInitLong":	-47.899455
 			,"Comment":	"Discrepancies"
 		});
 		//Brasília Outer
-		this.refPoints[1828328431] = this.CopyObjectWithModifications(this.refPoints[202837760], {"Name": "Brasília Outer","AltNames":"Brasilia Outer"});
+		this.refPoints[1828328431] = this.CopyObjectWithModifications(this.refPoints[202837760], {"Name": "Brasília Outer","AltNames":"Brasilia Brasilia_Outer"});
 
 		//Granja Viana CopaSaoPauloStage2
 		this.refPoints[-939269561] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -748,7 +748,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	"Discrepancies"
 		});
 
-		//Hockenheim GP
+		//Hockenheim
 		this.refPoints[-435924753] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	49.328901
@@ -758,8 +758,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":1
 			,"cor_PosY_mul":1
-			,"Name":	"Hockenheim GP"
-			,"AltNames":	""
+			,"Name":	"Hockenheim"
+			,"AltNames":	"Hockenheim GP"
 			,"Zoom":	16
 			,"MapInitLat":	49.329718
 			,"MapInitLong":	8.574300
