@@ -813,7 +813,7 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[964004535] = this.CopyObjectWithModifications(this.refPoints[-931849903], {"Name": "Silverstone International","AltNames":"Silverstone Silverstone_Intl_2019","MapInitLat":52.068097});
 
 		//Buskerud Long
-		this.refPoints[196] = this.CopyObjectWithModifications(this.refPoints[8888888888],
+		this.refPoints[-1786068114] = this.CopyObjectWithModifications(this.refPoints[8888888888],
 		{
 			//"refLat":	-22.976979
 			//,"refLong":	-43.394669
@@ -832,7 +832,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	""
 		});
 		//Buskerud Short
-		this.refPoints[197] = this.CopyObjectWithModifications(this.refPoints[196], {"Name": "Buskerud Short","AltNames":"Buskerud Buskerud_Short","MapInitLat":40.998344});
+		this.refPoints[2097280990] = this.CopyObjectWithModifications(this.refPoints[-1786068114], {"Name": "Buskerud Short","AltNames":"Buskerud Buskerud_Short","MapInitLat":40.998344});
 	}
 	
 }
