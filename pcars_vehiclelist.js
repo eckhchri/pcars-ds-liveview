@@ -2475,6 +2475,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1061494025,
 		"name" : "Lotus Type 49C Cosworth",
 		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : 1368036017,
+		"name" : "BMW M1 Procar",
+		"class" : "Procar"
 	}
 ];
 
