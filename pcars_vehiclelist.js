@@ -2476,10 +2476,37 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "Lotus Type 49C Cosworth",
 		"class" : "F-Vintage_Gen2"
 	},
+	//V1.0.3.2
 	{
 		"id" : 1368036017,
 		"name" : "BMW M1 Procar",
 		"class" : "Procar"
+	},
+	//V1.0.4.0
+	{
+		"id" : 1818602836,
+		"name" : "MINI Cooper",
+		"class" : "MiniChallenge"
+	},
+	{
+		"id" : 1330326301,
+		"name" : "MINI Cooper S 1965",
+		"class" : "TC60S"
+	},
+	{
+		"id" : -830134672,
+		"name" : "Lotus 23",
+		"class" : "TC60S"
+	},
+	{
+		"id" : -934098507,
+		"name" : "BMW M3 Sport Evo Group A",
+		"class" : "Group A"
+	},
+	{
+		"id" : 262982797,
+		"name" : "Mercedes-Benz 190E 2.5-16 Evolution 2 DTM",
+		"class" : "Group A"
 	}
 ];
 
