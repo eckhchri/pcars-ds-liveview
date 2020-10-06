@@ -775,6 +775,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-108270200] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Historic 2001","AltNames":"Hockenheim GP_2001","Zoom":15,"MapInitLat":49.332988,"MapInitLong":8.58105});
 		//Hockenheim Historic 1988
 		this.refPoints[534374248] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988","AltNames":"Hockenheim GP_1988"});
+		//Hockenheim Historic 1988 Short
+		this.refPoints[-543681041] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988 Short","AltNames":"Hockenheim Hockenheim_1988_short"});
 		//Hockenheim Historic 1977
 		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
 
@@ -833,6 +835,30 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Buskerud Short
 		this.refPoints[2097280990] = this.CopyObjectWithModifications(this.refPoints[-1786068114], {"Name": "Buskerud Short","AltNames":"Buskerud Buskerud_Short","MapInitLat":40.998344});
+
+		//Speedland Kart Center 1
+		this.refPoints[756011139] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	-23.532157
+			,"refLong":	-46.584825
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":	"Speedland 1"
+			,"AltNames":	"Speedland Speedland1"
+			,"Zoom":	17
+			,"MapInitLat":	-23.532157
+			,"MapInitLong":	-46.584825
+			,"Comment":	"WIP"
+		});
+		//Speedland Kart Center 2
+		this.refPoints[-588458518] = this.CopyObjectWithModifications(this.refPoints[756011139], {"Name": "Speedland 2","AltNames":"Speedland Speedland2"});
+		//Speedland Kart Center 3
+		this.refPoints[-327486946] = this.CopyObjectWithModifications(this.refPoints[756011139], {"Name": "Speedland 3","AltNames":"Speedland Speedland3"});
+		//Speedland Kart Center 4
+		this.refPoints[-1941017299] = this.CopyObjectWithModifications(this.refPoints[756011139], {"Name": "Speedland 4","AltNames":"Speedland Speedland4"});
 	}
 	
 }
