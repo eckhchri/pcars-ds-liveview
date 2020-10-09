@@ -839,17 +839,17 @@ class RefPointDataAMS2 extends RefPointData {
 		//Speedland Kart Center 1
 		this.refPoints[756011139] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	-23.532157
-			,"refLong":	-46.584825
-			,"rotation":	0
+			"refLat":	-23.532398
+			,"refLong":	-46.584436
+			,"rotation":	-0.5
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":1.015
+			,"cor_PosY_mul":1.002
 			,"Name":	"Speedland 1"
 			,"AltNames":	"Speedland Speedland1"
-			,"Zoom":	17
-			,"MapInitLat":	-23.532157
+			,"Zoom":	19
+			,"MapInitLat":	-23.532057
 			,"MapInitLong":	-46.584825
 			,"Comment":	"WIP"
 		});
