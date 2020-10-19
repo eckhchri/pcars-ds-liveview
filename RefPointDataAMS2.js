@@ -776,7 +776,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Hockenheim Historic 1988
 		this.refPoints[534374248] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988","AltNames":"Hockenheim GP_1988"});
 		//Hockenheim Historic 1988 Short
-		this.refPoints[-543681041] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988 Short","AltNames":"Hockenheim Hockenheim_1988_short"});
+		this.refPoints[-543681041] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988 Short","AltNames":"Hockenheim Hockenheim_1988_short","Zoom":16,"MapInitLat":49.328698,"MapInitLong":8.56829});
 		//Hockenheim Historic 1977
 		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
 
