@@ -859,6 +859,28 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-327486946] = this.CopyObjectWithModifications(this.refPoints[756011139], {"Name": "Speedland 3","AltNames":"Speedland Speedland3"});
 		//Speedland Kart Center 4
 		this.refPoints[-1941017299] = this.CopyObjectWithModifications(this.refPoints[756011139], {"Name": "Speedland 4","AltNames":"Speedland Speedland4"});
+
+		//Nürburgring GP 2020
+		this.refPoints[899109770] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	50.332743
+			,"refLong":	6.943395
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":	"Nürburgring GP 2020"
+			,"AltNames":	"Nurburgring_2020 Nurb_GP_2020"
+			,"Zoom":	15
+			,"MapInitLat":	50.332154
+			,"MapInitLong":	6.940467
+			,"Comment":	"WIP"
+		});
+		//Nürburgring Sprint 2020
+		this.refPoints[1133983668] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Sprint 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint"});
+		//Nürburgring Veedol 2020
+		this.refPoints[-581740816] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Veedol 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Veedol"});
 	}
 	
 }

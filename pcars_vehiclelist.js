@@ -2507,6 +2507,47 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 262982797,
 		"name" : "Mercedes-Benz 190E 2.5-16 Evolution 2 DTM",
 		"class" : "Group A"
+	},
+	//V1.5.0
+	{
+		"id" : 1353949246,
+		"name" : "Mercedes-AMG GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 809291220,
+		"name" : "Porsche 911 GT3 R",
+		"class" : "GT3"
+	},
+	{
+		"id" : -310556497,
+		"name" : "McLaren 720S GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 850609487,
+		"name" : "McLaren 570S GT4",
+		"class" : "GT4"
+	},
+	{
+		"id" : -2019695308,
+		"name" : "Camaro GT4.R",
+		"class" : "GT4"
+	},
+	{
+		"id" : 1464988033,
+		"name" : "Porsche Cayman GT4 Clubsport MR",
+		"class" : "GT4"
+	},
+	{
+		"id" : 2144142462,
+		"name" : "Porsche 911 GT3 Cup 3.8",
+		"class" : "Carrera Cup"
+	},
+	{
+		"id" : -109705417,
+		"name" : "Porsche 911 GT3 Cup 4.0",
+		"class" : "Carrera Cup"
 	}
 ];
 
