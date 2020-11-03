@@ -863,22 +863,22 @@ class RefPointDataAMS2 extends RefPointData {
 		//Nürburgring GP 2020
 		this.refPoints[899109770] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	50.332743
-			,"refLong":	6.943395
-			,"rotation":	0
+			"refLat":	50.332773
+			,"refLong":	6.943377
+			,"rotation":	-0.75
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":0.9995
 			,"Name":	"Nürburgring GP 2020"
 			,"AltNames":	"Nurburgring_2020 Nurb_GP_2020"
 			,"Zoom":	15
-			,"MapInitLat":	50.332154
+			,"MapInitLat":	50.331144
 			,"MapInitLong":	6.940467
-			,"Comment":	"WIP"
+			,"Comment":	""
 		});
 		//Nürburgring Sprint 2020
-		this.refPoints[1133983668] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Sprint 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint"});
+		this.refPoints[1133983668] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Sprint 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint","Zoom":16,"MapInitLat":50.333534,"MapInitLong":6.943427});
 		//Nürburgring Veedol 2020
 		this.refPoints[-581740816] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Veedol 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Veedol"});
 	}
