@@ -881,6 +881,20 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[1133983668] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Sprint 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint","Zoom":16,"MapInitLat":50.333534,"MapInitLong":6.943427});
 		//Nürburgring Veedol 2020
 		this.refPoints[-581740816] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Veedol 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Veedol"});
+		//Nordschleife 2020
+		this.refPoints[884472481] = this.CopyObjectWithModifications(this.refPoints[899109770],
+		{
+				"rotation":		-0.815
+				,"cor_PosX_mul":0.9979
+				,"cor_PosY_mul":0.9996
+				,"Name": 		"Nordschleife 2020"
+				,"AltNames":	"Nurburgring_2020 Nordschleife_2020"
+				,"Zoom":	13
+				,"MapInitLat":	50.359101
+				,"MapInitLong":	6.962529
+		});
+		//Nordschleife 2020 24h
+		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.359101,"MapInitLong":6.962529});
 	}
 	
 }
