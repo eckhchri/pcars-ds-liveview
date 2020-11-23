@@ -894,7 +894,7 @@ class RefPointDataAMS2 extends RefPointData {
 				,"MapInitLong":	6.962529
 		});
 		//Nordschleife 2020 24h
-		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.359101,"MapInitLong":6.962529});
+		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.353881});
 	}
 	
 }
