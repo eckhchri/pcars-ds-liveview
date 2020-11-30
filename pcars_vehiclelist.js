@@ -2548,6 +2548,17 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -109705417,
 		"name" : "Porsche 911 GT3 Cup 4.0",
 		"class" : "Carrera Cup"
+	},
+	//V1.6.0
+	{
+		"id" : -241187148,
+		"name" : "BMW M6 GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 379055283,
+		"name" : "Ginetta G55 GT4",
+		"class" : "GT4"
 	}
 ];
 
