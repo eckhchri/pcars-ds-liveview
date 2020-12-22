@@ -489,7 +489,7 @@
 	 var CoordSystemGPS = {};
 
 	// trackmap debug markers for refPoint tuning
-        var tm_debug_markers = [];
+    var tm_debug_markers = [];
 	
 	var zoom_level;         //Google Maps zoom level
 	
@@ -547,7 +547,11 @@
 
 ////////////////////////////////////////////// start application after loading google map api 
 function initialize_app(){
-		
+	
+	if (window.location.protocol == "https:") {
+		alert('Please use http instead of https for proper functionality!\n\n' +
+		'Its because loading mixed content is blocked by browsers.\nMore details: https://github.com/eckhchri/pcars-ds-liveview/issues/2');	
+	}
 	
 	//preset HTML elemets
 	setParamDemoStartPos(demo_start_pos , true);
