@@ -2037,6 +2037,36 @@ this.aVehicleInfoExt['PCARS2']	= 	[
 this.aVehicleInfoExt['AMS2']  =       [];
 this.aVehicleInfoExt['AMS2']  =       [
 	{
+		"id" : 1368036017,
+		"name" : "BMW M1 Procar",
+		"class" : "Procar"
+	},
+	{
+		"id" : -934098507,
+		"name" : "BMW M3 Sport Evo Group A",
+		"class" : "Group A"
+	},
+	{
+		"id" : 262982797,
+		"name" : "Mercedes-Benz 190E 2.5-16 Evolution 2 DTM",
+		"class" : "Group A"
+	},
+	{
+		"id" : 1330326301,
+		"name" : "MINI Cooper S 1965",
+		"class" : "TC60S"
+	},
+	{
+		"id" : -830134672,
+		"name" : "Lotus 23",
+		"class" : "TC60S"
+	},
+	{
+		"id" : 1818602836,
+		"name" : "MINI Cooper",
+		"class" : "MiniChallenge"
+	},
+	{
 		"id" : -950775810,
 		"name" : "Caterham Academy",
 		"class" : "Cat_Academy"
@@ -2057,6 +2087,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"class" : "Cat_Supersport"
 	},
 	{
+		"id" : -2123166417,
+		"name" : "Camaro SS",
+		"class" : "Street"
+	},
+	{
 		"id" : 428770333,
 		"name" : "F301",
 		"class" : "F-3"
@@ -2068,63 +2103,98 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 697161929,
-		"name" : "Formula Classic Gen1 Model 1",
+		"name" : "Formula Classic Gen1 Model1",
 		"class" : "F-Classic_Gen1"
 	},
 	{
 		"id" : -1819510420,
-		"name" : "Formula Classic Gen1 Model 2",
+		"name" : "Formula Classic Gen1 Model2",
 		"class" : "F-Classic_Gen1"
 	},
 	{
 		"id" : -1667467124,
-		"name" : "Formula Classic Gen2 Model 1",
+		"name" : "Formula Classic Gen2 Model1",
 		"class" : "F-Classic_Gen2"
 	},
 	{
 		"id" : -1004811218,
-		"name" : "Formula Classic Gen2 Model 2",
+		"name" : "Formula Classic Gen2 Model2",
 		"class" : "F-Classic_Gen2"
 	},
 	{
 		"id" : -494068343,
-		"name" : "Formula Classic Gen2 Model 3",
+		"name" : "Formula Classic Gen2 Model3",
 		"class" : "F-Classic_Gen2"
 	},
 	{
 		"id" : -1700189536,
-		"name" : "Formula Classic Gen3 Model 1",
+		"name" : "Formula Classic Gen3 Model1",
 		"class" : "F-Classic_Gen3"
 	},
 	{
 		"id" : -1662617552,
-		"name" : "Formula Classic Gen3 Model 2",
+		"name" : "Formula Classic Gen3 Model2",
 		"class" : "F-Classic_Gen3"
 	},
 	{
 		"id" : -1828044943,
-		"name" : "Formula Classic Gen3 Model 3",
+		"name" : "Formula Classic Gen3 Model3",
 		"class" : "F-Classic_Gen3"
 	},
 	{
 		"id" : -1261768631,
-		"name" : "Formula Vintage G1M1",
+		"name" : "Formula Vintage Gen1 Model1",
 		"class" : "F-Vintage_Gen1"
 	},
 	{
 		"id" : 318400650,
-		"name" : "Formula Vintage G1M2",
+		"name" : "Formula Vintage Gen1 Model2",
 		"class" : "F-Vintage_Gen1"
 	},
 	{
 		"id" : -1988395354,
-		"name" : "Formula Vintage G2M1",
+		"name" : "Formula Vintage Gen2 Model1",
 		"class" : "F-Vintage_Gen2"
 	},
 	{
 		"id" : 617290135,
-		"name" : "Formula Vintage G2M2",
+		"name" : "Formula Vintage Gen2 Model2",
 		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : -1201605905,
+		"name" : "Brabham BT26A",
+		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : 1061494025,
+		"name" : "Lotus Type 49C Cosworth",
+		"class" : "F-Vintage_Gen2"
+	},
+	{
+		"id" : 435621847,
+		"name" : "Lotus Type 72E",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : -1025098540,
+		"name" : "Brabham BT44",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : 1437730287,
+		"name" : "Formula Retro V8",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : -532210519,
+		"name" : "Formula Retro V12",
+		"class" : "F-Retro"
+	},
+	{
+		"id" : 553963368,
+		"name" : "McLaren M23",
+		"class" : "F-Retro"
 	},
 	{
 		"id" : -2140090167,
@@ -2158,8 +2228,18 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 523915852,
-		"name" : "Formula V10",
+		"name" : "Formula V10 Gen2",
 		"class" : "F-V10_Gen2"
+	},
+	{
+		"id" : 884102371,
+		"name" : "Formula V10 Gen1",
+		"class" : "F-V10_Gen1"
+	},
+	{
+		"id" : -1766950841,
+		"name" : "McLaren MP4/12",
+		"class" : "F-V10_Gen1"
 	},
 	{
 		"id" : -2053858829,
@@ -2187,6 +2267,81 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"class" : "CopaTruck"
 	},
 	{
+		"id" : 2091910841,
+		"name" : "Ginetta G55 GT4 Supercup",
+		"class" : "G55Supercup"
+	},
+	{
+		"id" : 379055283,
+		"name" : "Ginetta G55 GT4",
+		"class" : "GT4"
+	},
+	{
+		"id" : 1433352906,
+		"name" : "Ginetta G58",
+		"class" : "P1"
+	},
+	{
+		"id" : -241187148,
+		"name" : "BMW M6 GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 1353949246,
+		"name" : "Mercedes-AMG GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 809291220,
+		"name" : "Porsche 911 GT3 R",
+		"class" : "GT3"
+	},
+	{
+		"id" : 2144142462,
+		"name" : "Porsche 911 GT3 Cup 3.8",
+		"class" : "Carrera Cup"
+	},
+	{
+		"id" : -109705417,
+		"name" : "Porsche 911 GT3 Cup 4.0",
+		"class" : "Carrera Cup"
+	},
+	{
+		"id" : 1464988033,
+		"name" : "Porsche Cayman GT4 Clubsport MR",
+		"class" : "GT4"
+	},
+	{
+		"id" : 850609487,
+		"name" : "McLaren 570S GT4",
+		"class" : "GT4"
+	},
+	{
+		"id" : -310556497,
+		"name" : "McLaren 720S GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : -2019695308,
+		"name" : "Camaro GT4.R",
+		"class" : "GT4"
+	},
+	{
+		"id" : -1001569309,
+		"name" : "McLaren F1 GTR",
+		"class" : "GT1"
+	},
+	{
+		"id" : 1979398129,
+		"name" : "Mercedes-Benz CLK-LM",
+		"class" : "GT1"
+	},
+	{
+		"id" : 1076438091,
+		"name" : "Porsche 911 GT1-98",
+		"class" : "GT1"
+	},
+	{
 		"id" : 844159614,
 		"name" : "Kart 125cc 2STROKE",
 		"class" : "Kart125cc"
@@ -2210,6 +2365,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 95104745,
 		"name" : "MCR S2000",
 		"class" : "P4"
+	},
+	{
+		"id" : -204135982,
+		"name" : "McLaren F1 LM",
+		"class" : "Street"
 	},
 	{
 		"id" : 1932261404,
@@ -2242,6 +2402,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"class" : "LancerCup"
 	},
 	{
+		"id" : 979672157,
+		"name" : "Copa Montana",
+		"class" : "Montana"
+	},
+	{
 		"id" : -1404228714,
 		"name" : "Sprint Race",
 		"class" : "SprintRace"
@@ -2253,12 +2418,22 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1323381033,
-		"name" : "Stock Car Brasil",
+		"name" : "Chevrolet Cruze Stock Car 2019",
 		"class" : "StockCarV8"
 	},
 	{
+		"id" : 1836524676,
+		"name" : "Chevrolet Cruza Stock Car 2020",
+		"class" : "StockCarV8_2020"
+	},
+	{
+		"id" : 619110280,
+		"name" : "Toyota Corolla Stock Car 2020",
+		"class" : "StockCarV8_2020"
+	},
+	{
 		"id" : 306371028,
-		"name" : "Superkart 250cc (PF=Yes)",
+		"name" : "Superkart 250cc",
 		"class" : "SuperKart"
 	},
 	{
@@ -2302,6 +2477,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"class" : "P2"
 	},
 	{
+		"id" : -1201567586,
+		"name" : "Opala 79",
+		"class" : "Opala79"
+	},
+	{
 		"id" : 245459304,
 		"name" : "Opala Stock Cars 1986",
 		"class" : "Opala86"
@@ -2338,7 +2518,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : -815324367,
-		"name" : "Fusca CA",
+		"name" : "Fusca Classic FL",
 		"class" : "CopaClassicFL"
 	},
 	{
@@ -2353,22 +2533,22 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : -45848101,
-		"name" : "Copa Classic A",
+		"name" : "Gol Classic FL",
 		"class" : "CopaClassicFL"
 	},
 	{
 		"id" : -333355648,
-		"name" : "Copa Classic B",
+		"name" : "Gol Classic B",
 		"class" : "CopaClassicB"
 	},
 	{
 		"id" : 1661024873,
-		"name" : "Pas Classic A",
+		"name" : "Passat Classic FL",
 		"class" : "CopaClassicFL"
 	},
 	{
 		"id" : 1700425966,
-		"name" : "Pas Classic B",
+		"name" : "Passat Classic B",
 		"class" : "CopaClassicB"
 	},
 	{
@@ -2383,7 +2563,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 390318757,
-		"name" : "Pas HotCars",
+		"name" : "Passat HotCars",
 		"class" : "Hot Cars"
 	},
 	{
@@ -2395,170 +2575,6 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1785300635,
 		"name" : "ARC Camaro",
 		"class" : "ARC_Cam"
-	},
-	{
-		"id" : -1201567586,
-		"name" : "Opala 79",
-		"class" : "Opala79"
-	},
-	{
-		"id" : 979672157,
-		"name" : "Copa Montana",
-		"class" : "Montana"
-	},
-	{
-		"id" : -2123166417,
-		"name" : "Camaro SS",
-		"class" : "Street"
-	},
-	{
-		"id" : -1025098540,
-		"name" : "Brabham BT44",
-		"class" : "F-Retro"
-	},
-	{
-		"id" : -532210519,
-		"name" : "Formula Retro V12",
-		"class" : "F-Retro"
-	},
-	{
-		"id" : 1437730287,
-		"name" : "Formula Retro V8",
-		"class" : "F-Retro"
-	},
-	{
-		"id" : 435621847,
-		"name" : "Lotus Type 72E",
-		"class" : "F-Retro"
-	},
-	{
-		"id" : 553963368,
-		"name" : "McLaren M23",
-		"class" : "F-Retro"
-	},
-	{
-		"id" : 2091910841,
-		"name" : "Ginetta G55 GT4 Supercup",
-		"class" : "G55Supercup"
-	},
-	{
-		"id" : 1433352906,
-		"name" : "Ginetta G58",
-		"class" : "P1"
-	},
-	{
-		"id" : 1836524676,
-		"name" : "Stock Car 2020",
-		"class" : "StockCarV8_2020"
-	},
-	{
-		"id" : 619110280,
-		"name" : "Stock Car Corolla",
-		"class" : "StockCarV8_2020"
-	},
-	{
-		"id" : 884102371,
-		"name" : "Formula V10 G1",
-		"class" : "F-V10_Gen1"
-	},
-	{
-		"id" : -1766950841,
-		"name" : "McLaren MP4/12",
-		"class" : "F-V10_Gen1"
-	},
-	{
-		"id" : -1201605905,
-		"name" : "Brabham BT26A",
-		"class" : "F-Vintage_Gen2"
-	},
-	{
-		"id" : 1061494025,
-		"name" : "Lotus Type 49C Cosworth",
-		"class" : "F-Vintage_Gen2"
-	},
-	//V1.0.3.2
-	{
-		"id" : 1368036017,
-		"name" : "BMW M1 Procar",
-		"class" : "Procar"
-	},
-	//V1.0.4.0
-	{
-		"id" : 1818602836,
-		"name" : "MINI Cooper",
-		"class" : "MiniChallenge"
-	},
-	{
-		"id" : 1330326301,
-		"name" : "MINI Cooper S 1965",
-		"class" : "TC60S"
-	},
-	{
-		"id" : -830134672,
-		"name" : "Lotus 23",
-		"class" : "TC60S"
-	},
-	{
-		"id" : -934098507,
-		"name" : "BMW M3 Sport Evo Group A",
-		"class" : "Group A"
-	},
-	{
-		"id" : 262982797,
-		"name" : "Mercedes-Benz 190E 2.5-16 Evolution 2 DTM",
-		"class" : "Group A"
-	},
-	//V1.5.0
-	{
-		"id" : 1353949246,
-		"name" : "Mercedes-AMG GT3",
-		"class" : "GT3"
-	},
-	{
-		"id" : 809291220,
-		"name" : "Porsche 911 GT3 R",
-		"class" : "GT3"
-	},
-	{
-		"id" : -310556497,
-		"name" : "McLaren 720S GT3",
-		"class" : "GT3"
-	},
-	{
-		"id" : 850609487,
-		"name" : "McLaren 570S GT4",
-		"class" : "GT4"
-	},
-	{
-		"id" : -2019695308,
-		"name" : "Camaro GT4.R",
-		"class" : "GT4"
-	},
-	{
-		"id" : 1464988033,
-		"name" : "Porsche Cayman GT4 Clubsport MR",
-		"class" : "GT4"
-	},
-	{
-		"id" : 2144142462,
-		"name" : "Porsche 911 GT3 Cup 3.8",
-		"class" : "Carrera Cup"
-	},
-	{
-		"id" : -109705417,
-		"name" : "Porsche 911 GT3 Cup 4.0",
-		"class" : "Carrera Cup"
-	},
-	//V1.6.0
-	{
-		"id" : -241187148,
-		"name" : "BMW M6 GT3",
-		"class" : "GT3"
-	},
-	{
-		"id" : 379055283,
-		"name" : "Ginetta G55 GT4",
-		"class" : "GT4"
 	}
 ];
 
