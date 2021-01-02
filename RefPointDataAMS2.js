@@ -913,7 +913,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":	15
 			,"MapInitLat":	50.436800
 			,"MapInitLong":	5.970570
-			,"Comment":	"WIP"
+			,"Comment":	""
 		});
 	}
 	
