@@ -901,13 +901,13 @@ class RefPointDataAMS2 extends RefPointData {
 		//Spa Francorchamps 2020
 		this.refPoints[-1262750090] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	50.436800
-			,"refLong":	5.970570
-			,"rotation":	0
+			"refLat":	50.437348
+			,"refLong":	5.967998
+			,"rotation":	-2.3
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.9965
+			,"cor_PosY_mul":0.9995
 			,"Name":	"Spa Francorchamps 2020"
 			,"AltNames":	"SpaFrancorchamps Spa_Francorchamps_2020"
 			,"Zoom":	15
