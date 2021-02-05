@@ -2575,6 +2575,16 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1785300635,
 		"name" : "ARC Camaro",
 		"class" : "ARC_Cam"
+	},
+	{
+		"id" : 310900789,
+		"name" : "Ginetta G40",
+		"class" : "GT5"
+	},
+	{
+		"id" : -751207847,
+		"name" : "Ginetta G40 Cup",
+		"class" : "G40Cup"
 	}
 ];
 
