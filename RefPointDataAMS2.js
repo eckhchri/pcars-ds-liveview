@@ -898,7 +898,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Nordschleife 2020 24h
 		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.353881});
 
-		//Spa Francorchamps 2020
+		//Spa-Francorchamps 2020
 		this.refPoints[-1262750090] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":	50.437348
@@ -908,13 +908,15 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.9965
 			,"cor_PosY_mul":0.9995
-			,"Name":	"Spa Francorchamps 2020"
+			,"Name":	"Spa-Francorchamps 2020"
 			,"AltNames":	"SpaFrancorchamps Spa_Francorchamps_2020"
 			,"Zoom":	15
 			,"MapInitLat":	50.436800
 			,"MapInitLong":	5.970570
 			,"Comment":	""
 		});
+		//Spa-Francorchamps Historic 1993
+		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993","Comment":"WIP"});
 	}
 	
 }

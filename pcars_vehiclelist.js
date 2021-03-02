@@ -2585,6 +2585,32 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -751207847,
 		"name" : "Ginetta G40 Cup",
 		"class" : "G40Cup"
+	},
+	//V1.1.2.0
+	{
+		"id" : 957632269,
+		"name" : "Porsche 962C",
+		"class" : "Group C"
+	},
+	{
+		"id" : 65306143,
+		"name" : "Sauber C9 Mercedes-Benz",
+		"class" : "Group C"
+	},
+	{
+		"id" : -371227432,
+		"name" : "Chevrolet Omega Stock Car 1999",
+		"class" : "StockCar99"
+	},
+	{
+		"id" : -1357079805,
+		"name" : "Chevrolet Cruze Stock Car 2021",
+		"class" : "StockCarV8_2021"
+	},
+	{
+		"id" : 806954123,
+		"name" : "Toyota Corolla Stock Car 2021",
+		"class" : "StockCarV8_2021"
 	}
 ];
 
