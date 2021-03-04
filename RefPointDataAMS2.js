@@ -916,7 +916,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	""
 		});
 		//Spa-Francorchamps Historic 1993
-		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993","Comment":"WIP"});
+		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993","Comment":""});
 	}
 	
 }
