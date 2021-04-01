@@ -2174,27 +2174,27 @@ this.aVehicleInfoExt['AMS2']  =       [
 	{
 		"id" : 435621847,
 		"name" : "Lotus Type 72E",
-		"class" : "F-Retro"
+		"class" : "F-Retro_Gen1"
 	},
 	{
 		"id" : -1025098540,
 		"name" : "Brabham BT44",
-		"class" : "F-Retro"
+		"class" : "F-Retro_Gen1"
 	},
 	{
 		"id" : 1437730287,
 		"name" : "Formula Retro V8",
-		"class" : "F-Retro"
+		"class" : "F-Retro_Gen1"
 	},
 	{
 		"id" : -532210519,
 		"name" : "Formula Retro V12",
-		"class" : "F-Retro"
+		"class" : "F-Retro_Gen1"
 	},
 	{
 		"id" : 553963368,
 		"name" : "McLaren M23",
-		"class" : "F-Retro"
+		"class" : "F-Retro_Gen1"
 	},
 	{
 		"id" : -2140090167,
@@ -2611,6 +2611,16 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 806954123,
 		"name" : "Toyota Corolla Stock Car 2021",
 		"class" : "StockCarV8_2021"
+	},
+	{
+		"id" : 369722929,
+		"name" : "Formula Retro Gen2",
+		"class" : "F-Retro_Gen2"
+	},
+	{
+		"id" : 1439296671,
+		"name" : "Lotus 79",
+		"class" : "F-Retro_Gen2"
 	}
 ];
 
