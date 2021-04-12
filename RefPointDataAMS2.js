@@ -342,11 +342,11 @@ class RefPointDataAMS2 extends RefPointData {
 		//Jacarepaguá Historic 2005
 		this.refPoints[393495474] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005","AltNames":"Jacarepagua Jacarepagua_2005"});
 		//Jacarepaguá Historic 2005 Oval
-		this.refPoints[-1081969582] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005 Oval","AltNames":"Jacarepagua Jacarepagua_OVAL"});
+		this.refPoints[-1081969582] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005 Oval","AltNames":"Jacarepagua Jacarepagua_OVAL","MapInitLat":-22.975779});
 		//Jacarepaguá Historic 2005 SCB
-		this.refPoints[-467386624] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005 SCB","AltNames":"Jacarepagua Jacarepagua_SCB"});
+		this.refPoints[-467386624] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005 SCB","AltNames":"Jacarepagua Jacarepagua_SCB","MapInitLong":-43.396529});
 		//Jacarepaguá Historic 2005 Short
-		this.refPoints[1891554116] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005 Short","AltNames":"Jacarepagua Jacarepagua_SHORT"});
+		this.refPoints[1891554116] = this.CopyObjectWithModifications(this.refPoints[-89774641], {"Name": "Jacarepaguá Historic 2005 Short","AltNames":"Jacarepagua Jacarepagua_SHORT","MapInitLong":-43.395809});
 
 		//Jerez Chicane
 		this.refPoints[1406264747] = this.CopyObjectWithModifications(this.refPoints[9999999999],
