@@ -2621,6 +2621,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1439296671,
 		"name" : "Lotus 79",
 		"class" : "F-Retro_Gen2"
+	},
+	{
+		"id" : 476615325,
+		"name" : "Brabham BT46B",
+		"class" : "F-Retro_Gen2"
 	}
 ];
 
