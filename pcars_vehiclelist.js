@@ -2626,7 +2626,29 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 476615325,
 		"name" : "Brabham BT46B",
 		"class" : "F-Retro_Gen2"
-	}
+	},
+	//V1.1.5.5
+	{
+		"id" : -1729418598,
+		"name" : "Chevrolet Corvette C8.R",
+		"class" : "GTE"
+	},
+	{
+		"id" : 24108228,
+		"name" : "Porsche 911 RSR GTE",
+		"class" : "GTE"
+	},
+	{
+		"id" : 901145560,
+		"name" : "BMW M8 GTE",
+		"class" : "GTE"
+	},
+	//V1.1.9.9
+	{
+		"id" : 912279169,
+		"name" : "Cadillac DPi-VR",
+		"class" : "DPI"
+	},
 ];
 
 }// end load vehicle data

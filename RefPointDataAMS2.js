@@ -925,6 +925,65 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Spa-Francorchamps Historic 1993
 		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993","Comment":""});
+
+		//V1.1.5.5
+		//Daytona Road Course
+		this.refPoints[467707118] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		29.185563
+			,"refLong":		-81.069434
+			,"rotation":		-125.8
+			,"cor_r_Long":		0
+			,"cor_r_Lat":		0
+			,"cor_PosX_mul":	1.001
+			,"cor_PosY_mul":	1
+			,"Name":		"Daytona Road Course"
+			,"AltNames":	 	"Daytona Daytona_Road_Course"
+			,"Zoom":		16
+			,"MapInitLat":	29.185007
+			,"MapInitLong":	-81.069100
+			,"Comment":		"WIP, from pcars"
+		});
+		//Daytona Nascar Road Course
+		this.refPoints[705412912] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Nascar Road Course","Name2": "","AltNames":"Daytona Daytona_Nascar_Road_Course"});
+
+		//Long Beach
+		this.refPoints[1731699995] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        33.763798
+			,"refLong":      -118.191507
+			,"rotation":     0.6
+			,"cor_r_Long":   0
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 0.998
+			,"cor_PosY_mul": 1.002
+			,"Name":         "Long Beach"
+			,"AltNames":	 "Long_Beach Long_Beach"
+			,"Zoom":         17
+			,"MapInitLat":   33.764020
+			,"MapInitLong":  -118.190768
+			,"Comment": "WIP, from pcars"
+		});
+
+		//V1.1.7.0
+		//Laguna Seca
+		this.refPoints[568559152] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		36.584300
+			,"refLong":		-121.753357
+			,"rotation":	2
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":		"Laguna Seca"
+			,"AltNames":	"Laguna_Seca Laguna_Seca_2020"
+			,"Zoom":		16
+			,"MapInitLat":	36.584275
+			,"MapInitLong":	-121.753345
+			,"Comment": "WIP, from pcars"
+		});
+
 	}
 	
 }
