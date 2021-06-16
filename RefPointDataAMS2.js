@@ -930,22 +930,22 @@ class RefPointDataAMS2 extends RefPointData {
 		//Daytona Road Course
 		this.refPoints[467707118] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":		29.185563
+			"refLat":		29.185571
 			,"refLong":		-81.069434
 			,"rotation":		-125.8
 			,"cor_r_Long":		0
 			,"cor_r_Lat":		0
-			,"cor_PosX_mul":	1.001
-			,"cor_PosY_mul":	1
+			,"cor_PosX_mul":	1.002
+			,"cor_PosY_mul":	0.999
 			,"Name":		"Daytona Road Course"
 			,"AltNames":	 	"Daytona Daytona_Road_Course"
 			,"Zoom":		16
 			,"MapInitLat":	29.185007
 			,"MapInitLong":	-81.069100
-			,"Comment":		"WIP, from pcars"
+			,"Comment":		"same Track ID as pcars2"
 		});
 		//Daytona Nascar Road Course
-		this.refPoints[705412912] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Nascar Road Course","Name2": "","AltNames":"Daytona Daytona_Nascar_Road_Course"});
+		this.refPoints[705412912] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Nascar Road Course","Name2": "","AltNames":"Daytona Daytona_Nascar_Road_Course","Comment":""});
 
 		//Long Beach
 		this.refPoints[1731699995] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -962,26 +962,26 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":         17
 			,"MapInitLat":   33.764020
 			,"MapInitLong":  -118.190768
-			,"Comment": "WIP, from pcars"
+			,"Comment": "same Track ID as pcars2"
 		});
 
 		//V1.1.7.0
 		//Laguna Seca
 		this.refPoints[568559152] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":		36.584300
-			,"refLong":		-121.753357
-			,"rotation":	2
+			"refLat":		36.584272
+			,"refLong":		-121.753386
+			,"rotation":	-0.75
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.003
 			,"Name":		"Laguna Seca"
 			,"AltNames":	"Laguna_Seca Laguna_Seca_2020"
 			,"Zoom":		16
 			,"MapInitLat":	36.584275
 			,"MapInitLong":	-121.753345
-			,"Comment": "WIP, from pcars"
+			,"Comment": ""
 		});
 
 	}
