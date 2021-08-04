@@ -172,3 +172,5 @@ The Node Proxy can used for the CREST API modes, too. But the normal use case is
 
 - Chrome seems to have a problem, if you have liveview open, switch to another browser tab and later back again. Then the liveview tab freezes, normally it catches itself after several seconds. But better is you don't switch to other tabs. Maybe opening a new instance of Chrome instead of new tabs work. Further minimizing the Chrome window has the same effect.
 
+
+
