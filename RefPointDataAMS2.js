@@ -298,6 +298,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-46.696486
 			,"Comment":	""
 		});
+		//Interlagos SCB - from V1.2.1.9
+		this.refPoints[420324528] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {"Name": "Interlagos SCB","AltNames":"Interlagos Interlagos_SCB"});
 		//Interlagos Historic 1976
 		this.refPoints[1312214486] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Interlagos_Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
 		//Interlagos Historic Outer
