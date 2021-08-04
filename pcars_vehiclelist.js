@@ -2649,6 +2649,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "Cadillac DPi-VR",
 		"class" : "DPI"
 	},
+	//V1.2.1.6
+	{
+		"id" : 2016280350,
+		"name" : "Porsche 911 RSR 74",
+		"class" : "TC70S"
+	}
 ];
 
 }// end load vehicle data

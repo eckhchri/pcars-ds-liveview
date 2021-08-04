@@ -737,6 +737,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-9.393352
 			,"Comment":	""
 		});
+		//Cascais Alternate - from V1.2.1.6
+		this.refPoints[-1015082583] = this.CopyObjectWithModifications(this.refPoints[1650761166], {"Name": "Cascais Alternate","AltNames":"Cascais Cascais_Alternate"});
 
 		//Bathurst
 		this.refPoints[1080325116] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -981,6 +983,25 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Zoom":		16
 			,"MapInitLat":	36.584275
 			,"MapInitLong":	-121.753345
+			,"Comment": ""
+		});
+
+		//V1.2.1.7
+		//Salvador Street Circuit
+		this.refPoints[761562120] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		-12.944537
+			,"refLong":		-38.431418
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1.005
+			,"cor_PosY_mul":1.007
+			,"Name":		"Salvador Street Circuit"
+			,"AltNames":	"Salvador Salvador_Street_Circuit"
+			,"Zoom":		17
+			,"MapInitLat":	-12.946795
+			,"MapInitLong":	-38.429754
 			,"Comment": ""
 		});
 
