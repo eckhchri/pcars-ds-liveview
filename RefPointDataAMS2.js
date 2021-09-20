@@ -1007,6 +1007,27 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 
+		//V1.2.3.5
+		//Monza
+		this.refPoints[222] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		45.619146
+			,"refLong":		9.280608
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":		"Monza"
+			,"AltNames":	"Monza Monza_2020"
+			,"Zoom":		15
+			,"MapInitLat":	45.621690
+			,"MapInitLong":	9.286990
+			,"Comment": "WIP"
+		});
+		//Monza Junior
+		this.refPoints[223] = this.CopyObjectWithModifications(this.refPoints[222], {"Name": "Monza Junior","Name2": "","AltNames":"Monza Monza_2020_Junior","Comment":"WIP"});
+
 	}
 	
 }
