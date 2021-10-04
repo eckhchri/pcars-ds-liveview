@@ -928,7 +928,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	""
 		});
 		//Spa-Francorchamps Historic 1993
-		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993","Comment":""});
+		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993"});
 
 		//V1.1.5.5
 		//Daytona Road Course
@@ -1009,25 +1009,36 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.2.3.5
 		//Monza
-		this.refPoints[222] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-1257095693] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":		45.619146
-			,"refLong":		9.280608
-			,"rotation":	0
+			"refLat":		45.623527
+			,"refLong":		9.284271
+			,"rotation":	-0.2
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.9975
+			,"cor_PosY_mul":1.001
 			,"Name":		"Monza"
 			,"AltNames":	"Monza Monza_2020"
 			,"Zoom":		15
 			,"MapInitLat":	45.621690
 			,"MapInitLong":	9.286990
-			,"Comment": "WIP"
+			,"Comment": ""
 		});
 		//Monza Junior
-		this.refPoints[223] = this.CopyObjectWithModifications(this.refPoints[222], {"Name": "Monza Junior","Name2": "","AltNames":"Monza Monza_2020_Junior","Comment":"WIP"});
-
+		this.refPoints[-2098177408] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Junior","AltNames":"Monza Monza_2020_Junior","Zoom":16,"MapInitLat":45.61679,"MapInitLong":9.28292});
+		//V1.2.3.8
+		//Monza Historic 1971
+		this.refPoints[-332593300] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Historic 1971","AltNames":"Monza Monza_1971"});
+		//Monza Historic 1971 Junior
+		this.refPoints[-1956398437] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Historic 1971 Junior","AltNames":"Monza Monza_1971_Junior","Zoom":16,"MapInitLat":45.61679,"MapInitLong":9.28292});
+		//Monza Historic 1971 10km
+		this.refPoints[-2054918047] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Historic 1971 10km","AltNames":"Monza Monza_1971_10k"});
+		//Monza Historic 1971 10km no chicane
+		this.refPoints[612695202] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Historic 1971 10km no chicane","AltNames":"Monza Monza_1971_10knc"});
+		//V1.2.4.0
+		//Monza 1991
+		this.refPoints[1003665316] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza 1991","AltNames":"Monza Monza_1991"});
 	}
 	
 }
