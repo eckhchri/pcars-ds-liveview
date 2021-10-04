@@ -2665,6 +2665,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1965836946,
 		"name" : "Chevrolet Corvette C3",
 		"class" : "TC70S"
+	},
+	//V1.2.4.0
+	{
+		"id" : 143364290,
+		"name" : "BMW 2002 Turbo",
+		"class" : "TC60S"
 	}
 ];
 
