@@ -2671,6 +2671,23 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 143364290,
 		"name" : "BMW 2002 Turbo",
 		"class" : "TC60S"
+	},
+	//?
+	{
+		"id" : -1966031044,
+		"name" : "BMW M4 GT4",
+		"class" : "GT4"
+	},
+	//V1.2.6.0
+	{
+		"id" : -1170240161,
+		"name" : "VW Polo",
+		"class" : "TSICup"
+	},
+	{
+		"id" : -1137512839,
+		"name" : "VW Virtus",
+		"class" : "TSICup"
 	}
 ];
 

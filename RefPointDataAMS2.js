@@ -1039,6 +1039,24 @@ class RefPointDataAMS2 extends RefPointData {
 		//V1.2.4.0
 		//Monza 1991
 		this.refPoints[1003665316] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza 1991","AltNames":"Monza Monza_1991"});
+
+		//Azure Circuit 2021
+		this.refPoints[-1939104917] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":	43.73705
+			,"refLong":	7.427437
+			,"rotation":	126
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.978
+			,"cor_PosY_mul":0.985
+			,"Name":	"Azure Circuit 2021"
+			,"AltNames":	"Azure_Circuit Azure_Circuit_2021"
+			,"Zoom":	16
+			,"MapInitLat":	43.737186
+			,"MapInitLong":	7.425732
+			,"Comment":	"WIP"
+		});
 	}
 	
 }
