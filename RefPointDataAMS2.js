@@ -1040,22 +1040,66 @@ class RefPointDataAMS2 extends RefPointData {
 		//Monza 1991
 		this.refPoints[1003665316] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza 1991","AltNames":"Monza Monza_1991"});
 
+		//V1.2.9.0
 		//Azure Circuit 2021
 		this.refPoints[-1939104917] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	43.73705
-			,"refLong":	7.427437
-			,"rotation":	126
+			"refLat":	43.737142
+			,"refLong":	7.427485
+			,"rotation":	125.7
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":0.978
-			,"cor_PosY_mul":0.985
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":0.998
 			,"Name":	"Azure Circuit 2021"
 			,"AltNames":	"Azure_Circuit Azure_Circuit_2021"
 			,"Zoom":	16
 			,"MapInitLat":	43.737186
 			,"MapInitLong":	7.425732
-			,"Comment":	"WIP"
+			,"Comment":	""
+		});
+
+		//V1.3.1.0
+		//Watkins Glen GP
+		this.refPoints[-875185854] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		42.336421
+			,"refLong":		-76.924775
+			,"rotation":	1.3
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":1.001
+			,"Name":		"Watkins Glen GP"
+			,"AltNames":	"Watkins_Glen Watkins_Glen_GP"
+			,"Zoom":		15
+			,"MapInitLat":	42.336564
+			,"MapInitLong":	-76.924519
+			,"Comment": ""
+		});
+		//Watkins Glen GP Inner Loop
+		this.refPoints[-191952188] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen GP Inner Loop","AltNames":"Watkins_Glen Watkins_Glen_GPIL"});
+		//Watkins Glen Short
+		this.refPoints[2035789624] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short","AltNames":"Watkins_Glen Watkins_Glen_S"});
+		//Watkins Glen Short Inner Loop
+		this.refPoints[-619438500] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short Inner Loop","AltNames":"Watkins_Glen Watkins_Glen_SIL"});
+
+		//Cleveland GP
+		this.refPoints[-2123543761] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		41.518940
+			,"refLong":		-81.678438
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":		"Cleveland GP"
+			,"AltNames":	"Cleveland Cleveland_GP"
+			,"Zoom":		16
+			,"MapInitLat":	41.518940
+			,"MapInitLong":	-81.678438
+			,"Comment": ""
 		});
 	}
 	
