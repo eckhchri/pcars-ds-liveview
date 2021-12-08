@@ -2688,6 +2688,37 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -1137512839,
 		"name" : "VW Virtus",
 		"class" : "TSICup"
+	},
+	//V1.3.1.0
+	{
+		"id" : 1408764300,
+		"name" : "Lola T98",
+		"class" : "F-USA_Gen2"
+	},
+	{
+		"id" : -406287657,
+		"name" : "Reynard 98i Ford",
+		"class" : "F-USA_Gen2"
+	},
+	{
+		"id" : 2011027431,
+		"name" : "Reynard 98i Honda",
+		"class" : "F-USA_Gen2"
+	},
+	{
+		"id" : 174857498,
+		"name" : "Reynard 98i Mercedes",
+		"class" : "F-USA_Gen2"
+	},
+	{
+		"id" : -1212556546,
+		"name" : "Reynard 98i Toyota",
+		"class" : "F-USA_Gen2"
+	},
+	{
+		"id" : 943684424,
+		"name" : "Swift 009c",
+		"class" : "F-USA_Gen2"
 	}
 ];
 
