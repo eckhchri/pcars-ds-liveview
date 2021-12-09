@@ -1087,18 +1087,18 @@ class RefPointDataAMS2 extends RefPointData {
 		//Cleveland GP
 		this.refPoints[-2123543761] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":		41.518940
-			,"refLong":		-81.678438
-			,"rotation":	0
+			"refLat":		41.520765
+			,"refLong":		-81.678257
+			,"rotation":	0.53
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":0.999
 			,"Name":		"Cleveland GP"
 			,"AltNames":	"Cleveland Cleveland_GP"
 			,"Zoom":		16
-			,"MapInitLat":	41.518940
-			,"MapInitLong":	-81.678438
+			,"MapInitLat":	41.51866
+			,"MapInitLong":	-81.679858
 			,"Comment": ""
 		});
 	}
