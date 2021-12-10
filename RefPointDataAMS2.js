@@ -1080,9 +1080,9 @@ class RefPointDataAMS2 extends RefPointData {
 		//Watkins Glen GP Inner Loop
 		this.refPoints[-191952188] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen GP Inner Loop","AltNames":"Watkins_Glen Watkins_Glen_GPIL"});
 		//Watkins Glen Short
-		this.refPoints[2035789624] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short","AltNames":"Watkins_Glen Watkins_Glen_S"});
+		this.refPoints[2035789624] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short","AltNames":"Watkins_Glen Watkins_Glen_S","MapInitLat":42.337204});
 		//Watkins Glen Short Inner Loop
-		this.refPoints[-619438500] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short Inner Loop","AltNames":"Watkins_Glen Watkins_Glen_SIL"});
+		this.refPoints[-619438500] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short Inner Loop","AltNames":"Watkins_Glen Watkins_Glen_SIL","MapInitLat":42.337204});
 
 		//Cleveland GP
 		this.refPoints[-2123543761] = this.CopyObjectWithModifications(this.refPoints[9999999999],
