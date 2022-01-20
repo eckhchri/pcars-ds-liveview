@@ -112,7 +112,7 @@ httpApiAccessLevels : {
 }
 ```
 You should be able to open the URL without authentication:\
-http://DS_domain_name/api/session/status?attributes&members&participants. If this works, liveview should work,too.
+http://DS_domain_name:port/api/session/status?attributes&members&participants. If this works, liveview should work,too.
 
 Other relevant settings in DS config:
 ```
