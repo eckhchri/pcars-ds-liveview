@@ -1101,6 +1101,25 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-81.679858
 			,"Comment": ""
 		});
+
+		//V1.3.3.0
+		//Road America
+		this.refPoints[-398562049] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		43.798198
+			,"refLong":		-87.996168
+			,"rotation":	0.68
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":1.001
+			,"Name":		"Road America"
+			,"AltNames":	"Road_America Road_America_RC"
+			,"Zoom":		15
+			,"MapInitLat":	43.798710
+			,"MapInitLong":	-87.995182
+			,"Comment": ""
+		});
 	}
 	
 }

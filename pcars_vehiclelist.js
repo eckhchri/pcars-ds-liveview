@@ -2719,6 +2719,68 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 943684424,
 		"name" : "Swift 009c",
 		"class" : "F-USA_Gen2"
+	},
+	//V1.3.2.6
+	{
+		"id" : 2005556145,
+		"name" : "McLaren MP4/1C",
+		"class" : "F-Retro_Gen3"
+	},
+	{
+		"id" : -1054300831,
+		"name" : "Formula Retro Gen3 Turbo",
+		"class" : "F-Retro_Gen3"
+	},
+	{
+		"id" : -1762971386,
+		"name" : "VW Polo GTS",
+		"class" : "TSICup"
+	},
+	{
+		"id" : -1310963279,
+		"name" : "VW Virtus GTS",
+		"class" : "TSICup"
+	},
+	//V1.3.2.9
+	{
+		"id" : -845636149,
+		"name" : "Lola B2K00 Ford-Cosworth",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : 1305671580,
+		"name" : "Lola B2K00 Mercedes-Benz",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : -1883533152,
+		"name" : "Lola B2K00 Toyota",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : 990042821,
+		"name" : "Reynard 2Ki Ford-Cosworth",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : 1530597907,
+		"name" : "Reynard 2Ki Honda",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : 290327508,
+		"name" : "Reynard 2Ki Mercedes-Benz",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : -564338836,
+		"name" : "Reynard 2Ki Toyota",
+		"class" : "F-USA_Gen3"
+	},
+	{
+		"id" : -953316099,
+		"name" : "Formula Retro Gen3 DFV",
+		"class" : "F-Retro_Gen3"
 	}
 ];
 
