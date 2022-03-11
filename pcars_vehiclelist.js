@@ -2781,6 +2781,32 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -953316099,
 		"name" : "Formula Retro Gen3 DFV",
 		"class" : "F-Retro_Gen3"
+	},
+	//V1.3.4.0
+	{
+		"id" : -1477576480,
+		"name" : "Lola T95/00 Ford-Cosworth",
+		"class" : "F-USA_Gen1"
+	},
+	{
+		"id" : 1701517873,
+		"name" : "Lola T95/00 Mercedes-Benz",
+		"class" : "F-USA_Gen1"
+	},
+	{
+		"id" : -794072085,
+		"name" : "Reynard 95i Ford-Cosworth",
+		"class" : "F-USA_Gen1"
+	},
+	{
+		"id" : 243649723,
+		"name" : "Reynard 95i Honda",
+		"class" : "F-USA_Gen1"
+	},
+	{
+		"id" : -832846400,
+		"name" : "Reynard 95i Mercedes-Benz",
+		"class" : "F-USA_Gen1"
 	}
 ];
 
