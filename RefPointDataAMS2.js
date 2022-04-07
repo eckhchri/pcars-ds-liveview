@@ -1120,6 +1120,25 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-87.995182
 			,"Comment": ""
 		});
+
+		//V1.3.5.0
+		//Galeão Airport
+		this.refPoints[1674501695] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		-22.799539
+			,"refLong":		-43.239885
+			,"rotation":	0.8
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1.003
+			,"Name":		"Galeão Airport"
+			,"AltNames":	"Galeao_Airport Galeao_Airport"
+			,"Zoom":		17
+			,"MapInitLat":	-22.799817
+			,"MapInitLong":	-43.23892
+			,"Comment": "WIP"
+		});
 	}
 	
 }

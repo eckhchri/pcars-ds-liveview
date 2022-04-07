@@ -2807,6 +2807,22 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -832846400,
 		"name" : "Reynard 95i Mercedes-Benz",
 		"class" : "F-USA_Gen1"
+	},
+	//V1.3.5.0
+	{
+		"id" : -377858367,
+		"name" : "Formula Ultimate Gen2",
+		"class" : "F-Ultimate_Gen2"
+	},
+	{
+		"id" : 1767659669,
+		"name" : "Chevrolet Cruze Stock Car 2022",
+		"class" : "StockCarV8_2022"
+	},
+	{
+		"id" : 539628044,
+		"name" : "Toyota Corolla Stock Car 2022",
+		"class" : "StockCarV8_2022"
 	}
 ];
 
