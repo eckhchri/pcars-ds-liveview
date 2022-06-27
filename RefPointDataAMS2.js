@@ -1144,19 +1144,19 @@ class RefPointDataAMS2 extends RefPointData {
 		//Buenos Aires Circuito 15
 		this.refPoints[237] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":		-34.694055
-			,"refLong":		-58.458984
-			,"rotation":	-0.05
+			"refLat":		-34.694051
+			,"refLong":		-58.458974
+			,"rotation":	-0.1
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":0.976
+			,"cor_PosX_mul":0.974
 			,"cor_PosY_mul":0.976
 			,"Name":		"Buenos Aires Circuito 15"
 			,"AltNames":	"Buenos_Aires Buenos_Aires_Circuito_15"
 			,"Zoom":		16
 			,"MapInitLat":	-34.690437
 			,"MapInitLong":	-58.455127
-			,"Comment": "WIP"
+			,"Comment": ""
 		});
 		//Buenos Aires Circuito 12
 		this.refPoints[238] = this.CopyObjectWithModifications(this.refPoints[237], {"Name": "Buenos Aires Circuito 12","AltNames":"Buenos_Aires Buenos_Aires_Circuito_12"});
@@ -1178,14 +1178,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"rotation":	-0.9
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
+			,"cor_PosX_mul":0.9985
 			,"cor_PosY_mul":1.004
 			,"Name":		"Termas de Rio Hondo"
 			,"AltNames":	"Termas_Rio_Hondo Termas_Rio_Hondo"
 			,"Zoom":		16
 			,"MapInitLat":	-27.507662
 			,"MapInitLong":	-64.913847
-			,"Comment": "WIP"
+			,"Comment": ""
 		});
 	}
 }
