@@ -1170,7 +1170,7 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[242] = this.CopyObjectWithModifications(this.refPoints[239], {"Name": "Buenos Aires Circuito 9","AltNames":"Buenos_Aires Buenos_Aires_Circuito_9"});
 
 		//V1.3.7.6
-		//Termas de Rio Hondo
+		//Termas de Río Hondo
 		this.refPoints[243] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		-27.507524
@@ -1180,11 +1180,30 @@ class RefPointDataAMS2 extends RefPointData {
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.9985
 			,"cor_PosY_mul":1.004
-			,"Name":		"Termas de Rio Hondo"
+			,"Name":		"Termas de Río Hondo"
 			,"AltNames":	"Termas_Rio_Hondo Termas_Rio_Hondo"
 			,"Zoom":		16
 			,"MapInitLat":	-27.507662
 			,"MapInitLong":	-64.913847
+			,"Comment": ""
+		});
+
+		//V1.3.8.0
+		//Córdoba TC
+		this.refPoints[244] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		-31.573589
+			,"refLong":		-64.363897
+			,"rotation":	-0.05
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.003
+			,"Name":		"Córdoba TC"
+			,"AltNames":	"Cordoba Cordoba_International"
+			,"Zoom":		17
+			,"MapInitLat":	-31.575023
+			,"MapInitLong":	-64.361592
 			,"Comment": ""
 		});
 	}
