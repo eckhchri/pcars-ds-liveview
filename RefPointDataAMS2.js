@@ -1142,7 +1142,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.3.7.3
 		//Buenos Aires Circuito 15
-		this.refPoints[237] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-430748509] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		-34.694051
 			,"refLong":		-58.458974
@@ -1159,19 +1159,19 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//Buenos Aires Circuito 12
-		this.refPoints[238] = this.CopyObjectWithModifications(this.refPoints[237], {"Name": "Buenos Aires Circuito 12","AltNames":"Buenos_Aires Buenos_Aires_Circuito_12"});
+		this.refPoints[799677855] = this.CopyObjectWithModifications(this.refPoints[-430748509], {"Name": "Buenos Aires Circuito 12","AltNames":"Buenos_Aires Buenos_Aires_Circuito_12"});
 		//Buenos Aires Circuito 6
-		this.refPoints[239] = this.CopyObjectWithModifications(this.refPoints[237], {"Name": "Buenos Aires Circuito 6","AltNames":"Buenos_Aires Buenos_Aires_Circuito_6","Zoom":17,"MapInitLat":-34.69445,"MapInitLong":-58.459867});
+		this.refPoints[-1914387303] = this.CopyObjectWithModifications(this.refPoints[-430748509], {"Name": "Buenos Aires Circuito 6","AltNames":"Buenos_Aires Buenos_Aires_Circuito_6","Zoom":17,"MapInitLat":-34.69445,"MapInitLong":-58.459867});
 		//Buenos Aires Circuito 7
-		this.refPoints[240] = this.CopyObjectWithModifications(this.refPoints[239], {"Name": "Buenos Aires Circuito 7","AltNames":"Buenos_Aires Buenos_Aires_Circuito_7"});
+		this.refPoints[-1297377774] = this.CopyObjectWithModifications(this.refPoints[-1914387303], {"Name": "Buenos Aires Circuito 7","AltNames":"Buenos_Aires Buenos_Aires_Circuito_7"});
 		//Buenos Aires Circuito 8
-		this.refPoints[241] = this.CopyObjectWithModifications(this.refPoints[239], {"Name": "Buenos Aires Circuito 8","AltNames":"Buenos_Aires Buenos_Aires_Circuito_8"});
+		this.refPoints[-444279793] = this.CopyObjectWithModifications(this.refPoints[-1914387303], {"Name": "Buenos Aires Circuito 8","AltNames":"Buenos_Aires Buenos_Aires_Circuito_8"});
 		//Buenos Aires Circuito 9
-		this.refPoints[242] = this.CopyObjectWithModifications(this.refPoints[239], {"Name": "Buenos Aires Circuito 9","AltNames":"Buenos_Aires Buenos_Aires_Circuito_9"});
+		this.refPoints[325651039] = this.CopyObjectWithModifications(this.refPoints[-1914387303], {"Name": "Buenos Aires Circuito 9","AltNames":"Buenos_Aires Buenos_Aires_Circuito_9"});
 
 		//V1.3.7.6
 		//Termas de Río Hondo
-		this.refPoints[243] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[163877389] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		-27.507524
 			,"refLong":		-64.915548
@@ -1190,7 +1190,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.3.8.0
 		//Córdoba TC
-		this.refPoints[244] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-1142444519] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		-31.573589
 			,"refLong":		-64.363897
