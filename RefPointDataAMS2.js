@@ -1206,5 +1206,9 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-64.361592
 			,"Comment": ""
 		});
+		//Córdoba No.4 / Córdoba GP
+		this.refPoints[-1043857231] = this.CopyObjectWithModifications(this.refPoints[-1142444519], {"Name": "Córdoba No.4","AltNames":"Cordoba Cordoba_GP"});
+		//Córdoba No.2 / Córdoba National
+		this.refPoints[-171682166] = this.CopyObjectWithModifications(this.refPoints[-1142444519], {"Name": "Córdoba No.2","AltNames":"Cordoba Cordoba_NATL"});
 	}
 }
