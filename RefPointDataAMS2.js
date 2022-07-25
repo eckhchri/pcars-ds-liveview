@@ -1212,5 +1212,26 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-1043857231] = this.CopyObjectWithModifications(this.refPoints[-1142444519], {"Name": "Córdoba No.4","AltNames":"Cordoba Cordoba_GP"});
 		//Córdoba No.2 / Córdoba National
 		this.refPoints[-171682166] = this.CopyObjectWithModifications(this.refPoints[-1142444519], {"Name": "Córdoba No.2","AltNames":"Cordoba Cordoba_NATL","MapInitLong":-64.364662});
+
+		//V1.3.9.4
+		//WWT Raceway Road Course 1
+		this.refPoints[248] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		38.651002
+			,"refLong":		-90.135621
+			,"rotation":	-1.85
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1.001
+			,"Name":		"WWT Raceway Road Course 1"
+			,"AltNames":	"Gateway Gateway_RC1"
+			,"Zoom":		16
+			,"MapInitLat":	38.651326
+			,"MapInitLong":	-90.135041
+			,"Comment": ""
+		});
+		//WWT Raceway Road Course 2
+		this.refPoints[249] = this.CopyObjectWithModifications(this.refPoints[248], {"Name": "WWT Raceway Road Course 2","AltNames":"Gateway Gateway_RC2"});
 	}
 }
