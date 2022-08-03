@@ -949,7 +949,10 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":		"same Track ID as pcars2"
 		});
 		//Daytona Nascar Road Course
-		this.refPoints[705412912] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Nascar Road Course","Name2": "","AltNames":"Daytona Daytona_Nascar_Road_Course","Comment":""});
+		this.refPoints[705412912] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Nascar Road Course","AltNames":"Daytona Daytona_Nascar_Road_Course","Comment":""});
+		//V1.3.9.8
+		//Daytona Tri-Oval
+		this.refPoints[251] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Tri-Oval","AltNames":"Daytona Daytona_Speedway_Tri_Oval","Comment":""});
 
 		//Long Beach
 		this.refPoints[1731699995] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -1233,5 +1236,29 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//WWT Raceway Road Course 2
 		this.refPoints[249] = this.CopyObjectWithModifications(this.refPoints[248], {"Name": "WWT Raceway Road Course 2","AltNames":"Gateway Gateway_RC2"});
+		//V1.3.9.8
+		//WWT Raceway Oval
+		this.refPoints[250] = this.CopyObjectWithModifications(this.refPoints[248], {"Name": "WWT Raceway Oval","AltNames":"Gateway Gateway_OVAL"});
+
+		//V1.3.9.8
+		//Auto Club Speedway Sports Car Course
+		this.refPoints[252] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		34.088868
+			,"refLong":		-117.500521
+			,"rotation":	0.27
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.003
+			,"Name":		"Auto Club Speedway Sports Car Course"
+			,"AltNames":	"Fontana Fontana_SCC"
+			,"Zoom":		17
+			,"MapInitLat":	34.088944
+			,"MapInitLong":	-117.500440
+			,"Comment": ""
+		});
+		//Auto Club Speedway Oval
+		this.refPoints[253] = this.CopyObjectWithModifications(this.refPoints[252], {"Name": "Auto Club Speedway Oval","AltNames":"Fontana Fontana_OVAL"});
 	}
 }
