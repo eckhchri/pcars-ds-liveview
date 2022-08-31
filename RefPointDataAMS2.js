@@ -952,7 +952,7 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[705412912] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Nascar Road Course","AltNames":"Daytona Daytona_Nascar_Road_Course","Comment":""});
 		//V1.3.9.8
 		//Daytona Tri-Oval
-		this.refPoints[251] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Tri-Oval","AltNames":"Daytona Daytona_Speedway_Tri_Oval","Comment":""});
+		this.refPoints[2054003546] = this.CopyObjectWithModifications(this.refPoints[467707118], {"Name": "Daytona Tri-Oval","AltNames":"Daytona Daytona_Speedway_Tri_Oval","Comment":""});
 
 		//Long Beach
 		this.refPoints[1731699995] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -1218,7 +1218,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.3.9.4
 		//WWT Raceway Road Course 1
-		this.refPoints[248] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-385022794] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		38.651002
 			,"refLong":		-90.135621
@@ -1235,14 +1235,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//WWT Raceway Road Course 2
-		this.refPoints[249] = this.CopyObjectWithModifications(this.refPoints[248], {"Name": "WWT Raceway Road Course 2","AltNames":"Gateway Gateway_RC2"});
+		this.refPoints[175033766] = this.CopyObjectWithModifications(this.refPoints[-385022794], {"Name": "WWT Raceway Road Course 2","AltNames":"Gateway Gateway_RC2"});
 		//V1.3.9.8
 		//WWT Raceway Oval
-		this.refPoints[250] = this.CopyObjectWithModifications(this.refPoints[248], {"Name": "WWT Raceway Oval","AltNames":"Gateway Gateway_OVAL"});
+		this.refPoints[2044979547] = this.CopyObjectWithModifications(this.refPoints[-385022794], {"Name": "WWT Raceway Oval","AltNames":"Gateway Gateway_OVAL"});
 
 		//V1.3.9.8
 		//Auto Club Speedway Sports Car Course
-		this.refPoints[252] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-1899621736] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		34.088868
 			,"refLong":		-117.500521
@@ -1259,6 +1259,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//Auto Club Speedway Oval
-		this.refPoints[253] = this.CopyObjectWithModifications(this.refPoints[252], {"Name": "Auto Club Speedway Oval","AltNames":"Fontana Fontana_OVAL"});
+		this.refPoints[1602044389] = this.CopyObjectWithModifications(this.refPoints[-1899621736], {"Name": "Auto Club Speedway Oval","AltNames":"Fontana Fontana_OVAL"});
 	}
 }
