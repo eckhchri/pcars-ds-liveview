@@ -2054,12 +2054,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 	{
 		"id" : 1330326301,
 		"name" : "MINI Cooper S 1965",
-		"class" : "TC60S"
+		"class" : "TC60S2"
 	},
 	{
 		"id" : -830134672,
 		"name" : "Lotus 23",
-		"class" : "TC60S"
+		"class" : "TC60S2"
 	},
 	{
 		"id" : 1818602836,
@@ -2823,6 +2823,27 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 539628044,
 		"name" : "Toyota Corolla Stock Car 2022",
 		"class" : "StockCarV8_2022"
+	},
+	//V1.4
+	{
+		"id" : -855144880,
+		"name" : "Mercedes-AMG GT4",
+		"class" : "GT4"
+	},
+	{
+		"id" : -1170674276,
+		"name" : "Ginetta G55 GT3",
+		"class" : "GTOpen"
+	},
+	{
+		"id" : 400701189,
+		"name" : "MINI Cooper S 1965 B",
+		"class" : "CopaClassicB"
+	},
+	{
+		"id" : -619309786,
+		"name" : "Vulkan Truck",
+		"class" : "CopaTruck"
 	}
 ];
 
