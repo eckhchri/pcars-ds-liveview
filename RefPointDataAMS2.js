@@ -929,6 +929,9 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Spa-Francorchamps Historic 1993
 		this.refPoints[1283905272] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps Historic 1993","AltNames":"SpaFrancorchamps Spa_Francorchamps_1993"});
+		//V1.4
+		//Spa-Francorchamps 2022
+		this.refPoints[775712153] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2022","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022"});
 
 		//V1.1.5.5
 		//Daytona Road Course
