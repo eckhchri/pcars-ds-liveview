@@ -2844,6 +2844,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -619309786,
 		"name" : "Vulkan Truck",
 		"class" : "CopaTruck"
+	},
+	//V1.4.3.1
+	{
+		"id" : 373176631,
+		"name" : "Chevrolet Corvette GTP",
+		"class" : "Group C"
 	}
 ];
 
