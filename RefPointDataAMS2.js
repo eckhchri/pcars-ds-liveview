@@ -934,7 +934,7 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[775712153] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2022","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022"});
 		//V1.4.2.9
 		//Spa-Francorchamps 1970
-		this.refPoints[255] = this.CopyObjectWithModifications(this.refPoints[-1262750090],
+		this.refPoints[-1736505524] = this.CopyObjectWithModifications(this.refPoints[-1262750090],
 		{
 			"refLat":	50.437348
 			,"refLong":	5.967996
@@ -949,7 +949,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment":	""
 		});
 		//Spa-Francorchamps 1970 1000km
-		this.refPoints[256] = this.CopyObjectWithModifications(this.refPoints[255], {"Name": "Spa-Francorchamps 1970 1000km","AltNames":"SpaFrancorchamps Spa_Francorchamps_1970_1000km"});
+		this.refPoints[1170932587] = this.CopyObjectWithModifications(this.refPoints[-1736505524], {"Name": "Spa-Francorchamps 1970 1000km","AltNames":"SpaFrancorchamps Spa_Francorchamps_1970_1000km"});
 
 		//V1.1.5.5
 		//Daytona Road Course
@@ -1284,7 +1284,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.4.3.2
 		//Indianapolis Motor Speedway Road Course
-		this.refPoints[257] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[328837350] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		39.793347
 			,"refLong":		-86.238889
@@ -1301,6 +1301,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//Indianapolis Motor Speedway Oval
-		this.refPoints[258] = this.CopyObjectWithModifications(this.refPoints[257], {"Name": "Indianapolis Motor Speedway Oval","AltNames":"Indianapolis Indianapolis_2022_OVAL"});
+		this.refPoints[-468654879] = this.CopyObjectWithModifications(this.refPoints[328837350], {"Name": "Indianapolis Motor Speedway Oval","AltNames":"Indianapolis Indianapolis_2022_OVAL"});
 	}
 }
