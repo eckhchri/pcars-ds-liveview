@@ -369,6 +369,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Jerez Moto
 		this.refPoints[-1602971785] = this.CopyObjectWithModifications(this.refPoints[1406264747], {"Name": "Jerez Moto","AltNames":"Jerez Standard"});
+		//Jerez Historic 1988 - from V1.4.4.8
+		this.refPoints[-1548942089] = this.CopyObjectWithModifications(this.refPoints[1406264747], {"Name": "Jerez Historic 1988","AltNames":"Jerez GP"});
 
 		//Kansai GP
 		this.refPoints[1261622488] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -741,6 +743,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Cascais Alternate - from V1.2.1.6
 		this.refPoints[-1015082583] = this.CopyObjectWithModifications(this.refPoints[1650761166], {"Name": "Cascais Alternate","AltNames":"Cascais Cascais_Alternate"});
+		//Cascais Historic 1988 - from V1.4.4.8
+		this.refPoints[-869897529] = this.CopyObjectWithModifications(this.refPoints[1650761166], {"Name": "Cascais Historic 1988","AltNames":"Cascais Cascais_1988"});
 
 		//Bathurst
 		this.refPoints[1080325116] = this.CopyObjectWithModifications(this.refPoints[9999999999],
