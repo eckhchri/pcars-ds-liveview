@@ -2088,7 +2088,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : -2123166417,
-		"name" : "Camaro SS",
+		"name" : "Chevrolet Camaro SS",
 		"class" : "Street"
 	},
 	{
@@ -2125,21 +2125,6 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -494068343,
 		"name" : "Formula Classic Gen2 Model3",
 		"class" : "F-Classic_Gen2"
-	},
-	{
-		"id" : -1700189536,
-		"name" : "Formula Classic Gen3 Model1",
-		"class" : "F-Classic_Gen3"
-	},
-	{
-		"id" : -1662617552,
-		"name" : "Formula Classic Gen3 Model2",
-		"class" : "F-Classic_Gen3"
-	},
-	{
-		"id" : -1828044943,
-		"name" : "Formula Classic Gen3 Model3",
-		"class" : "F-Classic_Gen3"
 	},
 	{
 		"id" : -1261768631,
@@ -2323,7 +2308,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : -2019695308,
-		"name" : "Camaro GT4.R",
+		"name" : "Chevrolet Camaro GT4.R",
 		"class" : "GT4"
 	},
 	{
@@ -2365,11 +2350,6 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 95104745,
 		"name" : "MCR S2000",
 		"class" : "P4"
-	},
-	{
-		"id" : -204135982,
-		"name" : "McLaren F1 LM",
-		"class" : "Street"
 	},
 	{
 		"id" : 1932261404,
@@ -2435,11 +2415,6 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 306371028,
 		"name" : "Superkart 250cc",
 		"class" : "SuperKart"
-	},
-	{
-		"id" : 1560162507,
-		"name" : "Ultima GTR",
-		"class" : "Street"
 	},
 	{
 		"id" : 306785397,
@@ -2573,7 +2548,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1785300635,
-		"name" : "ARC Camaro",
+		"name" : "Aussie Racing Camaro",
 		"class" : "ARC_Cam"
 	},
 	{
@@ -2850,6 +2825,112 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 373176631,
 		"name" : "Chevrolet Corvette GTP",
 		"class" : "Group C"
+	},
+	//V1.4.3.7 - 1.4.5.2
+	{
+		"id" : -61299331,
+		"name" : "McLaren MP4/5B",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : -1700189536,
+		"name" : "Formula Classic Gen3 Model1",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : -1662617552,
+		"name" : "Formula Classic Gen3 Model2",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : -1828044943,
+		"name" : "Formula Classic Gen3 Model3",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : 264295457,
+		"name" : "Formula Classic Gen3 Model4",
+		"class" : "F-Classic_Gen3"
+	},
+	{
+		"id" : 271036494,
+		"name" : "McLaren MP4/6",
+		"class" : "F-Classic_Gen4"
+	},
+	{
+		"id" : 1294128988,
+		"name" : "Formula Classic Gen4 Model1",
+		"class" : "F-Classic_Gen4"
+	},
+	{
+		"id" : 157362639,
+		"name" : "Formula Classic Gen4 Model2",
+		"class" : "F-Classic_Gen4"
+	},
+	{
+		"id" : 121318055,
+		"name" : "Formula Classic Gen4 Model3",
+		"class" : "F-Classic_Gen4"
+	},
+	{
+		"id" : 1891730007,
+		"name" : "Nissan R89C",
+		"class" : "Group C"
+	},
+	{
+		"id" : -343023508,
+		"name" : "Nissan R390 GT1",
+		"class" : "GT1"
+	},
+	{
+		"id" : 240609990,
+		"name" : "Brabham BT49",
+		"class" : "F-Retro_Gen2"
+	},
+	{
+		"id" : 1959097924,
+		"name" : "Lotus 98T",
+		"class" : "F-Classic_Gen1"
+	},
+	{
+		"id" : -975958992,
+		"name" : "McLaren Senna",
+		"class" : "Hypercars"
+	},
+	{
+		"id" : 1630268373,
+		"name" : "Brabham BT62",
+		"class" : "Hypercars"
+	},
+	{
+		"id" : 798477355,
+		"name" : "Chevrolet Corvette C8 Z06",
+		"class" : "Supercars"
+	},
+	{
+		"id" : -204135982,
+		"name" : "McLaren F1 LM",
+		"class" : "Supercars"
+	},
+	{
+		"id" : 1560162507,
+		"name" : "Ultima GTR",
+		"class" : "Supercars"
+	},
+	{
+		"id" : -1416203489,
+		"name" : "Nissan GT-R Nismo GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 280856873,
+		"name" : "Brabham BT52",
+		"class" : "F-Retro_Gen3"
+	},
+	{
+		"id" : -489015418,
+		"name" : "McLaren MP4/4",
+		"class" : "F-Classic_Gen2"
 	}
 ];
 
