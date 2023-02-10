@@ -746,15 +746,15 @@ class RefPointDataAMS2 extends RefPointData {
 		//Cascais Historic 1988 - from V1.4.4.8
 		this.refPoints[-869897529] = this.CopyObjectWithModifications(this.refPoints[1650761166], {"Name": "Cascais Historic 1988","AltNames":"Cascais Cascais_1988"});
 
-		//Bathurst
+		//Bathurst 2020
 		this.refPoints[1080325116] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	-33.448695
-			,"refLong":	149.546165
-			,"rotation":	1.25
+			"refLat":	-33.448739
+			,"refLong":	149.54617
+			,"rotation":	1.3
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":0.997
+			,"cor_PosX_mul":0.998
 			,"cor_PosY_mul":1.003
 			,"Name":	"Bathurst 2020"
 			,"AltNames":	"Bathurst Bathurst_2020"
@@ -763,6 +763,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	149.555024
 			,"Comment":	"Discrepancies"
 		});
+		//Bathurst 1983
+		this.refPoints[-620880244] = this.CopyObjectWithModifications(this.refPoints[1080325116], {"Name": "Bathurst 1983","AltNames":"Bathurst Bathurst_1983"});
 
 		//Hockenheim
 		this.refPoints[-435924753] = this.CopyObjectWithModifications(this.refPoints[9999999999],
