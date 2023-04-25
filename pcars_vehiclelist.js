@@ -2931,7 +2931,13 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -489015418,
 		"name" : "McLaren MP4/4",
 		"class" : "F-Classic_Gen2"
-	}
+	},
+	//V1.4.6.0
+	{
+		"id" : -67190685,
+		"name" : "Formula Inter MG-15",
+		"class" : "F-Inter"
+	},
 ];
 
 }// end load vehicle data

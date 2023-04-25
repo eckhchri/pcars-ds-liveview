@@ -915,6 +915,12 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Nordschleife 2020 24h
 		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.353881});
+		//Gesamtstrecke Historic 1971
+		this.refPoints[262] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Gesamtstrecke Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Gesamt"});
+		//Nordschleife Historic 1971
+		this.refPoints[263] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Nords"});
+		//Südschleife Historic 1971
+		this.refPoints[264] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Südschleife Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Suds"});
 
 		//Spa-Francorchamps 2020
 		this.refPoints[-1262750090] = this.CopyObjectWithModifications(this.refPoints[9999999999],
