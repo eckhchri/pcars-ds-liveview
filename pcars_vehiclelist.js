@@ -2938,6 +2938,17 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "Formula Inter MG-15",
 		"class" : "F-Inter"
 	},
+	//V1.4.6.8
+	{
+		"id" : -1698500493,
+		"name" : "Chevrolet Cruze Stock Car 2023",
+		"class" : "StockCarV8_2023"
+	},
+	{
+		"id" : 821932703,
+		"name" : "Toyota Corolla Stock Car 2023",
+		"class" : "StockCarV8_2023"
+	}
 ];
 
 }// end load vehicle data
