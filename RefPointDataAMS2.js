@@ -1314,5 +1314,26 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Indianapolis Motor Speedway Oval
 		this.refPoints[-468654879] = this.CopyObjectWithModifications(this.refPoints[328837350], {"Name": "Indianapolis Motor Speedway Oval","AltNames":"Indianapolis Indianapolis_2022_OVAL"});
+
+		//V1.4.7.9
+		//Circuit de Barcelona-Catalunya GP
+		this.refPoints[265] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		41.56943
+			,"refLong":		2.257912
+			,"rotation":	0.56
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":1.001
+			,"Name":		"Circuit de Barcelona-Catalunya GP"
+			,"AltNames":	"Barcelona GP"
+			,"Zoom":		16
+			,"MapInitLat":	41.569512
+			,"MapInitLong":	2.257745
+			,"Comment": ""
+		});
+		//Circuit de Barcelona-Catalunya GP (no chicane)
+		this.refPoints[266] = this.CopyObjectWithModifications(this.refPoints[265], {"Name": "Circuit de Barcelona-Catalunya GP (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_GP_NC"});
 	}
 }

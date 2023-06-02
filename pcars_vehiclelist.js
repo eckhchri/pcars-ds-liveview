@@ -2948,6 +2948,18 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 821932703,
 		"name" : "Toyota Corolla Stock Car 2023",
 		"class" : "StockCarV8_2023"
+	},
+	//V1.4.7.7
+	{
+		"id" : -360792512,
+		"name" : "Formula USA 2023",
+		"class" : "F-USA_2023"
+	},
+	//V1.4.7.9
+	{
+		"id" : 1609162502,
+		"name" : "Formula Junior",
+		"class" : "F-Junior"
 	}
 ];
 
