@@ -1317,7 +1317,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.4.7.9
 		//Circuit de Barcelona-Catalunya GP
-		this.refPoints[265] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[788137081] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		41.56943
 			,"refLong":		2.257912
@@ -1334,6 +1334,6 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//Circuit de Barcelona-Catalunya GP (no chicane)
-		this.refPoints[266] = this.CopyObjectWithModifications(this.refPoints[265], {"Name": "Circuit de Barcelona-Catalunya GP (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_GP_NC"});
+		this.refPoints[-2045930240] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya GP (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_GP_NC"});
 	}
 }
