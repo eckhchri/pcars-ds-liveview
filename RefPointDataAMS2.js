@@ -1156,6 +1156,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-87.995182
 			,"Comment": ""
 		});
+		//Road America (Bend)
+		this.refPoints[372107672] = this.CopyObjectWithModifications(this.refPoints[-398562049], {"Name": "Road America (Bend)","AltNames":"Road_America Road_America_RCB"});
 
 		//V1.3.5.0
 		//Galeão Airport
