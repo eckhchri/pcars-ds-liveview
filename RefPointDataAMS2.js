@@ -797,6 +797,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-543681041] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988 Short","AltNames":"Hockenheim Hockenheim_1988_short","Zoom":16,"MapInitLat":49.328698,"MapInitLong":8.56829});
 		//Hockenheim Historic 1977
 		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
+		//Hockenheim Rallycross - 1.4.9.7
+		this.refPoints[275] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Rallycross","AltNames":"Hockenheim GP","Zoom":17,"MapInitLat":49.327448,"MapInitLong":8.56839});
 
 		//Silverstone GP
 		this.refPoints[-931849903] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -901,6 +903,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[1819021861] = this.CopyObjectWithModifications(this.refPoints[1133983668], {"Name": "Nürburgring Sprint S 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint_S"});
 		//Nürburgring Veedol 2020
 		this.refPoints[-581740816] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Veedol 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Veedol"});
+		//Nürburgring 2020 RX - 1.4.9.8
+		this.refPoints[276] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring 2020 RX","AltNames":"Nurburgring_2020 RX","Zoom":17,"MapInitLat":50.325774,"MapInitLong":6.936487});
 		//Nordschleife 2020
 		this.refPoints[884472481] = this.CopyObjectWithModifications(this.refPoints[899109770],
 		{
@@ -1337,5 +1341,70 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Circuit de Barcelona-Catalunya GP (no chicane)
 		this.refPoints[-2045930240] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya GP (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_GP_NC"});
+		//Circuit de Catalunya RX - V1.4.9.7
+		this.refPoints[274] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
+
+		//V1.4.9.6
+		//Ascurra Dirt
+		this.refPoints[268] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		-26.934041
+			,"refLong":		-49.386504
+			,"rotation":	1
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1.004
+			,"cor_PosY_mul":0.99
+			,"Name":		"Ascurra Dirt"
+			,"AltNames":	"Ascurra Ascurra_Dirt"
+			,"Zoom":		17
+			,"MapInitLat":	-26.934491
+			,"MapInitLong":	-49.388907
+			,"Comment": ""
+		});
+		//Ascurra RX
+		this.refPoints[269] = this.CopyObjectWithModifications(this.refPoints[268], {"Name": "Ascurra RX","AltNames":"Ascurra Ascurra_RX"});
+
+		//Tykki RX
+		this.refPoints[270] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		60.884125
+			,"refLong":		26.795916
+			,"rotation":	0
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1.03
+			,"cor_PosY_mul":1.03
+			,"Name":		"Tykki RX"
+			,"AltNames":	"Tykki Tykki_RX"
+			,"Zoom":		17
+			,"MapInitLat":	60.883436
+			,"MapInitLong":	26.796558
+			,"Comment": ""
+		});
+		//Tykki Tarmac
+		this.refPoints[271] = this.CopyObjectWithModifications(this.refPoints[270], {"Name": "Tykki Tarmac","AltNames":"Tykki Tykki_Tarmac","Zoom":18,"MapInitLat":60.883726});
+		//Tykki Dirt1
+		this.refPoints[272] = this.CopyObjectWithModifications(this.refPoints[270], {"Name": "Tykki Dirt1","AltNames":"Tykki Tykki_Dirt1"});
+		//Tykki Dirt2
+		this.refPoints[273] = this.CopyObjectWithModifications(this.refPoints[270], {"Name": "Tykki Dirt2","AltNames":"Tykki Tykki_Dirt2","MapInitLat":60.883026});
+
+		//Foz RX
+		this.refPoints[277] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		-25.604479
+			,"refLong":		-54.490209
+			,"rotation":	-2
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.96
+			,"cor_PosY_mul":1
+			,"Name":		"Foz RX"
+			,"AltNames":	"Foz Foz_RX"
+			,"Zoom":		18
+			,"MapInitLat":	-25.604355
+			,"MapInitLong":	-54.489663
+			,"Comment": ""
+		});
 	}
 }
