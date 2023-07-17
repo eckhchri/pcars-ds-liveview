@@ -903,8 +903,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[1819021861] = this.CopyObjectWithModifications(this.refPoints[1133983668], {"Name": "Nürburgring Sprint S 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint_S"});
 		//Nürburgring Veedol 2020
 		this.refPoints[-581740816] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Veedol 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Veedol"});
-		//Nürburgring 2020 RX - 1.4.9.8
-		this.refPoints[276] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring 2020 RX","AltNames":"Nurburgring_2020 RX","Zoom":17,"MapInitLat":50.325774,"MapInitLong":6.936487});
+		//Nürburgring RX - 1.4.9.8
+		this.refPoints[276] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring RX","AltNames":"Nurburgring_2020 RX","Zoom":17,"MapInitLat":50.325774,"MapInitLong":6.936487});
 		//Nordschleife 2020
 		this.refPoints[884472481] = this.CopyObjectWithModifications(this.refPoints[899109770],
 		{
@@ -948,6 +948,8 @@ class RefPointDataAMS2 extends RefPointData {
 		//V1.4
 		//Spa-Francorchamps 2022
 		this.refPoints[775712153] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2022","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022"});
+		//Spa-Francorchamps RX - V1.5.0.0
+		this.refPoints[278] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps RX","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022_RX","Zoom":17,"MapInitLat":50.44302,"MapInitLong":5.97125});
 		//V1.4.2.9
 		//Spa-Francorchamps 1970
 		this.refPoints[-1736505524] = this.CopyObjectWithModifications(this.refPoints[-1262750090],
@@ -1341,8 +1343,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Circuit de Barcelona-Catalunya GP (no chicane)
 		this.refPoints[-2045930240] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya GP (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_GP_NC"});
-		//Circuit de Catalunya RX - V1.4.9.7
-		this.refPoints[274] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
+		//Circuit de Barcelona-Catalunya RX - V1.4.9.7
+		this.refPoints[274] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
 
 		//V1.4.9.6
 		//Ascurra Dirt
