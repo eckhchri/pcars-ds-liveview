@@ -1408,5 +1408,165 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-54.489663
 			,"Comment": ""
 		});
+
+
+
+
+
+		///////////////////////////////
+		////  MOD Tracks
+		///////////////////////////////
+		//Rouen Les Essarts
+		this.refPoints[-1031249929] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        49.333052
+			,"refLong":      1.010787
+			,"rotation":     55.5
+			,"cor_r_Long":   0
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 1
+			,"cor_PosY_mul": 1.04
+			,"Name":         "Rouen Les Essarts"
+			,"AltNames":	 "Rouen"
+			,"Zoom":         14
+			,"MapInitLat":   49.333581
+			,"MapInitLong":  1.004589
+			,"Comment": "pcars2 Mod"
+		});
+		//Rouen Les Essarts Short
+		this.refPoints[-1515473908] = this.CopyObjectWithModifications(this.refPoints[-1031249929], {"Name": "Rouen Les Essarts Short","AltNames":"Rouen Short","Zoom": 15,"MapInitLat": 49.330981});
+
+		//Sportsland SUGO
+		this.refPoints[-1024221192] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        38.140381
+			,"refLong":      140.776663
+			,"rotation":     0
+			,"cor_r_Long":   0
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 0.9985
+			,"cor_PosY_mul": 1
+			,"Name":         "Sportsland SUGO"
+			,"AltNames":	 "SUGO GP,Sugo Grand Prix"
+			,"Zoom":         17
+			,"MapInitLat":   38.140497
+			,"MapInitLong":  140.776549
+			,"Comment": "pcars2 Mod"
+		});
+
+		//Fuji
+		this.refPoints[-1695214357] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        35.373892
+			,"refLong":      138.929643
+			,"rotation":     1.3
+			,"cor_r_Long":   0
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 0.9985
+			,"cor_PosY_mul": 1.0005
+			,"Name":         "Fuji GP"
+			,"AltNames":	 "Fuji Grand Prix"
+			,"Zoom":         16
+			,"MapInitLat":   35.370554
+			,"MapInitLong":  138.927871
+			,"Comment": "pcars2 Mod"
+		});
+
+		//Brno
+        this.refPoints[-907901266] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        49.203370
+			,"refLong":      16.444172
+			,"rotation":     156.6
+			,"cor_r_Long":   10000000
+			,"cor_r_Lat":    -30000000
+			,"cor_PosX_mul": 1
+			,"cor_PosY_mul": 1
+			,"Name":         "Brno GP"
+			,"AltNames":	 "Brno,Brno Grand Prix"
+			,"Zoom":         16
+			,"MapInitLat":   49.205370
+			,"MapInitLong":  16.452067
+			,"Comment": "pcars2 Mod"
+		});
+
+		//Sonoma Raceway
+        this.refPoints[-1454279631] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        38.162520
+			,"refLong":      -122.457175
+			,"rotation":     141.5
+			,"cor_r_Long":   0
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 1.004
+			,"cor_PosY_mul": 0.99
+			,"Name":         "Sonoma Raceway GP"
+			,"AltNames":	 "Sonoma Raceway Grand Prix,Sonoma_Raceway GP"
+			,"Zoom":         16
+			,"MapInitLat":   38.162600
+			,"MapInitLong":  -122.457415
+			,"Comment": "pcars2 Mod"
+		});
+		//Sonoma Raceway National
+		this.refPoints[-995202729] = this.CopyObjectWithModifications(this.refPoints[-1454279631],{"Name":"Sonoma Raceway National","AltNames":"Sonoma_Raceway National","Zoom":16,"MapInitLat":38.163366,"MapInitLong":  -122.457876});
+		//Sonoma Sonoma Raceway Short
+		this.refPoints[1035110721] = this.CopyObjectWithModifications(this.refPoints[-1454279631], {"Name": "Sonoma Raceway Short","AltNames":"Sonoma_Raceway Short"});
+
+		//Mojave Cougar Ridge
+		this.refPoints[31280808] = this.CopyObjectWithModifications(this.refPoints[8888888888],
+		{
+			"Name":         "Mojave Cougar Ridge"
+			,"AltNames":	"Mojave Cougar_Ridge"
+			,"Zoom":	16
+			,"MapInitLat":	40.9966
+			,"MapInitLong":	-113.565
+			,"Comment": 	"pcars2 Mod - fictional"
+        });
+		//Mojave Boa Ascent - TrackID pcars1 [850003838]
+		this.refPoints[-984009759] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent","Zoom":17,"MapInitLat":41.0033,"MapInitLong":-113.569});
+		//Mojave Gila Crest - TrackID pcars1 [2089801285]
+		this.refPoints[-60500434] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Gila Crest","AltNames":"Mojave Gila_Crest","MapInitLat":40.9955,"MapInitLong":-113.559});
+		//Mojave Coyote Noose - TrackID pcars1 [-2125682335]
+		this.refPoints[369271528] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Coyote Noose","AltNames":"Mojave Coyote_Noose","MapInitLong":-113.5675});
+		//Mojave Sidewinder - TrackID pcars1 [-1463443929]
+		this.refPoints[2015693491] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Sidewinder","AltNames":"","Zoom":17,"MapInitLat":40.9968,"MapInitLong":-113.5605});
+		//Mojave Test Track - only in Game API available, because you cannot play it in Multiplayer, it has no TrackID -> works only in CREST Mode
+		this.refPoints[-1] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Test Track","AltNames":""});
+
+		//Azure Coast
+		this.refPoints[560711985] = this.CopyObjectWithModifications(this.refPoints[8888888888],
+		{
+			"Name":         "Azure Coast"
+			,"AltNames":	 "Azure Coast Eastbound,Azure_Coast Eastbound"
+			,"Zoom":         13
+			,"Comment": 	"pcars2 Mod - fictional"
+		});
+		//Azure Coast Westbound
+		this.refPoints[-1936790504] = this.CopyObjectWithModifications(this.refPoints[560711985], {"Name": "Azure Coast Westbound","AltNames":"Azure_Coast Westbound"});
+		//Azure Coast Stage 1
+		this.refPoints[550129415] = this.CopyObjectWithModifications(this.refPoints[560711985], {"Name": "Azure Coast Stage 1","AltNames":"Azure_Coast Stage_1","Zoom":15,"MapInitLat":40.979});
+		//Azure Coast Stage 2
+		this.refPoints[-780879576] = this.CopyObjectWithModifications(this.refPoints[560711985], {"Name": "Azure Coast Stage 2","AltNames":"Azure_Coast Stage_2","Zoom":14,"MapInitLong":-113.56});
+		//Azure Coast Stage 3
+		this.refPoints[-1737261125] = this.CopyObjectWithModifications(this.refPoints[560711985], {"Name": "Azure Coast Stage 3","AltNames":"Azure_Coast Stage_3","Zoom":15,"MapInitLat":41.018,"MapInitLong":-113.59});
+
+		//California Highway Full
+		this.refPoints[-1593944167] = this.CopyObjectWithModifications(this.refPoints[8888888888],
+		{
+			"Name":         "California Highway Full"
+			,"AltNames":	"California_Highway Full"
+			,"Zoom":	13
+			,"MapInitLat": 	41.032
+			,"MapInitLong":	-113.58
+			,"Comment": 	"pcars2 Mod - fictional"
+		});
+		//California Highway Reverse
+		this.refPoints[928006536] = this.CopyObjectWithModifications(this.refPoints[-1593944167], {"Name": "California Highway Reverse","AltNames":"California_Highway Reverse"});
+		//California Highway Stage 1
+		this.refPoints[1676943041] = this.CopyObjectWithModifications(this.refPoints[-1593944167], {"Name": "California Highway Stage 1","AltNames":"California_Highway Stage1","Zoom":15,"MapInitLat":41.005,"MapInitLong":-113.563});
+		//California Highway Stage 2
+		this.refPoints[940391868] = this.CopyObjectWithModifications(this.refPoints[-1593944167], {"Name": "California Highway Stage 2","AltNames":"California_Highway Stage2","MapInitLat":41.038,"MapInitLong":-113.55});
+		//California Highway Stage 3
+		this.refPoints[-331502851] = this.CopyObjectWithModifications(this.refPoints[-1593944167], {"Name": "California Highway Stage 3","AltNames":"California_Highway Stage3","Zoom":15,"MapInitLat":41.06,"MapInitLong":-113.593});
 	}
 }
