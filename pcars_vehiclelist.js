@@ -2960,6 +2960,39 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1609162502,
 		"name" : "Formula Junior",
 		"class" : "F-Junior"
+	},
+	//V1.4.9.6
+	{
+		"id" : -354497004,
+		"name" : "Formula Dirt",
+		"class" : "F-Dirt"
+	},
+	//1.4.9.7
+	{
+		"id" : -1084561430,
+		"name" : "Kart Cross",
+		"class" : "Kartcross"
+	},
+	//V1.4.9.8
+	{
+		"id" : -69155277,
+		"name" : "Mini Countryman R60 RX",
+		"class" : "RX"
+	},
+	{
+		"id" : -983006067,
+		"name" : "Citroen DS3 RX",
+		"class" : "RX"
+	},
+	{
+		"id" : 2037619631,
+		"name" : "Volkswagen Polo RX",
+		"class" : "RX"
+	},
+	{
+		"id" : 512055145,
+		"name" : "Mitsubishi Lancer Evo10 RX",
+		"class" : "RX"
 	}
 ];
 
