@@ -797,8 +797,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-543681041] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1988 Short","AltNames":"Hockenheim Hockenheim_1988_short","Zoom":16,"MapInitLat":49.328698,"MapInitLong":8.56829});
 		//Hockenheim Historic 1977
 		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
-		//Hockenheim Rallycross - 1.4.9.7
-		this.refPoints[275] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Rallycross","AltNames":"Hockenheim GP","Zoom":17,"MapInitLat":49.327448,"MapInitLong":8.56839});
+		//Hockenheim Rallycross - 1.4.9.7   - same Track ID as in pcars2
+		this.refPoints[761864750] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Rallycross","AltNames":"Hockenheim GP","Zoom":17,"MapInitLat":49.327448,"MapInitLong":8.56839});
 
 		//Silverstone GP
 		this.refPoints[-931849903] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -904,7 +904,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Nürburgring Veedol 2020
 		this.refPoints[-581740816] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Veedol 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Veedol"});
 		//Nürburgring RX - 1.4.9.8
-		this.refPoints[276] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring RX","AltNames":"Nurburgring_2020 RX","Zoom":17,"MapInitLat":50.325774,"MapInitLong":6.936487});
+		this.refPoints[-1012344423] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring RX","AltNames":"Nurburgring_2020 RX","Zoom":17,"MapInitLat":50.325774,"MapInitLong":6.936487});
 		//Nordschleife 2020
 		this.refPoints[884472481] = this.CopyObjectWithModifications(this.refPoints[899109770],
 		{
@@ -949,7 +949,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Spa-Francorchamps 2022
 		this.refPoints[775712153] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2022","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022"});
 		//Spa-Francorchamps RX - V1.5.0.0
-		this.refPoints[278] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps RX","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022_RX","Zoom":17,"MapInitLat":50.44302,"MapInitLong":5.97125});
+		this.refPoints[-1531498465] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps RX","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022_RX","Zoom":17,"MapInitLat":50.44302,"MapInitLong":5.97125});
 		//V1.4.2.9
 		//Spa-Francorchamps 1970
 		this.refPoints[-1736505524] = this.CopyObjectWithModifications(this.refPoints[-1262750090],
@@ -1344,11 +1344,11 @@ class RefPointDataAMS2 extends RefPointData {
 		//Circuit de Barcelona-Catalunya GP (no chicane)
 		this.refPoints[-2045930240] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya GP (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_GP_NC"});
 		//Circuit de Barcelona-Catalunya RX - V1.4.9.7
-		this.refPoints[274] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
+		this.refPoints[-1698375535] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
 
 		//V1.4.9.6
 		//Ascurra Dirt
-		this.refPoints[268] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[1328659519] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		-26.934041
 			,"refLong":		-49.386504
@@ -1365,10 +1365,10 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//Ascurra RX
-		this.refPoints[269] = this.CopyObjectWithModifications(this.refPoints[268], {"Name": "Ascurra RX","AltNames":"Ascurra Ascurra_RX"});
+		this.refPoints[-2021270791] = this.CopyObjectWithModifications(this.refPoints[1328659519], {"Name": "Ascurra RX","AltNames":"Ascurra Ascurra_RX"});
 
 		//Tykki RX
-		this.refPoints[270] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[1637229097] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		60.884125
 			,"refLong":		26.795916
@@ -1385,14 +1385,14 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 		//Tykki Tarmac
-		this.refPoints[271] = this.CopyObjectWithModifications(this.refPoints[270], {"Name": "Tykki Tarmac","AltNames":"Tykki Tykki_Tarmac","Zoom":18,"MapInitLat":60.883726});
+		this.refPoints[-1627472795] = this.CopyObjectWithModifications(this.refPoints[1637229097], {"Name": "Tykki Tarmac","AltNames":"Tykki Tykki_Tarmac","Zoom":18,"MapInitLat":60.883726});
 		//Tykki Dirt1
-		this.refPoints[272] = this.CopyObjectWithModifications(this.refPoints[270], {"Name": "Tykki Dirt1","AltNames":"Tykki Tykki_Dirt1"});
+		this.refPoints[779269607] = this.CopyObjectWithModifications(this.refPoints[1637229097], {"Name": "Tykki Dirt1","AltNames":"Tykki Tykki_Dirt1"});
 		//Tykki Dirt2
-		this.refPoints[273] = this.CopyObjectWithModifications(this.refPoints[270], {"Name": "Tykki Dirt2","AltNames":"Tykki Tykki_Dirt2","MapInitLat":60.883026});
+		this.refPoints[-1929604728] = this.CopyObjectWithModifications(this.refPoints[1637229097], {"Name": "Tykki Dirt2","AltNames":"Tykki Tykki_Dirt2","MapInitLat":60.883026});
 
 		//Foz RX
-		this.refPoints[277] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-1399336065] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		-25.604479
 			,"refLong":		-54.490209
@@ -1473,7 +1473,7 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 
 		//Brno
-        this.refPoints[-907901266] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-907901266] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":        49.203370
 			,"refLong":      16.444172
@@ -1491,7 +1491,7 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 
 		//Sonoma Raceway
-        this.refPoints[-1454279631] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[-1454279631] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":        38.162520
 			,"refLong":      -122.457175
@@ -1521,7 +1521,7 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLat":	40.9966
 			,"MapInitLong":	-113.565
 			,"Comment": 	"pcars2 Mod - fictional"
-        });
+		});
 		//Mojave Boa Ascent - TrackID pcars1 [850003838]
 		this.refPoints[-984009759] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent","Zoom":17,"MapInitLat":41.0033,"MapInitLong":-113.569});
 		//Mojave Gila Crest - TrackID pcars1 [2089801285]
