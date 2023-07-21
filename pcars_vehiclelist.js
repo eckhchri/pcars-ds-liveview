@@ -2993,6 +2993,27 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 512055145,
 		"name" : "Mitsubishi Lancer Evo10 RX",
 		"class" : "RX"
+	},
+	//V1.5.0.0
+	{
+		"id" : -1164814162,
+		"name" : "MetalMoro AJR Gen2 Chevrolet",
+		"class" : "P1Gen2"
+	},
+	{
+		"id" : 995681332,
+		"name" : "MetalMoro AJR Gen2 Honda",
+		"class" : "P1Gen2"
+	},
+	{
+		"id" : -68656752,
+		"name" : "MetalMoro AJR Gen2 Nissan",
+		"class" : "P1Gen2"
+	},
+	{
+		"id" : -1720554236,
+		"name" : "Sigma P1 G5",
+		"class" : "P1Gen2"
 	}
 ];
 
