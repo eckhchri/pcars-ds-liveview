@@ -3014,6 +3014,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -1720554236,
 		"name" : "Sigma P1 G5",
 		"class" : "P1Gen2"
+	},
+	{
+		"id" : 1989434463,
+		"name" : "Ginetta G58 Gen2",
+		"class" : "P1Gen2"
 	}
 ];
 
