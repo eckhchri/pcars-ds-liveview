@@ -2403,7 +2403,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1836524676,
-		"name" : "Chevrolet Cruza Stock Car 2020",
+		"name" : "Chevrolet Cruze Stock Car 2020",
 		"class" : "StockCarV8_2020"
 	},
 	{
