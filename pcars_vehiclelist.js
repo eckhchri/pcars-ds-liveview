@@ -3019,6 +3019,52 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1989434463,
 		"name" : "Ginetta G58 Gen2",
 		"class" : "P1Gen2"
+	},
+	//V1.5.2.x
+	{
+		"id" : -520644472,
+		"name" : "McLaren MP4/7A",
+		"class" : "F-Hitech_Gen1"
+	},
+	{
+		"id" : -1271841366,
+		"name" : "McLaren MP4/8",
+		"class" : "F-Hitech_Gen2"
+	},
+	{
+		"id" : -546064616,
+		"name" : "Formula HiTech Gen1 Model1",
+		"class" : "F-Hitech_Gen1"
+	},
+	{
+		"id" : -1021087696,
+		"name" : "Formula HiTech Gen1 Model2",
+		"class" : "F-Hitech_Gen1"
+	},
+	{
+		"id" : -1740598979,
+		"name" : "Formula HiTech Gen1 Model3",
+		"class" : "F-Hitech_Gen1"
+	},
+	{
+		"id" : 1820184336,
+		"name" : "Formula HiTech Gen1 Model4",
+		"class" : "F-Hitech_Gen1"
+	},
+	{
+		"id" : 1511161791,
+		"name" : "Formula HiTech Gen2 Model1",
+		"class" : "F-Hitech_Gen2"
+	},
+	{
+		"id" : -873293860,
+		"name" : "Formula HiTech Gen2 Model2",
+		"class" : "F-Hitech_Gen2"
+	},
+	{
+		"id" : -1932898643,
+		"name" : "Formula HiTech Gen2 Model3",
+		"class" : "F-Hitech_Gen2"
 	}
 ];
 

@@ -1346,7 +1346,7 @@ class RefPointDataAMS2 extends RefPointData {
 		//Circuit de Barcelona-Catalunya RX - V1.4.9.7
 		this.refPoints[-1698375535] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
 		//Circuit de Barcelona-Catalunya National (no chicane) - V1.5.1.3
-		this.refPoints[279] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya National (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_NATL_NC","MapInitLat":41.570622,"MapInitLong":2.259125});
+		this.refPoints[-1460882916] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya National (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_NATL_NC","MapInitLat":41.570622,"MapInitLong":2.259125});
 
 		//V1.4.9.6
 		//Ascurra Dirt
