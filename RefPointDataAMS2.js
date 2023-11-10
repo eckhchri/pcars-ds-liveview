@@ -304,6 +304,18 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[1312214486] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {"Name": "Interlagos Historic 1976","AltNames":"Interlagos Interlagos_Historic","refLat": -23.701977,"refLong": -46.69619,"cor_PosX_mul": 0.985});
 		//Interlagos Historic Outer
 		this.refPoints[-1704124105] = this.CopyObjectWithModifications(this.refPoints[1312214486], {"Name": "Interlagos Historic Outer","AltNames":"Interlagos Interlagos_Historic_Outer"});
+		//Interlagos 1991 - v1.5.2.6
+		this.refPoints[930258290] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {
+			"Name": "Interlagos Historic 1991"
+			,"AltNames":"Interlagos Interlagos_1991"
+			,"refLat": -23.70202
+			,"refLong": -46.69621
+			,"rotation": -0.5
+			,"cor_PosX_mul": 0.975
+			,"cor_PosY_mul":1.0075
+		});
+		//Interlagos 1993 - v1.5.2.8
+		this.refPoints[1641699173] = this.CopyObjectWithModifications(this.refPoints[930258290], {"Name": "Interlagos Historic 1993","AltNames":"Interlagos Interlagos_1993"});
 		//Interlagos Kart One
 		this.refPoints[228315736] = this.CopyObjectWithModifications(this.refPoints[-1478712571], {
 			"refLat":	-23.702023
@@ -475,6 +487,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Montreal Historic 1988
 		this.refPoints[-696853932] = this.CopyObjectWithModifications(this.refPoints[-1239363445], {"Name": "Montreal Historic 1988","AltNames":"Montreal Montreal_Historic"});
+		//Montreal Historic 1991 - V1.5.2.0
+		this.refPoints[880948150] = this.CopyObjectWithModifications(this.refPoints[-1239363445], {"Name": "Montreal Historic 1991","AltNames":"Montreal Montreal_Historic_1991"});
 
 		//Ortona Kart One
 		this.refPoints[809214670] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -1347,6 +1361,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-1698375535] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya RX","AltNames":"Barcelona Barcelona_RX","Zoom":18,"MapInitLat":41.573722,"MapInitLong":2.260605});
 		//Circuit de Barcelona-Catalunya National (no chicane) - V1.5.1.3
 		this.refPoints[-1460882916] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya National (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_NATL_NC","MapInitLat":41.570622,"MapInitLong":2.259125});
+		//Circuit de Barcelona-Catalunya Historic 1991 - V1.5.2.8
+		this.refPoints[-1976262540] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya Historic 1991","AltNames":"Barcelona Barcelona_1991"});
 
 		//V1.4.9.6
 		//Ascurra Dirt
