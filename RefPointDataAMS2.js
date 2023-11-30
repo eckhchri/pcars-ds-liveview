@@ -873,8 +873,8 @@ class RefPointDataAMS2 extends RefPointData {
 		//Speedland Kart Center 1
 		this.refPoints[756011139] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
-			"refLat":	-23.532398
-			,"refLong":	-46.584436
+			"refLat":	-23.532388
+			,"refLong":	-46.584453
 			,"rotation":	-0.5
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
