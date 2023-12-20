@@ -1533,12 +1533,12 @@ class RefPointDataAMS2 extends RefPointData {
 		//Mojave Cougar Ridge
 		this.refPoints[31280808] = this.CopyObjectWithModifications(this.refPoints[8888888888],
 		{
-			"Name":         "Mojave Cougar Ridge"
+			"Name":			"Mojave Cougar Ridge"
 			,"AltNames":	"Mojave Cougar_Ridge"
-			,"Zoom":	16
+			,"Zoom":		16
 			,"MapInitLat":	40.9966
 			,"MapInitLong":	-113.565
-			,"Comment": 	"pcars2 Mod - fictional"
+			,"Comment":		"pcars2 Mod - fictional"
 		});
 		//Mojave Boa Ascent - TrackID pcars1 [850003838]
 		this.refPoints[-984009759] = this.CopyObjectWithModifications(this.refPoints[31280808], {"Name": "Mojave Boa Ascent","AltNames":"Mojave Boa_Ascent","Zoom":17,"MapInitLat":41.0033,"MapInitLong":-113.569});
@@ -1586,5 +1586,95 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[940391868] = this.CopyObjectWithModifications(this.refPoints[-1593944167], {"Name": "California Highway Stage 2","AltNames":"California_Highway Stage2","MapInitLat":41.038,"MapInitLong":-113.55});
 		//California Highway Stage 3
 		this.refPoints[-331502851] = this.CopyObjectWithModifications(this.refPoints[-1593944167], {"Name": "California Highway Stage 3","AltNames":"California_Highway Stage3","Zoom":15,"MapInitLat":41.06,"MapInitLong":-113.593});
+
+		//Bannochbrae Road Circuit
+		this.refPoints[-602684269] = this.CopyObjectWithModifications(this.refPoints[8888888888],
+		{
+			"Name":			"Bannochbrae Road Circuit"
+			,"AltNames":	"Bannochbrae Road_Circuit"
+			,"MapInitLat":	40.993664
+			,"MapInitLong":	-113.562253
+			,"Comment":		"pcars2 Mod - fictional"
+		});
+
+		//Willow Springs International Raceway
+		this.refPoints[-103312908] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		34.871624
+			,"refLong":		-118.263848
+			,"rotation":	-32.8
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.97
+			,"cor_PosY_mul":0.97
+			,"Name":		"Willow Springs International Raceway"
+			,"AltNames":	"Willow_Springs International_Raceway,Willow Springs International_Raceway"
+			,"Zoom":		16
+			,"MapInitLat":	34.872929
+			,"MapInitLong":	-118.264394
+			,"Comment":		"pcars2 Mod"
+		});
+		//Willow Springs Horse Thief Mile
+		this.refPoints[-1849531562] = this.CopyObjectWithModifications(this.refPoints[-103312908],
+		{
+			"rotation":		-33.3
+			,"cor_PosX_mul":0.97
+			,"cor_PosY_mul":0.985
+			,"Name":		"Willow Springs Horse Thief Mile"
+			,"AltNames":	"Willow_Springs Horse_Thief_Mile"
+			,"Zoom":		18
+			,"MapInitLat":	34.878337
+			,"MapInitLong":	-118.264290
+			,"Comment":		"pcars2 Mod"
+		});
+
+		//Ruapuna Park GP
+		this.refPoints[1277693448] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		-43.533275
+			,"refLong":		172.478130
+			,"rotation":	-0.3
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":		"Ruapuna Park GP"
+			,"AltNames":	"Ruapuna Park Grand Prix,Ruapuna_Park GP"
+			,"Zoom":		17
+			,"MapInitLat":	-43.530723 
+			,"MapInitLong":	172.479408
+			,"Comment":		"pcars2 Mod"
+		});
+		//Ruapuna Park A Circuit
+		this.refPoints[619694160] = this.CopyObjectWithModifications(this.refPoints[1277693448], {"Name": "Ruapuna Park A Circuit","Name2": "","AltNames":"Ruapuna Park A_Circuit,Ruapuna_Park A_Circuit","Zoom": 18,"MapInitLat": -43.531735,"MapInitLong": 172.482294});
+		//Ruapuna Park Club
+		this.refPoints[1446378877] = this.CopyObjectWithModifications(this.refPoints[1277693448], {"Name": "Ruapuna Park Club","Name2": "","AltNames":"Ruapuna_Park Club"});
+		//Ruapuna Park Outer Loop
+		this.refPoints[1940584155] = this.CopyObjectWithModifications(this.refPoints[1277693448], {"Name": "Ruapuna Park Outer Loop","Name2": "","AltNames":"Ruapuna Park Outer_Loop,Ruapuna_Park Outer_Loop"});
+		//Ruapuna Park B Circuit
+		this.refPoints[-2046633090] = this.CopyObjectWithModifications(this.refPoints[1277693448], {"Name": "Ruapuna Park B Circuit","Name2": "","AltNames":"Ruapuna Park B_Circuit,Ruapuna_Park B_Circuit","MapInitLat": -43.530846,"MapInitLong": 172.477963});
+
+		//Circuit of the Americas GP
+		this.refPoints[2050315946] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		30.131935
+			,"refLong":		-97.639792
+			,"rotation":	-0.7
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.9983
+			,"cor_PosY_mul":1.0035
+			,"Name":		"Circuit of the Americas GP"
+			,"AltNames":	"Circuit_of_the_Americas GP,Circuit of the Americas Grand Prix"
+			,"Zoom":		16
+			,"MapInitLat":	30.134614
+			,"MapInitLong":	-97.634090
+			,"Comment":		"pcars2 Mod"
+		});
+		//Circuit of the Americas Club
+		this.refPoints[802214179] = this.CopyObjectWithModifications(this.refPoints[2050315946], {"Name": "Circuit of the Americas Club","Name2": "","AltNames":"Circuit_of_the_Americas Club_Circuit,Circuit of the Americas Club Circuit","Zoom": 17,"MapInitLat": 30.137552,"MapInitLong": -97.628475});
+		//Circuit of the Americas National
+		this.refPoints[1629467388] = this.CopyObjectWithModifications(this.refPoints[2050315946], {"Name": "Circuit of the Americas National","Name2": "","AltNames":"Circuit_of_the_Americas National_Circuit,Circuit of the Americas National_Circuit","MapInitLat": 30.133822,"MapInitLong": -97.638199});
+
 	}
 }
