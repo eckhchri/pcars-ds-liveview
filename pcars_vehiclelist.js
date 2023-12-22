@@ -3065,6 +3065,27 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -1932898643,
 		"name" : "Formula HiTech Gen2 Model3",
 		"class" : "F-Hitech_Gen2"
+	},
+	//V1.5.4.2
+	{
+		"id" : 1311912387,
+		"name" : "BMW M4 GT3",
+		"class" : "GT3_Gen2"
+	},
+	{
+		"id" : 160008140,
+		"name" : "Mercedes-AMG GT3 Evo",
+		"class" : "GT3_Gen2"
+	},
+	{
+		"id" : -519566358,
+		"name" : "Porsche 992 GT3 R",
+		"class" : "GT3_Gen2"
+	},
+	{
+		"id" : -1026941607,
+		"name" : "McLaren 720S GT3 Evo",
+		"class" : "GT3_Gen2"
 	}
 ];
 
