@@ -1427,6 +1427,26 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 
+		//V1.5.4.2
+		//Le Mans 24h
+		this.refPoints[1060182346] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		47.937495
+			,"refLong":		0.225358
+			,"rotation":	2.05
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":0.9999
+			,"Name":		"Le Mans 24h"
+			,"AltNames":	"La_Sarthe Le_Mans_24h"
+			,"Zoom":		13
+			,"MapInitLat":	47.936818
+			,"MapInitLong":	0.223960
+			,"Comment": ""
+		});
+		//Le Mans Circuit Bugatti
+		this.refPoints[1446740417] = this.CopyObjectWithModifications(this.refPoints[1060182346], {"Name": "Le Mans Circuit Bugatti","AltNames":"La_Sarthe Le_Mans_Circuit_Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});
 
 
 
