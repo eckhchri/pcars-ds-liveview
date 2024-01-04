@@ -3086,6 +3086,22 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -1026941607,
 		"name" : "McLaren 720S GT3 Evo",
 		"class" : "GT3_Gen2"
+	},
+	//V1.5.4.8
+	{
+		"id" : -842343170,
+		"name" : "BMW M Hybrid V8",
+		"class" : "LMDh"
+	},
+	{
+		"id" : 16119375,
+		"name" : "Cadillac V-Series.R",
+		"class" : "LMDh"
+	},
+	{
+		"id" : -811404968,
+		"name" : "Porsche 963",
+		"class" : "LMDh"
 	}
 ];
 
