@@ -3102,6 +3102,17 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -811404968,
 		"name" : "Porsche 963",
 		"class" : "LMDh"
+	},
+	//V1.5.5.8
+	{
+		"id" : -1110072839,
+		"name" : "Chevrolet Cruze Stock Car 2024",
+		"class" : "StockCarV8_2024"
+	},
+	{
+		"id" : -959185748,
+		"name" : "Toyota Corolla Stock Car 2024",
+		"class" : "StockCarV8_2024"
 	}
 ];
 

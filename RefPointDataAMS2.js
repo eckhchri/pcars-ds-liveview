@@ -939,6 +939,9 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[399001429] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Nords"});
 		//Südschleife Historic 1971
 		this.refPoints[199279675] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Südschleife Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Suds","Zoom":14,"MapInitLat":50.32758,"MapInitLong":6.93579});
+		//V1.5.5.8
+		//Betonschleife Historic 1971
+		this.refPoints[-1999809693] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Betonschleife Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Beton","Zoom":16,"MapInitLat":50.33496,"MapInitLong":6.94696});
 
 		//Spa-Francorchamps 2020
 		this.refPoints[-1262750090] = this.CopyObjectWithModifications(this.refPoints[9999999999],
