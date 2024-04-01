@@ -2208,7 +2208,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : -1142039519,
-		"name" : "Formula Ultimate 2019",
+		"name" : "Formula Ultimate Gen1",
 		"class" : "F-Ultimate"
 	},
 	{
@@ -2785,7 +2785,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	//V1.3.5.0
 	{
-		"id" : -377858367,
+		"id" : 1947909519,
 		"name" : "Formula Ultimate Gen2",
 		"class" : "F-Ultimate_Gen2"
 	},
