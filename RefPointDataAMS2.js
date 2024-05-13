@@ -1451,6 +1451,24 @@ class RefPointDataAMS2 extends RefPointData {
 		//Le Mans Circuit Bugatti
 		this.refPoints[1446740417] = this.CopyObjectWithModifications(this.refPoints[1060182346], {"Name": "Le Mans Circuit Bugatti","AltNames":"La_Sarthe Le_Mans_Circuit_Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});
 
+		//V1.5.7.0
+		//Road Atlanta
+		this.refPoints[287] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		34.148197
+			,"refLong":		-83.815261
+			,"rotation":	1.55
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":1
+			,"cor_PosY_mul":1
+			,"Name":		"Road Atlanta"
+			,"AltNames":	"Road_Atlanta Road_Atlanta"
+			,"Zoom":		15
+			,"MapInitLat":	34.143599
+			,"MapInitLong":	-83.815312
+			,"Comment": ""
+		});
 
 
 
@@ -1699,5 +1717,42 @@ class RefPointDataAMS2 extends RefPointData {
 		//Circuit of the Americas National
 		this.refPoints[1629467388] = this.CopyObjectWithModifications(this.refPoints[2050315946], {"Name": "Circuit of the Americas National","Name2": "","AltNames":"Circuit_of_the_Americas National_Circuit,Circuit of the Americas National_Circuit","MapInitLat": 30.133822,"MapInitLong": -97.638199});
 
+		//Mugello GP
+		this.refPoints[1730519219] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        43.997614
+			,"refLong":      11.371401
+			,"rotation":     -1.595
+			,"cor_r_Long":   0
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 0.9983
+			,"cor_PosY_mul": 1
+			,"Name":         "Mugello GP"
+			,"AltNames":	 ""
+			,"Zoom":         15
+			,"MapInitLat":   43.997633
+			,"MapInitLong":  11.371350
+			,"Comment": ""
+		});
+		//Mugello Short
+		this.refPoints[-2110554879] = this.CopyObjectWithModifications(this.refPoints[1730519219], {"Name": "Mugello Short","AltNames":"","Zoom": 16,"MapInitLat": 43.998674,"MapInitLong": 11.373907});
+
+		//Zolder
+		this.refPoints[-360711057] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":        50.992257
+			,"refLong":      5.258882
+			,"rotation":     -148.2
+			,"cor_r_Long":   15000000
+			,"cor_r_Lat":    0
+			,"cor_PosX_mul": 0.955
+			,"cor_PosY_mul": 0.96
+			,"Name":         "Zolder"
+			,"AltNames":	 "Zolder Grand Prix,Zolder GP"
+			,"Zoom":         15
+			,"MapInitLat":   50.990644 
+			,"MapInitLong":  5.257656
+			,"Comment": ""
+		});
 	}
 }
