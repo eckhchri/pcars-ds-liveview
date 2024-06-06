@@ -3113,6 +3113,33 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -959185748,
 		"name" : "Toyota Corolla Stock Car 2024",
 		"class" : "StockCarV8_2024"
+	},
+	//V1.5.7.4
+	{
+		"id" : -340376700,
+		"name" : "Audi V8 quattro DTM",
+		"class" : "Group A"
+	},
+	{
+		"id" : -1135637484,
+		"name" : "Audi R8 LMS GT3",
+		"class" : "GT3"
+	},
+	{
+		"id" : 2057865340,
+		"name" : "Audi R8 LMS GT3 evo II",
+		"class" : "GT3_Gen2"
+	},
+	//V1.5.8.0
+	{
+		"id" : -1655460260,
+		"name" : "Lamborghini Huracan GT3 EVO2",
+		"class" : "GT3_Gen2"
+	},
+	{
+		"id" : 1723657866,
+		"name" : "Ligier JS P320",
+		"class" : "P1Gen2"
 	}
 ];
 
