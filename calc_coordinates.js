@@ -64,7 +64,20 @@ function calc_coordinates (circuit_id,PosX,PosY, aRefPoint){
  
 	var angleX = x_new / circumference_earth_Lat * 360;
 	var angleY = y_new / circumference_earth * 360;
-		
+
+	/***************************************************
+	//Methode 3
+	// https://en.wikipedia.org/wiki/Geographic_coordinate_system#Length_of_a_degree
+
+	var refLat_rad = degreeToRadians(aRefPointTmp[circuit_id]["refLat"]);
+	var refLong_rad = degreeToRadians(aRefPointTmp[circuit_id]["refLong"]);
+
+	var m_per_deg_lat = 111132.954 - (559.822 * Math.cos( 2 * refLat_rad ) ) + ( 1.175 * Math.cos( 4 * refLat_rad) ) - ( 0.0023 * Math.cos( 6 * refLat_rad ));
+	var m_per_deg_lon = ( 111412.84 * Math.cos( refLat_rad ) ) - (93.5 * Math.cos( 3 * refLat_rad )) + (0.118 * Math.cos( 5 * refLat_rad ));
+
+	var angleX = x_new / m_per_deg_lon / 1000;
+	var angleY = y_new / m_per_deg_lat / 1000;
+	***************************************************/
 		
 	//console.log("CuircitName: "     + aRefPointTmp[circuit_id]["Name"]);
 	//console.log("radius2EarthAxis: "  + radius2EarthAxis);
@@ -81,14 +94,14 @@ function calc_coordinates (circuit_id,PosX,PosY, aRefPoint){
 	return {"Lat" : car_coordinateLat , "Long" : car_coordinateLong};
 }
 
-function degreeToRadians($degree)
+function degreeToRadians(degree)
 {
-    return $degree * Math.PI / 180;
+    return degree * Math.PI / 180;
 }
 
-function radiansToDegrees($radian)
+function radiansToDegrees(radian)
 {
-        return $radian * 180/ Math.PI;
+        return radian * 180/ Math.PI;
 }
 
 

@@ -1456,12 +1456,12 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[269355464] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		34.148197
-			,"refLong":		-83.815261
-			,"rotation":	1.55
+			,"refLong":		-83.815268
+			,"rotation":	1.50
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
 			,"cor_PosX_mul":0.998
-			,"cor_PosY_mul":1.002
+			,"cor_PosY_mul":1.0025
 			,"Name":		"Road Atlanta"
 			,"AltNames":	"Road_Atlanta Road_Atlanta"
 			,"Zoom":		15
