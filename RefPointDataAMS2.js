@@ -1460,8 +1460,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"rotation":	1.55
 			,"cor_r_Long":	0
 			,"cor_r_Lat":	0
-			,"cor_PosX_mul":1
-			,"cor_PosY_mul":1
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.002
 			,"Name":		"Road Atlanta"
 			,"AltNames":	"Road_Atlanta Road_Atlanta"
 			,"Zoom":		15
@@ -1470,6 +1470,24 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 
+		//V1.5.9.0
+		//Canadian Tire Motorsports Park
+		this.refPoints[288] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		44.048403
+			,"refLong":		-78.674805
+			,"rotation":	-1.62
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.0015
+			,"Name":		"Canadian Tire Motorsports Park"
+			,"AltNames":	"Mosport Mosport"
+			,"Zoom":		16
+			,"MapInitLat":	44.04856
+			,"MapInitLong":	-78.674548
+			,"Comment": ""
+		});
 
 
 		///////////////////////////////

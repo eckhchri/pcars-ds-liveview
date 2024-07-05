@@ -3140,6 +3140,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1723657866,
 		"name" : "Ligier JS P320",
 		"class" : "P1Gen2"
+	},
+	//V1.5.9.0
+	{
+		"id" : -1685046747,
+		"name" : "Lamborghini Huracan SuperTrofeo Evo2",
+		"class" : "Super Trofeo"
 	}
 ];
 
