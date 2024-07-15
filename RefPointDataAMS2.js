@@ -1489,6 +1489,25 @@ class RefPointDataAMS2 extends RefPointData {
 			,"Comment": ""
 		});
 
+		//V1.5.9.7
+		//Sebring
+		this.refPoints[289] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		27.453802
+			,"refLong":		-81.352445
+			,"rotation":	0.15
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.999
+			,"cor_PosY_mul":1.005
+			,"Name":		"Sebring"
+			,"AltNames":	"Sebring Sebring"
+			,"Zoom":		16
+			,"MapInitLat":	27.453067
+			,"MapInitLong":	-81.351976
+			,"Comment": ""
+		});
+
 
 		///////////////////////////////
 		////  MOD Tracks

@@ -66,8 +66,10 @@ function calc_coordinates (circuit_id,PosX,PosY, aRefPoint){
 	var angleY = y_new / circumference_earth * 360;
 
 	/***************************************************
-	//Methode 3
+	//Method 3
 	// https://en.wikipedia.org/wiki/Geographic_coordinate_system#Length_of_a_degree
+	// Better method with higher accuracy compared to the other methods based on the right-angled triangle
+	// But it would require an adjustment/fine tuning of the correction values of all refPoints to realign the trackmaps to the satellite map
 
 	var refLat_rad = degreeToRadians(aRefPointTmp[circuit_id]["refLat"]);
 	var refLong_rad = degreeToRadians(aRefPointTmp[circuit_id]["refLong"]);
