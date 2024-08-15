@@ -1472,7 +1472,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.5.9.0
 		//Canadian Tire Motorsports Park
-		this.refPoints[288] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[868841025] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		44.048403
 			,"refLong":		-78.674805
@@ -1491,7 +1491,7 @@ class RefPointDataAMS2 extends RefPointData {
 
 		//V1.5.9.7
 		//Sebring
-		this.refPoints[289] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		this.refPoints[1064267013] = this.CopyObjectWithModifications(this.refPoints[9999999999],
 		{
 			"refLat":		27.453802
 			,"refLong":		-81.352445
