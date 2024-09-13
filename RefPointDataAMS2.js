@@ -1471,7 +1471,7 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//V1.6.0.0
 		//Road Atlanta Moto
-		this.refPoints[292] = this.CopyObjectWithModifications(this.refPoints[269355464], {"Name": "Road Atlanta Moto","AltNames":"Road_Atlanta Road_Atlanta_Moto","MapInitLat": 34.143849});
+		this.refPoints[512524319] = this.CopyObjectWithModifications(this.refPoints[269355464], {"Name": "Road Atlanta Moto","AltNames":"Road_Atlanta Road_Atlanta_Moto","MapInitLat": 34.143849});
 
 		//V1.5.9.0
 		//Canadian Tire Motorsports Park
@@ -1512,9 +1512,9 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//V1.6.0.0
 		//Sebring School
-		this.refPoints[290] = this.CopyObjectWithModifications(this.refPoints[1064267013], {"Name": "Sebring School","AltNames":"Sebring Sebring_School","Zoom": 17,"MapInitLat": 27.450777,"MapInitLong": -81.351576});
+		this.refPoints[21132368] = this.CopyObjectWithModifications(this.refPoints[1064267013], {"Name": "Sebring School","AltNames":"Sebring Sebring_School","Zoom": 17,"MapInitLat": 27.450777,"MapInitLong": -81.351576});
 		//Sebring Club
-		this.refPoints[291] = this.CopyObjectWithModifications(this.refPoints[1064267013], {"Name": "Sebring Club","AltNames":"Sebring Sebring_Club","Zoom": 17,"MapInitLat": 27.455077,"MapInitLong": -81.353166});
+		this.refPoints[1655714206] = this.CopyObjectWithModifications(this.refPoints[1064267013], {"Name": "Sebring Club","AltNames":"Sebring Sebring_Club","Zoom": 17,"MapInitLat": 27.455077,"MapInitLong": -81.353166});
 
 
 		///////////////////////////////
