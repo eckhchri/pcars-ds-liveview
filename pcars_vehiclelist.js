@@ -2638,7 +2638,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1965836946,
-		"name" : "Chevrolet Corvette C3",
+		"name" : "Chevrolet Corvette C3.R",
 		"class" : "TC70S"
 	},
 	//V1.2.4.0
@@ -2902,9 +2902,9 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "Brabham BT62",
 		"class" : "Hypercars"
 	},
-	{
-		"id" : 798477355,
-		"name" : "Chevrolet Corvette C8 Z06",
+	{	//updated with V1.6.1.7
+		"id" : -1625811303,
+		"name" : "Chevrolet Corvette C8 Z06 (+Z07 Upgrade)",
 		"class" : "Supercars"
 	},
 	{
@@ -3152,6 +3152,52 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1564669712,
 		"name" : "Lamborghini Veneno Roadster",
 		"class" : "Hypercars"
+	},
+	{
+		"id" : 1122735892,
+		"name" : "Lamborghini SC63",
+		"class" : "LMDh"
+	},
+	//V1.6.0.8
+	{
+		"id" : -1404454397,
+		"name" : "Alpine A424",
+		"class" : "LMDh"
+	},
+	{
+		"id" : 9617015,
+		"name" : "Chevrolet Corvette Z06 GT3.R",
+		"class" : "GT3_Gen2"
+	},
+	{
+		"id" : 1132970248,
+		"name" : "Audi R8 LMS GT4",
+		"class" : "GT4"
+	},
+	{
+		"id" : -484149203,
+		"name" : "Oreca 07",
+		"class" : "LMP2"
+	},
+	{
+		"id" : 440916666,
+		"name" : "Oreca 07",
+		"class" : "LMP2_Gen1"
+	},
+	{
+		"id" : -1507418170,
+		"name" : "Ligier JS P217",
+		"class" : "LMP2"
+	},
+	{
+		"id" : 1679105968,
+		"name" : "Ligier JS P217",
+		"class" : "LMP2_Gen1"
+	},
+	{
+		"id" : -1050342761,
+		"name" : "Chevrolet Corvette C3.R Convertible",
+		"class" : "TC70S"
 	}
 ];
 
