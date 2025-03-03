@@ -3198,6 +3198,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -1050342761,
 		"name" : "Chevrolet Corvette C3.R Convertible",
 		"class" : "TC70S"
+	},
+	{
+		"id" : -2038590707,
+		"name" : "Super Trophy Trucks",
+		"class" : "SST"
 	}
 ];
 
