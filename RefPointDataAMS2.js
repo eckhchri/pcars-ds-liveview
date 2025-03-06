@@ -46,6 +46,9 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Adelaide Historic 1988
 		this.refPoints[-559709709] = this.CopyObjectWithModifications(this.refPoints[827815091], {"Name": "Adelaide Historic 1988","AltNames":"Adelaide Adelaide_Historic","MapInitLat": -34.927166,"MapInitLong": 138.617828});
+		//V1.6.3.9
+		//Adelaide STT
+		this.refPoints[1565677554] = this.CopyObjectWithModifications(this.refPoints[827815091], {"Name": "Adelaide STT","AltNames":"Adelaide Adelaide_Modern_STT"});
 
 		//Azure Circuit
 		this.refPoints[832629329] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -238,6 +241,9 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-51.852850
 			,"Comment":	""
 		});
+		//V1.6.3.9
+		//Guapore STT
+		this.refPoints[-1949748308] = this.CopyObjectWithModifications(this.refPoints[2058166835], {"Name": "Guapore STT","AltNames":"Guapore Guapore_STT"});
 
 		//Ibarra Autódromo Yahuarcocha
 		this.refPoints[2111076703] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -601,6 +607,9 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-213305159] = this.CopyObjectWithModifications(this.refPoints[735562025], {"Name": "Spielberg Historic 1974","AltNames":"Spielberg Spielberg_Vintage","refLat": 47.219763,"refLong": 14.763679,"cor_PosX_mul": 0.997,"cor_PosY_mul": 0.99,"MapInitLat": 47.223176,"MapInitLong": 14.760487});
 		//Spielberg Historic 1977
 		this.refPoints[-100668052] = this.CopyObjectWithModifications(this.refPoints[-213305159], {"Name": "Spielberg Historic 1977","AltNames":"Spielberg Spielberg_Historic"});
+		//V1.6.3.9
+		//Spielberg STT copy of Short layout
+		this.refPoints[1524591075] = this.CopyObjectWithModifications(this.refPoints[1819432538], {"Name": "Spielberg STT","AltNames":"Spielberg Spielberg_STT"});
 
 		//Tarumã Internacional
 		this.refPoints[2074495683] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -663,6 +672,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Velopark 2010
 		this.refPoints[193535285] = this.CopyObjectWithModifications(this.refPoints[-1642426225], {"Name": "Velopark 2010","AltNames":"Velopark Velopark_2010"});
+		//Velopark 2017 STT
+		this.refPoints[-1732031247] = this.CopyObjectWithModifications(this.refPoints[-1642426225], {"Name": "Velopark 2017 STT","AltNames":"Velopark Velopark_2017_STT"});
 
 		//Virginia Full
 		this.refPoints[1063112912] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -813,6 +824,9 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[473366003] = this.CopyObjectWithModifications(this.refPoints[-108270200], {"Name": "Hockenheim Historic 1977","AltNames":"Hockenheim GP_1977"});
 		//Hockenheim Rallycross - 1.4.9.7   - same Track ID as in pcars2
 		this.refPoints[761864750] = this.CopyObjectWithModifications(this.refPoints[-435924753], {"Name": "Hockenheim Rallycross","AltNames":"Hockenheim GP","Zoom":17,"MapInitLat":49.327448,"MapInitLong":8.56839});
+		//V1.6.3.9
+		//Hockenheim STT - copy of Short A layout
+		this.refPoints[-1567974516] = this.CopyObjectWithModifications(this.refPoints[239659483], {"Name": "Hockenheim STT","AltNames":"Hockenheim Hockenheim_STT"});
 
 		//Silverstone GP
 		this.refPoints[-931849903] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -1027,6 +1041,9 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":  -118.190768
 			,"Comment": "same Track ID as pcars2"
 		});
+		//V1.6.3.9
+		//Long Beach STT
+		this.refPoints[-1976903313] = this.CopyObjectWithModifications(this.refPoints[1731699995], {"Name": "Long Beach STT","AltNames":"Long_Beach Long_Beach_STT"});
 
 		//V1.1.7.0
 		//Laguna Seca
@@ -1142,6 +1159,9 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[2035789624] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short","AltNames":"Watkins_Glen Watkins_Glen_S","MapInitLat":42.337204});
 		//Watkins Glen Short Inner Loop
 		this.refPoints[-619438500] = this.CopyObjectWithModifications(this.refPoints[-875185854], {"Name": "Watkins Glen Short Inner Loop","AltNames":"Watkins_Glen Watkins_Glen_SIL","MapInitLat":42.337204});
+		//V1.6.3.9
+		//Watkins Glen STT - copy of Short Inner Loop layout
+		this.refPoints[1836425306] = this.CopyObjectWithModifications(this.refPoints[-619438500], {"Name": "Watkins Glen STT","AltNames":"Watkins_Glen Watkins_Glen_STT"});
 
 		//Cleveland GP
 		this.refPoints[-2123543761] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -1160,6 +1180,9 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	-81.679858
 			,"Comment": ""
 		});
+		//V1.6.3.9
+		//Cleveland STT
+		this.refPoints[706432470] = this.CopyObjectWithModifications(this.refPoints[-2123543761], {"Name": "Cleveland STT","AltNames":"Cleveland Cleveland_STT"});
 
 		//V1.3.3.0
 		//Road America
@@ -1181,6 +1204,9 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Road America (Bend)
 		this.refPoints[372107672] = this.CopyObjectWithModifications(this.refPoints[-398562049], {"Name": "Road America (Bend)","AltNames":"Road_America Road_America_RCB"});
+		//V1.6.3.9
+		//Road America STT
+		this.refPoints[1508125921] = this.CopyObjectWithModifications(this.refPoints[-398562049], {"Name": "Road America STT","AltNames":"Road_America Road_America_STT","MapInitLong":-87.992132});
 
 		//V1.3.5.0
 		//Galeão Airport
@@ -1515,6 +1541,9 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[21132368] = this.CopyObjectWithModifications(this.refPoints[1064267013], {"Name": "Sebring School","AltNames":"Sebring Sebring_School","Zoom": 17,"MapInitLat": 27.450777,"MapInitLong": -81.351576});
 		//Sebring Club
 		this.refPoints[1655714206] = this.CopyObjectWithModifications(this.refPoints[1064267013], {"Name": "Sebring Club","AltNames":"Sebring Sebring_Club","Zoom": 17,"MapInitLat": 27.455077,"MapInitLong": -81.353166});
+		//V1.6.3.9
+		//Sebring STT - copy of School layout
+		this.refPoints[-681188758] = this.CopyObjectWithModifications(this.refPoints[21132368], {"Name": "Sebring STT","AltNames":"Sebring Sebring_STT"});
 
 
 		///////////////////////////////
