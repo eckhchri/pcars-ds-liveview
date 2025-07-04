@@ -266,7 +266,7 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-676667056] = this.CopyObjectWithModifications(this.refPoints[2111076703], {"Name": "Ibarra Autódromo Yahuarcocha Reverse","AltNames":"Ibarra4 Ibarra_Reverse"});
 		//V1.6.4.2
 		//Ibarra Autódromo Yahuarcocha STT
-		this.refPoints[304] = this.CopyObjectWithModifications(this.refPoints[2111076703], {"Name": "Ibarra Autódromo Yahuarcocha STT","AltNames":"Ibarra4 Ibarra_STT"});
+		this.refPoints[-254340281] = this.CopyObjectWithModifications(this.refPoints[2111076703], {"Name": "Ibarra Autódromo Yahuarcocha STT","AltNames":"Ibarra4 Ibarra_STT"});
 
 		//Imola
 		this.refPoints[731129913] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -1122,7 +1122,7 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[1003665316] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza 1991","AltNames":"Monza Monza_1991"});
 		//V1.6.4.2
 		//Monza STT - copy of Junior layout
-		this.refPoints[305] = this.CopyObjectWithModifications(this.refPoints[-2098177408], {"Name": "Monza STT","AltNames":"Monza Monza_2020_STT"});
+		this.refPoints[256298636] = this.CopyObjectWithModifications(this.refPoints[-2098177408], {"Name": "Monza STT","AltNames":"Monza Monza_2020_STT"});
 
 		//V1.2.9.0
 		//Azure Circuit 2021
