@@ -3204,6 +3204,40 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -2038590707,
 		"name" : "Super Trophy Trucks",
 		"class" : "SST"
+	},
+	//V1.6.5.4
+	{
+		"id" : 1401532035,
+		"name" : "Aston Martin Vantage GTE",
+		"class" : "GTE"
+	},
+	//V1.6.5.7
+	{
+		"id" : 1327147786,
+		"name" : "Aston Martin Vantage GT3 Evo",
+		"class" : "GT3_Gen2"
+	},
+	{
+		"id" : -524222514,
+		"name" : "Aston Martin Vantage GT4 Evo",
+		"class" : "GT4"
+	},
+	//V1.6.5.9
+	{
+		"id" : 969706465,
+		"name" : "Alpine A110 GT4 Evo",
+		"class" : "GT4"
+	},
+	{
+		"id" : -896587240,
+		"name" : "Aston Martin Valkyrie Hypercar",
+		"class" : "LMDh"
+	},
+	//V1.6.6.0
+	{
+		"id" : 1561601348,
+		"name" : "Ligier JS2 R",
+		"class" : "LES_2025"
 	}
 ];
 

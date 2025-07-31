@@ -930,6 +930,8 @@ class RefPointDataAMS2 extends RefPointData {
 			,"MapInitLong":	6.940467
 			,"Comment":	""
 		});
+		//Nürburgring GP 2025 - V1.6.5.8
+		this.refPoints[-741729925] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring GP 2025","AltNames":"Nurburgring_2025 Nurb_GP_2025"});
 		//Nürburgring Sprint 2020
 		this.refPoints[1133983668] = this.CopyObjectWithModifications(this.refPoints[899109770], {"Name": "Nürburgring Sprint 2020","AltNames":"Nurburgring_2020 Nurb_GP_2020_Sprint","Zoom":16,"MapInitLat":50.333534,"MapInitLong":6.943427});
 		//Nürburgring Sprint S 2020
@@ -952,6 +954,10 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Nordschleife 2020 24h
 		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.353881});
+		//Nordschleife 2025 - V1.6.5.8
+		this.refPoints[-1789057785] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2025","AltNames":"Nurburgring_2025 Nordschleife_2025"});
+		//Nordschleife 2025 24h - V1.6.5.8
+		this.refPoints[-864856074] = this.CopyObjectWithModifications(this.refPoints[-472366150], {"Name": "Nordschleife 2025 24h","AltNames":"Nurburgring_2025 Nordschleife_2025_24hr"});
 		//Gesamtstrecke Historic 1971
 		this.refPoints[-1099915987] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Gesamtstrecke Historic 1971","AltNames":"Nurburgring_2020 Nurb_1971_Gesamt","MapInitLat":50.34988});
 		//Nordschleife Historic 1971
