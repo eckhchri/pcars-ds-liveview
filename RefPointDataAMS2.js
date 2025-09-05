@@ -1559,6 +1559,37 @@ class RefPointDataAMS2 extends RefPointData {
 		//Sebring STT - copy of School layout
 		this.refPoints[-681188758] = this.CopyObjectWithModifications(this.refPoints[21132368], {"Name": "Sebring STT","AltNames":"Sebring Sebring_STT"});
 
+		//V1.6.6.5
+		//Pocona Oval
+		this.refPoints[1588462641] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		41.0553
+			,"refLong":		-75.50902
+			,"rotation":	0.3
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.998
+			,"cor_PosY_mul":1.002
+			,"Name":		"Pocona Oval"
+			,"AltNames":	"Pocono Pocono_OVAL"
+			,"Zoom":		16
+			,"MapInitLat":	41.055156
+			,"MapInitLong":	-75.509213
+			,"Comment": ""
+		});
+		//V1.6.7.2
+		//Pocono Road Course 1
+		this.refPoints[234013581] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 1","AltNames":"Pocono Pocono_RC1","MapInitLong": -75.507283});
+		//Pocono Road Course 2
+		this.refPoints[701322116] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 2","AltNames":"Pocono Pocono_RC2","MapInitLat": 41.055836});
+		//Pocono Road Course 3
+		this.refPoints[1354845710] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 3","AltNames":"Pocono Pocono_RC3","MapInitLong": -75.507283});
+		//Pocono Road Course 4
+		this.refPoints[776240466] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 4","AltNames":"Pocono Pocono_RC4","MapInitLat": 41.054736,"MapInitLong": -75.504533});
+		//Pocono Road Course 5
+		this.refPoints[218937197] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 5","AltNames":"Pocono Pocono_RC5","Zoom": 17,"MapInitLat": 41.056476,"MapInitLong": -75.505943});
+		//Pocono Road Course 6
+		this.refPoints[-2071676586] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 6","AltNames":"Pocono Pocono_RC6","MapInitLat": 41.054656,"MapInitLong": -75.504083});
 
 		///////////////////////////////
 		////  MOD Tracks

@@ -2183,12 +2183,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : -2140090167,
-		"name" : "Formula Vee",
+		"name" : "Formula Vee Gen1",
 		"class" : "F-Vee"
 	},
 	{
 		"id" : -186413128,
-		"name" : "Formula Vee Fin",
+		"name" : "Formula Vee Gen1 + Fin",
 		"class" : "F-Vee"
 	},
 	{
@@ -3238,6 +3238,34 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1561601348,
 		"name" : "Ligier JS2 R",
 		"class" : "LES_2025"
+	},
+	//V1.6.6.6
+	{
+		"id" : -1199329799,
+		"name" : "Stock USA Gen3",
+		"class" : "Stock_USA_Gen3"
+	},
+	//V1.6.7.0
+	{
+		"id" : -129624066,
+		"name" : "Formula Vee Gen2",
+		"class" : "F-Vee_Gen2"
+	},
+	{
+		"id" : 478471898,
+		"name" : "Ligier JS P4",
+		"class" : "LES_2025"
+	},
+	//V1.6.7.x
+	{
+		"id" : 506087870,
+		"name" : "Stock USA Gen1",
+		"class" : "Stock_USA_Gen1"
+	},
+	{
+		"id" : 1041490421,
+		"name" : "Stock USA Gen2",
+		"class" : "Stock_USA_Gen2"
 	}
 ];
 
