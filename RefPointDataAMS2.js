@@ -1358,6 +1358,9 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Auto Club Speedway Oval
 		this.refPoints[1602044389] = this.CopyObjectWithModifications(this.refPoints[-1899621736], {"Name": "Auto Club Speedway Oval","AltNames":"Fontana Fontana_OVAL"});
+		//V1.6.7.3
+		//Auto Club Speedway Oval Historic
+		this.refPoints[-606500494] = this.CopyObjectWithModifications(this.refPoints[1602044389], {"Name": "Auto Club Speedway Oval Historic","AltNames":"Fontana Fontana_OVAL_Historic"});
 
 		//V1.4.3.2
 		//Indianapolis Motor Speedway Road Course
