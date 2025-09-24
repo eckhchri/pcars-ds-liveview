@@ -3256,7 +3256,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"name" : "Ligier JS P4",
 		"class" : "LES_2025"
 	},
-	//V1.6.7.x
+	//V1.6.7.2
 	{
 		"id" : 506087870,
 		"name" : "Stock USA Gen1",
@@ -3266,6 +3266,27 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1041490421,
 		"name" : "Stock USA Gen2",
 		"class" : "Stock_USA_Gen2"
+	},
+	{
+		"id" : 1221944856,
+		"name" : "Stock USA Gen3 LM",
+		"class" : "Stock_USA_Gen3_LM"
+	},
+	//V1.6.7.6
+	{
+		"id" : 1466312296,
+		"name" : "Audi R8 LMP1",
+		"class" : "LMP1_05"
+	},
+	{
+		"id" : 1168262642,
+		"name" : "Courage C60 Hybrid",
+		"class" : "LMP1_05"
+	},
+	{
+		"id" : -610534646,
+		"name" : "Dallara SP1",
+		"class" : "LMP1_05"
 	}
 ];
 
