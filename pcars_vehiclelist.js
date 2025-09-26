@@ -3287,6 +3287,33 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -610534646,
 		"name" : "Dallara SP1",
 		"class" : "LMP1_05"
+	},
+	//V1.6.7.7
+	{
+		"id" : 1841695623,
+		"name" : "Lola B05/40 Turbo",
+		"class" : "LMP2_05"
+	},
+	{
+		"id" : -1575210468,
+		"name" : "Lola B05/40 V8",
+		"class" : "LMP2_05"
+	},
+	//V1.6.7.8
+	{
+		"id" : -957838629,
+		"name" : "Chevrolet Corvette C5-R",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : 1380008006,
+		"name" : "Lamborghini Murcielago R-GT",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : 2119768860,
+		"name" : "Porsche 996 GT3 RSR",
+		"class" : "GT2_05"
 	}
 ];
 
