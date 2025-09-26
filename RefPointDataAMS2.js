@@ -1515,6 +1515,9 @@ class RefPointDataAMS2 extends RefPointData {
 		//V1.6.0.0
 		//Road Atlanta Moto
 		this.refPoints[512524319] = this.CopyObjectWithModifications(this.refPoints[269355464], {"Name": "Road Atlanta Moto","AltNames":"Road_Atlanta Road_Atlanta_Moto","MapInitLat": 34.143849});
+		//V1.6.7.8
+		//Road Atlanta 2005
+		this.refPoints[61057241] = this.CopyObjectWithModifications(this.refPoints[269355464], {"Name": "Road Atlanta 2005","AltNames":"Road_Atlanta Road_Atlanta_2005"});
 
 		//V1.5.9.0
 		//Canadian Tire Motorsports Park
