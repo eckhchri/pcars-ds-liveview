@@ -3314,6 +3314,11 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 2119768860,
 		"name" : "Porsche 996 GT3 RSR",
 		"class" : "GT2_05"
+	},
+	{
+		"id" : 1625859751,
+		"name" : "Lamborghini Diablo SV-R",
+		"class" : "ST96"
 	}
 ];
 
