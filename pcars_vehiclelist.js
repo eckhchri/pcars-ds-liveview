@@ -3319,6 +3319,17 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1625859751,
 		"name" : "Lamborghini Diablo SV-R",
 		"class" : "ST96"
+	},
+	//V1.6.7.9
+	{
+		"id" : -1396331646,
+		"name" : "Lamborghini Miura SV",
+		"class" : "TC60S"
+	},
+	{
+		"id" : 1656093112,
+		"name" : "Lamborghini Revuelto",
+		"class" : "Hypercars"
 	}
 ];
 
