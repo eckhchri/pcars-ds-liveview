@@ -3144,7 +3144,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	//V1.5.9.0
 	{
 		"id" : -1685046747,
-		"name" : "Lamborghini Huracan SuperTrofeo Evo2",
+		"name" : "Lamborghini Huracan Super Trofeo EVO2",
 		"class" : "Super Trofeo"
 	},
 	//V1.6.0.0

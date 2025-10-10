@@ -992,6 +992,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[775712153] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2022","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022"});
 		//Spa-Francorchamps RX - V1.5.0.0
 		this.refPoints[-1531498465] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps RX","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022_RX","Zoom":17,"MapInitLat":50.44302,"MapInitLong":5.97125});
+		//Spa-Francorchamps 2005 - V1.6.8.2
+		this.refPoints[-1017131847] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2005","AltNames":"SpaFrancorchamps Spa_Francorchamps_2005"});
 		//V1.4.2.9
 		//Spa-Francorchamps 1970
 		this.refPoints[-1736505524] = this.CopyObjectWithModifications(this.refPoints[-1262750090],
