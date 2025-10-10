@@ -3330,6 +3330,32 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1656093112,
 		"name" : "Lamborghini Revuelto",
 		"class" : "Hypercars"
+	},
+	//V1.6.8.2
+	{
+		"id" : 1646202889,
+		"name" : "Maserati MC12 GT1",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : 913906120,
+		"name" : "Maserati MC12 GT1 - Low Downforce",
+		"class" : "GT1_05_LD "
+	},
+	{
+		"id" : -1768443172,
+		"name" : "Dodge Viper GTS-R",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : -1334233081,
+		"name" : "BMW M3 E46 GTR",
+		"class" : "GTR_04"
+	},
+	{
+		"id" : -1941368649,
+		"name" : "Milano GT36",
+		"class" : "GT2_05"
 	}
 ];
 
