@@ -1495,6 +1495,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Le Mans Circuit Bugatti
 		this.refPoints[1446740417] = this.CopyObjectWithModifications(this.refPoints[1060182346], {"Name": "Le Mans Circuit Bugatti","AltNames":"La_Sarthe Le_Mans_Circuit_Bugatti","Zoom": 15,"MapInitLat": 47.954335,"MapInitLong": 0.211027});
+		//Le Mans 24h 2005 - V1.6.8.4
+		this.refPoints[999948974] = this.CopyObjectWithModifications(this.refPoints[1060182346], {"Name": "Le Mans 24h 2005","AltNames":"La_Sarthe Le_Mans_24h_2005"});
 
 		//V1.5.7.0
 		//Road Atlanta

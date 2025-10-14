@@ -3356,6 +3356,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -1941368649,
 		"name" : "Milano GT36",
 		"class" : "GT2_05"
+	},
+	//V1.6.8.4
+	{
+		"id" : 1401751841,
+		"name" : "Aston Martin DBR9",
+		"class" : "GT1_05"
 	}
 ];
 
