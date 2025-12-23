@@ -2203,12 +2203,12 @@ this.aVehicleInfoExt['AMS2']  =       [
 	},
 	{
 		"id" : 1948072701,
-		"name" : "Formula Reiza",
+		"name" : "Formula V8 Gen3",
 		"class" : "F-Reiza"
 	},
 	{
 		"id" : -1142039519,
-		"name" : "Formula Ultimate Gen1",
+		"name" : "Formula Ultimate Hybrid Gen2",
 		"class" : "F-Ultimate"
 	},
 	{
@@ -2786,7 +2786,7 @@ this.aVehicleInfoExt['AMS2']  =       [
 	//V1.3.5.0
 	{
 		"id" : 1947909519,
-		"name" : "Formula Ultimate Gen2",
+		"name" : "Formula Ultimate Hybrid Gen3",
 		"class" : "F-Ultimate_Gen2"
 	},
 	{
@@ -3362,6 +3362,29 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1401751841,
 		"name" : "Aston Martin DBR9",
 		"class" : "GT1_05"
+	},
+	//V1.6.8.85
+	{
+		"id" : 855020114,
+		"name" : "Audi R8 V10 GT",
+		"class" : "Supercars"
+	},
+	//V1.6.8.95
+	{
+		"id" : -1835337441,
+		"name" : "Dodge Viper ACR",
+		"class" : "Supercars"
+	},
+	//V1.6.9.0 RC2
+	{
+		"id" : 1025465700,
+		"name" : "Maserati GT2 Stradale",
+		"class" : "Supercars"
+	},
+	{
+		"id" : -615502661,
+		"name" : "Aston Martin Valkyrie",
+		"class" : "Hypercars"
 	}
 ];
 
