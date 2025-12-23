@@ -956,6 +956,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-472366150] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2020 24h","AltNames":"Nurburgring_2020 Nordschleife_2020_24hr","MapInitLat":50.353881});
 		//Nordschleife 2025 - V1.6.5.8
 		this.refPoints[-1789057785] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2025","AltNames":"Nurburgring_2025 Nordschleife_2025"});
+		//Nordschleife 2025 Tourist - V1.6.5.85
+		this.refPoints[-1841018106] = this.CopyObjectWithModifications(this.refPoints[884472481], {"Name": "Nordschleife 2025 Tourist","AltNames":"Nurburgring_2020 Nordschleife_2025_tourist"});
 		//Nordschleife 2025 24h - V1.6.5.8
 		this.refPoints[-864856074] = this.CopyObjectWithModifications(this.refPoints[-472366150], {"Name": "Nordschleife 2025 24h","AltNames":"Nurburgring_2025 Nordschleife_2025_24hr"});
 		//Gesamtstrecke Historic 1971
@@ -1522,6 +1524,9 @@ class RefPointDataAMS2 extends RefPointData {
 		//V1.6.7.8
 		//Road Atlanta 2005
 		this.refPoints[61057241] = this.CopyObjectWithModifications(this.refPoints[269355464], {"Name": "Road Atlanta 2005","AltNames":"Road_Atlanta Road_Atlanta_2005"});
+		//V1.6.8.5
+		//Road Atlanta 2005 Short
+		this.refPoints[-2008079786] = this.CopyObjectWithModifications(this.refPoints[269355464], {"Name": "Road Atlanta 2005 Short","AltNames":"Road_Atlanta Road_Atlanta_2005_short","MapInitLat": 34.146199});
 
 		//V1.5.9.0
 		//Canadian Tire Motorsports Park
