@@ -3385,6 +3385,27 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : -615502661,
 		"name" : "Aston Martin Valkyrie",
 		"class" : "Hypercars"
+	},
+	//V1.6.9.5
+	{
+		"id" : -1986131630,
+		"name" : "Formula Edge Model1",
+		"class" : "FE-G1"
+	},
+	{
+		"id" : 1758947754,
+		"name" : "Formula Edge Model2",
+		"class" : "FE-G1"
+	},
+	{
+		"id" : 1775904576,
+		"name" : "Formula Edge Model3",
+		"class" : "FE-G1"
+	},
+	{
+		"id" : 1971065697,
+		"name" : "Formula Ultimate Hybrid Gen1",
+		"class" : "F-Ultimate_Gen1"
 	}
 ];
 
