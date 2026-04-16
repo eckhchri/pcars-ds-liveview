@@ -2227,11 +2227,6 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"class" : "F-V10_Gen1"
 	},
 	{
-		"id" : -2053858829,
-		"name" : "Formula V12",
-		"class" : "F-V12"
-	},
-	{
 		"id" : -487937394,
 		"name" : "Iveco Stralis",
 		"class" : "CopaTruck"
@@ -3406,6 +3401,38 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1971065697,
 		"name" : "Formula Ultimate Hybrid Gen1",
 		"class" : "F-Ultimate_Gen1"
+	},
+	{
+		"id" : -1485318279,
+		"name" : "Formula V10 Gen3",
+		"class" : "F-V10_Gen3"
+	},
+	{
+		"id" : -1260391192,
+		"name" : "Formula V8 Gen1",
+		"class" : "F-V8_Gen1"
+	},
+	{
+		"id" : 1107719042,
+		"name" : "Formula V8 Gen2",
+		"class" : "F-V8_Gen2"
+	},
+	//V1.6.9.55
+	{
+		"id" : -1611902643,
+		"name" : "Renault R25",
+		"class" : "F-V10_Gen3"
+	},
+	{
+		"id" : -1938396064,
+		"name" : "Renault R26",
+		"class" : "F-V8_Gen1"
+	},
+	//V1.6.9.57
+	{
+		"id" : 1466589629,
+		"name" : "McLaren MP4/23",
+		"class" : "F-V8_Gen2"
 	}
 ];
 

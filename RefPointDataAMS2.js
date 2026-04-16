@@ -1386,6 +1386,10 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Indianapolis Motor Speedway Oval
 		this.refPoints[-468654879] = this.CopyObjectWithModifications(this.refPoints[328837350], {"Name": "Indianapolis Motor Speedway Oval","AltNames":"Indianapolis Indianapolis_2022_OVAL"});
+		//Indianapolis Motor Speedway Road Course 2001 - V1.6.9.57
+		this.refPoints[1326349095] = this.CopyObjectWithModifications(this.refPoints[328837350], {"Name": "Indianapolis Motor Speedway Road Course 2001","AltNames":"Indianapolis Indianapolis_2001_RC"});
+		//Indianapolis Motor Speedway Oval 2001 - V1.6.9.57
+		this.refPoints[613230187] = this.CopyObjectWithModifications(this.refPoints[328837350], {"Name": "Indianapolis Motor Speedway Oval 2001","AltNames":"Indianapolis Indianapolis_2001_OVAL"});
 
 		//V1.4.7.9
 		//Circuit de Barcelona-Catalunya GP
@@ -1413,6 +1417,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-1460882916] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya National (no chicane)","AltNames":"Barcelona Circuit_de_Catalunya_NATL_NC","MapInitLat":41.570622,"MapInitLong":2.259125});
 		//Circuit de Barcelona-Catalunya Historic 1991 - V1.5.2.8
 		this.refPoints[-1976262540] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya Historic 1991","AltNames":"Barcelona Barcelona_1991"});
+		//Circuit de Barcelona-Catalunya Historic 1999 - V1.6.9.5
+		this.refPoints[-123933393] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya Historic 1999","AltNames":"Barcelona Barcelona_GP_1999"});
 
 		//V1.4.9.6
 		//Ascurra Dirt
@@ -1605,6 +1611,25 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[218937197] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 5","AltNames":"Pocono Pocono_RC5","Zoom": 17,"MapInitLat": 41.056476,"MapInitLong": -75.505943});
 		//Pocono Road Course 6
 		this.refPoints[-2071676586] = this.CopyObjectWithModifications(this.refPoints[1588462641], {"Name": "Pocono Road Course 6","AltNames":"Pocono Pocono_RC6","MapInitLat": 41.054656,"MapInitLong": -75.504083});
+
+		//V1.6.9.5
+		//Hungaroring GP 2025
+		this.refPoints[-1299546486] = this.CopyObjectWithModifications(this.refPoints[9999999999],
+		{
+			"refLat":		47.582977
+			,"refLong":		19.24938
+			,"rotation":	1.3
+			,"cor_r_Long":	0
+			,"cor_r_Lat":	0
+			,"cor_PosX_mul":0.997
+			,"cor_PosY_mul":1.001
+			,"Name":		"Hungaroring GP 2025"
+			,"AltNames":	"Hungaroring Hungaroring_GP_2025"
+			,"Zoom":		16
+			,"MapInitLat":	47.58291
+			,"MapInitLong":	19.250345
+			,"Comment": ""
+		});
 
 		///////////////////////////////
 		////  MOD Tracks
