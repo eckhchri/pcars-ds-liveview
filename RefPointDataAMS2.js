@@ -291,6 +291,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[1544603199] = this.CopyObjectWithModifications(this.refPoints[731129913], {"Name": "Imola Historic 1988","AltNames":"ImolaAMS2 Imola_GP_1988"});
 		//Imola Historic 2001
 		this.refPoints[-29732804] = this.CopyObjectWithModifications(this.refPoints[731129913], {"Name": "Imola Historic 2001","AltNames":"ImolaAMS2 Imola_GP_2001"});
+		//Imola Historic 2005 - V1.6.9.62
+		this.refPoints[533874158] = this.CopyObjectWithModifications(this.refPoints[731129913], {"Name": "Imola Historic 2005","AltNames":"ImolaAMS2 Imola_GP_2005"});
 
 		//Interlagos
 		this.refPoints[-1478712571] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -615,6 +617,8 @@ class RefPointDataAMS2 extends RefPointData {
 		//V1.6.3.9
 		//Spielberg STT copy of Short layout
 		this.refPoints[1524591075] = this.CopyObjectWithModifications(this.refPoints[1819432538], {"Name": "Spielberg STT","AltNames":"Spielberg Spielberg_STT"});
+		//Spielberg Historic 2001 - V1.6.9.62
+		this.refPoints[-407158417] = this.CopyObjectWithModifications(this.refPoints[735562025], {"Name": "Spielberg Historic 2001","AltNames":"Spielberg Spielberg_2001"});
 
 		//Tarumã Internacional
 		this.refPoints[2074495683] = this.CopyObjectWithModifications(this.refPoints[9999999999],
@@ -996,6 +1000,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-1531498465] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps RX","AltNames":"SpaFrancorchamps Spa_Francorchamps_2022_RX","Zoom":17,"MapInitLat":50.44302,"MapInitLong":5.97125});
 		//Spa-Francorchamps 2005 - V1.6.8.2
 		this.refPoints[-1017131847] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2005","AltNames":"SpaFrancorchamps Spa_Francorchamps_2005"});
+		//Spa-Francorchamps Historic 2005 Endurance Circuit
+		this.refPoints[797987967] = this.CopyObjectWithModifications(this.refPoints[-1262750090], {"Name": "Spa-Francorchamps 2005 Endurance Circuit","AltNames":"SpaFrancorchamps Spa_Francorchamps_2005_EC"});
 		//V1.4.2.9
 		//Spa-Francorchamps 1970
 		this.refPoints[-1736505524] = this.CopyObjectWithModifications(this.refPoints[-1262750090],
@@ -1118,6 +1124,8 @@ class RefPointDataAMS2 extends RefPointData {
 		});
 		//Monza Junior
 		this.refPoints[-2098177408] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Junior","AltNames":"Monza Monza_2020_Junior","Zoom":16,"MapInitLat":45.61679,"MapInitLong":9.28292});
+		//Monza Historic 2005 - 1.6.9.62
+		this.refPoints[421674434] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Historic 2005","AltNames":"Monza Monza_2005"});
 		//V1.2.3.8
 		//Monza Historic 1971
 		this.refPoints[-332593300] = this.CopyObjectWithModifications(this.refPoints[-1257095693], {"Name": "Monza Historic 1971","AltNames":"Monza Monza_1971"});
