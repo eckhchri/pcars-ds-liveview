@@ -1427,6 +1427,8 @@ class RefPointDataAMS2 extends RefPointData {
 		this.refPoints[-1976262540] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya Historic 1991","AltNames":"Barcelona Barcelona_1991"});
 		//Circuit de Barcelona-Catalunya Historic 1999 - V1.6.9.5
 		this.refPoints[-123933393] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya Historic 1999","AltNames":"Barcelona Barcelona_GP_1999"});
+		//Circuit de Barcelona-Catalunya Historic 2001 - V1.6.9.5
+		this.refPoints[-807437289] = this.CopyObjectWithModifications(this.refPoints[788137081], {"Name": "Circuit de Barcelona-Catalunya Historic 2001","AltNames":"Barcelona Barcelona_GP_2001"});
 
 		//V1.4.9.6
 		//Ascurra Dirt
