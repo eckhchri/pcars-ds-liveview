@@ -3433,6 +3433,48 @@ this.aVehicleInfoExt['AMS2']  =       [
 		"id" : 1466589629,
 		"name" : "McLaren MP4/23",
 		"class" : "F-V8_Gen2"
+	},
+	//V1.6.9.85
+	{
+		"id" : -1064971214,
+		"name" : "Lister Storm GTM",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : 760386338,
+		"name" : "Milano GT55",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : -1807987305,
+		"name" : "Gillet Vertigo Streiff",
+		"class" : "GTR_04"
+	},
+	{
+		"id" : -896466442,
+		"name" : "Maserati GranSport Trofeo",
+		"class" : "Trofeo_2005"
+	},
+	{
+		"id" : -1609635929,
+		"name" : "Spyker C8 Spyder GT2-R",
+		"class" : "GT2_05"
+	},
+	//V1.6.9.88
+	{
+		"id" : 109500005,
+		"name" : "Saleen S7-R GT1",
+		"class" : "GT1_05"
+	},
+	{
+		"id" : 2134184300,
+		"name" : "Panoz Esperante GTLM",
+		"class" : "GT2_05"
+	},
+	{
+		"id" : 1475475090,
+		"name" : "TVR Tuscan T400R GT2",
+		"class" : "GT2_05"
 	}
 ];
 
